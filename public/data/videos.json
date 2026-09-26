@@ -1,22 +1,102 @@
 {
- "generatedAt": "2026-09-26T21:34:16.137Z",
+ "generatedAt": "2026-09-26T21:38:51.270Z",
  "runDate": "2026-09-26",
- "mode": "rss",
+ "mode": "api",
  "classifier": "heuristic",
  "stats": {
-  "candidates": 210,
-  "kept": 30,
-  "added": 4
+  "candidates": 709,
+  "kept": 120,
+  "added": 101
  },
  "videos": [
+  {
+   "id": "KIe7LM8NAOA",
+   "title": "100 hours of Vibe Coding Lessons with Claude Opus 5.5",
+   "channel": "Zinho Automates",
+   "channelId": "UC3i3qKQ5aR_guegQj5bhOMw",
+   "publishedAt": "2026-09-26T14:32:43Z",
+   "duration": 628,
+   "views": 7775,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "is3XYKl2bpI",
+   "title": "Anthropic Revealed Their Secret Guide to Mastering Opus 5.5",
+   "channel": "Brock Mesarich | AI for Non Techies",
+   "channelId": "UCjc1vfduI7BhVMXBLJLDjmA",
+   "publishedAt": "2026-09-26T14:22:15Z",
+   "duration": 520,
+   "views": 7003,
+   "likes": 123,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "llms",
+    "prompting"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "E6ZWShZAxeU",
+   "title": "AI Agents, Simply Explained (Build Your First One in 7 Minutes)",
+   "channel": "Jeremy Utley",
+   "channelId": "UCpSejclxf6XyB6_IB4lpKdg",
+   "publishedAt": "2026-09-26T14:00:34Z",
+   "duration": 429,
+   "views": 189,
+   "likes": 6,
+   "tools": [],
+   "topics": [
+    "agents",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 57,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "AEi77QEG-JI",
+   "title": "NEW Copilot Wave 4: Home, Code & Autopilot Explained | Insights From A Microsoft Engineer",
+   "channel": "M365 Copilot Connection",
+   "channelId": "UCMVG4U2L2ocqgdYLAubuYGQ",
+   "publishedAt": "2026-09-25T19:58:01Z",
+   "duration": 786,
+   "views": 18279,
+   "likes": 245,
+   "tools": [],
+   "topics": [
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-09-26"
+  },
   {
    "id": "_Mqr5B3DLgM",
    "title": "How to use Claude, Codex, and BYOK in GitHub Copilot for VS Code | GitHub Copilot Day",
    "channel": "GitHub",
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-25T18:23:59+00:00",
-   "duration": 0,
-   "views": 7760,
+   "duration": 509,
+   "views": 7783,
    "likes": 67,
    "tools": [
     "claude",
@@ -34,13 +114,149 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "ZTTTsB_B6c4",
+   "title": "Give Every Character in Your Book Its Own Voice (Full Tutorial)",
+   "channel": "ElevenLabs",
+   "channelId": "UC-ew9TfeD887qUSiWWAAj1w",
+   "publishedAt": "2026-09-25T16:07:17Z",
+   "duration": 507,
+   "views": 6111,
+   "likes": 125,
+   "tools": [
+    "elevenlabs"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Risal7sjYms",
+   "title": "How To Use ChatGPT Work: The Complete Beginner's Guide (2026)",
+   "channel": "AI News & Strategy Daily | Nate B Jones",
+   "channelId": "UC0C-17n9iuUQPylguM1d-lQ",
+   "publishedAt": "2026-09-25T15:30:23Z",
+   "duration": 4075,
+   "views": 26247,
+   "likes": 484,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "chat-basics",
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 69,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "nmuc7ShF8Bs",
+   "title": "Create 30 Days of Content in Under 30 Minutes Using AI (Claude + Higgsfield)",
+   "channel": "Thomas Creates",
+   "channelId": "UCK-Yq0PKk97nWXNSqmLeXOg",
+   "publishedAt": "2026-09-25T13:34:11Z",
+   "duration": 625,
+   "views": 15608,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "prompting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 67,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "u2QqWkMv3Lg",
+   "title": "Claude Code Full Course 2026 | How Senior Engineers Actually Build with AI",
+   "channel": "JavaScript Mastery",
+   "channelId": "UCmXmlB4-HJytD7wek0Uo97A",
+   "publishedAt": "2026-09-25T12:37:19Z",
+   "duration": 8020,
+   "views": 67594,
+   "likes": 1222,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "agents",
+    "coding"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 71,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "7-SyiD6phB4",
+   "title": "ElevenLabs Tutorial 2026: The Only AI Voice Guide You Need",
+   "channel": "AI Captain",
+   "channelId": "UCx9mhvLaKCpQ6rMLwK9t57Q",
+   "publishedAt": "2026-09-25T12:10:35Z",
+   "duration": 483,
+   "views": 3804,
+   "likes": 97,
+   "tools": [
+    "elevenlabs"
+   ],
+   "topics": [
+    "multimodal"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "NsGN2uFKrxQ",
+   "title": "AI Voice Agents Explained in 15 Minutes!",
+   "channel": "Aishwarya Srinivasan",
+   "channelId": "UCzd4ZN716evEjtbJERBMTfg",
+   "publishedAt": "2026-09-25T06:04:32Z",
+   "duration": 919,
+   "views": 13172,
+   "likes": 110,
+   "tools": [],
+   "topics": [
+    "multimodal",
+    "agents"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 62,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "P-XDIa4hHLw",
+   "title": "FULL Gemini Course for Beginners in 2026! (Become a PRO!)",
+   "channel": "AI Master",
+   "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
+   "publishedAt": "2026-09-25T05:25:04Z",
+   "duration": 5907,
+   "views": 13671,
+   "likes": 285,
+   "tools": [
+    "gemini"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 67,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "IAEQt_yqfLA",
    "title": "Let's Learn GitHub Copilot SDK",
    "channel": "GitHub",
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-24T18:24:11+00:00",
-   "duration": 0,
-   "views": 10552,
+   "duration": 5896,
+   "views": 10558,
    "likes": 169,
    "tools": [
     "github-copilot"
@@ -56,13 +272,118 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "1dKkFPCGVgk",
+   "title": "Claude Code + Seedance 2.5: Full Tutorial for Beginners (Websites)",
+   "channel": "Mikey Website",
+   "channelId": "UCSSB338C8A9ZOXtsbfM7phg",
+   "publishedAt": "2026-09-24T14:15:06Z",
+   "duration": 1197,
+   "views": 16954,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "chat-basics",
+    "agents",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "R-7kbHNPYwc",
+   "title": "What The Hell Is Meta Muse? Meta’s New AI Agent Explained",
+   "channel": "tabGeeks: Pro Tech Meets Real Life",
+   "channelId": "UCxYBda_YEwafkLiBC6bU0hA",
+   "publishedAt": "2026-09-24T04:31:23Z",
+   "duration": 862,
+   "views": 43276,
+   "likes": 320,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "agents",
+    "ethics"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "PSFStzv0LiA",
+   "title": "Prompt Engineering Full Course 2026| Prompt Engineering Tutorial | Simplilearn",
+   "channel": "Simplilearn",
+   "channelId": "UCsvqVGtbbyHaMoevxPAq9Fg",
+   "publishedAt": "2026-09-24T04:13:23Z",
+   "duration": 13703,
+   "views": 15928,
+   "likes": 83,
+   "tools": [],
+   "topics": [
+    "agents",
+    "prompting",
+    "automation"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 60,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "F1PEICLlEBk",
+   "title": "Ultimate Guide to ChatGPT in 2026 (Updated for ChatGPT 6 Astra)",
+   "channel": "Skill Leap AI",
+   "channelId": "UCwSozl89jl2zUDzQ4jGJD3g",
+   "publishedAt": "2026-09-23T21:47:49Z",
+   "duration": 1266,
+   "views": 31068,
+   "likes": 318,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "chat-basics"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "3udhwFMmzTg",
+   "title": "Build your Own AI Agent - No Code Required (Full 2026 Guide)",
+   "channel": "Hostinger Academy",
+   "channelId": "UCbNIC-svDbtUOH2qsLnPQPg",
+   "publishedAt": "2026-09-23T19:00:31Z",
+   "duration": 537,
+   "views": 2454,
+   "likes": 35,
+   "tools": [
+    "n8n"
+   ],
+   "topics": [
+    "agents",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 57,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "3D_oZSUFhzI",
    "title": "How to Use Zapier Next Gen Zaps (Step-by-Step Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-23T18:35:30+00:00",
-   "duration": 0,
-   "views": 20476,
+   "duration": 564,
+   "views": 20489,
    "likes": 163,
    "tools": [
     "zapier"
@@ -77,42 +398,191 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "LzmdR0sYNDc",
-   "title": "Create HD videos at no cost with Gemini in Google Vids",
-   "channel": "Google Workspace",
-   "channelId": "UCBmwzQnSoj9b6HzNmFrg_yw",
-   "publishedAt": "2026-09-23T16:00:04+00:00",
-   "duration": 0,
-   "views": 39064,
-   "likes": 734,
-   "tools": [
-    "gemini"
+   "id": "A3Ey22-Y67Y",
+   "title": "Every AI Video Generator Explained (for Beginners)",
+   "channel": "Youri van Hofwegen",
+   "channelId": "UCdR7eGozLjafYMTd2BFnJaQ",
+   "publishedAt": "2026-09-23T15:30:58Z",
+   "duration": 1186,
+   "views": 24597,
+   "tools": [],
+   "topics": [
+    "multimodal"
    ],
-   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "l89xtX8k4Uk",
+   "title": "Perplexity AI Tutorial: How to Research 10x Faster in 2026",
+   "channel": "AI Captain",
+   "channelId": "UCx9mhvLaKCpQ6rMLwK9t57Q",
+   "publishedAt": "2026-09-23T01:57:50Z",
+   "duration": 469,
+   "views": 2775,
+   "likes": 35,
+   "tools": [
+    "perplexity"
+   ],
+   "topics": [
+    "research",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 56,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "AbqPOLfLsm8",
+   "title": "How to build a powerful Telegram agent in n8n fast",
+   "channel": "n8n",
+   "channelId": "UCiHVTkJtWSdc9N3h0nUGWLg",
+   "publishedAt": "2026-09-22T16:04:08Z",
+   "duration": 1529,
+   "views": 9244,
+   "likes": 113,
+   "tools": [
+    "n8n"
+   ],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "bxSr8QAQt7c",
+   "title": "How To Use Claude Code In Visual Studio Code - Step by Step",
+   "channel": "Mikey No Code",
+   "channelId": "UCde0vB0fTwC8AT3sJofFV0w",
+   "publishedAt": "2026-09-22T14:15:14Z",
+   "duration": 1315,
+   "views": 41211,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "chat-basics",
+    "agents",
+    "coding",
+    "automation"
+   ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 67,
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "FL6mI_Br-mc",
-   "title": "Create your own voices with Gemini 3.8 text-to-speech",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-09-23T15:23:38+00:00",
-   "duration": 0,
-   "views": 104154,
-   "likes": 1360,
+   "id": "HYsAsAE_sZA",
+   "title": "How to Use Claude to Vibe Code Like a Pro (Full Tutorial)",
+   "channel": "Mikey Vibe Coding",
+   "channelId": "UCa6jen0g1qJH8MHY8NOTElA",
+   "publishedAt": "2026-09-22T14:15:02Z",
+   "duration": 1293,
+   "views": 17198,
    "tools": [
-    "gemini"
+    "claude"
    ],
    "topics": [
-    "multimodal",
+    "chat-basics",
+    "agents",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "JxQsEklz9eA",
+   "title": "How to Build ChatGPT Skills Better Than 99% of People (Full Guide)",
+   "channel": "9x",
+   "channelId": "UCKtumk72QC3XBb_VWSMQAHg",
+   "publishedAt": "2026-09-22T13:00:23Z",
+   "duration": 1786,
+   "views": 45708,
+   "likes": 429,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
     "prompting"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 68,
+   "score": 63,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Km0gcjEdFTc",
+   "title": "How To Use Claude Code For Beginners (Running on Cheap Models)",
+   "channel": "Lucas Bright",
+   "channelId": "UCs_Fxf_ikfQbFaTTUrjdnpg",
+   "publishedAt": "2026-09-22T11:44:05Z",
+   "duration": 631,
+   "views": 7838,
+   "likes": 3006,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "chat-basics",
+    "agents",
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 69,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "pmsK4VMtswU",
+   "title": "How to Self-Host n8n (Full Setup + Real Workflow)",
+   "channel": "Tony Teaches Tech",
+   "channelId": "UCWPJwoVXJhv0-ucr3pUs1dA",
+   "publishedAt": "2026-09-22T10:00:30Z",
+   "duration": 988,
+   "views": 6016,
+   "likes": 44,
+   "tools": [
+    "n8n"
+   ],
+   "topics": [
+    "coding",
+    "automation"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 56,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "23rdY39Vs1A",
+   "title": "Build PowerPoint Interactive Slides with Microsoft Copilot",
+   "channel": "Bright Ideas Agency",
+   "channelId": "UCnv9vvr7tQVQ07iSe4rZgWQ",
+   "publishedAt": "2026-09-22T10:00:18Z",
+   "duration": 736,
+   "views": 2634,
+   "likes": 22,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "prompting",
+    "presenting",
+    "field",
+    "ethics"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 40,
    "firstSeen": "2026-09-26"
   },
   {
@@ -121,9 +591,9 @@
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-22T07:00:32+00:00",
-   "duration": 0,
+   "duration": 475,
    "views": 52273,
-   "likes": 668,
+   "likes": 669,
    "tools": [
     "chatgpt"
    ],
@@ -136,101 +606,106 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "XVscTlkFl1o",
-   "title": "How to move AI from code completion to agentic workflows",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-21T15:00:17+00:00",
-   "duration": 0,
-   "views": 4787,
-   "likes": 34,
-   "tools": [],
+   "id": "sMdWHmuxrjg",
+   "title": "Ultimate Gemini Tutorial: How to Use Gemini AI For Beginners in 2026",
+   "channel": "AI Master",
+   "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
+   "publishedAt": "2026-09-21T19:00:28Z",
+   "duration": 1235,
+   "views": 23177,
+   "likes": 254,
+   "tools": [
+    "gemini"
+   ],
    "topics": [
+    "genai-basics",
+    "chat-basics"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 61,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "bWEz9d7TVOE",
+   "title": "Microsoft Copilot Tutorial — How to Use Copilot AI (From Chat to Agents)",
+   "channel": "AI Master",
+   "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
+   "publishedAt": "2026-09-20T18:23:50Z",
+   "duration": 1279,
+   "views": 10656,
+   "likes": 78,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "chat-basics",
     "agents",
+    "data",
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 56,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "9kGnod1dV4E",
+   "title": "How to Use Gemini NotebookLM 2.0 Like a PRO (Full Tutorial)",
+   "channel": "Nishant Chahar",
+   "channelId": "UCVe8CMJF4caRzuckVYV8CaQ",
+   "publishedAt": "2026-09-20T08:09:23Z",
+   "duration": 1507,
+   "views": 21430,
+   "likes": 166,
+   "tools": [
+    "notebooklm",
+    "gemini"
+   ],
+   "topics": [
+    "chat-basics"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "kxi3bGvUnLQ",
+   "title": "How to Use Gemini Notebook Better than 99% of People",
+   "channel": "Parker Prompts",
+   "channelId": "UCaNk22cLid93kifuVbVapcQ",
+   "publishedAt": "2026-09-19T16:06:30Z",
+   "duration": 644,
+   "views": 51318,
+   "tools": [
+    "gemini"
+   ],
+   "topics": [
+    "chat-basics",
+    "research",
     "coding",
     "automation"
    ],
-   "difficulty": "advanced",
+   "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 66,
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "C_1QKZAcJjk",
-   "title": "Claude Certified Developer Foundations (CCDV-F) Certification Course",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-21T12:12:42+00:00",
-   "duration": 0,
-   "views": 167407,
-   "likes": 1742,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "agents",
-    "coding",
-    "automation",
-    "field"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 79,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "EIea1OM3M0A",
-   "title": "How to handle non-compliant AI tool usage without slowing down developers",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-19T15:00:05+00:00",
-   "duration": 0,
-   "views": 8124,
-   "likes": 29,
-   "tools": [],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 65,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "bbNTY8O0GTY",
-   "title": "Use ChatGPT Work to ground analysis in your semantic layer",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-18T13:28:31+00:00",
-   "duration": 0,
-   "views": 25232,
-   "likes": 162,
+   "id": "2-O-PRlvlww",
+   "title": "ChatGPT Work Tutorial for Beginners: Everything You Need to Know",
+   "channel": "The Tech Girl",
+   "channelId": "UCjzWsRM05uCgkSEELJZWciA",
+   "publishedAt": "2026-09-19T13:00:05Z",
+   "duration": 1010,
+   "views": 21216,
+   "likes": 184,
    "tools": [
     "chatgpt"
    ],
    "topics": [
-    "agents"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 57,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "GzCsKuDgr6Q",
-   "title": "Use ChatGPT Work to build dashboards from a business question",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-18T13:27:46+00:00",
-   "duration": 0,
-   "views": 38238,
-   "likes": 248,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "prompting",
-    "automation"
+    "chat-basics"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
@@ -238,81 +713,84 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "Wb8MhkpQpX8",
-   "title": "Use ChatGPT Work to tailor dashboards for every stakeholder",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-18T13:27:02+00:00",
-   "duration": 0,
-   "views": 13248,
-   "likes": 91,
-   "tools": [
-    "chatgpt"
-   ],
+   "id": "dJPCim2vMtQ",
+   "title": "Prompt Engineering Full Course 2026| Prompt Engineering Tutorial | Simplilearn",
+   "channel": "Simplilearn",
+   "channelId": "UCsvqVGtbbyHaMoevxPAq9Fg",
+   "publishedAt": "2026-09-19T04:34:09Z",
+   "duration": 13712,
+   "views": 17855,
+   "likes": 114,
+   "tools": [],
    "topics": [
-    "data"
+    "agents",
+    "prompting",
+    "automation"
    ],
-   "difficulty": "beginner",
+   "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 55,
+   "score": 57,
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "euED8JRunBA",
-   "title": "Use ChatGPT Work to help teams answer their own data questions",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-18T13:25:54+00:00",
-   "duration": 0,
-   "views": 8730,
-   "likes": 51,
-   "tools": [
-    "chatgpt"
-   ],
+   "id": "ZK9NkUIqNZQ",
+   "title": "Master Realistic AI Casting | Runway",
+   "channel": "Runway",
+   "channelId": "UCUBqu_z5uP0AZhYtuyFZB3g",
+   "publishedAt": "2026-09-18T16:49:23Z",
+   "duration": 781,
+   "views": 12886,
+   "likes": 261,
+   "tools": [],
    "topics": [
-    "agents"
+    "agents",
+    "prompting"
    ],
-   "difficulty": "beginner",
+   "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 53,
+   "score": 48,
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "wK0zWeVyLM4",
-   "title": "Use ChatGPT Work to turn product insights into a team action plan",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-18T13:25:37+00:00",
-   "duration": 0,
-   "views": 9100,
-   "likes": 71,
+   "id": "Q1wJe_hSPic",
+   "title": "How Complete Beginners Master 95% of Claude Code in 28 minutes",
+   "channel": "Mikey No Code",
+   "channelId": "UCde0vB0fTwC8AT3sJofFV0w",
+   "publishedAt": "2026-09-18T14:15:21Z",
+   "duration": 1679,
+   "views": 36475,
    "tools": [
-    "chatgpt"
+    "claude-code"
    ],
-   "topics": [],
+   "topics": [
+    "chat-basics",
+    "agents",
+    "coding",
+    "automation"
+   ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 64,
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "cXUmFec2PNY",
-   "title": "Use ChatGPT Work to build your data agent",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-18T13:25:00+00:00",
-   "duration": 0,
-   "views": 46943,
-   "likes": 394,
+   "id": "QDsenEcAJIk",
+   "title": "Anthropic’s CEO: How to Build a 1 Person Business with Claude",
+   "channel": "Nate Herk | AI Automation",
+   "channelId": "UC2ojq-nuP8ceeHqiroeKhBA",
+   "publishedAt": "2026-09-18T13:01:25Z",
+   "duration": 700,
+   "views": 158377,
+   "likes": 1749,
    "tools": [
-    "chatgpt"
+    "claude"
    ],
    "topics": [
-    "agents"
+    "automation"
    ],
-   "difficulty": "advanced",
+   "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 59,
+   "score": 66,
    "firstSeen": "2026-09-26"
   },
   {
@@ -321,7 +799,7 @@
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-18T07:00:30+00:00",
-   "duration": 0,
+   "duration": 1103,
    "views": 22636,
    "likes": 117,
    "tools": [
@@ -337,13 +815,116 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "0VghkmXfE2o",
+   "title": "ChatGPT 6 Astra Just Changed How we Work Forever! (Tutorial)",
+   "channel": "Samin Yasar",
+   "channelId": "UCzGcYErpBX4ldvv0l7MWLfw",
+   "publishedAt": "2026-09-17T21:17:05Z",
+   "duration": 5846,
+   "views": 41621,
+   "likes": 570,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "field"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 62,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "tRmLQZJYQdA",
+   "title": "Claude's Creator Just Told Us How to Actually Use Claude in 2026",
+   "channel": "AI Edge",
+   "channelId": "UC-PQKtrPhk3JXyjUleBLgQQ",
+   "publishedAt": "2026-09-17T20:43:57Z",
+   "duration": 1257,
+   "views": 84879,
+   "likes": 1038,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "agents",
+    "teaching"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "K040jc0PQWI",
+   "title": "VS Code Learn: Agent-First Development",
+   "channel": "Visual Studio Code",
+   "channelId": "UCs5Y5_7XK8HLDX0SLNwkd3w",
+   "publishedAt": "2026-09-17T17:15:06Z",
+   "duration": 2934,
+   "views": 22829,
+   "likes": 297,
+   "tools": [],
+   "topics": [
+    "agents",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "PjBfho9Knlw",
+   "title": "How Complete Beginners Master 95% of Claude Design in 18 minutes",
+   "channel": "Mikey Website",
+   "channelId": "UCSSB338C8A9ZOXtsbfM7phg",
+   "publishedAt": "2026-09-17T14:15:02Z",
+   "duration": 1119,
+   "views": 28863,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "chat-basics",
+    "agents",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 63,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "AfTpIHU0HtE",
+   "title": "Build Once, Reuse Forever: PowerPoint Copilot Skills | Expertise From A Microsoft Engineer",
+   "channel": "M365 Copilot Connection",
+   "channelId": "UCMVG4U2L2ocqgdYLAubuYGQ",
+   "publishedAt": "2026-09-17T13:00:02Z",
+   "duration": 594,
+   "views": 6049,
+   "likes": 115,
+   "tools": [],
+   "topics": [
+    "prompting",
+    "coding",
+    "presenting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 44,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "iZX6d0OdZys",
    "title": "What Is MLflow? Tracing AI Agents & LLM Workflows",
    "channel": "IBM Technology",
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-17T11:00:24+00:00",
-   "duration": 0,
-   "views": 72190,
+   "duration": 578,
+   "views": 72194,
    "likes": 1042,
    "tools": [],
    "topics": [
@@ -357,13 +938,109 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "NGRZ2wrmK3Q",
+   "title": "Master Copilot Agents in 34 Minutes (Full Tutorial)",
+   "channel": "David Fortin",
+   "channelId": "UCEJoO7Zkfv45zIjuALuJLTQ",
+   "publishedAt": "2026-09-17T10:00:04Z",
+   "duration": 2088,
+   "views": 34192,
+   "likes": 361,
+   "tools": [],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 60,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "LDYGPU9OuyQ",
+   "title": "1,000+ Hours Of Claude Knowledge In 20 Minutes (Beginners Guide)",
+   "channel": "Jordan Welch",
+   "channelId": "UC5deKm1RRbcoUIuLuSCFprg",
+   "publishedAt": "2026-09-16T22:14:36Z",
+   "duration": 1224,
+   "views": 22356,
+   "likes": 371,
+   "tools": [
+    "claude"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 60,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "vIUJpG0PfRw",
+   "title": "How to Use Copilot in Excel | The 12-Minute Tutorial",
+   "channel": "Jotform",
+   "channelId": "UCh04CepWeaJT7wJUIgnmzJQ",
+   "publishedAt": "2026-09-16T21:15:10Z",
+   "duration": 712,
+   "views": 3348,
+   "likes": 1,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "chat-basics",
+    "prompting",
+    "data",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 48,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "ToL03cARlgs",
+   "title": "The Claude Code Beginner's Handbook: Everything You Need to Know",
+   "channel": "Software Help Network",
+   "channelId": "UCIxp8XkKoiGkhVnT65oLe0w",
+   "publishedAt": "2026-09-16T19:30:03Z",
+   "duration": 442,
+   "views": 1152,
+   "likes": 0,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 51,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "kGku3TTiYO8",
+   "title": "Create Cinematic AI Ads with Seedance 2.5 - Full guide",
+   "channel": "Dan Kieft",
+   "channelId": "UCdNj_PP__5kKtjZabuEjbqA",
+   "publishedAt": "2026-09-16T15:36:39Z",
+   "duration": 1016,
+   "views": 104505,
+   "tools": [],
+   "topics": [
+    "prompting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "c8_fwGEQoUQ",
    "title": "How to Use ChatGPT Images 2.5 (Step-by-Step Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-16T07:00:11+00:00",
-   "duration": 0,
-   "views": 99887,
+   "duration": 585,
+   "views": 99899,
    "likes": 1189,
    "tools": [
     "chatgpt"
@@ -379,13 +1056,96 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "dNCGfpDho0U",
+   "title": "How to continue GitHub Copilot app sessions in VS Code",
+   "channel": "GitHub",
+   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
+   "publishedAt": "2026-09-15T15:00:25Z",
+   "duration": 186,
+   "views": 25501,
+   "likes": 66,
+   "tools": [
+    "github-copilot"
+   ],
+   "topics": [
+    "agents",
+    "coding"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 67,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "vbi96v73b-Y",
+   "title": "Vibe Coding for Complete Beginners: Idea to Live Website With Claude",
+   "channel": "Julia McCoy",
+   "channelId": "UCqzK60-oUOEq36uU9B1MMUg",
+   "publishedAt": "2026-09-15T15:00:00Z",
+   "duration": 686,
+   "views": 10431,
+   "likes": 209,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 58,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "TDgdEMRKVUU",
+   "title": "ChatGPT Astra Guide: How to Use ChatGPT-6 Astra For Beginners (Become a PRO!)",
+   "channel": "AI Master",
+   "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
+   "publishedAt": "2026-09-15T12:37:39Z",
+   "duration": 1057,
+   "views": 61754,
+   "likes": 471,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "chat-basics",
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "4z4eIaEEH9A",
+   "title": "Copilot in Excel: Complete Course for Beginners",
+   "channel": "Lisa Crosbie",
+   "channelId": "UCvxCGKv4WSq49LfNIfZEEtg",
+   "publishedAt": "2026-09-15T11:30:26Z",
+   "duration": 4211,
+   "views": 10568,
+   "likes": 199,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "chat-basics",
+    "data"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 58,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "CKC47S92wA4",
    "title": "What Is Legacy Code? How AI Is Modernizing Legacy Systems",
    "channel": "IBM Technology",
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-15T11:00:31+00:00",
-   "duration": 0,
-   "views": 42259,
+   "duration": 551,
+   "views": 42252,
    "likes": 474,
    "tools": [],
    "topics": [
@@ -403,7 +1163,7 @@
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-15T07:00:27+00:00",
-   "duration": 0,
+   "duration": 512,
    "views": 38878,
    "likes": 261,
    "tools": [
@@ -418,13 +1178,194 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "zKRswIjtFuU",
+   "title": "How to Create Workflows Using Copilot Agent Mode in Excel",
+   "channel": "Simon Sez IT",
+   "channelId": "UC-3e3hAUhDV2lwcoQGD2grg",
+   "publishedAt": "2026-09-14T14:00:12Z",
+   "duration": 397,
+   "views": 4787,
+   "likes": 24,
+   "tools": [],
+   "topics": [
+    "agents",
+    "prompting",
+    "data",
+    "automation"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 49,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "2w_1z4o7Rvg",
+   "title": "Gamma AI: Make PPT in 1 Click! 🔥 | AI Presentation Maker Tutorial #ai",
+   "channel": "The Insight Horizon",
+   "channelId": "UCrxw9tSE5fsCgLnp5BrlA4g",
+   "publishedAt": "2026-09-14T06:53:41Z",
+   "duration": 338,
+   "views": 2481,
+   "likes": 161,
+   "tools": [
+    "gamma"
+   ],
+   "topics": [
+    "genai-basics",
+    "presenting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 60,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "vGlqHqa6zOU",
+   "title": "The Ultimate Claude AI Course for Family History (Chat, Projects, Artifacts, Skills, Connectors)",
+   "channel": "Denyse Allen • Chronicle Makers",
+   "channelId": "UCu0RT3pKeOZDfp94JRaaqxg",
+   "publishedAt": "2026-09-13T13:45:25Z",
+   "duration": 4874,
+   "views": 3540,
+   "likes": 101,
+   "tools": [
+    "claude"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 57,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "F6cwLhubj7o",
+   "title": "Master Claude Code in less than 1 Hour",
+   "channel": "Bad Decisions Studio ",
+   "channelId": "UCOQ6GGRyyu8S3jahnUz2zHw",
+   "publishedAt": "2026-09-13T02:01:42Z",
+   "duration": 3785,
+   "views": 9132,
+   "likes": 104,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "prompting",
+    "coding"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 40,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Oh_l9fT5kO8",
+   "title": "Gemini Notebook Tutorial: The Ultimate Guide for Your Research!",
+   "channel": "Great Learning",
+   "channelId": "UCObs0kLIrDjX2LLSybqNaEA",
+   "publishedAt": "2026-09-12T14:30:08Z",
+   "duration": 1321,
+   "views": 2782,
+   "likes": 32,
+   "tools": [
+    "gemini"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 49,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Nl9gvZCmIVI",
+   "title": "What is RAG - Retrieval Augmented Generation | Simplest Explanation on Internet",
+   "channel": "OnlineStudy4u",
+   "channelId": "UC512aL5wp8icOicjwwWtOyg",
+   "publishedAt": "2026-09-12T13:16:03Z",
+   "duration": 1348,
+   "views": 4637,
+   "likes": 51,
+   "tools": [],
+   "topics": [
+    "llms",
+    "rag"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 51,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "ljr2K65ty9M",
+   "title": "Claude AI Complete Course for Beginners 2026 - Start Here",
+   "channel": "Pavan Lalwani",
+   "channelId": "UC5fs7PookxGfDPTo-RU0ReQ",
+   "publishedAt": "2026-09-11T15:00:09Z",
+   "duration": 817,
+   "views": 28367,
+   "likes": 354,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "chat-basics",
+    "data",
+    "coding",
+    "ethics"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 57,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "S-cVvNmvgvY",
+   "title": "Cursor Projects Explained: An AI Agent That Keeps Working",
+   "channel": "TechWealth Hub",
+   "channelId": "UCF5_adlZTaoAzxqEh5SSCVA",
+   "publishedAt": "2026-09-11T12:46:38Z",
+   "duration": 329,
+   "views": 1795,
+   "likes": 4,
+   "tools": [
+    "cursor"
+   ],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 44,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "--Kwc-L3lN4",
+   "title": "How To Build A Faceless Channel in 2026 (Digital Maker AI + NotebookLM)",
+   "channel": "Alex Best Digital",
+   "channelId": "UC2wUTmjFacOeGWxM6ijR0LA",
+   "publishedAt": "2026-09-10T15:15:04Z",
+   "duration": 1148,
+   "views": 4017,
+   "likes": 86,
+   "tools": [
+    "notebooklm"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 53,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "o3CX_Y59_74",
    "title": "OpenAI Codex Crash Course – Build & Deploy Apps with Autonomous AI",
    "channel": "freeCodeCamp.org",
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-10T15:04:22+00:00",
-   "duration": 0,
-   "views": 145631,
+   "publishedAt": "2026-09-10T15:04:22Z",
+   "duration": 2479,
+   "views": 145634,
    "likes": 1321,
    "tools": [],
    "topics": [
@@ -437,13 +1378,176 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "b4Mhoe0Z4vA",
+   "title": "Learn 95% Of Claude Code In 30 Minutes",
+   "channel": "Sharbel A.",
+   "channelId": "UCxLzvFAUbpdNUIh0hGsEH0w",
+   "publishedAt": "2026-09-10T14:00:27Z",
+   "duration": 1750,
+   "views": 5811,
+   "likes": 90,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "prompting",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 52,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "aXM56qJQT7Y",
+   "title": "Learn 97% Of Claude Code In Under 18 Minutes",
+   "channel": "Sandeep Swadia",
+   "channelId": "UC4ZVkG3RQPzvZk7alIVjcCg",
+   "publishedAt": "2026-09-10T12:04:46Z",
+   "duration": 1067,
+   "views": 298366,
+   "likes": 4029,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 65,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "4AYlIbBL-X8",
+   "title": "🔥 ChatGPT Image Generator Just Got WAY Better - Full Images 2.5 Tutorial",
+   "channel": "Alicia Lyttle",
+   "channelId": "UCchfCBPdLeDf5hjKUmGpVqQ",
+   "publishedAt": "2026-09-09T23:53:09Z",
+   "duration": 2398,
+   "views": 18628,
+   "likes": 653,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "prompting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 63,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "u2CePpp03ls",
+   "title": "AI Agents, Explained for Beginners",
+   "channel": "Charlie Chang",
+   "channelId": "UCTQuKo8v0PaPCvk5aRxc_Yg",
+   "publishedAt": "2026-09-09T20:46:04Z",
+   "duration": 749,
+   "views": 10340,
+   "likes": 101,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "agents",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 52,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "ug8So9QbA3A",
+   "title": "How to Connect Your AI Agent to 9,000 Apps (for beginners)",
+   "channel": "corbin",
+   "channelId": "UCJFMlSxcvlZg5yZUYJT0Pug",
+   "publishedAt": "2026-09-09T14:15:21Z",
+   "duration": 511,
+   "views": 3933,
+   "likes": 37,
+   "tools": [
+    "zapier"
+   ],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 48,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "PtCsci1hHr0",
+   "title": "You Need to Learn Claude Code in 2026",
+   "channel": "Nishant Chahar",
+   "channelId": "UCVe8CMJF4caRzuckVYV8CaQ",
+   "publishedAt": "2026-09-09T14:10:13Z",
+   "duration": 1720,
+   "views": 24628,
+   "likes": 185,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 54,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "L-S0xG23B3g",
+   "title": "Google's New AI Agent! - Gemini Spark Full Beginner's Guide",
+   "channel": "Santrel Media",
+   "channelId": "UCg60QRUSvLZMF4zHv2ajBqA",
+   "publishedAt": "2026-09-09T13:04:47Z",
+   "duration": 670,
+   "views": 77949,
+   "likes": 749,
+   "tools": [
+    "gemini"
+   ],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 58,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "shXbi_v40Gk",
+   "title": "Manus AI Tutorial - How to Actually Use AI Agents",
+   "channel": "CodeWithChris",
+   "channelId": "UC2D6eRvCeMtcF5OGHf1-trw",
+   "publishedAt": "2026-09-09T13:00:24Z",
+   "duration": 795,
+   "views": 4609,
+   "likes": 27,
+   "tools": [],
+   "topics": [
+    "agents",
+    "automation"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 47,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "J5mdP0Q0nn4",
    "title": "Google Vids Tutorial for Beginners – How to Create Videos with AI",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
-   "publishedAt": "2026-09-09T07:00:13+00:00",
-   "duration": 0,
-   "views": 66014,
+   "publishedAt": "2026-09-09T07:00:13Z",
+   "duration": 811,
+   "views": 66019,
    "likes": 715,
    "tools": [],
    "topics": [
@@ -456,13 +1560,383 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "5Br1m3XxGqU",
+   "title": "Midjourney EDIT Mode | How It Works & What It Can Do | Complete Guide (2026)",
+   "channel": "Woollyfern",
+   "channelId": "UC2LUqhg0ZqCTPeBbP7rEUlw",
+   "publishedAt": "2026-09-08T17:24:51Z",
+   "duration": 1035,
+   "views": 7407,
+   "likes": 283,
+   "tools": [
+    "midjourney"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 61,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "QGakvawJc2M",
+   "title": "How to teach GitHub Copilot about your codebase | Tutorial for Beginners",
+   "channel": "GitHub",
+   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
+   "publishedAt": "2026-09-08T15:00:30Z",
+   "duration": 366,
+   "views": 24391,
+   "likes": 102,
+   "tools": [
+    "github-copilot"
+   ],
+   "topics": [
+    "agents",
+    "prompting",
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "lHBiso1Nw2E",
+   "title": "RAG Explained: AI SKILL Every Developer Needs in 2026!",
+   "channel": "CodeHelp - by Babbar",
+   "channelId": "UCldyi11QYNXYXiLjVbyw5dA",
+   "publishedAt": "2026-09-08T13:25:39Z",
+   "duration": 904,
+   "views": 112222,
+   "likes": 731,
+   "tools": [],
+   "topics": [
+    "rag",
+    "limits"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 58,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "5qVP0UWz-jM",
+   "title": "Copilot in PowerPoint Tutorial (2026) – Major New Features + Full Guide",
+   "channel": "Mike Tholfsen",
+   "channelId": "UC2dSE9W3lGYbFi_CPmVtA-A",
+   "publishedAt": "2026-09-08T12:45:49Z",
+   "duration": 1004,
+   "views": 35315,
+   "likes": 367,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "presenting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 56,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "OmHmO-s0Rqo",
+   "title": "Gemini Notebook Full Course For Research - Master “NotebookLM 2 0” in 18 Minutes",
+   "channel": "Andy Stapleton",
+   "channelId": "UCFqXmQ56-Gp1rIKa-GoAJvQ",
+   "publishedAt": "2026-09-08T02:30:26Z",
+   "duration": 1058,
+   "views": 54766,
+   "likes": 645,
+   "tools": [
+    "gemini",
+    "notebooklm"
+   ],
+   "topics": [],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 58,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "ppN_erpEuZ0",
+   "title": "7 tips that turn ChatGPT 6 Astra into AGI",
+   "channel": "Alex Finn",
+   "channelId": "UCfQNB91qRP_5ILeu_S_bSkg",
+   "publishedAt": "2026-09-07T21:40:19Z",
+   "duration": 982,
+   "views": 157712,
+   "likes": 2593,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 63,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "kt5a-TXmWew",
+   "title": "Claude Code: The Advanced Guide (99% of Devs Skip These Features)",
+   "channel": "Tech With Tim",
+   "channelId": "UC4JX40jDee_tINbkjycV4Sg",
+   "publishedAt": "2026-09-07T18:07:20Z",
+   "duration": 1178,
+   "views": 95546,
+   "likes": 780,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 58,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "CcLjASl-C6A",
+   "title": "How I Save Hours Using These 5 Microsoft Copilot Agents!",
+   "channel": "Scott Brant",
+   "channelId": "UC-Iu-wRWwWX8NjVRxDnW8JA",
+   "publishedAt": "2026-09-07T15:00:37Z",
+   "duration": 1199,
+   "views": 62964,
+   "likes": 543,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 57,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "2o0Q85JUZNk",
+   "title": "Graph RAG Simply Explained",
+   "channel": "codebasics",
+   "channelId": "UCh9nVJoWXmFb7sLApWGcLPQ",
+   "publishedAt": "2026-09-07T13:30:07Z",
+   "duration": 833,
+   "views": 42179,
+   "likes": 382,
+   "tools": [],
+   "topics": [
+    "rag"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 55,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "ZT0NNkiVmS4",
+   "title": "How to Create Consistent AI Clipart with Midjourney V8.2 | New Edit Model",
+   "channel": "Diana Serra",
+   "channelId": "UCs87vsqz30wv6QzVsrCtNGQ",
+   "publishedAt": "2026-09-06T10:00:28Z",
+   "duration": 375,
+   "views": 1627,
+   "likes": 49,
+   "tools": [
+    "midjourney"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 52,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "2uLTMXG_Yco",
+   "title": "Learn 97% of ElevenLabs in 20 minutes",
+   "channel": "Arsh Goyal",
+   "channelId": "UCJqx8MM4gDPDy8TqVVlPyLw",
+   "publishedAt": "2026-09-05T15:52:30Z",
+   "duration": 1347,
+   "views": 3639,
+   "tools": [
+    "elevenlabs"
+   ],
+   "topics": [
+    "multimodal"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 51,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "_DACED6z5ho",
+   "title": "How I Use Claude AI Daily to Make ₹5,00,000/month (Full Guide)",
+   "channel": "Dhaval Kataria",
+   "channelId": "UCC4BWRoVCLQJ4JYX3Fbx7qg",
+   "publishedAt": "2026-09-05T14:00:27Z",
+   "duration": 1096,
+   "views": 414312,
+   "likes": 4413,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "prompting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 63,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "BeeQ3_zb8q8",
+   "title": "AI Agent System Design Explained in 15 Minutes!",
+   "channel": "The Cutting Edge School",
+   "channelId": "UCZknyXD-6tETm9aN8GQCi8g",
+   "publishedAt": "2026-09-05T12:39:57Z",
+   "duration": 822,
+   "views": 97413,
+   "likes": 1254,
+   "tools": [],
+   "topics": [
+    "llms",
+    "agents",
+    "prompting",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "g326FZa94FU",
+   "title": "FULL Claude AI Course for Beginners in 2026 — Zero to Pro (And How To Get Paid For It)",
+   "channel": "Shane Hummus",
+   "channelId": "UCLKZ20yD2tNMBOkSDZo4FeQ",
+   "publishedAt": "2026-09-05T12:00:35Z",
+   "duration": 6014,
+   "views": 64698,
+   "likes": 2169,
+   "tools": [
+    "claude"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 65,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "x-KRw9TkqQE",
+   "title": "Every AI Agent Term Explained Like You’re 5",
+   "channel": "Theo - Dawnspire Academy",
+   "channelId": "UCIBN_ixxnop1MGbeGVvNUSA",
+   "publishedAt": "2026-09-04T12:30:45Z",
+   "duration": 590,
+   "views": 11311,
+   "tools": [],
+   "topics": [
+    "llms",
+    "agents",
+    "rag",
+    "teaching"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 54,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "HzGOWq5UyjY",
+   "title": "How AI Agents Actually Work (Every Piece Explained & Built)",
+   "channel": "Tech With Tim",
+   "channelId": "UC4JX40jDee_tINbkjycV4Sg",
+   "publishedAt": "2026-09-03T14:00:11Z",
+   "duration": 1168,
+   "views": 158813,
+   "likes": 2325,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 61,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "amk94YcrXxo",
+   "title": "How to Use Cursor to Build an App 2026 (Step-By-Step)",
+   "channel": "Emma's Productivity Lab",
+   "channelId": "UCWt1kyzL6YmUJ55cdhSTNMw",
+   "publishedAt": "2026-09-03T13:44:02Z",
+   "duration": 1437,
+   "views": 1251,
+   "likes": 8,
+   "tools": [
+    "cursor"
+   ],
+   "topics": [
+    "coding",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 41,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "_JYh3tgJzVw",
+   "title": "Grok Bot Tutorial for Beginners (Automate Anything with AI Agents)",
+   "channel": "Zinho Automates",
+   "channelId": "UC3i3qKQ5aR_guegQj5bhOMw",
+   "publishedAt": "2026-09-03T13:38:41Z",
+   "duration": 895,
+   "views": 54637,
+   "tools": [],
+   "topics": [
+    "agents",
+    "prompting",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "ilBsHSKUO3g",
+   "title": "Cursor Tutorial For Beginners 2026 | Master Cursor In 10 Minutes (Step-By-Step)",
+   "channel": "Emma's Productivity Lab",
+   "channelId": "UCWt1kyzL6YmUJ55cdhSTNMw",
+   "publishedAt": "2026-09-03T13:28:55Z",
+   "duration": 455,
+   "views": 2509,
+   "likes": 10,
+   "tools": [
+    "cursor"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 43,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "1PRcdCu8n6M",
    "title": "How to Use Claude Artifacts (Beginner Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-03T07:00:28+00:00",
-   "duration": 0,
-   "views": 107499,
+   "duration": 762,
+   "views": 107506,
    "likes": 1003,
    "tools": [
     "claude"
@@ -477,13 +1951,135 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "ZGXwu97bNCA",
+   "title": "10 TRICKS for Midjourneys New Edit Model",
+   "channel": "Future Tech Pilot",
+   "channelId": "UCEuQ7YIThAps6wERHfsY7fQ",
+   "publishedAt": "2026-09-02T15:27:58Z",
+   "duration": 723,
+   "views": 12228,
+   "likes": 489,
+   "tools": [
+    "midjourney"
+   ],
+   "topics": [
+    "prompting",
+    "coding"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 61,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "fcrAR-WaWg4",
+   "title": "Create Interactive PowerPoint Slides with Copilot: 3 Practical Examples",
+   "channel": "Chris Menard",
+   "channelId": "UCtj9lJ5KAQtQExgCN_CgtLQ",
+   "publishedAt": "2026-09-02T14:55:48Z",
+   "duration": 640,
+   "views": 45982,
+   "likes": 412,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "prompting",
+    "data",
+    "presenting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 41,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "CFFcWs2FRBo",
+   "title": "Build Your Personal Brand with GitHub Copilot — Full Course for Students",
+   "channel": "Microsoft Developer",
+   "channelId": "UCsMica-v34Irf9KVTh6xx-g",
+   "publishedAt": "2026-09-01T19:15:44Z",
+   "duration": 7553,
+   "views": 10481,
+   "likes": 87,
+   "tools": [
+    "github-copilot"
+   ],
+   "topics": [
+    "llms",
+    "agents",
+    "prompting",
+    "coding"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 49,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Zo8KaTs0l6k",
+   "title": "How I Make Ultra Realistic AI Videos using Seedance 2.5",
+   "channel": "Dan Kieft",
+   "channelId": "UCdNj_PP__5kKtjZabuEjbqA",
+   "publishedAt": "2026-09-01T15:38:51Z",
+   "duration": 1363,
+   "views": 225438,
+   "tools": [],
+   "topics": [
+    "multimodal"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 63,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Xfgq79gV_GM",
+   "title": "How to build custom workflows with canvases in the GitHub Copilot app | Tutorial for beginners",
+   "channel": "GitHub",
+   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
+   "publishedAt": "2026-09-01T15:00:33Z",
+   "duration": 208,
+   "views": 9948,
+   "likes": 52,
+   "tools": [
+    "github-copilot"
+   ],
+   "topics": [
+    "agents",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "eF0rwHZvUWU",
+   "title": "Runway AI - Tutorial for Beginners in 11 MINUTES !  [ UPDATED ]",
+   "channel": "Skills Factory",
+   "channelId": "UCqKRlX8Pi6xg-lAAzkt3wfA",
+   "publishedAt": "2026-09-01T10:00:07Z",
+   "duration": 679,
+   "views": 9517,
+   "likes": 106,
+   "tools": [
+    "runway"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 34,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "HsLFoeOF6aw",
    "title": "How to Use ChatGPT Plugins (Full Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-01T07:00:04+00:00",
-   "duration": 0,
-   "views": 48557,
+   "duration": 342,
+   "views": 48560,
    "likes": 413,
    "tools": [
     "chatgpt"
@@ -497,12 +2093,233 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "Dzai942PPbE",
+   "title": "NEW Midjourney V8.2 EDIT MODE is live! Here's how to use it.",
+   "channel": "Wade McMaster - Creator Impact",
+   "channelId": "UCcCzzSbdw5-qmdF_NuTtb2w",
+   "publishedAt": "2026-09-01T05:18:21Z",
+   "duration": 1124,
+   "views": 14253,
+   "likes": 281,
+   "tools": [
+    "midjourney"
+   ],
+   "topics": [
+    "prompting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 39,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "DQ_2omv3c4E",
+   "title": "The ONLY ChatGPT Work Tutorial You Need (AI Agents Do All Your Work)",
+   "channel": "Charlie Chang",
+   "channelId": "UCTQuKo8v0PaPCvk5aRxc_Yg",
+   "publishedAt": "2026-08-31T17:20:54Z",
+   "duration": 1176,
+   "views": 29904,
+   "likes": 341,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "agents",
+    "automation"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 53,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "qVWfoe0voIk",
+   "title": "We Tested Midjourney’s New Editor Live. Here's How to Use It.",
+   "channel": "Fast Hours",
+   "channelId": "UCxkOnB_ojDRWywB2W1fGCdg",
+   "publishedAt": "2026-08-31T15:26:27Z",
+   "duration": 1614,
+   "views": 6295,
+   "likes": 42,
+   "tools": [
+    "midjourney"
+   ],
+   "topics": [
+    "multimodal"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 46,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "WhVCOOgLWOY",
+   "title": "How I Use ElevenLabs for FREE in 2026?",
+   "channel": "Tube Gyaan",
+   "channelId": "UCfAkjqedCeeFWR291PZcEaw",
+   "publishedAt": "2026-08-31T10:30:26Z",
+   "duration": 388,
+   "views": 6172,
+   "likes": 108,
+   "tools": [
+    "elevenlabs"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 50,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "rPXs2cFIiDU",
+   "title": "How to Create a Scheduled Workflow Automation on n8n",
+   "channel": "ProgrammingKnowledge",
+   "channelId": "UCs6nmQViDpUw0nuIx9c_WvA",
+   "publishedAt": "2026-08-30T21:44:16Z",
+   "duration": 625,
+   "views": 3553,
+   "likes": 15,
+   "tools": [
+    "n8n"
+   ],
+   "topics": [
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 43,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "AUNjLohRp9c",
+   "title": "Claude Code Full Beginner Setup Guide (2026 Updated)",
+   "channel": "Web Tech Knowledge",
+   "channelId": "UCeNYDojo4nU2sbHz1sMsBXw",
+   "publishedAt": "2026-08-30T14:32:51Z",
+   "duration": 406,
+   "views": 1908,
+   "likes": 14,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 42,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "QO31VbeWM8M",
+   "title": "Every Level of Copilot Agents Explained in 13 Minutes",
+   "channel": "David Fortin",
+   "channelId": "UCEJoO7Zkfv45zIjuALuJLTQ",
+   "publishedAt": "2026-08-30T12:00:27Z",
+   "duration": 790,
+   "views": 26904,
+   "likes": 222,
+   "tools": [],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 51,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "mEEqosrJ1Dk",
+   "title": "How to Create a Presentation with AI in Minutes | Gamma AI Tutorial 2026",
+   "channel": "ETHAN VISION",
+   "channelId": "UC8lYUyMDFZkyD9Qt-uT1Vkg",
+   "publishedAt": "2026-08-30T08:22:34Z",
+   "duration": 358,
+   "views": 6303,
+   "likes": 202,
+   "tools": [
+    "gamma"
+   ],
+   "topics": [
+    "prompting",
+    "data",
+    "presenting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 55,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "j6b_PGg_80Q",
+   "title": "Google NotebookLM Kaise Use Kare? 🤯 PDF Se Notes & Questions FREE | Hindi Tutorial",
+   "channel": "The Insight Horizon",
+   "channelId": "UCrxw9tSE5fsCgLnp5BrlA4g",
+   "publishedAt": "2026-08-29T07:31:10Z",
+   "duration": 227,
+   "views": 2881,
+   "likes": 123,
+   "tools": [
+    "notebooklm"
+   ],
+   "topics": [
+    "teaching"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 40,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Rk4VyQxDq5s",
+   "title": "Getting Started with ChatGPT Work",
+   "channel": "OpenAI",
+   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
+   "publishedAt": "2026-08-28T20:51:11Z",
+   "duration": 234,
+   "views": 60409,
+   "likes": 539,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "chat-basics",
+    "llms"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "Lu9_3MYaYw0",
+   "title": "How To Create Dashboards with Gemini in Google Sheets (in 3 mins)",
+   "channel": "Dean Stokes - Tech Tutorials",
+   "channelId": "UCX-znXB00avwiMyXU9GRlWA",
+   "publishedAt": "2026-08-28T20:32:34Z",
+   "duration": 195,
+   "views": 6209,
+   "likes": 88,
+   "tools": [
+    "gemini"
+   ],
+   "topics": [
+    "data",
+    "coding"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 48,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "mqDn-h0PJnA",
    "title": "ChatGPT Work Tutorial for Beginners",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-08-27T07:00:37+00:00",
-   "duration": 0,
+   "duration": 563,
    "views": 55437,
    "likes": 512,
    "tools": [
@@ -523,7 +2340,7 @@
    "channel": "freeCodeCamp.org",
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
    "publishedAt": "2026-08-26T15:08:03+00:00",
-   "duration": 0,
+   "duration": 10833,
    "views": 66617,
    "likes": 477,
    "tools": [],
@@ -543,8 +2360,8 @@
    "channel": "Jeff Su",
    "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
    "publishedAt": "2026-08-25T13:00:23+00:00",
-   "duration": 0,
-   "views": 303757,
+   "duration": 1175,
+   "views": 303788,
    "likes": 3881,
    "tools": [
     "chatgpt"
@@ -561,8 +2378,8 @@
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-08-24T07:00:05+00:00",
-   "duration": 0,
-   "views": 16042,
+   "duration": 234,
+   "views": 16041,
    "likes": 313,
    "tools": [
     "chatgpt"
@@ -581,8 +2398,8 @@
    "channel": "freeCodeCamp.org",
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
    "publishedAt": "2026-08-19T10:00:28+00:00",
-   "duration": 0,
-   "views": 43066,
+   "duration": 8282,
+   "views": 43057,
    "likes": 1046,
    "tools": [],
    "topics": [
@@ -598,9 +2415,9 @@
    "title": "Every AI Model Explained In 20 Minutes (Update)",
    "channel": "Tina Huang",
    "channelId": "UC2UXDak6o7rBm23k3Vv5dww",
-   "publishedAt": "2026-08-10T13:02:38+00:00",
-   "duration": 0,
-   "views": 143052,
+   "publishedAt": "2026-08-10T13:02:38Z",
+   "duration": 1224,
+   "views": 143061,
    "likes": 4529,
    "tools": [],
    "topics": [
