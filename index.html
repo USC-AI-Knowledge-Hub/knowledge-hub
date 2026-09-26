@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>USC AI Knowledge Hub</title>
+    <meta name="description" content="Learn AI tools at your own pace: learning paths, tool guides and a video library refreshed every day, sorted by tool and difficulty." />
+    <meta name="theme-color" content="#990000" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23990000' d='M50 4c7 0 10 7 16 9s13-1 17 5 0 12 2 18 9 10 9 16-7 10-9 16 2 12-2 18-11 3-17 5-9 9-16 9-10-7-16-9-13 1-17-5 0-12-2-18-9-10-9-16 7-10 9-16-2-12 2-18 11-3 17-5 9-9 16-9z'/%3E%3Cpath fill='%23FFCC00' d='M30 62h40v8H30zM38 50h24v8H38zM46 38h8v8h-8z'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,GRAD,ROND@6..144,-10..0,25..151,1..1000,0..100,0..100&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
+    <script>
+      try {
+        const t = localStorage.getItem("kh-theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

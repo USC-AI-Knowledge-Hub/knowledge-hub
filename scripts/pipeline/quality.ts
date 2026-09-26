@@ -1,0 +1,83 @@
+import { SETTINGS } from "./config";
+
+export interface Candidate {
+  id: string;
+  title: string;
+  description: string;
+  channel: string;
+  channelId: string;
+  publishedAt: string;
+  duration: number;
+  views: number;
+  likes?: number;
+  language?: string;
+  live?: boolean;
+  /** Known to be a YouTube Short (RSS links them under /shorts/). */
+  short?: boolean;
+  trusted?: boolean;
+}
+
+const HYPE = [
+  /\b(insane|shocking|crazy|unbelievable|mind[- ]?blowing|game[- ]?changer|destroys?|killed|is dead|rip)\b/i,
+  /\b(make|making|earn) \$?\d[\d,]*k?\b.*\b(month|day|week)\b/i,
+  /\bget rich\b|\bpassive income\b|\bside hustle\b/i,
+  /!!|🤯|😱|🔥🔥/u,
+];
+
+const EDUCATIONAL = /\b(tutorial|guide|course|explained|how to|walkthrough|lesson|learn|step[- ]by[- ]step|beginners?|deep dive)\b/i;
+
+/** Title reads like a lesson rather than news or entertainment. */
+export const looksEducational = (title: string) => EDUCATIONAL.test(title) || /\b(what is|explained|introduction to|basics)\b/i.test(title);
+
+export function hypeLevel(title: string): number {
+  let n = HYPE.filter((re) => re.test(title)).length;
+  const words = title.split(/\s+/).filter((w) => /[A-Z]{4,}/.test(w) && w === w.toUpperCase());
+  if (words.length >= 2) n += 1;
+  return n;
+}
+
+/** Share of letters outside Latin script: a cheap language check for RSS mode. */
+function nonLatinRatio(text: string): number {
+  const letters = [...text].filter((c) => /\p{L}/u.test(c));
+  if (!letters.length) return 0;
+  return letters.filter((c) => !/\p{Script=Latin}/u.test(c)).length / letters.length;
+}
+
+export function ageDays(publishedAt: string, now: Date): number {
+  return Math.max(0, (now.getTime() - new Date(publishedAt).getTime()) / 86_400_000);
+}
+
+/** Why a candidate was rejected, or null if it passes. */
+export function rejectReason(c: Candidate, now: Date): string | null {
+  if (c.live) return "live or upcoming";
+  if (c.short) return "short";
+  if (/#shorts?\b/i.test(c.title) || /#shorts?\b/i.test(c.description.slice(0, 200))) return "short";
+  if (c.duration && c.duration < SETTINGS.minDuration) return "too short";
+  if (c.duration > SETTINGS.maxDuration) return "too long";
+  if (c.language && !c.language.toLowerCase().startsWith("en")) return "not English";
+  if (nonLatinRatio(c.title) > 0.3) return "not English";
+  if (hypeLevel(c.title) >= 2) return "clickbait";
+  if (!c.trusted && c.views > 0) {
+    const min = ageDays(c.publishedAt, now) < 3 ? SETTINGS.minViewsFresh : SETTINGS.minViews;
+    if (c.views < min) return "too few views";
+  }
+  return null;
+}
+
+/**
+ * 0–100 quality score: reach, momentum, approval, freshness and source trust,
+ * minus a hype penalty. Weighted toward learning value over raw popularity.
+ */
+export function qualityScore(c: Candidate, now: Date): number {
+  const age = Math.max(1, ageDays(c.publishedAt, now));
+  const reach = Math.min(1, Math.log10(c.views + 1) / 6.5);
+  const momentum = Math.min(1, Math.log10(c.views / age + 1) / 5);
+  const approval = c.likes && c.views ? Math.min(1, (c.likes / c.views) / 0.04) : 0.5;
+  const fresh = Math.exp(-age / 30);
+  const trust = c.trusted ? 1 : 0;
+  const edu = EDUCATIONAL.test(c.title) ? 1 : 0;
+  const s =
+    0.25 * reach + 0.2 * momentum + 0.15 * approval + 0.15 * fresh + 0.12 * trust + 0.13 * edu -
+    0.15 * hypeLevel(c.title);
+  return Math.round(Math.max(0, Math.min(1, s)) * 100);
+}

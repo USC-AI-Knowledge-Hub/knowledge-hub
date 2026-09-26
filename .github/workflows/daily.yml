@@ -1,0 +1,89 @@
+name: Daily videos and deploy
+
+on:
+  schedule:
+    # Every day at 12:17 UTC (5:17 AM Pacific in summer, 4:17 AM in winter).
+    - cron: "17 12 * * *"
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Refresh the video library before deploying"
+        type: boolean
+        default: true
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: Decide whether to refresh videos
+        id: refresh
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] || { [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.refresh }}" = "true" ]; }; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          elif [ "$(node -p "require('./public/data/videos.json').videos.length")" = "0" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Refresh video library
+        if: steps.refresh.outputs.run == 'true'
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npm run videos
+
+      - name: Commit updated library
+        if: steps.refresh.outputs.run == 'true'
+        run: |
+          git config user.name "knowledge-hub-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/videos.json scripts/pipeline/channels.lock.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Daily video library update $(date -u +%F)"
+            git push
+          fi
+
+      - name: Build site
+        env:
+          # A custom domain serves from the root: set the BASE_PATH repository variable to "/".
+          BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
