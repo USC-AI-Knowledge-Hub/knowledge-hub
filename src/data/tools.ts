@@ -78,7 +78,7 @@ export const tools: Tool[] = [
     lastReviewed: REVIEWED,
     nextReview: NEXT,
     queries: ["ChatGPT tutorial", "ChatGPT tips for students", "ChatGPT advanced features"],
-    match: ["chat ?gpt", "\\bopenai\\b", "custom gpts?\\b", "\\bgpt-?[45]"],
+    match: ["chat ?gpt", "custom gpts?\\b"],
   },
   {
     id: "claude",
@@ -114,7 +114,7 @@ export const tools: Tool[] = [
     lastReviewed: REVIEWED,
     nextReview: NEXT,
     queries: ["Claude AI tutorial", "Claude projects artifacts tutorial", "Anthropic Claude tips"],
-    match: ["\\bclaude\\b", "\\banthropic\\b"],
+    match: ["\\bclaude\\b"],
     exclude: ["claude code"],
   },
   {
