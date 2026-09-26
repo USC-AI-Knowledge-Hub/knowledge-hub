@@ -8,7 +8,9 @@ import type { Course, CourseSource } from "./types";
  * Rules for adding one:
  * - It has to be a course, not a clip: a planned sequence, or one long
  *   video structured as lessons.
- * - Prefer the original publisher's channel over re-uploads.
+ * - Only the original publisher's channel, never a re-upload. The checker
+ *   compares channels, which is how it caught a re-uploaded OpenAI course.
+ * - It must allow embedding (Stanford's CS229 doesn't, so it isn't here).
  * - `channel` must match YouTube exactly. `npm run courses` fails CI when a
  *   course is gone or has moved to another channel.
  * - Lesson counts and hours are estimates; the daily run replaces them with
@@ -47,22 +49,6 @@ export const courses: Course[] = [
     audience: "Students with some calculus and Python who want a fast, current overview of deep learning.",
     cover: "alfdI7S6wCY",
     modules: ["llms", "multimodal", "ai-for-your-field"],
-  },
-  {
-    id: "stanford-cs229",
-    playlist: "PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU",
-    title: "Stanford CS229: Machine Learning (Andrew Ng)",
-    channel: "Stanford Online",
-    org: "Stanford",
-    source: "university",
-    lessons: 20,
-    hours: 27,
-    difficulty: "advanced",
-    summary:
-      "Andrew Ng's graduate machine learning course from 2018: supervised learning, neural networks, learning theory, unsupervised learning and reinforcement learning, with the math worked through.",
-    audience: "Researchers who want the theory behind the models they use. Assumes linear algebra and probability.",
-    cover: "jGwO_UgTS7I",
-    modules: ["ai-for-your-field"],
   },
   {
     id: "stanford-cs224n",
@@ -132,7 +118,7 @@ export const courses: Course[] = [
     id: "berkeley-llm-agents",
     playlist: "PLS01nW3RtgopsNLeM936V4TNSsvvVglLc",
     title: "Large Language Model Agents (Berkeley, Fall 2024)",
-    channel: "Berkeley RDI Center on Decentralization & AI",
+    channel: "Berkeley RDI",
     org: "UC Berkeley",
     source: "university",
     lessons: 12,
@@ -148,7 +134,7 @@ export const courses: Course[] = [
     id: "berkeley-advanced-agents",
     playlist: "PLS01nW3RtgorL3AW8REU9nGkzhvtn6Egn",
     title: "Advanced Large Language Model Agents (Berkeley, Spring 2025)",
-    channel: "Berkeley RDI Center on Decentralization & AI",
+    channel: "Berkeley RDI",
     org: "UC Berkeley",
     source: "university",
     lessons: 12,
@@ -177,22 +163,6 @@ export const courses: Course[] = [
     cover: "JpGtOfSgR-c",
     modules: ["chat-assistants", "prompting", "writing", "research-verification", "limits", "ai-for-teaching", "assessment", "ethics-integrity", "presentations"],
     tools: ["claude"],
-  },
-  {
-    id: "openai-teachers",
-    video: "1iDy_JHwimU",
-    title: "ChatGPT Foundations for Teachers",
-    channel: "OpenAI",
-    org: "OpenAI",
-    source: "maker",
-    lessons: 8,
-    hours: 1,
-    difficulty: "beginner",
-    summary:
-      "OpenAI and Common Sense Media's course for educators: how ChatGPT works, what it gets wrong, and how to use it for lesson planning, rubrics and feedback while protecting student privacy.",
-    audience: "Instructors and TAs. Written for K-12, but almost all of it applies to university teaching.",
-    modules: ["ai-for-teaching", "assessment"],
-    tools: ["chatgpt"],
   },
   {
     id: "ms-genai-beginners",
@@ -276,15 +246,15 @@ export const courses: Course[] = [
     id: "gemini-education",
     playlist: "PLP7Bvyb3ap462hNhU9dZdFEu3H04Efbyf",
     title: "Transform Education with Gemini for Google Workspace",
-    channel: "Google Workspace",
+    channel: "Google for Education",
     org: "Google",
     source: "maker",
     lessons: 6,
     hours: 1,
     difficulty: "beginner",
-    summary: "Demos of Gemini inside Docs, Slides, Sheets and Gmail for educators: planning, differentiating materials and handling admin work.",
+    summary: "Google for Education's demos of Gemini inside Workspace apps for educators: planning, preparing and adapting course materials, and handling admin work.",
     audience: "Instructors and staff who already work in Google Workspace.",
-    modules: ["ai-for-teaching", "presentations"],
+    modules: ["ai-for-teaching", "assessment", "presentations"],
     tools: ["gemini"],
   },
 
@@ -333,7 +303,7 @@ export const courses: Course[] = [
     summary:
       "A practical tour of today's assistants: choosing a model, thinking modes, search, deep research, file uploads, data analysis, voice, images and custom instructions.",
     audience: "Anyone who uses AI assistants and wants to get more out of them.",
-    modules: ["chat-assistants", "prompting", "writing", "data-analysis"],
+    modules: ["chat-assistants", "prompting", "writing", "data-analysis", "assessment"],
     tools: ["chatgpt", "claude", "gemini", "perplexity"],
   },
   {

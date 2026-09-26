@@ -8,7 +8,7 @@ A learning site for USC students and faculty, built around three things:
   learning paths (Student starter, Faculty, Research, Builder). Every lesson
   answers *what is it*, *why does it matter to me* and *show me how*, and ends with a
   hands-on exercise. Progress is saved in the browser.
-- **Full courses**: 25 complete YouTube courses and playlists (Harvard CS50, MIT,
+- **Full courses**: 23 complete YouTube courses and playlists (Harvard CS50, MIT,
   Stanford, Berkeley, Anthropic, OpenAI, Microsoft, Google, 3Blue1Brown,
   Karpathy, fast.ai, Crash Course and more), each mapped to the lessons it goes
   deeper on. `npm run courses` checks every one against YouTube, in CI and daily.
