@@ -46,6 +46,12 @@ export const SETTINGS = {
   maxAgeDays: 60,
   /** Results requested per search query (max 50). Each search costs 100 quota units. */
   resultsPerQuery: 15,
+  /**
+   * Most searches per run. 90 searches is 9,000 of the default 10,000 daily
+   * units, leaving room for videos.list and the course check. With more
+   * queries than this, the pipeline rotates through them day by day.
+   */
+  maxSearches: 90,
   /** Drop videos from the feed once they were first seen this many days ago. */
   retentionDays: 120,
   /** Keep at most this many videos per tool × difficulty cell. */

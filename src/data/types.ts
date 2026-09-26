@@ -62,6 +62,59 @@ export interface CuratedVideo {
   minutes: number;
 }
 
+/** Who made a course: a university, the company behind a tool, or an independent educator. */
+export type CourseSource = "university" | "maker" | "educator";
+
+/**
+ * A full course on YouTube: a playlist, or one long single-video course.
+ * Lesson counts and hours here are editor estimates; `npm run courses`
+ * checks every course against YouTube and writes live numbers to
+ * public/data/courses.json, which the app prefers when present.
+ */
+export interface Course {
+  id: string;
+  /** YouTube playlist ID. Set this or `video`. */
+  playlist?: string;
+  /** YouTube video ID, for a course published as one long video. */
+  video?: string;
+  title: string;
+  /** The YouTube channel exactly as YouTube shows it. The checker compares against this. */
+  channel: string;
+  /** Short name for the institution or company, e.g. "Stanford". */
+  org: string;
+  source: CourseSource;
+  lessons: number;
+  hours: number;
+  difficulty: Difficulty;
+  summary: string;
+  /** Who should take it, and what it assumes. */
+  audience: string;
+  /** Video ID used for the thumbnail, usually the first lesson. */
+  cover?: string;
+  /** Learn modules this course goes deeper on. */
+  modules: string[];
+  tools?: string[];
+}
+
+/** One entry in public/data/courses.json, written by `npm run courses`. */
+export interface CourseCheck {
+  ok: boolean;
+  title?: string;
+  channel?: string;
+  lessons?: number;
+  seconds?: number;
+  cover?: string;
+  problem?: string;
+}
+
+export interface CourseStatus {
+  generatedAt: string;
+  via: "api" | "oembed";
+  courses: Record<string, CourseCheck>;
+  /** Editors' picks in learn.ts, keyed by video ID. */
+  curated: Record<string, CourseCheck>;
+}
+
 export interface Module {
   id: string;
   track: Track;

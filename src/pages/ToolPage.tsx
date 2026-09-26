@@ -1,4 +1,7 @@
 import { Link, useParams } from "react-router";
+import { CourseCard } from "../components/CourseCard";
+import { courses } from "../data/courses";
+import { live, useCourseStatus } from "../lib/courses";
 import { Icon } from "../components/Icon";
 import { Bars, Level } from "../components/Level";
 import { ToolMark } from "../components/ToolMark";
@@ -28,7 +31,10 @@ export function ToolPage() {
   const { id = "" } = useParams();
   const tool = toolById.get(id);
   const { feed } = useFeed();
+  const status = useCourseStatus();
   if (!tool) return <NotFound />;
+
+  const toolCourses = courses.filter((c) => c.tools?.includes(tool.id)).map((c) => live(c, status)).filter((c) => c.available);
 
   const videos = (feed?.videos ?? []).filter((v) => v.tools.includes(tool.id));
   const related = modules.filter((m) => m.tools.includes(tool.id)).slice(0, 4);
@@ -110,6 +116,24 @@ export function ToolPage() {
           })}
         </div>
       </section>
+
+      {toolCourses.length > 0 && (
+        <section className="section" aria-labelledby="tc-h">
+          <div className="section-head">
+            <div>
+              <h2 id="tc-h" className="headline-m">
+                Full courses
+              </h2>
+              <p className="body-m muted">Structured courses that teach {tool.name}, start to finish.</p>
+            </div>
+          </div>
+          <div className="grid cols-videos">
+            {toolCourses.map((c) => (
+              <CourseCard key={c.id} course={c} compact />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="section profile" aria-label="Tool review">
         <div className="profile-main">

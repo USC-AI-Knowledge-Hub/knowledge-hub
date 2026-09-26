@@ -4,9 +4,10 @@ import type { LearningPath, Module } from "./types";
  * Learning modules. Each one answers the Hub's three questions:
  * what is it, why does it matter to me, and show me how.
  *
- * `curated` holds a few evergreen videos chosen by editors. The daily pipeline
- * adds fresh videos by `topic`, so a module never goes stale even when its
- * curated list is short. The pipeline also re-checks curated IDs in API mode.
+ * `curated` holds a few short evergreen videos chosen by editors. Full courses
+ * live in courses.ts and are matched to modules there. The daily pipeline adds
+ * fresh videos by `topic`, so a module never goes stale. `npm run courses`
+ * checks every curated ID and course against YouTube.
  */
 export const modules: Module[] = [
   // ── Foundations ────────────────────────────────────────────────────────────
@@ -38,6 +39,8 @@ export const modules: Module[] = [
     topic: "genai-basics",
     curated: [
       { id: "aircAruvnKk", title: "But what is a neural network?", channel: "3Blue1Brown", minutes: 18 },
+      { id: "LPZh9BOjkQs", title: "Large Language Models explained briefly", channel: "3Blue1Brown", minutes: 8 },
+      { id: "G2fqAlgmoPo", title: "Introduction to Generative AI", channel: "Google Cloud Tech", minutes: 22 },
       { id: "zjkBMFhNj_g", title: "[1hr Talk] Intro to Large Language Models", channel: "Andrej Karpathy", minutes: 60 },
     ],
   },
@@ -69,7 +72,6 @@ export const modules: Module[] = [
     curated: [
       { id: "wjZofJX0v4M", title: "Transformers, the tech behind LLMs", channel: "3Blue1Brown", minutes: 27 },
       { id: "eMlx5fFNoYc", title: "Attention in transformers, step-by-step", channel: "3Blue1Brown", minutes: 26 },
-      { id: "7xTGNNLPyMI", title: "Deep Dive into LLMs like ChatGPT", channel: "Andrej Karpathy", minutes: 211 },
     ],
   },
   {
@@ -120,7 +122,7 @@ export const modules: Module[] = [
         "Mark every transcription error it made.",
       ],
     },
-    tools: ["gemini", "chatgpt", "midjourney", "runway", "elevenlabs"],
+    tools: ["gemini", "chatgpt", "adobe-firefly", "midjourney", "runway", "descript", "elevenlabs"],
     topic: "multimodal",
     curated: [],
   },
@@ -260,7 +262,7 @@ export const modules: Module[] = [
     tools: ["chatgpt", "claude", "gemini"],
     topic: "prompting",
     curated: [
-      { id: "EWvNQjAaOHw", title: "How I use LLMs", channel: "Andrej Karpathy", minutes: 131 },
+      { id: "ysPbXH0LpIE", title: "Prompting 101", channel: "Anthropic", minutes: 24 },
     ],
   },
   {
@@ -285,7 +287,7 @@ export const modules: Module[] = [
         "Trace each one to a primary source and mark it supported, weak or wrong.",
       ],
     },
-    tools: ["perplexity", "elicit", "gemini", "notebooklm"],
+    tools: ["perplexity", "elicit", "scispace", "consensus", "scite", "researchrabbit", "semantic-scholar", "notebooklm"],
     topic: "research",
     curated: [],
   },
@@ -311,7 +313,7 @@ export const modules: Module[] = [
         "Revise it yourself, then ask again.",
       ],
     },
-    tools: ["claude", "chatgpt", "copilot"],
+    tools: ["claude", "chatgpt", "copilot", "grammarly", "quillbot"],
     topic: "writing",
     curated: [],
   },
@@ -337,7 +339,7 @@ export const modules: Module[] = [
         "Pick one, get a chart, and verify one figure by hand.",
       ],
     },
-    tools: ["chatgpt", "claude", "copilot", "gemini"],
+    tools: ["chatgpt", "claude", "julius", "copilot", "gemini"],
     topic: "data",
     curated: [],
   },
@@ -363,7 +365,7 @@ export const modules: Module[] = [
         "Ask it to write tests, then break the input on purpose.",
       ],
     },
-    tools: ["github-copilot", "cursor", "claude-code"],
+    tools: ["github-copilot", "cursor", "claude-code", "replit"],
     topic: "coding",
     curated: [
       { id: "kCc8FmEb1nY", title: "Let's build GPT: from scratch, in code, spelled out.", channel: "Andrej Karpathy", minutes: 116 },
@@ -383,7 +385,7 @@ export const modules: Module[] = [
       title: "Outline to deck in 15 minutes",
       steps: ["Write a five-point outline.", "Generate a deck in Gamma or Copilot.", "Rewrite each headline to state its point."],
     },
-    tools: ["gamma", "copilot"],
+    tools: ["gamma", "canva", "napkin", "copilot"],
     topic: "presenting",
     curated: [],
   },
@@ -453,7 +455,7 @@ export const modules: Module[] = [
       title: "Build a practice set",
       steps: ["Upload one lecture's slides to NotebookLM.", "Generate ten practice questions.", "Edit them and share with a TA for review."],
     },
-    tools: ["notebooklm", "chatgpt", "claude"],
+    tools: ["notebooklm", "chatgpt", "claude", "otter"],
     topic: "teaching",
     curated: [],
   },

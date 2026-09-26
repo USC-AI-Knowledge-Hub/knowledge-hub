@@ -36,8 +36,10 @@ description: How the daily YouTube pipeline finds, filters, labels and ranks vid
 ## Quota
 
 search.list is 100 units; the default daily quota is 10,000. Today:
-~30 tool queries + 7 topic queries ≈ 3,700 units, plus a few units for
-videos.list. Keep the total under ~8,000 so a manual re-run still fits.
+47 tool queries + 7 topic queries = 5,400 units, plus a few units for
+videos.list and about 100 for the course check (`npm run courses`).
+`SETTINGS.maxSearches` (90) caps searches per run; above it, `rotation.ts`
+cycles through the queries day by day. Give a new tool one query, not three.
 
 ## Common changes
 
@@ -46,6 +48,9 @@ videos.list. Keep the total under ~8,000 so a manual re-run still fits.
   `scripts/pipeline/__tests__/pipeline.test.ts` for any ambiguous name.
 - **Add a trusted channel:** add its @handle to `TRUSTED_CHANNELS`. IDs are
   resolved on the next run and cached in `channels.lock.json`.
+- **Add a full course:** add it to `src/data/courses.ts` with its playlist (or
+  video) ID, the exact channel name and the modules it covers, then run
+  `npm run courses -- --check` (needs YouTube access, so CI runs it on every PR).
 - **Add a lesson topic:** add to `src/data/topics.ts` and set `topic` on the module.
 - **Tune difficulty:** edit `SIGNALS` in `difficulty.ts` and add a test case.
 

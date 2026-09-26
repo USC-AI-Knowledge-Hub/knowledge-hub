@@ -1,10 +1,13 @@
 import { Link, useParams } from "react-router";
+import { CourseCard } from "../components/CourseCard";
 import { Icon } from "../components/Icon";
 import { Level } from "../components/Level";
 import { ToolMark } from "../components/ToolMark";
 import { VideoCard } from "../components/VideoCard";
+import { coursesFor } from "../data/courses";
 import { moduleById, paths } from "../data/learn";
 import { toolById } from "../data/tools";
+import { live, useCourseStatus } from "../lib/courses";
 import { useFeed } from "../lib/feed";
 import { minutesLabel } from "../lib/format";
 import { useProgress } from "../lib/progress";
@@ -15,10 +18,19 @@ export function ModulePage() {
   const m = moduleById.get(id);
   const { feed } = useFeed();
   const { isDone, toggle } = useProgress();
+  const status = useCourseStatus();
   if (!m) return <NotFound />;
 
+  // Courses at this lesson's level first, then the closest levels, shortest first.
+  const rank = { beginner: 0, intermediate: 1, advanced: 2 };
+  const moduleCourses = coursesFor(m.id)
+    .map((c) => live(c, status))
+    .filter((c) => c.available)
+    .sort((a, b) => Math.abs(rank[a.difficulty] - rank[m.difficulty]) - Math.abs(rank[b.difficulty] - rank[m.difficulty]) || a.hours - b.hours);
+  const curated = m.curated.filter((c) => status?.curated[c.id]?.ok ?? true);
+
   const done = isDone(m.id);
-  const curatedIds = new Set(m.curated.map((c) => c.id));
+  const curatedIds = new Set(curated.map((c) => c.id));
   const fresh = (feed?.videos ?? [])
     .filter((v) => v.topics.includes(m.topic) && !curatedIds.has(v.id))
     // Prefer videos at this lesson's level, then the best-rated.
@@ -92,14 +104,28 @@ export function ModulePage() {
             )}
           </section>
 
-          {(m.curated.length > 0 || fresh.length > 0) && (
+          {moduleCourses.length > 0 && (
+            <section aria-labelledby="courses-h">
+              <h2 id="courses-h" className="headline-s watch-h">
+                Go deeper with a full course
+              </h2>
+              <p className="body-m muted measure sub-h">Complete, free courses that cover this lesson in depth. Pick one; you don't need them all.</p>
+              <div className="grid cols-videos">
+                {moduleCourses.map((c) => (
+                  <CourseCard key={c.id} course={c} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {(curated.length > 0 || fresh.length > 0) && (
             <section>
               <h2 className="headline-s watch-h">Watch</h2>
-              {m.curated.length > 0 && (
+              {curated.length > 0 && (
                 <>
                   <p className="label-l muted sub-h">Editors' picks</p>
                   <div className="grid cols-videos">
-                    {m.curated.map((c) => (
+                    {curated.map((c) => (
                       <VideoCard key={c.id} video={{ ...c, duration: c.minutes * 60 }} />
                     ))}
                   </div>

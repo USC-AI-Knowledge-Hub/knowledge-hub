@@ -9,7 +9,8 @@
     "test": "vitest run",
     "typecheck": "tsc -b",
     "theme": "tsx scripts/gen-theme.ts",
-    "videos": "tsx scripts/pipeline/index.ts"
+    "videos": "tsx scripts/pipeline/index.ts",
+    "courses": "tsx scripts/courses.ts"
   },
   "repository": {
     "type": "git",

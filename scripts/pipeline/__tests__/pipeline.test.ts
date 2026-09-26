@@ -6,6 +6,7 @@ import { parseIsoDuration } from "../duration";
 import { mergeFeed } from "../merge";
 import { hypeLevel, looksEducational, mentionsAI, qualityScore, rejectReason, type Candidate } from "../quality";
 import { parseFeed } from "../rss";
+import { todaysQueries } from "../rotation";
 import { tagTools, tagTopics } from "../tagging";
 
 const now = new Date("2026-09-26T12:00:00Z");
@@ -168,5 +169,34 @@ describe("mergeFeed", () => {
     const out = mergeFeed([], many, "2026-09-26");
     expect(out).toHaveLength(15);
     expect(Math.min(...out.map((x) => x.score))).toBe(15);
+  });
+});
+
+describe("todaysQueries", () => {
+  const qs = Array.from({ length: 10 }, (_, i) => `q${i}`);
+  it("returns everything when under budget", () => {
+    expect(todaysQueries(qs, now, 20)).toEqual(qs);
+  });
+  it("caps the count and covers every query within a few days", () => {
+    const seen = new Set<string>();
+    for (let d = 0; d < 3; d++) {
+      const today = todaysQueries(qs, new Date(now.getTime() + d * 86_400_000), 4);
+      expect(today).toHaveLength(4);
+      today.forEach((q) => seen.add(q));
+    }
+    expect(seen.size).toBe(10);
+  });
+});
+
+describe("tagTools for research and creative tools", () => {
+  it("tags the new tools by name", () => {
+    expect(tagTools("SciSpace tutorial for literature reviews")).toEqual(["scispace"]);
+    expect(tagTools("How to use Consensus AI for research")).toContain("consensus");
+    expect(tagTools("ResearchRabbit in 10 minutes")).toEqual(["researchrabbit"]);
+    expect(tagTools("Edit a podcast in Descript")).toEqual(["descript"]);
+  });
+  it("doesn't fire on ordinary words", () => {
+    expect(tagTools("Reaching consensus in group projects")).toEqual([]);
+    expect(tagTools("Read the video description")).toEqual([]);
   });
 });

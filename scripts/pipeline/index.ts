@@ -25,6 +25,7 @@ import { guessDifficulty } from "./difficulty";
 import { mergeFeed } from "./merge";
 import { looksEducational, mentionsAI, qualityScore, rejectReason, type Candidate } from "./quality";
 import { fetchChannelFeed, resolveHandle } from "./rss";
+import { todaysQueries } from "./rotation";
 import { tagTools, tagTopics } from "./tagging";
 import { existingIds, searchVideoIds, videoDetails } from "./youtube-api";
 
@@ -89,7 +90,7 @@ async function collect(trusted: Set<string>): Promise<{ candidates: Candidate[];
 
   const after = new Date(now.getTime() - SETTINGS.searchWindowDays * 86_400_000);
   const ids = new Set(rssCandidates.map((c) => c.id));
-  const queries = [...tools.flatMap((t) => t.queries), ...TOPIC_QUERIES];
+  const queries = todaysQueries([...tools.flatMap((t) => t.queries), ...TOPIC_QUERIES], now, SETTINGS.maxSearches);
   for (const q of queries) {
     try {
       for (const id of await searchVideoIds(q, after, SETTINGS.resultsPerQuery, ytKey)) ids.add(id);

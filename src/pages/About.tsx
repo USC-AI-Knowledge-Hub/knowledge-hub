@@ -81,7 +81,8 @@ export function About() {
           <li className="body-l">It judges videos by their title, description and statistics. Nobody has watched every one.</li>
           <li className="body-l">Difficulty labels are a best guess. If one looks wrong, trust your own sense of the video.</li>
           <li className="body-l">
-            Lessons in Learn also have editors' picks: videos a Hub Fellow has watched and recommends. Those are the ones to start with.
+            Lessons in Learn also have editors' picks and full courses from universities and the companies behind the tools. Those are
+            the ones to start with. Every course is checked against YouTube each day, and any that disappear are hidden.
           </li>
         </ul>
       </section>
