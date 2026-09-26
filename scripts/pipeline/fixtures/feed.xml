@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+ <title>Example Educator</title>
+ <entry>
+  <id>yt:video:abc123def45</id>
+  <yt:videoId>abc123def45</yt:videoId>
+  <yt:channelId>UCaaaaaaaaaaaaaaaaaaaaaa</yt:channelId>
+  <title>NotebookLM Tutorial for Beginners</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=abc123def45"/>
+  <author><name>Example Educator</name></author>
+  <published>2026-09-20T15:00:00+00:00</published>
+  <media:group>
+   <media:title>NotebookLM Tutorial for Beginners</media:title>
+   <media:description>Learn how to study with your own sources.</media:description>
+   <media:community>
+    <media:starRating count="1200" average="5.00" min="1" max="5"/>
+    <media:statistics views="45000"/>
+   </media:community>
+  </media:group>
+ </entry>
+ <entry>
+  <id>yt:video:shrt0000001</id>
+  <yt:videoId>shrt0000001</yt:videoId>
+  <yt:channelId>UCaaaaaaaaaaaaaaaaaaaaaa</yt:channelId>
+  <title>One ChatGPT trick</title>
+  <link rel="alternate" href="https://www.youtube.com/shorts/shrt0000001"/>
+  <author><name>Example Educator</name></author>
+  <published>2026-09-21T15:00:00+00:00</published>
+  <media:group>
+   <media:description>#shorts</media:description>
+   <media:community><media:statistics views="900000"/></media:community>
+  </media:group>
+ </entry>
+</feed>
