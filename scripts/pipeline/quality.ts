@@ -24,10 +24,22 @@ const HYPE = [
   /!!|🤯|😱|🔥🔥/u,
 ];
 
-const EDUCATIONAL = /\b(tutorial|guide|course|explained|how to|walkthrough|lesson|learn|step[- ]by[- ]step|beginners?|deep dive)\b/i;
+const EDUCATIONAL =
+  /\b(tutorial|guide|course|explained|explainer|how to|how i|walkthrough|lessons?|learn|step[- ]by[- ]step|beginners?|deep dive|tips|tricks|crash course|full course|intro(duction)?|what is|basics|fundamentals|getting started|masterclass|workshop|in under \d+ minutes)\b/i;
+
+/** Imperative titles like "Use ChatGPT Work to build dashboards" are lessons too. */
+const IMPERATIVE = /^(use|build|create|make|set ?up|automate|write|analy[sz]e|turn|learn|master)\b/i;
+
+/** News, announcements and entertainment: never lessons, whatever else they mention. */
+const NOT_LESSON =
+  /\b(ai news|news:|this week in ai|weekly (ai )?(news|recap)|documentary|trailer|teaser|podcast|introducing|announcing|announcement|keynote|livestream|live stream|reacts?|reaction)\b/i;
 
 /** Title reads like a lesson rather than news or entertainment. */
-export const looksEducational = (title: string) => EDUCATIONAL.test(title) || /\b(what is|explained|introduction to|basics)\b/i.test(title);
+export const looksEducational = (title: string) => EDUCATIONAL.test(title) || IMPERATIVE.test(title.trim());
+
+/** The title is about AI at all. Required for videos that don't name a catalog tool. */
+export const mentionsAI = (title: string) =>
+  /\b(ai|a\.i\.|llms?|gpts?|agents?|agentic|machine learning|deep learning|reinforcement learning|neural|genai|generative|prompt(s|ing)?|chatbots?|copilot|mcp|rag)\b/i.test(title);
 
 export function hypeLevel(title: string): number {
   let n = HYPE.filter((re) => re.test(title)).length;
@@ -57,6 +69,8 @@ export function rejectReason(c: Candidate, now: Date): string | null {
   if (c.language && !c.language.toLowerCase().startsWith("en")) return "not English";
   if (nonLatinRatio(c.title) > 0.3) return "not English";
   if (hypeLevel(c.title) >= 2) return "clickbait";
+  if (NOT_LESSON.test(c.title)) return "news or announcement";
+  if (ageDays(c.publishedAt, now) > SETTINGS.maxAgeDays) return "too old";
   if (!c.trusted && c.views > 0) {
     const min = ageDays(c.publishedAt, now) < 3 ? SETTINGS.minViewsFresh : SETTINGS.minViews;
     if (c.views < min) return "too few views";

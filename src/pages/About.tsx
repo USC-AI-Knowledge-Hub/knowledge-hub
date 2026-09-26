@@ -14,7 +14,7 @@ const STEPS = [
   {
     icon: "filter_alt",
     title: "Filter",
-    body: "Shorts, livestreams, non-English videos, clickbait titles and videos with too little audience are dropped before anything else happens.",
+    body: "Shorts, livestreams, news roundups, product announcements, non-English videos, clickbait titles, anything older than 60 days and videos with too little audience are dropped. Without Claude, a title also has to read like a lesson: a tutorial, a guide, tips, “how to”.",
   },
   {
     icon: "label",

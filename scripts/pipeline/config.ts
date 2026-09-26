@@ -42,6 +42,8 @@ export const TOPIC_QUERIES = [
 export const SETTINGS = {
   /** Only consider videos published in the last N days on search. */
   searchWindowDays: 30,
+  /** Anything older is dropped, including old uploads that show up in channel feeds. */
+  maxAgeDays: 60,
   /** Results requested per search query (max 50). Each search costs 100 quota units. */
   resultsPerQuery: 15,
   /** Drop videos from the feed once they were first seen this many days ago. */

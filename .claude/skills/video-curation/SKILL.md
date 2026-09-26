@@ -14,17 +14,23 @@ description: How the daily YouTube pipeline finds, filters, labels and ranks vid
    `YOUTUBE_API_KEY`, also search every `tool.queries` entry plus
    `TOPIC_QUERIES`, then fetch details (duration, likes, language) for all IDs.
 2. **Filter** (`quality.ts#rejectReason`): shorts, live, too short/long,
-   non-English, clickbait, too few views (trusted channels are exempt).
+   non-English, clickbait, news/announcements/documentaries (`NOT_LESSON`),
+   older than 60 days, too few views (trusted channels are exempt). Without
+   Claude, the title must also read as a lesson (`looksEducational`), because
+   official channels post far more announcements than tutorials.
 3. **Tag** (`tagging.ts`): tools by `tool.match`/`tool.exclude` regexes (title
-   counts double), topics by `topics.ts`. Videos with no tool are kept only if
-   they teach a lesson topic and look like a lesson.
+   counts double), topics by `topics.ts`. Company names (OpenAI, Anthropic) are
+   deliberately not tool matches. Videos with no tool are kept only if they
+   mention AI, teach a lesson topic and look like a lesson.
 4. **Label.** `difficulty.ts` keyword model by default. With `ANTHROPIC_API_KEY`,
    `classify-claude.ts` sends new videos in batches of 20 and gets back
    difficulty, tools, topics, a one-line summary and an `educational` flag
    (structured output). Any Claude failure falls back to the keyword model.
 5. **Rank** (`quality.ts#qualityScore`): reach, momentum, like ratio,
    freshness, trusted channel and lesson-like title, minus hype.
-6. **Merge** (`merge.ts`): known videos keep `firstSeen` and Claude labels;
+6. **Re-check** the existing library against today's rules, so a tightened
+   filter also retires earlier picks (Claude-labeled entries keep their labels).
+7. **Merge** (`merge.ts`): known videos keep `firstSeen` and Claude labels;
    entries age out after 120 days; each tool × difficulty cell keeps its best 15.
 
 ## Quota

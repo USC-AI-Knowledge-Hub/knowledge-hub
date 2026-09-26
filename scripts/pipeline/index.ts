@@ -23,7 +23,7 @@ import { classifyWithClaude, type ClaudeLabel } from "./classify-claude";
 import { SETTINGS, TOPIC_QUERIES, TRUSTED_CHANNELS } from "./config";
 import { guessDifficulty } from "./difficulty";
 import { mergeFeed } from "./merge";
-import { looksEducational, qualityScore, rejectReason, type Candidate } from "./quality";
+import { looksEducational, mentionsAI, qualityScore, rejectReason, type Candidate } from "./quality";
 import { fetchChannelFeed, resolveHandle } from "./rss";
 import { tagTools, tagTopics } from "./tagging";
 import { existingIds, searchVideoIds, videoDetails } from "./youtube-api";
@@ -132,11 +132,15 @@ async function main() {
       rejected[reason] = (rejected[reason] ?? 0) + 1;
       continue;
     }
+    // Without Claude to judge, only titles that read as lessons get in.
+    if (!useClaude && !looksEducational(c.title)) {
+      rejected["not a lesson"] = (rejected["not a lesson"] ?? 0) + 1;
+      continue;
+    }
     const heuristicTools = tagTools(c.title, c.description);
     const topics = tagTopics(c.title, c.description);
-    // No tool named: keep it only if it teaches a lesson topic and comes from a
-    // trusted channel or plainly reads as a lesson.
-    if (!heuristicTools.length && !(topics.length && (c.trusted || looksEducational(c.title)))) {
+    // No tool named: keep it only if it's about AI, teaches a lesson topic and reads as a lesson.
+    if (!heuristicTools.length && !(topics.length && looksEducational(c.title) && mentionsAI(c.title))) {
       rejected["off-topic"] = (rejected["off-topic"] ?? 0) + 1;
       continue;
     }
@@ -205,6 +209,20 @@ async function main() {
     }
   }
 
+  // Re-check what's already in the library against today's rules, so tightening
+  // a filter or a match pattern also cleans up earlier picks.
+  const before = existing.length;
+  existing = existing.flatMap((v) => {
+    const asCandidate: Candidate = { ...v, description: "", trusted: true };
+    if (rejectReason(asCandidate, now)) return [];
+    if (v.difficultySource === "claude") return [v];
+    if (!looksEducational(v.title)) return [];
+    const tools = tagTools(v.title);
+    const topics = tagTopics(v.title);
+    return tools.length || (topics.length && mentionsAI(v.title)) ? [{ ...v, tools, topics }] : [];
+  });
+  const retired = before - existing.length;
+
   const videos = mergeFeed(existing, incoming, runDate);
   const added = videos.filter((v) => v.firstSeen === runDate && !known.has(v.id)).length;
 
@@ -232,7 +250,7 @@ async function main() {
   const summary = [
     `## Daily videos — ${runDate}`,
     `Mode: **${next.mode}** · Classifier: **${next.classifier}**`,
-    `Candidates: ${seen.size} · Passed filters: ${passing.length} · New today: **${added}** · In feed: ${videos.length}`,
+    `Candidates: ${seen.size} · Passed filters: ${passing.length} · New today: **${added}** · Retired by current rules: ${retired} · In feed: ${videos.length}`,
     "",
     "Rejected: " + (Object.entries(rejected).map(([k, n]) => `${k} ${n}`).join(", ") || "none"),
     ...(warnings.length ? ["", "### Curated", ...warnings.map((w) => `- ${w}`)] : []),

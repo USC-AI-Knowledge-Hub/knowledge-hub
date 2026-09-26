@@ -4,7 +4,7 @@ import type { Video } from "../../../src/data/types";
 import { guessDifficulty } from "../difficulty";
 import { parseIsoDuration } from "../duration";
 import { mergeFeed } from "../merge";
-import { hypeLevel, qualityScore, rejectReason, type Candidate } from "../quality";
+import { hypeLevel, looksEducational, mentionsAI, qualityScore, rejectReason, type Candidate } from "../quality";
 import { parseFeed } from "../rss";
 import { tagTools, tagTopics } from "../tagging";
 
@@ -36,6 +36,10 @@ describe("parseIsoDuration", () => {
 });
 
 describe("tagTools", () => {
+  it("doesn't treat the company name as its chatbot", () => {
+    expect(tagTools("Inside Anthropic's molecular biology lab")).toEqual([]);
+    expect(tagTools("How OpenAI hacked HuggingFace")).toEqual([]);
+  });
   it("finds a tool named in the title", () => {
     expect(tagTools("How to use NotebookLM to study")).toEqual(["notebooklm"]);
   });
@@ -89,6 +93,23 @@ describe("quality", () => {
     expect(rejectReason(cand({ title: "This INSANE ChatGPT hack is a GAME CHANGER" }), now)).toBe("clickbait");
     expect(rejectReason(cand({ views: 300, publishedAt: "2026-09-01T00:00:00Z" }), now)).toBe("too few views");
     expect(rejectReason(cand({ language: "es" }), now)).toBe("not English");
+  });
+  it("rejects news, announcements and old uploads", () => {
+    expect(rejectReason(cand({ title: "AI News: Opus 5.5, GPT-6 and more" }), now)).toBe("news or announcement");
+    expect(rejectReason(cand({ title: "Introducing Claude Fable 5.1" }), now)).toBe("news or announcement");
+    expect(rejectReason(cand({ title: "Inside a Hackathon [Full Documentary]" }), now)).toBe("news or announcement");
+    expect(rejectReason(cand({ publishedAt: "2026-05-01T00:00:00Z" }), now)).toBe("too old");
+  });
+  it("recognizes lesson-like titles", () => {
+    expect(looksEducational("Use ChatGPT Work to build dashboards")).toBe(true);
+    expect(looksEducational("Claude Cowork: Top 5 Tips for Productivity")).toBe(true);
+    expect(looksEducational("Tough dexterity tasks with Gemini Robotics 2")).toBe(false);
+    expect(looksEducational("I Never Thought I'd See This Happen")).toBe(false);
+  });
+  it("requires AI in the title for tool-less videos", () => {
+    expect(mentionsAI("How to move AI from code completion to agentic workflows")).toBe(true);
+    expect(mentionsAI("Excel Formulas & Functions – Full Course")).toBe(false);
+    expect(mentionsAI("TimescaleDB Course – PostgreSQL for Time-Series Data")).toBe(false);
   });
   it("lets trusted channels through with few views", () => {
     expect(rejectReason(cand({ views: 50, trusted: true }), now)).toBeNull();
