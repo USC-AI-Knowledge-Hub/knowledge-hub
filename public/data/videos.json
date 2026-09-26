@@ -1,53 +1,14 @@
 {
- "generatedAt": "2026-09-26T21:25:54.136Z",
+ "generatedAt": "2026-09-26T21:34:16.137Z",
  "runDate": "2026-09-26",
  "mode": "rss",
  "classifier": "heuristic",
  "stats": {
   "candidates": 210,
-  "kept": 95,
-  "added": 95
+  "kept": 30,
+  "added": 4
  },
  "videos": [
-  {
-   "id": "-uMkZDEZCNw",
-   "title": "How to automate issue metadata with GitHub issue intents",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-26T15:00:21+00:00",
-   "duration": 0,
-   "views": 1476,
-   "likes": 26,
-   "tools": [],
-   "topics": [
-    "agents",
-    "automation"
-   ],
-   "difficulty": "intermediate",
-   "difficultySource": "heuristic",
-   "score": 71,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "aDpIra7NFuE",
-   "title": "AI News: Opus 5.5, GPT-6 Sol, Jev, Muse and More!",
-   "channel": "Matt Wolfe",
-   "channelId": "UChpleBmo18P08aKCIgti38g",
-   "publishedAt": "2026-09-26T02:37:49+00:00",
-   "duration": 0,
-   "views": 103904,
-   "likes": 1993,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 73,
-   "firstSeen": "2026-09-26"
-  },
   {
    "id": "_Mqr5B3DLgM",
    "title": "How to use Claude, Codex, and BYOK in GitHub Copilot for VS Code | GitHub Copilot Day",
@@ -55,7 +16,7 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-25T18:23:59+00:00",
    "duration": 0,
-   "views": 7695,
+   "views": 7760,
    "likes": 67,
    "tools": [
     "claude",
@@ -73,31 +34,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "O4n1jtWzt30",
-   "title": "New frontier AI models, TypeSafe’s Jev AI, & NASA’s IBM collab",
-   "channel": "IBM Technology",
-   "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
-   "publishedAt": "2026-09-25T10:00:11+00:00",
-   "duration": 0,
-   "views": 17120,
-   "likes": 201,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 63,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "IAEQt_yqfLA",
    "title": "Let's Learn GitHub Copilot SDK",
    "channel": "GitHub",
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-24T18:24:11+00:00",
    "duration": 0,
-   "views": 10519,
+   "views": 10552,
    "likes": 169,
    "tools": [
     "github-copilot"
@@ -113,89 +56,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "FVN0t1vb7k8",
-   "title": "Inside a Hong Kong Hackathon [Full Documentary]",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-24T14:28:39+00:00",
-   "duration": 0,
-   "views": 86739,
-   "likes": 444,
-   "tools": [],
-   "topics": [
-    "multimodal",
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 65,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "F3hlZSZc6UI",
-   "title": "How AI Agents, LLMs & APIs Use Real-Time Data at the US Open",
-   "channel": "IBM Technology",
-   "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
-   "publishedAt": "2026-09-24T11:00:22+00:00",
-   "duration": 0,
-   "views": 22995,
-   "likes": 199,
-   "tools": [],
-   "topics": [
-    "llms",
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 62,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "SA9kdAX2Zj0",
-   "title": "Claude Opus 5.5 AI: An Incredible Leap Forward",
-   "channel": "Two Minute Papers",
-   "channelId": "UCbfYPyITQ-7l4upoX8nvctg",
-   "publishedAt": "2026-09-24T08:40:55+00:00",
-   "duration": 0,
-   "views": 300634,
-   "likes": 4391,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 72,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "lXuWCC9ycXs",
-   "title": "Sheets canvas: Turn project trackers into dynamic Kanban boards",
-   "channel": "Google Workspace",
-   "channelId": "UCBmwzQnSoj9b6HzNmFrg_yw",
-   "publishedAt": "2026-09-23T18:48:07+00:00",
-   "duration": 0,
-   "views": 15937,
-   "likes": 157,
-   "tools": [],
-   "topics": [
-    "prompting",
-    "data",
-    "automation"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 60,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "3D_oZSUFhzI",
    "title": "How to Use Zapier Next Gen Zaps (Step-by-Step Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-23T18:35:30+00:00",
    "duration": 0,
-   "views": 20436,
+   "views": 20476,
    "likes": 163,
    "tools": [
     "zapier"
@@ -210,52 +77,14 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "DdCEmlAydcw",
-   "title": "Inside Anthropic's molecular biology lab",
-   "channel": "Anthropic",
-   "channelId": "UCrDwWp7EBBv4NwvScIpBDOA",
-   "publishedAt": "2026-09-23T18:01:32+00:00",
-   "duration": 0,
-   "views": 121914,
-   "likes": 1532,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 68,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "96ogPwN9ykM",
-   "title": "Get Stuff Done with ChatGPT Voice",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-23T17:11:13+00:00",
-   "duration": 0,
-   "views": 115848,
-   "likes": 2283,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "data"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 71,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "LzmdR0sYNDc",
    "title": "Create HD videos at no cost with Gemini in Google Vids",
    "channel": "Google Workspace",
    "channelId": "UCBmwzQnSoj9b6HzNmFrg_yw",
    "publishedAt": "2026-09-23T16:00:04+00:00",
    "duration": 0,
-   "views": 38980,
-   "likes": 733,
+   "views": 39064,
+   "likes": 734,
    "tools": [
     "gemini"
    ],
@@ -272,8 +101,8 @@
    "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
    "publishedAt": "2026-09-23T15:23:38+00:00",
    "duration": 0,
-   "views": 104072,
-   "likes": 1359,
+   "views": 104154,
+   "likes": 1360,
    "tools": [
     "gemini"
    ],
@@ -287,128 +116,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "4xeDfqEsHU4",
-   "title": "GitHub Copilot everywhere: building code across Slack, Teams, mobile, and VS Code",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-23T15:15:05+00:00",
-   "duration": 0,
-   "views": 3997,
-   "likes": 34,
-   "tools": [
-    "github-copilot"
-   ],
-   "topics": [
-    "coding",
-    "automation"
-   ],
-   "difficulty": "intermediate",
-   "difficultySource": "heuristic",
-   "score": 55,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "gYTA8nQN030",
-   "title": "TimescaleDB Course – PostgreSQL for Time-Series Data",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-23T10:30:04+00:00",
-   "duration": 0,
-   "views": 71337,
-   "likes": 460,
-   "tools": [],
-   "topics": [
-    "agents",
-    "data"
-   ],
-   "difficulty": "intermediate",
-   "difficultySource": "heuristic",
-   "score": 77,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "WshA826u3gU",
-   "title": "Ask Gemini in Google Chat",
-   "channel": "Google Workspace",
-   "channelId": "UCBmwzQnSoj9b6HzNmFrg_yw",
-   "publishedAt": "2026-09-22T22:40:14+00:00",
-   "duration": 0,
-   "views": 15302,
-   "likes": 169,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 60,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "0t-eWrGFZyA",
-   "title": "Claude Opus 5.5 Didn’t Need to Go This Hard",
-   "channel": "Matt Wolfe",
-   "channelId": "UChpleBmo18P08aKCIgti38g",
-   "publishedAt": "2026-09-22T22:30:04+00:00",
-   "duration": 0,
-   "views": 209536,
-   "likes": 2520,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 69,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "wtMaYmkhANQ",
-   "title": "Welcome to GitHub Copilot Day: the future of agentic engineering",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-22T18:00:31+00:00",
-   "duration": 0,
-   "views": 15987,
-   "likes": 81,
-   "tools": [
-    "github-copilot"
-   ],
-   "topics": [
-    "agents",
-    "coding"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 57,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "XzL_vtYAO-4",
-   "title": "AI Agents Aren't the Revolution. They're the Catalyst!",
-   "channel": "IBM Technology",
-   "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
-   "publishedAt": "2026-09-22T11:00:08+00:00",
-   "duration": 0,
-   "views": 49885,
-   "likes": 803,
-   "tools": [],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 65,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "wuEYbt8KumA",
    "title": "How to Build a Website with ChatGPT Sites",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-22T07:00:32+00:00",
    "duration": 0,
-   "views": 52230,
+   "views": 52273,
    "likes": 668,
    "tools": [
     "chatgpt"
@@ -419,43 +133,6 @@
    "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 77,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "p7TjXroM4ak",
-   "title": "One Prompt. A Feature Built and Tested. | Ramp × GPT-6 Astra",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-21T19:22:03+00:00",
-   "duration": 0,
-   "views": 22785,
-   "likes": 117,
-   "tools": [],
-   "topics": [
-    "agents",
-    "prompting"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 58,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "dtNlpZI86Dk",
-   "title": "“A Staff Engineer Collaborator” | Notion’s First Look at GPT-6 Astra",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-21T19:17:35+00:00",
-   "duration": 0,
-   "views": 18573,
-   "likes": 139,
-   "tools": [],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 58,
    "firstSeen": "2026-09-26"
   },
   {
@@ -485,8 +162,8 @@
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
    "publishedAt": "2026-09-21T12:12:42+00:00",
    "duration": 0,
-   "views": 167073,
-   "likes": 1740,
+   "views": 167407,
+   "likes": 1742,
    "tools": [
     "claude"
    ],
@@ -502,91 +179,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "FheRqx7DjbU",
-   "title": "Goodbye Tokenmaxxing: From AI Usage to Agentic AI Outcomes",
-   "channel": "IBM Technology",
-   "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
-   "publishedAt": "2026-09-21T11:00:44+00:00",
-   "duration": 0,
-   "views": 77576,
-   "likes": 978,
-   "tools": [],
-   "topics": [
-    "llms",
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 65,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "9yPyoxlyc5Q",
-   "title": "25 agent skills to improve your workflow in GitHub Copilot | Matt Pocock | GitHub Copilot Day",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-20T15:00:33+00:00",
-   "duration": 0,
-   "views": 29697,
-   "likes": 280,
-   "tools": [
-    "github-copilot"
-   ],
-   "topics": [
-    "agents",
-    "coding",
-    "automation"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 60,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "jRMbbRdju7Q",
-   "title": "When Should AI Systems Use Super Agents?",
-   "channel": "IBM Technology",
-   "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
-   "publishedAt": "2026-09-20T11:00:32+00:00",
-   "duration": 0,
-   "views": 42524,
-   "likes": 368,
-   "tools": [],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 60,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "hbsce4HNL7o",
-   "title": "🐙 Building With Hermes Agent",
-   "channel": "Tina Huang",
-   "channelId": "UC2UXDak6o7rBm23k3Vv5dww",
-   "publishedAt": "2026-09-19T15:21:17+00:00",
-   "duration": 0,
-   "views": 86917,
-   "likes": 1131,
-   "tools": [],
-   "topics": [
-    "agents",
-    "data"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 64,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "EIea1OM3M0A",
    "title": "How to handle non-compliant AI tool usage without slowing down developers",
    "channel": "GitHub",
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-19T15:00:05+00:00",
    "duration": 0,
-   "views": 8116,
+   "views": 8124,
    "likes": 29,
    "tools": [],
    "topics": [
@@ -598,43 +197,23 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "_Mmf3DLVuOQ",
-   "title": "Open Source Friday: Securing JavaScript Projects with CVE Lite CLI",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-19T06:25:38+00:00",
+   "id": "bbNTY8O0GTY",
+   "title": "Use ChatGPT Work to ground analysis in your semantic layer",
+   "channel": "OpenAI",
+   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
+   "publishedAt": "2026-09-18T13:28:31+00:00",
    "duration": 0,
-   "views": 6363,
-   "likes": 59,
-   "tools": [],
-   "topics": [
-    "coding"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 53,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "2dy2hFR3-q4",
-   "title": "Dream it, Build it, Ship it! | GitHub Copilot Day",
-   "channel": "GitHub",
-   "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
-   "publishedAt": "2026-09-18T20:42:02+00:00",
-   "duration": 0,
-   "views": 9089,
-   "likes": 68,
+   "views": 25232,
+   "likes": 162,
    "tools": [
-    "github-copilot"
+    "chatgpt"
    ],
    "topics": [
-    "agents",
-    "coding",
-    "automation"
+    "agents"
    ],
-   "difficulty": "intermediate",
+   "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 57,
    "firstSeen": "2026-09-26"
   },
   {
@@ -659,6 +238,64 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "Wb8MhkpQpX8",
+   "title": "Use ChatGPT Work to tailor dashboards for every stakeholder",
+   "channel": "OpenAI",
+   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
+   "publishedAt": "2026-09-18T13:27:02+00:00",
+   "duration": 0,
+   "views": 13248,
+   "likes": 91,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "data"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 55,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "euED8JRunBA",
+   "title": "Use ChatGPT Work to help teams answer their own data questions",
+   "channel": "OpenAI",
+   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
+   "publishedAt": "2026-09-18T13:25:54+00:00",
+   "duration": 0,
+   "views": 8730,
+   "likes": 51,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 53,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "wK0zWeVyLM4",
+   "title": "Use ChatGPT Work to turn product insights into a team action plan",
+   "channel": "OpenAI",
+   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
+   "publishedAt": "2026-09-18T13:25:37+00:00",
+   "duration": 0,
+   "views": 9100,
+   "likes": 71,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 54,
+   "firstSeen": "2026-09-26"
+  },
+  {
    "id": "cXUmFec2PNY",
    "title": "Use ChatGPT Work to build your data agent",
    "channel": "OpenAI",
@@ -676,26 +313,6 @@
    "difficulty": "advanced",
    "difficultySource": "heuristic",
    "score": 59,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "VMgEQ7ym9WU",
-   "title": "Meet the Data Agent in ChatGPT Work",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-18T13:24:22+00:00",
-   "duration": 0,
-   "views": 22919,
-   "likes": 209,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 57,
    "firstSeen": "2026-09-26"
   },
   {
@@ -720,49 +337,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "YeeGHCixr7o",
-   "title": "Astra for Law: Frontier intelligence built for your practice.",
-   "channel": "OpenAI",
-   "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
-   "publishedAt": "2026-09-17T20:41:08+00:00",
-   "duration": 0,
-   "views": 124235,
-   "likes": 1275,
-   "tools": [],
-   "topics": [
-    "ethics"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 63,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "BMYvfVk8Ar0",
-   "title": "Hands-On Evolution of Deep Learning – Geoffrey Hinton’s AI Legacy",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-17T13:32:11+00:00",
-   "duration": 0,
-   "views": 229198,
-   "likes": 2792,
-   "tools": [],
-   "topics": [
-    "coding"
-   ],
-   "difficulty": "intermediate",
-   "difficultySource": "heuristic",
-   "score": 66,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "iZX6d0OdZys",
    "title": "What Is MLflow? Tracing AI Agents & LLM Workflows",
    "channel": "IBM Technology",
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-17T11:00:24+00:00",
    "duration": 0,
-   "views": 72179,
+   "views": 72190,
    "likes": 1042,
    "tools": [],
    "topics": [
@@ -772,7 +353,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 63,
+   "score": 76,
    "firstSeen": "2026-09-26"
   },
   {
@@ -782,7 +363,7 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-16T07:00:11+00:00",
    "duration": 0,
-   "views": 99853,
+   "views": 99887,
    "likes": 1189,
    "tools": [
     "chatgpt"
@@ -798,31 +379,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "wY5pQOTsGaA",
-   "title": "How to Deploy, Secure, and Automate Full-Stack Web Apps – Course for Beginners",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-15T12:41:24+00:00",
-   "duration": 0,
-   "views": 393882,
-   "likes": 5202,
-   "tools": [],
-   "topics": [
-    "automation"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 80,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "CKC47S92wA4",
    "title": "What Is Legacy Code? How AI Is Modernizing Legacy Systems",
    "channel": "IBM Technology",
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-15T11:00:31+00:00",
    "duration": 0,
-   "views": 42255,
+   "views": 42259,
    "likes": 474,
    "tools": [],
    "topics": [
@@ -831,25 +394,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 59,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "YoEWjZSwoys",
-   "title": "Claude Is Now Leaving Invisible Fingerprints In Its Text",
-   "channel": "Two Minute Papers",
-   "channelId": "UCbfYPyITQ-7l4upoX8nvctg",
-   "publishedAt": "2026-09-15T10:12:34+00:00",
-   "duration": 0,
-   "views": 103739,
-   "likes": 1535,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 63,
+   "score": 72,
    "firstSeen": "2026-09-26"
   },
   {
@@ -873,98 +418,22 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "JwTCjarfJYw",
-   "title": "AI News: The AI World is REALLY Scared Right Now",
-   "channel": "Matt Wolfe",
-   "channelId": "UChpleBmo18P08aKCIgti38g",
-   "publishedAt": "2026-09-11T15:00:00+00:00",
-   "duration": 0,
-   "views": 213979,
-   "likes": 3294,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "automation"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 64,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "o3CX_Y59_74",
    "title": "OpenAI Codex Crash Course – Build & Deploy Apps with Autonomous AI",
    "channel": "freeCodeCamp.org",
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
    "publishedAt": "2026-09-10T15:04:22+00:00",
    "duration": 0,
-   "views": 145611,
+   "views": 145631,
    "likes": 1321,
-   "tools": [
-    "chatgpt"
-   ],
+   "tools": [],
    "topics": [
     "coding",
     "automation"
    ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 73,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "mOvtumfyjCs",
-   "title": "I Never Thought I’d See This Happen",
-   "channel": "Two Minute Papers",
-   "channelId": "UCbfYPyITQ-7l4upoX8nvctg",
-   "publishedAt": "2026-09-10T08:47:23+00:00",
-   "duration": 0,
-   "views": 385409,
-   "likes": 7864,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 67,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "-KcHn0QcSb0",
-   "title": "I Built A Tool To Detect AI Video (You Can Have It)",
-   "channel": "Matt Wolfe",
-   "channelId": "UChpleBmo18P08aKCIgti38g",
-   "publishedAt": "2026-09-09T22:18:17+00:00",
-   "duration": 0,
-   "views": 62508,
-   "likes": 963,
-   "tools": [],
-   "topics": [
-    "multimodal"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 59,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "kLZgQWjnUz0",
-   "title": "Learn Python – Interactive Course 2026",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-09T13:46:04+00:00",
-   "duration": 0,
-   "views": 213169,
-   "likes": 3085,
-   "tools": [],
-   "topics": [
-    "coding"
-   ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 76,
+   "score": 73,
    "firstSeen": "2026-09-26"
   },
   {
@@ -974,7 +443,7 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-09T07:00:13+00:00",
    "duration": 0,
-   "views": 65997,
+   "views": 66014,
    "likes": 715,
    "tools": [],
    "topics": [
@@ -987,31 +456,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "B3LXEW4Pc-w",
-   "title": "Claude Fable AI Is Much Stranger Than The Headlines Suggest",
-   "channel": "Two Minute Papers",
-   "channelId": "UCbfYPyITQ-7l4upoX8nvctg",
-   "publishedAt": "2026-09-03T08:23:37+00:00",
-   "duration": 0,
-   "views": 203400,
-   "likes": 3058,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 61,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "1PRcdCu8n6M",
    "title": "How to Use Claude Artifacts (Beginner Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-03T07:00:28+00:00",
    "duration": 0,
-   "views": 107495,
+   "views": 107499,
    "likes": 1003,
    "tools": [
     "claude"
@@ -1026,51 +477,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "ROF2Nv_KjOM",
-   "title": "Introducing Claude Fable 5.1",
-   "channel": "Anthropic",
-   "channelId": "UCrDwWp7EBBv4NwvScIpBDOA",
-   "publishedAt": "2026-09-01T18:02:31+00:00",
-   "duration": 0,
-   "views": 671774,
-   "likes": 11969,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "data"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 65,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "gvhsKtjAmgc",
-   "title": "Excel Formulas & Functions – Full Course",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-09-01T14:57:53+00:00",
-   "duration": 0,
-   "views": 142081,
-   "likes": 1706,
-   "tools": [],
-   "topics": [
-    "data"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 71,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "HsLFoeOF6aw",
    "title": "How to Use ChatGPT Plugins (Full Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-01T07:00:04+00:00",
    "duration": 0,
-   "views": 48555,
+   "views": 48557,
    "likes": 413,
    "tools": [
     "chatgpt"
@@ -1081,46 +494,6 @@
    "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 66,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "UxJZrCFzTHY",
-   "title": "Model Hardware Standard: AI operating physical equipment",
-   "channel": "Anthropic",
-   "channelId": "UCrDwWp7EBBv4NwvScIpBDOA",
-   "publishedAt": "2026-08-28T00:40:16+00:00",
-   "duration": 0,
-   "views": 69763,
-   "likes": 888,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 54,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "P1zBiAQU1IA",
-   "title": "AI models can now help run physical science experiments",
-   "channel": "Anthropic",
-   "channelId": "UCrDwWp7EBBv4NwvScIpBDOA",
-   "publishedAt": "2026-08-27T17:54:32+00:00",
-   "duration": 0,
-   "views": 415456,
-   "likes": 4330,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 60,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1142,24 +515,6 @@
    "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 65,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "tBjgCj_dGZM",
-   "title": "The mathematics of AI uncertainty",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-08-26T15:45:28+00:00",
-   "duration": 0,
-   "views": 390258,
-   "likes": 2563,
-   "tools": [],
-   "topics": [
-    "llms"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 58,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1189,7 +544,7 @@
    "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
    "publishedAt": "2026-08-25T13:00:23+00:00",
    "duration": 0,
-   "views": 303619,
+   "views": 303757,
    "likes": 3881,
    "tools": [
     "chatgpt"
@@ -1201,51 +556,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "g3X8JauSWTM",
-   "title": "Stop Building AI Slop – Build High-End Web Apps with AI",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-08-25T12:14:06+00:00",
-   "duration": 0,
-   "views": 129295,
-   "likes": 1821,
-   "tools": [],
-   "topics": [
-    "coding",
-    "automation"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 56,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "1CLc-VeEivk",
-   "title": "My FULL Hermes Agent Setup (HermesOS)",
-   "channel": "Tina Huang",
-   "channelId": "UC2UXDak6o7rBm23k3Vv5dww",
-   "publishedAt": "2026-08-25T11:54:18+00:00",
-   "duration": 0,
-   "views": 193096,
-   "likes": 3629,
-   "tools": [],
-   "topics": [
-    "agents",
-    "coding"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 60,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "j5CKUUpRZV8",
    "title": "How to Make YouTube Thumbnails with ChatGPT (Step-by-Step)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-08-24T07:00:05+00:00",
    "duration": 0,
-   "views": 16038,
+   "views": 16042,
    "likes": 313,
    "tools": [
     "chatgpt"
@@ -1256,24 +573,6 @@
    "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 64,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "RpLnQnurpLY",
-   "title": "Learn Data Structures and Algorithms Visually – Crash Course",
-   "channel": "freeCodeCamp.org",
-   "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
-   "publishedAt": "2026-08-20T10:14:35+00:00",
-   "duration": 0,
-   "views": 247737,
-   "likes": 7603,
-   "tools": [],
-   "topics": [
-    "coding"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 77,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1295,51 +594,13 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "QnGNF8k_uoc",
-   "title": "Claude AI Failed 650 Times…Then Beat The Human Record",
-   "channel": "Two Minute Papers",
-   "channelId": "UCbfYPyITQ-7l4upoX8nvctg",
-   "publishedAt": "2026-08-14T08:42:07+00:00",
-   "duration": 0,
-   "views": 57854,
-   "likes": 2188,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 61,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "JQ97GiDwPxc",
-   "title": "How OpenAI Hacked HuggingFace",
-   "channel": "Two Minute Papers",
-   "channelId": "UCbfYPyITQ-7l4upoX8nvctg",
-   "publishedAt": "2026-08-11T15:35:35+00:00",
-   "duration": 0,
-   "views": 68420,
-   "likes": 3279,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 61,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "--8pJvYNcX4",
    "title": "Every AI Model Explained In 20 Minutes (Update)",
    "channel": "Tina Huang",
    "channelId": "UC2UXDak6o7rBm23k3Vv5dww",
    "publishedAt": "2026-08-10T13:02:38+00:00",
    "duration": 0,
-   "views": 143028,
+   "views": 143052,
    "likes": 4529,
    "tools": [],
    "topics": [
@@ -1348,497 +609,6 @@
    "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 74,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "fo9WirRIaVs",
-   "title": "Robots working together with Gemini Robotics 2",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-07-30T14:58:16+00:00",
-   "duration": 0,
-   "views": 14963,
-   "likes": 450,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [
-    "automation"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 51,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "nBftSI5mmHA",
-   "title": "Tasks that require whole-body control with Gemini Robotics 2",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-07-30T14:58:12+00:00",
-   "duration": 0,
-   "views": 17992,
-   "likes": 472,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 50,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "wYVHxw2-DP4",
-   "title": "Tough dexterity tasks with Gemini Robotics 2",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-07-30T14:58:10+00:00",
-   "duration": 0,
-   "views": 13390,
-   "likes": 391,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 50,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "9MNLEAzA59o",
-   "title": "Intelligent whole-body control with Gemini Robotics 2",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-07-30T14:58:07+00:00",
-   "duration": 0,
-   "views": 99126,
-   "likes": 2441,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 56,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "CiTPDm7PKW0",
-   "title": "Multi-robot collaboration with Gemini Robotics 2",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-07-30T14:58:03+00:00",
-   "duration": 0,
-   "views": 25039,
-   "likes": 670,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 52,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "O9-650iHAls",
-   "title": "Advanced dexterity with Gemini Robotics 2",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-07-30T14:57:59+00:00",
-   "duration": 0,
-   "views": 37257,
-   "likes": 993,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 53,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "4lSQnrMC6nY",
-   "title": "Gemini Robotics 2 brings whole body intelligence to robots",
-   "channel": "Google DeepMind",
-   "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
-   "publishedAt": "2026-07-30T14:57:57+00:00",
-   "duration": 0,
-   "views": 4277306,
-   "likes": 8622,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 59,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "VeWf0l4ci6Y",
-   "title": "Claude Design is Insanely Easy (even for beginners)",
-   "channel": "Jeff Su",
-   "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
-   "publishedAt": "2026-07-21T13:00:15+00:00",
-   "duration": 0,
-   "views": 243726,
-   "likes": 5072,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "prompting",
-    "presenting"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 69,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "GlYgs6v2YfU",
-   "title": "But what is cross-entropy? | Compression is Intelligence Part 2",
-   "channel": "3Blue1Brown",
-   "channelId": "UCYO_jab_esuFRV4b17AJtAw",
-   "publishedAt": "2026-07-16T11:56:04+00:00",
-   "duration": 0,
-   "views": 805549,
-   "likes": 21591,
-   "tools": [],
-   "topics": [
-    "llms"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 62,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "rKV5JcALQoQ",
-   "title": "The different levels of how Claude thinks",
-   "channel": "Anthropic",
-   "channelId": "UCrDwWp7EBBv4NwvScIpBDOA",
-   "publishedAt": "2026-07-06T16:59:51+00:00",
-   "duration": 0,
-   "views": 501820,
-   "likes": 20248,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 65,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "7GkIWPPC9i0",
-   "title": "Gemini Spark: Google’s Most Powerful Personal Agent",
-   "channel": "Jeff Su",
-   "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
-   "publishedAt": "2026-06-30T13:00:21+00:00",
-   "duration": 0,
-   "views": 222344,
-   "likes": 3975,
-   "tools": [
-    "gemini"
-   ],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 54,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "Y9Wz2PV404E",
-   "title": "Introducing Claude Fable 5",
-   "channel": "Anthropic",
-   "channelId": "UCrDwWp7EBBv4NwvScIpBDOA",
-   "publishedAt": "2026-06-09T17:00:05+00:00",
-   "duration": 0,
-   "views": 821432,
-   "likes": 24027,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "coding"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 62,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "msFxQ7OYPj8",
-   "title": "How I'd Learn AI From Scratch in 2026 (skip the useless 80%)",
-   "channel": "Jeff Su",
-   "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
-   "publishedAt": "2026-06-09T13:00:37+00:00",
-   "duration": 0,
-   "views": 382598,
-   "likes": 9698,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "prompting"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 71,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "4wvLHFgnQZQ",
-   "title": "Claude Cowork: Top 5 Tips for Productivity",
-   "channel": "Jeff Su",
-   "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
-   "publishedAt": "2026-05-19T13:00:11+00:00",
-   "duration": 0,
-   "views": 119913,
-   "likes": 2433,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "intermediate",
-   "difficultySource": "heuristic",
-   "score": 51,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "z9rdrNrkvDY",
-   "title": "Learn 80% of Claude Cowork in Under 20 Minutes",
-   "channel": "Jeff Su",
-   "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
-   "publishedAt": "2026-04-07T13:02:24+00:00",
-   "duration": 0,
-   "views": 1444088,
-   "likes": 25588,
-   "tools": [
-    "claude"
-   ],
-   "topics": [],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 71,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "D4XTefP3Lsc",
-   "title": "When AIs act emotional",
-   "channel": "Anthropic",
-   "channelId": "UCrDwWp7EBBv4NwvScIpBDOA",
-   "publishedAt": "2026-04-02T16:06:59+00:00",
-   "duration": 0,
-   "views": 326380,
-   "likes": 18178,
-   "tools": [
-    "claude"
-   ],
-   "topics": [
-    "coding",
-    "presenting"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 61,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "EWvNQjAaOHw",
-   "title": "How I use LLMs",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2025-02-27T22:29:56+00:00",
-   "duration": 0,
-   "views": 2749007,
-   "likes": 68125,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "llms"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 61,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "7xTGNNLPyMI",
-   "title": "Deep Dive into LLMs like ChatGPT",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2025-02-05T18:23:47+00:00",
-   "duration": 0,
-   "views": 9753139,
-   "likes": 137145,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "llms"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 72,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "zjkBMFhNj_g",
-   "title": "[1hr Talk] Intro to Large Language Models",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2023-11-23T02:27:48+00:00",
-   "duration": 0,
-   "views": 4138897,
-   "likes": 103144,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "llms"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 61,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "kCc8FmEb1nY",
-   "title": "Let's build GPT: from scratch, in code, spelled out.",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2023-01-17T16:33:27+00:00",
-   "duration": 0,
-   "views": 7925432,
-   "likes": 169845,
-   "tools": [
-    "chatgpt"
-   ],
-   "topics": [
-    "llms",
-    "coding"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 60,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "q8SA3rM6ckI",
-   "title": "Building makemore Part 4: Becoming a Backprop Ninja",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2022-10-11T17:56:19+00:00",
-   "duration": 0,
-   "views": 379139,
-   "likes": 6069,
-   "tools": [],
-   "topics": [
-    "rag"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 49,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "PaCmpygFfXo",
-   "title": "The spelled-out intro to language modeling: building makemore",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2022-09-07T19:14:47+00:00",
-   "duration": 0,
-   "views": 1282203,
-   "likes": 20797,
-   "tools": [],
-   "topics": [
-    "llms"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 53,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "kVpDARqZdrQ",
-   "title": "Stable diffusion dreams of psychedelic faces",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2022-08-19T18:32:25+00:00",
-   "duration": 0,
-   "views": 54074,
-   "likes": 950,
-   "tools": [],
-   "topics": [
-    "prompting"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 43,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "2oKjtvYslMY",
-   "title": "Stable diffusion dreams of steampunk brains",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2022-08-17T16:58:01+00:00",
-   "duration": 0,
-   "views": 38139,
-   "likes": 630,
-   "tools": [],
-   "topics": [
-    "prompting"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 42,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "sM9bozW295Q",
-   "title": "Stable diffusion dreams of tattoos",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2022-08-16T23:02:58+00:00",
-   "duration": 0,
-   "views": 103897,
-   "likes": 848,
-   "tools": [],
-   "topics": [
-    "coding"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 42,
-   "firstSeen": "2026-09-26"
-  },
-  {
-   "id": "VMj-3S1tku0",
-   "title": "The spelled-out intro to neural networks and backpropagation: building micrograd",
-   "channel": "Andrej Karpathy",
-   "channelId": "UCXUPKJO5MZQN11PqgIvyuvQ",
-   "publishedAt": "2022-08-16T22:44:26+00:00",
-   "duration": 0,
-   "views": 4164541,
-   "likes": 82588,
-   "tools": [],
-   "topics": [
-    "coding"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 58,
    "firstSeen": "2026-09-26"
   }
  ]
