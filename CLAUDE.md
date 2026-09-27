@@ -32,6 +32,9 @@ A daily GitHub Action refreshes the YouTube video library.
 ## Content rules
 
 - Every tool profile uses the same fields. Update `lastReviewed`/`nextReview` when re-tested.
+- Tool logos are 8-bit pixel renditions (`src/data/pixelLogos.ts`), shown only to identify a tool
+  next to its name. Official shapes come from Simple Icons (CC0); no other logo sources. Remove a
+  logo if its owner asks.
 - Only claim USC access (`usc: "provided"`) when it's confirmed. Otherwise use `"check"`.
 - Curated videos in `learn.ts` and courses in `courses.ts` must be ones an editor has watched.
 - Courses must be real courses (a planned sequence, or one long structured video) from the
