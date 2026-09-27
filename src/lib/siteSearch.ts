@@ -124,8 +124,12 @@ export const PAGES: { id: string; title: string; route: string; blurb: string; w
 
 export function searchSite(q: string, limit = 8): SiteHit[] {
   const terms = tokenize(q).map(stem);
-  if (!terms.length) return [];
   const whole = norm(q).trim();
+  // Page names are checked on the whole query first, since some ("tools") are stop words.
+  if (!terms.length) {
+    const page = PAGES.find((p) => p.words.includes(whole));
+    return page ? [{ kind: "page", id: page.id, title: page.title, route: page.route, blurb: page.blurb, score: 30 }] : [];
+  }
   const out: SiteHit[] = [];
 
   for (const p of PAGES) {

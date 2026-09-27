@@ -43,6 +43,7 @@ describe("searchSite", () => {
     expect(searchSite("rag").some((h) => h.id === "rag" && h.kind === "lesson")).toBe(true);
     expect(searchSite("stanford").some((h) => h.kind === "course")).toBe(true);
     expect(searchSite("videos")[0]).toMatchObject({ kind: "page", route: "/watch" });
+    expect(searchSite("tools")[0]).toMatchObject({ kind: "page", route: "/tools" });
   });
 });
 

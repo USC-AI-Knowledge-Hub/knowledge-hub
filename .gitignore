@@ -5,3 +5,5 @@ dist
 .env
 *.tsbuildinfo
 .claude/worktrees/
+test-results/
+playwright-report/
