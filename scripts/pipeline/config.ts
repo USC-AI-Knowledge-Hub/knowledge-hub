@@ -39,6 +39,12 @@ export const TOPIC_QUERIES = [
   "AI literature review tutorial",
 ];
 
+/**
+ * Searches (API mode) for what's new in AI. Results land in the trends feed,
+ * not the lesson library. Channel feeds from TRUSTED_CHANNELS supply most trends.
+ */
+export const TREND_QUERIES = ["AI news this week", "new AI model release"];
+
 export const SETTINGS = {
   /** Only consider videos published in the last N days on search. */
   searchWindowDays: 30,
@@ -46,6 +52,12 @@ export const SETTINGS = {
   maxAgeDays: 60,
   /** Results requested per search query (max 50). Each search costs 100 quota units. */
   resultsPerQuery: 15,
+  /**
+   * Most searches per run. 90 searches is 9,000 of the default 10,000 daily
+   * units, leaving room for videos.list and the course check. With more
+   * queries than this, the pipeline rotates through them day by day.
+   */
+  maxSearches: 90,
   /** Drop videos from the feed once they were first seen this many days ago. */
   retentionDays: 120,
   /** Keep at most this many videos per tool × difficulty cell. */
@@ -58,6 +70,12 @@ export const SETTINGS = {
   /** Minimum views for non-trusted channels, scaled down for very new uploads. */
   minViews: 1000,
   minViewsFresh: 150,
+  /** Trends: only take videos this new, keep them this long, and cap the feed. */
+  trendMaxAgeDays: 14,
+  trendRetentionDays: 21,
+  trendCap: 48,
+  /** At most this many trends from one channel, so a daily news channel can't fill the feed. */
+  trendPerChannel: 4,
   /** Claude classification batch size. */
   claudeBatch: 20,
 };

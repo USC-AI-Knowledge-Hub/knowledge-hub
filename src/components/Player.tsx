@@ -7,8 +7,20 @@ import { ago, compact, duration } from "../lib/format";
 import { Icon } from "./Icon";
 import { Level } from "./Level";
 
-/** Anything playable: a feed video, or a curated one with fewer fields. */
-export type Playable = Pick<Video, "id" | "title" | "channel"> & Partial<Video>;
+/**
+ * Anything playable: a feed video, a curated one with fewer fields, or a full
+ * course. For a playlist, `list` holds the playlist ID and `id` a video to show
+ * first (may be empty).
+ */
+export type Playable = Pick<Video, "id" | "title" | "channel"> &
+  Partial<Video> & { list?: string; lessons?: number; audience?: string; hoursLabel?: string };
+
+const embedSrc = (v: Playable) =>
+  v.list
+    ? `https://www.youtube-nocookie.com/embed/videoseries?list=${v.list}&autoplay=1&rel=0`
+    : `https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1`;
+const youtubeUrl = (v: Playable) =>
+  v.list ? `https://www.youtube.com/playlist?list=${v.list}` : `https://www.youtube.com/watch?v=${v.id}`;
 
 const PlayerContext = createContext<(v: Playable) => void>(() => {});
 export const usePlayer = () => useContext(PlayerContext);
@@ -42,7 +54,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
           <div>
             <div className="player-frame">
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1`}
+                src={embedSrc(video)}
                 title={video.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
@@ -52,6 +64,8 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
             <div className="player-body">
               <div className="player-meta">
                 {video.difficulty && <Level level={video.difficulty} />}
+                {video.lessons && video.lessons > 1 ? <span className="label-m muted">{video.lessons} lessons</span> : null}
+                {video.hoursLabel ? <span className="label-m muted">{video.hoursLabel}</span> : null}
                 {video.duration ? <span className="label-m muted">{duration(video.duration)}</span> : null}
                 {video.views ? <span className="label-m muted">{compact(video.views)} views</span> : null}
                 {video.publishedAt && <span className="label-m muted">{ago(video.publishedAt)}</span>}
@@ -59,6 +73,12 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
               <h2 className="headline-s">{video.title}</h2>
               <p className="body-m muted">{video.channel}</p>
               {video.summary && <p className="body-l measure">{video.summary}</p>}
+              {video.audience && (
+                <p className="body-m measure player-audience">
+                  <Icon name="person" size={20} />
+                  {video.audience}
+                </p>
+              )}
               <div className="chip-row">
                 {video.tools?.map((id) => {
                   const t = toolById.get(id);
@@ -75,7 +95,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
                 ))}
               </div>
               <div className="player-actions">
-                <a className="btn outlined sm state" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noreferrer">
+                <a className="btn outlined sm state" href={youtubeUrl(video)} target="_blank" rel="noreferrer">
                   <Icon name="open_in_new" />
                   Open on YouTube
                 </a>

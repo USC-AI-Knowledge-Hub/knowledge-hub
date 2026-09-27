@@ -2,6 +2,9 @@ name: CI
 
 on:
   pull_request:
+  push:
+    branches: ["claude/**"]
+  workflow_dispatch:
 
 jobs:
   check:
@@ -14,4 +17,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Check every course and editors' pick exists on YouTube
+        run: npm run courses -- --check --strict
       - run: npm run build

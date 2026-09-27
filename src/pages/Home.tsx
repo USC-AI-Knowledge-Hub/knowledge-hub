@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { Icon } from "../components/Icon";
 import { Ladder } from "../components/Ladder";
+import { TrendCard } from "../components/TrendCard";
 import { VideoCard } from "../components/VideoCard";
 import { moduleById, paths } from "../data/learn";
 import { TASK_ICON, TASK_LABEL, tools } from "../data/tools";
@@ -14,7 +15,7 @@ import { WavyProgress } from "../components/WavyProgress";
 const PATH_SHAPES = [SHAPES.cookie9, SHAPES.clover4, SHAPES.sunny, SHAPES.cookie6];
 
 export function Home() {
-  const { feed, today } = useFeed();
+  const { feed, today, trends } = useFeed();
   const { isDone } = useProgress();
   const videos = feed?.videos ?? [];
   const picks = (today.length ? today : [...videos].sort((a, b) => b.score - a.score)).slice(0, 6);
@@ -135,6 +136,27 @@ export function Home() {
           </div>
         )}
       </section>
+
+      {trends.length > 0 && (
+        <section className="section" aria-labelledby="trends-h">
+          <div className="section-head">
+            <div>
+              <h2 id="trends-h" className="headline-m">
+                What's new in AI
+              </h2>
+              <p className="body-m muted">Launches, research, talks and news from the last three weeks, official channels first.</p>
+            </div>
+            <Link to="/watch?tab=trends" className="btn text state">
+              All trends
+            </Link>
+          </div>
+          <div className="grid cols-videos">
+            {trends.slice(0, 4).map((t) => (
+              <TrendCard key={t.id} trend={t} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="section" aria-labelledby="task-h">
         <div className="section-head">

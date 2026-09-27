@@ -55,12 +55,19 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: npm run videos
 
+      - name: Check courses and editors' picks
+        # Runs on every build so a dead playlist is hidden right away. It never
+        # blocks the deploy; CI's strict check catches problems in pull requests.
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: npm run courses || echo "::warning::Course check failed; the site will use catalog estimates."
+
       - name: Commit updated library
         if: steps.refresh.outputs.run == 'true'
         run: |
           git config user.name "knowledge-hub-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/videos.json scripts/pipeline/channels.lock.json
+          git add public/data/videos.json public/data/courses.json scripts/pipeline/channels.lock.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else

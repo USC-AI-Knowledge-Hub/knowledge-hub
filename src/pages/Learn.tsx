@@ -1,9 +1,12 @@
 import { Link, useSearchParams } from "react-router";
+import { CourseCard } from "../components/CourseCard";
 import { Icon } from "../components/Icon";
 import { Level } from "../components/Level";
 import { WavyProgress } from "../components/WavyProgress";
+import { courseById, courses } from "../data/courses";
 import { moduleById, modules, paths } from "../data/learn";
 import { DIFFICULTIES, DIFFICULTY_LABEL, type Difficulty, type Module } from "../data/types";
+import { live, useCourseStatus } from "../lib/courses";
 import { minutesLabel } from "../lib/format";
 import { useProgress } from "../lib/progress";
 
@@ -26,8 +29,13 @@ function ModuleTile({ m, done }: { m: Module; done: boolean }) {
   );
 }
 
+/** One strong starting course per level, then one per kind of source. */
+const FEATURED = ["anthropic-ai-fluency", "karpathy-deep-dive", "3b1b-neural-networks", "cs50-ai"];
+
 export function Learn() {
   const { isDone, done } = useProgress();
+  const status = useCourseStatus();
+  const featured = FEATURED.map((id) => live(courseById.get(id)!, status)).filter((c) => c.available);
   const [params, setParams] = useSearchParams();
   const level = params.get("level") as Difficulty | null;
   const show = (track: Module["track"]) => modules.filter((m) => m.track === track && (!level || m.difficulty === level));
@@ -76,6 +84,27 @@ export function Learn() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="fc-h">
+        <div className="section-head">
+          <div>
+            <h2 id="fc-h" className="headline-m">
+              Full courses
+            </h2>
+            <p className="body-m muted">
+              Complete playlists from Harvard, MIT, Stanford, Berkeley and the companies behind the tools. Free, and checked daily.
+            </p>
+          </div>
+          <Link to="/learn/courses" className="btn tonal state">
+            All {courses.length} courses
+          </Link>
+        </div>
+        <div className="grid cols-videos">
+          {featured.map((c) => (
+            <CourseCard key={c.id} course={c} compact />
+          ))}
         </div>
       </section>
 

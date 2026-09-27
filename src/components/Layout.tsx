@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from
 import { useThemeMode } from "../lib/theme";
 import { Icon } from "./Icon";
 import { PlayerProvider } from "./Player";
+import { Tutor } from "./tutor/Tutor";
 
 const NAV = [
   { to: "/", label: "Home", icon: "home", end: true },
@@ -120,6 +121,7 @@ export function Layout() {
       <nav className="bottom-nav" aria-label="Primary">
         <NavItems />
       </nav>
+      <Tutor />
     </div>
     </PlayerProvider>
   );
