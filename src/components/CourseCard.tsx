@@ -5,7 +5,7 @@ import { thumb } from "../lib/format";
 import { SHAPES, shapeFor } from "../lib/shapes";
 import { Icon } from "./Icon";
 import { Level } from "./Level";
-import { usePlayer } from "./Player";
+import { usePlayer, type Playable } from "./Player";
 
 function Cover({ course }: { course: LiveCourse }) {
   const [broken, setBroken] = useState(false);
@@ -23,22 +23,24 @@ function Cover({ course }: { course: LiveCourse }) {
   );
 }
 
+/** What the player needs to show a course. */
+export const coursePlayable = (course: LiveCourse): Playable => ({
+  id: course.video ?? course.cover ?? "",
+  list: course.playlist,
+  title: course.title,
+  channel: course.channel,
+  difficulty: course.difficulty,
+  summary: course.summary,
+  audience: course.audience,
+  lessons: course.lessons,
+  hoursLabel: hoursLabel(course.hours),
+});
+
 /** A full course: a playlist or one long video. Opens in the player. */
 export function CourseCard({ course, compact }: { course: LiveCourse; compact?: boolean }) {
   const play = usePlayer();
   const isPlaylist = Boolean(course.playlist);
-  const open = () =>
-    play({
-      id: course.video ?? course.cover ?? "",
-      list: course.playlist,
-      title: course.title,
-      channel: course.channel,
-      difficulty: course.difficulty,
-      summary: course.summary,
-      audience: course.audience,
-      lessons: course.lessons,
-      hoursLabel: hoursLabel(course.hours),
-    });
+  const open = () => play(coursePlayable(course));
 
   return (
     <article className={`ccard ${isPlaylist ? "is-playlist" : ""} ${compact ? "compact" : ""}`}>

@@ -1,10 +1,11 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router";
 import { Bars } from "../components/Level";
-import { CourseCard } from "../components/CourseCard";
+import { CourseCard, coursePlayable } from "../components/CourseCard";
+import { usePlayer } from "../components/Player";
 import { Icon } from "../components/Icon";
 import { Segmented } from "../components/Segmented";
-import { courses, SOURCE_LABEL } from "../data/courses";
+import { courseById, courses, SOURCE_LABEL } from "../data/courses";
 import { modules } from "../data/learn";
 import { DIFFICULTIES, DIFFICULTY_LABEL, type CourseSource, type Difficulty } from "../data/types";
 import { live, useCourseStatus } from "../lib/courses";
@@ -30,6 +31,18 @@ export function Courses() {
     else next.delete(key);
     setParams(next, { replace: true, preventScrollReset: true });
   };
+
+  // Search and the tutor link to /learn/courses?course=<id>: open that course straight away.
+  const play = usePlayer();
+  const linked = params.get("course");
+  useEffect(() => {
+    const c = linked ? courseById.get(linked) : undefined;
+    if (!c) return;
+    play(coursePlayable(live(c, status)));
+    const next = new URLSearchParams(params);
+    next.delete("course");
+    setParams(next, { replace: true });
+  }, [linked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const all = useMemo(() => courses.map((c) => live(c, status)).filter((c) => c.available), [status]);
   const shown = all
