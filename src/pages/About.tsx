@@ -14,7 +14,7 @@ const STEPS = [
   {
     icon: "filter_alt",
     title: "Filter",
-    body: "Shorts, livestreams, news roundups, product announcements, non-English videos, clickbait titles, anything older than 60 days and videos with too little audience are dropped. Without Claude, a title also has to read like a lesson: a tutorial, a guide, tips, “how to”.",
+    body: "Shorts, live streams, trailers, reactions, non-English videos, clickbait titles, anything older than 60 days and videos with too little audience are dropped. News, launches, research and talks go to a separate AI trends feed instead of the lessons, and leave it after three weeks. Without Claude, a title also has to read like a lesson: a tutorial, a guide, tips, “how to”.",
   },
   {
     icon: "label",

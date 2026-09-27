@@ -1,10 +1,10 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import type { Video } from "../../../src/data/types";
+import type { Trend, Video } from "../../../src/data/types";
 import { guessDifficulty } from "../difficulty";
 import { parseIsoDuration } from "../duration";
-import { mergeFeed } from "../merge";
-import { hypeLevel, looksEducational, mentionsAI, qualityScore, rejectReason, type Candidate } from "../quality";
+import { mergeFeed, mergeTrends } from "../merge";
+import { hypeLevel, looksEducational, mentionsAI, qualityScore, rejectReason, trendKind, type Candidate } from "../quality";
 import { parseFeed } from "../rss";
 import { todaysQueries } from "../rotation";
 import { tagTools, tagTopics } from "../tagging";
@@ -95,10 +95,10 @@ describe("quality", () => {
     expect(rejectReason(cand({ views: 300, publishedAt: "2026-09-01T00:00:00Z" }), now)).toBe("too few views");
     expect(rejectReason(cand({ language: "es" }), now)).toBe("not English");
   });
-  it("rejects news, announcements and old uploads", () => {
-    expect(rejectReason(cand({ title: "AI News: Opus 5.5, GPT-6 and more" }), now)).toBe("news or announcement");
-    expect(rejectReason(cand({ title: "Introducing Claude Fable 5.1" }), now)).toBe("news or announcement");
-    expect(rejectReason(cand({ title: "Inside a Hackathon [Full Documentary]" }), now)).toBe("news or announcement");
+  it("rejects entertainment and old uploads, but leaves news for the trends feed", () => {
+    expect(rejectReason(cand({ title: "Official trailer: The AI Movie" }), now)).toBe("entertainment");
+    expect(rejectReason(cand({ title: "Engineer reacts to AI code" }), now)).toBe("entertainment");
+    expect(rejectReason(cand({ title: "AI News: Opus 5.5, GPT-6 and more" }), now)).toBeNull();
     expect(rejectReason(cand({ publishedAt: "2026-05-01T00:00:00Z" }), now)).toBe("too old");
   });
   it("recognizes lesson-like titles", () => {
@@ -198,5 +198,48 @@ describe("tagTools for research and creative tools", () => {
   it("doesn't fire on ordinary words", () => {
     expect(tagTools("Reaching consensus in group projects")).toEqual([]);
     expect(tagTools("Read the video description")).toEqual([]);
+  });
+});
+
+describe("trendKind", () => {
+  it("sorts news, launches, research and talks", () => {
+    expect(trendKind("AI News: Opus 5.5, GPT-6 and more")).toBe("news");
+    expect(trendKind("Introducing Claude Fable 5.1")).toBe("launch");
+    expect(trendKind("OpenAI DevDay keynote")).toBe("talk");
+    expect(trendKind("Inside a Hackathon [Full Documentary]")).toBe("talk");
+    expect(trendKind("This new paper lets robots copy human moves")).toBe("research");
+    expect(trendKind("Researchers built an AI that predicts protein shapes")).toBe("research");
+  });
+  it("leaves lessons alone", () => {
+    expect(trendKind("ChatGPT tutorial for beginners")).toBeNull();
+    expect(trendKind("How to use NotebookLM for exam prep")).toBeNull();
+    expect(trendKind("Gemini Deep Research Explained in 8 Minutes")).toBeNull();
+    expect(trendKind("n8n AI Agent Tutorial: Build a Research Agent With Tools")).toBeNull();
+  });
+});
+
+describe("mergeTrends", () => {
+  const t = (over: Partial<Trend> = {}): Trend => ({
+    id: "t",
+    title: "AI News",
+    channel: "C",
+    channelId: "UC1",
+    publishedAt: "2026-09-25T00:00:00Z",
+    duration: 600,
+    views: 1000,
+    kind: "news",
+    tools: [],
+    score: 50,
+    firstSeen: "2026-09-25",
+    ...over,
+  });
+  it("drops trends past the retention window", () => {
+    expect(mergeTrends([t({ publishedAt: "2026-08-01T00:00:00Z" })], [], "2026-09-26")).toHaveLength(0);
+  });
+  it("caps each channel and sorts newest first", () => {
+    const many = Array.from({ length: 8 }, (_, i) => t({ id: `a${i}`, score: i, publishedAt: `2026-09-2${i % 6}T00:00:00Z` }));
+    const out = mergeTrends([], [...many, t({ id: "b", channelId: "UC2", publishedAt: "2026-09-26T00:00:00Z" })], "2026-09-26");
+    expect(out.filter((x) => x.channelId === "UC1")).toHaveLength(4);
+    expect(out[0].id).toBe("b");
   });
 });

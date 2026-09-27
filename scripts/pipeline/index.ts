@@ -18,12 +18,12 @@
 import { appendFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { modules } from "../../src/data/learn";
 import { tools } from "../../src/data/tools";
-import type { Video, VideoFeed } from "../../src/data/types";
+import type { Trend, Video, VideoFeed } from "../../src/data/types";
 import { classifyWithClaude, type ClaudeLabel } from "./classify-claude";
-import { SETTINGS, TOPIC_QUERIES, TRUSTED_CHANNELS } from "./config";
+import { SETTINGS, TOPIC_QUERIES, TREND_QUERIES, TRUSTED_CHANNELS } from "./config";
 import { guessDifficulty } from "./difficulty";
-import { mergeFeed } from "./merge";
-import { looksEducational, mentionsAI, qualityScore, rejectReason, type Candidate } from "./quality";
+import { mergeFeed, mergeTrends } from "./merge";
+import { ageDays, looksEducational, mentionsAI, qualityScore, rejectReason, trendKind, type Candidate } from "./quality";
 import { fetchChannelFeed, resolveHandle } from "./rss";
 import { todaysQueries } from "./rotation";
 import { tagTools, tagTopics } from "./tagging";
@@ -90,7 +90,7 @@ async function collect(trusted: Set<string>): Promise<{ candidates: Candidate[];
 
   const after = new Date(now.getTime() - SETTINGS.searchWindowDays * 86_400_000);
   const ids = new Set(rssCandidates.map((c) => c.id));
-  const queries = todaysQueries([...tools.flatMap((t) => t.queries), ...TOPIC_QUERIES], now, SETTINGS.maxSearches);
+  const queries = todaysQueries([...tools.flatMap((t) => t.queries), ...TOPIC_QUERIES, ...TREND_QUERIES], now, SETTINGS.maxSearches);
   for (const q of queries) {
     try {
       for (const id of await searchVideoIds(q, after, SETTINGS.resultsPerQuery, ytKey)) ids.add(id);
@@ -112,6 +112,7 @@ async function collect(trusted: Set<string>): Promise<{ candidates: Candidate[];
 async function main() {
   const feed = loadFeed();
   const known = new Map(feed.videos.map((v) => [v.id, v]));
+  const knownTrends = new Map((feed.trends ?? []).map((t) => [t.id, t]));
   const channels = await trustedChannelIds();
   const trusted = new Set(channels.values());
   const { candidates, sourcesOk } = await collect(trusted);
@@ -124,7 +125,29 @@ async function main() {
   // 1. Filter and tag.
   const rejected: Record<string, number> = {};
   const passing: (Candidate & { heuristicTools: string[]; topics: string[] })[] = [];
+  const trendCandidates: Trend[] = [];
   const seen = new Set<string>();
+  const reject = (why: string) => (rejected[why] = (rejected[why] ?? 0) + 1);
+  /** News, launches, research and talks about AI go to the trends feed instead of the library. */
+  const toTrend = (c: Candidate, kind: Trend["kind"]) => {
+    const tools = tagTools(c.title, c.description);
+    if (!tools.length && !mentionsAI(c.title)) return reject("off-topic");
+    if (ageDays(c.publishedAt, now) > SETTINGS.trendMaxAgeDays) return reject("old news");
+    trendCandidates.push({
+      id: c.id,
+      title: c.title,
+      channel: c.channel,
+      channelId: c.channelId,
+      publishedAt: c.publishedAt,
+      duration: c.duration,
+      views: c.views,
+      likes: c.likes,
+      kind,
+      tools,
+      score: qualityScore(c, now),
+      firstSeen: knownTrends.get(c.id)?.firstSeen ?? runDate,
+    });
+  };
   for (const c of candidates) {
     if (seen.has(c.id)) continue;
     seen.add(c.id);
@@ -133,9 +156,16 @@ async function main() {
       rejected[reason] = (rejected[reason] ?? 0) + 1;
       continue;
     }
-    // Without Claude to judge, only titles that read as lessons get in.
+    const kind = trendKind(c.title);
+    if (kind) {
+      toTrend(c, kind);
+      continue;
+    }
+    // Without Claude to judge, only titles that read as lessons get in. Official and
+    // trusted channels' other AI videos are usually updates, so they become trends.
     if (!useClaude && !looksEducational(c.title)) {
-      rejected["not a lesson"] = (rejected["not a lesson"] ?? 0) + 1;
+      if (c.trusted) toTrend(c, "news");
+      else reject("not a lesson");
       continue;
     }
     const heuristicTools = tagTools(c.title, c.description);
@@ -167,7 +197,8 @@ async function main() {
   for (const c of passing) {
     const label = labels.get(c.id);
     if (label && !label.educational) {
-      rejected["not educational (Claude)"] = (rejected["not educational (Claude)"] ?? 0) + 1;
+      if (c.trusted) toTrend(c, "news");
+      else reject("not educational (Claude)");
       continue;
     }
     const toolsFor = label ? label.tools : c.heuristicTools;
@@ -216,6 +247,7 @@ async function main() {
   existing = existing.flatMap((v) => {
     const asCandidate: Candidate = { ...v, description: "", trusted: true };
     if (rejectReason(asCandidate, now)) return [];
+    if (trendKind(v.title)) return [];
     if (v.difficultySource === "claude") return [v];
     if (!looksEducational(v.title)) return [];
     const tools = tagTools(v.title);
@@ -225,6 +257,9 @@ async function main() {
   const retired = before - existing.length;
 
   const videos = mergeFeed(existing, incoming, runDate);
+  // Trends already in the feed are re-checked against today's rules too.
+  const existingTrends = (feed.trends ?? []).filter((t) => !rejectReason({ ...t, description: "", trusted: true }, now));
+  const trends = mergeTrends(existingTrends, trendCandidates, runDate);
   const added = videos.filter((v) => v.firstSeen === runDate && !known.has(v.id)).length;
 
   const next: VideoFeed = {
@@ -232,8 +267,9 @@ async function main() {
     runDate,
     mode: fixture ? feed.mode : ytKey ? "api" : "rss",
     classifier: labels.size ? "claude" : "heuristic",
-    stats: { candidates: seen.size, kept: videos.length, added },
+    stats: { candidates: seen.size, kept: videos.length, added, trends: trends.length },
     videos,
+    trends,
   };
 
   // 5. Curated videos: warn if any have disappeared (API mode only).
@@ -251,7 +287,7 @@ async function main() {
   const summary = [
     `## Daily videos — ${runDate}`,
     `Mode: **${next.mode}** · Classifier: **${next.classifier}**`,
-    `Candidates: ${seen.size} · Passed filters: ${passing.length} · New today: **${added}** · Retired by current rules: ${retired} · In feed: ${videos.length}`,
+    `Candidates: ${seen.size} · Passed filters: ${passing.length} · New today: **${added}** · Retired by current rules: ${retired} · In feed: ${videos.length} · Trends: ${trends.length} (${trendCandidates.length} today)`,
     "",
     "Rejected: " + (Object.entries(rejected).map(([k, n]) => `${k} ${n}`).join(", ") || "none"),
     ...(warnings.length ? ["", "### Curated", ...warnings.map((w) => `- ${w}`)] : []),

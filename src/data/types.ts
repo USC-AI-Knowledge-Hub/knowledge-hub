@@ -168,11 +168,35 @@ export interface Video {
   firstSeen: string;
 }
 
+/** What kind of trend video it is. Shown as a label; trends have no difficulty. */
+export type TrendKind = "launch" | "research" | "talk" | "news";
+
+/**
+ * A news, launch, research or talk video: what's happening in AI, rather than
+ * how to use it. Kept apart from lessons and dropped after a few weeks.
+ */
+export interface Trend {
+  id: string;
+  title: string;
+  channel: string;
+  channelId: string;
+  publishedAt: string;
+  duration: number;
+  views: number;
+  likes?: number;
+  kind: TrendKind;
+  tools: string[];
+  score: number;
+  firstSeen: string;
+}
+
 export interface VideoFeed {
   generatedAt: string | null;
   runDate: string | null;
   mode: "api" | "rss" | "none";
   classifier: "claude" | "heuristic";
-  stats: { candidates: number; kept: number; added: number };
+  stats: { candidates: number; kept: number; added: number; trends?: number };
   videos: Video[];
+  /** AI news, launches, research and talks. Absent in feeds written before trends existed. */
+  trends?: Trend[];
 }

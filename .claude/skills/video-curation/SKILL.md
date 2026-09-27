@@ -14,7 +14,9 @@ description: How the daily YouTube pipeline finds, filters, labels and ranks vid
    `YOUTUBE_API_KEY`, also search every `tool.queries` entry plus
    `TOPIC_QUERIES`, then fetch details (duration, likes, language) for all IDs.
 2. **Filter** (`quality.ts#rejectReason`): shorts, live, too short/long,
-   non-English, clickbait, news/announcements/documentaries (`NOT_LESSON`),
+   non-English, clickbait, entertainment (`ENTERTAINMENT`). News, launches,
+   research and talks (`trendKind`) go to the separate `trends` feed (`mergeTrends`:
+   14-day intake, 21-day retention, 4 per channel, 48 total), never the lessons;
    older than 60 days, too few views (trusted channels are exempt). Without
    Claude, the title must also read as a lesson (`looksEducational`), because
    official channels post far more announcements than tutorials.

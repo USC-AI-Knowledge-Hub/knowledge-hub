@@ -1,3 +1,4 @@
+import type { TrendKind } from "../../src/data/types";
 import { SETTINGS } from "./config";
 
 export interface Candidate {
@@ -30,9 +31,30 @@ const EDUCATIONAL =
 /** Imperative titles like "Use ChatGPT Work to build dashboards" are lessons too. */
 const IMPERATIVE = /^(use|build|create|make|set ?up|automate|write|analy[sz]e|turn|learn|master)\b/i;
 
-/** News, announcements and entertainment: never lessons, whatever else they mention. */
-const NOT_LESSON =
-  /\b(ai news|news:|this week in ai|weekly (ai )?(news|recap)|documentary|trailer|teaser|podcast|introducing|announcing|announcement|keynote|livestream|live stream|reacts?|reaction)\b/i;
+/** Entertainment: never kept, as a lesson or a trend. */
+const ENTERTAINMENT = /\b(trailer|teaser|reacts?|reaction|memes?|compilation)\b/i;
+
+/**
+ * News, launches, research and talks go to the trends feed, never the lesson
+ * library. Checked in this order, so "AI News: X launches Y" counts as news.
+ */
+const TREND_PATTERNS: [TrendKind, RegExp][] = [
+  ["news", /\b(ai news|news:|this week in ai|weekly (ai )?(news|recap)|recap|round-?up|everything (announced|new)|what's new)\b/i],
+  ["talk", /\b(keynote|podcast|interview|in conversation|conversation with|fireside|panel|documentary|talks? (with|at)|ted talk|livestream|live stream)\b/i],
+  ["launch", /\b(introducing|announcing|announcement|launch(es|ed|ing)?|released?|now available|unveil(s|ed)?|just dropped|is here|new model)\b/i],
+  // "Research" alone is too common in lesson titles ("Deep Research explained"), so only news-style phrasing counts.
+  ["research", /\b((new|this|the) paper|research paper|researchers|study (finds|shows)|benchmarks?|breakthrough|state of ai)\b/i],
+];
+
+/** The kind of trend a title is, or null when it doesn't read as news, a launch, research or a talk. */
+export function trendKind(title: string): TrendKind | null {
+  for (const [kind, re] of TREND_PATTERNS) {
+    // A lesson that mentions research is still a lesson.
+    if (kind === "research" && looksEducational(title)) continue;
+    if (re.test(title)) return kind;
+  }
+  return null;
+}
 
 /** Title reads like a lesson rather than news or entertainment. */
 export const looksEducational = (title: string) => EDUCATIONAL.test(title) || IMPERATIVE.test(title.trim());
@@ -69,7 +91,7 @@ export function rejectReason(c: Candidate, now: Date): string | null {
   if (c.language && !c.language.toLowerCase().startsWith("en")) return "not English";
   if (nonLatinRatio(c.title) > 0.3) return "not English";
   if (hypeLevel(c.title) >= 2) return "clickbait";
-  if (NOT_LESSON.test(c.title)) return "news or announcement";
+  if (ENTERTAINMENT.test(c.title)) return "entertainment";
   if (ageDays(c.publishedAt, now) > SETTINGS.maxAgeDays) return "too old";
   if (!c.trusted && c.views > 0) {
     const min = ageDays(c.publishedAt, now) < 3 ? SETTINGS.minViewsFresh : SETTINGS.minViews;

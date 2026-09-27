@@ -698,3 +698,21 @@
 .course-src-blurb { margin: -4px 0 16px; }
 .player-audience { display: flex; gap: 8px; align-items: flex-start; color: var(--md-sys-color-on-surface-variant); }
 .player-audience .icon { flex: none; margin-top: 2px; }
+
+/* ── Trends ────────────────────────────────────────────────────────────── */
+/* Kind labels use neutral and gold roles: difficulty colors are reserved for difficulty. */
+
+.trend-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px 2px 6px;
+  border-radius: var(--md-shape-full);
+  background: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+}
+.trend-kind.launch { background: var(--md-sys-color-tertiary-fixed-dim); color: var(--md-sys-color-on-tertiary-fixed); }
+.trend-kind.research { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.trend-note { margin: 14px 0 24px; }
+.watch-tabs { margin: 12px 0 8px; }
+.trend-filters { margin-top: 20px; }

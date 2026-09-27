@@ -39,6 +39,12 @@ export const TOPIC_QUERIES = [
   "AI literature review tutorial",
 ];
 
+/**
+ * Searches (API mode) for what's new in AI. Results land in the trends feed,
+ * not the lesson library. Channel feeds from TRUSTED_CHANNELS supply most trends.
+ */
+export const TREND_QUERIES = ["AI news this week", "new AI model release"];
+
 export const SETTINGS = {
   /** Only consider videos published in the last N days on search. */
   searchWindowDays: 30,
@@ -64,6 +70,12 @@ export const SETTINGS = {
   /** Minimum views for non-trusted channels, scaled down for very new uploads. */
   minViews: 1000,
   minViewsFresh: 150,
+  /** Trends: only take videos this new, keep them this long, and cap the feed. */
+  trendMaxAgeDays: 14,
+  trendRetentionDays: 21,
+  trendCap: 48,
+  /** At most this many trends from one channel, so a daily news channel can't fill the feed. */
+  trendPerChannel: 4,
   /** Claude classification batch size. */
   claudeBatch: 20,
 };

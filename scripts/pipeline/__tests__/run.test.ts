@@ -28,6 +28,12 @@ describe("pipeline run (fixture)", () => {
     expect(titles.some((t) => /INSANE/.test(t))).toBe(false);
     expect(titles.some((t) => /#shorts/.test(t))).toBe(false);
     expect(titles).toContain("Prompt Engineering for Beginners: The Complete Guide");
+    // News goes to trends, entertainment and stale news nowhere.
+    expect(titles).not.toContain("Introducing GPT-6");
+    expect(feed.trends?.map((t) => [t.title, t.kind])).toEqual([
+      ["AI News: Three New Models and a Big Agents Update", "news"],
+      ["Introducing GPT-6", "launch"],
+    ]);
     for (const v of feed.videos) {
       expect(["beginner", "intermediate", "advanced"]).toContain(v.difficulty);
       expect(v.tools.length + v.topics.length).toBeGreaterThan(0);
