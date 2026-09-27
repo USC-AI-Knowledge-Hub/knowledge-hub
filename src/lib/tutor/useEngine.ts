@@ -10,7 +10,8 @@ export type Phase =
   | { name: "off"; missing?: boolean }
   | { name: "loading"; model: TutorModel; device: Device; loaded: number; total: number; file: string; fromCache: boolean }
   | { name: "compiling"; model: TutorModel; device: Device; fromCache: boolean }
-  | { name: "ready"; model: TutorModel; device: Device }
+  /** `saved` is false when the browser wouldn't keep the files (private window, low storage). */
+  | { name: "ready"; model: TutorModel; device: Device; saved: boolean }
   | { name: "error"; message: string; model: TutorModel; device: Device };
 
 export interface TutorEngine {
@@ -61,8 +62,8 @@ export function useTutorEngine(): TutorEngine {
 
   const start = useCallback((model: TutorModel, device: Device, fromCache: boolean) => {
     // Once a model is loading in this session, there's nothing to resume. Without this,
-    // saving "downloaded" at the end of a download re-triggered resume, whose cache check
-    // could run before the browser finished writing the files and reset the tutor to "off".
+    // saving "downloaded" at the end of a download re-triggered resume, and a failed cache
+    // check there reset a working model to "off".
     resumed.current = true;
     const v = model.variants[device];
     setPhase({ name: "loading", model, device, loaded: 0, total: (v?.mb ?? 0) * 1e6, file: "", fromCache });
@@ -71,15 +72,18 @@ export function useTutorEngine(): TutorEngine {
         onProgress: (p) => setPhase({ name: "loading", model, device, ...p, fromCache }),
         onCompiling: () => setPhase({ name: "compiling", model, device, fromCache }),
       })
-      .then(() => {
-        modelStore.set({ status: "downloaded", model: model.id, device });
-        setPhase({ name: "ready", model, device });
+      // Transformers.js finishes writing to the cache before load resolves, so this check is
+      // reliable. Only promise "saved for next time" when the files really are there.
+      .then(() => (mock ? true : isCached(model, device)))
+      .then((saved) => {
+        if (saved) modelStore.set({ status: "downloaded", model: model.id, device });
+        setPhase({ name: "ready", model, device, saved });
       })
       .catch((err) => {
         if (err instanceof CancelledError) return;
         setPhase({ name: "error", message: explain(err, device), model, device });
       });
-  }, []);
+  }, [mock]);
 
   const download = useCallback(
     (modelId: string, device: Device) => {

@@ -1,3 +1,6 @@
+import { mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 
 /**
@@ -297,15 +300,23 @@ test.describe("real model", () => {
   // One slow download per run: a retry would double the job time.
   test.describe.configure({ retries: 0 });
 
-  test("@model the real engine answers on WASM", async ({ page }) => {
+  test("@model the real engine answers on WASM", async ({ playwright }) => {
     test.setTimeout(15 * 60_000);
+    // A persistent profile, like a student's browser. Playwright's default contexts behave like
+    // private windows, whose small storage quota can't hold the model between visits.
+    const context = await playwright.chromium.launchPersistentContext(mkdtempSync(join(tmpdir(), "kh-tutor-")), {
+      baseURL: "http://localhost:4173",
+      ...(process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {}),
+    });
+    test.info().attach("note", { body: "see [heartbeat] lines in the job log" });
+    const page = context.pages()[0] ?? (await context.newPage());
     await setup(page, { mock: false, storage: { "kh-tutor-device": "wasm", "kh-tutor-debug": "1" } });
     // Everything the tutor logs, and any model or runtime request that fails, goes to the CI log.
     let lastProgress = "";
     page.on("console", (m) => {
       const t = m.text();
       if (/progress /.test(t)) lastProgress = t;
-      else if (m.type() === "error" || t.startsWith("[tutor]")) console.log("[browser]", t);
+      else if (m.type() === "error" || m.type() === "warning" || t.startsWith("[tutor]")) console.log("[browser]", t);
     });
     page.context().on("requestfailed", (r) => MODEL_HOSTS.test(r.url()) && console.log("[request failed]", r.url(), r.failure()?.errorText));
     page.context().on("response", (r) => MODEL_HOSTS.test(r.url()) && r.status() >= 400 && console.log("[http]", r.status(), r.url()));
@@ -313,8 +324,9 @@ test.describe("real model", () => {
       const status = await sheet.locator(".t-status, [role=status], [role=alert]").allInnerTexts().catch(() => []);
       console.log("[heartbeat]", lastProgress, "|", status.join(" / ").replace(/\s+/g, " ").slice(0, 200));
     }, 30_000);
-    test.info().attach("note", { body: "see [heartbeat] lines in the job log" });
     const sheet = await openTutor(page, "/?tutor=real");
+    const quota = await page.evaluate(async () => (await navigator.storage.estimate()).quota ?? 0);
+    console.log(`[storage] quota ${Math.round(quota / 1e6)} MB`);
     await sheet.getByRole("button", { name: "Choose a model" }).click();
     await expect(sheet.getByRole("radio", { name: /SmolLM2 360M Instruct/ })).toBeChecked();
     await sheet.getByLabel("I understand it will be slow on this device.").check();
@@ -333,6 +345,8 @@ test.describe("real model", () => {
     await expect(answer).toHaveText(/\w+/, { timeout: 3 * 60_000 });
     await expect(sheet.getByText(/Small on-device model/)).toBeVisible({ timeout: 5 * 60_000 });
     const text = (await answer.innerText()).trim();
+    // The ready view says so if the browser couldn't keep the files.
+    await expect(sheet.getByText(/couldn't keep the model/)).toHaveCount(0);
     console.log(`[model answer] ${text}`);
     expect(text.length).toBeGreaterThan(10);
 
@@ -343,5 +357,6 @@ test.describe("real model", () => {
     await page.getByRole("button", { name: /Ask the tutor/ }).click();
     await expect(page.getByRole("dialog", { name: "AI tutor" }).locator(".t-status")).toContainText(/SmolLM2/, { timeout: 3 * 60_000 });
     expect(modelRequests).toBe(0);
+    await context.close();
   });
 });

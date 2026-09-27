@@ -86,6 +86,12 @@ export function Setup() {
           <p className="body-m">
             Running on {phase.device === "webgpu" ? "your graphics chip (WebGPU)" : "your processor (WASM)"}. Nothing you type leaves your browser.
           </p>
+          {!phase.saved && (
+            <p className="body-s t-alert">
+              This browser couldn't keep the model for next time, usually because it's a private window or storage is nearly full. It works
+              now, but you'll download it again on your next visit.
+            </p>
+          )}
           <div className="t-actions">
             <button type="button" className="btn filled sm state" onClick={() => setView({ name: "home" })}>
               Start learning
