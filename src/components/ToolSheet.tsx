@@ -24,7 +24,7 @@ function Lineage({ id, onOpen }: { id: string; onOpen: (id: string) => void }) {
   const groups = [
     { title: "Runs on", list: links.filter((l) => l.from === id && l.kind === "built-on"), end: "to" as const },
     { title: "Lets you pick", list: links.filter((l) => l.from === id && l.kind === "choose"), end: "to" as const },
-    { title: "Its models power", list: links.filter((l) => l.to === id && l.kind === "built-on"), end: "from" as const },
+    { title: "Built on it", list: links.filter((l) => l.to === id && l.kind === "built-on"), end: "from" as const },
     { title: "Available in", list: links.filter((l) => l.to === id && l.kind === "choose"), end: "from" as const },
   ].filter((g) => g.list.length);
   if (!groups.length) return null;

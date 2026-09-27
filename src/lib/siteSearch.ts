@@ -21,7 +21,7 @@ const TASK_WORDS: Record<Task, string[]> = {
   audio: ["audio", "voice", "podcast", "transcribe", "transcript", "transcription", "recording", "captions", "speech", "narration", "lecture recording", "meeting notes"],
   code: ["code", "coding", "program", "programming", "debug", "app", "website", "python", "javascript", "script", "developer"],
   study: ["study", "learn", "exam", "quiz", "flashcards", "notes", "revise", "understand", "explain", "reading"],
-  teach: ["teach", "teaching", "lesson plan", "class", "students", "rubric", "syllabus", "instructor", "lecture"],
+  teach: ["teach", "teaching", "lesson plan", "class", "students", "rubric", "syllabus", "instructor", "lecture slides"],
   automate: ["automate", "automation", "workflow", "workflows", "integrate", "connect apps", "zap", "repetitive"],
 };
 

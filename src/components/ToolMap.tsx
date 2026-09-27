@@ -78,7 +78,7 @@ function calloutLines(id: string): { kind: ToolLink["kind"]; label: string; name
   const inside = links.filter((l) => l.to === id && l.kind === "choose").map((l) => l.from);
   if (runsOn.length) out.push({ kind: "built-on", label: "Runs on", names: names(runsOn) });
   if (picks.length) out.push({ kind: "choose", label: "Lets you pick", names: names(picks) });
-  if (powers.length) out.push({ kind: "built-on", label: "Its models power", names: names(powers, true) });
+  if (powers.length) out.push({ kind: "built-on", label: "Built on it", names: names(powers, true) });
   if (inside.length) out.push({ kind: "choose", label: "Available in", names: names(inside, true) });
   return out;
 }
