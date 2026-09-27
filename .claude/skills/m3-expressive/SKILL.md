@@ -42,8 +42,18 @@ headings.
 - Scale tokens: `--md-shape-xs` … `--md-shape-2xl`, `--md-shape-full`.
 - Buttons and chips are pills that square off on press (`:active`), the
   Expressive shape morph. Cards round further on hover.
-- Tool monograms and path cards use the shape library in `src/lib/shapes.ts`
-  (cookies, clover, sunny). We never reproduce vendor logos.
+- Path cards and course covers use the shape library in `src/lib/shapes.ts`
+  (cookies, clover, sunny).
+- Tools are identified by their logos as 8-bit pixel art (`ToolMark` /
+  `PixelMark`, data in `src/data/pixelLogos.ts`), always next to the tool's
+  name and only to identify it. Each is a 16×16 grid on the same light retro
+  tile (stepped corners, 1px ink outline, hard pixel shadow) in both themes.
+  Shapes come from Simple Icons (CC0, rasterized by
+  `scripts/gen-pixel-logos.ts`, touched up by hand) or are hand-drawn homages;
+  where we don't know a logo we draw an icon of what the tool does. No other
+  logo sources. Render at 16, 24, 32, 48 or multiples of 16 so pixels stay square.
+- "Pixelify Sans" is an accent face for the tool pop-up's character card only
+  (`.px-font`), never body text, never below 12px.
 
 ## Motion
 

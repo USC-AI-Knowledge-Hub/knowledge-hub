@@ -7,6 +7,8 @@ test.describe("tool map", () => {
     await page.goto("/tools");
     await expect(page.locator(".map-node")).toHaveCount(30);
     await expect(page.locator(".map-cluster")).toHaveCount(7);
+    // Every node shows its pixel logo.
+    await expect(page.locator(".map-node .pixel-mark")).toHaveCount(30);
     await expect(page.getByRole("button", { name: /^Research and papers$/ }).first()).toBeVisible();
     // Built-on links are always drawn; "lets you pick" links only while a tool is pointed at.
     await expect(page.locator(".map-svg .edge.built-on")).toHaveCount(3);
@@ -51,6 +53,10 @@ test.describe("tool map", () => {
     await expect(page).toHaveURL(/tool=notebooklm/);
     await expect(sheet.getByRole("heading", { name: "NotebookLM", level: 2 })).toBeVisible();
     await expect(sheet.locator(".sheet-lineage")).toContainText("Gemini");
+    // Character card: stats from real profile fields.
+    await expect(sheet.locator(".sheet-stats")).toContainText("Study and writing");
+    await expect(sheet.locator(".sheet-stats")).toContainText("Check USC");
+    await expect(sheet.locator(".sheet-crt .pixel-mark").first()).toBeAttached();
     // 1:3 split on wide screens.
     const [left, right] = await Promise.all([sheet.locator(".sheet-left").boundingBox(), sheet.locator(".sheet-right").boundingBox()]);
     expect(right!.width / left!.width).toBeGreaterThan(2.6);
