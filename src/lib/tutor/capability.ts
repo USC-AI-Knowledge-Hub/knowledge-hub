@@ -17,7 +17,9 @@ export interface Capability {
 }
 
 interface NavigatorExtras {
-  gpu?: { requestAdapter(): Promise<{ features: { has(f: string): boolean } } | null> };
+  gpu?: {
+    requestAdapter(): Promise<{ features: { has(f: string): boolean }; isFallbackAdapter?: boolean; info?: { isFallbackAdapter?: boolean } } | null>;
+  };
   deviceMemory?: number;
   connection?: { type?: string; saveData?: boolean; effectiveType?: string };
 }
@@ -44,6 +46,9 @@ export async function detectCapability(mock = false): Promise<Capability> {
   try {
     const adapter = await nav.gpu.requestAdapter();
     if (!adapter) return { ...base, device: "wasm", reason: "WebGPU is available, but it couldn't find a graphics chip to use." };
+    // A software "fallback" adapter emulates a GPU on the CPU and is slower than WASM.
+    if (adapter.isFallbackAdapter || adapter.info?.isFallbackAdapter)
+      return { ...base, device: "wasm", reason: "WebGPU is only available in software on this device, which is slower than running on the CPU." };
     if (!adapter.features.has("shader-f16"))
       return { ...base, device: "wasm", reason: "Your graphics chip doesn't support the 16-bit math these models use in the browser." };
     return { ...base, device: "webgpu", reason: null };

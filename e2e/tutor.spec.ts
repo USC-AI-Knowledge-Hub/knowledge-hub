@@ -299,15 +299,33 @@ test.describe("real model", () => {
 
   test("@model the real engine answers on WASM", async ({ page }) => {
     test.setTimeout(15 * 60_000);
-    await setup(page, { mock: false, storage: { "kh-tutor-device": "wasm" } });
-    page.on("console", (m) => m.type() === "error" && console.log("[browser]", m.text()));
+    await setup(page, { mock: false, storage: { "kh-tutor-device": "wasm", "kh-tutor-debug": "1" } });
+    // Everything the tutor logs, and any model or runtime request that fails, goes to the CI log.
+    let lastProgress = "";
+    page.on("console", (m) => {
+      const t = m.text();
+      if (/progress /.test(t)) lastProgress = t;
+      else if (m.type() === "error" || t.startsWith("[tutor]")) console.log("[browser]", t);
+    });
+    page.context().on("requestfailed", (r) => MODEL_HOSTS.test(r.url()) && console.log("[request failed]", r.url(), r.failure()?.errorText));
+    page.context().on("response", (r) => MODEL_HOSTS.test(r.url()) && r.status() >= 400 && console.log("[http]", r.status(), r.url()));
+    const heartbeat = setInterval(async () => {
+      const status = await sheet.locator(".t-status, [role=status], [role=alert]").allInnerTexts().catch(() => []);
+      console.log("[heartbeat]", lastProgress, "|", status.join(" / ").replace(/\s+/g, " ").slice(0, 200));
+    }, 30_000);
+    test.info().attach("note", { body: "see [heartbeat] lines in the job log" });
     const sheet = await openTutor(page, "/?tutor=real");
     await sheet.getByRole("button", { name: "Choose a model" }).click();
     await expect(sheet.getByRole("radio", { name: /SmolLM2 360M Instruct/ })).toBeChecked();
     await sheet.getByLabel("I understand it will be slow on this device.").check();
     await sheet.getByRole("button", { name: /^Download \d+ MB/ }).click();
     await expect(sheet.getByRole("progressbar", { name: "Download progress" })).toBeVisible();
-    await expect(sheet.getByRole("heading", { name: "The tutor is ready" })).toBeVisible({ timeout: 10 * 60_000 });
+    // Wait for ready, but fail fast (with the message) if the tutor shows an error.
+    const ready = sheet.getByRole("heading", { name: "The tutor is ready" });
+    const failed = sheet.getByRole("alert");
+    await expect(ready.or(failed)).toBeVisible({ timeout: 10 * 60_000 });
+    clearInterval(heartbeat);
+    if (await failed.isVisible()) throw new Error(`The tutor showed an error: ${await failed.innerText()}`);
 
     await sheet.getByRole("button", { name: "Start learning" }).click();
     await ask(page, "What is a token?");

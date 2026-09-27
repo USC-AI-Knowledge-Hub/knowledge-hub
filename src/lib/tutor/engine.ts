@@ -35,6 +35,15 @@ export interface Engine {
   dispose(): void;
 }
 
+/** localStorage["kh-tutor-debug"]="1" logs every step of loading and generating to the console. */
+const debug = () => {
+  try {
+    return localStorage.getItem("kh-tutor-debug") === "1";
+  } catch {
+    return false;
+  }
+};
+
 export class CancelledError extends Error {
   constructor() {
     super("Cancelled");
@@ -95,6 +104,8 @@ class WorkerEngine implements Engine {
 
   private onMessage = (e: MessageEvent<FromWorker>) => {
     const m = e.data;
+    if (m.type === "error") console.error("[tutor] model error:", m.message);
+    else if (debug() && m.type !== "text") console.info("[tutor]", m.type === "progress" ? `progress ${m.file} ${Math.round(m.loaded / 1e6)}/${Math.round(m.total / 1e6)} MB` : m.type);
     switch (m.type) {
       case "progress":
         this.pendingLoad?.cb.onProgress(m);
@@ -137,6 +148,7 @@ class WorkerEngine implements Engine {
     this.worker = new Worker(new URL("./worker.ts", import.meta.url), { type: "module", name: "tutor-model" });
     this.worker.onmessage = this.onMessage;
     this.worker.onerror = (e) => {
+      console.error("[tutor] worker error:", e.message);
       this.pendingLoad?.reject(new Error(e.message || "The model worker stopped."));
       this.pendingLoad = null;
     };

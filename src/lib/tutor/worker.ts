@@ -57,6 +57,8 @@ async function load(msg: Extract<ToWorker, { type: "load" }>) {
     progress_callback: onProgress,
   });
   post({ type: "compiling" });
+  // Tell the page which backend actually loaded; useful when something is slow.
+  post({ type: "progress", loaded: 1, total: 1, file: `loaded on ${msg.device} (${msg.dtype})` });
   // Warm up: the first run compiles GPU shaders, which can take a few seconds.
   const inputs = tokenizer("Hi", { return_tensor: true });
   await model.generate({ ...inputs, max_new_tokens: 1 });
@@ -100,6 +102,11 @@ async function generate(msg: Extract<ToWorker, { type: "generate" }>) {
   stopper = null;
   post({ type: "done", id: msg.id, text, tokens, ms: performance.now() - started });
 }
+
+// Errors thrown outside a request (e.g. inside ONNX Runtime's own startup) would otherwise vanish.
+self.addEventListener("unhandledrejection", (e) => {
+  post({ type: "error", message: e.reason instanceof Error ? e.reason.message : String(e.reason) });
+});
 
 self.onmessage = async (e: MessageEvent<ToWorker>) => {
   const msg = e.data;
