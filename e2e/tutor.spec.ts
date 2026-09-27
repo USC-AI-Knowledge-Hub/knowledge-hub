@@ -335,5 +335,13 @@ test.describe("real model", () => {
     const text = (await answer.innerText()).trim();
     console.log(`[model answer] ${text}`);
     expect(text.length).toBeGreaterThan(10);
+
+    // A returning student gets the model back from the browser cache, with no new download.
+    let modelRequests = 0;
+    page.context().on("request", (r) => /huggingface\.co|hf\.co/.test(r.url()) && /\.onnx/.test(r.url()) && modelRequests++);
+    await page.reload();
+    await page.getByRole("button", { name: /Ask the tutor/ }).click();
+    await expect(page.getByRole("dialog", { name: "AI tutor" }).locator(".t-status")).toContainText(/SmolLM2/, { timeout: 3 * 60_000 });
+    expect(modelRequests).toBe(0);
   });
 });

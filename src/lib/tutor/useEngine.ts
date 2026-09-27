@@ -60,6 +60,10 @@ export function useTutorEngine(): TutorEngine {
   }, [mock]);
 
   const start = useCallback((model: TutorModel, device: Device, fromCache: boolean) => {
+    // Once a model is loading in this session, there's nothing to resume. Without this,
+    // saving "downloaded" at the end of a download re-triggered resume, whose cache check
+    // could run before the browser finished writing the files and reset the tutor to "off".
+    resumed.current = true;
     const v = model.variants[device];
     setPhase({ name: "loading", model, device, loaded: 0, total: (v?.mb ?? 0) * 1e6, file: "", fromCache });
     engine()
