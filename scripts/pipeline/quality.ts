@@ -49,8 +49,9 @@ const TREND_PATTERNS: [TrendKind, RegExp][] = [
 /** The kind of trend a title is, or null when it doesn't read as news, a launch, research or a talk. */
 export function trendKind(title: string): TrendKind | null {
   for (const [kind, re] of TREND_PATTERNS) {
-    // A lesson that mentions research is still a lesson.
-    if (kind === "research" && looksEducational(title)) continue;
+    // A lesson that mentions research, a podcast or a launch is still a lesson
+    // ("NotebookLM tutorial: turn notes into a podcast"). Only explicit news phrasing wins over that.
+    if (kind !== "news" && looksEducational(title)) continue;
     if (re.test(title)) return kind;
   }
   return null;

@@ -89,6 +89,11 @@ export interface Course {
   summary: string;
   /** Who should take it, and what it assumes. */
   audience: string;
+  /**
+   * The playlist keeps adding each year's lectures (MIT 6.S191). Its live totals cover every
+   * year, so the site shows the catalog's one-year lesson count and hours instead.
+   */
+  rolling?: boolean;
   /** Video ID used for the thumbnail, usually the first lesson. */
   cover?: string;
   /** Learn modules this course goes deeper on. */

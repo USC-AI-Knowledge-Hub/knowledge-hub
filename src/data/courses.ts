@@ -45,9 +45,10 @@ export const courses: Course[] = [
     hours: 10,
     difficulty: "intermediate",
     summary:
-      "MIT's one-week bootcamp, re-recorded every year: neural networks, sequence models, transformers, computer vision, generative models and reinforcement learning, plus guest lectures.",
+      "MIT's one-week bootcamp, re-recorded every year: neural networks, sequence models, transformers, computer vision, generative models and reinforcement learning, plus guest lectures. The playlist keeps past years too; start with the most recent year's lectures.",
     audience: "Students with some calculus and Python who want a fast, current overview of deep learning.",
     cover: "alfdI7S6wCY",
+    rolling: true,
     modules: ["llms", "multimodal", "ai-for-your-field"],
   },
   {

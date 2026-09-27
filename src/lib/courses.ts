@@ -33,11 +33,13 @@ export interface LiveCourse extends Course {
 /** Merges the catalog entry with the latest check. Unchecked courses count as available. */
 export function live(c: Course, status: CourseStatus | null): LiveCourse {
   const check = status?.courses[c.id];
+  // A rolling playlist's live totals span every year it has run; keep the one-year estimate.
+  const counts = check?.ok && !c.rolling;
   return {
     ...c,
     available: check?.ok ?? true,
-    lessons: check?.ok && check.lessons ? check.lessons : c.lessons,
-    hours: check?.ok && check.seconds ? Math.round(check.seconds / 360) / 10 : c.hours,
+    lessons: counts && check.lessons ? check.lessons : c.lessons,
+    hours: counts && check.seconds ? Math.round(check.seconds / 360) / 10 : c.hours,
     cover: c.cover ?? (check?.ok ? check.cover : undefined) ?? c.video,
   };
 }

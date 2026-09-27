@@ -258,7 +258,10 @@ async function main() {
 
   const videos = mergeFeed(existing, incoming, runDate);
   // Trends already in the feed are re-checked against today's rules too.
-  const existingTrends = (feed.trends ?? []).filter((t) => !rejectReason({ ...t, description: "", trusted: true }, now));
+  // A lesson-style title only stays a trend when it's explicit news.
+  const existingTrends = (feed.trends ?? []).filter(
+    (t) => !rejectReason({ ...t, description: "", trusted: true }, now) && (!looksEducational(t.title) || trendKind(t.title) === "news"),
+  );
   const trends = mergeTrends(existingTrends, trendCandidates, runDate);
   const added = videos.filter((v) => v.firstSeen === runDate && !known.has(v.id)).length;
 

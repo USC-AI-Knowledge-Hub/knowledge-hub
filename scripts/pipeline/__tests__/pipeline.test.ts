@@ -214,6 +214,8 @@ describe("trendKind", () => {
     expect(trendKind("ChatGPT tutorial for beginners")).toBeNull();
     expect(trendKind("How to use NotebookLM for exam prep")).toBeNull();
     expect(trendKind("Gemini Deep Research Explained in 8 Minutes")).toBeNull();
+    expect(trendKind("Gemini NotebookLM Tutorial: Turn Your Notes Into an AI Podcast (2026)")).toBeNull();
+    expect(trendKind("How to use the new model launched this week")).toBeNull();
     expect(trendKind("n8n AI Agent Tutorial: Build a Research Agent With Tools")).toBeNull();
   });
 });
