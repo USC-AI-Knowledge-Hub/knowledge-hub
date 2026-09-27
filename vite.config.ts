@@ -13,8 +13,23 @@ const spaFallback = (): Plugin => ({
   },
 });
 
+/**
+ * ONNX Runtime's bundle has a fallback URL to its 27 MB .wasm, so Vite emits a
+ * copy. Transformers.js always points ONNX Runtime at the matching version on
+ * jsDelivr instead, so the copy is never used; keep it out of the deploy.
+ */
+const dropUnusedOrtWasm = (): Plugin => ({
+  name: "drop-unused-ort-wasm",
+  apply: "build",
+  generateBundle(_, bundle) {
+    for (const name of Object.keys(bundle)) if (/ort-wasm[^/]*\.wasm$/.test(name)) delete bundle[name];
+  },
+});
+
 export default defineConfig({
   // Set BASE_PATH=/repo-name/ when deploying to a GitHub Pages project site.
   base: process.env.BASE_PATH ?? "/",
   plugins: [react(), spaFallback()],
+  // The tutor's model worker imports Transformers.js lazily, which needs an ES module worker.
+  worker: { format: "es", plugins: () => [dropUnusedOrtWasm()] },
 });
