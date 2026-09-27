@@ -109,6 +109,29 @@ export function ToolMap({
   const [focus, setFocus] = useState<string | null>(null);
   const active = hover ?? focus ?? selected;
 
+  // Roll call: when the matches change, matched nodes hop in order. Alternating
+  // between two identical animations restarts it without remounting the buttons.
+  const highlightKey = highlight ? [...highlight].join(",") : "";
+  const roll = useRef({ key: "", n: 0 });
+  if (roll.current.key !== highlightKey) roll.current = { key: highlightKey, n: roll.current.n + 1 };
+  const order = useMemo(() => new Map([...(highlight ?? [])].map((id, i) => [id, i])), [highlight]);
+
+  // Easter egg: the Konami code toggles an arcade screen over the map.
+  const [arcade, setArcade] = useState(false);
+  useEffect(() => {
+    const code = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+    let at = 0;
+    const onKey = (e: KeyboardEvent) => {
+      at = e.key === code[at] ? at + 1 : e.key === code[0] ? 1 : 0;
+      if (at === code.length) {
+        at = 0;
+        setArcade((a) => !a);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
   const apply = useCallback(() => {
     const v = view.current;
     if (layer.current) layer.current.style.transform = `translate3d(${v.x}px, ${v.y}px, 0) scale(${v.k})`;
@@ -344,6 +367,7 @@ export function ToolMap({
       role="group"
       aria-label="Map of AI tools by category. Drag to move, scroll or pinch to zoom."
       data-filtering={highlight ? "" : undefined}
+      data-arcade={arcade ? "" : undefined}
     >
       <div ref={layer} className="map-world" style={{ width: world.w, height: world.h }}>
         <svg className="map-svg" width={world.w} height={world.h} viewBox={`0 0 ${world.w} ${world.h}`} aria-hidden="true">
@@ -425,7 +449,7 @@ export function ToolMap({
           </div>
         ))}
 
-        {ORDERED.map((t) => {
+        {ORDERED.map((t, i) => {
           const p = nodes.get(t.id)!;
           const cat = clusterOf[t.id];
           const parent = links.find((l) => l.from === t.id && l.kind === "built-on");
@@ -434,7 +458,15 @@ export function ToolMap({
               key={t.id}
               type="button"
               className={`map-node cat-${cat}`}
-              style={{ left: p.x - NODE_W / 2, top: p.y - NODE_H / 2, width: NODE_W, height: NODE_H }}
+              style={{
+                left: p.x - NODE_W / 2,
+                top: p.y - NODE_H / 2,
+                width: NODE_W,
+                height: NODE_H,
+                ["--i" as string]: i,
+                ["--n" as string]: order.get(t.id) ?? 0,
+              }}
+              data-roll={highlight?.has(t.id) ? roll.current.n % 2 : undefined}
               data-dim={lit(t.id) ? undefined : ""}
               data-match={highlight?.has(t.id) ? "" : undefined}
               data-selected={selected === t.id ? "" : undefined}
@@ -449,12 +481,21 @@ export function ToolMap({
               onBlur={() => setFocus((f) => (f === t.id ? null : f))}
             >
               <span className="map-node-mark">
-                <PixelMark tool={t} size={48} />
-                {t.usc === "provided" && (
-                  <span className="map-node-usc" title="USC provides it">
-                    <Icon name="verified" filled size={14} />
+                <span className="map-node-hop">
+                  <PixelMark tool={t} size={48} />
+                  {t.usc === "provided" && (
+                    <span className="map-node-usc" title="USC provides it">
+                      <Icon name="verified" filled size={14} />
+                    </span>
+                  )}
+                  <span className="sparks" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
                   </span>
-                )}
+                </span>
               </span>
               <span className="map-node-name">{t.name}</span>
               <span className="visually-hidden">

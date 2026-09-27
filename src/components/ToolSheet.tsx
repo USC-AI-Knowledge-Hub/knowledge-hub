@@ -14,7 +14,8 @@ import { toolById } from "../data/tools";
 import { Icon } from "./Icon";
 import { Level } from "./Level";
 import { PixelMark } from "./PixelMark";
-import { COST_LABEL, ToolReview, ToolVideos, UscBadge } from "./ToolProfile";
+import type { Cost, UscAccess } from "../data/types";
+import { COST_LABEL, ToolReview, ToolVideos } from "./ToolProfile";
 import "../styles/map.css";
 
 /** Chromium can run an SVG filter on the backdrop; other engines ignore it, so only opt in there. */
@@ -51,6 +52,39 @@ function Lineage({ id, onOpen }: { id: string; onOpen: (id: string) => void }) {
         </div>
       ))}
     </div>
+  );
+}
+
+/** Cost as coins: none for free, one for a free tier, two for paid. The label always sits beside it. */
+function Coins({ cost }: { cost: Cost }) {
+  const n = cost === "free" ? 0 : cost === "freemium" ? 1 : 2;
+  return (
+    <span className="coins" aria-hidden="true">
+      {[0, 1].map((i) => (
+        <svg key={i} width="14" height="14" viewBox="0 0 7 7" shapeRendering="crispEdges" className={i < n ? "on" : ""}>
+          <path d="M2 0h3v1h1v1h1v3h-1v1h-1v1h-3v-1h-1v-1h-1v-3h1v-1h1z" className="coin-edge" />
+          <path d="M2 1h3v1h1v3h-1v1h-3v-1h-1v-3h1z" className="coin-face" />
+          <path d="M3 2h1v3h-1z" className="coin-mark" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+const PASS: Record<UscAccess, { label: string; icon: string }> = {
+  provided: { label: "USC pass", icon: "verified" },
+  check: { label: "Check USC", icon: "help" },
+  personal: { label: "Personal account", icon: "person" },
+};
+
+/** USC access as a pixel badge. */
+function UscPass({ usc }: { usc: UscAccess }) {
+  const p = PASS[usc];
+  return (
+    <span className={`usc-pass px-font ${usc}`}>
+      <Icon name={p.icon} filled={usc === "provided"} size={16} />
+      {p.label}
+    </span>
   );
 }
 
@@ -110,24 +144,45 @@ export function ToolSheet({ toolId, onClose, onOpen }: { toolId: string | null; 
           </button>
 
           <aside className="sheet-left">
-            <div className="sheet-cart">
-              <PixelMark tool={tool} size={144} className="sheet-mark" />
+            {/* Character select: the logo on a little CRT, then the tool's stats. Every stat is a real profile field. */}
+            <div className="sheet-crt">
+              <PixelMark tool={tool} size={160} className="sheet-mark sheet-mark-lg" />
+              <PixelMark tool={tool} size={64} className="sheet-mark sheet-mark-sm" />
             </div>
             <div className="sheet-id">
-              <h2 id="tool-sheet-title" className="headline-m">
+              <h2 id="tool-sheet-title" className="px-font sheet-name">
                 {tool.name}
               </h2>
               <p className="body-m sheet-maker">by {tool.maker}</p>
             </div>
-            <div className="sheet-tags">
-              <span className="sheet-cluster">
-                <Icon name={cluster.icon} size={18} />
-                {cluster.label}
-              </span>
-              <Level level={tool.difficulty} />
-              <span className="label-m sheet-cost">{COST_LABEL[tool.cost]}</span>
-              <UscBadge usc={tool.usc} />
-            </div>
+            <dl className="sheet-stats">
+              <div>
+                <dt className="px-font">Class</dt>
+                <dd>
+                  <Icon name={cluster.icon} size={18} />
+                  <span>{cluster.label}</span>
+                </dd>
+              </div>
+              <div>
+                <dt className="px-font">Difficulty</dt>
+                <dd>
+                  <Level level={tool.difficulty} />
+                </dd>
+              </div>
+              <div>
+                <dt className="px-font">Cost</dt>
+                <dd>
+                  <Coins cost={tool.cost} />
+                  {COST_LABEL[tool.cost]}
+                </dd>
+              </div>
+              <div>
+                <dt className="px-font">Access</dt>
+                <dd>
+                  <UscPass usc={tool.usc} />
+                </dd>
+              </div>
+            </dl>
             <p className="body-l sheet-bestfor">{tool.bestFor}</p>
             {tool.uscNote && (
               <p className="body-s sheet-usc">
