@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { moduleById, paths } from "../../../data/learn";
-import { PATH_QUESTIONS, intentOf, nextModule, pickPath, planNavigation, toolQuestion } from "../guide";
+import { PATH_QUESTIONS, intentOf, nextModule, pickPath, planNavigation, routeMessage, toolQuestion } from "../guide";
 import { LIMITS, buildMessages, clip, stripThink, type ChatMessage } from "../prompt";
 import { XP_FIRST_TRY, XP_QUEST_BONUS, XP_RETRY, quests } from "../quests";
 import { DEFAULT_MODEL, MODELS, WASM_MODEL, modelById, onnxFile } from "../registry";
@@ -170,6 +170,21 @@ describe("navigation", () => {
       const p = planNavigation(q)!;
       if (p.go && p.hits[1]) expect(p.go.score).toBeGreaterThanOrEqual(2 * p.hits[1].score);
     }
+  });
+});
+
+describe("routing a message", () => {
+  it("sends each kind of message to the right place", () => {
+    expect(routeMessage("What should I learn next?")).toEqual({ type: "intent", intent: "next" });
+    expect(routeMessage("find me a tool for slides")).toMatchObject({ type: "tool" });
+    expect(routeMessage("take me to the courses")).toMatchObject({ type: "nav", plan: { go: { route: "/learn/courses" } } });
+    expect(routeMessage("What is a token?")).toEqual({ type: "chat" });
+  });
+
+  it("treats “show me how…” as a question, not a destination", () => {
+    expect(routeMessage("show me how attention works")).toEqual({ type: "chat" });
+    expect(routeMessage("can you show me an example of a good prompt")).toEqual({ type: "chat" });
+    expect(planNavigation("show me what tokens are")).toBeNull();
   });
 });
 

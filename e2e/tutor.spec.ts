@@ -150,7 +150,7 @@ test.describe("tutor without a model", () => {
     await expect(page).toHaveURL(/\/learn\/prompting$/);
   });
 
-  test("offers choices when a destination is ambiguous", async ({ page }) => {
+  test("says so when nothing on the site matches", async ({ page }) => {
     await setup(page);
     const sheet = await openTutor(page);
     await ask(page, "where is qwertyuiop");
@@ -293,24 +293,29 @@ test.describe("mobile", () => {
   });
 });
 
-test("@model the real engine answers on WASM", async ({ page }) => {
-  test.setTimeout(15 * 60_000);
-  await setup(page, { mock: false, storage: { "kh-tutor-device": "wasm" } });
-  page.on("console", (m) => m.type() === "error" && console.log("[browser]", m.text()));
-  const sheet = await openTutor(page, "/?tutor=real");
-  await sheet.getByRole("button", { name: "Choose a model" }).click();
-  await expect(sheet.getByRole("radio", { name: /SmolLM2 360M Instruct/ })).toBeChecked();
-  await sheet.getByLabel("I understand it will be slow on this device.").check();
-  await sheet.getByRole("button", { name: /^Download \d+ MB/ }).click();
-  await expect(sheet.getByRole("progressbar", { name: "Download progress" })).toBeVisible();
-  await expect(sheet.getByRole("heading", { name: "The tutor is ready" })).toBeVisible({ timeout: 10 * 60_000 });
+test.describe("real model", () => {
+  // One slow download per run: a retry would double the job time.
+  test.describe.configure({ retries: 0 });
 
-  await sheet.getByRole("button", { name: "Start learning" }).click();
-  await ask(page, "What is a token?");
-  const answer = sheet.locator(".t-msg.tutor .md").last();
-  await expect(answer).toHaveText(/\w+/, { timeout: 3 * 60_000 });
-  await expect(sheet.getByText(/Small on-device model/)).toBeVisible({ timeout: 5 * 60_000 });
-  const text = (await answer.innerText()).trim();
-  console.log(`[model answer] ${text}`);
-  expect(text.length).toBeGreaterThan(10);
+  test("@model the real engine answers on WASM", async ({ page }) => {
+    test.setTimeout(15 * 60_000);
+    await setup(page, { mock: false, storage: { "kh-tutor-device": "wasm" } });
+    page.on("console", (m) => m.type() === "error" && console.log("[browser]", m.text()));
+    const sheet = await openTutor(page, "/?tutor=real");
+    await sheet.getByRole("button", { name: "Choose a model" }).click();
+    await expect(sheet.getByRole("radio", { name: /SmolLM2 360M Instruct/ })).toBeChecked();
+    await sheet.getByLabel("I understand it will be slow on this device.").check();
+    await sheet.getByRole("button", { name: /^Download \d+ MB/ }).click();
+    await expect(sheet.getByRole("progressbar", { name: "Download progress" })).toBeVisible();
+    await expect(sheet.getByRole("heading", { name: "The tutor is ready" })).toBeVisible({ timeout: 10 * 60_000 });
+
+    await sheet.getByRole("button", { name: "Start learning" }).click();
+    await ask(page, "What is a token?");
+    const answer = sheet.locator(".t-msg.tutor .md").last();
+    await expect(answer).toHaveText(/\w+/, { timeout: 3 * 60_000 });
+    await expect(sheet.getByText(/Small on-device model/)).toBeVisible({ timeout: 5 * 60_000 });
+    const text = (await answer.innerText()).trim();
+    console.log(`[model answer] ${text}`);
+    expect(text.length).toBeGreaterThan(10);
+  });
 });

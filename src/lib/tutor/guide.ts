@@ -111,7 +111,8 @@ export interface NavPlan {
 /** "Take me to the courses" → a plan. Null when the text isn't a navigation request. */
 export function planNavigation(text: string): NavPlan | null {
   const dest = navigationRequest(text);
-  if (!dest) return null;
+  // "Show me how attention works" is a question, not a place.
+  if (!dest || /^(me\s+)?(how|why|what|when|who|whether|if|(an?\s+)?examples?)\b/.test(dest)) return null;
   // A page named exactly ("tools", "full courses", "video library") always wins.
   // searchSite treats "tools" as a stop word, so check page names first.
   const key = dest.toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
@@ -145,4 +146,25 @@ export function intentOf(text: string): Intent {
   if (PATH_INTENT.test(text)) return "path";
   if (NEXT_INTENT.test(text)) return "next";
   return null;
+}
+
+export type Route =
+  | { type: "intent"; intent: "next" | "path" }
+  | { type: "tool"; task: string }
+  | { type: "nav"; plan: NavPlan }
+  | { type: "chat" };
+
+/**
+ * Decides what a message is before any model sees it: a path question, a
+ * tool question ("find me a tool for slides"), a place on the site, or a
+ * question for the tutor. Most specific first.
+ */
+export function routeMessage(text: string): Route {
+  const intent = intentOf(text);
+  if (intent) return { type: "intent", intent };
+  const tq = toolQuestion(text);
+  if (tq) return { type: "tool", task: tq.task };
+  const plan = planNavigation(text);
+  if (plan) return { type: "nav", plan };
+  return { type: "chat" };
 }

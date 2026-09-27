@@ -4,7 +4,7 @@ import { moduleById, pathById } from "../../data/learn";
 import { TASK_LABEL, toolById } from "../../data/tools";
 import type { Task } from "../../data/types";
 import { searchSite, searchTools, type SiteHit } from "../../lib/siteSearch";
-import { intentOf, nextModule, planNavigation, toolQuestion } from "../../lib/tutor/guide";
+import { nextModule, routeMessage } from "../../lib/tutor/guide";
 import { buildMessages, type ChatMessage, type Mode } from "../../lib/tutor/prompt";
 import { ground, moduleNotes, toolNotesById, type Source } from "../../lib/tutor/retrieval";
 import { pathStore } from "../../lib/tutor/storage";
@@ -86,15 +86,23 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
     [navigate, setOpen],
   );
 
-  /** History for the model: finished answers and what the student typed. */
-  const history = (): ChatMessage[] =>
-    itemsRef.current.flatMap((x): ChatMessage[] =>
-      x.kind === "user" ? [{ role: "user", content: x.text }] : x.kind === "answer" && x.state === "done" && !x.label ? [{ role: "assistant", content: x.text }] : [],
-    );
+  /** History for the model: earlier free-chat questions paired with their finished answers. */
+  const history = (): ChatMessage[] => {
+    const out: ChatMessage[] = [];
+    let question: string | null = null;
+    for (const x of itemsRef.current) {
+      if (x.kind === "user") question = x.text;
+      else if (x.kind === "answer" && x.state === "done" && !x.label && question) {
+        out.push({ role: "user", content: question }, { role: "assistant", content: x.text });
+        question = null;
+      }
+    }
+    return out;
+  };
 
   const generate = useCallback(
     async (mode: Mode, notes: string, question: string, extra: { label?: string; related?: SiteHit[]; sources?: Source[]; withHistory?: boolean; maxNewTokens?: number }) => {
-      const msgs = buildMessages(mode, notes, question, extra.withHistory ? history().slice(0, -1) : []);
+      const msgs = buildMessages(mode, notes, question, extra.withHistory ? history() : []);
       const id = push({ kind: "answer", text: "", state: "thinking", label: extra.label, related: extra.related, sources: extra.sources });
       try {
         const r = await engine.generate(msgs, (t) => update(id, { text: t, state: "streaming" } as Partial<Item>), extra.maxNewTokens);
@@ -135,7 +143,7 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
           announce(hits.length ? `Tools for ${a.task}: ${hits.map((h) => h.tool.name).join(", ")}.` : `No tools matched ${a.task}.`);
           if (ready && hits.length) {
             const notes = hits.map((h) => `${h.tool.name}: ${h.tool.bestFor}`).join("\n");
-            void generate("frame", notes, `Which tool should I try first to ${a.task}?`, { maxNewTokens: 60 });
+            void generate("frame", notes, `Which tool should I try first to ${a.task}?`, { label: "Where to start", maxNewTokens: 60 });
           }
           break;
         }
@@ -188,9 +196,12 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
       if (!text) return;
       setView({ name: "chat" });
 
-      // 1. Navigation never uses the model.
-      const nav = planNavigation(text);
-      if (nav) {
+      // 1. The path guide, tool finder and navigation never use the model.
+      const route = routeMessage(text);
+      if (route.type === "intent") return act({ type: route.intent }, text);
+      if (route.type === "tool") return act({ type: "toolTask", task: route.task }, text);
+      if (route.type === "nav") {
+        const nav = route.plan;
         push({ kind: "user", text });
         push({ kind: "nav", dest: nav.dest, hits: nav.hits, opened: nav.go });
         if (nav.go) {
@@ -199,13 +210,8 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
         } else announce(nav.hits.length ? `Found ${nav.hits.length} places for ${nav.dest}.` : `Nothing on this site matched ${nav.dest}.`);
         return;
       }
-      // 2. Path guide and tool finder are deterministic too.
-      const intent = intentOf(text);
-      if (intent) return act({ type: intent }, text);
-      const tq = toolQuestion(text);
-      if (tq) return act({ type: "toolTask", task: tq.task }, text);
 
-      // 3. Free chat, grounded in our lessons and quest notes.
+      // 2. Free chat, grounded in our lessons and quest notes.
       push({ kind: "user", text });
       const g = ground(text);
       if (engine.ready) {

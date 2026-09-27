@@ -98,7 +98,8 @@ function Composer() {
   const ref = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    ref.current?.focus({ preventScroll: true });
+    // On touch screens, opening the keyboard uninvited hides half the sheet; the heading gets focus instead.
+    if (matchMedia("(pointer: fine)").matches) ref.current?.focus({ preventScroll: true });
   }, [view.name]);
 
   useEffect(() => {
@@ -161,6 +162,11 @@ export function TutorSheet({ page }: { page: PageContext }) {
     body.current?.scrollTo({ top: 0 });
   }, [view.name]);
 
+  // Move focus into the sheet when it opens (the composer takes it on devices with a mouse).
+  useEffect(() => {
+    if (!matchMedia("(pointer: fine)").matches) sheet.current?.querySelector<HTMLElement>("#tutor-title")?.focus();
+  }, []);
+
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "Escape" && !e.defaultPrevented) {
       e.preventDefault();
@@ -181,7 +187,7 @@ export function TutorSheet({ page }: { page: PageContext }) {
           <Orb size={40} thinking={engine.busy || loading} className="t-head-orb" />
         )}
         <div className="t-head-text">
-          <h2 id="tutor-title" className="title-l">
+          <h2 id="tutor-title" className="title-l" tabIndex={-1}>
             AI tutor
           </h2>
           <p className="body-s muted t-status">
