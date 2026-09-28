@@ -3,11 +3,23 @@ import { Link, useSearchParams } from "react-router";
 import { Icon } from "../components/Icon";
 import { Bars } from "../components/Level";
 import { Segmented } from "../components/Segmented";
+import { TALK_FILTER_LABEL, TALK_ICON, TalkCard } from "../components/TalkCard";
 import { ToolMark } from "../components/ToolMark";
 import { TREND_ICON, TREND_LABEL, TrendCard } from "../components/TrendCard";
 import { VideoCard } from "../components/VideoCard";
+import { TALK_KINDS, talks } from "../data/talks";
 import { toolById, tools } from "../data/tools";
-import { DIFFICULTIES, DIFFICULTY_BLURB, DIFFICULTY_LABEL, type Difficulty, type Trend, type TrendKind, type Video } from "../data/types";
+import {
+  DIFFICULTIES,
+  DIFFICULTY_BLURB,
+  DIFFICULTY_LABEL,
+  type Difficulty,
+  type TalkKind,
+  type Trend,
+  type TrendKind,
+  type Video,
+} from "../data/types";
+import { liveTalk, useCourseStatus } from "../lib/courses";
 import { useFeed } from "../lib/feed";
 import { longDate } from "../lib/format";
 
@@ -101,10 +113,65 @@ function Trends() {
   );
 }
 
+type Tab = "lessons" | "trends" | "talks";
+const TAB_TITLE: Record<Tab, string> = { lessons: "Watch and learn", trends: "What's new in AI", talks: "Talks and podcasts" };
+
+/** Hand-picked talks, debates, keynotes and podcasts: the long view, kept apart from lessons and trends. */
+function Talks() {
+  const status = useCourseStatus();
+  const [params, setParams] = useSearchParams();
+  const raw = params.get("kind") as TalkKind | null;
+  const kind = raw && TALK_KINDS.includes(raw) ? raw : null;
+  const set = (value: TalkKind | null) => {
+    const next = new URLSearchParams(params);
+    if (value) next.set("kind", value);
+    else next.delete("kind");
+    setParams(next, { replace: true, preventScrollReset: true });
+  };
+  const available = useMemo(() => talks.map((t) => liveTalk(t, status)).filter((t) => t.available), [status]);
+  const shown = available.filter((t) => !kind || t.kind === kind);
+  return (
+    <>
+      <div className="chip-row talk-filters" aria-label="Kind of talk">
+        <button type="button" className="chip state" aria-pressed={!kind} onClick={() => set(null)}>
+          {!kind && <Icon name="check" />}
+          All
+          <span className="chip-count">{available.length}</span>
+        </button>
+        {TALK_KINDS.map((k) => (
+          <button key={k} type="button" className="chip state" aria-pressed={kind === k} onClick={() => set(kind === k ? null : k)}>
+            <Icon name={kind === k ? "check" : TALK_ICON[k]} />
+            {TALK_FILTER_LABEL[k]}
+            <span className="chip-count">{available.filter((t) => t.kind === k).length}</span>
+          </button>
+        ))}
+      </div>
+      <p className="body-m muted measure trend-note">
+        Picked by editors for lasting value, not recency. Optimists, critics and practitioners, each on the original publisher's channel.
+      </p>
+      {!shown.length && (
+        <div className="empty">
+          <Icon name="podcasts" size={32} />
+          <p className="title-m">Nothing of this kind right now</p>
+          <button type="button" className="btn tonal sm state" onClick={() => set(null)}>
+            Show everything
+          </button>
+        </div>
+      )}
+      <div className="grid cols-videos">
+        {shown.map((t) => (
+          <TalkCard key={t.id} talk={t} />
+        ))}
+      </div>
+    </>
+  );
+}
+
 export function Watch() {
   const { feed, error } = useFeed();
   const [params, setParams] = useSearchParams();
-  const tab = params.get("tab") === "trends" ? "trends" : "lessons";
+  const tabParam = params.get("tab");
+  const tab: Tab = tabParam === "trends" || tabParam === "talks" ? tabParam : "lessons";
   const tool = params.get("tool") ?? "";
   const level = (params.get("level") as LevelFilter) || "all";
   const sort = (params.get("sort") as Sort) || "new";
@@ -145,15 +212,16 @@ export function Watch() {
   return (
     <>
       <header className="page-head">
-        <h1 className="display-s">{tab === "trends" ? "What's new in AI" : "Watch and learn"}</h1>
+        <h1 className="display-s">{TAB_TITLE[tab]}</h1>
         <div className="watch-tabs">
-          <Segmented<"lessons" | "trends">
+          <Segmented<Tab>
             label="Library"
             value={tab}
-            onChange={(v) => setParams(v === "trends" ? { tab: "trends" } : {}, { replace: true, preventScrollReset: true })}
+            onChange={(v) => setParams(v === "lessons" ? {} : { tab: v }, { replace: true, preventScrollReset: true })}
             options={[
               { value: "lessons", label: "Lessons" },
               { value: "trends", label: "AI trends" },
+              { value: "talks", label: "Talks and podcasts" },
             ]}
           />
         </div>
@@ -169,6 +237,8 @@ export function Watch() {
 
       {tab === "trends" ? (
         <Trends />
+      ) : tab === "talks" ? (
+        <Talks />
       ) : (
         <>
           <div className="filters" role="region" aria-label="Filters">

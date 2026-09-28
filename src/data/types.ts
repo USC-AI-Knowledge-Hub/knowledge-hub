@@ -118,6 +118,36 @@ export interface CourseStatus {
   courses: Record<string, CourseCheck>;
   /** Editors' picks in learn.ts, keyed by video ID. */
   curated: Record<string, CourseCheck>;
+  /** Talks and podcasts in talks.ts, keyed by talk ID. Absent in files written before talks existed. */
+  talks?: Record<string, CourseCheck>;
+}
+
+/** What kind of talk: a stage talk (TED and the like), a debate, a conference keynote or a podcast episode. */
+export type TalkKind = "talk" | "debate" | "keynote" | "podcast";
+
+/**
+ * A talk, debate, keynote or podcast episode worth watching whole. Hand-picked
+ * and evergreen, unlike the daily trends. Each is checked by `npm run courses`.
+ */
+export interface Talk {
+  id: string;
+  /** YouTube video ID. Set this or `playlist`. */
+  video?: string;
+  /** YouTube playlist ID, for a talk published in parts. */
+  playlist?: string;
+  title: string;
+  /** The YouTube channel exactly as YouTube shows it: the original publisher's. */
+  channel: string;
+  speakers: string[];
+  kind: TalkKind;
+  year: number;
+  /** Editor estimate; the check's live length wins when present. */
+  minutes: number;
+  /** One plain sentence on why it's worth the time. */
+  summary: string;
+  /** Learn modules it relates to. */
+  modules: string[];
+  tags: string[];
 }
 
 export interface Module {

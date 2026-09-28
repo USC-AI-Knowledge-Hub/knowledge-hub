@@ -1,6 +1,6 @@
 /**
- * Checks every course in src/data/courses.ts and every editors' pick in
- * src/data/learn.ts against YouTube.
+ * Checks every course in src/data/courses.ts, every editors' pick in
+ * src/data/learn.ts and every talk in src/data/talks.ts against YouTube.
  *
  *   npm run courses                   # check, then write public/data/courses.json
  *   npm run courses -- --check        # check only, write nothing
@@ -14,6 +14,7 @@
 import { appendFileSync, writeFileSync } from "node:fs";
 import { courses } from "../src/data/courses";
 import { modules } from "../src/data/learn";
+import { talks } from "../src/data/talks";
 import type { CourseCheck, CourseStatus } from "../src/data/types";
 import { parseIsoDuration } from "./pipeline/duration";
 
@@ -143,16 +144,21 @@ async function run() {
   );
   const curatedTargets = new Map<string, Target>();
   for (const m of modules) for (const v of m.curated) curatedTargets.set(v.id, { kind: "video", id: v.id, channel: v.channel });
+  const talkTargets = new Map<string, Target>(
+    talks.map((t) => [t.id, { kind: t.playlist ? "playlist" : "video", id: (t.playlist ?? t.video)!, channel: t.channel }]),
+  );
   // Cover images are checked too, so a thumbnail never 404s.
   const covers = courses.filter((c) => c.cover && c.cover !== c.video).map((c) => c.cover!);
 
-  const status: CourseStatus = { generatedAt: new Date().toISOString(), via: key ? "api" : "oembed", courses: {}, curated: {} };
+  const status: CourseStatus = { generatedAt: new Date().toISOString(), via: key ? "api" : "oembed", courses: {}, curated: {}, talks: {} };
+  const talkStatus = status.talks!;
   const coverProblems: string[] = [];
 
   if (key) {
     const singleIds = [
       ...[...courseTargets.values()].filter((t) => t.kind === "video").map((t) => t.id),
       ...curatedTargets.keys(),
+      ...[...talkTargets.values()].filter((t) => t.kind === "video").map((t) => t.id),
       ...covers,
     ];
     const videos = await videosById([...new Set(singleIds)]);
@@ -160,10 +166,14 @@ async function run() {
       status.courses[id] = t.kind === "playlist" ? await playlistViaApi(t) : videoCheck(t, videos.get(t.id));
     }
     for (const [id, t] of curatedTargets) status.curated[id] = videoCheck(t, videos.get(id));
+    for (const [id, t] of talkTargets) {
+      talkStatus[id] = t.kind === "playlist" ? await playlistViaApi(t) : videoCheck(t, videos.get(t.id));
+    }
     for (const id of covers) if (!videos.has(id)) coverProblems.push(id);
   } else {
     for (const [id, t] of courseTargets) status.courses[id] = await viaOembed(t);
     for (const [id, t] of curatedTargets) status.curated[id] = await viaOembed(t);
+    for (const [id, t] of talkTargets) talkStatus[id] = await viaOembed(t);
     for (const id of covers) {
       const res = await fetchRetry(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(`https://www.youtube.com/watch?v=${id}`)}`);
       if (!res.ok && res.status !== 401) coverProblems.push(id);
@@ -180,6 +190,7 @@ async function run() {
   };
   for (const c of courses) line(c.title, status.courses[c.id]);
   for (const m of modules) for (const v of m.curated) line(`${v.title} (pick in ${m.id})`, status.curated[v.id]);
+  for (const t of talks) line(`${t.title} (${t.kind})`, talkStatus[t.id]);
   for (const id of coverProblems) {
     rows.push(`| ❌ | cover ${id} | | | cover video not found |`);
     failures.push(`cover ${id}: not found`);
@@ -188,7 +199,7 @@ async function run() {
   const summary = [
     `### Course check (${status.via})`,
     "",
-    `${Object.keys(status.courses).length} courses and ${curatedTargets.size} editors' picks checked, ${failures.length} problem${failures.length === 1 ? "" : "s"}.`,
+    `${Object.keys(status.courses).length} courses, ${curatedTargets.size} editors' picks and ${talkTargets.size} talks checked, ${failures.length} problem${failures.length === 1 ? "" : "s"}.`,
     "",
     "| | Title | Channel | Size | Problem |",
     "|---|---|---|---|---|",
