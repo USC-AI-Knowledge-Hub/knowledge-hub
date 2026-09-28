@@ -10,6 +10,7 @@ const NAV = [
   { to: "/learn", label: "Learn", icon: "school" },
   { to: "/tools", label: "Tools", icon: "handyman" },
   { to: "/watch", label: "Watch", icon: "smart_display" },
+  { to: "/green", label: "Green AI", icon: "eco" },
 ];
 
 function Brand({ size = 40 }: { size?: number }) {

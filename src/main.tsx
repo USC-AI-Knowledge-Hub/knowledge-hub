@@ -5,6 +5,7 @@ import { Layout } from "./components/Layout";
 import { FeedProvider } from "./lib/feed";
 import { About } from "./pages/About";
 import { Courses } from "./pages/Courses";
+import { Green } from "./pages/Green";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
 import { LessonPlayer } from "./pages/LessonPlayer";
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
         { path: "tools", element: <Tools /> },
         { path: "tools/:id", element: <ToolPage /> },
         { path: "watch", element: <Watch /> },
+        { path: "green", element: <Green /> },
         { path: "search", element: <Search /> },
         { path: "about", element: <About /> },
         { path: "*", element: <NotFound /> },

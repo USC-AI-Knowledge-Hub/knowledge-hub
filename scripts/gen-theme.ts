@@ -29,6 +29,13 @@ const CUSTOM = {
   advanced: "#5B3FD1",
 };
 
+/**
+ * Green AI page accent: a fresh leaf green, harmonized to cardinal. Kept out of
+ * CUSTOM so it doesn't move the tool map's category hues, and tilted toward
+ * teal so it never reads as the beginner level.
+ */
+const GREEN = "#009688";
+
 const ROLES = [
   "primary", "onPrimary", "primaryContainer", "onPrimaryContainer",
   "secondary", "onSecondary", "secondaryContainer", "onSecondaryContainer",
@@ -71,6 +78,21 @@ function customVars(isDark: boolean): string[] {
     out.push(`--kh-on-${name}-container: ${hexFromArgb(palette.tone(tones.onContainer))};`);
   }
   return out;
+}
+
+function greenVars(isDark: boolean, contrast: number): string[] {
+  const hct = Hct.fromInt(Blend.harmonize(argbFromHex(GREEN), argbFromHex(CARDINAL)));
+  const palette = TonalPalette.fromHueAndChroma(hct.hue, Math.max(hct.chroma, 44));
+  const tones = isDark
+    ? { color: 80, on: 20, container: contrast > 0 ? 25 : 30, onContainer: contrast > 0 ? 98 : 90, soft: 20 }
+    : { color: contrast > 0 ? 30 : 40, on: 100, container: 90, onContainer: contrast > 0 ? 5 : 10, soft: 96 };
+  return [
+    `--kh-green: ${hexFromArgb(palette.tone(tones.color))};`,
+    `--kh-on-green: ${hexFromArgb(palette.tone(tones.on))};`,
+    `--kh-green-container: ${hexFromArgb(palette.tone(tones.container))};`,
+    `--kh-on-green-container: ${hexFromArgb(palette.tone(tones.onContainer))};`,
+    `--kh-green-soft: ${hexFromArgb(palette.tone(tones.soft))};`,
+  ];
 }
 
 /**
@@ -166,7 +188,7 @@ function block(isDark: boolean, contrast: number): string[] {
     neutralPalette: TonalPalette.fromHueAndChroma(source.hue, 3),
     neutralVariantPalette: TonalPalette.fromHueAndChroma(source.hue, 7),
   });
-  return [...schemeVars(scheme), ...customVars(isDark), ...clusterVars(isDark, contrast)];
+  return [...schemeVars(scheme), ...customVars(isDark), ...greenVars(isDark, contrast), ...clusterVars(isDark, contrast)];
 }
 
 const indent = (lines: string[], n = 2) => lines.map((l) => " ".repeat(n) + l).join("\n");
