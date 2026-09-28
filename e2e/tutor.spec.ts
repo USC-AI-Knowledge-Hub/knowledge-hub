@@ -364,7 +364,7 @@ test.describe("real model", () => {
   // the WebLLM path end to end on it, and skips (saying why) if no adapter is available.
   // Real students use a real GPU, which is much faster.
   test("@model WebLLM answers on WebGPU", async ({ playwright }) => {
-    test.setTimeout(40 * 60_000);
+    test.setTimeout(50 * 60_000);
     const context = await playwright.chromium.launchPersistentContext(mkdtempSync(join(tmpdir(), "kh-webllm-")), {
       baseURL: "http://localhost:4173",
       channel: process.env.PW_CHROMIUM_PATH ? undefined : "chromium",
@@ -402,11 +402,12 @@ test.describe("real model", () => {
     await expect(sheet.locator(".t-status")).toContainText(/WebGPU/);
 
     // A software GPU generates thousands of times slower than a real one, so this checks that
-    // the answer starts streaming and that Stop works, not that a full answer finishes.
+    // the answer starts streaming and that Stop works, not that a full answer finishes. Reading
+    // the prompt alone took 11-15 minutes on CI runners, so the first word gets 25.
     await sheet.getByRole("button", { name: "Start learning" }).click();
     await ask(page, "What is a token?");
     const answer = sheet.locator(".t-msg.tutor .md").last();
-    await expect(answer).toHaveText(/\w{2,}/, { timeout: 15 * 60_000 });
+    await expect(answer).toHaveText(/\w{2,}/, { timeout: 25 * 60_000 });
     console.log(`[webllm first words] ${(await answer.innerText()).trim()}`);
     await sheet.getByRole("button", { name: /^Stop/ }).click();
     await expect(sheet.getByText(/Stopped|stopped/).first()).toBeVisible({ timeout: 5 * 60_000 });
