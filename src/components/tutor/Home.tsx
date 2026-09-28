@@ -1,8 +1,21 @@
+import { useState } from "react";
 import { WavyProgress } from "../WavyProgress";
 import { Icon } from "../Icon";
-import { quests } from "../../lib/tutor/quests";
+import { UNLOCK_AFTER, XP_REVIEW, XP_REVIEW_BONUS, levels, quests, type Level } from "../../lib/tutor/quests";
 import { modelById, mbLabel } from "../../lib/tutor/registry";
-import { liveStreak, questProgress, useModelChoice, useQuestState } from "../../lib/tutor/storage";
+import { REVIEW_SIZE, reviewPool } from "../../lib/tutor/review";
+import {
+  levelDone,
+  levelNeeds,
+  levelUnlocked,
+  liveStreak,
+  questProgress,
+  questUnlocked,
+  today,
+  useModelChoice,
+  useQuestState,
+} from "../../lib/tutor/storage";
+import { ReviewView } from "./ReviewView";
 import { useTutor, type Action } from "./context";
 import { Badge, Ring } from "./Shapes";
 import type { PageContext } from "./TutorApp";
@@ -96,7 +109,7 @@ function Progress() {
           const earned = s.badges.includes(q.id);
           return (
             <li key={q.id} title={`${q.title}${earned ? "" : " (not earned yet)"}`}>
-              <Badge shape={q.shape} icon={q.icon} earned={earned} size={40} />
+              <Badge shape={q.shape} icon={q.icon} earned={earned} size={30} />
               <span className="visually-hidden">
                 {q.title}: {earned ? "earned" : "not earned yet"}
               </span>
@@ -108,25 +121,93 @@ function Progress() {
   );
 }
 
-function Quests() {
+function ReviewCard({ onStart }: { onStart(): void }) {
+  const s = useQuestState();
+  const ready = reviewPool(s).length > 0;
+  const xpToday = s.reviewDay !== today();
+  return (
+    <div className={`t-review-card ${ready ? "" : "empty"}`}>
+      <span className="t-review-icon" aria-hidden="true">
+        <Icon name="replay" />
+      </span>
+      <div className="grow">
+        <p className="title-s">Daily review</p>
+        <p className="body-s muted">
+          {ready
+            ? `${REVIEW_SIZE} mixed questions from quests you've finished, with more of the ones you missed. ${
+                xpToday ? `Up to ${REVIEW_SIZE * XP_REVIEW + XP_REVIEW_BONUS} XP today.` : "Today's review XP is earned; keep practising."
+              }`
+            : "Finish your first quest and its questions show up here for review."}
+        </p>
+      </div>
+      {ready && (
+        <button type="button" className="btn tonal sm state" onClick={onStart}>
+          Start review
+        </button>
+      )}
+    </div>
+  );
+}
+
+function LevelBlock({ level }: { level: Level }) {
   const s = useQuestState();
   const { setView } = useTutor();
+  const open = levelUnlocked(s, level.n);
+  const done = levelDone(s, level);
+  const needs = levelNeeds(s, level.n);
+  const complete = done === level.quests.length;
+  const id = `t-level-${level.n}`;
   return (
-    <ul className="t-quests">
-      {quests.map((q) => {
-        const { done, total } = questProgress(s, q.id);
-        const earned = s.badges.includes(q.id);
-        return (
-          <li key={q.id}>
-            <button type="button" className="t-quest state" onClick={() => setView({ name: "quest", quest: q.id })}>
-              <Ring value={done / total} shape={q.shape} icon={q.icon} earned={earned} />
-              <span className="title-s">{q.title}</span>
-              <span className="body-s muted">{earned ? "Badge earned" : done ? `${done} of ${total} steps` : `${total} steps`}</span>
-            </button>
-          </li>
-        );
-      })}
-    </ul>
+    <li className={`t-level ${open ? "open" : "locked"} ${complete ? "complete" : ""}`} aria-labelledby={id}>
+      <div className="t-level-head">
+        <span className="t-level-num" aria-hidden="true">
+          {complete ? <Icon name="check" size={20} /> : open ? level.n : <Icon name="lock" size={18} />}
+        </span>
+        <div className="grow">
+          <h4 id={id} className="title-m">
+            <span className="visually-hidden">Level {level.n}: </span>
+            {level.title}
+          </h4>
+          <p className="body-s muted">
+            {open
+              ? `Level ${level.n} · ${done} of ${level.quests.length} quests done`
+              : `Level ${level.n} · opens after ${UNLOCK_AFTER} quests in level ${level.n - 1} (${needs} to go). Tap a quest to peek.`}
+          </p>
+        </div>
+      </div>
+      <ul className="t-quests">
+        {level.quests.map((q) => {
+          const { done: stepsDone, total } = questProgress(s, q.id);
+          const earned = s.badges.includes(q.id);
+          const unlocked = questUnlocked(s, q.id);
+          return (
+            <li key={q.id}>
+              <button type="button" className={`t-quest state ${unlocked ? "" : "peek"}`} onClick={() => setView({ name: "quest", quest: q.id })}>
+                <Ring value={stepsDone / total} shape={q.shape} icon={q.icon} earned={earned} />
+                <span className="title-s">{q.title}</span>
+                <span className="body-s muted">
+                  {!unlocked ? `Peek · ${total} steps` : earned ? "Badge earned" : stepsDone ? `${stepsDone} of ${total} steps` : `${total} steps`}
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </li>
+  );
+}
+
+function Path({ onReview }: { onReview(): void }) {
+  return (
+    <>
+      <Progress />
+      <ReviewCard onStart={onReview} />
+      <ol className="t-path">
+        {levels.map((l) => (
+          <LevelBlock key={l.n} level={l} />
+        ))}
+      </ol>
+    </>
   );
 }
 
@@ -142,6 +223,8 @@ function Chip({ action, label, icon }: { action: Action; label: string; icon: st
 
 export function Home({ page }: { page: PageContext }) {
   const { send, items, setView } = useTutor();
+  const [reviewing, setReviewing] = useState(false);
+  if (reviewing) return <ReviewView onExit={() => setReviewing(false)} />;
   return (
     <div className="t-home">
       <section className="t-hello">
@@ -173,12 +256,13 @@ export function Home({ page }: { page: PageContext }) {
       <section className="t-section" aria-labelledby="t-quests">
         <div className="t-section-head">
           <h3 id="t-quests" className="title-s">
-            Quests
+            Training path
           </h3>
-          <span className="body-s muted">Short lessons with checks. Earn XP and badges.</span>
+          <span className="body-s muted">
+            Short quests with checks, in three levels. Finish {UNLOCK_AFTER} quests in a level to open the next. Earn XP and badges.
+          </span>
         </div>
-        <Progress />
-        <Quests />
+        <Path onReview={() => setReviewing(true)} />
       </section>
 
       <section className="t-section" aria-labelledby="t-find">
