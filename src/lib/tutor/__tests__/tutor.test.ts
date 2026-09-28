@@ -3,7 +3,7 @@ import { moduleById, paths } from "../../../data/learn";
 import { PATH_QUESTIONS, intentOf, nextModule, pickPath, planNavigation, routeMessage, toolQuestion } from "../guide";
 import { LIMITS, buildMessages, clip, stripThink, type ChatMessage } from "../prompt";
 import { XP_FIRST_TRY, XP_QUEST_BONUS, XP_RETRY, quests } from "../quests";
-import { DEFAULT_MODEL, MODELS, WASM_MODEL, modelById, onnxFile } from "../registry";
+import { ALL_MODELS, DEFAULT_MODEL, LINEUP, MODELS, WASM_MODEL, modelById, onnxFile } from "../registry";
 import { bestQuestStep, ground, lessonNotes } from "../retrieval";
 import { optionOrder, scoreCount, scorePrompt } from "../rubric";
 import { applyPass, liveStreak, type QuestState } from "../storage";
@@ -288,6 +288,26 @@ describe("model registry", () => {
     expect(d.variants.webgpu!.mb).toBeLessThan(500);
     expect(modelById.get(WASM_MODEL)!.variants.wasm).toBeDefined();
     for (const m of MODELS) expect(Object.keys(m.variants).length).toBeGreaterThan(0);
+  });
+
+  it("defines a complete WebLLM lineup, with Qwen3 recommended and a CPU fallback", () => {
+    const webllm = ALL_MODELS.filter((m) => m.variants.webgpu?.runtime === "webllm");
+    expect(webllm.length).toBeGreaterThanOrEqual(3);
+    for (const m of webllm) expect(m.variants.webgpu!.mlcId, m.id).toMatch(/-MLC$/);
+    // Graphics chips without 16-bit floats get WebLLM's 32-bit builds instead of the CPU.
+    for (const m of webllm) expect(m.variants["webgpu-f32"]?.mlcId, m.id).toMatch(/q4f32_1-MLC$/);
+    const rec = webllm.find((m) => m.recommended)!;
+    expect(rec.name).toMatch(/Qwen3/);
+    expect(rec.variants.webgpu!.mb).toBeLessThan(400);
+    expect(webllm.some((m) => m.variants.wasm?.runtime === "transformers")).toBe(true);
+    // Every WebLLM model is smaller than the Transformers.js build of the same family.
+    const onnxQwen3 = modelById.get("qwen3-0.6b")!.variants.webgpu!.mb;
+    expect(modelById.get("qwen3-0.6b-mlc")!.variants.webgpu!.mb).toBeLessThan(onnxQwen3);
+  });
+
+  it("uses the Transformers.js lineup unless the browser opted in", () => {
+    expect(LINEUP).toBe("transformers");
+    expect(MODELS.every((m) => Object.values(m.variants).every((v) => v?.runtime === "transformers"))).toBe(true);
   });
 
   it("maps dtypes to Transformers.js file names", () => {

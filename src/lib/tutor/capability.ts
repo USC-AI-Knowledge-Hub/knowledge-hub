@@ -3,7 +3,7 @@
  * at a usable speed; without it we offer the smallest model on WASM (CPU),
  * which works but is slow.
  */
-import type { Device } from "./registry";
+import { LINEUP, type Device } from "./registry";
 
 export interface Capability {
   device: Device;
@@ -40,6 +40,11 @@ export async function detectCapability(mock = false): Promise<Capability> {
     /* ignore */
   }
   if (forced === "wasm") return { ...base, device: "wasm", reason: "WebGPU is turned off for testing on this browser." };
+  // Tests on machines with only a software GPU use this to exercise the WebGPU path anyway.
+  if (forced === "webgpu") {
+    const adapter = await nav.gpu?.requestAdapter().catch(() => null);
+    return { ...base, device: adapter?.features.has("shader-f16") || LINEUP !== "webllm" ? "webgpu" : "webgpu-f32", reason: null };
+  }
   if (mock) return { ...base, device: "webgpu", reason: null };
 
   if (!nav.gpu) return { ...base, device: "wasm", reason: "This browser doesn't support WebGPU, which lets the model use your graphics chip." };
@@ -49,8 +54,11 @@ export async function detectCapability(mock = false): Promise<Capability> {
     // A software "fallback" adapter emulates a GPU on the CPU and is slower than WASM.
     if (adapter.isFallbackAdapter || adapter.info?.isFallbackAdapter)
       return { ...base, device: "wasm", reason: "WebGPU is only available in software on this device, which is slower than running on the CPU." };
-    if (!adapter.features.has("shader-f16"))
+    if (!adapter.features.has("shader-f16")) {
+      // WebLLM has 32-bit builds for these chips; Transformers.js models need 16-bit math.
+      if (LINEUP === "webllm") return { ...base, device: "webgpu-f32", reason: null };
       return { ...base, device: "wasm", reason: "Your graphics chip doesn't support the 16-bit math these models use in the browser." };
+    }
     return { ...base, device: "webgpu", reason: null };
   } catch {
     return { ...base, device: "wasm", reason: "WebGPU failed to start on this device." };

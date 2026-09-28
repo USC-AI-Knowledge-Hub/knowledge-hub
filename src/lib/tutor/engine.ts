@@ -6,7 +6,7 @@
  */
 import { GENERATION, stripThink, trimRepetition, type ChatMessage } from "./prompt";
 import type { FromWorker, ToWorker } from "./protocol";
-import { onnxFile, type Device, type TutorModel } from "./registry";
+import { ALL_MODELS, onnxFile, type Device, type TutorModel } from "./registry";
 
 export interface LoadProgress {
   loaded: number;
@@ -56,14 +56,17 @@ export const CACHE_NAME = "transformers-cache";
 
 export function fileUrl(model: TutorModel, device: Device): string | null {
   const v = model.variants[device];
-  return v ? `https://huggingface.co/${model.repo}/resolve/main/onnx/${onnxFile(v.dtype)}` : null;
+  return v?.runtime === "transformers" && v.dtype ? `https://huggingface.co/${v.repo}/resolve/main/onnx/${onnxFile(v.dtype)}` : null;
 }
 
 /** Whether the model's weights are already in this browser's cache (no network). */
 export async function isCached(model: TutorModel, device: Device): Promise<boolean> {
   try {
+    const v = model.variants[device];
+    if (!v || typeof caches === "undefined") return false;
+    if (v.runtime === "webllm") return await askWorker({ type: "has-cached", mlcId: v.mlcId! });
     const url = fileUrl(model, device);
-    if (!url || typeof caches === "undefined") return false;
+    if (!url) return false;
     const cache = await caches.open(CACHE_NAME);
     return !!(await cache.match(url));
   } catch {
@@ -71,11 +74,44 @@ export async function isCached(model: TutorModel, device: Device): Promise<boole
   }
 }
 
+/** Runs one cache request in a short-lived model worker and returns its answer. */
+function askWorker(msg: Extract<ToWorker, { type: "has-cached" | "remove-cached" }>): Promise<boolean> {
+  return new Promise((resolve) => {
+    const worker = new Worker(new URL("./worker.ts", import.meta.url), { type: "module", name: "tutor-cache" });
+    const done = (cached: boolean) => {
+      worker.terminate();
+      resolve(cached);
+    };
+    worker.onmessage = (e: MessageEvent<FromWorker>) => e.data.type === "cache-result" && done(e.data.cached);
+    worker.onerror = () => done(false);
+    worker.postMessage(msg);
+  });
+}
+
+/** WebLLM models this browser may have downloaded. */
+const webllmIds = () => ALL_MODELS.flatMap((m) => Object.values(m.variants)).flatMap((v) => (v?.runtime === "webllm" && v.mlcId ? [v.mlcId] : []));
+
+/** Deletes every downloaded model, from both runtimes. */
 export async function removeDownloadedModels(): Promise<boolean> {
   try {
-    return typeof caches !== "undefined" && (await caches.delete(CACHE_NAME));
+    if (typeof caches === "undefined") return false;
+    const removed = await caches.delete(CACHE_NAME);
+    if (await caches.has("webllm/model")) await askWorker({ type: "remove-cached", mlcIds: webllmIds() });
+    return removed;
   } catch {
     return false;
+  }
+}
+
+/**
+ * After a WebLLM model loads on WebGPU, the ONNX files an earlier Transformers.js model left
+ * behind (up to ~580 MB) are dead weight: the CPU fallback is only used without WebGPU.
+ */
+export async function removeUnusedOnnxFiles(): Promise<void> {
+  try {
+    if (typeof caches !== "undefined") await caches.delete(CACHE_NAME);
+  } catch {
+    /* nothing to clean */
   }
 }
 
@@ -159,7 +195,7 @@ class WorkerEngine implements Engine {
     };
     return new Promise((resolve, reject) => {
       this.pendingLoad = { resolve, reject, cb };
-      this.send({ type: "load", repo: model.repo, dtype: v.dtype, device, expectedBytes: v.mb * 1e6, thinking: !!model.thinking });
+      this.send({ type: "load", variant: v, device, thinking: !!model.thinking });
     });
   }
 
@@ -212,7 +248,8 @@ class MockEngine implements Engine {
   load(model: TutorModel, device: Device, cb: LoadCallbacks): Promise<void> {
     this.dispose();
     const total = (model.variants[device]?.mb ?? 300) * 1e6;
-    const files = ["config.json", "tokenizer.json", `onnx/${onnxFile(model.variants[device]?.dtype ?? "q4f16")}`];
+    const v = model.variants[device];
+    const files = v?.runtime === "webllm" ? ["mlc-chat-config.json", "tokenizer.json", "params_shard_0.bin"] : ["config.json", "tokenizer.json", `onnx/${onnxFile(v?.dtype ?? "q4f16")}`];
     const steps = 30;
     return new Promise((resolve, reject) => {
       let i = 0;

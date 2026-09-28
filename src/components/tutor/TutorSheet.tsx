@@ -19,7 +19,7 @@ export function statusText(phase: Phase, declined: boolean): string {
     case "compiling":
       return "Getting the model ready";
     case "ready":
-      return `${phase.model.name.replace(/ Instruct$/, "")} on ${phase.device === "webgpu" ? "WebGPU" : "your processor"}`;
+      return `${phase.model.name.replace(/ Instruct$/, "")} on ${phase.device !== "wasm" ? "WebGPU" : "your processor"}`;
     case "error":
       return "The model didn't load";
   }

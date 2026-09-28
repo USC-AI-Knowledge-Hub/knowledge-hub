@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MODELS, mbLabel, modelsFor, type Device } from "../../lib/tutor/registry";
+import { LINEUP, MODELS, mbLabel, modelsFor, type Device } from "../../lib/tutor/registry";
 import { useModelChoice } from "../../lib/tutor/storage";
 import { Icon } from "../Icon";
 import { WavyProgress } from "../WavyProgress";
@@ -45,7 +45,7 @@ export function Setup() {
           <WavyProgress value={pct} label="Download progress" />
           <p className="body-m t-bytes">
             {phase.name === "compiling" ? (
-              phase.device === "webgpu" ? (
+              phase.device !== "wasm" ? (
                 "Preparing it for your graphics chip. This takes a few seconds the first time."
               ) : (
                 "Preparing it for your processor."
@@ -84,7 +84,7 @@ export function Setup() {
         <div className="t-card">
           <p className="title-m">{phase.model.name}</p>
           <p className="body-m">
-            Running on {phase.device === "webgpu" ? "your graphics chip (WebGPU)" : "your processor (WASM)"}. Nothing you type leaves your browser.
+            Running on {phase.device !== "wasm" ? "your graphics chip (WebGPU)" : "your processor (WASM)"}. Nothing you type leaves your browser.
           </p>
           {!phase.saved && (
             <p className="body-s t-alert">
@@ -124,7 +124,7 @@ export function Setup() {
         </li>
         <li>
           <Icon name="battery_charging_full" />
-          <span>Uses your {device === "webgpu" ? "graphics chip" : "processor"} and battery while it answers. Small models can be wrong.</span>
+          <span>Uses your {device !== "wasm" ? "graphics chip" : "processor"} and battery while it answers. Small models can be wrong.</span>
         </li>
       </ul>
 
@@ -166,7 +166,7 @@ export function Setup() {
               <span className="grow">
                 <span className="t-model-name">
                   <span className="title-s">{m.name}</span>
-                  {m.recommended && device === "webgpu" && <span className="t-tag label-m">Recommended</span>}
+                  {m.recommended && device !== "wasm" && <span className="t-tag label-m">Recommended</span>}
                 </span>
                 <span className="body-s muted">{m.blurb}</span>
               </span>
@@ -174,6 +174,12 @@ export function Setup() {
             </label>
           );
         })}
+        {LINEUP === "webllm" && device !== "wasm" && (
+          <p className="body-s muted">
+            Preview: these run on WebLLM, which downloads the same models about a third smaller. To go back, add ?engine=default to the page
+            address.
+          </p>
+        )}
         {noGpu && MODELS.length > options.length && (
           <p className="body-s muted">The other models need WebGPU. Chrome and Edge on a recent laptop or desktop support it.</p>
         )}

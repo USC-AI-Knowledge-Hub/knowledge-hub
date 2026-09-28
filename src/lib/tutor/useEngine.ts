@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { detectCapability, type Capability } from "./capability";
-import { CancelledError, createEngine, isCached, isMockMode, removeDownloadedModels, type Engine, type GenerateResult } from "./engine";
+import { CancelledError, createEngine, isCached, isMockMode, removeDownloadedModels, removeUnusedOnnxFiles, type Engine, type GenerateResult } from "./engine";
 import type { ChatMessage } from "./prompt";
 import { DEFAULT_MODEL, WASM_MODEL, modelById, type Device, type TutorModel } from "./registry";
 import { modelStore, useModelChoice } from "./storage";
@@ -40,7 +40,7 @@ function explain(err: unknown, device: Device): string {
   if (/fetch|network|Failed to fetch|NetworkError|load failed/i.test(msg)) return "The download stopped. Check your connection and try again.";
   if (/quota|storage/i.test(msg)) return "Your browser ran out of storage space for the model. Free some space, or pick a smaller model.";
   if (/memory|allocation|OOM/i.test(msg)) return "Your device ran out of memory loading the model. Try the smaller model.";
-  if (device === "webgpu" && /webgpu|gpu|adapter|shader/i.test(msg)) return "The graphics chip couldn't run the model. Try the smaller model on your processor instead.";
+  if (device !== "wasm" && /webgpu|gpu|adapter|shader/i.test(msg)) return "The graphics chip couldn't run the model. Try the smaller model on your processor instead.";
   return `The model couldn't start: ${msg.slice(0, 160)}`;
 }
 
@@ -77,6 +77,7 @@ export function useTutorEngine(): TutorEngine {
       .then(() => (mock ? true : isCached(model, device)))
       .then((saved) => {
         if (saved) modelStore.set({ status: "downloaded", model: model.id, device });
+        if (saved && !mock && model.variants[device]?.runtime === "webllm") void removeUnusedOnnxFiles();
         setPhase({ name: "ready", model, device, saved });
       })
       .catch((err) => {

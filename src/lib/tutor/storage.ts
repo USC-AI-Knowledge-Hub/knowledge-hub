@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from "react";
 import { XP_FIRST_TRY, XP_QUEST_BONUS, XP_RETRY, questById } from "./quests";
+import type { Device } from "./registry";
 
 /**
  * Tutor state kept in this browser only: quest progress, XP, badges, streak,
@@ -19,7 +20,7 @@ export interface QuestState {
 export type ModelChoice =
   | { status: "unset" }
   | { status: "declined" }
-  | { status: "downloaded"; model: string; device: "webgpu" | "wasm" };
+  | { status: "downloaded"; model: string; device: Device };
 
 const QUEST_KEY = "kh-tutor-quests";
 const MODEL_KEY = "kh-tutor-model";

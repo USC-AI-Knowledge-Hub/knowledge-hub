@@ -337,7 +337,7 @@ test.describe("real model", () => {
     const failed = sheet.getByRole("alert");
     await expect(ready.or(failed)).toBeVisible({ timeout: 10 * 60_000 });
     clearInterval(heartbeat);
-    if (await failed.isVisible()) throw new Error(`The tutor showed an error: ${await failed.innerText()}`);
+    if (await failed.isVisible()) throw new Error(`The tutor showed an error: ${(await failed.allInnerTexts()).join(" / ")}`);
 
     await sheet.getByRole("button", { name: "Start learning" }).click();
     await ask(page, "What is a token?");
@@ -357,6 +357,57 @@ test.describe("real model", () => {
     await page.getByRole("button", { name: /Ask the tutor/ }).click();
     await expect(page.getByRole("dialog", { name: "AI tutor" }).locator(".t-status")).toContainText(/SmolLM2/, { timeout: 3 * 60_000 });
     expect(modelRequests).toBe(0);
+    await context.close();
+  });
+
+  // CI runners have no GPU, but Chromium can run WebGPU in software (SwiftShader). This runs
+  // the WebLLM path end to end on it, and skips (saying why) if no adapter is available.
+  // Real students use a real GPU, which is much faster.
+  test("@model WebLLM answers on WebGPU", async ({ playwright }) => {
+    test.setTimeout(30 * 60_000);
+    const context = await playwright.chromium.launchPersistentContext(mkdtempSync(join(tmpdir(), "kh-webllm-")), {
+      baseURL: "http://localhost:4173",
+      channel: process.env.PW_CHROMIUM_PATH ? undefined : "chromium",
+      args: ["--enable-unsafe-webgpu", "--enable-features=Vulkan", "--use-vulkan=swiftshader", "--use-webgpu-adapter=swiftshader", "--ignore-gpu-blocklist"],
+      ...(process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {}),
+    });
+    const page = context.pages()[0] ?? (await context.newPage());
+    await page.goto("/");
+    const gpu = await page.evaluate(async () => {
+      const nav = navigator as Navigator & { gpu?: { requestAdapter(): Promise<{ features: Set<string>; info?: { description?: string; vendor?: string } } | null> } };
+      const a = await nav.gpu?.requestAdapter().catch(() => null);
+      return { adapter: !!a, f16: !!a?.features.has("shader-f16"), info: a?.info ? `${a.info.vendor ?? ""} ${a.info.description ?? ""}`.trim() : "" };
+    });
+    console.log("[webgpu]", JSON.stringify(gpu));
+    if (!gpu.adapter) {
+      await context.close();
+      test.skip(true, "No WebGPU adapter on this runner.");
+      return;
+    }
+    // Without shader-f16 (true of the software GPU) the tutor picks WebLLM's q4f32 build.
+
+    await setup(page, { mock: false, storage: { "kh-tutor-device": "webgpu", "kh-tutor-debug": "1" } });
+    page.on("console", (m) => {
+      const t = m.text();
+      if (m.type() === "error" || m.type() === "warning" || (t.startsWith("[tutor]") && !/progress /.test(t))) console.log("[browser]", t);
+    });
+    const sheet = await openTutor(page, "/?engine=webllm&tutor=real");
+    await sheet.getByRole("button", { name: "Choose a model" }).click();
+    await sheet.getByRole("radio", { name: /SmolLM2 360M Instruct/ }).check();
+    await sheet.getByRole("button", { name: /^Download \d+ MB/ }).click();
+    const ready = sheet.getByRole("heading", { name: "The tutor is ready" });
+    const failed = sheet.getByRole("alert");
+    await expect(ready.or(failed)).toBeVisible({ timeout: 15 * 60_000 });
+    if (await failed.isVisible()) throw new Error(`The tutor showed an error: ${(await failed.allInnerTexts()).join(" / ")}`);
+    await expect(sheet.locator(".t-status")).toContainText(/WebGPU/);
+
+    await sheet.getByRole("button", { name: "Start learning" }).click();
+    await ask(page, "What is a token?");
+    const answer = sheet.locator(".t-msg.tutor .md").last();
+    await expect(sheet.getByText(/Small on-device model/)).toBeVisible({ timeout: 12 * 60_000 });
+    const text = (await answer.innerText()).trim();
+    console.log(`[webllm answer] ${text}`);
+    expect(text.length).toBeGreaterThan(10);
     await context.close();
   });
 });

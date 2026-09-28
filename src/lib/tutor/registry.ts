@@ -3,17 +3,31 @@
  * downloads anything: the worker fetches a model only after the student
  * chooses Download.
  *
- * Sizes are what the browser actually downloads for the dtype we use (the
- * ONNX weights plus config and tokenizer files), in megabytes (10^6 bytes).
+ * Two runtimes: Transformers.js (ONNX files, WebGPU or WASM) and WebLLM (MLC builds,
+ * WebGPU only). Sizes are what the browser actually downloads, in megabytes (10^6 bytes).
  * `npm run model-sizes` (scripts/model-sizes.ts) checks them against the
  * Hugging Face API and fails if one is off by more than 15%.
  */
 
-export type Device = "webgpu" | "wasm";
+/**
+ * Where the model runs. "webgpu-f32" is a graphics chip without 16-bit float support
+ * (shader-f16): WebLLM's q4f32 builds run there, the q4f16 ones can't.
+ */
+export type Device = "webgpu" | "webgpu-f32" | "wasm";
+/** Whether a device is a graphics chip (either kind). */
+export const onGpu = (d: Device) => d !== "wasm";
 export type Dtype = "q4f16" | "q4" | "q8";
+/** Transformers.js runs ONNX files on WebGPU or WASM; WebLLM runs MLC builds on WebGPU only. */
+export type Runtime = "transformers" | "webllm";
 
 export interface ModelVariant {
-  dtype: Dtype;
+  runtime: Runtime;
+  /** Hugging Face repo the weights come from (checked by `npm run model-sizes`). */
+  repo: string;
+  /** Transformers.js dtype. */
+  dtype?: Dtype;
+  /** WebLLM prebuilt model ID. */
+  mlcId?: string;
   /** Approximate download in MB. */
   mb: number;
 }
@@ -21,46 +35,102 @@ export interface ModelVariant {
 export interface TutorModel {
   id: string;
   name: string;
-  /** Hugging Face repo with an onnx/ folder. */
-  repo: string;
   blurb: string;
   /** Which variant to load on each device. A model without `wasm` isn't offered without WebGPU. */
   variants: Partial<Record<Device, ModelVariant>>;
-  /** Qwen3 thinks out loud unless the chat template is told not to. */
+  /** Qwen3 thinks out loud unless it's told not to. */
   thinking?: boolean;
   recommended?: boolean;
 }
 
-export const MODELS: TutorModel[] = [
+/** The CPU fallback, shared by both lineups: WASM is slow, so it gets the smallest model. */
+const SMOLLM_WASM: ModelVariant = { runtime: "transformers", repo: "HuggingFaceTB/SmolLM2-360M-Instruct", dtype: "q8", mb: 370 };
+
+/** Transformers.js on WebGPU. Its ONNX exports keep the vocabulary table at 16-bit, so they're larger. */
+const TRANSFORMERS_MODELS: TutorModel[] = [
   {
     id: "qwen2.5-0.5b",
     name: "Qwen2.5 0.5B Instruct",
-    repo: "onnx-community/Qwen2.5-0.5B-Instruct",
     blurb: "Good balance of speed and quality for short explanations.",
-    variants: { webgpu: { dtype: "q4f16", mb: 490 } },
+    variants: { webgpu: { runtime: "transformers", repo: "onnx-community/Qwen2.5-0.5B-Instruct", dtype: "q4f16", mb: 490 } },
     recommended: true,
   },
   {
     id: "smollm2-360m",
     name: "SmolLM2 360M Instruct",
-    repo: "HuggingFaceTB/SmolLM2-360M-Instruct",
     blurb: "Smaller and faster. Answers are simpler and slip up more often.",
-    variants: { webgpu: { dtype: "q4f16", mb: 275 }, wasm: { dtype: "q8", mb: 370 } },
+    variants: { webgpu: { runtime: "transformers", repo: "HuggingFaceTB/SmolLM2-360M-Instruct", dtype: "q4f16", mb: 275 }, wasm: SMOLLM_WASM },
   },
   {
     id: "qwen3-0.6b",
     name: "Qwen3 0.6B",
-    repo: "onnx-community/Qwen3-0.6B-ONNX",
     blurb: "Sharper answers. A bit larger and slower to load.",
-    variants: { webgpu: { dtype: "q4f16", mb: 570 } },
+    variants: { webgpu: { runtime: "transformers", repo: "onnx-community/Qwen3-0.6B-ONNX", dtype: "q4f16", mb: 570 } },
     thinking: true,
   },
 ];
 
-export const modelById = new Map(MODELS.map((m) => [m.id, m]));
+/**
+ * WebLLM on WebGPU. MLC builds quantize the vocabulary table too, so the same models download
+ * 35–40% smaller. Sizes include WebLLM's few-MB model library, fetched from GitHub.
+ */
+const WEBLLM_MODELS: TutorModel[] = [
+  {
+    id: "qwen3-0.6b-mlc",
+    name: "Qwen3 0.6B",
+    blurb: "The best explainer here, for its size.",
+    variants: {
+      webgpu: { runtime: "webllm", repo: "mlc-ai/Qwen3-0.6B-q4f16_1-MLC", mlcId: "Qwen3-0.6B-q4f16_1-MLC", mb: 355 },
+      "webgpu-f32": { runtime: "webllm", repo: "mlc-ai/Qwen3-0.6B-q4f32_1-MLC", mlcId: "Qwen3-0.6B-q4f32_1-MLC", mb: 390 },
+    },
+    thinking: true,
+    recommended: true,
+  },
+  {
+    id: "qwen2.5-0.5b-mlc",
+    name: "Qwen2.5 0.5B Instruct",
+    blurb: "Smaller download, slightly simpler answers.",
+    variants: {
+      webgpu: { runtime: "webllm", repo: "mlc-ai/Qwen2.5-0.5B-Instruct-q4f16_1-MLC", mlcId: "Qwen2.5-0.5B-Instruct-q4f16_1-MLC", mb: 295 },
+      "webgpu-f32": { runtime: "webllm", repo: "mlc-ai/Qwen2.5-0.5B-Instruct-q4f32_1-MLC", mlcId: "Qwen2.5-0.5B-Instruct-q4f32_1-MLC", mb: 320 },
+    },
+  },
+  {
+    id: "smollm2-360m-mlc",
+    name: "SmolLM2 360M Instruct",
+    blurb: "Smallest and fastest. Answers are simpler and slip up more often.",
+    variants: {
+      webgpu: { runtime: "webllm", repo: "mlc-ai/SmolLM2-360M-Instruct-q4f16_1-MLC", mlcId: "SmolLM2-360M-Instruct-q4f16_1-MLC", mb: 210 },
+      "webgpu-f32": { runtime: "webllm", repo: "mlc-ai/SmolLM2-360M-Instruct-q4f32_1-MLC", mlcId: "SmolLM2-360M-Instruct-q4f32_1-MLC", mb: 230 },
+      wasm: SMOLLM_WASM,
+    },
+  },
+];
+
+/**
+ * Which lineup this browser uses. WebLLM is opt-in while it's being tried on real hardware:
+ * visiting any page with ?engine=webllm turns it on for this browser, ?engine=default turns it off.
+ */
+function pickLineup(): "webllm" | "transformers" {
+  try {
+    const param = new URLSearchParams(location.search).get("engine");
+    if (param === "webllm" || param === "default") localStorage.setItem("kh-tutor-engine", param);
+    return localStorage.getItem("kh-tutor-engine") === "webllm" ? "webllm" : "transformers";
+  } catch {
+    return "transformers";
+  }
+}
+
+export const LINEUP = pickLineup();
+/** Every model in both lineups, for the size check and for recognizing a saved choice. */
+export const ALL_MODELS = [...TRANSFORMERS_MODELS, ...WEBLLM_MODELS];
+/** The models this browser offers. */
+export const MODELS = LINEUP === "webllm" ? WEBLLM_MODELS : TRANSFORMERS_MODELS;
+
+export const modelById = new Map(ALL_MODELS.map((m) => [m.id, m]));
 export const DEFAULT_MODEL = MODELS.find((m) => m.recommended)!.id;
-/** The only model offered without WebGPU: WASM on the CPU is slow, so it gets the smallest. */
-export const WASM_MODEL = "smollm2-360m";
+/** The model offered without WebGPU. */
+export const WASM_MODEL = MODELS.find((m) => m.variants.wasm)!.id;
 
 export function modelsFor(device: Device): TutorModel[] {
   return MODELS.filter((m) => m.variants[device]);
