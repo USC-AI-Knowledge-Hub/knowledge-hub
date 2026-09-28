@@ -1,0 +1,205 @@
+import type { GuidedLesson } from "../types";
+
+export const aiForTeaching: GuidedLesson = {
+  module: "ai-for-teaching",
+  objectives: [
+    "Decide which teaching tasks to hand to AI and which need you, using the four Ds of AI fluency.",
+    "Draft practice questions, examples and study aids with AI, and review every item before students see it.",
+    "Explain to students how you use AI in your course, and keep their data out of tools that aren't approved for it.",
+  ],
+  sections: [
+    {
+      heading: "Where AI helps in teaching",
+      body: "AI is most useful for the parts of teaching prep that need volume and variety:\n\n- **Worked examples** at several levels of difficulty, or set in different contexts.\n- **Practice questions** and alternate versions of problems.\n- **Study aids** from your own materials: glossaries, summaries and review guides. A grounded tool like NotebookLM answers from the slides and readings you upload, with links back to the passage.\n- **Analogies and case scenarios** to test in class.\n- **First drafts** of rubrics, announcements and activity instructions.\n- **Transcripts and captions** of recorded lectures, which help students who need them, and everyone reviewing later.\n\nWhat stays with you: judging whether content is correct, knowing your students, deciding grades, and the conversations where learning actually happens. Used deliberately, AI takes over some drafting so you have more time for those.",
+      ask: "Which parts of teaching prep are a good fit for AI, and which aren't?",
+    },
+    {
+      heading: "Delegation and description",
+      body: "The AI Fluency Framework by Rick Dakan and Joseph Feller describes four competencies, the four Ds: **Delegation**, **Description**, **Discernment** and **Diligence**. They map neatly onto teaching.\n\n**Delegation** is deciding whether and how to involve AI, based on your goal, the task and what the tool can do well. Drafting ten practice questions on a topic you know deeply is a good fit: you can spot every error. Writing an explanation of a topic at the edge of your expertise is riskier, because you're less able to catch mistakes.\n\n**Description** is communicating clearly what you want. For practice questions, that means the learning objective, the level, the misconceptions you want to target, the format, and what the answer key should include. “Ten questions on photosynthesis” gets generic recall items. A description of what students must be able to do gets questions that test it.",
+      ask: "Why is it safer to delegate content in an area I know well?",
+    },
+    {
+      heading: "Discernment: review everything",
+      body: "**Discernment**, the third D, is evaluating what the AI produced. With teaching materials, review every item, because students will trust what you give them.\n\nCommon problems in AI-drafted questions:\n\n- **Wrong answer keys,** especially in math, chemistry and anything with calculation steps.\n- **More than one defensible answer,** or a correct option that's worded more carefully than the rest.\n- **Weak distractors** that no student would choose.\n- **The wrong skill:** recall questions when you wanted application.\n- **Content you didn't teach,** or terms defined differently from your course.\n- **Narrow examples:** names, contexts and assumptions that don't reflect your students.\n\nSolve each question yourself. Grounded tools reduce invented content but don't remove errors, so follow the citations. A second reviewer, like a TA, catches what you miss. Expect to edit a meaningful share of what's generated; the time saved is in drafting, not in skipping review.",
+      ask: "What kinds of mistakes should I look for in AI-generated practice questions?",
+    },
+    {
+      heading: "Diligence: transparency and privacy",
+      body: "**Diligence**, the fourth D, is taking responsibility for how AI is used and what it produces.\n\n**Tell students how you use it.** A line such as “Practice questions were drafted with AI and reviewed by me and the TA” models the disclosure you'll probably ask of them, and invites them to flag errors.\n\n**Protect student data.** Student work and grades are education records, which FERPA protects in the US. Don't paste identifiable student work, grades or messages into a personal AI account. USC provides ChatGPT Edu, which keeps chats in a university workspace, but even there, check your school's guidance on which kinds of data it's approved for.\n\n**Feedback and grading.** If you use AI to help draft feedback, check your school's guidance first, tell students, and review every comment. Grades remain your decision.\n\n**Recording.** Tell students before you record or transcribe a class.\n\nFor current guidance, start with USC's Center for Excellence in Teaching and your school's own policies.",
+      ask: "Why should I tell students how I'm using AI in my course?",
+    },
+  ],
+  example: {
+    title: "A practice set from one lecture",
+    body: "An instructor uploads one week's lecture slides to NotebookLM.\n\n**Description:** “Using only these slides, write ten multiple-choice questions for second-year students. Each should test applying a concept to a new situation, not recalling a definition. Four options each, one correct, with distractors based on common misconceptions. Give the answer, a one-sentence explanation and the slide it relies on.”\n\n**Discernment:** the instructor solves every question. Of the ten:\n\n- Two have answer keys that don't match the slides.\n- One has two defensible answers.\n- Three are recall questions despite the instruction, so they're rewritten as short scenarios.\n- Several distractors are too obviously wrong and get replaced with real misconceptions from past exams.\n\n**Second review:** the TA takes the quiz cold and flags one question as ambiguous. It's reworded.\n\n**Diligence:** the set goes out with a note: “Drafted with AI from our slides, then checked and edited by the teaching team. Spot an error? Tell us.”\n\nThe draft took minutes. The review took most of an hour, and the result is a set the instructor stands behind.",
+  },
+  deliverable: "Ten practice questions built from one lecture's material, edited by you and reviewed by a TA or colleague, with a short note on what you changed and a one-line disclosure for students.",
+  questions: [
+    {
+      id: "delegate-expertise",
+      prompt: "Which task is the safest to delegate to AI for a first draft?",
+      options: [
+        "Explaining a topic you've never studied to your class",
+        "Final grades for a set of essays",
+        "Practice questions on a topic you know deeply and can check line by line",
+        "A statement of your course's academic integrity policy, published without review",
+      ],
+      answer: 2,
+      explain: "Delegation works best where you can judge the output. Deep expertise lets you catch the errors AI will make.",
+    },
+    {
+      id: "four-ds",
+      prompt: "In the AI Fluency Framework, what does Discernment refer to?",
+      options: [
+        "Evaluating the quality and accuracy of what AI produces",
+        "Deciding whether to use AI at all",
+        "Describing clearly what you want",
+        "Keeping student data private",
+      ],
+      answer: 0,
+      explain: "The four Ds are Delegation (deciding), Description (communicating), Discernment (evaluating) and Diligence (taking responsibility).",
+    },
+    {
+      id: "description",
+      prompt: "You ask for “ten questions on supply and demand” and get simple definition questions. What's the most useful fix?",
+      options: [
+        "Ask for twenty and pick the best ten",
+        "Switch to a different tool",
+        "Accept them; definitions are fine",
+        "Describe the learning objective and level, and ask for questions that apply concepts to new situations",
+      ],
+      answer: 3,
+      explain: "Description shapes the output. Saying what students must be able to do gets questions that test it.",
+    },
+    {
+      id: "answer-key",
+      prompt: "An AI-generated chemistry quiz looks polished. What's the most important review step?",
+      options: [
+        "Check the formatting is consistent",
+        "Solve each question yourself and confirm the answer key",
+        "Make sure each question has four options",
+        "Ask the AI whether its answers are correct",
+      ],
+      answer: 1,
+      explain: "Wrong answer keys are a common problem, especially with calculations. Solving the questions yourself is the reliable check.",
+    },
+    {
+      id: "grounded",
+      prompt: "You generate a study guide with NotebookLM from your own slides. What's true about its accuracy?",
+      options: [
+        "Grounding reduces invented content, but you still need to check the output and its citations",
+        "Grounding in your slides makes errors impossible",
+        "It's less accurate than a general chatbot",
+        "Accuracy doesn't matter for study guides",
+      ],
+      answer: 0,
+      explain: "Grounded tools answer from your sources and cite them, which helps. They can still misread or oversimplify, so review.",
+    },
+    {
+      id: "student-work-privacy",
+      prompt: "A TA wants to paste thirty students' essays, with names, into a personal ChatGPT account to draft feedback. What's the main problem?",
+      options: [
+        "The feedback might be too long",
+        "ChatGPT can't read essays",
+        "Student work is part of their education records, and a personal account isn't an approved place for it",
+        "There's no problem if the feedback is good",
+      ],
+      answer: 2,
+      explain: "Student records are protected under FERPA in the US. Keep identifiable student work out of personal accounts and check your school's guidance.",
+    },
+    {
+      id: "chatgpt-edu",
+      prompt: "USC provides ChatGPT Edu. What should an instructor still do before using it with student data?",
+      options: [
+        "Nothing; a university tool is approved for every kind of data",
+        "Check their school's guidance on which kinds of data it's approved for",
+        "Switch to a personal account for more privacy",
+        "Ask the chatbot whether it's FERPA compliant",
+      ],
+      answer: 1,
+      explain: "A university workspace is a better starting point than a personal account, but approval for specific data types depends on institutional guidance.",
+    },
+    {
+      id: "disclose-to-students",
+      prompt: "Why tell students that your practice questions were drafted with AI and reviewed by you?",
+      options: [
+        "It's a legal requirement in every course",
+        "It lowers their expectations",
+        "It means you don't need to review the questions",
+        "It models the transparency you'll likely ask of them, and invites them to report errors",
+      ],
+      answer: 3,
+      explain: "Being open about your own use builds trust and makes your expectations for their disclosure consistent.",
+    },
+    {
+      id: "grading",
+      prompt: "An instructor uses AI to help draft comments on student essays. Which practice is most responsible?",
+      options: [
+        "Let the AI assign grades too, to save time",
+        "Use it without telling students, since the comments are yours",
+        "Check school guidance, tell students, review every comment, and keep grading decisions yourself",
+        "Only use it for students you haven't met",
+      ],
+      answer: 2,
+      explain: "Feedback affects students directly. Review, transparency and keeping grading decisions with the instructor are part of Diligence.",
+    },
+    {
+      id: "bias-examples",
+      prompt: "Your AI-generated case studies all feature people with similar names and backgrounds. What should you do?",
+      options: [
+        "Revise them so the examples reflect the range of your students and contexts",
+        "Nothing; names don't matter",
+        "Remove all names from every example you ever use",
+        "Ask students to ignore the names",
+      ],
+      answer: 0,
+      explain: "Models can default to narrow examples. Reviewing for who is represented is part of checking teaching materials.",
+    },
+    {
+      id: "accessibility",
+      prompt: "Which is a genuine accessibility benefit of AI in teaching?",
+      options: [
+        "Replacing office hours with a chatbot",
+        "Transcripts and captions of recorded lectures for students who need them",
+        "Removing the need for alt text",
+        "Grading students with disabilities automatically",
+      ],
+      answer: 1,
+      explain: "Transcription and captions help students who are deaf or hard of hearing, and anyone reviewing. Check them for accuracy, especially technical terms.",
+    },
+    {
+      id: "time-saved",
+      prompt: "Where does AI usually save time in making a practice set?",
+      options: [
+        "In the review, because AI output doesn't need checking",
+        "Nowhere; it always takes longer",
+        "In grading the practice set",
+        "In the drafting; the review still takes real time",
+      ],
+      answer: 3,
+      explain: "Drafting is fast. Reviewing and editing is where your expertise goes, and it can't be skipped.",
+    },
+    {
+      id: "recording",
+      prompt: "You want to transcribe your lectures with Otter to create study notes. What should you do first?",
+      options: [
+        "Tell students before you record or transcribe the class",
+        "Record quietly so students aren't distracted",
+        "Only record the students' questions",
+        "Share the transcripts publicly online",
+      ],
+      answer: 0,
+      explain: "Students should know when class is recorded. Also turn off automatic sharing so notes don't go out without your review.",
+    },
+  ],
+  reflect: "Pick one teaching task you do every term. Using the four Ds, what would you delegate to AI, how would you describe it, how would you check it, and what would you tell your students?",
+  sources: [
+    {
+      title: "AI Fluency Framework, by Rick Dakan and Joseph Feller",
+      url: "https://aifluencyframework.org/",
+      license: "CC BY-NC-SA 4.0",
+      note: "Adapted the four competencies (Delegation, Description, Discernment, Diligence) and applied them to teaching preparation.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/ai-for-teaching", license: "Original" },
+  ],
+};

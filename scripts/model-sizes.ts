@@ -1,14 +1,14 @@
 /**
  * Checks the tutor's model registry against the Hugging Face API: for every
  * model and device variant, adds up the files the browser downloads (the
- * ONNX weights for that dtype, any external data files, and the config and
- * tokenizer files) and compares the total with the registry's size.
+ * ONNX weights for that dtype plus config and tokenizer files, or a whole WebLLM MLC
+ * build) and compares the total with the registry's size.
  *
  *   npm run model-sizes          print the table, fail if any size is off by > 15%
  *
  * Needs network access to huggingface.co (CI has it).
  */
-import { MODELS, SIDE_FILES, onnxFile, type Device } from "../src/lib/tutor/registry";
+import { ALL_MODELS, SIDE_FILES, onnxFile, type Device, type ModelVariant } from "../src/lib/tutor/registry";
 
 const TOLERANCE = 0.15;
 const API = "https://huggingface.co/api/models";
@@ -37,29 +37,42 @@ const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 let failed = false;
 const rows: string[] = [];
 
-for (const model of MODELS) {
-  const [root, onnx] = await Promise.all([tree(model.repo), tree(model.repo, "onnx")]);
-  const side = SIDE_FILES.map((f) => root.find((e) => e.path === f)).filter((e): e is TreeEntry => !!e);
-  for (const [device, variant] of Object.entries(model.variants) as [Device, NonNullable<(typeof model.variants)[Device]>][]) {
-    const name = onnxFile(variant.dtype);
-    // The .onnx file plus external data (model_q4f16.onnx_data, model_q4f16.onnx_data_1, ...).
-    const pattern = new RegExp(`^onnx/${escape(name)}(_data(_\\d+)?)?$`);
-    const weights = onnx.filter((e) => e.type === "file" && pattern.test(e.path));
-    if (!weights.some((e) => e.path === `onnx/${name}`)) {
-      console.error(`✗ ${model.repo}: onnx/${name} not found. Available: ${onnx.map((e) => e.path.replace("onnx/", "")).join(", ")}`);
-      failed = true;
-      continue;
+for (const model of ALL_MODELS) {
+  for (const [device, variant] of Object.entries(model.variants) as [Device, ModelVariant][]) {
+    if (!variant) continue;
+    let files: TreeEntry[];
+    if (variant.runtime === "webllm") {
+      // An MLC build is downloaded whole: weight shards, config and tokenizer (docs aside).
+      files = (await tree(variant.repo)).filter((e) => e.type === "file" && !/\.(md|gitattributes)$|^\./.test(e.path));
+      if (!files.some((e) => /params_shard_\d+\.bin$/.test(e.path))) {
+        console.error(`✗ ${variant.repo}: no params_shard files found.`);
+        failed = true;
+        continue;
+      }
+    } else {
+      const [root, onnx] = await Promise.all([tree(variant.repo), tree(variant.repo, "onnx")]);
+      const side = SIDE_FILES.map((f) => root.find((e) => e.path === f)).filter((e): e is TreeEntry => !!e);
+      const name = onnxFile(variant.dtype!);
+      // The .onnx file plus external data (model_q4f16.onnx_data, model_q4f16.onnx_data_1, ...).
+      const pattern = new RegExp(`^onnx/${escape(name)}(_data(_\\d+)?)?$`);
+      const weights = onnx.filter((e) => e.type === "file" && pattern.test(e.path));
+      if (!weights.some((e) => e.path === `onnx/${name}`)) {
+        console.error(`✗ ${variant.repo}: onnx/${name} not found. Available: ${onnx.map((e) => e.path.replace("onnx/", "")).join(", ")}`);
+        failed = true;
+        continue;
+      }
+      files = [...weights, ...side];
     }
-    const files = [...weights, ...side];
     const actual = files.reduce((n, e) => n + sizeOf(e), 0);
     const expected = variant.mb * 1e6;
     const off = (expected - actual) / actual;
     const ok = Math.abs(off) <= TOLERANCE;
     if (!ok) failed = true;
+    const kind = variant.runtime === "webllm" ? "webllm" : variant.dtype!;
     rows.push(
-      `${ok ? "✓" : "✗"} ${model.name.padEnd(24)} ${device.padEnd(7)} ${variant.dtype.padEnd(6)} actual ${mb(actual)} MB  registry ${mb(expected)} MB  ${(off * 100).toFixed(1).padStart(6)}%`,
+      `${ok ? "✓" : "✗"} ${`${model.name} (${model.id})`.padEnd(36)} ${device.padEnd(7)} ${kind.padEnd(6)} actual ${mb(actual)} MB  registry ${mb(expected)} MB  ${(off * 100).toFixed(1).padStart(6)}%`,
     );
-    for (const f of files) rows.push(`    ${f.path.padEnd(36)} ${mb(sizeOf(f))} MB`);
+    if (variant.runtime !== "webllm") for (const f of files) rows.push(`    ${f.path.padEnd(36)} ${mb(sizeOf(f))} MB`);
   }
 }
 

@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { matchPath, useLocation, useNavigate } from "react-router";
+import { lessonByModule } from "../../data/guided";
 import { moduleById, pathById } from "../../data/learn";
 import { TASK_LABEL, toolById } from "../../data/tools";
 import type { Task } from "../../data/types";
 import { searchSite, searchTools, type SiteHit } from "../../lib/siteSearch";
 import { nextModule, routeMessage } from "../../lib/tutor/guide";
 import { buildMessages, type ChatMessage, type Mode } from "../../lib/tutor/prompt";
-import { ground, moduleNotes, toolNotesById, type Source } from "../../lib/tutor/retrieval";
+import { onAsk, takeAsks } from "../../lib/tutor/bridge";
+import { ground, lessonGround, moduleNotes, toolNotesById, type Source } from "../../lib/tutor/retrieval";
 import { pathStore } from "../../lib/tutor/storage";
 import { useTutorEngine } from "../../lib/tutor/useEngine";
 import { useProgress } from "../../lib/progress";
@@ -22,6 +24,12 @@ export type PageContext =
   | null;
 
 export function pageContext(pathname: string): PageContext {
+  // A guided lesson, inside a course or on its own.
+  const g = matchPath("/learn/path/:path/:id", pathname) ?? matchPath("/learn/lesson/:id", pathname);
+  if (g) {
+    const m = moduleById.get(g.params.id ?? "");
+    return m ? { kind: "lesson", id: m.id, title: m.title } : null;
+  }
   const p = matchPath("/learn/path/:id", pathname);
   if (p) {
     const path = pathById.get(p.params.id ?? "");
@@ -211,10 +219,21 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
         return;
       }
 
-      // 2. Free chat, grounded in our lessons and quest notes.
+      // 2. Free chat, grounded in our lessons and quest notes. On a guided lesson, the
+      //    lesson's own sections come first, so the tutor explains what's being read.
       push({ kind: "user", text });
       const g = ground(text);
-      if (engine.ready) {
+      const ctx = pageRef.current;
+      const lessonCtx = ctx?.kind === "lesson" ? ctx : null;
+      const guided = lessonCtx ? lessonByModule.get(lessonCtx.id) : undefined;
+      if (engine.ready && guided) {
+        const lg = lessonGround(text, guided);
+        void generate("answer", lg.notes, text, {
+          related: g.related,
+          sources: [{ title: `${lessonCtx!.title}: ${lg.headings.join(", ")}`, route: pathname }],
+          withHistory: true,
+        });
+      } else if (engine.ready) {
         void generate("answer", g.notes, text, { related: g.related, sources: g.sources, withHistory: true });
       } else if (g.lesson) {
         push({
@@ -238,8 +257,32 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
         });
       }
     },
-    [act, announce, engine.ready, generate, navigate, push],
+    [act, announce, engine.ready, generate, navigate, pathname, push],
   );
+
+  // Questions handed over by pages ("Ask the tutor about this section", reflection feedback).
+  useEffect(() => {
+    const run = () => {
+      for (const ask of takeAsks()) {
+        setView({ name: "chat" });
+        push({ kind: "user", text: ask.question });
+        const sources = ask.source ? [ask.source] : undefined;
+        if (engine.ready) void generate(ask.mode === "feedback" ? "reflect" : "answer", ask.notes, ask.question, { sources });
+        else if (ask.fallback)
+          push({
+            kind: "reading",
+            title: ask.fallback.title,
+            intro: "Here's that part of the lesson again. Download a model (menu above) and the tutor will explain it in other words and take follow-up questions.",
+            paragraphs: ask.fallback.body
+              .split(/\n\n+|\n(?=[-*] )/)
+              .map((p) => p.replace(/\*\*/g, "").replace(/^[-*] /, "• ")),
+            route: ask.source?.route,
+          });
+      }
+    };
+    run();
+    return onAsk(run);
+  }, [engine.ready, generate, push]);
 
   // Load a model the student downloaded before, from cache, the first time they open the tutor.
   useEffect(() => {

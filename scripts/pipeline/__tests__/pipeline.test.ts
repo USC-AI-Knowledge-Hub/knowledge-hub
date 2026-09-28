@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import type { Trend, Video } from "../../../src/data/types";
+import { tools } from "../../../src/data/tools";
+import { SETTINGS, TOPIC_QUERIES, TREND_QUERIES } from "../config";
 import { guessDifficulty } from "../difficulty";
 import { parseIsoDuration } from "../duration";
 import { mergeFeed, mergeTrends } from "../merge";
@@ -217,6 +219,31 @@ describe("trendKind", () => {
     expect(trendKind("Gemini NotebookLM Tutorial: Turn Your Notes Into an AI Podcast (2026)")).toBeNull();
     expect(trendKind("How to use the new model launched this week")).toBeNull();
     expect(trendKind("n8n AI Agent Tutorial: Build a Research Agent With Tools")).toBeNull();
+  });
+  it("treats debates, panels, episodes, conferences and summits as talks", () => {
+    expect(trendKind("Is AI an existential threat? A debate")).toBe("talk");
+    expect(trendKind("Munk Debate on Artificial Intelligence")).toBe("talk");
+    expect(trendKind("AI and the future of work: a panel of economists")).toBe("talk");
+    expect(trendKind("Ep. 142: Where reasoning models go next")).toBe("talk");
+    expect(trendKind("Full episode: scaling laws with a DeepMind researcher")).toBe("talk");
+    expect(trendKind("Stanford HAI conference 2026: day one")).toBe("talk");
+    expect(trendKind("AI Engineer Summit: closing session")).toBe("talk");
+    expect(trendKind("What AI can't do yet | TEDx")).toBe("talk");
+    // News phrasing still wins.
+    expect(trendKind("Everything announced at the Google I/O conference")).toBe("news");
+  });
+  it("keeps lessons about these formats as lessons", () => {
+    expect(trendKind("How to prepare for a debate with ChatGPT")).toBeNull();
+    expect(trendKind("Tutorial: turn a conference paper into slides with Gamma")).toBeNull();
+    expect(trendKind("Stanford CS224N Lecture 5: Transformers")).toBeNull();
+  });
+});
+
+describe("talk searches", () => {
+  it("adds talk queries to the trends searches within the daily search cap", () => {
+    expect(TREND_QUERIES).toEqual(expect.arrayContaining(["AI conference keynote", "AI debate", "AI podcast interview"]));
+    const total = tools.reduce((n, t) => n + t.queries.length, 0) + TOPIC_QUERIES.length + TREND_QUERIES.length;
+    expect(total).toBeLessThanOrEqual(SETTINGS.maxSearches);
   });
 });
 

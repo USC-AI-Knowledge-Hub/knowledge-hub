@@ -1,0 +1,217 @@
+import type { GuidedLesson } from "../types";
+
+export const writing: GuidedLesson = {
+  module: "writing",
+  objectives: [
+    "Use AI as a critic and editor at each stage of writing while you keep the thinking and the drafting.",
+    "Revise your own draft from targeted AI critique without losing your voice or meaning.",
+    "Record and disclose AI's contribution in line with your course, publisher or office policy.",
+  ],
+  sections: [
+    {
+      heading: "Writing is thinking",
+      body: "When you write, you find out what you actually think: which claim you believe, which evidence holds, where the argument has a gap. If an AI drafts it, you get fluent text without doing that work, and in a course, that work is usually what's being assessed.\n\nSo the most useful role for AI in writing is **editor and sparring partner, not author**. A workflow that keeps you in charge:\n\n- **Plan** the point you want to make yourself.\n- **Brainstorm** with AI: angles, counterarguments, questions a reader might ask.\n- **Draft** yourself, even roughly.\n- **Ask for critique**, then revise yourself.\n- **Proofread** with AI or a tool like Grammarly at the end.\n- **Disclose** what AI contributed.\n\nThe same pattern works for a seminar paper, a grant section or a staff report. What changes is the policy you're working under.",
+      ask: "Why is AI better as an editor than as the author of my draft?",
+    },
+    {
+      heading: "Ask for critique before rewrites",
+      body: "If you ask an assistant to “improve this paragraph”, it rewrites it, and you lose track of what was wrong and what's now yours. Asking for a diagnosis first keeps you learning and keeps the words yours.\n\nPrompts that get useful critique:\n\n- “Act as a skeptical reviewer. What's the weakest claim here, and why?”\n- “Which sentence would confuse a reader new to this topic?”\n- “What's the strongest counterargument I haven't addressed?”\n- “Does each paragraph support the thesis? Point to any that drift.”\n\nGive context: the audience, the assignment and what the piece needs to do. Then revise yourself, and ask again to see if the problem is fixed.\n\nAssistants tend to be agreeable and can praise weak work. Asking explicitly for the weakest point, or for three problems, counters that.",
+      ask: "Why ask for the weakest claim instead of general feedback?",
+    },
+    {
+      heading: "Keep your voice and your meaning",
+      body: "Editing tools make text smoother, and smoothness has costs.\n\n- **Voice.** Accepting every suggestion pulls writing toward the same safe, generic style. Accept only changes you can explain, and keep phrasing that sounds like you on purpose.\n- **Meaning.** Rewrites and paraphrasers can quietly change a claim: “may reduce” becomes “reduces”, a technical term becomes a looser synonym. Reread every changed sentence against what you meant.\n- **Sources.** Running someone else's text through a paraphraser, such as QuillBot, is still using their ideas. Quote or cite it. Many instructors treat tool paraphrasing of sources as misconduct.\n\nA good habit: when a rewrite is better, work out why (a shorter subject, a stronger verb, one idea per sentence) and apply the lesson yourself next time. Then the tool is teaching you rather than replacing you.",
+      ask: "How can a paraphrasing tool change the meaning of my sentence?",
+    },
+    {
+      heading: "Know the rules and keep a record",
+      body: "Before you start, read the AI policy for your course, journal or office. Policies differ: one instructor allows brainstorming but not drafting, another allows proofreading only, a third asks for AI use to be documented.\n\nKeep a simple record as you go: which tool, what you asked, and what you kept. Save the key prompts. Grammarly's Authorship feature can document your process if an instructor asks for it.\n\nA useful disclosure says three things: **what** you used, **for what**, and **how you checked it**. For example: “I used Claude to critique two drafts for unclear claims and counterarguments; all wording and revisions are mine.”\n\nFor researchers, publishers and publishing-ethics bodies such as COPE hold that AI tools can't be listed as authors, because they can't take responsibility for the work. Whatever you submit, you're accountable for every sentence in it.",
+      ask: "What should a good AI disclosure statement include?",
+    },
+  ],
+  example: {
+    title: "A tough reviewer, then your revision",
+    body: "**Your draft:** “Remote work is better for everyone. Studies show people are more productive at home, and companies save money on offices, so all universities should let staff work remotely.”\n\n**Prompt:** “Act as a skeptical reviewer for a staff policy memo. What's the weakest claim here, and why? Don't rewrite it.”\n\n**Critique (summarized):** “Better for everyone” is unsupported; roles differ, and some depend on being on site. “Studies show” names no studies, and the evidence on productivity is mixed. The jump to “all universities” doesn't follow.\n\n**Your revision:** “For roles that don't require being on campus, a hybrid option could help staff focus and reduce commuting. Before adopting it, we should review evidence on productivity in comparable roles and ask each department which tasks need people on site.”\n\n**What changed:** a narrower claim, a plan for evidence instead of a vague appeal to it, and the wording is still yours. Ask the reviewer again: the next weakest point is a smaller one.",
+  },
+  deliverable: "Your original paragraph, the AI's critique, your own revision, the second round of critique, and a one-sentence disclosure of how you used AI.",
+  questions: [
+    {
+      id: "why-not-draft",
+      prompt: "Why does this lesson recommend drafting yourself rather than having AI draft for you?",
+      options: [
+        "AI drafts are always grammatically wrong",
+        "Drafting is where you work out what you think, and that thinking is usually what's being assessed",
+        "Drafting with AI takes longer",
+        "AI can't write in English",
+      ],
+      answer: 1,
+      explain: "Writing is thinking. Outsourcing the draft outsources the thinking, even when the result reads well.",
+    },
+    {
+      id: "critique-first",
+      prompt: "You have a draft paragraph and want it to be stronger. What's the best first prompt?",
+      options: [
+        "“Rewrite this to be better.”",
+        "“Make this sound more academic.”",
+        "“What's the weakest claim here, and why? Don't rewrite it.”",
+        "“Write a new paragraph on the same topic.”",
+      ],
+      answer: 2,
+      explain: "A diagnosis tells you what to fix and keeps the revision yours. A rewrite hides what was wrong.",
+    },
+    {
+      id: "sycophancy",
+      prompt: "An assistant says your essay is “excellent and well argued”, but your instructor gave a similar draft a C. What's a likely explanation, and a fix?",
+      options: [
+        "Assistants tend to be agreeable; ask explicitly for the three biggest problems",
+        "The instructor is wrong, so ignore the grade",
+        "The assistant compared it with published essays",
+        "Assistants only give praise on free plans",
+      ],
+      answer: 0,
+      explain: "Models lean toward agreeing and encouraging. Asking for specific weaknesses gets more useful feedback.",
+    },
+    {
+      id: "meaning-shift",
+      prompt: "After an AI edit, your sentence “The intervention may reduce anxiety in some students” reads “The intervention reduces student anxiety.” What happened?",
+      options: [
+        "The edit made the sentence more accurate",
+        "Nothing important; it's just shorter",
+        "The edit fixed a grammar error",
+        "The edit changed the claim by removing the hedges, so it now overstates your evidence",
+      ],
+      answer: 3,
+      explain: "Rewrites can quietly strengthen or change claims. Reread every edited sentence against what you meant.",
+    },
+    {
+      id: "paraphrase-source",
+      prompt: "A student runs a paragraph from a journal article through a paraphrasing tool and uses the result without citation. Is that acceptable?",
+      options: [
+        "Yes, because the words are different",
+        "Yes, if the tool is free",
+        "No: it still uses the author's ideas, so it needs a citation, and many instructors treat it as misconduct",
+        "Yes, if it passes a plagiarism checker",
+      ],
+      answer: 2,
+      explain: "Changing the words doesn't change whose ideas they are. Quote or paraphrase yourself, and cite the source.",
+    },
+    {
+      id: "voice",
+      prompt: "What's a sensible rule for accepting suggestions from an editing tool like Grammarly?",
+      options: [
+        "Accept only the changes you can explain and that keep your meaning",
+        "Accept all of them; the tool knows best",
+        "Reject all of them to protect your voice",
+        "Accept whichever makes the text longest",
+      ],
+      answer: 0,
+      explain: "Explaining a change means you've judged it. Blanket acceptance flattens your voice and can introduce errors.",
+    },
+    {
+      id: "disclosure",
+      prompt: "Which disclosure is most useful to an instructor?",
+      options: [
+        "“AI may have been used.”",
+        "“I used ChatGPT to critique my second draft for unclear arguments; I made all revisions myself.”",
+        "“Assisted by technology.”",
+        "No disclosure, because only critique was used",
+      ],
+      answer: 1,
+      explain: "It says what tool, for what purpose, and what remained your own work. That's what a reader needs to judge it.",
+    },
+    {
+      id: "policy-differs",
+      prompt: "Last term, your instructor allowed AI brainstorming. This term's syllabus says AI may be used for proofreading only. What applies now?",
+      options: [
+        "Last term's rule, since you learned it first",
+        "Whatever the AI tool's terms allow",
+        "The most permissive policy at the university",
+        "This course's policy: proofreading only",
+      ],
+      answer: 3,
+      explain: "Policies differ by course. The current course's rules decide what's allowed.",
+    },
+    {
+      id: "author",
+      prompt: "A researcher asks whether they can list an AI tool as a co-author on a paper. What's the position of publishing-ethics bodies such as COPE?",
+      options: [
+        "Yes, if it wrote more than half the text",
+        "No, because AI tools can't take responsibility for the work; disclose their use instead",
+        "Yes, as the last author",
+        "Only in computer science journals",
+      ],
+      answer: 1,
+      explain: "Authorship implies accountability. Disclose AI use in the way the journal asks, typically in the methods or acknowledgments.",
+    },
+    {
+      id: "brainstorm",
+      prompt: "Which of these uses keeps the student as the author?",
+      options: [
+        "Asking AI for counterarguments to your thesis, then deciding which to address in your own words",
+        "Asking AI to write the introduction, then changing a few words",
+        "Pasting the prompt into AI and submitting the result",
+        "Asking AI to expand your bullet points into full paragraphs",
+      ],
+      answer: 0,
+      explain: "Brainstorming counterarguments feeds your thinking; you still decide and write. The others hand the writing to the AI.",
+    },
+    {
+      id: "record",
+      prompt: "Why keep a record of prompts and what you kept while writing?",
+      options: [
+        "AI tools delete your text otherwise",
+        "It makes the essay longer",
+        "It shows your process and makes an accurate disclosure easy if you're asked",
+        "Records are required by every tool's terms of service",
+      ],
+      answer: 2,
+      explain: "A simple log lets you say exactly what AI contributed, and supports you if questions arise later.",
+    },
+    {
+      id: "context-critique",
+      prompt: "Your AI feedback on a grant section is generic. What's most likely to improve it?",
+      options: [
+        "Asking for “more feedback”",
+        "Removing the section's headings",
+        "Switching to a paraphrasing tool",
+        "Giving context: the funder, the reviewers' criteria and what the section must achieve",
+      ],
+      answer: 3,
+      explain: "Critique is only as specific as the brief. Tell it who reads the text and what they're judging.",
+    },
+    {
+      id: "learn-from-edit",
+      prompt: "An AI rewrite of your sentence is clearly better. What's the most useful next step?",
+      options: [
+        "Work out why it's better, such as a stronger verb or one idea per sentence, and apply that yourself",
+        "Paste all your future sentences into the tool",
+        "Ignore it to protect your voice",
+        "Ask for the whole essay to be rewritten the same way",
+      ],
+      answer: 0,
+      explain: "Understanding the change turns the tool into a teacher. You'll need it less over time.",
+    },
+    {
+      id: "responsible",
+      prompt: "An AI tool suggested a sentence with a factual error, and you accepted it into submitted work. Who is responsible?",
+      options: [
+        "The company that made the tool",
+        "Nobody, because it was an AI error",
+        "You, as the person who submitted the work",
+        "Your instructor, for allowing AI",
+      ],
+      answer: 2,
+      explain: "Whatever tools you use, you're accountable for what you submit. That's why you reread and check every change.",
+    },
+  ],
+  reflect: "Compare your original paragraph with your final revision. What did the critique catch that you hadn't noticed, and which parts of the paragraph are unmistakably yours? Would you use this process on your next assignment or report?",
+  sources: [
+    {
+      title: "AI Fluency Framework (Rick Dakan and Joseph Feller)",
+      url: "https://aifluencyframework.org/",
+      license: "CC BY-NC-SA 4.0",
+      note: "Adapted the ideas of delegating deliberately, discerning the quality of output, and diligence through transparency about AI's role.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/writing", license: "Original" },
+  ],
+};

@@ -2,12 +2,15 @@ import { Link, useParams } from "react-router";
 import { CourseCard } from "../components/CourseCard";
 import { Icon } from "../components/Icon";
 import { Level } from "../components/Level";
+import { TalkCard } from "../components/TalkCard";
 import { ToolMark } from "../components/ToolMark";
 import { VideoCard } from "../components/VideoCard";
 import { coursesFor } from "../data/courses";
+import { lessonByModule } from "../data/guided";
 import { moduleById, paths } from "../data/learn";
+import { talksFor } from "../data/talks";
 import { toolById } from "../data/tools";
-import { live, useCourseStatus } from "../lib/courses";
+import { live, liveTalk, useCourseStatus } from "../lib/courses";
 import { useFeed } from "../lib/feed";
 import { minutesLabel } from "../lib/format";
 import { useProgress } from "../lib/progress";
@@ -28,6 +31,13 @@ export function ModulePage() {
     .filter((c) => c.available)
     .sort((a, b) => Math.abs(rank[a.difficulty] - rank[m.difficulty]) - Math.abs(rank[b.difficulty] - rank[m.difficulty]) || a.hours - b.hours);
   const curated = m.curated.filter((c) => status?.curated[c.id]?.ok ?? true);
+
+  // Talks listing this lesson first are the closest fit; at most three, so lessons stay the focus.
+  const moduleTalks = talksFor(m.id)
+    .map((t) => liveTalk(t, status))
+    .filter((t) => t.available)
+    .sort((a, b) => a.modules.indexOf(m.id) - b.modules.indexOf(m.id))
+    .slice(0, 3);
 
   const done = isDone(m.id);
   const curatedIds = new Set(curated.map((c) => c.id));
@@ -59,6 +69,12 @@ export function ModulePage() {
         </div>
         <h1 className="display-s measure">{m.title}</h1>
         <p className="headline-s muted measure module-summary">{m.summary}</p>
+        {lessonByModule.has(m.id) && (
+          <Link to={`/learn/lesson/${m.id}`} className="btn filled state" style={{ marginTop: 20 }}>
+            <Icon name="school" />
+            Take the guided lesson
+          </Link>
+        )}
       </header>
 
       <div className="module-layout">
@@ -141,6 +157,22 @@ export function ModulePage() {
                   </div>
                 </>
               )}
+            </section>
+          )}
+
+          {moduleTalks.length > 0 && (
+            <section aria-labelledby="talks-h">
+              <h2 id="talks-h" className="headline-s watch-h">
+                Talks and debates
+              </h2>
+              <p className="body-m muted measure sub-h">
+                The bigger picture from researchers and critics. <Link to="/watch?tab=talks">All talks and podcasts</Link>
+              </p>
+              <div className="grid cols-videos">
+                {moduleTalks.map((t) => (
+                  <TalkCard key={t.id} talk={t} compact />
+                ))}
+              </div>
             </section>
           )}
         </article>

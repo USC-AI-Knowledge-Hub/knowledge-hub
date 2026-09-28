@@ -1,0 +1,223 @@
+import type { GuidedLesson } from "../types";
+
+export const dataAnalysis: GuidedLesson = {
+  module: "data-analysis",
+  objectives: [
+    "Get an AI assistant to describe a dataset and flag quality problems before any analysis.",
+    "Check the code and assumptions behind an AI analysis, and verify one result by hand.",
+    "Decide which data can go into which AI tool, based on privacy rules and agreements.",
+  ],
+  sections: [
+    {
+      heading: "What happens when you upload a spreadsheet",
+      body: "When you give ChatGPT, Claude, Gemini or Julius a CSV or Excel file and ask a question, the assistant usually doesn't “look” at the numbers the way you would. It writes code, typically Python, runs it on your file in a sandbox, and then describes the output in plain English, often with a chart. Copilot in Excel works on the open workbook in a similar spirit.\n\nThat has one big consequence: **the code is the analysis**. The friendly paragraph is a description of what the code did, written by the same model, and it can gloss over choices the code made. Julius and most assistants will show the code if you ask; some show it by default.\n\nYou don't need to be a programmer to benefit, but you do need to stay the analyst. The AI is fast at the mechanics. You decide which questions matter, which assumptions are acceptable and whether the answer makes sense.",
+      ask: "Why does it matter that the assistant writes and runs code instead of reading the numbers?",
+    },
+    {
+      heading: "Describe before you analyze",
+      body: "Before asking any real question, ask the assistant to describe the dataset: “How many rows and columns? What type is each column? How many values are missing per column? Any duplicates, odd values or inconsistent formats?”\n\nThen compare the answer with what you know. Does the row count match the source? Are the columns what the documentation says?\n\nCommon problems this step catches:\n\n- **Formatting:** dates read as text, numbers stored with commas or currency symbols, stray spaces that split one category into two.\n- **Duplicates:** repeated rows, often from joining two files, that inflate counts.\n- **Missing data:** blanks that may mean zero, unknown or not applicable. How to handle them depends on why they're missing.\n- **Units and codes:** thousands versus units, or a value like 999 used to mean “no answer”.\n\nFixing these first prevents confident answers built on a misread file.",
+      ask: "Why should I ask the assistant to describe the data before I ask my real question?",
+    },
+    {
+      heading: "Check the code and its assumptions",
+      body: "Every analysis involves choices, and an assistant makes them silently unless you ask. Watch for these:\n\n- **Missing values** dropped or filled in (for example with the average), which can change results.\n- **Filters** that quietly exclude rows, such as open cases or a year.\n- **Averages:** a mean pulled by a few extreme values when a median would describe typical cases better, or an average of percentages that ignores group sizes.\n- **Outliers** removed without saying so.\n- **Statistical tests** chosen without checking their assumptions.\n\nAsk directly: “List every decision you made about missing values, filters, outliers and grouping.” Then ask for the code, and for a line-by-line explanation of any part you don't follow.\n\nA useful cross-check is to ask for the same result computed a different way, such as a pivot table instead of code. If the answers differ, find out why before you use either.",
+      ask: "What kinds of silent choices can change the result of an AI analysis?",
+    },
+    {
+      heading: "Verify one number, and question the story",
+      body: "Pick one figure the answer depends on and reproduce it yourself: filter the spreadsheet, sum a column, or build a quick pivot table. If your number matches, you've confirmed the file was read correctly and the calculation does what it claims. If it doesn't, you've found a problem before anyone else did.\n\nThen question the interpretation:\n\n- **Does it make sense?** A result that contradicts everything you know deserves a second look, not an exciting headline.\n- **Correlation isn't causation.** Two things rising together may share a third cause.\n- **Groups can reverse a trend.** A pattern in the combined data can disappear or flip when you split by group.\n- **Charts can mislead.** Check axis ranges, labels and whether bars start at zero.\n\nThe assistant can help here too: ask “What are three reasons this pattern might not mean what it seems?”",
+      ask: "Why is reproducing just one number by hand worth the time?",
+    },
+    {
+      heading: "Keep data where it's allowed to be",
+      body: "The easiest analysis mistake to make, and the hardest to undo, is uploading data you weren't allowed to share.\n\n- **Public, open data** (city portals, government statistics) is the right place to practice.\n- **Student records** are protected by FERPA and university policy. Don't upload them to personal AI accounts.\n- **Human-subjects research data** is governed by your IRB protocol and consent forms, which may limit where it can be processed.\n- **Licensed or shared data** often comes with a data use agreement that restricts third-party tools.\n- **Health and financial data** carry their own legal protections.\n\nUse USC's ChatGPT Edu workspace for university work rather than a personal account, but a university workspace doesn't override an IRB protocol or data agreement. Removing names isn't always enough to de-identify data: combinations of details such as zip code, birth date and gender can identify people. When unsure, ask your IRB, supervisor or data steward first.",
+      ask: "If I remove names from a dataset, is it safe to upload?",
+    },
+  ],
+  example: {
+    title: "A ten-minute data story, checked",
+    body: "**Data:** a city's open-data CSV of service requests (potholes, graffiti, streetlights), with open and closed dates and a neighborhood column.\n\n**Describe:** the assistant reports the rows and columns, notes that “closed date” is blank for many rows, and that one neighborhood appears under two spellings. You ask it to merge the spellings.\n\n**Question:** “Which neighborhood waits longest for a pothole repair?” It returns a bar chart of average days to close.\n\n**Check the code:** it calculated days only for closed requests, silently dropping open ones. Neighborhoods with a backlog of old open requests look faster than they are. You ask for the median, and for the share of requests still open, per neighborhood.\n\n**Verify by hand:** you filter the spreadsheet to one neighborhood's closed pothole requests and compute the median yourself. It matches.\n\n**Story:** a chart of median days to close plus the share still open, with a note on what the data can't show, such as how requests were prioritized.",
+  },
+  deliverable: "A short data story from a public dataset: the question you chose, one chart, the code or steps the assistant used, and a note showing one figure you verified by hand.",
+  questions: [
+    {
+      id: "code-is-analysis",
+      prompt: "An assistant gives you a clear paragraph summarizing your data analysis. Why ask to see the code it ran?",
+      options: [
+        "The code shows what was actually done; the paragraph is only a description that can skip over choices",
+        "Code runs faster when you look at it",
+        "Summaries are always wrong",
+        "You need the code to open the chart",
+      ],
+      answer: 0,
+      explain: "The model writes and runs code, then describes it. Decisions like dropped rows show up in the code, not always in the summary.",
+    },
+    {
+      id: "describe-first",
+      prompt: "You upload a survey file. What should your first prompt be?",
+      options: [
+        "“What's the most surprising finding?”",
+        "“Make a chart for my presentation.”",
+        "“Run a regression on everything.”",
+        "“Describe this dataset: rows, columns, types, missing values, duplicates and anything odd.”",
+      ],
+      answer: 3,
+      explain: "Describing first catches misread columns and quality problems before they shape your results.",
+    },
+    {
+      id: "duplicates",
+      prompt: "After joining two spreadsheets, your participant count is higher than the number of people in the study. What's a likely cause?",
+      options: [
+        "The assistant rounded the numbers",
+        "Duplicate rows created by the join",
+        "Missing values in one column",
+        "The chart's axis starts above zero",
+      ],
+      answer: 1,
+      explain: "Joins often duplicate rows when keys repeat. Check for duplicates before counting anything.",
+    },
+    {
+      id: "sentinel",
+      prompt: "A column of ages has an average of 212. What's the best next step?",
+      options: [
+        "Report it; the assistant calculated it",
+        "Delete the age column",
+        "Look for codes such as 999 used for “no answer”, and ask how the assistant treated them",
+        "Switch to a different AI tool",
+      ],
+      answer: 2,
+      explain: "An impossible average usually means placeholder codes or a formatting problem. Find and handle them explicitly.",
+    },
+    {
+      id: "median",
+      prompt: "Most staff in a department earn similar salaries, but two earn far more. Which summary better describes a typical salary?",
+      options: ["The mean", "The maximum", "The sum", "The median"],
+      answer: 3,
+      explain: "The mean is pulled up by extreme values; the median is the middle value and describes typical cases better.",
+    },
+    {
+      id: "silent-drop",
+      prompt: "An analysis of repair times only included closed requests. Why could that mislead?",
+      options: [
+        "Requests still open, often the slowest ones, are left out, so waits look shorter than they are",
+        "Closed requests are always recorded incorrectly",
+        "It makes no difference to the result",
+        "Open requests are counted twice",
+      ],
+      answer: 0,
+      explain: "Filtering out unfinished cases biases the result toward faster times. Ask the assistant to list every filter it applied.",
+    },
+    {
+      id: "hand-check",
+      prompt: "What's the purpose of reproducing one key number by hand, for example with a pivot table?",
+      options: [
+        "To make the analysis take longer",
+        "To confirm the file was read correctly and the calculation does what it claims",
+        "To replace the AI analysis entirely",
+        "Because AI tools can't add numbers",
+      ],
+      answer: 1,
+      explain: "One independent check catches misread files and wrong calculations. If it matches, you can trust the pipeline more.",
+    },
+    {
+      id: "causation",
+      prompt: "The assistant finds that students who use the library more have higher grades and concludes the library raises grades. What's wrong?",
+      options: [
+        "Nothing; the data shows it",
+        "The sample must be too small",
+        "Library data can't be analyzed with AI",
+        "Correlation alone doesn't show causation; motivated students might do both",
+      ],
+      answer: 3,
+      explain: "A shared cause can produce the same pattern. Causal claims need a design that rules alternatives out.",
+    },
+    {
+      id: "ferpa",
+      prompt: "A staff member wants a quick analysis of a spreadsheet of student names, IDs and grades using a free personal AI account. What's the right call?",
+      options: [
+        "Go ahead, as long as the chat is deleted afterwards",
+        "Don't: student records are protected, so use an approved institutional route and check the rules first",
+        "Go ahead if the file is under 1,000 rows",
+        "Go ahead if the spreadsheet is password protected",
+      ],
+      answer: 1,
+      explain: "Student records are protected by FERPA and university policy. Deleting the chat doesn't undo sharing the data.",
+    },
+    {
+      id: "irb",
+      prompt: "A researcher has interview data covered by an IRB protocol. The university provides an AI workspace. What decides whether they can upload the data there?",
+      options: [
+        "Only whether the workspace is university-provided",
+        "Whether the files are small",
+        "What the IRB protocol, consent forms and any data agreements allow",
+        "Whether the AI tool promises not to train on it",
+      ],
+      answer: 2,
+      explain: "A university workspace doesn't override the protocol and consent participants agreed to. Check with the IRB if unsure.",
+    },
+    {
+      id: "deidentify",
+      prompt: "You've removed names from a dataset of patients. Why might it still identify people?",
+      options: [
+        "Combinations of details such as zip code, birth date and gender can single people out",
+        "AI tools can always recover deleted names",
+        "It can't; removing names is enough",
+        "Spreadsheets store deleted names in hidden columns",
+      ],
+      answer: 0,
+      explain: "Re-identification from a few quasi-identifiers is well documented. De-identification needs more than dropping a name column.",
+    },
+    {
+      id: "second-way",
+      prompt: "The assistant's code says average attendance was 84%. A pivot table you build says 79%. What should you do?",
+      options: [
+        "Use 84%; code is more reliable than pivot tables",
+        "Average the two and report 81.5%",
+        "Find out why they differ, for example different filters or averaging percentages across groups of different sizes",
+        "Report both and let readers choose",
+      ],
+      answer: 2,
+      explain: "A disagreement is a clue. Averaging percentages without weighting by group size is a common cause.",
+    },
+    {
+      id: "chart",
+      prompt: "A bar chart makes a 2% difference between groups look huge. What should you check?",
+      options: [
+        "Whether the colors are accessible",
+        "Whether the value axis starts at zero or has been cut to exaggerate the gap",
+        "Whether the title is in sentence case",
+        "Whether the chart was made in Python",
+      ],
+      answer: 1,
+      explain: "A truncated axis magnifies small differences. Check scales before you trust a visual impression.",
+    },
+    {
+      id: "list-decisions",
+      prompt: "Which prompt is most likely to reveal the hidden assumptions in an AI analysis?",
+      options: [
+        "“Are you sure?”",
+        "“Make the chart look nicer.”",
+        "“Explain it more simply.”",
+        "“List every decision you made about missing values, filters, outliers and grouping.”",
+      ],
+      answer: 3,
+      explain: "Asking for specific decisions makes the model surface choices that summaries leave out.",
+    },
+  ],
+  reflect: "What did the assistant assume about your data that you wouldn't have assumed? If you had to present this chart to a skeptical audience, what's the first question they'd ask, and could you answer it?",
+  sources: [
+    {
+      title: "Data Science for Beginners, lesson 8: Data preparation (Microsoft)",
+      url: "https://github.com/microsoft/Data-Science-For-Beginners/tree/main/2-Working-With-Data/08-data-preparation",
+      license: "MIT",
+      note: "Adapted the common cleaning problems: exploring first, formatting, duplicates and missing data.",
+    },
+    {
+      title: "Data Science for Beginners, lesson 2: Data ethics (Microsoft)",
+      url: "https://github.com/microsoft/Data-Science-For-Beginners/tree/main/1-Introduction/02-ethics",
+      license: "MIT",
+      note: "Adapted the points on data privacy, informed consent and data ownership.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/data-analysis", license: "Original" },
+  ],
+};

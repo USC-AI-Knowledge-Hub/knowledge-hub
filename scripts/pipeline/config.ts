@@ -41,9 +41,16 @@ export const TOPIC_QUERIES = [
 
 /**
  * Searches (API mode) for what's new in AI. Results land in the trends feed,
- * not the lesson library. Channel feeds from TRUSTED_CHANNELS supply most trends.
+ * not the lesson library. The hand-picked, evergreen talks live in src/data/talks.ts. Channel feeds from TRUSTED_CHANNELS supply most trends.
  */
-export const TREND_QUERIES = ["AI news this week", "new AI model release"];
+export const TREND_QUERIES = [
+  "AI news this week",
+  "new AI model release",
+  // Talks: conference sessions, debates and long interviews (3 searches, 300 units a day).
+  "AI conference keynote",
+  "AI debate",
+  "AI podcast interview",
+];
 
 export const SETTINGS = {
   /** Only consider videos published in the last N days on search. */

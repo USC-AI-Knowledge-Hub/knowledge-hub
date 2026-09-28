@@ -119,6 +119,13 @@ export const PAGES: { id: string; title: string; route: string; blurb: string; w
   { id: "courses", title: "Full courses", route: "/learn/courses", blurb: "Complete free courses on YouTube.", words: ["courses", "course", "playlists", "lectures", "university"] },
   { id: "tools", title: "Tools", route: "/tools", blurb: "The AI tool map and reviews.", words: ["tools", "tool map", "map", "reviews", "compare tools", "which ai"] },
   { id: "watch", title: "Watch", route: "/watch", blurb: "Videos refreshed every morning.", words: ["watch", "videos", "video library", "new videos", "youtube"] },
+  {
+    id: "green",
+    title: "Green AI",
+    route: "/green",
+    blurb: "Use AI efficiently and responsibly: right-size models, energy and governance.",
+    words: ["green", "green ai", "sustainability", "sustainable", "environment", "environmental", "energy", "climate", "carbon", "water", "planet", "efficient", "efficiency", "governance", "responsible ai", "responsible use", "pledge"],
+  },
   { id: "about", title: "How videos are chosen", route: "/about", blurb: "How the library works.", words: ["about", "how videos are chosen", "how it works"] },
 ];
 

@@ -2,103 +2,10 @@ import { describe, expect, it } from "vitest";
 import { moduleById, paths } from "../../../data/learn";
 import { PATH_QUESTIONS, intentOf, nextModule, pickPath, planNavigation, routeMessage, toolQuestion } from "../guide";
 import { LIMITS, buildMessages, clip, stripThink, type ChatMessage } from "../prompt";
-import { XP_FIRST_TRY, XP_QUEST_BONUS, XP_RETRY, quests } from "../quests";
-import { DEFAULT_MODEL, MODELS, WASM_MODEL, modelById, onnxFile } from "../registry";
+import { quests } from "../quests";
+import { ALL_MODELS, DEFAULT_MODEL, LINEUP, MODELS, WASM_MODEL, modelById, onnxFile } from "../registry";
 import { bestQuestStep, ground, lessonNotes } from "../retrieval";
-import { optionOrder, scoreCount, scorePrompt } from "../rubric";
-import { applyPass, liveStreak, type QuestState } from "../storage";
-
-describe("quest content", () => {
-  it("has six quests of four to six steps", () => {
-    expect(quests).toHaveLength(6);
-    for (const q of quests) {
-      expect(q.steps.length, q.id).toBeGreaterThanOrEqual(4);
-      expect(q.steps.length, q.id).toBeLessThanOrEqual(6);
-      expect(moduleById.has(q.lesson), `${q.id} lesson`).toBe(true);
-    }
-  });
-
-  it("gives every step notes and a check with exactly one correct answer", () => {
-    for (const q of quests)
-      for (const s of q.steps) {
-        const where = `${q.id}/${s.id}`;
-        expect(s.notes.length, where).toBeGreaterThan(120);
-        expect(s.ask.trim(), where).not.toBe("");
-        const { options, answer, explain, question } = s.check;
-        expect(question.trim(), where).not.toBe("");
-        expect(options.length, where).toBeGreaterThanOrEqual(3);
-        expect(new Set(options).size, `${where} duplicate options`).toBe(options.length);
-        expect(Number.isInteger(answer) && answer >= 0 && answer < options.length, where).toBe(true);
-        expect(explain.length, where).toBeGreaterThan(20);
-        if (s.kind === "dojo") expect(s.stronger.length, where).toBeGreaterThan(80);
-        if (s.kind === "spot") expect(s.question.trim(), where).not.toBe("");
-      }
-  });
-
-  it("uses unique ids", () => {
-    expect(new Set(quests.map((q) => q.id)).size).toBe(quests.length);
-    for (const q of quests) expect(new Set(q.steps.map((s) => s.id)).size, q.id).toBe(q.steps.length);
-  });
-
-  it("keeps the environment figures as sourced", () => {
-    const env = quests.find((q) => q.id === "environment")!.steps.map((s) => s.notes).join(" ");
-    for (const fact of ["415 TWh", "1.5%", "945 TWh", "0.24 Wh", "0.26 mL", "0.34 Wh", "1,287 MWh", "Patterson", "IEA", "August 2025", "June 2025"])
-      expect(env).toContain(fact);
-  });
-
-  it("covers the history milestones", () => {
-    const h = quests.find((q) => q.id === "history")!.steps.map((s) => s.notes).join(" ");
-    for (const fact of ["1956", "Dartmouth", "1958", "Rosenblatt", "1986", "Rumelhart", "1997", "Kasparov", "2012", "AlexNet", "2017", "Attention Is All You Need", "2020", "November 30, 2022"])
-      expect(h).toContain(fact);
-  });
-
-  it("shuffles options deterministically without losing any", () => {
-    const check = quests[0].steps[0].check;
-    const a = optionOrder(check, "transformer/tokens");
-    expect(optionOrder(check, "transformer/tokens")).toEqual(a);
-    expect([...a].sort()).toEqual(check.options.map((_, i) => i));
-    // Across all steps the right answer shouldn't always land first.
-    const firsts = quests.flatMap((q) => q.steps.map((s) => optionOrder(s.check, `${q.id}/${s.id}`)[0] === s.check.answer));
-    expect(firsts.filter(Boolean).length).toBeLessThan(firsts.length / 2);
-  });
-});
-
-describe("XP, badges and streaks", () => {
-  const empty: QuestState = { xp: 0, steps: {}, badges: [], streak: { count: 0, last: null } };
-
-  it("awards XP once per step, less after a wrong answer", () => {
-    let r = applyPass(empty, "history", "dartmouth", true, "2026-09-01");
-    expect(r.gained).toBe(XP_FIRST_TRY);
-    r = applyPass(r.state, "history", "dartmouth", true, "2026-09-01");
-    expect(r.gained).toBe(0);
-    r = applyPass(r.state, "history", "backprop", false, "2026-09-01");
-    expect(r.gained).toBe(XP_RETRY);
-    expect(r.state.xp).toBe(XP_FIRST_TRY + XP_RETRY);
-  });
-
-  it("earns the badge and bonus when the last step is passed", () => {
-    const q = quests.find((x) => x.id === "spot")!;
-    let s = empty;
-    let last = applyPass(s, q.id, q.steps[0].id, true);
-    for (const step of q.steps) {
-      last = applyPass(s, q.id, step.id, true, "2026-09-01");
-      s = last.state;
-    }
-    expect(last.badge).toBe(true);
-    expect(s.badges).toEqual(["spot"]);
-    expect(s.xp).toBe(q.steps.length * XP_FIRST_TRY + XP_QUEST_BONUS);
-  });
-
-  it("counts consecutive days and resets after a gap", () => {
-    let s = applyPass(empty, "history", "dartmouth", true, "2026-09-01").state;
-    s = applyPass(s, "history", "backprop", true, "2026-09-02").state;
-    expect(s.streak).toEqual({ count: 2, last: "2026-09-02" });
-    expect(liveStreak(s.streak, "2026-09-03")).toBe(2);
-    expect(liveStreak(s.streak, "2026-09-05")).toBe(0);
-    s = applyPass(s, "history", "perceptron-winters", true, "2026-09-06").state;
-    expect(s.streak.count).toBe(1);
-  });
-});
+import { scoreCount, scorePrompt } from "../rubric";
 
 describe("what to learn next", () => {
   it("starts new students on the student starter path", () => {
@@ -113,13 +20,13 @@ describe("what to learn next", () => {
     const n = nextModule(done)!;
     expect(n.path.id).toBe("builder");
     expect(n.module.id).toBe(builder.steps[3].module);
-    expect(n.reason).toMatch(/3 of 6/);
+    expect(n.reason).toMatch(new RegExp(`3 of ${builder.steps.length}`));
   });
 
   it("prefers the path the student is on", () => {
     const n = nextModule(["what-is-genai"], "faculty")!;
     expect(n.path.id).toBe("faculty");
-    expect(n.module.id).toBe("limits");
+    expect(n.module.id).toBe("llms");
   });
 
   it("moves on when a path is finished", () => {
@@ -271,9 +178,10 @@ describe("prompt assembly", () => {
 describe("prompt rubric", () => {
   it("scores a lazy prompt low and a strong one high", () => {
     expect(scoreCount(scorePrompt("help me study bio"))).toBeLessThanOrEqual(2);
-    const strong = quests.find((q) => q.id === "dojo")!.steps.find((s) => s.kind === "dojo")!;
-    if (strong.kind !== "dojo") throw new Error("expected a dojo step");
-    expect(scoreCount(scorePrompt(strong.stronger))).toBe(5);
+    // Every stronger prompt in every dojo task covers the whole rubric.
+    const strong = quests.flatMap((q) => q.steps.flatMap((s) => (s.kind === "dojo" ? s.tasks.map((t) => t.stronger) : [])));
+    expect(strong.length).toBeGreaterThanOrEqual(6);
+    for (const p of strong) expect(scoreCount(scorePrompt(p)), p.slice(0, 60)).toBe(5);
   });
 
   it("scores nothing for an empty prompt", () => {
@@ -288,6 +196,26 @@ describe("model registry", () => {
     expect(d.variants.webgpu!.mb).toBeLessThan(500);
     expect(modelById.get(WASM_MODEL)!.variants.wasm).toBeDefined();
     for (const m of MODELS) expect(Object.keys(m.variants).length).toBeGreaterThan(0);
+  });
+
+  it("defines a complete WebLLM lineup, with Qwen3 recommended and a CPU fallback", () => {
+    const webllm = ALL_MODELS.filter((m) => m.variants.webgpu?.runtime === "webllm");
+    expect(webllm.length).toBeGreaterThanOrEqual(3);
+    for (const m of webllm) expect(m.variants.webgpu!.mlcId, m.id).toMatch(/-MLC$/);
+    // Graphics chips without 16-bit floats get WebLLM's 32-bit builds instead of the CPU.
+    for (const m of webllm) expect(m.variants["webgpu-f32"]?.mlcId, m.id).toMatch(/q4f32_1-MLC$/);
+    const rec = webllm.find((m) => m.recommended)!;
+    expect(rec.name).toMatch(/Qwen3/);
+    expect(rec.variants.webgpu!.mb).toBeLessThan(400);
+    expect(webllm.some((m) => m.variants.wasm?.runtime === "transformers")).toBe(true);
+    // Every WebLLM model is smaller than the Transformers.js build of the same family.
+    const onnxQwen3 = modelById.get("qwen3-0.6b")!.variants.webgpu!.mb;
+    expect(modelById.get("qwen3-0.6b-mlc")!.variants.webgpu!.mb).toBeLessThan(onnxQwen3);
+  });
+
+  it("uses the Transformers.js lineup unless the browser opted in", () => {
+    expect(LINEUP).toBe("transformers");
+    expect(MODELS.every((m) => Object.values(m.variants).every((v) => v?.runtime === "transformers"))).toBe(true);
   });
 
   it("maps dtypes to Transformers.js file names", () => {

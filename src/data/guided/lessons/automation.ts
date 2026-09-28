@@ -1,0 +1,222 @@
+import type { GuidedLesson } from "../types";
+
+export const automation: GuidedLesson = {
+  module: "automation",
+  objectives: [
+    "Map a weekly task as a trigger, a series of steps and an output before you build anything.",
+    "Build a workflow in Zapier or n8n with one AI step and a manual approval before anything is sent.",
+    "Test the workflow with real data, log every run and plan for what happens when a step fails.",
+  ],
+  sections: [
+    {
+      heading: "Triggers, steps and where AI fits",
+      body: "Every automation has the same anatomy. A **trigger** starts it: a new form response, an incoming email, a file added to a folder, or a time of day. Then a series of **steps** runs: look something up, copy it to a spreadsheet, send a message.\n\nMost steps are ordinary software. They do exactly the same thing every time. An **AI step** is different. It can read messy text and summarize, classify, extract or draft, which ordinary steps can't. But it's probabilistic: the same input can give slightly different outputs, and sometimes the output is wrong.\n\nSo use AI only for the step that needs it, usually the one where a person currently reads free text and makes a judgment. Keep everything else, like dates, lookups, routing on exact values and arithmetic, in plain steps. A workflow with one well-placed AI step is easier to trust and debug than one where every step is a model.",
+      ask: "Why shouldn't every step in an automation be an AI step?",
+    },
+    {
+      heading: "Map it on paper first",
+      body: "Start with a chore you already do by hand every week. If you can't describe how you do it, you can't automate it.\n\nOn paper, write down:\n\n- **The trigger:** what starts the task?\n- **Each step,** in order, including the ones you do without thinking.\n- **The decisions:** where do you read something and choose what happens next? That's the likely AI step.\n- **Where data goes:** every app the data passes through.\n- **What “done” looks like,** and who sees the result.\n\nThen ask whether it's worth it. Count the minutes it takes each week against the time to build, test and maintain it.\n\nGood first projects are low stakes and internal: summarizing club form responses into a sheet, or sorting your own reading list. Poor first projects send messages to many people, touch grades or money, or handle other people's sensitive information.",
+      ask: "How do I tell which step in my workflow should be the AI step?",
+    },
+    {
+      heading: "Make the AI step predictable",
+      body: "The next step in the workflow can't read a friendly paragraph. It needs an output in a fixed shape. Write the AI step's prompt like a specification:\n\n- **Fixed choices:** “Classify the message as one of: dietary, accessibility, schedule, other.”\n- **An out:** “If none fit, or the message is empty, answer other.”\n- **Structured output:** ask for set fields, like a label and a one-line summary, so later steps can pick out each part. Many tools can request structured (JSON) output directly.\n- **Examples:** two or three sample inputs with the correct label.\n\nThen add a check after the AI step. If the output isn't one of the allowed labels, or a required field is blank, route it to a person instead of carrying on.\n\nThis is the same problem Microsoft's course describes for developers: free-form model answers vary from run to run, and consistent structure is what lets other systems use them.",
+      ask: "Why ask the AI step for a fixed set of labels instead of a free description?",
+    },
+    {
+      heading: "Keep a human in the loop",
+      body: "An automation acts without anyone watching, so a mistake can repeat on every run before you notice. Put a person in front of every consequential step: anything sent to other people, anything touching grades, money or records, and anything that deletes data.\n\nThe simplest pattern is to have the workflow prepare, not act. Save a reply as an email draft, or post it to a channel where you approve it, rather than sending it straight away. You keep most of the time saved and all of the judgment.\n\nBe open with people about what's automated. If a message was drafted by AI and approved by you, it's reasonable to say so, especially if people might reply expecting a person read their message closely.\n\nOnce a workflow has run correctly for weeks, you might remove approval from its lowest-risk steps. Make that a deliberate decision based on your logs, not a shortcut you take because approving got tedious.",
+      ask: "What counts as a consequential step that needs human approval?",
+    },
+    {
+      heading: "Test, log and plan for failure",
+      body: "Test with real data before you rely on it. Rerun ten past examples through the workflow, including awkward ones: a blank field, a very long message, a message in another language, one that fits no category. Compare the results with what you'd have done by hand.\n\nLog every run, for example as a row in a spreadsheet: time, input, AI output, action taken, and whether it was approved. Logs show you patterns, like one category the model keeps getting wrong.\n\nPlan for failure, because it will happen. A connected app changes its form, a service is down, you hit a usage limit, or an account's access expires. The worst failure is a silent one. Both Zapier and n8n can alert you when a run errors; turn that on.\n\nFinally, mind the data. Every connected app, and the AI provider, is another place it flows. Keep student records, health information and other people's private data out of workflows on personal accounts.",
+      ask: "What should I log for each run, and why?",
+    },
+  ],
+  example: {
+    title: "A club sign-up workflow with one AI step",
+    body: "A student runs sign-ups for a club's workshops. Each week they read form responses, answer questions and update a spreadsheet by hand.\n\n**The map:** trigger (new form response), read the question field, decide what kind of question it is, draft a reply, log it, send.\n\n**The build in Zapier:**\n\n1. **Trigger:** new response in the sign-up form.\n2. **AI step:** classify the question as dietary, accessibility, schedule or other, and draft a two-sentence reply. Blank or unclear questions are labeled other.\n3. **Filter:** if the label isn't one of the four, stop and flag it.\n4. **Log:** add a row to a sheet with the time, question, label and draft.\n5. **Approval:** save the reply as an email draft. The student reviews and sends it.\n\n**Testing:** they replay twelve old responses. The labels are right on most, but two blank responses got a cheerful reply to a question nobody asked. They add a rule that skips the AI step when the question field is empty, and switch on error alerts. Sign-up admin drops from an hour a week to about fifteen minutes of reviewing drafts.",
+  },
+  deliverable: "A paper map of one weekly chore, a working Zapier or n8n workflow with one AI step and a manual approval, and a log of at least ten test runs with notes on what failed and what you changed.",
+  questions: [
+    {
+      id: "anatomy",
+      prompt: "In a workflow that summarizes each new form response into a spreadsheet, what is the trigger?",
+      options: [
+        "The spreadsheet",
+        "The AI summary",
+        "A new form response arriving",
+        "The person who reads the spreadsheet",
+      ],
+      answer: 2,
+      explain: "The trigger is the event that starts the workflow. Everything after it, including the AI step, is a step it runs.",
+    },
+    {
+      id: "where-ai",
+      prompt: "Your workflow copies a date from a form, converts it to another time zone, reads a free-text comment, and files it. Which step benefits most from AI?",
+      options: [
+        "Reading and categorizing the free-text comment",
+        "Copying the date",
+        "Converting the time zone",
+        "Filing the result in a folder",
+      ],
+      answer: 0,
+      explain: "Plain steps handle exact data reliably. AI earns its place where something needs reading and judgment, like free text.",
+    },
+    {
+      id: "probabilistic",
+      prompt: "Why is an AI step harder to trust than an ordinary step?",
+      options: [
+        "AI steps always run more slowly",
+        "AI steps can't read text",
+        "Ordinary steps are never wrong",
+        "The same input can produce different outputs, and some will be wrong",
+      ],
+      answer: 3,
+      explain: "Ordinary steps do the same thing every time. An AI step's output varies, so it needs checks around it.",
+    },
+    {
+      id: "first-project",
+      prompt: "Which is the best first automation project?",
+      options: [
+        "Automatically emailing grades to a whole class",
+        "Summarizing your club's weekly form responses into a sheet you review",
+        "Auto-replying to every message in a shared inbox without review",
+        "Deleting old files from a shared drive based on an AI's judgment",
+      ],
+      answer: 1,
+      explain: "A first project should be low stakes and internal. The others send, grade or delete things where a mistake is costly.",
+    },
+    {
+      id: "fixed-labels",
+      prompt: "The next step in your workflow routes messages by category. How should you prompt the AI step?",
+      options: [
+        "“Classify the message as one of: billing, schedule, technical, other. If none fit, answer other.”",
+        "“Describe what this message is about.”",
+        "“Be creative in choosing a category.”",
+        "“Write a friendly paragraph about the message.”",
+      ],
+      answer: 0,
+      explain: "Later steps need predictable output. Fixed choices plus an out for anything that doesn't fit keep routing reliable.",
+    },
+    {
+      id: "validate",
+      prompt: "The AI step returns a label that isn't on your list. What should the workflow do?",
+      options: [
+        "Carry on with whatever the label says",
+        "Pick a category at random",
+        "Stop and send the item to a person to handle",
+        "Retry until it gets a valid label, with no limit",
+      ],
+      answer: 2,
+      explain: "A check after the AI step catches unexpected output. Routing it to a person is safer than guessing or looping forever.",
+    },
+    {
+      id: "human-approval",
+      prompt: "Your workflow drafts replies to people who wrote to your club. Where should the human check go?",
+      options: [
+        "After the replies are sent, by reading the sent folder",
+        "Before anything is sent, for example by saving replies as drafts to approve",
+        "Nowhere, once the prompt is good",
+        "Only on replies longer than a paragraph",
+      ],
+      answer: 1,
+      explain: "Messages to other people are consequential. Preparing drafts for approval keeps most of the time saved and all of the judgment.",
+    },
+    {
+      id: "testing",
+      prompt: "What's the best way to test a new workflow before you rely on it?",
+      options: [
+        "Run it once on a perfect example",
+        "Ask the AI step whether it works",
+        "Turn it on and wait to see if anyone complains",
+        "Replay real past examples, including awkward ones like blank or very long inputs",
+      ],
+      answer: 3,
+      explain: "Real data, especially the messy cases, shows how the workflow behaves in practice. A single tidy example proves very little.",
+    },
+    {
+      id: "logging",
+      prompt: "Why log every run with its input, AI output and action?",
+      options: [
+        "Because automation tools need logs to start",
+        "To make the workflow run faster",
+        "So you can spot failures and patterns, like one category that's often wrong",
+        "Logs are only useful for paid plans",
+      ],
+      answer: 2,
+      explain: "Without a record, mistakes are invisible. Logs let you find problems and decide, with evidence, whether to trust the workflow more.",
+    },
+    {
+      id: "silent-failure",
+      prompt: "The form feeding your workflow gets a new question, and the workflow quietly stops working. What would have caught this sooner?",
+      options: [
+        "Error alerts that notify you when a run fails",
+        "A longer AI prompt",
+        "Running the workflow less often",
+        "Using a different spreadsheet",
+      ],
+      answer: 0,
+      explain: "Connected apps change. Error alerts turn a silent failure into one you hear about quickly.",
+    },
+    {
+      id: "data-flow",
+      prompt: "A TA wants to automate summaries of student emails that include grade questions, using a personal Zapier account. What's the main concern?",
+      options: [
+        "Zapier can't read emails",
+        "Student information would flow through personal accounts and third-party AI services",
+        "Summaries are always too long",
+        "There is no concern if the summaries are accurate",
+      ],
+      answer: 1,
+      explain: "Every connected app and the AI provider receives the data. Student records don't belong in workflows on personal accounts; check what university-approved options exist.",
+    },
+    {
+      id: "remove-approval",
+      prompt: "Your workflow has run for two months and approving drafts feels tedious. When is it reasonable to remove approval from a step?",
+      options: [
+        "As soon as it feels tedious",
+        "Never, under any circumstances",
+        "When the AI step says it's confident",
+        "When your logs show the step has been reliable and a mistake there would be low-stakes",
+      ],
+      answer: 3,
+      explain: "Removing a check should be a deliberate decision based on evidence and risk. Steps that send, grade or delete usually keep a person in the loop.",
+    },
+    {
+      id: "n8n-vs-zapier",
+      prompt: "Which statement about n8n and Zapier fits their profiles on the Hub?",
+      options: [
+        "n8n can be self-hosted, which keeps data under your control but makes security and maintenance your job",
+        "Zapier requires you to write code for every step",
+        "n8n is the easier choice for a very first automation",
+        "Neither tool can include an AI step",
+      ],
+      answer: 0,
+      explain: "n8n is open source and self-hostable, with a steeper learning curve. Zapier is no-code with a large app catalog, which suits a first build.",
+    },
+  ],
+  reflect: "Look at your test log. Which failure surprised you most, and what does it tell you about where people are still needed in the workflow?",
+  sources: [
+    {
+      title: "Generative AI for Beginners, lesson 10: Building low-code AI applications (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/10-building-low-code-ai-applications",
+      license: "MIT",
+      note: "Adapted the idea of adding AI steps to low-code workflows that start from a trigger.",
+    },
+    {
+      title: "Generative AI for Beginners, lesson 11: Integrating with function calling (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/11-integrating-with-function-calling",
+      license: "MIT",
+      note: "Adapted the point that inconsistent free-form output is hard to use downstream, and structured output solves it.",
+    },
+    {
+      title: "Generative AI for Beginners, lesson 3: Using generative AI responsibly (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/03-using-generative-ai-responsibly",
+      license: "MIT",
+      note: "Adapted the idea of testing with a varied set of realistic inputs before launch and planning for incidents.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/automation", license: "Original" },
+  ],
+};

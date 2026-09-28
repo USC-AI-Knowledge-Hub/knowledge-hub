@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Course, CourseStatus } from "../data/types";
+import type { Course, CourseStatus, Talk } from "../data/types";
 
 let cached: Promise<CourseStatus | null> | null = null;
 
@@ -41,6 +41,21 @@ export function live(c: Course, status: CourseStatus | null): LiveCourse {
     lessons: counts && check.lessons ? check.lessons : c.lessons,
     hours: counts && check.seconds ? Math.round(check.seconds / 360) / 10 : c.hours,
     cover: c.cover ?? (check?.ok ? check.cover : undefined) ?? c.video,
+  };
+}
+
+export interface LiveTalk extends Talk {
+  /** False when the last check found the talk gone or moved; hide it. */
+  available: boolean;
+}
+
+/** Merges a talk with the latest check: availability and the real length. Unchecked talks count as available. */
+export function liveTalk(t: Talk, status: CourseStatus | null): LiveTalk {
+  const check = status?.talks?.[t.id];
+  return {
+    ...t,
+    available: check?.ok ?? true,
+    minutes: check?.ok && check.seconds ? Math.max(1, Math.round(check.seconds / 60)) : t.minutes,
   };
 }
 
