@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { onAsk } from "../../lib/tutor/bridge";
 import "../../styles/tutor.css";
 import { Orb } from "./Shapes";
 
@@ -25,6 +26,14 @@ export function Tutor() {
     // Return focus to the button when the sheet closes.
     else if (wasOpen.current) requestAnimationFrame(() => fab.current?.focus());
     wasOpen.current = open;
+  }, [open]);
+
+  // A page asked the tutor something (e.g. "Ask the tutor about this section"): open it.
+  useEffect(() => onAsk(() => setOpen(true)), []);
+
+  // Lets pages make room for the sheet, so a lesson and the tutor sit side by side.
+  useEffect(() => {
+    document.body.classList.toggle("tutor-open", open);
   }, [open]);
 
   // Ctrl/⌘+K toggles the tutor from anywhere.

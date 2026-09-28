@@ -1,0 +1,205 @@
+import type { GuidedLesson } from "../types";
+
+export const assessment: GuidedLesson = {
+  module: "assessment",
+  objectives: [
+    "Test one of your assignments against current AI assistants and grade the results with your own rubric.",
+    "Decide, for each assignment, whether AI use is excluded, allowed with disclosure or required, and say so plainly.",
+    "Redesign an assignment so students' thinking is visible through process evidence, authentic tasks or short conversations.",
+  ],
+  sections: [
+    {
+      heading: "Why design beats detection",
+      body: "AI detectors are tempting because they promise a quick answer. They aren't reliable enough to carry that weight.\n\n- **False positives:** they flag writing that a student wrote themselves. Some studies have found higher false-positive rates for writers whose first language isn't English.\n- **False negatives:** light editing or paraphrasing often gets AI text past them.\n- **No evidence trail:** a score doesn't show what happened, and students can't meaningfully rebut it.\n\nOpenAI withdrew its own AI text classifier in 2023, citing its low accuracy. A detector score shouldn't be the sole basis for an academic misconduct case. At most it's a reason to look more closely and talk with the student, following your institution's process.\n\nThe better investment is in design: clear rules about what's allowed, and assignments where the student's own thinking is visible. That works whether or not AI was used.",
+      ask: "Why shouldn't an AI detector score be enough to report a student for misconduct?",
+    },
+    {
+      heading: "AI-test your own assignment",
+      body: "Before you redesign anything, find out what current tools do with your assignment as it stands.\n\n1. Paste the prompt, exactly as students see it, into two assistants, for example ChatGPT Edu and Claude.\n2. Do what a student might: ask a follow-up or two to improve the answer.\n3. Grade each result with your real rubric, as if a student had submitted it.\n4. Note which criteria the AI met easily and which it missed.\n\nUse only your own assignment text for this, never student submissions.\n\nThe result tells you what the assignment currently measures. If an AI answer earns a solid grade, the rubric may be rewarding things AI does well, like fluent structure and broad coverage, rather than the learning you care about. It's common to find AI weakest on course-specific material, accurate citations, recent class discussion and personal reasoning. Those weak spots point to where the redesign should go.",
+      ask: "What does it tell me if an AI answer gets a good grade on my rubric?",
+    },
+    {
+      heading: "Three stances, assignment by assignment",
+      body: "There isn't one right AI policy for a whole course. Decide per assignment, based on what it's for:\n\n- **Exclude AI** where the struggle is the learning, like foundational skills or first attempts at a method. Pair this with conditions that make it realistic, such as in-class work.\n- **Allow with disclosure** where AI can support learning without replacing it: brainstorming, feedback on a draft, checking grammar. Say which uses are allowed and how to disclose them.\n- **Require AI** where using it well is the skill: critiquing an AI answer, comparing tools, or practicing a workflow from the field.\n\nWhatever you choose, be specific. “You may use AI to brainstorm topics and check grammar, but not to draft paragraphs” is followable; “use AI responsibly” isn't.\n\nThis is the AI Fluency Framework's Delegation applied to course design. If you require AI, make sure every student has access; USC provides ChatGPT Edu. Check your school's guidance for any required syllabus language.",
+      ask: "How do I decide whether an assignment should exclude, allow or require AI?",
+    },
+    {
+      heading: "Make the thinking visible",
+      body: "When the final product alone can't show who did the thinking, assess the process too:\n\n- **Staged work:** a proposal, a draft with revision notes, then the final version.\n- **Reflections** on specific decisions: why this source, why this approach, what changed.\n- **Short conversations:** a five-minute check where students explain a choice in their work.\n- **In-class components:** a first draft, a problem set or a presentation done in the room.\n- **Authentic tasks:** local data, a real audience, course readings, or the student's own experience.\n\nBe realistic about authentic tasks. AI can still help with them; they make generic output less useful rather than impossible, which is often enough.\n\nThen move rubric weight toward reasoning, use of evidence and justification, and away from polish alone. Watch the workload for you and for students: redesign one element at a time. A single well-placed checkpoint often does more than a full overhaul.",
+      ask: "Which kinds of process evidence make students' thinking visible?",
+    },
+  ],
+  example: {
+    title: "Redesigning an essay assignment",
+    body: "**Original:** “Write a 1,500-word essay analyzing the causes of the 2008 financial crisis.”\n\n**AI test:** two assistants produced well-organized essays that scored well on structure and coverage. One cited a paper that doesn't exist. Neither used the course readings or class discussion.\n\n**What the assignment should measure:** students' ability to build an argument from primary sources in the course reader.\n\n**Redesign:**\n\n1. **Proposal (in class):** choose one primary source from the reader and state a claim about it in a paragraph.\n2. **Draft:** with a short note on any AI use.\n3. **Final essay:** must quote and analyze the chosen source and one class discussion.\n4. **Five-minute conversation** in office hours or section: explain one choice in the essay.\n\n**Rubric change:** use of the primary source and reasoning now carry most of the weight; prose style carries less.\n\n**Policy line:** “You may use AI to brainstorm and to check grammar. Don't use it to draft paragraphs. Add a two-sentence note on any AI use: which tool, for what, and how you checked it.”",
+  },
+  deliverable: "One of your assignment prompts, the two AI answers graded with your rubric, and a redesigned version with one element changed so the thinking is visible, plus a policy line for that assignment.",
+  questions: [
+    {
+      id: "detector-sole",
+      prompt: "An AI detector flags a student's essay as 90% likely AI-written. What's the appropriate response?",
+      options: [
+        "File a misconduct report based on the score",
+        "Give the essay a zero and move on",
+        "Treat it as, at most, a reason to look closer and talk with the student, following your institution's process",
+        "Run it through two more detectors and report if they agree",
+      ],
+      answer: 2,
+      explain: "Detectors produce false positives and give no evidence trail. A score alone shouldn't be the basis for a misconduct case.",
+    },
+    {
+      id: "false-positive",
+      prompt: "Which concern about AI detectors has been raised in research?",
+      options: [
+        "They may flag writing by non-native English speakers as AI more often",
+        "They never flag human writing",
+        "They only work on essays over 5,000 words",
+        "They're only inaccurate with math",
+      ],
+      answer: 0,
+      explain: "Some studies found higher false-positive rates for non-native English writers, which raises fairness concerns.",
+    },
+    {
+      id: "ai-test-purpose",
+      prompt: "You paste your assignment into two assistants and both answers earn a B on your rubric. What's the most useful conclusion?",
+      options: [
+        "Your students are probably all using AI",
+        "The assignment is perfect and needs no change",
+        "You should ban computers in your course",
+        "Your rubric may be rewarding things AI does well rather than the learning you care about",
+      ],
+      answer: 3,
+      explain: "The AI test shows what the assignment currently measures. A good AI grade suggests the rubric weights polish and coverage over course-specific thinking.",
+    },
+    {
+      id: "test-input",
+      prompt: "What should you paste into AI assistants when testing your assignment?",
+      options: [
+        "A strong student's past submission",
+        "Your assignment prompt, exactly as students see it",
+        "Your whole class roster, for context",
+        "Student names and grades from last term",
+      ],
+      answer: 1,
+      explain: "Test with your own assignment text. Student work and records don't belong in AI tools for this purpose.",
+    },
+    {
+      id: "exclude",
+      prompt: "In which case does excluding AI make the most sense?",
+      options: [
+        "A first-year assignment where students practice writing a paragraph-level argument unaided, done in class",
+        "A take-home literature review in a graduate methods course",
+        "An assignment where students critique AI-generated code",
+        "A group project that simulates a professional workflow",
+      ],
+      answer: 0,
+      explain: "Exclusion fits where the struggle is the learning, and in-class conditions make it realistic to enforce.",
+    },
+    {
+      id: "require",
+      prompt: "Which assignment is a good candidate for requiring AI use?",
+      options: [
+        "A timed exam on basic definitions",
+        "A personal reflection on a field trip",
+        "Students ask an assistant to answer a question in the field, then critique the answer's accuracy and reasoning",
+        "Hand-drawn lab diagrams",
+      ],
+      answer: 2,
+      explain: "Requiring AI fits when using and evaluating it well is the skill being learned.",
+    },
+    {
+      id: "specific-policy",
+      prompt: "Which policy statement can a student actually follow?",
+      options: [
+        "“Use AI responsibly.”",
+        "“You may use AI to brainstorm topics and check grammar, but not to draft paragraphs. Note any use in two sentences.”",
+        "“AI is discouraged.”",
+        "“Follow the spirit of academic integrity.”",
+      ],
+      answer: 1,
+      explain: "Specific permitted uses, and a clear way to disclose, remove guesswork for students and make the policy fair to enforce.",
+    },
+    {
+      id: "process-evidence",
+      prompt: "Which change best makes a student's thinking visible in a research paper assignment?",
+      options: [
+        "Increasing the word count",
+        "Requiring a specific font",
+        "Running every paper through a detector",
+        "Requiring a proposal, a draft with revision notes, and a short conversation about one choice",
+      ],
+      answer: 3,
+      explain: "Staged work and brief conversations show the reasoning behind the product, which a final paper alone can't.",
+    },
+    {
+      id: "authentic-limits",
+      prompt: "You add personal and local context to an assignment. What's a realistic expectation?",
+      options: [
+        "AI can no longer help at all",
+        "Students will stop using AI entirely",
+        "Generic AI output becomes less useful, though students could still use AI for parts of it",
+        "It makes detectors accurate",
+      ],
+      answer: 2,
+      explain: "Authentic tasks raise the value of the student's own knowledge, but they don't make AI use impossible. Pair them with clear rules.",
+    },
+    {
+      id: "rubric-weight",
+      prompt: "How should rubric weighting change after an AI test shows polished but generic answers score well?",
+      options: [
+        "Put more weight on reasoning, use of course sources and justification of choices",
+        "Put more weight on grammar and structure",
+        "Remove the rubric",
+        "Grade on length",
+      ],
+      answer: 0,
+      explain: "Shifting weight to the thinking you care about means a polished but generic answer no longer earns a high grade.",
+    },
+    {
+      id: "access-equity",
+      prompt: "You plan to require AI in one assignment. What should you check first?",
+      options: [
+        "That students all use the same browser",
+        "That every student has access to a suitable tool, such as a university-provided one",
+        "That the assignment is due on a weekend",
+        "That students have paid subscriptions",
+      ],
+      answer: 1,
+      explain: "Requiring a tool some students can't access is unfair. USC provides ChatGPT Edu, which helps make required uses equitable.",
+    },
+    {
+      id: "workload",
+      prompt: "You teach four courses and want to respond to AI this term. What's a sensible approach?",
+      options: [
+        "Rewrite every assignment in every course before the term starts",
+        "Wait until detectors improve",
+        "Switch all assessments to multiple-choice exams",
+        "Redesign one element in one assignment, see how it works, then extend",
+      ],
+      answer: 3,
+      explain: "A single well-placed checkpoint often does more than a full overhaul, and it's sustainable for you and your students.",
+    },
+    {
+      id: "disclosure-channel",
+      prompt: "An assignment allows AI with disclosure. What helps students disclose honestly?",
+      options: [
+        "A clear, simple format, like two sentences on the tool, the task and how they checked it",
+        "Warning that any disclosed use will lower their grade",
+        "Asking them to guess what you'd accept",
+        "Leaving disclosure optional and unmentioned",
+      ],
+      answer: 0,
+      explain: "A simple, expected format makes disclosure routine. Penalizing permitted uses that students disclose discourages honesty.",
+    },
+  ],
+  reflect: "Think of the assignment you AI-tested. What did the results show about what it really measures, and what do you want it to measure instead? Which one change would get you closest?",
+  sources: [
+    {
+      title: "AI Fluency Framework, by Rick Dakan and Joseph Feller",
+      url: "https://aifluencyframework.org/",
+      license: "CC BY-NC-SA 4.0",
+      note: "Adapted the Delegation and Diligence competencies to deciding AI's role in each assignment and making its use transparent.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/assessment", license: "Original" },
+  ],
+};

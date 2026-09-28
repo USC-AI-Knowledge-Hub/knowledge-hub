@@ -2,6 +2,7 @@
  * Grounding for free chat: find the lessons (and quest notes) that cover a
  * question and turn them into short notes the model must stick to.
  */
+import type { GuidedLesson } from "../../data/guided/types";
 import { moduleById } from "../../data/learn";
 import { toolById } from "../../data/tools";
 import type { Module, Tool } from "../../data/types";
@@ -26,6 +27,29 @@ export interface Grounding {
 export function lessonNotes(m: Module, budget = 900): string {
   const ideas = m.keyIdeas.map((k) => `- ${k}`).join("\n");
   return clip(`Lesson “${m.title}”: ${m.what} ${m.why}`, Math.max(200, budget - ideas.length - 12)) + `\nKey ideas:\n${ideas}`;
+}
+
+/**
+ * Notes for a question asked while reading a guided lesson: the lesson's sections that share the
+ * most words with the question (the first section if none do), so the tutor explains what the
+ * student is reading.
+ */
+export function lessonGround(question: string, lesson: GuidedLesson): { notes: string; headings: string[] } {
+  const terms = new Set(tokenize(question).filter((t) => t.length > 2));
+  const scored = lesson.sections
+    .map((s, i) => {
+      const text = `${s.heading} ${s.body}`.toLowerCase();
+      let score = 0;
+      for (const t of terms) if (text.includes(t.length > 4 ? t.slice(0, -1) : t)) score++;
+      return { s, i, score };
+    })
+    .sort((a, b) => b.score - a.score || a.i - b.i);
+  const picked = scored[0].score ? scored.filter((x) => x.score > 0).slice(0, 2) : [scored[0]];
+  const per = Math.floor(LIMITS.notes / picked.length) - 20;
+  return {
+    notes: picked.map((x) => clip(`${x.s.heading}: ${x.s.body.replace(/\*\*/g, "")}`, per)).join("\n\n"),
+    headings: picked.map((x) => x.s.heading),
+  };
 }
 
 export function toolNotes(t: Tool): string {

@@ -1,0 +1,212 @@
+import type { GuidedLesson } from "../types";
+
+export const researchVerification: GuidedLesson = {
+  module: "research-verification",
+  objectives: [
+    "Choose the right kind of AI research tool for finding, reading or mapping sources.",
+    "Verify a citation by locating the source and confirming it supports the specific claim.",
+    "Use lateral reading and cross-checking to judge claims and sources you don't know.",
+  ],
+  sections: [
+    {
+      heading: "Finding is faster; checking is still yours",
+      body: "AI research tools fall into a few groups, and each does a different job:\n\n- **Search-first answers** (Perplexity, and the web or Deep Research modes of general assistants) read web results and write a summary with links.\n- **Paper search and extraction** (Elicit, SciSpace, Consensus) search academic papers and pull out methods, samples and findings into tables.\n- **Citation maps** (ResearchRabbit, Semantic Scholar) show what cites what, so you find earlier, later and related work. ResearchRabbit generates no text, so it can't invent claims.\n- **Citation context** (Scite) shows whether later papers support or dispute a result.\n- **Grounded reading** (NotebookLM) answers only from sources you upload.\n\nAll of them cut the time spent finding and skimming. None of them removes your responsibility for what you cite. Your job shifts from finding sources to verifying them.",
+      ask: "Which kind of research tool should I start with for a literature search?",
+    },
+    {
+      heading: "How AI research goes wrong",
+      body: "The failures are predictable, which makes them catchable:\n\n- **Invented citations.** Plausible authors, a real-sounding journal, a year, sometimes a DOI, for a paper that doesn't exist. In 2023, lawyers in a New York federal case, Mata v. Avianca, were sanctioned after filing a brief citing cases ChatGPT had made up.\n- **Real paper, wrong claim.** The source exists but doesn't say what the summary says, or says it with caveats that were dropped.\n- **Blended claims.** A sentence combines two sources into a conclusion neither makes.\n- **Flattened nuance.** “May be associated with, in one small sample” becomes “causes”.\n- **Extraction errors.** A table cell reports the wrong sample size or the control group's result.\n- **Stale or retracted work** presented as current.\n\nGeneral chat assistants without search are the most likely to invent references. Tools that search real papers rarely invent them outright, but they still misstate what papers found.",
+      ask: "If a tool only searches real papers, can it still get citations wrong?",
+    },
+    {
+      heading: "Check a citation in four steps",
+      body: "For every source you plan to rely on:\n\n1. **Find it independently.** Search the title in USC Libraries or Google Scholar, or resolve the DOI at doi.org. Don't trust the link the AI gave you; confirm authors, year and venue match.\n2. **Open the full text.** An abstract isn't enough to support a specific claim. If it's paywalled, USC Libraries can usually get it.\n3. **Find the passage.** Locate the sentence, table or figure that supports the claim. If you can't, the claim is unsupported, however plausible.\n4. **Check the fit.** Does the paper's population, method and hedging match how you're using it? Is it retracted or heavily disputed? Scite and publisher pages can show this.\n\nThen cite the paper you read, never the AI tool's summary of it.",
+      ask: "Why isn't the abstract enough to confirm a claim?",
+    },
+    {
+      heading: "Read laterally",
+      body: "When you meet an unfamiliar website, report or statistic, the instinct is to read it closely and judge whether it seems credible. Professional fact-checkers do something different: they leave the page almost immediately and open new tabs to see what other sources say about it. This is called **lateral reading**.\n\nApplied to AI output:\n\n- **Who is behind the source?** Search the organization or author. Is it a research group, an advocacy site, a company selling something?\n- **Do independent sources agree?** Look for the same claim from a second, unrelated source, ideally the original data or study.\n- **Where did the number come from?** Trace statistics back to where they were first published, not to articles repeating them.\n- **Ask a second tool.** Run the key claim through a different tool or a library database. Agreement isn't proof, but disagreement is a flag.\n\nLateral reading is quick. It often takes a minute and saves you from building on a bad source.",
+      ask: "How is lateral reading different from reading a source carefully?",
+    },
+    {
+      heading: "Keep a verification log",
+      body: "A short log turns checking into a habit and gives you evidence of your process. For each important claim, record:\n\n- the claim, in your words\n- the source the AI gave\n- whether the source exists\n- the passage that supports it, with page or section\n- a verdict: **supported**, **weak** (partly supported, overstated or missing caveats) or **wrong** (unsupported or contradicted)\n\nPrioritize. You can't trace every sentence of a long report, so start with the claims your argument depends on, plus anything specific: names, numbers, dates and quotes, which are where errors cluster.\n\nThe log also makes disclosure easy. Journals, instructors and supervisors increasingly ask how AI was used; “I used Elicit to find candidates and verified each cited claim against the full text” is a clear, honest answer.",
+      ask: "Which claims in an AI report should I check first?",
+    },
+  ],
+  example: {
+    title: "Tracing one claim from a research report",
+    body: "Suppose a Deep Research report on study habits says: “A 2019 review found that spaced practice doubles long-term retention.”\n\n**Step 1: find it.** You search the review's title in USC Libraries. It exists, and the authors and year match.\n\n**Step 2: open it.** You read the results and discussion, not just the abstract.\n\n**Step 3: find the passage.** The review reports that spacing improved retention across many studies, but gives no single figure and notes the effect varied by task and delay. “Doubles” appears nowhere.\n\n**Step 4: check the fit.** Most studies used university students and word lists. Your paper is about workplace training.\n\n**Verdict: weak.** The direction is supported; the size is invented and the population differs.\n\n**Your rewrite:** “A 2019 review found spaced practice generally improved retention, though effects varied by task; most studies involved university students.” The claim is smaller, and now it's true.",
+  },
+  deliverable: "A verification table for five key claims from an AI research report, each traced to a primary source and marked supported, weak or wrong, with the supporting passage noted.",
+  questions: [
+    {
+      id: "fake-doi",
+      prompt: "An assistant gives you a reference with authors, journal, year and a DOI. What's the first check?",
+      options: [
+        "Nothing; a DOI proves the paper exists",
+        "Ask the assistant whether the reference is real",
+        "Look it up independently, for example by resolving the DOI at doi.org or searching USC Libraries, and confirm the details match",
+        "Check that the journal name sounds academic",
+      ],
+      answer: 2,
+      explain: "Invented references can include DOIs that don't resolve or point to a different paper. Asking the same assistant isn't independent evidence.",
+    },
+    {
+      id: "abstract",
+      prompt: "A paper exists and its abstract is on topic. Why open the full text before citing it for a specific finding?",
+      options: [
+        "The abstract may not contain the specific result, caveats or population your claim depends on",
+        "Abstracts are usually written by AI",
+        "Citation styles require page numbers from the full text",
+        "It isn't necessary if the abstract mentions your keyword",
+      ],
+      answer: 0,
+      explain: "To support a claim you need the passage that says it, and the conditions around it. Abstracts compress and omit.",
+    },
+    {
+      id: "blended",
+      prompt: "A summary says “Studies show X causes Y” and cites two papers. One found X and Y were correlated; the other studied Y alone. How would you mark it?",
+      options: [
+        "Supported, because both papers are real",
+        "Wrong or weak: neither paper supports a causal claim linking X to Y",
+        "Supported, because two sources agree",
+        "Skip it; citations with two sources are always reliable",
+      ],
+      answer: 1,
+      explain: "This is a blended claim: two real sources combined into a conclusion neither makes. Correlation also isn't causation.",
+    },
+    {
+      id: "lateral",
+      prompt: "An AI answer relies on a report from an organization you've never heard of. What does lateral reading suggest?",
+      options: [
+        "Read the report closely to judge whether it seems credible",
+        "Trust it if the website looks professional",
+        "Ask the AI whether the organization is trustworthy and accept its answer",
+        "Open new tabs to find out who the organization is and what independent sources say about it",
+      ],
+      answer: 3,
+      explain: "Lateral reading means leaving the source to see what others say about it. A professional-looking site tells you little.",
+    },
+    {
+      id: "rabbit",
+      prompt: "Why can't ResearchRabbit hallucinate a claim about a paper?",
+      options: [
+        "It shows citation connections between papers and doesn't generate text about them",
+        "It checks every paper with a human editor",
+        "It only includes papers from the last year",
+        "It asks you to confirm every result",
+      ],
+      answer: 0,
+      explain: "It maps real citation links; it doesn't write summaries. It can still miss papers, especially new ones with little citation data.",
+    },
+    {
+      id: "scite",
+      prompt: "You're about to cite a striking result from 2015. Which tool is designed to show whether later papers supported or disputed it?",
+      options: ["QuillBot", "Scite", "NotebookLM", "Julius"],
+      answer: 1,
+      explain: "Scite classifies citation statements as supporting, contrasting or mentioning. Read the citing papers yourself before calling a result disputed.",
+    },
+    {
+      id: "priority",
+      prompt: "A 20-page AI report has too many claims to check all of them. Where should you start?",
+      options: [
+        "With the first paragraph, then work through in order",
+        "With the claims that have the most citations attached",
+        "With the claims your argument depends on, plus specific names, numbers, dates and quotes",
+        "With the general background, since that's where errors hide",
+      ],
+      answer: 2,
+      explain: "Errors cluster in specifics, and the claims you build on carry the most risk if they're wrong.",
+    },
+    {
+      id: "cite-what",
+      prompt: "Perplexity summarized a study for you, and you read the study. What do you cite?",
+      options: [
+        "Perplexity, because it found the study",
+        "Both, with Perplexity first",
+        "Nothing, since the AI did the work",
+        "The study itself",
+      ],
+      answer: 3,
+      explain: "Cite the source you read. If your instructor or journal asks, disclose separately how AI tools helped you find it.",
+    },
+    {
+      id: "weak",
+      prompt: "A report says a drug “cures” a condition. The cited trial found a modest improvement in some patients. Which verdict fits best?",
+      options: ["Supported", "Weak: the source supports a much smaller claim", "Wrong: the source doesn't exist", "Not worth checking"],
+      answer: 1,
+      explain: "The source exists and points in the same direction, but the claim is overstated. Rewrite it to match what the trial found.",
+    },
+    {
+      id: "second-tool",
+      prompt: "Two different AI tools give the same answer to your research question. What does that tell you?",
+      options: [
+        "It's a useful signal, but you still need to check the underlying sources",
+        "The answer is proven",
+        "The tools copied each other, so the answer is wrong",
+        "Nothing at all",
+      ],
+      answer: 0,
+      explain: "Agreement raises confidence a little; disagreement is a clear flag. Neither replaces opening the source.",
+    },
+    {
+      id: "retracted",
+      prompt: "A paper you plan to cite supports your claim perfectly. What else should you check before relying on it?",
+      options: [
+        "Whether its title is short enough",
+        "Whether it's been retracted or its result heavily disputed",
+        "Whether the AI tool ranked it first",
+        "Whether it was published on a weekday",
+      ],
+      answer: 1,
+      explain: "Retracted and disputed papers still circulate. Publisher pages and tools like Scite can show retractions and later challenges.",
+    },
+    {
+      id: "extraction",
+      prompt: "Elicit's table says a study had 1,200 participants. When you open the paper, 1,200 were screened and 300 were analyzed. What's the lesson?",
+      options: [
+        "Elicit is useless for literature reviews",
+        "Screening counts are the right number to report",
+        "Extracted cells need checking against the paper, especially numbers",
+        "Always use the larger number",
+      ],
+      answer: 2,
+      explain: "Extraction tools save time but misread tables and methods. Check each cell you'll rely on.",
+    },
+    {
+      id: "no-passage",
+      prompt: "You've read the whole cited paper and can't find anything supporting the AI's claim. What should you do?",
+      options: [
+        "Keep the citation; the claim is probably implied",
+        "Cite it anyway and add “see also”",
+        "Ask the AI to rephrase the claim until it fits",
+        "Treat the claim as unsupported: drop it or find a source that actually says it",
+      ],
+      answer: 3,
+      explain: "If you can't point to the passage, the source doesn't support the claim, however plausible it sounds.",
+    },
+    {
+      id: "disclose",
+      prompt: "Which disclosure best describes responsible AI use in a literature search?",
+      options: [
+        "“AI was used.”",
+        "“I used Elicit and ResearchRabbit to find candidate papers and verified each cited claim against the full text.”",
+        "“No AI was used,” since you checked everything yourself",
+        "“See the AI's reference list.”",
+      ],
+      answer: 1,
+      explain: "A good disclosure names the tools, what they did, and how you checked their output.",
+    },
+  ],
+  reflect: "Of the five claims you traced, how many held up fully? What does that tell you about when you can rely on AI research tools, and what will you check every time from now on?",
+  sources: [
+    {
+      title: "Generative AI for Beginners, lesson 3: Using generative AI responsibly (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/03-using-generative-ai-responsibly",
+      license: "MIT",
+      note: "Adapted the framing of hallucinations as confident, persuasive answers that newcomers may not question.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/research-verification", license: "Original" },
+  ],
+};

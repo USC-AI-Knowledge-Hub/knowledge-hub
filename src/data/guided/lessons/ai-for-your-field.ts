@@ -1,0 +1,205 @@
+import type { GuidedLesson } from "../types";
+
+export const aiForYourField: GuidedLesson = {
+  module: "ai-for-your-field",
+  objectives: [
+    "Find three real uses of AI in your field and tell them apart from demos and marketing.",
+    "Identify the privacy, liability and professional rules that shape how your field can use AI.",
+    "Try a small version of one workflow and judge what you'd need before you trusted it.",
+  ],
+  sections: [
+    {
+      heading: "Real uses versus demos",
+      body: "Most of what you'll find about AI in any field is demos: a tool doing something impressive once, on a carefully chosen example. A real use looks different. It usually has:\n\n- **A named person or team** doing the work, not just a vendor describing it.\n- **A specific task** inside a larger job, like drafting a first pass or sorting documents.\n- **A check:** someone qualified reviews the output before it matters.\n- **Stated limits:** what it's bad at, and what happened when it was wrong.\n\nGood places to look: your field's professional associations and trade publications, talks by practitioners, your instructors and career advisers, and the Hub's video library filtered by your field. Treat vendor marketing as a list of claims to check, not evidence.\n\nAim for three real uses. If you can only find demos, that's a finding too: it may mean your field is still early, or that the tools don't fit its work yet.",
+      ask: "How can I tell whether an AI use in my field is real or just a demo?",
+    },
+    {
+      heading: "Patterns that repeat across fields",
+      body: "The tools differ by field, but the jobs they do are surprisingly similar. Clinicians use AI to draft visit notes and summaries. Lawyers use it to review contracts and find relevant clauses. Marketers test variations of copy. Engineers and scientists generate code for simulations and analysis. Journalists and social scientists transcribe interviews and do a first pass at sorting open-ended responses.\n\nUnderneath, most real uses are one of a few tasks:\n\n- **Summarize** a long record, transcript or document.\n- **Draft** a first version for a professional to edit.\n- **Classify or extract** information from many documents.\n- **Write code** to analyze or simulate something.\n\nAnd almost all of them share one structure: AI produces a draft or a sort, and a qualified person checks it and takes responsibility. When you read about a use in your field, look for that person. If nobody checks, ask what happens when the output is wrong.",
+      ask: "Why do most professional AI uses still have a person checking the output?",
+    },
+    {
+      heading: "Your field's rules",
+      body: "Every field has rules that decide what AI use is acceptable, and they matter more than what the tool can do.\n\n- **Privacy:** health information, student records (covered by FERPA in the US), client files and personal data often have legal protection. Pasting them into a general AI tool can break those rules.\n- **Research ethics:** studies with human participants follow an approved protocol, usually through an IRB, which can limit which tools may touch the data.\n- **Liability:** the professional stays responsible for the work. There have been widely reported cases of lawyers facing court sanctions after filing briefs with case citations an AI invented.\n- **Intellectual property:** creative and design fields face open questions about ownership of AI-generated work and about training data.\n- **Professional codes:** many associations now publish guidance on AI.\n\nYou don't need to be an expert in all of this. You do need to know which rules apply in your field, and who to ask.",
+      ask: "Why can pasting client or patient information into an AI tool be a problem?",
+    },
+    {
+      heading: "Try it small, then judge trust",
+      body: "Pick one workflow from your research and try a small version of it yourself, using public or made-up data, never real client, patient or student information.\n\nTest it on several realistic cases, not just one easy example. Include a hard case and one where you already know the right answer, so you can see how it fails.\n\nThen write down three things:\n\n- **What worked:** where did it save time or catch something you'd miss?\n- **What didn't:** errors, omissions, or places it sounded confident and was wrong.\n- **What you'd need to trust it:** accuracy on your field's cases, a checking step, a tool approved for the data, and clarity about who's accountable.\n\nIf you can, talk to a practitioner. Ask what they tried, what stuck and what they dropped, and why. That conversation is often more useful than any demo. Being able to explain all this in an interview shows judgment employers look for.",
+      ask: "What should I test before deciding an AI workflow is trustworthy?",
+    },
+  ],
+  example: {
+    title: "A public health student maps one workflow",
+    body: "A public health student wants to know how AI is used to communicate research to the public.\n\n**Finding real uses:** in the video library and in a professional association's newsletter, they find health departments drafting plain-language summaries, researchers using AI to code open-ended survey answers, and a demo of a chatbot answering symptom questions. They count the first two as real uses (named teams, human review) and the chatbot as a demo.\n\n**The rules:** health information about individuals is protected, so they use only a published, public report.\n\n**Trying it:** they ask an assistant to summarize the report for a community newsletter at a middle-school reading level. The summary reads well. Checking it against the report, they find one number rounded in a way that changed its meaning and one recommendation the report never made.\n\n**What they'd need to trust it:** a fact-check against the source every time, a reviewer from the health team, and a tool approved for any non-public data.\n\nThey end with a one-page note: three uses, one workflow tested, two errors found, and what would make it safe to use.",
+  },
+  deliverable: "A one-page note on your field: three real uses with where you found them, the rules that apply, and what worked, what didn't and what you'd need to trust the workflow you tried.",
+  questions: [
+    {
+      id: "real-vs-demo",
+      prompt: "Which is the strongest sign that an AI use in your field is real rather than a demo?",
+      options: [
+        "A polished video from the vendor showing a perfect result",
+        "A social media post calling it revolutionary",
+        "A named team describing the task, how they check the output, and what went wrong",
+        "A long list of features on the product page",
+      ],
+      answer: 2,
+      explain: "Real uses come with a specific task, a review step and honest limits. Marketing shows the best case.",
+    },
+    {
+      id: "common-structure",
+      prompt: "Across medicine, law and engineering, what structure do most real AI uses share?",
+      options: [
+        "AI produces a draft or first sort, and a qualified person checks it and takes responsibility",
+        "AI makes final decisions and people are informed afterwards",
+        "AI is used only for scheduling",
+        "People do the work and AI rates their performance",
+      ],
+      answer: 0,
+      explain: "The common pattern is AI assisting with a first pass while a professional reviews and stays accountable.",
+    },
+    {
+      id: "task-types",
+      prompt: "A lawyer uses AI to find indemnity clauses across 200 contracts. Which underlying task is this?",
+      options: [
+        "Drafting",
+        "Summarizing",
+        "Generating images",
+        "Classifying and extracting information",
+      ],
+      answer: 3,
+      explain: "Finding and pulling out specific clauses across many documents is extraction. It still needs a lawyer to check what was found and missed.",
+    },
+    {
+      id: "test-data",
+      prompt: "You want to try an AI workflow from nursing: summarizing patient notes. What data should you practice with?",
+      options: [
+        "Real notes from your clinical placement, with names removed",
+        "Made-up or publicly available example notes",
+        "A friend's medical records, with their permission",
+        "Whatever the tool suggests",
+      ],
+      answer: 1,
+      explain: "Real patient information is protected, and removing names doesn't always make it safe to share. Practice with invented or public examples.",
+    },
+    {
+      id: "liability",
+      prompt: "A professional uses AI to draft a report, and the report contains an error. Who is generally responsible?",
+      options: [
+        "The professional who submitted the report",
+        "The AI company",
+        "Nobody, since AI wrote it",
+        "The person who recommended the tool",
+      ],
+      answer: 0,
+      explain: "Professionals remain accountable for the work they sign off on. Courts have sanctioned lawyers who filed AI-invented citations.",
+    },
+    {
+      id: "ferpa",
+      prompt: "An education major wants to use AI to analyze real student grades from their practicum school. What should they know first?",
+      options: [
+        "Grades aren't personal information",
+        "It's fine if they use a free account",
+        "Student education records are protected under FERPA, so they need the school's approval and an appropriate tool before using that data",
+        "AI tools delete data automatically, so there's no risk",
+      ],
+      answer: 2,
+      explain: "FERPA protects student education records in the US. Using them requires the right permissions and tools, not a personal account.",
+    },
+    {
+      id: "irb",
+      prompt: "A psychology student wants to transcribe interviews from their research study with an AI tool. What should they check?",
+      options: [
+        "Only that the transcripts are accurate",
+        "Whether their approved research protocol allows that tool to handle participant data",
+        "Whether the tool has a free tier",
+        "Nothing, because transcription isn't analysis",
+      ],
+      answer: 1,
+      explain: "Human-participant research follows an approved protocol, often through an IRB. It can limit which tools may process the data.",
+    },
+    {
+      id: "hard-case",
+      prompt: "When testing a small version of a workflow, why include a case where you already know the right answer?",
+      options: [
+        "It makes the test faster",
+        "Tools perform better on familiar cases",
+        "It's required by the tool's terms",
+        "It lets you see clearly whether and how the tool gets things wrong",
+      ],
+      answer: 3,
+      explain: "A known answer gives you a benchmark. Without one, a confident wrong answer can look fine.",
+    },
+    {
+      id: "only-demos",
+      prompt: "After searching, you can only find demos of AI in your field, no real uses. What's the best conclusion?",
+      options: [
+        "AI is useless in your field forever",
+        "You should invent a real use for your note",
+        "That's a finding: your field may be early, or the tools may not fit its work yet",
+        "Demos count as real uses",
+      ],
+      answer: 2,
+      explain: "An honest picture of where your field stands is more useful than a forced example. Say what you found.",
+    },
+    {
+      id: "trust-needs",
+      prompt: "Which list best describes what you'd need before trusting an AI workflow in professional practice?",
+      options: [
+        "Evidence it's accurate on your field's cases, a checking step, a tool approved for the data, and clear accountability",
+        "A good-looking interface and a free plan",
+        "A recommendation from a friend",
+        "The vendor's promise that it's accurate",
+      ],
+      answer: 0,
+      explain: "Trust comes from tested accuracy, review, appropriate data handling and knowing who's responsible.",
+    },
+    {
+      id: "practitioner",
+      prompt: "You get fifteen minutes with a practitioner in your field. Which question will teach you the most?",
+      options: [
+        "“Which AI tool is the best?”",
+        "“What did you try, what stuck, and what did you drop, and why?”",
+        "“Do you think AI will replace your job?”",
+        "“Can you send me your prompts?”",
+      ],
+      answer: 1,
+      explain: "Asking what stuck and what was dropped reveals real constraints and judgment, which demos and rankings don't.",
+    },
+    {
+      id: "vendor-claims",
+      prompt: "A vendor says its tool “cuts review time in half” for accountants. How should you treat that?",
+      options: [
+        "As a fact to put in your note",
+        "As false, because vendors always lie",
+        "As proof the tool is approved for client data",
+        "As a claim to check against independent sources or practitioners",
+      ],
+      answer: 3,
+      explain: "Marketing claims aren't evidence. They may be true, but you need an independent source before relying on them.",
+    },
+    {
+      id: "confident-wrong",
+      prompt: "Your test summary of a public report reads well, but one recommendation isn't in the report. What does this show?",
+      options: [
+        "Fluent output can include claims the source never made, so every summary needs checking against the source",
+        "The report must be incomplete",
+        "The tool is broken and should never be used",
+        "You should use a longer prompt and stop checking",
+      ],
+      answer: 0,
+      explain: "Models can add plausible content that isn't in the source. A checking step is part of any workflow you'd trust.",
+    },
+  ],
+  reflect: "Based on what you found, how do you expect AI to change the first job you want after graduating? What skill will matter more because of it, and what will you do this year to build it?",
+  sources: [
+    {
+      title: "Generative AI for Beginners, lesson 3: Using generative AI responsibly (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/03-using-generative-ai-responsibly",
+      license: "MIT",
+      note: "Adapted the idea of testing a varied set of realistic inputs to see how a model fails before relying on it.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/ai-for-your-field", license: "Original" },
+  ],
+};

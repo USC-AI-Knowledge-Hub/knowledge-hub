@@ -1,0 +1,223 @@
+import type { GuidedLesson } from "../types";
+
+export const chatAssistants: GuidedLesson = {
+  module: "chat-assistants",
+  objectives: [
+    "Set up an AI assistant for university work with the right account and sensible privacy habits.",
+    "Compare ChatGPT, Claude, Gemini and Copilot on the same real task and choose one for a purpose.",
+    "Keep course or project context in one place with projects, custom instructions and files.",
+  ],
+  sections: [
+    {
+      heading: "What an assistant is, and isn't",
+      body: "ChatGPT, Claude, Gemini and Microsoft Copilot are chat interfaces wrapped around large language models. The model writes each reply by predicting likely text, based on its training and on everything in the current conversation.\n\nThree consequences matter from day one:\n\n- **It only knows what's in the chat.** Your course, your reader and your deadline are invisible unless you say them.\n- **Its built-in knowledge stops at a training cutoff.** For recent events, use a mode that searches the web, and open the links it shows.\n- **It sounds equally sure when it's wrong.** Fluent writing is not evidence of accuracy.\n\nAround the model, each product adds features: file uploads, web search, voice, image generation, running code on data, and places to save instructions. Those features, more than the chat itself, are what separate the tools in daily use.",
+      ask: "If the assistant sounds confident, why can't I trust that it's right?",
+    },
+    {
+      heading: "Start with the right account",
+      body: "Which account you sign in with decides where your conversations go and what the provider may do with them.\n\nAt USC, **ChatGPT Edu is provided** to students, faculty and staff. Sign in at chatgpt.com with your USC credentials so university work stays in the university workspace. For Claude, Gemini and Copilot, check USC IT Services for current institutional access before relying on a personal account; Copilot and Gemini behave differently depending on whether you're signed in with a school or personal account.\n\nWhatever the tool, some material doesn't belong in a personal account at all:\n\n- student records and grades\n- health or other identifiable personal data\n- unpublished research, manuscripts under review, or data covered by an agreement\n- anything you'd need permission to share outside the university\n\nIn a personal account, open the data settings once and decide whether your chats may be used to improve the product.",
+      ask: "Why does it matter whether I use my USC account or a personal one?",
+    },
+    {
+      heading: "The big four, side by side",
+      body: "The main assistants overlap far more than their marketing suggests. All four can draft, explain, summarize and answer questions about files. Their differences are mostly in where they live and what they're built around:\n\n- **ChatGPT:** the broadest set of features in one place, including file and data analysis, image generation, voice and custom GPTs you can share.\n- **Claude:** strong on long documents and careful writing, with Projects for keeping files together and Artifacts for documents and small apps.\n- **Gemini:** built into Google's apps (Docs, Gmail, Drive), with strong image and video understanding and Deep Research reports.\n- **Microsoft Copilot:** works inside Word, Excel, PowerPoint, Outlook and Teams, where your Office files already are.\n\nModels are updated often, so rankings from last semester may not hold. The reliable way to choose is to run your own real task through each one and judge the results.",
+      ask: "If the assistants are so similar, how should I decide which one to use?",
+    },
+    {
+      heading: "Keep context in one place",
+      body: "Retyping who you are and what you're working on in every chat gets old fast, and the answers suffer when you forget. Most assistants let you save context:\n\n- **Projects** (ChatGPT, Claude) group chats with shared files and instructions, such as a syllabus, a reading list or a style guide.\n- **Custom GPTs** (ChatGPT) and **Gems** (Gemini) are reusable assistants with their own standing instructions.\n- **Custom instructions** apply to every chat: your role, your field, the tone and length you prefer.\n\nTwo habits keep answers sharp. Start a new chat when you change topic, because a long conversation carries old details that can pull answers off course. And check whether memory is on: some assistants remember facts across chats, which is convenient but worth reviewing in settings.",
+      ask: "Why would starting a new chat give me a better answer than continuing an old one?",
+    },
+    {
+      heading: "Decide what to hand over",
+      body: "The AI Fluency Framework by Rick Dakan and Joseph Feller describes four habits of effective AI use. They're a good checklist for your first week:\n\n- **Delegation:** decide what the AI should do and what you should do. Hand over tasks where you can judge the result; keep the ones that are the point of your learning or need your expertise.\n- **Description:** tell it clearly what you want, how to approach it and how to behave.\n- **Discernment:** evaluate what comes back. Is it accurate, fit for the audience, and reasoned soundly?\n- **Diligence:** take responsibility for what you use and share, including being open about AI's part in it.\n\nFor coursework, delegation also means reading your syllabus. Policies differ between courses, and the policy decides what's allowed, not the tool.",
+      ask: "How do I know whether a task is a good one to hand to an AI?",
+    },
+  ],
+  example: {
+    title: "Same task, three assistants",
+    body: "**The task:** a staff member needs to explain a new room-booking process to 200 students in a short email.\n\n**The prompt, identical in each tool:** “I coordinate events for a USC student center. Write a 120-word email telling students how to book study rooms from next week: book online, up to two hours a day, cancel 24 hours ahead. Friendly, plain language, one clear call to action.”\n\n**Scoring:** before reading any answer, decide what good looks like: facts correct and complete, right length, clear action, tone that fits students.\n\n**Results:** answer A was warm but invented a room-capacity rule nobody mentioned. Answer B was accurate but ran to 200 words. Answer C was accurate, 118 words, and ended with a single link line.\n\n**One-line verdict:** “C won because it stuck to the facts I gave and hit the length; A would have misinformed students.” That line is the useful part: next time you know what to check first.",
+  },
+  deliverable: "One real task, the identical prompt you gave three assistants, their answers ranked, and one line on why the winner won.",
+  questions: [
+    {
+      id: "usc-account",
+      prompt: "You want to use AI for a university project at USC. Which setup does the Hub recommend by default?",
+      options: [
+        "A free personal account on whichever tool is most popular this month",
+        "ChatGPT Edu, signed in with your USC credentials",
+        "Any tool, as long as you use private browsing",
+        "A friend's paid account, since paid plans are always private",
+      ],
+      answer: 1,
+      explain: "USC provides ChatGPT Edu to students, faculty and staff. Signing in with your USC account keeps university work inside the university workspace.",
+    },
+    {
+      id: "sensitive",
+      prompt: "A TA wants help spotting patterns in students' grades and comments. What's the problem with pasting them into a personal AI account?",
+      options: [
+        "Assistants can't read tables",
+        "Nothing, if the TA deletes the chat afterwards",
+        "Student records don't belong in a personal account; they need an approved, institutional setting",
+        "The answer will be too long",
+      ],
+      answer: 2,
+      explain: "Student records are protected information. Deleting a chat afterwards doesn't undo sending the data to a service the university hasn't approved.",
+    },
+    {
+      id: "invisible-context",
+      prompt: "You ask “Is this a good thesis statement?” and get a vague answer. What's the most likely reason?",
+      options: [
+        "The assistant doesn't know your course, the assignment or what good looks like to your instructor",
+        "The assistant is deliberately unhelpful with essays",
+        "Thesis statements are too short to analyze",
+        "You need a paid plan for writing feedback",
+      ],
+      answer: 0,
+      explain: "The model only knows what's in the chat. Say what the assignment is, who reads it, and what a strong thesis needs to do.",
+    },
+    {
+      id: "cutoff",
+      prompt: "You ask an assistant about a policy announced last week, and it answers confidently with no links. What should you do?",
+      options: [
+        "Trust it; confident answers are usually current",
+        "Ask it to be more confident",
+        "Assume the policy doesn't exist",
+        "Turn on web search or check the official source, because its built-in knowledge may predate the announcement",
+      ],
+      answer: 3,
+      explain: "A model's built-in knowledge stops at a training cutoff. For recent events, use web search and open the sources, or go to the official page.",
+    },
+    {
+      id: "choose",
+      prompt: "A classmate says one assistant is “the best” based on a ranking from last year. What's the most reliable way to choose for your own work?",
+      options: [
+        "Run the same real task through several assistants and judge the answers yourself",
+        "Pick the one with the newest model name",
+        "Use the one your classmate recommends",
+        "Pick whichever gives the longest answers",
+      ],
+      answer: 0,
+      explain: "Models change often and differ by task. Testing on your own work shows you what matters for you.",
+    },
+    {
+      id: "office",
+      prompt: "A staff member spends most of the day in Word, Excel and Outlook and wants help without copying text between apps. Which assistant is designed for that?",
+      options: ["Perplexity", "Microsoft Copilot", "NotebookLM", "ResearchRabbit"],
+      answer: 1,
+      explain: "Copilot works inside Microsoft 365 apps, so it can help where the files already are. Check USC IT Services for what your account includes.",
+    },
+    {
+      id: "project",
+      prompt: "You keep pasting the same syllabus and reading list into new chats for one course. What's a better approach?",
+      options: [
+        "Paste them into every message, not just the first",
+        "Stop giving context; the assistant will learn your course over time",
+        "Create a project (or custom GPT or Gem) with the syllabus and readings as shared files and instructions",
+        "Use a different assistant for each week",
+      ],
+      answer: 2,
+      explain: "Projects and custom assistants store files and instructions once, so every chat starts with the right context.",
+    },
+    {
+      id: "new-chat",
+      prompt: "After a two-hour chat about your thesis, you switch to asking about a lab report and the answers keep drifting back to the thesis. What helps most?",
+      options: [
+        "Start a new chat for the lab report",
+        "Type your question in capital letters",
+        "Ask the same question three times",
+        "Switch the assistant to voice mode",
+      ],
+      answer: 0,
+      explain: "Everything earlier in a chat is context for the next reply. A fresh chat removes old details that pull answers off course.",
+    },
+    {
+      id: "fluent",
+      prompt: "Which statement about an assistant's writing style is true?",
+      options: [
+        "Fluent, confident writing means the facts have been checked",
+        "Assistants only write confidently when they have a source",
+        "Hesitant phrasing means the answer is wrong",
+        "It writes just as fluently when it's wrong as when it's right",
+      ],
+      answer: 3,
+      explain: "The model predicts likely text, and likely text sounds confident. Style tells you nothing about accuracy.",
+    },
+    {
+      id: "delegation",
+      prompt: "In the AI Fluency Framework, what is delegation about?",
+      options: [
+        "Deciding which parts of a task the AI should do and which you should do yourself",
+        "Sharing your AI account with a group",
+        "Writing prompts in the correct format",
+        "Checking every answer against a source",
+      ],
+      answer: 0,
+      explain: "Delegation is the decision about who does what. Description, discernment and diligence cover prompting, evaluating and responsibility.",
+    },
+    {
+      id: "delegate-learning",
+      prompt: "An assignment asks you to practice solving a type of statistics problem. Which use of AI best fits good delegation?",
+      options: [
+        "Have the AI solve every problem and copy the working",
+        "Solve them yourself, then ask the AI to check one solution and explain any mistake",
+        "Ask the AI to rewrite the assignment so it's easier",
+        "Skip the problems and ask for a summary of the topic",
+      ],
+      answer: 1,
+      explain: "When the practice itself is the point, keep the core work and use AI as a checker or explainer, within your course's policy.",
+    },
+    {
+      id: "rubric-first",
+      prompt: "When comparing three assistants' answers, why decide what good looks like before reading them?",
+      options: [
+        "It makes the assistants answer faster",
+        "So the first fluent answer you read doesn't set your standard; you judge all three on the same criteria",
+        "Because assistants can see your criteria",
+        "It isn't useful; just pick the one you like",
+      ],
+      answer: 1,
+      explain: "Criteria set in advance, like accuracy, length and tone, make the comparison fair and show you why one answer won.",
+    },
+    {
+      id: "memory",
+      prompt: "Some assistants can remember details from earlier chats. What's a sensible habit?",
+      options: [
+        "Turn it on and never look at it",
+        "Assume it remembers nothing, whatever the settings say",
+        "Tell it your passwords so it can log in for you",
+        "Check the memory settings and review what's stored, especially on shared or personal accounts",
+      ],
+      answer: 3,
+      explain: "Memory is convenient but it's your data. Knowing what's saved, and turning it off when you need to, is part of setting up well.",
+    },
+    {
+      id: "policy",
+      prompt: "Two of your courses have different AI rules. Which one decides what you may do with AI in each course?",
+      options: [
+        "The assistant's terms of service",
+        "The rules of whichever course is stricter, applied to both",
+        "Each course's own policy, from the syllabus or instructor",
+        "Whatever the assistant agrees to do",
+      ],
+      answer: 2,
+      explain: "Course policies vary, and each applies to its own course. When in doubt, ask the instructor.",
+    },
+  ],
+  reflect: "Which assistant won your comparison, and was it the one you expected? Name one task this week you'd hand to it and one you'd keep for yourself, and explain the difference.",
+  sources: [
+    {
+      title: "AI Fluency Framework (Rick Dakan and Joseph Feller)",
+      url: "https://aifluencyframework.org/",
+      license: "CC BY-NC-SA 4.0",
+      note: "Adapted the four competencies: delegation, description, discernment and diligence.",
+    },
+    {
+      title: "Generative AI for Beginners, lesson 7: Building chat applications (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/07-building-chat-applications",
+      license: "MIT",
+      note: "Adapted the points on context retention, custom instructions, and the trade-off between remembered context and privacy.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/chat-assistants", license: "Original" },
+  ],
+};

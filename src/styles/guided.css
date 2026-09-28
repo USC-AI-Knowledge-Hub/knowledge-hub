@@ -1,0 +1,158 @@
+/* Guided courses: the course syllabus and the lesson player. */
+
+/* ── Course page ──────────────────────────────────────────────────────── */
+
+.course-cta { margin-top: 20px; }
+.course-outcomes { max-width: 820px; margin-top: 32px; padding: 24px 28px; }
+.course-outcomes .ideas { margin-top: 12px; }
+.course-unit { margin-top: 48px; }
+.course-unit .stepper { margin-top: 20px; }
+.step-meta { flex-wrap: wrap; }
+.course-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: var(--md-shape-full);
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.course-tag.passed { background: var(--kh-beginner-container); color: var(--kh-on-beginner-container); }
+.course-capstone { max-width: 820px; margin-top: 48px; padding: 28px; scroll-margin-top: 24px; }
+.course-capstone h3 { margin: 24px 0 8px; }
+.course-capstone-steps { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+.course-checklist { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 10px; }
+.course-checklist label,
+.lp-check-done { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+.course-checklist input,
+.lp-check-done input { width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: var(--md-sys-color-primary); }
+
+/* ── Lesson player ────────────────────────────────────────────────────── */
+
+.lp-head h1 { margin-top: 12px; }
+.lp-passed { display: inline-flex; align-items: center; gap: 4px; color: var(--kh-beginner); }
+
+.lp-steps { display: grid; gap: 8px; margin-top: 20px; max-width: 820px; }
+.lp-steps ol { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; }
+.lp-steps li { flex: 1; }
+.lp-step {
+  display: block;
+  width: 100%;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--md-shape-full);
+  background: var(--md-sys-color-surface-container-highest);
+  cursor: pointer;
+  transition: background-color var(--md-effect), height var(--md-spring-fast);
+}
+.lp-step.reached { background: var(--md-sys-color-primary-container); opacity: 0.55; }
+.lp-step.current { background: var(--md-sys-color-primary-container); opacity: 1; height: 12px; margin-top: -2px; }
+.lp-step:disabled { cursor: not-allowed; }
+.lp-step:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 3px; }
+
+.lp-layout { display: grid; gap: 32px; margin-top: 32px; }
+@media (min-width: 1100px) {
+  .lp-layout { grid-template-columns: minmax(0, 760px) minmax(240px, 300px); align-items: start; }
+  .lp-side { position: sticky; top: 24px; }
+}
+/* With the tutor open, the companion steps aside so the lesson and tutor sit side by side. */
+body.tutor-open .lp-side { display: none; }
+@media (min-width: 1100px) {
+  body.tutor-open .lesson-player { padding-right: 440px; }
+  body.tutor-open .lp-layout { grid-template-columns: minmax(0, 1fr); }
+}
+
+.lp-main { min-width: 0; }
+.lp-step-title { margin: 0 0 16px; outline: none; }
+.lp-reading { max-width: 68ch; }
+.lp-reading p { margin: 0 0 14px; }
+.lp-ask { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.lp-ask .btn { height: auto; min-height: 40px; padding-block: 8px; text-align: left; }
+.lp-example { padding: 24px 28px; max-width: 68ch; }
+.lp-example .title-m { margin: 0 0 12px; }
+.lp-practice-steps { margin: 0 0 16px; padding-left: 22px; display: grid; gap: 10px; max-width: 68ch; }
+.lp-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+.lp-row .body-s { margin-right: auto; }
+
+.lp-questions { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; max-width: 68ch; }
+.lp-q { padding: 20px 22px; }
+.lp-q fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.lp-q legend { display: flex; gap: 12px; align-items: baseline; padding: 0; margin-bottom: 12px; }
+.lp-q-num {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--md-shape-full);
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-size: 14px;
+}
+.lp-options { display: grid; gap: 8px; }
+.lp-option {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: var(--md-shape-md);
+  background: var(--md-sys-color-surface-container-low);
+  cursor: pointer;
+  transition: border-radius var(--md-spring-fast), background-color var(--md-effect);
+}
+.lp-option:hover { border-radius: var(--md-shape-lg); }
+.lp-option input { flex: none; width: 18px; height: 18px; margin: 0; accent-color: var(--md-sys-color-primary); }
+.lp-option span { flex: 1; }
+fieldset:disabled .lp-option { cursor: default; }
+.lp-option.right { background: var(--kh-beginner-container); color: var(--kh-on-beginner-container); }
+.lp-option.wrong { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
+.lp-explain { margin: 12px 0 0; padding-left: 12px; border-left: 3px solid var(--md-sys-color-outline-variant); }
+.lp-explain.right { border-color: var(--kh-beginner); }
+.lp-explain.wrong { border-color: var(--md-sys-color-error); }
+.lp-result { display: grid; gap: 12px; justify-items: start; margin-top: 20px; padding: 20px 24px; max-width: 68ch; }
+.lp-result .title-m { margin: 0; }
+
+.lp-textarea {
+  display: block;
+  width: 100%;
+  max-width: 68ch;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: var(--md-shape-md);
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  resize: vertical;
+}
+.lp-textarea:focus { outline: 2px solid var(--md-sys-color-primary); outline-offset: -1px; }
+
+.lp-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.lp-companion { padding: 20px; }
+.lp-companion .title-m { display: flex; gap: 8px; align-items: center; margin: 0 0 6px; }
+.lp-companion ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.lp-suggest {
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--md-shape-md);
+  background: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: border-radius var(--md-spring-fast);
+}
+.lp-suggest:hover { border-radius: var(--md-shape-lg); }

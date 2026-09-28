@@ -5,6 +5,7 @@ import { Level } from "../components/Level";
 import { ToolMark } from "../components/ToolMark";
 import { VideoCard } from "../components/VideoCard";
 import { coursesFor } from "../data/courses";
+import { lessonByModule } from "../data/guided";
 import { moduleById, paths } from "../data/learn";
 import { toolById } from "../data/tools";
 import { live, useCourseStatus } from "../lib/courses";
@@ -59,6 +60,12 @@ export function ModulePage() {
         </div>
         <h1 className="display-s measure">{m.title}</h1>
         <p className="headline-s muted measure module-summary">{m.summary}</p>
+        {lessonByModule.has(m.id) && (
+          <Link to={`/learn/lesson/${m.id}`} className="btn filled state" style={{ marginTop: 20 }}>
+            <Icon name="school" />
+            Take the guided lesson
+          </Link>
+        )}
       </header>
 
       <div className="module-layout">

@@ -46,7 +46,7 @@ export function trimRepetition(text: string): { text: string; looping: boolean }
 const BASE =
   "You are the AI tutor on USC's AI Knowledge Hub. You help students understand AI. Use plain language. Base every fact on the notes below; never invent numbers, names, dates or sources.";
 
-export type Mode = "answer" | "quest" | "critique" | "quiz" | "simpler" | "tool" | "frame";
+export type Mode = "answer" | "quest" | "critique" | "quiz" | "simpler" | "tool" | "frame" | "reflect";
 
 const TASKS: Record<Mode, string> = {
   answer:
@@ -58,6 +58,8 @@ const TASKS: Record<Mode, string> = {
   simpler: "Explain the lesson to a first-year student in under 100 words, using an everyday comparison.",
   tool: "Using only the tool profile in the notes, say in under 100 words when to use this tool and when to pick something else.",
   frame: "In one sentence of under 30 words, tell the student which of the listed tools to try first and why. Only mention tools in the notes.",
+  reflect:
+    "The student wrote a reflection on the lesson in the notes. In under 110 words: name one thing that shows real understanding, then ask one question that would push their thinking further. Be warm and specific. Don't grade it.",
 };
 
 export function clip(text: string, max: number): string {

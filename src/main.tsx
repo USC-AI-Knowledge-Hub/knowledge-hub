@@ -7,6 +7,7 @@ import { About } from "./pages/About";
 import { Courses } from "./pages/Courses";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
+import { LessonPlayer } from "./pages/LessonPlayer";
 import { ModulePage } from "./pages/ModulePage";
 import { NotFound } from "./pages/NotFound";
 import { PathPage } from "./pages/PathPage";
@@ -27,6 +28,8 @@ const router = createBrowserRouter(
         { path: "learn", element: <Learn /> },
         { path: "learn/courses", element: <Courses /> },
         { path: "learn/path/:id", element: <PathPage /> },
+        { path: "learn/path/:path/:id", element: <LessonPlayer /> },
+        { path: "learn/lesson/:id", element: <LessonPlayer /> },
         { path: "learn/:id", element: <ModulePage /> },
         { path: "tools", element: <Tools /> },
         { path: "tools/:id", element: <ToolPage /> },

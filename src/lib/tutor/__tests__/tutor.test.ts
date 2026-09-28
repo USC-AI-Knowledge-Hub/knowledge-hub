@@ -113,13 +113,13 @@ describe("what to learn next", () => {
     const n = nextModule(done)!;
     expect(n.path.id).toBe("builder");
     expect(n.module.id).toBe(builder.steps[3].module);
-    expect(n.reason).toMatch(/3 of 6/);
+    expect(n.reason).toMatch(new RegExp(`3 of ${builder.steps.length}`));
   });
 
   it("prefers the path the student is on", () => {
     const n = nextModule(["what-is-genai"], "faculty")!;
     expect(n.path.id).toBe("faculty");
-    expect(n.module.id).toBe("limits");
+    expect(n.module.id).toBe("llms");
   });
 
   it("moves on when a path is finished", () => {

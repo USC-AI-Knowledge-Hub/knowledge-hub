@@ -1,0 +1,228 @@
+import type { GuidedLesson } from "../types";
+
+export const ethicsIntegrity: GuidedLesson = {
+  module: "ethics-integrity",
+  objectives: [
+    "Work out what AI use a course or assignment allows, and ask before you start when it's unclear.",
+    "Decide what's safe to put into an AI tool, and keep other people's private data out.",
+    "Write a disclosure that says which tool you used, for what, and how you checked its output.",
+  ],
+  sections: [
+    {
+      heading: "The syllabus wins",
+      body: "There's no single rule for AI at a university. One instructor may encourage it, another may ban it, and the same course can treat two assignments differently. The university's academic integrity policy sets the frame; your course and assignment instructions set the specifics.\n\nSo before you use AI on graded work:\n\n- **Read the syllabus** and the assignment instructions for anything about AI.\n- **Don't assume** that what was fine in one course is fine in another.\n- **If it's unclear, ask** before you start, ideally in writing, and keep the answer.\n\nUsing AI in a way your instructor hasn't allowed can be treated as academic misconduct, even if you'd have used it the same way elsewhere.\n\nIf you're an instructor, the same applies in reverse: say what's allowed for each assignment, specifically. Researchers have another layer, since many journals and funders publish their own AI rules, and journals commonly say an AI tool can't be listed as an author.",
+      ask: "What should I do if the syllabus doesn't mention AI at all?",
+    },
+    {
+      heading: "Privacy: what you put in",
+      body: "Anything you type or upload goes to the tool's provider. Depending on the tool, your account type and your settings, it may be stored, reviewed or used to improve models.\n\nNever paste other people's private information into a tool that isn't approved for it:\n\n- **Classmates' work** or messages, without their permission.\n- **Student records** such as grades and submissions. In the US, FERPA protects student education records.\n- **Health information** or other personal details about anyone.\n- **Research participant data,** which your approved research protocol governs.\n- **Confidential material** from an employer or internship, or someone's unpublished work.\n\nFor university work, use the university's tools. USC provides ChatGPT Edu, which keeps chats inside a university workspace; sign in with your USC account. Even there, check which kinds of data it's approved for before using anything sensitive.\n\nRecording people raises the same issue: get consent from everyone before you record or transcribe a conversation.",
+      ask: "Why is it risky to paste a classmate's draft into a personal AI account?",
+    },
+    {
+      heading: "Disclosure: credit AI like a source",
+      body: "When your course allows AI, disclose it the way you'd cite a source. A good disclosure answers four questions in a sentence or two:\n\n- **Which tool** did you use?\n- **For what** part of the work?\n- **How did you check** its output?\n- **What's yours:** the ideas, the argument, the analysis?\n\n“I used ChatGPT” is too vague to be useful. “I used ChatGPT to suggest an outline and to check grammar in my final draft; the argument and sources are mine, and I rejected one suggested section that misread the reading” tells your instructor exactly what happened.\n\nMajor citation styles, including APA, MLA and Chicago, have published guidance on citing generative AI. Follow the one your course uses. Cite the original sources you actually read, not the AI that pointed you to them.\n\nYou're accountable for everything you submit, including any error the AI introduced. The AI Fluency Framework calls this Diligence: being transparent about AI's role and taking responsibility for the result.",
+      ask: "What makes a disclosure statement useful rather than vague?",
+    },
+    {
+      heading: "Copyright is unsettled",
+      body: "Copyright and AI is an area where the law is still developing, so be careful about confident claims either way.\n\nWhat's reasonably clear: in the US, the Copyright Office has said that copyright protects works of human authorship. Material generated entirely by AI, without meaningful human creative contribution, may not be protected. Work where a person selects, arranges or substantially modifies AI output is more complicated and is judged case by case.\n\nWhat's still open: several lawsuits are testing whether training AI models on copyrighted books, images and articles is lawful. The answers may differ by country and by case.\n\nPractical habits while it's unsettled:\n\n- **Don't upload material you don't have the right to share,** like a whole textbook, into a tool.\n- **Don't assume AI output is free to use** commercially; read the tool's terms.\n- **Label AI-generated images** and media in your work.\n- **Ask** your instructor or a librarian when a project depends on the answer.",
+      ask: "Can I own the copyright to something an AI generated for me?",
+    },
+    {
+      heading: "Fairness, bias and access",
+      body: "Language and image models learn from huge amounts of human-made data, and they reflect its patterns, including stereotypes. Ask for an image of a “scientist” or a story about a “nurse” and notice who appears. Bias can also be subtler: whose examples, dialects or perspectives are treated as normal.\n\nThis matters most when AI output affects people. Don't use AI to make judgments about individuals, like screening applicants or evaluating a classmate, without a person reviewing the decision. Check examples and images in your own work for who's represented.\n\nFairness includes access, too. Paid tools can give some students an advantage; university-provided tools help level that.\n\nAnd AI has real accessibility benefits. Captions and transcripts, reading support, text-to-speech, and help drafting image descriptions can make learning easier for many people. These are legitimate uses. As with anything else, check the output: captions mishear technical terms, and generated descriptions can miss what matters in an image.",
+      ask: "How can bias in AI output affect my own work?",
+    },
+  ],
+  example: {
+    title: "From a vague note to a real disclosure",
+    body: "A student used AI on a history essay. The syllabus says: “You may use AI for brainstorming and proofreading. Don't use it to write any part of the essay. Disclose any use.”\n\n**First attempt:** “I used AI.”\n\nThis doesn't say which tool, for what, or how it was checked. The instructor can't tell whether the use was allowed.\n\n**Revised:** “I used ChatGPT Edu to brainstorm three possible angles on the reading and to proofread my final draft for grammar. I chose the second angle and wrote the essay myself; I checked each grammar suggestion and rejected two that changed my meaning.”\n\n**Checking it against the policy:**\n\n- Brainstorming: allowed.\n- Proofreading: allowed.\n- Drafting: not used, and the note says so.\n- Disclosure: included, specific and honest.\n\nThe student also noticed that while brainstorming, they'd pasted in a classmate's discussion post to “get more ideas”. They'd had no permission to share it, so next time they'll summarize the idea in their own words and credit the classmate instead.",
+  },
+  deliverable: "A two-sentence disclosure for a recent assignment that names the tool, what you used it for and how you checked it, with a note confirming it fits the course's AI policy, or the question you'll ask your instructor if it doesn't.",
+  questions: [
+    {
+      id: "syllabus-wins",
+      prompt: "Your roommate's instructor lets students draft with AI. Your syllabus says AI may only be used for brainstorming. What applies to you?",
+      options: [
+        "Your roommate's rules, since they're more generous",
+        "Whatever the AI tool's terms of service allow",
+        "Your own syllabus",
+        "The most common rule across campus",
+      ],
+      answer: 2,
+      explain: "Policies differ by course and assignment. The syllabus for your course is what counts for your work.",
+    },
+    {
+      id: "unclear-policy",
+      prompt: "An assignment doesn't mention AI, and the syllabus is vague. What's the best move?",
+      options: [
+        "Ask the instructor before you start, ideally in writing",
+        "Use AI freely, since it isn't banned",
+        "Avoid mentioning it and hope nobody asks",
+        "Use AI but delete your chat history",
+      ],
+      answer: 0,
+      explain: "Asking first removes guesswork. A written answer also protects you if questions come up later.",
+    },
+    {
+      id: "classmate-data",
+      prompt: "You want feedback on a group project and consider pasting in your teammates' sections. What should you do?",
+      options: [
+        "Paste them in; it's all for the same project",
+        "Remove their names and paste them in without asking",
+        "Paste them into a personal account so it doesn't count",
+        "Ask your teammates first, and use a tool approved for university work",
+      ],
+      answer: 3,
+      explain: "Other people's work isn't yours to share without permission. Asking, and using an appropriate tool, respects their privacy.",
+    },
+    {
+      id: "ferpa",
+      prompt: "A TA wants a quick summary of which students are struggling and considers pasting the gradebook into a free chatbot account. What's the key issue?",
+      options: [
+        "Chatbots can't read spreadsheets",
+        "Grades are part of student education records, protected under FERPA, and don't belong in personal accounts",
+        "It's fine if the TA deletes the chat afterwards",
+        "The summary might be too short",
+      ],
+      answer: 1,
+      explain: "FERPA protects student education records in the US. Deleting a chat afterwards doesn't undo sharing them.",
+    },
+    {
+      id: "usc-tool",
+      prompt: "For university coursework, which account is the better default?",
+      options: [
+        "USC's ChatGPT Edu, signed in with your USC account",
+        "Whichever free tool loads fastest",
+        "A friend's paid account",
+        "Any tool, as long as you use incognito mode",
+      ],
+      answer: 0,
+      explain: "USC provides ChatGPT Edu, which keeps chats in a university workspace. Still check which kinds of data it's approved for.",
+    },
+    {
+      id: "good-disclosure",
+      prompt: "Which disclosure is most useful to an instructor?",
+      options: [
+        "“I used AI.”",
+        "“AI helped a bit.”",
+        "“I used Claude to generate practice questions on the reading and to check my citations' formatting; the analysis is mine, and I verified each citation against the source.”",
+        "“No AI was harmed in the making of this essay.”",
+      ],
+      answer: 2,
+      explain: "A useful disclosure names the tool, the task, how you checked it and what's yours.",
+    },
+    {
+      id: "cite-original",
+      prompt: "An AI assistant pointed you to a journal article, which you then read. What do you cite?",
+      options: [
+        "The AI assistant, since it found the article",
+        "The journal article you read",
+        "Both the AI and a random second article",
+        "Nothing, since you found it through AI",
+      ],
+      answer: 1,
+      explain: "Cite the source you actually read and relied on. If you used AI in finding it, your disclosure can say so.",
+    },
+    {
+      id: "accountable",
+      prompt: "Your submitted essay includes a wrong date that came from an AI suggestion. Who is responsible for it?",
+      options: [
+        "The AI company",
+        "Nobody, because it was an honest mistake",
+        "Your instructor, for allowing AI",
+        "You, since you submitted the work",
+      ],
+      answer: 3,
+      explain: "You're accountable for everything you submit. That's why checking AI output is part of using it responsibly.",
+    },
+    {
+      id: "copyright-output",
+      prompt: "What does US Copyright Office guidance say about material generated entirely by AI?",
+      options: [
+        "It's automatically owned by whoever typed the prompt",
+        "It's always owned by the AI company",
+        "It may not be protected, because copyright requires human authorship",
+        "It's in the public domain worldwide by law",
+      ],
+      answer: 2,
+      explain: "The Copyright Office has said protection requires human authorship. Work with substantial human contribution is judged case by case.",
+    },
+    {
+      id: "copyright-upload",
+      prompt: "You have a PDF of an entire copyrighted textbook. Is it fine to upload it to an AI tool to make study notes?",
+      options: [
+        "Not necessarily: check whether you have the right to share it with that service, and use material you're allowed to share",
+        "Yes, any file you have can be uploaded anywhere",
+        "Yes, if you rename the file",
+        "Only if the tool is free",
+      ],
+      answer: 0,
+      explain: "Having a copy doesn't mean you can share it with a third-party service. Use material you have the right to upload, or ask a librarian.",
+    },
+    {
+      id: "bias-judgment",
+      prompt: "A student club wants to use AI to rank applicants for leadership roles and accept the top five automatically. What's the main concern?",
+      options: [
+        "AI can't read applications",
+        "The model may reflect biases, and decisions about people need human review",
+        "Ranking takes too long",
+        "There's no concern if the prompt says “be fair”",
+      ],
+      answer: 1,
+      explain: "Models can reproduce patterns from their training data. When output affects people, a person should review the decision.",
+    },
+    {
+      id: "accessibility",
+      prompt: "Which is a legitimate accessibility use of AI, provided you check the output?",
+      options: [
+        "Writing an essay for a student who finds writing hard, without disclosure",
+        "Recording a class secretly to transcribe it",
+        "Replacing required readings with AI summaries without permission",
+        "Generating captions and transcripts for a recorded lecture",
+      ],
+      answer: 3,
+      explain: "Captions and transcripts can make learning more accessible. Check them, since they often mishear technical terms, and record only with permission.",
+    },
+    {
+      id: "recording-consent",
+      prompt: "You want to transcribe a study group meeting with an AI note-taker. What do you need first?",
+      options: [
+        "Consent from everyone in the meeting",
+        "A paid plan",
+        "Only the organizer's consent",
+        "Nothing, since it's just notes",
+      ],
+      answer: 0,
+      explain: "Everyone recorded should agree first. Some note-takers also share notes automatically, so check those settings too.",
+    },
+    {
+      id: "journals",
+      prompt: "A grad student asks whether they can list an AI tool as a co-author on a journal submission. What's the usual answer?",
+      options: [
+        "Yes, if it wrote more than half the paper",
+        "Yes, but only as last author",
+        "Journals commonly say no; check the journal's policy and disclose AI use as it requires",
+        "It doesn't matter; journals don't have AI policies",
+      ],
+      answer: 2,
+      explain: "Many journals say AI can't be an author because it can't take responsibility for the work. They typically ask for disclosure instead.",
+    },
+  ],
+  reflect: "Think of a time you used AI, or considered it, on coursework or a job. Was it clear what was allowed? What would you disclose about it now, and is there any data you shared that you wouldn't share again?",
+  sources: [
+    {
+      title: "AI Fluency Framework, by Rick Dakan and Joseph Feller",
+      url: "https://aifluencyframework.org/",
+      license: "CC BY-NC-SA 4.0",
+      note: "Adapted the Diligence competency: being transparent about AI's role and taking responsibility for the result.",
+    },
+    {
+      title: "Generative AI for Beginners, lesson 3: Using generative AI responsibly (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/03-using-generative-ai-responsibly",
+      license: "MIT",
+      note: "Adapted the discussion of fairness and of outputs that reinforce stereotypes.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/ethics-integrity", license: "Original" },
+  ],
+};

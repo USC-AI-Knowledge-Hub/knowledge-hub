@@ -1,0 +1,223 @@
+import type { GuidedLesson } from "../types";
+
+export const rag: GuidedLesson = {
+  module: "rag",
+  objectives: [
+    "Explain how retrieval-augmented generation works: chunking, embeddings, retrieval and grounded generation.",
+    "Diagnose whether a bad answer came from retrieval or from generation.",
+    "Stress-test a grounded tool with answerable and unanswerable questions, and check its citations.",
+  ],
+  sections: [
+    {
+      heading: "Answering from your documents",
+      body: "A language model on its own answers from patterns learned in training. That knowledge stops at a cutoff date and never included your lecture notes, your lab's protocols or your office's policies.\n\n**Retrieval-augmented generation (RAG)** fixes this in two steps. First, a search step finds the passages in your documents most relevant to the question. Then those passages are placed in the prompt, with an instruction like “answer using only these sources, and cite them”. It's the difference between a closed-book and an open-book exam.\n\nNotebookLM and most “chat with your PDF” tools work this way, as do many campus and company help bots.\n\nWhy not paste every document into the prompt? For a few short files, that can work. But models have a limit on how much text they take at once, long inputs cost more and are slower, and relevant details get diluted in a sea of irrelevant ones. Retrieval sends only what matters.",
+      ask: "Why not just paste all my documents into the prompt instead of using retrieval?",
+    },
+    {
+      heading: "Chunks and embeddings",
+      body: "Before anything can be retrieved, documents are prepared once:\n\n- **Chunking.** Each document is split into pieces: paragraphs, sections, or fixed-size blocks, often overlapping slightly so a sentence isn't cut off from its context. Adding the document title or section heading to each chunk helps it make sense on its own.\n- **Embedding.** Each chunk is turned into an **embedding**: a long list of numbers produced by a model so that texts with similar meaning get similar numbers. “Car” and “automobile” end up close together even though they share no letters.\n- **Indexing.** The embeddings are stored in a vector index or database, which can quickly find the chunks closest to a new query.\n\nThis enables **semantic search**: matching by meaning rather than exact words. Many systems combine it with ordinary keyword search, called hybrid search, because exact terms like course codes, names and acronyms are sometimes better matched literally.",
+      ask: "What is an embedding, in plain words?",
+    },
+    {
+      heading: "Retrieval decides the answer",
+      body: "When you ask a question, it's embedded the same way, and the system fetches the few chunks whose embeddings are closest, often measured by cosine similarity. Some systems then re-rank those results with a second model before passing the best ones to the language model.\n\nThe model can only work with what retrieval hands it. **Bad retrieval means bad answers, however good the model is.** Typical retrieval failures:\n\n- **The right passage is split** across two chunks, and neither makes sense alone.\n- **Vocabulary mismatch:** your question says “leave policy”, the handbook says “time off”, and the right passage ranks low.\n- **Near-miss chunks:** similar-sounding but wrong passages, such as last year's version of a policy.\n- **Nothing relevant exists,** but the system still returns the closest chunks, because nearest isn't the same as relevant.\n\nWhen an answer is wrong, look at what was retrieved first. That tells you whether to fix the search or the prompt.",
+      ask: "How can I tell whether a wrong answer came from retrieval or from the model?",
+    },
+    {
+      heading: "Grounding and citations",
+      body: "Grounding means the answer is built from the retrieved passages rather than the model's general knowledge. A good grounded prompt says three things: answer only from these sources, cite the passage for each claim, and say so if the sources don't contain the answer.\n\nCitations are what make grounded answers checkable. In NotebookLM you can click a citation to jump to the exact passage. Use that every time it matters.\n\nGrounding reduces made-up facts; it doesn't eliminate errors. A grounded answer can still:\n\n- **misread** a passage or drop its caveats\n- **blend** two chunks into a claim neither makes\n- **drift** into general knowledge when the sources run thin\n- **faithfully repeat** a source that is itself wrong or out of date\n\nSo the habit is the same as in research: open the cited passage and confirm it says what the answer claims.",
+      ask: "If an answer has citations, why do I still need to check them?",
+    },
+    {
+      heading: "Stress-test before you trust",
+      body: "Whether you're using NotebookLM or building your own assistant, test it with questions you already know the answers to.\n\n- **Answerable:** the sources clearly answer it. Is the answer right, and does the citation support it?\n- **Unanswerable:** the sources don't cover it. Does it say so, or does it fill the gap from general knowledge?\n- **Partly answerable:** does it separate what the sources say from what they don't?\n- **Conflicting:** two sources disagree. Does it notice, or pick one silently?\n- **Wording changes:** ask the same question with different vocabulary. Does retrieval still find the passage?\n\nFor builders, write these down as a small test set with expected answers, and record which retrieved chunks each answer used. Checking retrieval and generation separately shows you what to fix.\n\nAnd remember the documents themselves: only upload material you're allowed to share with the service.",
+      ask: "Why test a RAG tool with a question its sources can't answer?",
+    },
+  ],
+  example: {
+    title: "Stress-testing a notebook of three readings",
+    body: "**Setup:** a student loads three course readings on urban heat into NotebookLM.\n\n**Test 1, unanswerable:** “What does the city's 2030 climate plan commit to?” None of the readings mention the plan. A well-grounded answer says the sources don't cover it. If the tool answers anyway, with no citations or with citations that don't mention the plan, it's filling the gap from general knowledge, and you note that.\n\n**Test 2, answerable:** “Why are some neighborhoods hotter than others?” The answer lists tree cover, paved surfaces and building density, with citations. You click each one. Two passages say exactly that. The third mentions building density only as a possible factor the authors didn't measure, while the answer states it as a finding.\n\n**Verdict:** retrieval found the right passages; generation overstated one of them. You record it as partly supported.\n\n**Test 3, rephrased:** you ask about the “urban heat island effect” instead of “hotter neighborhoods”, and check that the same passages come back.",
+  },
+  deliverable: "A short test log for a notebook of three sources: an unanswerable question and how the tool handled it, an answerable question with each citation checked against its passage, and your verdict on how far you'd trust it.",
+  questions: [
+    {
+      id: "what-rag",
+      prompt: "Which description best matches retrieval-augmented generation?",
+      options: [
+        "Retraining the model on your documents so it memorizes them",
+        "Finding the most relevant passages in your documents and giving them to the model to answer from",
+        "Searching the whole web for every question",
+        "Asking the model to answer from memory, then adding citations afterwards",
+      ],
+      answer: 1,
+      explain: "RAG retrieves relevant passages at question time and puts them in the prompt. The model itself isn't retrained.",
+    },
+    {
+      id: "why-not-paste",
+      prompt: "A lab has 2,000 pages of protocols. Why use retrieval instead of pasting them all into every prompt?",
+      options: [
+        "Models have limits on input length, long inputs cost more, and relevant details get diluted",
+        "Models can't read protocols",
+        "Pasting text is against every tool's rules",
+        "Retrieval makes the model smarter",
+      ],
+      answer: 0,
+      explain: "Retrieval sends only the passages that matter, which keeps the prompt within limits and focused.",
+    },
+    {
+      id: "embedding",
+      prompt: "What is an embedding?",
+      options: [
+        "A copy of the document stored in the model",
+        "A summary written by the model",
+        "A list of numbers representing a text's meaning, so similar texts get similar numbers",
+        "A keyword index of every word",
+      ],
+      answer: 2,
+      explain: "Embeddings place texts in a numeric space where closeness reflects similarity of meaning, which enables semantic search.",
+    },
+    {
+      id: "semantic",
+      prompt: "A student asks about “automobile emissions” and the system finds a passage about “car exhaust”. Which kind of search made that possible?",
+      options: ["Keyword search", "Alphabetical search", "Date-sorted search", "Semantic search using embeddings"],
+      answer: 3,
+      explain: "Semantic search matches by meaning. Keyword search would miss it because the words don't overlap.",
+    },
+    {
+      id: "hybrid",
+      prompt: "Your assistant struggles to find passages mentioning course codes like “CSCI 567”. What might help?",
+      options: [
+        "Hybrid search that adds exact keyword matching to semantic search",
+        "Longer answers",
+        "A larger language model with no retrieval",
+        "Removing course codes from the documents",
+      ],
+      answer: 0,
+      explain: "Exact identifiers such as codes, names and acronyms are often matched better literally. Hybrid search combines both.",
+    },
+    {
+      id: "chunk-split",
+      prompt: "A policy's key rule is in one sentence, and its exceptions are in the next paragraph, which landed in a different chunk. What's the risk?",
+      options: [
+        "None; the model sees the whole document anyway",
+        "The answer may state the rule without its exceptions, because only one chunk was retrieved",
+        "The document will be deleted",
+        "Embeddings can't be created for policies",
+      ],
+      answer: 1,
+      explain: "Chunk boundaries can separate related text. Overlap, section-based chunking and headings on each chunk reduce this.",
+    },
+    {
+      id: "diagnose",
+      prompt: "An answer is wrong. You check the retrieved chunks and none of them contains the relevant passage. Where's the problem?",
+      options: [
+        "Generation: the model misread the passage",
+        "The citation format",
+        "Retrieval: the right passage never reached the model",
+        "The user's spelling",
+      ],
+      answer: 2,
+      explain: "If the passage wasn't retrieved, the model couldn't use it. Fix chunking, wording or search settings, not the answer prompt.",
+    },
+    {
+      id: "nearest",
+      prompt: "Someone asks a RAG system a question its documents don't cover. What does the retrieval step typically return?",
+      options: [
+        "The closest chunks it can find, even though they aren't relevant",
+        "Nothing, always",
+        "An error message",
+        "A web search result",
+      ],
+      answer: 0,
+      explain: "Nearest isn't the same as relevant. That's why the prompt should tell the model to say when sources don't answer, and why systems may use relevance thresholds.",
+    },
+    {
+      id: "unanswerable-test",
+      prompt: "Why ask a grounded tool a question you know its sources can't answer?",
+      options: [
+        "To make it retrieve faster",
+        "To see whether it admits the gap or fills it from general knowledge",
+        "To train it on the new topic",
+        "It's not useful; only ask answerable questions",
+      ],
+      answer: 1,
+      explain: "A trustworthy grounded tool says when the sources don't cover something. Filling the gap silently is a warning sign.",
+    },
+    {
+      id: "citation-check",
+      prompt: "A grounded answer cites a passage. When you open it, the passage mentions the factor only as a possibility. What happened?",
+      options: [
+        "Retrieval failed completely",
+        "The source is wrong",
+        "Nothing; a citation means the claim is supported",
+        "Generation overstated the source, turning a possibility into a finding",
+      ],
+      answer: 3,
+      explain: "Retrieval found the right passage, but the model dropped its caveat. Clicking citations is how you catch this.",
+    },
+    {
+      id: "grounded-prompt",
+      prompt: "Which instruction is most important in a grounded prompt?",
+      options: [
+        "“Be creative and add helpful background.”",
+        "“Answer only from the provided sources, cite them, and say if they don't contain the answer.”",
+        "“Answer as briefly as possible.”",
+        "“Use your own knowledge first, then the sources.”",
+      ],
+      answer: 1,
+      explain: "It limits the model to the sources, makes answers checkable, and gives it an acceptable response when information is missing.",
+    },
+    {
+      id: "stale-source",
+      prompt: "An office's assistant correctly quotes its policy documents, but the answer is out of date. Why?",
+      options: [
+        "The model's training cutoff is too old",
+        "The embeddings expired",
+        "The documents it retrieves from are outdated; grounding faithfully repeats what the sources say",
+        "RAG systems can't handle dates",
+      ],
+      answer: 2,
+      explain: "A grounded system is only as current and correct as its documents. Keep sources updated and remove old versions.",
+    },
+    {
+      id: "wording",
+      prompt: "You ask “What's the leave policy?” and get nothing useful, but “How much time off do staff get?” works. What does that suggest?",
+      options: [
+        "Retrieval is sensitive to vocabulary; the documents use different words than your question",
+        "The model is refusing leave questions",
+        "The first question was too long",
+        "The documents were deleted between questions",
+      ],
+      answer: 0,
+      explain: "Vocabulary mismatch is a common retrieval failure. Testing rephrased questions reveals it.",
+    },
+    {
+      id: "test-set",
+      prompt: "You're building a RAG assistant over your notes for a club. What's the most useful way to evaluate it?",
+      options: [
+        "Ask it one question and see if you like the answer",
+        "Check that it responds quickly",
+        "Ask it whether it's accurate",
+        "Write a set of questions with expected answers, including unanswerable ones, and record which chunks each answer used",
+      ],
+      answer: 3,
+      explain: "A test set with expected answers, checked for both retrieval and generation, shows what works and what to fix.",
+    },
+  ],
+  reflect: "In your stress test, did the failures come from retrieval, from generation, or from the sources themselves? Describe one kind of question you would now trust the tool with, and one you wouldn't.",
+  sources: [
+    {
+      title: "Generative AI for Beginners, lesson 15: RAG and vector databases (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/15-rag-and-vector-databases",
+      license: "MIT",
+      note: "Adapted the RAG pipeline (chunking, embeddings, vector search, re-ranking, augmented generation), hybrid search and the problem of retrieval when nothing relevant exists.",
+    },
+    {
+      title: "Generative AI for Beginners, lesson 8: Building search applications (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/08-building-search-applications",
+      license: "MIT",
+      note: "Adapted the explanation of semantic search, text embeddings and cosine similarity.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/rag", license: "Original" },
+  ],
+};

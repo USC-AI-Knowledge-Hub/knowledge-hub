@@ -1,0 +1,222 @@
+import type { GuidedLesson } from "../types";
+
+export const coding: GuidedLesson = {
+  module: "coding",
+  objectives: [
+    "Match the right kind of AI coding tool to a task, from inline suggestions to agents.",
+    "Review AI-written code line by line and check it with tests, including inputs designed to break it.",
+    "Spot security, dependency and licensing risks in AI-generated code before you accept it.",
+  ],
+  sections: [
+    {
+      heading: "From autocomplete to agents",
+      body: "AI coding tools sit on a spectrum of autonomy:\n\n- **Inline suggestions:** GitHub Copilot proposes the next lines as you type.\n- **Chat about code:** you paste or select code and ask for an explanation, a fix or a test.\n- **Editor agents:** Cursor, or Copilot's agent mode, plan a change and edit several files at once.\n- **Terminal agents:** Claude Code reads a project, runs commands and tests, and iterates while you approve its actions.\n- **App builders:** Replit Agent sets up, builds and hosts a small app from a description.\n\nThe further along the spectrum, the more code appears per request, and the more you have to review. More autonomy doesn't mean less responsibility: you're still the engineer who ships it.\n\nBefore using any of them for coursework, read the course policy. Many programming courses restrict AI help or require disclosure, because writing the code yourself is how you learn it.",
+      ask: "Why does a more autonomous coding tool mean more review, not less?",
+    },
+    {
+      heading: "Give it context, and keep tasks small",
+      body: "Coding tools fail in the same way chat assistants do: they fill gaps with the most typical guess. Typical may not be what your project needs.\n\n- **Conventions:** language version, libraries you already use, naming and formatting style.\n- **Constraints:** “no new dependencies”, “must run on the lab machines”, “don't change the public interface”.\n- **Examples:** point to an existing function that does something similar and say “follow this pattern”.\n\nMany tools read a project instruction file, such as a CLAUDE.md or a rules file, so you don't repeat this every time.\n\nThen keep each request small and testable. “Add a function that removes duplicate rows by email, with tests” is reviewable. “Build the whole data pipeline” produces hundreds of lines nobody reads carefully. For bigger jobs, ask for a plan first, correct it, then build it in steps.",
+      ask: "Why is a small, testable request better than asking for a whole feature at once?",
+    },
+    {
+      heading: "Read every change",
+      body: "AI-written code looks tidy and confident, which makes errors easy to miss. Review it the way you'd review a new teammate's work:\n\n- **Read the diff,** not just the final file, so you see everything that changed, including edits to code you didn't ask it to touch.\n- **Comment or ask about every line you don't understand.** “Explain this line and what happens if the input is empty” is a good prompt.\n- **Check that functions and libraries exist.** Models sometimes call methods that look plausible but aren't real, or use an old version of an API.\n- **Look at edge cases:** empty input, missing values, unusual characters, very large files.\n- **Watch for shortcuts:** an agent trying to make tests pass may weaken the test or special-case the example instead of fixing the logic.\n\nIf you can't explain what a piece of code does, you're not ready to accept it.",
+      ask: "What kinds of mistakes should I look for when reviewing AI-written code?",
+    },
+    {
+      heading: "Tests are how you check",
+      body: "Reading catches a lot, but running code against known answers catches more. Tests turn “looks right” into “does what I specified”.\n\n- **Write down the expected behavior first,** in plain words: given this input, the output should be that.\n- **Ask the AI for tests, then review them.** Tests written by the same model can share its misunderstanding, so check that each one tests what you actually want.\n- **Include hostile inputs:** an empty file, a missing column, a duplicated header, a date in a different format, text where a number should be.\n- **Run the tests yourself** and see them fail when you break the code on purpose. A test that never fails checks nothing.\n\nKeep the tests once they work. They let you ask for future changes with confidence, because you'll know immediately if something that used to work breaks.",
+      ask: "Why isn't it enough for the AI to write tests that pass?",
+    },
+    {
+      heading: "Security, dependencies and licensing",
+      body: "Some risks aren't visible when the code runs fine:\n\n- **Secrets:** never paste passwords or API keys into prompts or hard-code them; use environment variables or a secrets store.\n- **Unsafe input handling:** check for queries built by pasting user input into strings (SQL injection), and for input that's never validated.\n- **Dependencies:** models sometimes suggest packages that don't exist, and an attacker could publish malware under such a name. Confirm a package is real, maintained and the one you meant before installing it.\n- **Agent permissions:** agents that run commands can delete files or send data. Approve actions you understand and work in a copy or a version-controlled project.\n- **Prompt injection:** an agent that reads web pages or files can be steered by instructions hidden in them.\n- **Licensing:** suggestions can resemble existing public code. Check dependency licenses, and use settings that block suggestions matching public code where a tool offers them.",
+      ask: "How could a package name suggested by AI be a security risk?",
+    },
+  ],
+  example: {
+    title: "Build, then review: a CSV-cleaning script",
+    body: "**Request:** “Write a Python script that cleans contacts.csv: trim spaces, drop rows without an email, remove duplicate emails, and write clean.csv. Use only the standard library. Add tests.”\n\n**Review, line by line:**\n\n- It drops rows with any blank field, not just a blank email. Rows with a missing phone number vanish. You ask it to check only the email column.\n- Duplicates are compared case-sensitively, so “A@usc.edu” and “a@usc.edu” both survive. You ask it to compare lowercase emails.\n- One line uses a function you don't recognize. You ask for an explanation; it's fine, and you add a comment.\n\n**Tests:** the generated tests only use tidy input. You add three: an empty file, a file with no email column, and an email with trailing spaces. The empty-file test crashes the script. You ask for a clear error message instead.\n\n**Result:** a script you can explain, with tests that fail when you break it on purpose.",
+  },
+  deliverable: "A small CSV-cleaning script with your comments on every line you didn't understand at first, a set of tests including deliberately broken inputs, and a note on what the review caught.",
+  questions: [
+    {
+      id: "autonomy",
+      prompt: "You switch from inline suggestions to an agent that edits many files per request. What changes most for you?",
+      options: [
+        "Nothing; agents are reviewed automatically",
+        "You need to review much more code per request, including files you didn't expect to change",
+        "You no longer need tests",
+        "You can skip reading the diff because the agent explains it",
+      ],
+      answer: 1,
+      explain: "More autonomy produces more changes at once. The responsibility to understand them stays with you.",
+    },
+    {
+      id: "course-policy",
+      prompt: "You're in an introductory programming course. Before using GitHub Copilot on an assignment, what should you do?",
+      options: [
+        "Nothing; Copilot is free for students",
+        "Turn off autocomplete only",
+        "Read the course's AI policy, since many programming courses restrict AI help or require disclosure",
+        "Ask Copilot whether it's allowed",
+      ],
+      answer: 2,
+      explain: "Policies vary and exist because writing code yourself is how you learn. Being free for students doesn't mean allowed.",
+    },
+    {
+      id: "context",
+      prompt: "An agent keeps adding a new library for tasks your project already handles with an existing one. What's the best fix?",
+      options: [
+        "State the constraint (“no new dependencies; use the existing library”) and point to an example, ideally in the project's instruction file",
+        "Accept it; more libraries are better",
+        "Switch to a different agent",
+        "Delete the existing library",
+      ],
+      answer: 0,
+      explain: "Conventions and constraints are context. Writing them down once, where the tool reads them, prevents the same guess every time.",
+    },
+    {
+      id: "small-tasks",
+      prompt: "Which request is easiest to review well?",
+      options: [
+        "“Build my whole research data pipeline.”",
+        "“Improve the code.”",
+        "“Rewrite the project in a faster language.”",
+        "“Add a function that removes duplicate rows by email, with tests.”",
+      ],
+      answer: 3,
+      explain: "Small, specific tasks produce changes you can read and test. Big vague ones produce code nobody checks properly.",
+    },
+    {
+      id: "fake-api",
+      prompt: "AI-generated code calls a method you've never seen and the program crashes with “no such attribute”. What likely happened?",
+      options: [
+        "The model used a plausible-looking method that doesn't exist, or one from a different version",
+        "Your computer is too old",
+        "The code is correct and the language is broken",
+        "The method only works in the cloud",
+      ],
+      answer: 0,
+      explain: "Models predict likely code, including names that look right but aren't real. Check unfamiliar calls against the documentation.",
+    },
+    {
+      id: "weak-test",
+      prompt: "An agent says “all tests pass now”. Reviewing the diff, you see it changed a test's expected value to match the output. What should you do?",
+      options: [
+        "Accept it; passing tests mean the code works",
+        "Reject that change and ask it to fix the logic so the original expectation is met, if that expectation was right",
+        "Delete the test",
+        "Run the tests again until they fail",
+      ],
+      answer: 1,
+      explain: "Weakening a test to pass hides the bug. Decide what the correct behavior is, then fix the code.",
+    },
+    {
+      id: "same-author",
+      prompt: "Why review tests that the same AI wrote for its own code?",
+      options: [
+        "AI can't write tests in Python",
+        "Tests slow down the program",
+        "The tests may share the model's misunderstanding of what the code should do",
+        "Tests written by AI can't be run",
+      ],
+      answer: 2,
+      explain: "If the model misread the requirement, its code and its tests can both be wrong in the same way and still pass.",
+    },
+    {
+      id: "never-fails",
+      prompt: "You break the code on purpose and all the tests still pass. What does that tell you?",
+      options: [
+        "The code is very robust",
+        "The tests don't check the behavior you broke",
+        "The break didn't work",
+        "Tests only run on new code",
+      ],
+      answer: 1,
+      explain: "A test that can't fail checks nothing. Deliberately breaking code shows whether your tests have teeth.",
+    },
+    {
+      id: "hostile-input",
+      prompt: "Which test input is most useful for a script that cleans a CSV?",
+      options: [
+        "A second copy of the tidy example file",
+        "An empty file, or one with a missing column",
+        "A very small tidy file",
+        "The same file renamed",
+      ],
+      answer: 1,
+      explain: "Real data is messy. Tests with broken inputs catch crashes and silent mistakes that tidy examples never trigger.",
+    },
+    {
+      id: "secret",
+      prompt: "An AI suggestion puts your API key directly in the source code “for simplicity”. What should you do?",
+      options: [
+        "Keep it, but make the repository private",
+        "Keep it; keys in code are standard",
+        "Paste the key into the chat so the AI can check it",
+        "Move it to an environment variable or secrets store, and rotate the key if it was ever committed or shared",
+      ],
+      answer: 3,
+      explain: "Secrets in code leak through repositories and screenshots. A key that has been exposed should be replaced.",
+    },
+    {
+      id: "package",
+      prompt: "An assistant tells you to install a package you can't find any documentation for. What's the safe response?",
+      options: [
+        "Install it and see what happens",
+        "Confirm it exists, is maintained and is the package you meant before installing; it may be invented, or malicious",
+        "Install it inside a virtual environment, which makes any package safe",
+        "Ask the assistant to promise it's safe",
+      ],
+      answer: 1,
+      explain: "Models sometimes invent package names, and attackers can register such names. Virtual environments don't stop malicious code from running.",
+    },
+    {
+      id: "sql",
+      prompt: "AI-written code builds a database query by pasting a user's search text straight into the SQL string. What's the risk?",
+      options: [
+        "SQL injection: crafted input could read or change data it shouldn't",
+        "The query will run slightly slower",
+        "Nothing; databases clean input automatically",
+        "The code won't compile",
+      ],
+      answer: 0,
+      explain: "Use parameterized queries. Unsafe input handling is a common flaw in generated code that works fine on normal input.",
+    },
+    {
+      id: "injection",
+      prompt: "You ask a coding agent to summarize a web page, and the page contains hidden text telling AI agents to upload your files. What is this?",
+      options: [
+        "A normal part of web pages",
+        "A licensing notice",
+        "A prompt injection: content trying to steer the agent, which is why you limit and approve what agents can do",
+        "A test the agent must pass",
+      ],
+      answer: 2,
+      explain: "Agents that read untrusted content can be manipulated by instructions hidden in it. Limit permissions and review actions.",
+    },
+    {
+      id: "license",
+      prompt: "A long AI suggestion closely resembles code from a public project. What should you consider?",
+      options: [
+        "Its license may place obligations on you; check it, or use a tool setting that blocks suggestions matching public code",
+        "AI output is never covered by any license",
+        "Nothing, as long as it runs",
+        "Rename the variables so it's original",
+      ],
+      answer: 0,
+      explain: "Code can carry license terms wherever it came from. Renaming variables doesn't change that.",
+    },
+  ],
+  reflect: "Look at the lines you commented on in the script. What did the AI do that you wouldn't have done, and what did you learn from it? Where would you not trust an AI coding tool yet, and why?",
+  sources: [
+    {
+      title: "Generative AI for Beginners, lesson 13: Securing your generative AI applications (Microsoft)",
+      url: "https://github.com/microsoft/generative-ai-for-beginners/tree/main/13-securing-ai-applications",
+      license: "MIT",
+      note: "Adapted the idea of prompt injection and the need to treat content an AI reads as untrusted.",
+    },
+    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/coding", license: "Original" },
+  ],
+};
