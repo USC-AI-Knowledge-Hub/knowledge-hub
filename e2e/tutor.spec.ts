@@ -338,6 +338,26 @@ test.describe("tutor with the mock model", () => {
     expect(saved).toMatchObject({ status: "downloaded", model: "qwen2.5-0.5b", device: "webgpu" });
   });
 
+  test("follow-ups keep the topic, and answers suggest videos to watch", async ({ page }) => {
+    await setup(page, { storage: { "kh-tutor-model": { status: "downloaded", model: "smollm2-360m", device: "webgpu" } } });
+    // Asked from an unrelated lesson page: the answer still comes from the LLM lesson.
+    const sheet = await openTutor(page, "/learn/ai-for-your-field");
+    await expect(sheet.getByText(/SmolLM2 360M on WebGPU/)).toBeVisible({ timeout: 20_000 });
+    await ask(page, "explain llms to me");
+    const first = sheet.locator(".t-msg.tutor").last();
+    await expect(first.getByText(/Based on: How large language models work/)).toBeVisible({ timeout: 15_000 });
+    await expect(first.getByText("Watch next")).toBeVisible();
+    expect(await first.locator(".t-watch-card").count()).toBeGreaterThanOrEqual(3);
+
+    await ask(page, "explain its architecture");
+    const second = sheet.locator(".t-msg.tutor").last();
+    await expect(second.getByText(/Based on: .*Inside a transformer/)).toBeVisible({ timeout: 15_000 });
+
+    // A suggested video opens in the player.
+    await second.locator(".t-watch-card").first().click();
+    await expect(page.locator("dialog.player")).toBeVisible();
+  });
+
   test("the tutor explains quest steps and can be stopped", async ({ page }) => {
     await setup(page, { storage: { "kh-tutor-model": { status: "downloaded", model: "smollm2-360m", device: "webgpu" } } });
     const sheet = await openTutor(page);

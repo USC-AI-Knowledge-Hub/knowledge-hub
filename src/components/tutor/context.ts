@@ -14,6 +14,8 @@ export type Item =
       label?: string;
       related?: SiteHit[];
       sources?: Source[];
+      /** Lessons whose videos to suggest under the answer, most relevant first. */
+      watch?: string[];
     }
   | { id: number; kind: "nav"; dest: string; hits: SiteHit[]; opened: SiteHit | null }
   | { id: number; kind: "next"; rec: NextStep | null }
@@ -29,6 +31,8 @@ export type Item =
       bullets?: string[];
       route?: string;
       related?: SiteHit[];
+      /** Lessons whose videos to suggest. */
+      watch?: string[];
       /** Hidden-until-revealed bullets, for "quiz me" without a model. */
       recall?: boolean;
     };

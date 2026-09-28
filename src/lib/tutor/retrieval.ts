@@ -2,6 +2,7 @@
  * Grounding for free chat: find the lessons (and quest notes) that cover a
  * question and turn them into short notes the model must stick to.
  */
+import { guidedLessons } from "../../data/guided";
 import type { GuidedLesson } from "../../data/guided/types";
 import { moduleById } from "../../data/learn";
 import { toolById } from "../../data/tools";
@@ -22,6 +23,8 @@ export interface Grounding {
   related: SiteHit[];
   /** Best lesson for this question, if any. Used when there's no model. */
   lesson: Module | null;
+  /** Lessons the notes came from, most relevant first. Used to suggest videos. */
+  modules: string[];
 }
 
 export function lessonNotes(m: Module, budget = 900): string {
@@ -95,34 +98,214 @@ export function bestQuestStep(q: string): { quest: Quest; step: QuestStep } | nu
   return best && best.s >= 1.2 ? { quest: best.quest, step: best.step } : null;
 }
 
-export function ground(question: string): Grounding {
-  const hits = searchSite(question, 8);
+/**
+ * Words students use that the notes put differently. Each expands a query term into the words
+ * the notes actually use, so "its architecture" can find the transformer notes.
+ */
+const EXPAND: Record<string, string[]> = {
+  llm: ["language", "model", "transformer"],
+  llms: ["language", "model", "transformer"],
+  gpt: ["language", "model", "transformer"],
+  architecture: ["transformer", "layers", "attention", "embeddings"],
+  structure: ["transformer", "layers", "attention", "embeddings"],
+  built: ["transformer", "layers", "training"],
+  inside: ["transformer", "layers", "attention"],
+  internals: ["transformer", "layers", "attention"],
+  parts: ["transformer", "layers", "embeddings"],
+  components: ["transformer", "layers", "embeddings"],
+  neural: ["network", "layers"],
+  trained: ["training", "pre-training"],
+  learn: ["training"],
+  hallucinate: ["hallucination", "invent"],
+  hallucinates: ["hallucination", "invent"],
+  hallucinations: ["hallucination", "invent"],
+  rag: ["retrieval", "documents"],
+};
+
+/** Words that say what kind of answer is wanted, not what it's about. */
+const FILLER = new Set(
+  "explain show tell give full whole detail details detailed more about works work working mean means meaning define definition simple simply please good make makes making made thing things stuff way ways get gets".split(" "),
+);
+
+const PRONOUN = /\b(it|its|it's|this|that|they|them|their|these|those|he|she)\b/i;
+
+/** Phrases students use for an idea the notes name with one word. */
+const PHRASES: [RegExp, string][] = [
+  [/\b(make|makes|making|made) (things|stuff|facts|it) up\b|\bmade[- ]up\b|\bconfidently wrong\b/i, "hallucination"],
+  [/\bhow (is|are) (it|they|llms?|models?) (built|made|structured)\b/i, "architecture"],
+];
+
+/** The words that say what a question is about, expanded with the words the notes use. */
+export function topicTerms(q: string): string[] {
+  const base = tokenize(q).filter((t) => t.length > 2 && !QUESTION_WORDS.has(t) && !FILLER.has(t));
+  for (const [re, word] of PHRASES) if (re.test(q)) base.push(word);
+  return [...new Set(base.flatMap((t) => [t, ...(EXPAND[t] ?? [])]))];
+}
+
+/**
+ * Follow-ups like "explain its architecture" or "show me how it works" name no topic of their
+ * own. Returns the earlier question to carry the topic over from, or null for a fresh question.
+ */
+export function followUpContext(question: string, previous: string | null): string | null {
+  if (!previous) return null;
+  const own = tokenize(question).filter((t) => t.length > 2 && !QUESTION_WORDS.has(t) && !FILLER.has(t));
+  const vague = own.every((t) => EXPAND[t] && ["architecture", "structure", "built", "inside", "internals", "parts", "components"].includes(t));
+  return own.length === 0 || vague || (PRONOUN.test(question) && own.length < 3) ? previous : null;
+}
+
+interface Chunk {
+  head: string;
+  body: string;
+  source: Source;
+  /** Guided lesson module, when the chunk is a lesson section. */
+  module?: string;
+  /** Order within its source, so steps come out in sequence. */
+  order: number;
+  group: string;
+}
+
+let CHUNKS: Chunk[] | null = null;
+function chunks(): Chunk[] {
+  if (CHUNKS) return CHUNKS;
+  const out: Chunk[] = [];
+  for (const l of guidedLessons) {
+    const m = moduleById.get(l.module);
+    if (!m) continue;
+    l.sections.forEach((s, i) =>
+      out.push({
+        head: `${m.title} ${s.heading} ${s.ask}`,
+        body: s.body.replace(/\*\*/g, ""),
+        source: { title: m.title, route: `/learn/${m.id}` },
+        module: m.id,
+        order: i,
+        group: `lesson:${m.id}`,
+      }),
+    );
+  }
+  for (const q of quests)
+    q.steps.forEach((st, i) =>
+      out.push({ head: `${q.title} ${st.title} ${st.ask}`, body: st.notes, source: { title: q.title, route: "" }, order: i, group: `quest:${q.id}` }),
+    );
+  return (CHUNKS = out);
+}
+
+const rootOf = (t: string) => (t.length > 4 ? t.slice(0, -1) : t);
+
+let DF: Map<string, number> | null = null;
+/** How rare a word is across the notes: rare words ("electricity") say more than common ones ("model"). */
+function idf(root: string): number {
+  DF ??= new Map();
+  let df = DF.get(root);
+  if (df === undefined) {
+    df = chunks().filter((c) => c.head.toLowerCase().includes(root) || c.body.toLowerCase().includes(root)).length;
+    DF.set(root, df);
+  }
+  return Math.log(1 + chunks().length / (df + 1));
+}
+
+/** Terms with weights: the question's own words count fully, carried-over ones half. */
+type Weighted = { root: string; w: number }[];
+
+function chunkScore(terms: Weighted, c: Chunk): number {
+  const head = c.head.toLowerCase();
+  const body = c.body.toLowerCase();
+  let s = 0;
+  let matched = 0;
+  let inHead = false;
+  let total = 0;
+  for (const { root, w } of terms) {
+    const weight = w * idf(root);
+    total += weight;
+    if (head.includes(root)) {
+      s += 3 * weight;
+      inHead = true;
+    } else if (body.includes(root)) s += weight;
+    else continue;
+    matched++;
+  }
+  // One shared body word isn't a match: "prompt engineering" once pulled in the energy-per-prompt notes.
+  if (matched === 1 && terms.length > 1 && !inHead) return 0;
+  return total ? s / Math.sqrt(total) : 0;
+}
+
+/**
+ * Grounding for free chat. Searches every guided lesson section and quest step, keeps the few
+ * that clearly match, and returns them in reading order so "how does it work" gets the steps in
+ * sequence. `prefer` is the lesson the student is reading, which wins ties.
+ */
+export function ground(question: string, { prefer, context }: { prefer?: string; context?: string | null } = {}): Grounding {
+  const hits = searchSite(context ? `${context} ${question}` : question, 8);
   const lessonHits = hits.filter((h) => h.kind === "lesson");
-  // A second lesson only if it's nearly as relevant; a weak match adds noise, not help.
-  const lessons = lessonHits
-    .filter((h, i) => i === 0 || h.score >= lessonHits[0].score * 0.6)
-    .slice(0, 2)
-    .map((h) => moduleById.get(h.id)!)
-    .filter(Boolean);
-  const step = bestQuestStep(question);
+  const topLesson = lessonHits[0] ? moduleById.get(lessonHits[0].id) ?? null : null;
+  const own = topicTerms(question);
+  const carried = context ? topicTerms(context).filter((t) => !own.includes(t)) : [];
+  const terms: Weighted = [...own.map((t) => ({ root: rootOf(t), w: 1 })), ...carried.map((t) => ({ root: rootOf(t), w: 0.5 }))];
+
+  const scored = terms.length
+    ? chunks()
+        .map((c) => {
+          let s = chunkScore(terms, c);
+          if (s && c.module && c.module === topLesson?.id) s *= 1.15;
+          if (s && c.module && c.module === prefer) s *= 1.3;
+          return { c, s };
+        })
+        .filter((x) => x.s >= 2)
+        .sort((a, b) => b.s - a.s)
+    : [];
+
+  let picked: Chunk[] = [];
+  if (scored.length) {
+    const best = scored[0].s;
+    // Chunks from the best source first, then close runners-up from elsewhere.
+    const lead = scored[0].c.group;
+    // Another source has to be nearly as relevant: a weak match adds noise, not help.
+    const pool = scored.filter((x) => x.s >= best * (x.c.group === lead ? 0.55 : 0.6));
+    picked = [...pool.filter((x) => x.c.group === lead), ...pool.filter((x) => x.c.group !== lead)].slice(0, 3).map((x) => x.c);
+  } else if (prefer && !terms.length) {
+    // A vague question on a lesson page ("explain this") is about that lesson.
+    const l = guidedLessons.find((g) => g.module === prefer);
+    const m = moduleById.get(prefer);
+    if (l && m) picked = l.sections.slice(0, 2).map((s, i) => ({ head: s.heading, body: s.body.replace(/\*\*/g, ""), source: { title: m.title, route: `/learn/${m.id}` }, module: m.id, order: i, group: `lesson:${m.id}` }));
+  }
+
+  // Reading order: group by source, then position within it.
+  const groups = [...new Set(picked.map((c) => c.group))];
+  picked.sort((a, b) => groups.indexOf(a.group) - groups.indexOf(b.group) || a.order - b.order);
+
   const parts: string[] = [];
   const sources: Source[] = [];
-  if (step) {
-    parts.push(`${step.step.title}: ${step.step.notes}`);
-    sources.push({ title: step.quest.title, route: "" });
+  if (picked.length) {
+    const per = Math.floor(LIMITS.notes / picked.length) - 4;
+    for (const c of picked) {
+      parts.push(clip(`${headOf(c)}: ${c.body}`, per));
+      if (!sources.some((x) => x.title === c.source.title)) sources.push(c.source);
+    }
+  } else if (topLesson) {
+    parts.push(lessonNotes(topLesson, LIMITS.notes));
+    sources.push({ title: topLesson.title, route: `/learn/${topLesson.id}` });
   }
-  const per = Math.floor((LIMITS.notes - (parts[0]?.length ?? 0)) / Math.max(1, lessons.length)) - 10;
-  for (const m of lessons) {
-    if (per < 250) break;
-    parts.push(lessonNotes(m, per));
-    sources.push({ title: m.title, route: `/learn/${m.id}` });
-  }
+
+  const lessonId = picked.find((c) => c.module)?.module;
+  const modules = [...new Set([...picked.map((c) => c.module ?? quests.find((q) => `quest:${q.id}` === c.group)?.lesson), topLesson?.id])].filter(
+    (m): m is string => !!m && moduleById.has(m),
+  );
   return {
     notes: parts.join("\n\n").slice(0, LIMITS.notes),
     sources,
     related: hits.slice(0, 3),
-    lesson: lessons[0] ?? null,
+    lesson: (lessonId ? moduleById.get(lessonId) : null) ?? topLesson,
+    modules,
   };
+}
+
+/** A chunk's own heading, without the lesson title and question it's indexed under. */
+function headOf(c: Chunk): string {
+  if (c.module) {
+    const l = guidedLessons.find((g) => g.module === c.module);
+    return l?.sections[c.order]?.heading ?? c.source.title;
+  }
+  const q = quests.find((x) => `quest:${x.id}` === c.group);
+  return q?.steps[c.order]?.title ?? c.source.title;
 }
 
 export const moduleNotes = (id: string) => {
