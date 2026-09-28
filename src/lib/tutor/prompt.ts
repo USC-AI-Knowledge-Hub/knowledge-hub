@@ -10,7 +10,8 @@ export interface ChatMessage {
 }
 
 export const LIMITS = {
-  notes: 1800,
+  // Tiny models get lost in long context: keep only the notes that clearly match.
+  notes: 1200,
   turn: 500,
   turns: 6,
   question: 800,
@@ -18,7 +19,29 @@ export const LIMITS = {
   total: 5200,
 } as const;
 
-export const GENERATION = { maxNewTokens: 256, temperature: 0.4, topP: 0.9, repetitionPenalty: 1.1 } as const;
+export const GENERATION = { maxNewTokens: 256, temperature: 0.4, topP: 0.9, repetitionPenalty: 1.15 } as const;
+
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+/**
+ * Small models sometimes fall into a loop, repeating one sentence until they run out of
+ * tokens. Cuts the text at the first repeat of a sentence already said, so the student sees
+ * the useful part once, and reports it so generation can stop early.
+ */
+export function trimRepetition(text: string): { text: string; looping: boolean } {
+  const seen = new Set<string>();
+  const re = /[^.!?\n]+[.!?]?(\s+|$)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text))) {
+    const sentence = norm(m[0]);
+    if (sentence.length < 12) continue;
+    // Only a finished sentence can count as a repeat; the last one may still be streaming.
+    const finished = /[.!?\n]/.test(m[0]) || re.lastIndex < text.length;
+    if (seen.has(sentence) && finished) return { text: text.slice(0, m.index).trimEnd(), looping: true };
+    if (finished) seen.add(sentence);
+  }
+  return { text, looping: false };
+}
 
 const BASE =
   "You are the AI tutor on USC's AI Knowledge Hub. You help students understand AI. Use plain language. Base every fact on the notes below; never invent numbers, names, dates or sources.";

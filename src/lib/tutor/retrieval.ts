@@ -47,11 +47,16 @@ function stepScore(q: string, quest: Quest, step: QuestStep): number {
   const head = `${quest.title} ${step.title} ${step.ask}`.toLowerCase();
   const body = step.notes.toLowerCase();
   let s = 0;
+  let matched = 0;
   for (const t of terms) {
     const root = t.length > 4 ? t.slice(0, -1) : t;
     if (head.includes(root)) s += 2;
     else if (body.includes(root)) s += 1;
+    else continue;
+    matched++;
   }
+  // One shared word isn't enough: "prompt engineering" once matched the energy-per-prompt step.
+  if (terms.length > 1 && matched < 2) return 0;
   return s / Math.sqrt(terms.length);
 }
 
@@ -68,8 +73,10 @@ export function bestQuestStep(q: string): { quest: Quest; step: QuestStep } | nu
 
 export function ground(question: string): Grounding {
   const hits = searchSite(question, 8);
-  const lessons = hits
-    .filter((h) => h.kind === "lesson")
+  const lessonHits = hits.filter((h) => h.kind === "lesson");
+  // A second lesson only if it's nearly as relevant; a weak match adds noise, not help.
+  const lessons = lessonHits
+    .filter((h, i) => i === 0 || h.score >= lessonHits[0].score * 0.6)
     .slice(0, 2)
     .map((h) => moduleById.get(h.id)!)
     .filter(Boolean);
