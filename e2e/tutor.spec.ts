@@ -162,10 +162,10 @@ test.describe("tutor without a model", () => {
   });
 
   test("the path guide recommends the next lesson", async ({ page }) => {
-    await setup(page, { storage: { "kh-progress": ["llms", "prompting"] } });
+    await setup(page, { storage: { "kh-progress": ["llms", "prompting", "reasoning-models"] } });
     const sheet = await openTutor(page);
     await sheet.getByRole("button", { name: "What should I learn next?" }).click();
-    // Two of six builder lessons done: the builder path wins, and coding is next.
+    // Three of eight builder lessons done: the builder path wins, and coding is next.
     await expect(sheet.getByText("Next up, builder path")).toBeVisible();
     await expect(sheet.getByText("Coding with AI", { exact: true })).toBeVisible();
     await sheet.getByRole("button", { name: "Open the lesson" }).click();
