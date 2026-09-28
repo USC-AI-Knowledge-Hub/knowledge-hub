@@ -9,13 +9,14 @@ A daily GitHub Action refreshes the YouTube video library.
 - `npm run build`: typecheck and production build (`dist/`)
 - `npm test`: Vitest (pipeline unit tests plus an offline end-to-end run)
 - `npm run videos`: run the video pipeline (see the video-curation skill)
-- `npm run courses`: check every course and editors' pick against YouTube (`--check --strict` in CI)
+- `npm run courses`: check every course, editors' pick and talk against YouTube (`--check --strict` in CI)
 - `npm run theme`: regenerate `src/styles/tokens.css` from the brand colors
 
 ## Layout
 
 - `src/data/`: all content. `tools.ts` (tool reviews and pipeline match rules),
   `learn.ts` (modules and learning paths), `courses.ts` (full courses mapped to modules),
+  `talks.ts` (talks, debates, keynotes and podcasts), `guided/` (guided lessons and course paths),
   `topics.ts`, `types.ts`.
 - `src/pages/`, `src/components/`, `src/lib/`: the app.
 - `src/styles/`: `tokens.css` (generated), `base.css` (system and components), `pages.css`.
