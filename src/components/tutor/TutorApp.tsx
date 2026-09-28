@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { matchPath, useLocation, useNavigate } from "react-router";
-import { lessonByModule } from "../../data/guided";
 import { moduleById, pathById } from "../../data/learn";
 import { TASK_LABEL, toolById } from "../../data/tools";
 import type { Task } from "../../data/types";
@@ -8,7 +7,7 @@ import { searchSite, searchTools, type SiteHit } from "../../lib/siteSearch";
 import { nextModule, routeMessage } from "../../lib/tutor/guide";
 import { buildMessages, type ChatMessage, type Mode } from "../../lib/tutor/prompt";
 import { onAsk, takeAsks } from "../../lib/tutor/bridge";
-import { ground, lessonGround, moduleNotes, toolNotesById, type Source } from "../../lib/tutor/retrieval";
+import { followUpContext, ground, moduleNotes, toolNotesById, type Source } from "../../lib/tutor/retrieval";
 import { pathStore } from "../../lib/tutor/storage";
 import { useTutorEngine } from "../../lib/tutor/useEngine";
 import { useProgress } from "../../lib/progress";
@@ -49,6 +48,25 @@ export function pageContext(pathname: string): PageContext {
   return null;
 }
 
+/** Where the student is, in words the model can use: "the lesson “Prompting that works”". */
+export function pageLabel(pathname: string): string | undefined {
+  const c = pageContext(pathname);
+  if (c?.kind === "lesson") return `the lesson “${c.title}”`;
+  if (c?.kind === "path") return `the learning path “${c.title}”`;
+  if (c?.kind === "tool") return `the tool page for ${c.title}`;
+  if (c?.kind === "tools") return "the tool map, which finds AI tools by task";
+  const exact: Record<string, string> = {
+    "/": "the home page",
+    "/learn": "the Learn page, with lessons and learning paths",
+    "/learn/courses": "the list of full video courses",
+    "/watch": "the Watch page, with videos, trends, talks and podcasts",
+    "/green": "the Green AI page, about using AI efficiently and responsibly",
+    "/search": "the search page",
+    "/about": "the About page",
+  };
+  return exact[pathname.replace(/\/$/, "") || "/"];
+}
+
 /**
  * The tutor itself, loaded on first open (see Tutor.tsx) and kept mounted
  * afterwards so the conversation and any loaded model survive closing the sheet.
@@ -67,6 +85,8 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
   const page = pageContext(pathname);
   const pageRef = useRef(page);
   pageRef.current = page;
+  /** The last free-chat topic, so follow-ups like "show me how it works" keep it. */
+  const lastTopic = useRef<string | null>(null);
 
   const push = useCallback((item: NewItem): number => {
     const id = nextId.current++;
@@ -109,9 +129,14 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
   };
 
   const generate = useCallback(
-    async (mode: Mode, notes: string, question: string, extra: { label?: string; related?: SiteHit[]; sources?: Source[]; withHistory?: boolean; maxNewTokens?: number }) => {
-      const msgs = buildMessages(mode, notes, question, extra.withHistory ? history() : []);
-      const id = push({ kind: "answer", text: "", state: "thinking", label: extra.label, related: extra.related, sources: extra.sources });
+    async (
+      mode: Mode,
+      notes: string,
+      question: string,
+      extra: { label?: string; related?: SiteHit[]; sources?: Source[]; withHistory?: boolean; maxNewTokens?: number; page?: string; watch?: string[] },
+    ) => {
+      const msgs = buildMessages(mode, notes, question, extra.withHistory ? history() : [], extra.page);
+      const id = push({ kind: "answer", text: "", state: "thinking", label: extra.label, related: extra.related, sources: extra.sources, watch: extra.watch });
       try {
         const r = await engine.generate(msgs, (t) => update(id, { text: t, state: "streaming" } as Partial<Item>), extra.maxNewTokens);
         const text = r.text || "I couldn't come up with an answer. Try asking a different way.";
@@ -219,22 +244,16 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
         return;
       }
 
-      // 2. Free chat, grounded in our lessons and quest notes. On a guided lesson, the
-      //    lesson's own sections come first, so the tutor explains what's being read.
+      // 2. Free chat, grounded in the lessons and quest notes. A follow-up that names no topic
+      //    ("explain its architecture") carries over the one before; the lesson the student
+      //    is reading wins ties, and the model is told which page they're on.
       push({ kind: "user", text });
-      const g = ground(text);
+      const context = followUpContext(text, lastTopic.current);
+      lastTopic.current = context ? `${context} ${text}`.slice(-200) : text;
       const ctx = pageRef.current;
-      const lessonCtx = ctx?.kind === "lesson" ? ctx : null;
-      const guided = lessonCtx ? lessonByModule.get(lessonCtx.id) : undefined;
-      if (engine.ready && guided) {
-        const lg = lessonGround(text, guided);
-        void generate("answer", lg.notes, text, {
-          related: g.related,
-          sources: [{ title: `${lessonCtx!.title}: ${lg.headings.join(", ")}`, route: pathname }],
-          withHistory: true,
-        });
-      } else if (engine.ready) {
-        void generate("answer", g.notes, text, { related: g.related, sources: g.sources, withHistory: true });
+      const g = ground(text, { context, prefer: ctx?.kind === "lesson" ? ctx.id : undefined });
+      if (engine.ready) {
+        void generate("answer", g.notes, text, { related: g.related, sources: g.sources, withHistory: true, page: pageLabel(pathname), watch: g.modules });
       } else if (g.lesson) {
         push({
           kind: "reading",
@@ -244,6 +263,7 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
           bullets: g.lesson.keyIdeas,
           route: `/learn/${g.lesson.id}`,
           related: g.related.filter((h) => h.route !== `/learn/${g.lesson!.id}`),
+          watch: g.modules,
         });
         announce(`From the lesson ${g.lesson.title}: ${g.lesson.what}`);
       } else {

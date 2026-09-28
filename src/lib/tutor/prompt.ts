@@ -44,13 +44,13 @@ export function trimRepetition(text: string): { text: string; looping: boolean }
 }
 
 const BASE =
-  "You are the AI tutor on USC's AI Knowledge Hub. You help students understand AI. Use plain language. Base every fact on the notes below; never invent numbers, names, dates or sources.";
+  "You are the AI tutor on USC's AI Knowledge Hub. You help students understand AI. Use plain language. Base every fact on the notes below; never invent numbers, names, dates or sources. Explain the actual content: don't offer to help, don't say what you could explain, and don't repeat an earlier answer.";
 
 export type Mode = "answer" | "quest" | "critique" | "quiz" | "simpler" | "tool" | "frame" | "reflect";
 
 const TASKS: Record<Mode, string> = {
   answer:
-    "Answer in under 120 words. If the notes don't cover the question, say that in one sentence and suggest the lesson named in the notes.",
+    "Answer in under 120 words. If the student asks how something works or what it's made of, go through the parts or steps from the notes as a short numbered list. If the notes don't cover the question, say that in one sentence and suggest the lesson named in the notes.",
   quest: "Explain the answer to the student's question in under 110 words, like a friendly tutor. Use one concrete example. Don't quiz them.",
   critique:
     "The student wrote a prompt for the task in the notes. In under 110 words: say what works, then the one or two most useful improvements, using the rubric. Don't rewrite the whole prompt.",
@@ -70,16 +70,28 @@ export function clip(text: string, max: number): string {
   return `${cut.slice(0, end > max * 0.5 ? end + (cut[end] === "." ? 1 : 0) : max - 1).trimEnd()}…`;
 }
 
-export function systemPrompt(mode: Mode, notes: string): string {
-  return `${BASE} ${TASKS[mode]}\n\nNotes:\n${clip(notes, LIMITS.notes) || "(none)"}`;
+export function systemPrompt(mode: Mode, notes: string, page?: string): string {
+  const where = page ? ` The student is on ${page}. When it helps, connect your answer to that page or suggest one thing to try there.` : "";
+  return `${BASE} ${TASKS[mode]}${where}\n\nNotes:\n${clip(notes, LIMITS.notes) || "(none)"}`;
+}
+
+/** Closing lines small models add instead of content: "Let me know how I can help!" */
+const FILLER_END = /^(let me know|feel free|i hope (this|that) helps|hope (this|that) helps|if you have (any )?(other|more|further) questions|is there anything else|would you like (me )?to (know|learn|explore) more|i('m| am) (here|happy) to help)/i;
+
+/** Removes those closing lines, and a whole answer made only of them is left as is. */
+export function stripFiller(text: string): string {
+  const sentences = text.match(/[^.!?\n]+[.!?]*\s*|\n+/g) ?? [text];
+  let end = sentences.length;
+  while (end > 1 && (FILLER_END.test(sentences[end - 1].trim()) || !sentences[end - 1].trim())) end--;
+  return sentences.slice(0, end).join("").trimEnd();
 }
 
 /**
  * Builds the message list. History is trimmed from the oldest end until the
  * whole prompt fits in LIMITS.total.
  */
-export function buildMessages(mode: Mode, notes: string, question: string, history: ChatMessage[] = []): ChatMessage[] {
-  const system: ChatMessage = { role: "system", content: systemPrompt(mode, notes) };
+export function buildMessages(mode: Mode, notes: string, question: string, history: ChatMessage[] = [], page?: string): ChatMessage[] {
+  const system: ChatMessage = { role: "system", content: systemPrompt(mode, notes, page) };
   const user: ChatMessage = { role: "user", content: clip(question, LIMITS.question) };
   const turns = history
     .filter((m) => m.role !== "system" && m.content.trim())

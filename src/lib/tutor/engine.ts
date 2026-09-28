@@ -4,7 +4,7 @@
  * development and tests: `?tutor=mock` or localStorage["kh-tutor-mock"]="1")
  * fakes the download and streams answers built from the notes it was given.
  */
-import { GENERATION, stripThink, trimRepetition, type ChatMessage } from "./prompt";
+import { GENERATION, stripFiller, stripThink, trimRepetition, type ChatMessage } from "./prompt";
 import type { FromWorker, ToWorker } from "./protocol";
 import { ALL_MODELS, onnxFile, type Device, type TutorModel } from "./registry";
 
@@ -165,7 +165,7 @@ class WorkerEngine implements Engine {
         if (this.pendingGen?.id === m.id) {
           const g = this.pendingGen;
           this.pendingGen = null;
-          g.resolve({ text: trimRepetition(stripThink(m.text)).text.trim(), tokens: m.tokens, ms: m.ms, stopped: g.stopped });
+          g.resolve({ text: stripFiller(trimRepetition(stripThink(m.text)).text.trim()), tokens: m.tokens, ms: m.ms, stopped: g.stopped });
         }
         break;
       case "error": {

@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { useCourseStatus } from "../../lib/courses";
+import { thumb } from "../../lib/format";
 import type { SiteHit } from "../../lib/siteSearch";
+import { watchFor } from "../../lib/tutor/watch";
 import { PATH_QUESTIONS, pickPath, type Goal, type Role } from "../../lib/tutor/guide";
 import { pathStore } from "../../lib/tutor/storage";
 import { Icon } from "../Icon";
+import { usePlayer } from "../Player";
 import { ToolMark } from "../ToolMark";
 import { WavyProgress } from "../WavyProgress";
 import { useTutor, type Item } from "./context";
@@ -39,6 +43,39 @@ export function Related({ hits }: { hits: SiteHit[] }) {
           </button>
         ))}
       </div>
+    </div>
+  );
+}
+
+const WATCH_ICON = { course: "playlist_play", pick: "smart_display", talk: "podium" } as const;
+
+/** Playlists, editors' picks and talks for the lessons an answer drew on. They open in the player. */
+export function WatchNext({ modules }: { modules?: string[] }) {
+  const status = useCourseStatus();
+  const play = usePlayer();
+  const { go } = useTutor();
+  const list = modules?.length ? watchFor(modules, status) : [];
+  if (!list.length) return null;
+  return (
+    <div className="t-watch">
+      <p className="label-m muted">Watch next</p>
+      <ul className="t-watch-list">
+        {list.map((v) => (
+          <li key={v.key}>
+            <button type="button" className="t-watch-card state" onClick={() => play(v.playable)} aria-label={`Play: ${v.title}`}>
+              <span className="t-watch-thumb">
+                {v.thumb ? <img src={thumb(v.thumb)} alt="" loading="lazy" width={160} height={120} /> : null}
+                <Icon name={WATCH_ICON[v.kind]} size={18} />
+              </span>
+              <span className="label-l t-watch-title">{v.title}</span>
+              <span className="body-s muted">{v.meta}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <button type="button" className="t-link body-s" onClick={() => go(`/learn/${modules![0]}`)}>
+        More videos in the lesson
+      </button>
     </div>
   );
 }
@@ -80,6 +117,7 @@ function Answer({ item }: { item: Extract<Item, { kind: "answer" }> }) {
               {item.state === "stopped" ? "Stopped. " : ""}Small on-device model. It can be wrong.
               {item.sources?.length ? ` Based on: ${item.sources.map((s) => s.title).join(", ")}.` : ""}
             </p>
+            <WatchNext modules={item.watch} />
             {item.related && <Related hits={item.related} />}
           </>
         )}
@@ -328,6 +366,7 @@ function Reading({ item }: { item: Extract<Item, { kind: "reading" }> }) {
           </button>
         </div>
       )}
+      <WatchNext modules={item.watch} />
       {item.related && <Related hits={item.related} />}
       <ModelHint />
     </div>
