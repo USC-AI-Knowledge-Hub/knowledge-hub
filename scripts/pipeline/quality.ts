@@ -40,7 +40,9 @@ const ENTERTAINMENT = /\b(trailer|teaser|reacts?|reaction|memes?|compilation)\b/
  */
 const TREND_PATTERNS: [TrendKind, RegExp][] = [
   ["news", /\b(ai news|news:|this week in ai|weekly (ai )?(news|recap)|recap|round-?up|everything (announced|new)|what's new)\b/i],
-  ["talk", /\b(keynote|podcast|interview|in conversation|conversation with|fireside|panel|documentary|talks? (with|at)|ted talk|livestream|live stream)\b/i],
+  // Talks: stage talks, debates, conference sessions and podcast episodes. "Lecture" is left out on purpose:
+  // course lectures are lessons.
+  ["talk", /\b(keynote|podcast|interview|in conversation|conversation with|fireside|panel(ists?)?|documentary|talks? (with|at)|ted ?talk|tedx?\b|livestream|live stream|debates?|debating|episode|ep\.? ?\d+|conference|summit|symposium)\b/i],
   ["launch", /\b(introducing|announcing|announcement|launch(es|ed|ing)?|released?|now available|unveil(s|ed)?|just dropped|is here|new model)\b/i],
   // "Research" alone is too common in lesson titles ("Deep Research explained"), so only news-style phrasing counts.
   ["research", /\b((new|this|the) paper|research paper|researchers|study (finds|shows)|benchmarks?|breakthrough|state of ai)\b/i],
