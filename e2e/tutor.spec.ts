@@ -1,7 +1,8 @@
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
+import { levels, quests, type Check } from "../src/lib/tutor/quests";
 
 /**
  * The on-device tutor. Most tests use the mock engine (localStorage
@@ -34,6 +35,35 @@ async function openTutor(page: Page, path = "/") {
   return sheet;
 }
 
+/** Every check in every quest. Checks are drawn at random, so tests look up the one on screen. */
+const ALL_CHECKS: Check[] = quests.flatMap((q) =>
+  q.steps.flatMap((s) => (s.kind === "learn" ? s.checks : s.kind === "dojo" ? s.tasks.map((t) => t.check) : [s.check])),
+);
+
+/** The check currently on screen, found by its options (which are shuffled). */
+async function currentCheck(sheet: Locator): Promise<Check> {
+  const shown = (await sheet.locator(".t-check .t-option .body-m").allInnerTexts()).map((t) => t.trim());
+  const c = ALL_CHECKS.find((x) => x.options.length === shown.length && shown.every((t) => x.options.includes(t)));
+  if (!c) throw new Error(`No check has these options: ${shown.join(" | ")}`);
+  return c;
+}
+
+/** Picks the right (or a wrong) option on the current check and submits it. */
+async function answer(sheet: Locator, right: boolean): Promise<Check> {
+  const c = await currentCheck(sheet);
+  const text = right ? c.options[c.answer] : c.options.find((_, i) => i !== c.answer)!;
+  await sheet.locator(".t-check").getByText(text, { exact: true }).click();
+  await sheet.getByRole("button", { name: "Check answer" }).click();
+  return c;
+}
+
+const questState = (steps: Record<string, Record<string, string>>, badges: string[] = [], xp = 0) => ({
+  xp,
+  steps,
+  badges,
+  streak: { count: 0, last: null },
+});
+
 async function ask(page: Page, text: string) {
   const input = page.getByRole("textbox", { name: "Ask the tutor" });
   await input.fill(text);
@@ -60,8 +90,8 @@ test.describe("tutor without a model", () => {
     await setup(page);
     const sheet = await openTutor(page);
     await expect(sheet.getByRole("button", { name: /Inside a transformer/ })).toBeVisible();
-    await expect(sheet.locator(".t-quest")).toHaveCount(6);
-    await expect(sheet.getByRole("list", { name: /Badges: 0 of 6 earned/ })).toBeVisible();
+    await expect(sheet.locator(".t-quest")).toHaveCount(quests.length);
+    await expect(sheet.getByRole("list", { name: new RegExp(`Badges: 0 of ${quests.length} earned`) })).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(sheet).toBeHidden();
     await expect(page.getByRole("button", { name: /Ask the tutor/ })).toBeFocused();
@@ -85,18 +115,23 @@ test.describe("tutor without a model", () => {
     await expect(sheet.getByText("From the notes")).toBeVisible();
 
     // A wrong answer first: no XP, and the student can try again.
-    await sheet.getByText("It never learned the alphabet").click();
-    await sheet.getByRole("button", { name: "Check answer" }).click();
+    const first = await answer(sheet, false);
     await expect(sheet.getByText("Not quite.")).toBeVisible();
-    await sheet.getByText("It sees tokens, which can be chunks").click();
-    await sheet.getByRole("button", { name: "Check answer" }).click();
+    await answer(sheet, true);
     await expect(sheet.getByText("Correct.")).toBeVisible();
     await expect(sheet.getByText("+5 XP")).toBeVisible();
 
+    // Another question on the same idea: a different variant, no more XP.
+    await sheet.getByRole("button", { name: "Try another question" }).click();
+    const second = await currentCheck(sheet);
+    expect(second.question).not.toBe(first.question);
+    await answer(sheet, true);
+    await expect(sheet.getByText("Correct.")).toBeVisible();
+    await expect(sheet.getByText(/\+\d+ XP/)).toHaveCount(0);
+
     await sheet.getByRole("button", { name: "Next step" }).click();
     await expect(sheet.getByRole("heading", { name: /Step 2 of 6\s*Embeddings/ })).toBeVisible();
-    await sheet.getByText("A vector of numbers for each token").click();
-    await sheet.getByRole("button", { name: "Check answer" }).click();
+    await answer(sheet, true);
     await expect(sheet.getByText("+10 XP")).toBeVisible();
 
     await sheet.getByRole("button", { name: "Back to tutor home" }).click();
@@ -113,8 +148,7 @@ test.describe("tutor without a model", () => {
     const sheet = await openTutor(page);
     await sheet.getByRole("button", { name: /Spot the hallucination/ }).click();
     await expect(sheet.getByRole("heading", { name: /Step 5 of 5/ })).toBeVisible();
-    await sheet.getByText("Search the exact title in Google Scholar").click();
-    await sheet.getByRole("button", { name: "Check answer" }).click();
+    await answer(sheet, true);
     await expect(sheet.getByText("+35 XP")).toBeVisible();
     await sheet.getByRole("button", { name: "Finish" }).click();
     await expect(sheet.getByRole("heading", { name: "Badge earned" })).toBeVisible();
@@ -138,7 +172,76 @@ test.describe("tutor without a model", () => {
     await sheet.getByRole("button", { name: "Score my prompt" }).click();
     await expect(sheet.getByText(/of 5 on the rubric/)).toBeVisible();
     await expect(sheet.getByText("A stronger version")).toBeVisible();
-    await expect(sheet.getByText("In the stronger prompt, which part is a constraint?")).toBeVisible();
+    // The task rotates between visits; its check asks about that task's stronger prompt.
+    const task = quests.find((q) => q.id === "dojo")!.steps.find((s) => s.id === "study-prompt")!;
+    if (task.kind !== "dojo") throw new Error("expected a dojo step");
+    const shown = (await sheet.locator(".t-stronger").innerText()).trim();
+    const t = task.tasks.find((x) => x.stronger === shown)!;
+    expect(t).toBeDefined();
+    await expect(sheet.locator(".t-check legend")).toHaveText(t.check.question);
+    await answer(sheet, true);
+    await expect(sheet.getByText("+10 XP")).toBeVisible();
+  });
+
+  test("lays out a three-level path and lets students peek at locked levels", async ({ page }) => {
+    await setup(page);
+    const sheet = await openTutor(page);
+    for (const l of levels) await expect(sheet.getByRole("heading", { name: `Level ${l.n}: ${l.title}` })).toBeVisible();
+    await expect(sheet.getByText(/Level 2 · opens after 3 quests in level 1 \(3 to go\)/)).toBeVisible();
+    // Peek: the notes are readable, but the check stays closed.
+    await sheet.getByRole("button", { name: /Grounding AI in documents/ }).click();
+    await expect(sheet.getByText("From the notes")).toBeVisible();
+    await expect(sheet.getByText(/You're peeking ahead/)).toBeVisible();
+    await expect(sheet.getByRole("button", { name: "Check answer" })).toHaveCount(0);
+    await sheet.getByRole("button", { name: "Next step" }).click();
+    await expect(sheet.getByRole("heading", { name: /Step 2 of 4/ })).toBeVisible();
+  });
+
+  test("opens level 2 after three level 1 quests, keeping old progress", async ({ page }) => {
+    const l1 = levels[0].quests.slice(0, 3).map((q) => q.id);
+    // A version 1 save: only xp, steps, badges and streak.
+    await setup(page, { storage: { "kh-tutor-quests": questState({ environment: { "data-centres": "first" } }, l1, 100) } });
+    const sheet = await openTutor(page);
+    await expect(sheet.locator(".t-xp-num")).toHaveText("100");
+    await expect(sheet.getByText(/Level 2 · 0 of \d+ quests done/)).toBeVisible();
+    await expect(sheet.getByText(/Level 3 · opens after/)).toBeVisible();
+    // Started before levels existed, so it stays open.
+    await sheet.getByRole("button", { name: /AI and the environment\s*1 of 5 steps/ }).click();
+    await expect(sheet.getByRole("heading", { name: /Step 2 of 5/ })).toBeVisible();
+    await expect(sheet.getByRole("button", { name: "Check answer" })).toBeVisible();
+  });
+
+  test("daily review is empty until a quest is finished", async ({ page }) => {
+    await setup(page);
+    const sheet = await openTutor(page);
+    await expect(sheet.getByText("Finish your first quest and its questions show up here for review.")).toBeVisible();
+    await expect(sheet.getByRole("button", { name: "Start review" })).toHaveCount(0);
+  });
+
+  test("daily review asks five questions from finished quests and awards XP once a day", async ({ page }) => {
+    await setup(page, { storage: { "kh-tutor-quests": questState({}, ["history", "spot"], 50) } });
+    const sheet = await openTutor(page);
+    await sheet.getByRole("button", { name: "Start review" }).click();
+    const allowed = new Set(quests.filter((q) => q.id === "history" || q.id === "spot").flatMap((q) => q.steps.map((s) => s.title)));
+    for (let i = 0; i < 5; i++) {
+      await expect(sheet.getByRole("heading", { name: new RegExp(`Question ${i + 1} of 5`) })).toBeVisible();
+      const from = (await sheet.locator(".t-review-from").innerText()).split(" · ")[1];
+      expect(allowed.has(from), from).toBe(true);
+      await answer(sheet, i !== 0);
+      await expect(sheet.locator(".t-feedback")).toBeVisible();
+      await sheet.getByRole("button", { name: i === 4 ? "See results" : "Next question" }).click();
+    }
+    await expect(sheet.getByRole("heading", { name: "4 of 5 correct" })).toBeVisible();
+    await expect(sheet.getByText("+13 XP, and your streak is safe for today.")).toBeVisible();
+    await expect(sheet.getByText("To go over again")).toBeVisible();
+    const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("kh-tutor-quests") ?? "{}"));
+    expect(saved.xp).toBe(63);
+    expect(saved.streak.count).toBe(1);
+    expect(Object.values(saved.answers as Record<string, { wrong: number }>).filter((a) => a.wrong > 0)).toHaveLength(1);
+
+    // A second review the same day is practice only.
+    await sheet.getByRole("button", { name: "Another review" }).click();
+    await expect(sheet.getByText("Practice round")).toBeVisible();
   });
 
   test("navigates without the model: take me to the courses", async ({ page }) => {
