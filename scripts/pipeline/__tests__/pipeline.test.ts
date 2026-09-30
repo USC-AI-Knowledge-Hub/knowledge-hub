@@ -8,6 +8,7 @@ import { parseIsoDuration } from "../duration";
 import { mergeFeed, mergeTrends } from "../merge";
 import { hypeLevel, looksEducational, mentionsAI, qualityScore, rejectReason, trendKind, type Candidate } from "../quality";
 import { parseFeed } from "../rss";
+import { sparseTools } from "../coverage";
 import { todaysQueries } from "../rotation";
 import { tagTools, tagTopics } from "../tagging";
 
@@ -270,5 +271,48 @@ describe("mergeTrends", () => {
     const out = mergeTrends([], [...many, t({ id: "b", channelId: "UC2", publishedAt: "2026-09-26T00:00:00Z" })], "2026-09-26");
     expect(out.filter((x) => x.channelId === "UC1")).toHaveLength(4);
     expect(out[0].id).toBe("b");
+  });
+});
+
+describe("evergreen search for barely covered tools", () => {
+  const now = new Date("2026-09-30T12:00:00Z");
+  const tutorial = cand({ title: "SciSpace tutorial: literature review in 20 minutes", publishedAt: "2026-03-01T00:00:00Z", views: 450 });
+
+  it("finds the tools with too few videos", () => {
+    const sparse = sparseTools([...Array(6)].map(() => ({ tools: ["chatgpt"] })));
+    expect(sparse.has("chatgpt")).toBe(false);
+    expect(sparse.has("scispace")).toBe(true);
+  });
+
+  it("rejects an older, less-viewed tutorial normally but keeps it on the evergreen path", () => {
+    expect(rejectReason(tutorial, now)).toBe("too old");
+    expect(rejectReason({ ...tutorial, publishedAt: "2026-09-10T00:00:00Z" }, now)).toBe("too few views");
+    expect(rejectReason(tutorial, now, { evergreen: true })).toBeNull();
+  });
+
+  it("still has limits on the evergreen path", () => {
+    expect(rejectReason({ ...tutorial, views: 120 }, now, { evergreen: true })).toBe("too few views");
+    expect(rejectReason({ ...tutorial, publishedAt: "2023-01-01T00:00:00Z" }, now, { evergreen: true })).toBe("too old");
+  });
+
+  it("keeps the evergreen mark when a known video comes back", () => {
+    const v: Video = {
+      id: "a",
+      title: "SciSpace tutorial",
+      channel: "c",
+      channelId: "UC",
+      publishedAt: "2026-03-01T00:00:00Z",
+      duration: 600,
+      views: 450,
+      tools: ["scispace"],
+      topics: [],
+      difficulty: "beginner",
+      difficultySource: "heuristic",
+      score: 30,
+      firstSeen: "2026-09-29",
+      evergreen: true,
+    };
+    const [merged] = mergeFeed([v], [{ ...v, evergreen: undefined }], "2026-09-30");
+    expect(merged.evergreen).toBe(true);
   });
 });

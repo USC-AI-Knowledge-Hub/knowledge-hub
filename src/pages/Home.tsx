@@ -49,7 +49,8 @@ export function Home() {
               <h2 className="title-l">The library today</h2>
               <p className="body-s muted">
                 {feed?.runDate
-                  ? `Updated ${longDate(feed.runDate)}. ${feed.stats.added} new, ${videos.length} in total.`
+                  ? // Counts every video first seen that day, not just the last run's additions.
+                    `Updated ${longDate(feed.runDate)}. ${today.length} new, ${videos.length} in total.`
                   : "The first daily update hasn't run yet."}
               </p>
             </div>

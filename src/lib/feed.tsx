@@ -17,9 +17,9 @@ export function FeedProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Cache-bust per day so a fresh daily run shows up without a hard reload.
-    const day = new Date().toISOString().slice(0, 10);
-    fetch(`${import.meta.env.BASE_URL}data/videos.json?d=${day}`)
+    // Always ask the server whether the library changed (a cheap 304 when it hasn't), so a
+    // run that lands mid-day, or a second run the same day, shows up on the next visit.
+    fetch(`${import.meta.env.BASE_URL}data/videos.json`, { cache: "no-cache" })
       .then((r) => {
         if (!r.ok) throw new Error(`Video library didn't load (HTTP ${r.status}).`);
         return r.json();

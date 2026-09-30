@@ -168,7 +168,7 @@ function Talks() {
 }
 
 export function Watch() {
-  const { feed, error } = useFeed();
+  const { feed, error, today } = useFeed();
   const [params, setParams] = useSearchParams();
   const tabParam = params.get("tab");
   const tab: Tab = tabParam === "trends" || tabParam === "talks" ? tabParam : "lessons";
@@ -228,7 +228,7 @@ export function Watch() {
         {tab === "lessons" && (
           <p className="body-l muted measure">
             {feed?.runDate
-              ? `Refreshed every morning. Last run ${longDate(feed.runDate)}, with ${feed.stats.added} new videos out of ${feed.stats.candidates} checked.`
+              ? `Refreshed every morning. Last run ${longDate(feed.runDate)}, with ${today.length} new that day.`
               : "Refreshed every morning from YouTube, filtered for teaching value and sorted by tool and difficulty."}{" "}
             <Link to="/about">How videos are chosen</Link>
           </p>

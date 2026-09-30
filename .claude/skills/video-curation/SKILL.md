@@ -6,7 +6,7 @@ description: How the daily YouTube pipeline finds, filters, labels and ranks vid
 # Daily video curation
 
 `scripts/pipeline/index.ts` rebuilds `public/data/videos.json` once a day
-(`.github/workflows/daily.yml`, 12:17 UTC) and the site reads that file at runtime.
+(`.github/workflows/daily.yml`, 07:17 UTC, just after the YouTube quota resets) and the site reads that file at runtime.
 
 ## Flow
 
