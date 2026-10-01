@@ -509,7 +509,9 @@ test.describe("real model", () => {
     }
     // Without shader-f16 (true of the software GPU) the tutor picks WebLLM's q4f32 build.
 
-    await setup(page, { mock: false, storage: { "kh-tutor-device": "webgpu", "kh-tutor-debug": "1" } });
+    // A short prompt: this checks the WebLLM runtime loads and streams, and a full prompt takes
+    // the software GPU 11-25 minutes just to read. The WASM test above covers full prompts.
+    await setup(page, { mock: false, storage: { "kh-tutor-device": "webgpu", "kh-tutor-debug": "1", "kh-tutor-short-prompt": "1" } });
     page.on("console", (m) => {
       const t = m.text();
       if (m.type() === "error" || m.type() === "warning" || (t.startsWith("[tutor]") && !/progress /.test(t))) console.log("[browser]", t);
@@ -525,8 +527,7 @@ test.describe("real model", () => {
     await expect(sheet.locator(".t-status")).toContainText(/WebGPU/);
 
     // A software GPU generates thousands of times slower than a real one, so this checks that
-    // the answer starts streaming and that Stop works, not that a full answer finishes. Reading
-    // the prompt alone took 11-15 minutes on CI runners, so the first word gets 25.
+    // the answer starts streaming and that Stop works, not that a full answer finishes.
     await sheet.getByRole("button", { name: "Start learning" }).click();
     await ask(page, "What is a token?");
     const answer = sheet.locator(".t-msg.tutor .md").last();

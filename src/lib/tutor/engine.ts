@@ -35,6 +35,19 @@ export interface Engine {
   dispose(): void;
 }
 
+/**
+ * Tests only: localStorage["kh-tutor-short-prompt"]="1" trims every message to a few
+ * sentences. Reading a full prompt takes CI's software GPU 11–25 minutes; a short one shows
+ * the runtime loads and streams without that wait.
+ */
+const shortPrompt = () => {
+  try {
+    return localStorage.getItem("kh-tutor-short-prompt") === "1";
+  } catch {
+    return false;
+  }
+};
+
 /** localStorage["kh-tutor-debug"]="1" logs every step of loading and generating to the console. */
 const debug = () => {
   try {
@@ -208,7 +221,7 @@ class WorkerEngine implements Engine {
       this.send({
         type: "generate",
         id,
-        messages,
+        messages: shortPrompt() ? [...new Set([messages[0], messages[messages.length - 1]])].map((m) => ({ ...m, content: m.content.slice(0, 240) })) : messages,
         maxNewTokens,
         temperature: GENERATION.temperature,
         topP: GENERATION.topP,
