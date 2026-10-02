@@ -2,8 +2,11 @@ name: Daily videos and deploy
 
 on:
   schedule:
-    # Every day at 12:17 UTC (5:17 AM Pacific in summer, 4:17 AM in winter).
-    - cron: "17 12 * * *"
+    # Every day at 07:17 UTC, just after the YouTube quota resets (midnight Pacific in
+    # summer). GitHub often starts scheduled runs hours late; the earlier slot means the
+    # library is still fresh by morning in the US. A manual run later the same day shares
+    # that day's quota, so its searches may be refused.
+    - cron: "17 7 * * *"
   workflow_dispatch:
     inputs:
       refresh:

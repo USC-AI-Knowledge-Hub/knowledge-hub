@@ -85,4 +85,13 @@ export const SETTINGS = {
   trendPerChannel: 4,
   /** Claude classification batch size. */
   claudeBatch: 20,
+  /**
+   * Niche tools (SciSpace, ResearchRabbit) rarely get a 1,000-view tutorial in any 30-day
+   * window, so they'd never show up. A tool with fewer than this many videos in the library
+   * gets an evergreen search: tutorials from the past year, with a lower view floor.
+   */
+  sparseTool: 5,
+  evergreenWindowDays: 365,
+  evergreenMaxAgeDays: 730,
+  evergreenMinViews: 300,
 };

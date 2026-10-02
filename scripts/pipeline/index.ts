@@ -20,6 +20,7 @@ import { modules } from "../../src/data/learn";
 import { tools } from "../../src/data/tools";
 import type { Trend, Video, VideoFeed } from "../../src/data/types";
 import { classifyWithClaude, type ClaudeLabel } from "./classify-claude";
+import { sparseTools } from "./coverage";
 import { SETTINGS, TOPIC_QUERIES, TREND_QUERIES, TRUSTED_CHANNELS } from "./config";
 import { guessDifficulty } from "./difficulty";
 import { mergeFeed, mergeTrends } from "./merge";
@@ -69,7 +70,7 @@ async function trustedChannelIds(): Promise<Map<string, string>> {
   return new Map(Object.entries(lock));
 }
 
-async function collect(trusted: Set<string>): Promise<{ candidates: Candidate[]; sourcesOk: number }> {
+async function collect(trusted: Set<string>, sparse: Set<string>): Promise<{ candidates: Candidate[]; sourcesOk: number }> {
   if (fixture) {
     const list: Candidate[] = JSON.parse(readFileSync(fixture, "utf8"));
     return { candidates: list.map((c) => ({ ...c, trusted: c.trusted ?? trusted.has(c.channelId) })), sourcesOk: 1 };
@@ -88,16 +89,24 @@ async function collect(trusted: Set<string>): Promise<{ candidates: Candidate[];
 
   if (!ytKey) return { candidates: rssCandidates, sourcesOk };
 
-  const after = new Date(now.getTime() - SETTINGS.searchWindowDays * 86_400_000);
+  const daysAgo = (n: number) => new Date(now.getTime() - n * 86_400_000);
   const ids = new Set(rssCandidates.map((c) => c.id));
+  const evergreenQueries = new Set(tools.filter((t) => sparse.has(t.id)).flatMap((t) => t.queries));
+  if (evergreenQueries.size) log(`Evergreen search for ${[...sparse].join(", ")}.`);
   const queries = todaysQueries([...tools.flatMap((t) => t.queries), ...TOPIC_QUERIES, ...TREND_QUERIES], now, SETTINGS.maxSearches);
   for (const q of queries) {
+    const after = daysAgo(evergreenQueries.has(q) ? SETTINGS.evergreenWindowDays : SETTINGS.searchWindowDays);
     try {
       for (const id of await searchVideoIds(q, after, SETTINGS.resultsPerQuery, ytKey)) ids.add(id);
       sourcesOk++;
     } catch (e) {
-      errors.push(`Search "${q}": ${(e as Error).message}`);
-      if (/quotaExceeded/.test((e as Error).message)) break;
+      const message = (e as Error).message;
+      // Out of quota for the day: every other search would fail the same way.
+      if (/quota ?exceeded/i.test(message)) {
+        errors.push(`YouTube search quota used up after ${sourcesOk} sources; skipped the remaining searches. The quota resets at midnight Pacific time.`);
+        break;
+      }
+      errors.push(`Search "${q}": ${message}`);
     }
   }
   // Re-fetch details for everything so RSS items get durations and like counts.
@@ -115,7 +124,8 @@ async function main() {
   const knownTrends = new Map((feed.trends ?? []).map((t) => [t.id, t]));
   const channels = await trustedChannelIds();
   const trusted = new Set(channels.values());
-  const { candidates, sourcesOk } = await collect(trusted);
+  const sparse = sparseTools(feed.videos);
+  const { candidates, sourcesOk } = await collect(trusted, sparse);
 
   if (sourcesOk === 0) {
     console.error("Every source failed; leaving the feed untouched.\n" + errors.join("\n"));
@@ -124,7 +134,7 @@ async function main() {
 
   // 1. Filter and tag.
   const rejected: Record<string, number> = {};
-  const passing: (Candidate & { heuristicTools: string[]; topics: string[] })[] = [];
+  const passing: (Candidate & { heuristicTools: string[]; topics: string[]; evergreen: boolean })[] = [];
   const trendCandidates: Trend[] = [];
   const seen = new Set<string>();
   const reject = (why: string) => (rejected[why] = (rejected[why] ?? 0) + 1);
@@ -151,7 +161,8 @@ async function main() {
   for (const c of candidates) {
     if (seen.has(c.id)) continue;
     seen.add(c.id);
-    const reason = rejectReason(c, now);
+    const evergreen = tagTools(c.title, c.description).some((t) => sparse.has(t));
+    const reason = rejectReason(c, now, { evergreen });
     if (reason) {
       rejected[reason] = (rejected[reason] ?? 0) + 1;
       continue;
@@ -175,7 +186,7 @@ async function main() {
       rejected["off-topic"] = (rejected["off-topic"] ?? 0) + 1;
       continue;
     }
-    passing.push({ ...c, heuristicTools, topics });
+    passing.push({ ...c, heuristicTools, topics, evergreen });
   }
 
   // 2. Label new videos with Claude when available.
@@ -221,6 +232,7 @@ async function main() {
       summary: label?.summary,
       score: qualityScore(c, now),
       firstSeen: known.get(c.id)?.firstSeen ?? runDate,
+      ...(c.evergreen || known.get(c.id)?.evergreen ? { evergreen: true } : {}),
     });
   }
 
@@ -246,7 +258,7 @@ async function main() {
   const before = existing.length;
   existing = existing.flatMap((v) => {
     const asCandidate: Candidate = { ...v, description: "", trusted: true };
-    if (rejectReason(asCandidate, now)) return [];
+    if (rejectReason(asCandidate, now, { evergreen: v.evergreen })) return [];
     if (trendKind(v.title)) return [];
     if (v.difficultySource === "claude") return [v];
     if (!looksEducational(v.title)) return [];

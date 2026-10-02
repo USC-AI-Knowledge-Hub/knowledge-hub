@@ -201,6 +201,8 @@ export interface Video {
   score: number;
   /** YYYY-MM-DD of the pipeline run that first picked this video up. */
   firstSeen: string;
+  /** Picked up by the evergreen search for a tool the library barely covered, so it may be older. */
+  evergreen?: boolean;
 }
 
 /** What kind of trend video it is. Shown as a label; trends have no difficulty. */
