@@ -1,15 +1,121 @@
 {
- "generatedAt": "2026-10-03T16:15:04.754Z",
- "runDate": "2026-10-03",
+ "generatedAt": "2026-10-04T16:50:43.333Z",
+ "runDate": "2026-10-04",
  "mode": "api",
  "classifier": "heuristic",
  "stats": {
-  "candidates": 934,
-  "kept": 209,
-  "added": 14,
+  "candidates": 949,
+  "kept": 213,
+  "added": 11,
   "trends": 48
  },
  "videos": [
+  {
+   "id": "riCqdacSz9o",
+   "title": "n8n Tutorial for Beginners #16 | Prompt Engineering for Better AI Responses",
+   "channel": "Assistant Dial AI",
+   "channelId": "UCmQxheR0YmH-XdYqd23I6ng",
+   "publishedAt": "2026-10-04T16:45:33Z",
+   "duration": 392,
+   "views": 0,
+   "likes": 0,
+   "tools": [
+    "n8n"
+   ],
+   "topics": [
+    "agents",
+    "prompting",
+    "automation"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 35,
+   "firstSeen": "2026-10-04"
+  },
+  {
+   "id": "HzXD4GVqXwM",
+   "title": "I Fully Automated My Video Editing Using Claude Code (Full Walkthrough)",
+   "channel": "Christian Peverelli",
+   "channelId": "UCrJrY9gMcbRL2APnFCXiuBQ",
+   "publishedAt": "2026-10-04T13:00:18Z",
+   "duration": 1019,
+   "views": 977,
+   "likes": 53,
+   "tools": [
+    "claude-code"
+   ],
+   "topics": [
+    "coding",
+    "automation"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-10-04"
+  },
+  {
+   "id": "WAZDkcmb_CU",
+   "title": "Claude Tutorial 2026: How to Master Artifacts, Coding & Projects",
+   "channel": "AI Captain",
+   "channelId": "UCx9mhvLaKCpQ6rMLwK9t57Q",
+   "publishedAt": "2026-10-04T12:28:46Z",
+   "duration": 514,
+   "views": 4933,
+   "likes": 99,
+   "tools": [
+    "claude"
+   ],
+   "topics": [
+    "chat-basics",
+    "coding"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 64,
+   "firstSeen": "2026-10-04"
+  },
+  {
+   "id": "f0auVDTTpZM",
+   "title": "The Only Copilot Course You'll Need in 2027 (Full 1 Hour Training)",
+   "channel": "David Fortin",
+   "channelId": "UCEJoO7Zkfv45zIjuALuJLTQ",
+   "publishedAt": "2026-10-04T10:00:05Z",
+   "duration": 3890,
+   "views": 1682,
+   "likes": 59,
+   "tools": [
+    "copilot"
+   ],
+   "topics": [
+    "chat-basics",
+    "prompting",
+    "data"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-10-04"
+  },
+  {
+   "id": "0yaQLKm_PHw",
+   "title": "ChatGPT Tutorial: 7 New Features to 10x Your Productivity",
+   "channel": "AI Captain",
+   "channelId": "UCx9mhvLaKCpQ6rMLwK9t57Q",
+   "publishedAt": "2026-10-03T15:34:00Z",
+   "duration": 599,
+   "views": 4418,
+   "likes": 34,
+   "tools": [
+    "chatgpt"
+   ],
+   "topics": [
+    "chat-basics"
+   ],
+   "difficulty": "intermediate",
+   "difficultySource": "heuristic",
+   "score": 59,
+   "firstSeen": "2026-10-04"
+  },
   {
    "id": "0lIhvOIRouw",
    "title": "Cursor AI Tutorial: Beginner to Pro | Learn Cursor AI Step by Step",
@@ -17,17 +123,15 @@
    "channelId": "UCncbN8gzmir-mw9t5do358w",
    "publishedAt": "2026-10-03T13:30:07Z",
    "duration": 233,
-   "views": 0,
+   "views": 3,
    "likes": 0,
    "tools": [
     "cursor"
    ],
-   "topics": [
-    "coding"
-   ],
+   "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 35,
+   "score": 39,
    "firstSeen": "2026-10-03"
   },
   {
@@ -37,7 +141,7 @@
    "channelId": "UC8z4U1aMaOdPe_VBuJFRyww",
    "publishedAt": "2026-10-03T12:05:04Z",
    "duration": 417,
-   "views": 0,
+   "views": 1,
    "likes": 0,
    "tools": [
     "zapier"
@@ -49,7 +153,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 35,
+   "score": 37,
    "firstSeen": "2026-10-03"
   },
   {
@@ -59,7 +163,7 @@
    "channelId": "UC-58Sc064PDv5-kRoELUQ5w",
    "publishedAt": "2026-10-03T11:24:50Z",
    "duration": 190,
-   "views": 0,
+   "views": 2,
    "likes": 0,
    "tools": [
     "canva"
@@ -67,7 +171,7 @@
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 35,
+   "score": 38,
    "firstSeen": "2026-10-03"
   },
   {
@@ -77,17 +181,16 @@
    "channelId": "UCypXkiAYzkq5uPEpQwkjpMQ",
    "publishedAt": "2026-10-03T09:07:44Z",
    "duration": 856,
-   "views": 22396,
+   "views": 30329,
    "tools": [
     "claude-code"
    ],
    "topics": [
-    "coding",
-    "automation"
+    "coding"
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 69,
+   "score": 70,
    "firstSeen": "2026-10-03"
   },
   {
@@ -115,7 +218,7 @@
    "channelId": "UCyNtWXc9TcDYnDkFj-OTwyg",
    "publishedAt": "2026-10-02T14:15:30Z",
    "duration": 737,
-   "views": 8231,
+   "views": 8789,
    "tools": [],
    "topics": [
     "agents",
@@ -124,7 +227,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 51,
+   "score": 49,
    "firstSeen": "2026-10-02"
   },
   {
@@ -134,7 +237,7 @@
    "channelId": "UCVMJPRXrBIOFDBZEaF-_pEA",
    "publishedAt": "2026-10-02T14:11:36Z",
    "duration": 245,
-   "views": 915,
+   "views": 1096,
    "likes": 9,
    "tools": [
     "adobe-firefly"
@@ -144,29 +247,8 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-10-02"
-  },
-  {
-   "id": "HpgGb-63rDo",
-   "title": "Master Copilot Studio in 25 minutes",
-   "channel": "Keith AI",
-   "channelId": "UCtZWlHoNRuo1PNk2ElAMPHg",
-   "publishedAt": "2026-10-02T14:02:05Z",
-   "duration": 1559,
-   "views": 381,
-   "likes": 5,
-   "tools": [
-    "copilot"
-   ],
-   "topics": [
-    "agents",
-    "data"
-   ],
-   "difficulty": "intermediate",
-   "difficultySource": "heuristic",
-   "score": 39,
-   "firstSeen": "2026-10-03"
   },
   {
    "id": "qTWOkhytG0M",
@@ -175,8 +257,8 @@
    "channelId": "UCrJrY9gMcbRL2APnFCXiuBQ",
    "publishedAt": "2026-10-02T13:00:14Z",
    "duration": 1640,
-   "views": 4910,
-   "likes": 64,
+   "views": 7800,
+   "likes": 88,
    "tools": [
     "claude-code"
    ],
@@ -187,7 +269,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 61,
+   "score": 60,
    "firstSeen": "2026-10-02"
   },
   {
@@ -197,7 +279,7 @@
    "channelId": "UCi369jkK9Ro-MrElPQzuqkw",
    "publishedAt": "2026-10-02T12:37:36Z",
    "duration": 396,
-   "views": 5796,
+   "views": 6083,
    "likes": 24,
    "tools": [
     "elevenlabs"
@@ -207,7 +289,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 58,
+   "score": 57,
    "firstSeen": "2026-10-02"
   },
   {
@@ -217,15 +299,17 @@
    "channelId": "UCi369jkK9Ro-MrElPQzuqkw",
    "publishedAt": "2026-10-02T05:50:54Z",
    "duration": 314,
-   "views": 4703,
+   "views": 4757,
    "likes": 38,
    "tools": [
     "gemini"
    ],
-   "topics": [],
+   "topics": [
+    "automation"
+   ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 59,
+   "score": 57,
    "firstSeen": "2026-10-02"
   },
   {
@@ -235,14 +319,12 @@
    "channelId": "UCPoZs42STdjL0-HMjw-PIqA",
    "publishedAt": "2026-10-01T20:38:35Z",
    "duration": 180,
-   "views": 222,
-   "likes": 2,
+   "views": 310,
+   "likes": 3,
    "tools": [
     "adobe-firefly"
    ],
-   "topics": [
-    "prompting"
-   ],
+   "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
    "score": 48,
@@ -255,8 +337,8 @@
    "channelId": "UC5fs7PookxGfDPTo-RU0ReQ",
    "publishedAt": "2026-10-01T15:30:28Z",
    "duration": 859,
-   "views": 5710,
-   "likes": 74,
+   "views": 6917,
+   "likes": 78,
    "tools": [
     "julius"
    ],
@@ -266,7 +348,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 60,
+   "score": 59,
    "firstSeen": "2026-10-01"
   },
   {
@@ -276,19 +358,16 @@
    "channelId": "UCMVG4U2L2ocqgdYLAubuYGQ",
    "publishedAt": "2026-10-01T14:37:29Z",
    "duration": 663,
-   "views": 3628,
-   "likes": 52,
-   "tools": [
-    "copilot"
-   ],
+   "views": 4366,
+   "likes": 57,
+   "tools": [],
    "topics": [
-    "prompting",
     "data",
     "automation"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 46,
+   "score": 45,
    "firstSeen": "2026-10-03"
   },
   {
@@ -298,8 +377,8 @@
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-10-01T11:00:23Z",
    "duration": 903,
-   "views": 444180,
-   "likes": 3943,
+   "views": 606622,
+   "likes": 4853,
    "tools": [],
    "topics": [
     "llms",
@@ -317,8 +396,8 @@
    "channelId": "UCs6nmQViDpUw0nuIx9c_WvA",
    "publishedAt": "2026-09-30T21:12:33Z",
    "duration": 8548,
-   "views": 4035,
-   "likes": 32,
+   "views": 4421,
+   "likes": 35,
    "tools": [
     "n8n"
    ],
@@ -327,7 +406,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 43,
+   "score": 42,
    "firstSeen": "2026-10-01"
   },
   {
@@ -351,24 +430,43 @@
    "firstSeen": "2026-09-30"
   },
   {
-   "id": "q1IwR88mhaA",
-   "title": "The ONLY Grok Bot Tutorial You Need 2026 - How To Use Grok Bot For Beginners",
-   "channel": "Charlie Chang",
-   "channelId": "UCTQuKo8v0PaPCvk5aRxc_Yg",
-   "publishedAt": "2026-09-30T19:29:13Z",
-   "duration": 841,
-   "views": 41371,
-   "likes": 511,
+   "id": "db1KRJQEt8w",
+   "title": "ChatGPT Dots: How I Spent My First 24 Hours",
+   "channel": "The AI Advantage",
+   "channelId": "UCHhYXsLBEVVnbvsq57n1MTQ",
+   "publishedAt": "2026-09-30T19:04:18Z",
+   "duration": 755,
+   "views": 86439,
+   "likes": 670,
    "tools": [
     "chatgpt"
    ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 65,
+   "firstSeen": "2026-10-04"
+  },
+  {
+   "id": "DP7mgLUKN_U",
+   "title": "How To Use Claude Code To Build Amazing Sites With Opus 5.5",
+   "channel": "AI LABS",
+   "channelId": "UCelfWQr9sXVMTvBzviPGlFw",
+   "publishedAt": "2026-09-30T15:00:28Z",
+   "duration": 1527,
+   "views": 28475,
+   "likes": 412,
+   "tools": [
+    "claude-code"
+   ],
    "topics": [
-    "automation"
+    "chat-basics",
+    "coding"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 66,
-   "firstSeen": "2026-10-03"
+   "score": 64,
+   "firstSeen": "2026-10-04"
   },
   {
    "id": "qlT4NyuWClU",
@@ -377,7 +475,7 @@
    "channelId": "UC40AR8r9YbHrxGm26VJCuug",
    "publishedAt": "2026-09-30T14:54:38Z",
    "duration": 541,
-   "views": 14260,
+   "views": 16481,
    "tools": [
     "claude-code"
    ],
@@ -389,8 +487,28 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 65,
+   "score": 64,
    "firstSeen": "2026-10-03"
+  },
+  {
+   "id": "2Paer0PoFzk",
+   "title": "Hermes Agent Tutorial: From Zero to a Team of AI Agents",
+   "channel": "Zinho Automates",
+   "channelId": "UC3i3qKQ5aR_guegQj5bhOMw",
+   "publishedAt": "2026-09-30T14:20:39Z",
+   "duration": 1005,
+   "views": 28693,
+   "tools": [],
+   "topics": [
+    "agents",
+    "prompting",
+    "coding",
+    "automation"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 66,
+   "firstSeen": "2026-10-04"
   },
   {
    "id": "fWRWJz-Uxd8",
@@ -399,7 +517,7 @@
    "channelId": "UCzEQpEckBEM_FpRSCLLKcNQ",
    "publishedAt": "2026-09-30T14:00:22Z",
    "duration": 344,
-   "views": 323,
+   "views": 384,
    "likes": 0,
    "tools": [
     "zapier"
@@ -409,7 +527,7 @@
    ],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 52,
+   "score": 51,
    "firstSeen": "2026-10-02"
   },
   {
@@ -419,15 +537,15 @@
    "channelId": "UCEcOWDGI1Q1ReD4xrtUorWQ",
    "publishedAt": "2026-09-30T14:00:06Z",
    "duration": 1189,
-   "views": 6049,
-   "likes": 175,
+   "views": 6570,
+   "likes": 182,
    "tools": [
     "chatgpt"
    ],
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 65,
+   "score": 64,
    "firstSeen": "2026-09-30"
   },
   {
@@ -437,15 +555,15 @@
    "channelId": "UCTs3VX60I6EKrrwdkgrwCGQ",
    "publishedAt": "2026-09-30T13:03:02Z",
    "duration": 1455,
-   "views": 4929,
-   "likes": 94,
+   "views": 5896,
+   "likes": 110,
    "tools": [
     "canva"
    ],
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 46,
+   "score": 45,
    "firstSeen": "2026-09-30"
   },
   {
@@ -455,8 +573,8 @@
    "channelId": "UCck1m7zZdzioiUzqhzpdNPw",
    "publishedAt": "2026-09-30T12:04:03Z",
    "duration": 518,
-   "views": 3279,
-   "likes": 24,
+   "views": 3363,
+   "likes": 27,
    "tools": [],
    "topics": [
     "multimodal",
@@ -464,7 +582,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 55,
+   "score": 54,
    "firstSeen": "2026-09-30"
   },
   {
@@ -474,7 +592,7 @@
    "channelId": "UCI8MObIbykGY0qCmz33w0RQ",
    "publishedAt": "2026-09-30T12:00:20Z",
    "duration": 379,
-   "views": 151,
+   "views": 188,
    "tools": [
     "gemini"
    ],
@@ -493,8 +611,8 @@
    "channelId": "UCBaPFhxvJekoSLVuMtxV7nw",
    "publishedAt": "2026-09-30T08:13:28Z",
    "duration": 2823,
-   "views": 6405,
-   "likes": 74,
+   "views": 6764,
+   "likes": 79,
    "tools": [
     "copilot"
    ],
@@ -503,7 +621,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 59,
+   "score": 58,
    "firstSeen": "2026-10-02"
   },
   {
@@ -513,7 +631,7 @@
    "channelId": "UC6Z0LUZI6YE0xzL0iushjpg",
    "publishedAt": "2026-09-30T08:00:19Z",
    "duration": 1459,
-   "views": 1936,
+   "views": 2017,
    "likes": 31,
    "tools": [],
    "topics": [
@@ -521,7 +639,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 56,
+   "score": 55,
    "firstSeen": "2026-09-30"
   },
   {
@@ -531,18 +649,17 @@
    "channelId": "UCdPhLDznZzUeEtshDUe0R_A",
    "publishedAt": "2026-09-30T06:00:07Z",
    "duration": 683,
-   "views": 1104,
+   "views": 1145,
    "likes": 13,
    "tools": [
     "cursor"
    ],
    "topics": [
-    "agents",
     "coding"
    ],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 53,
+   "score": 52,
    "firstSeen": "2026-10-01"
   },
   {
@@ -552,7 +669,7 @@
    "channelId": "UC_xWTNsx7zA2uI0ydQikViA",
    "publishedAt": "2026-09-30T05:25:06Z",
    "duration": 373,
-   "views": 6039,
+   "views": 6070,
    "likes": 6,
    "tools": [],
    "topics": [
@@ -560,7 +677,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-10-01"
   },
   {
@@ -570,8 +687,8 @@
    "channelId": "UCzCsyvyrq38R6TnztEzOmgg",
    "publishedAt": "2026-09-30T04:01:23Z",
    "duration": 1633,
-   "views": 37727,
-   "likes": 335,
+   "views": 44239,
+   "likes": 386,
    "tools": [
     "cursor"
    ],
@@ -582,21 +699,40 @@
    "firstSeen": "2026-09-30"
   },
   {
+   "id": "MWurz-UUCH0",
+   "title": "How to Make the Viral Migos Hotel Lobby AI Trend With Seedance 2.5 (Full Tutorial + Prompts)",
+   "channel": "Kapwing",
+   "channelId": "UCR5GrKMeaZJxPKVMdEgKIKA",
+   "publishedAt": "2026-09-29T23:25:50Z",
+   "duration": 442,
+   "views": 33401,
+   "likes": 292,
+   "tools": [],
+   "topics": [
+    "prompting"
+   ],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 62,
+   "firstSeen": "2026-10-04"
+  },
+  {
    "id": "x2JylyXA_qA",
    "title": "OpenAI Just Launched Always-On AI Agents (Dots Explained)",
    "channel": "WesGPT",
    "channelId": "UCgzH02aZzAcX0bDvdzy928w",
    "publishedAt": "2026-09-29T22:17:24Z",
    "duration": 643,
-   "views": 8080,
-   "likes": 20,
+   "views": 8182,
+   "likes": 21,
    "tools": [],
    "topics": [
-    "agents"
+    "agents",
+    "automation"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 56,
+   "score": 55,
    "firstSeen": "2026-09-30"
   },
   {
@@ -606,8 +742,8 @@
    "channelId": "UCSuQd43nLcgH18R4d7DwTZQ",
    "publishedAt": "2026-09-29T19:00:05Z",
    "duration": 491,
-   "views": 490,
-   "likes": 4,
+   "views": 682,
+   "likes": 5,
    "tools": [],
    "topics": [
     "presenting"
@@ -624,8 +760,8 @@
    "channelId": "UCSCchj5F2I1mqv2hrfFvNWA",
    "publishedAt": "2026-09-29T18:54:26Z",
    "duration": 461,
-   "views": 183,
-   "likes": 1,
+   "views": 192,
+   "likes": 2,
    "tools": [
     "adobe-firefly"
    ],
@@ -635,7 +771,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 44,
+   "score": 45,
    "firstSeen": "2026-10-02"
   },
   {
@@ -645,7 +781,7 @@
    "channelId": "UCF-uUxo43IPpnEwnR62WGlA",
    "publishedAt": "2026-09-29T17:53:29Z",
    "duration": 327,
-   "views": 3407,
+   "views": 3438,
    "likes": 23,
    "tools": [],
    "topics": [
@@ -653,7 +789,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-09-30"
   },
   {
@@ -663,7 +799,7 @@
    "channelId": "UCk5L9Qma0PBPJR6PVqR3NRA",
    "publishedAt": "2026-09-29T15:30:26Z",
    "duration": 207,
-   "views": 324,
+   "views": 336,
    "likes": 5,
    "tools": [
     "gemini"
@@ -671,7 +807,7 @@
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 49,
+   "score": 48,
    "firstSeen": "2026-09-30"
   },
   {
@@ -699,7 +835,7 @@
    "channelId": "UCLjxQwEvQDqxMI0j-GfoHoQ",
    "publishedAt": "2026-09-29T14:00:20Z",
    "duration": 274,
-   "views": 1,
+   "views": 2,
    "likes": 1,
    "tools": [],
    "topics": [
@@ -718,8 +854,8 @@
    "channelId": "UCsHY26z8k24htAsrY7L0T7A",
    "publishedAt": "2026-09-29T13:47:15Z",
    "duration": 1443,
-   "views": 686,
-   "likes": 4,
+   "views": 778,
+   "likes": 6,
    "tools": [
     "n8n"
    ],
@@ -760,7 +896,7 @@
    "channelId": "UCB0CZVWByHLSCJN2IZUoFsw",
    "publishedAt": "2026-09-28T18:41:48Z",
    "duration": 441,
-   "views": 12024,
+   "views": 14635,
    "tools": [
     "julius"
    ],
@@ -779,8 +915,8 @@
    "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
    "publishedAt": "2026-09-28T13:53:01Z",
    "duration": 1352,
-   "views": 4451,
-   "likes": 45,
+   "views": 5083,
+   "likes": 52,
    "tools": [
     "claude"
    ],
@@ -802,15 +938,15 @@
    "channelId": "UCH912uDFX3sIaPXMrJa9X_w",
    "publishedAt": "2026-09-28T13:02:22Z",
    "duration": 151,
-   "views": 5580,
-   "likes": 133,
+   "views": 5724,
+   "likes": 136,
    "tools": [],
    "topics": [
     "rag"
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 61,
+   "score": 60,
    "firstSeen": "2026-09-28"
   },
   {
@@ -820,8 +956,8 @@
    "channelId": "UC2dSE9W3lGYbFi_CPmVtA-A",
    "publishedAt": "2026-09-28T12:33:44Z",
    "duration": 628,
-   "views": 45436,
-   "likes": 379,
+   "views": 51860,
+   "likes": 417,
    "tools": [
     "copilot"
    ],
@@ -840,8 +976,8 @@
    "channelId": "UCc5-Xb17fw1I0EOoIuzN2xw",
    "publishedAt": "2026-09-28T12:30:30Z",
    "duration": 1043,
-   "views": 14862,
-   "likes": 195,
+   "views": 15879,
+   "likes": 220,
    "tools": [],
    "topics": [
     "research",
@@ -859,15 +995,15 @@
    "channelId": "UCi25qw0w1GxxUqxeFMK0q1Q",
    "publishedAt": "2026-09-28T11:30:29Z",
    "duration": 154,
-   "views": 57371,
-   "likes": 1519,
+   "views": 59206,
+   "likes": 1582,
    "tools": [],
    "topics": [
     "prompting"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 70,
+   "score": 69,
    "firstSeen": "2026-10-03"
   },
   {
@@ -877,8 +1013,8 @@
    "channelId": "UCAp3b6zIvS8ct4yci-GwxIg",
    "publishedAt": "2026-09-28T11:00:23Z",
    "duration": 167,
-   "views": 4013,
-   "likes": 85,
+   "views": 4310,
+   "likes": 92,
    "tools": [
     "gemini"
    ],
@@ -895,7 +1031,7 @@
    "channelId": "UCRu5fGnEQ4tf6_QuaTSv3mg",
    "publishedAt": "2026-09-28T03:20:46Z",
    "duration": 432,
-   "views": 4,
+   "views": 6,
    "likes": 0,
    "tools": [
     "elevenlabs"
@@ -921,7 +1057,7 @@
    "topics": [],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 33,
+   "score": 32,
    "firstSeen": "2026-09-27"
   },
   {
@@ -941,7 +1077,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 40,
+   "score": 39,
    "firstSeen": "2026-09-27"
   },
   {
@@ -951,7 +1087,7 @@
    "channelId": "UCmQxheR0YmH-XdYqd23I6ng",
    "publishedAt": "2026-09-27T16:45:28Z",
    "duration": 495,
-   "views": 37,
+   "views": 42,
    "likes": 1,
    "tools": [
     "n8n"
@@ -961,7 +1097,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 45,
+   "score": 43,
    "firstSeen": "2026-09-27"
   },
   {
@@ -971,15 +1107,15 @@
    "channelId": "UCJKzyA7mf4L6CtdNuRFExTw",
    "publishedAt": "2026-09-27T16:00:27Z",
    "duration": 692,
-   "views": 23854,
-   "likes": 515,
+   "views": 30542,
+   "likes": 624,
    "tools": [],
    "topics": [
     "agents"
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 52,
+   "score": 51,
    "firstSeen": "2026-09-30"
   },
   {
@@ -989,8 +1125,8 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-27T15:00:28Z",
    "duration": 373,
-   "views": 17943,
-   "likes": 141,
+   "views": 19188,
+   "likes": 142,
    "tools": [
     "github-copilot"
    ],
@@ -1004,31 +1140,13 @@
    "firstSeen": "2026-09-27"
   },
   {
-   "id": "YbnK5ODcPSg",
-   "title": "How AI Agents Use Tools | Tool Calling Explained | PYPROVERSE",
-   "channel": "PYPRO VERSE",
-   "channelId": "UCTeUiwld4fXYOLhO88QroSw",
-   "publishedAt": "2026-09-27T14:30:08Z",
-   "duration": 578,
-   "views": 14,
-   "likes": 0,
-   "tools": [],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 39,
-   "firstSeen": "2026-09-27"
-  },
-  {
    "id": "F2lUTn4TJbU",
    "title": "Adobe Firefly Tutorial for Beginners: How to Use Adobe Firefly AI (2026)",
    "channel": "OlympusForge",
    "channelId": "UCABKuNjTxOaeDq3ZjjaUbcA",
    "publishedAt": "2026-09-27T13:51:58Z",
    "duration": 159,
-   "views": 179,
+   "views": 180,
    "likes": 11,
    "tools": [
     "adobe-firefly"
@@ -1036,7 +1154,7 @@
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 55,
+   "score": 54,
    "firstSeen": "2026-09-27"
   },
   {
@@ -1046,7 +1164,7 @@
    "channelId": "UCGHGpofP-_2fwoibih4fOxg",
    "publishedAt": "2026-09-27T12:52:48Z",
    "duration": 203,
-   "views": 47,
+   "views": 49,
    "likes": 0,
    "tools": [
     "gemini"
@@ -1054,7 +1172,7 @@
    "topics": [],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 43,
+   "score": 42,
    "firstSeen": "2026-09-27"
   },
   {
@@ -1064,7 +1182,7 @@
    "channelId": "UCmt_G3aU7i6rSSL2Iv6j34A",
    "publishedAt": "2026-09-27T07:58:55Z",
    "duration": 557,
-   "views": 10540,
+   "views": 10813,
    "tools": [
     "chatgpt"
    ],
@@ -1073,7 +1191,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 61,
+   "score": 60,
    "firstSeen": "2026-09-27"
   },
   {
@@ -1083,8 +1201,8 @@
    "channelId": "UCgscS8mBsQZ5sFRkJIFWD7Q",
    "publishedAt": "2026-09-27T07:50:47Z",
    "duration": 812,
-   "views": 129422,
-   "likes": 3175,
+   "views": 138584,
+   "likes": 3378,
    "tools": [
     "claude"
    ],
@@ -1098,31 +1216,13 @@
    "firstSeen": "2026-09-27"
   },
   {
-   "id": "EAUL_a1YRss",
-   "title": "Master Google AI for Research",
-   "channel": "CONNECTING ASIA TV",
-   "channelId": "UCpE44cWit07e0IDjSFxTogQ",
-   "publishedAt": "2026-09-27T01:49:55Z",
-   "duration": 2756,
-   "views": 1016,
-   "likes": 23,
-   "tools": [],
-   "topics": [
-    "research"
-   ],
-   "difficulty": "intermediate",
-   "difficultySource": "heuristic",
-   "score": 41,
-   "firstSeen": "2026-09-28"
-  },
-  {
    "id": "SQyG1dxfMaU",
    "title": "RAG explained for beginner",
    "channel": "CodeWithJoe",
    "channelId": "UCdgU4pljNproO0RQVbT5QKg",
    "publishedAt": "2026-09-26T17:43:41Z",
    "duration": 1483,
-   "views": 239,
+   "views": 247,
    "likes": 2,
    "tools": [],
    "topics": [
@@ -1140,15 +1240,15 @@
    "channelId": "UCUjDQgufeSsHFRatlAuauQg",
    "publishedAt": "2026-09-26T17:27:15Z",
    "duration": 809,
-   "views": 1706,
-   "likes": 60,
+   "views": 1736,
+   "likes": 61,
    "tools": [
     "gemini"
    ],
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 60,
+   "score": 59,
    "firstSeen": "2026-09-27"
   },
   {
@@ -1158,7 +1258,7 @@
    "channelId": "UC3i3qKQ5aR_guegQj5bhOMw",
    "publishedAt": "2026-09-26T14:32:43Z",
    "duration": 628,
-   "views": 25113,
+   "views": 25875,
    "tools": [
     "claude"
    ],
@@ -1177,8 +1277,8 @@
    "channelId": "UCjc1vfduI7BhVMXBLJLDjmA",
    "publishedAt": "2026-09-26T14:22:15Z",
    "duration": 520,
-   "views": 65309,
-   "likes": 702,
+   "views": 67102,
+   "likes": 726,
    "tools": [
     "claude"
    ],
@@ -1198,8 +1298,8 @@
    "channelId": "UCpSejclxf6XyB6_IB4lpKdg",
    "publishedAt": "2026-09-26T14:00:34Z",
    "duration": 429,
-   "views": 4093,
-   "likes": 40,
+   "views": 4122,
+   "likes": 41,
    "tools": [],
    "topics": [
     "agents"
@@ -1216,15 +1316,15 @@
    "channelId": "UCbhYLExS9jRS8gDeUeXY8pg",
    "publishedAt": "2026-09-26T08:28:22Z",
    "duration": 483,
-   "views": 11561,
-   "likes": 167,
+   "views": 11655,
+   "likes": 170,
    "tools": [
     "gemini"
    ],
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 46,
+   "score": 45,
    "firstSeen": "2026-09-30"
   },
   {
@@ -1234,15 +1334,15 @@
    "channelId": "UCMVG4U2L2ocqgdYLAubuYGQ",
    "publishedAt": "2026-09-25T19:58:01Z",
    "duration": 786,
-   "views": 38165,
-   "likes": 403,
+   "views": 38476,
+   "likes": 405,
    "tools": [],
    "topics": [
     "coding"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 61,
+   "score": 60,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1252,8 +1352,8 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-25T18:23:59+00:00",
    "duration": 509,
-   "views": 21561,
-   "likes": 103,
+   "views": 21718,
+   "likes": 105,
    "tools": [
     "claude",
     "github-copilot"
@@ -1266,7 +1366,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 69,
+   "score": 68,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1276,15 +1376,15 @@
    "channelId": "UC-ew9TfeD887qUSiWWAAj1w",
    "publishedAt": "2026-09-25T16:07:17Z",
    "duration": 507,
-   "views": 12155,
-   "likes": 227,
+   "views": 12359,
+   "likes": 228,
    "tools": [
     "elevenlabs"
    ],
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 60,
+   "score": 59,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1294,8 +1394,8 @@
    "channelId": "UC0C-17n9iuUQPylguM1d-lQ",
    "publishedAt": "2026-09-25T15:30:23Z",
    "duration": 4075,
-   "views": 53654,
-   "likes": 828,
+   "views": 55291,
+   "likes": 841,
    "tools": [
     "chatgpt"
    ],
@@ -1305,7 +1405,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 64,
+   "score": 63,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1315,7 +1415,7 @@
    "channelId": "UCK-Yq0PKk97nWXNSqmLeXOg",
    "publishedAt": "2026-09-25T13:34:11Z",
    "duration": 625,
-   "views": 26840,
+   "views": 27587,
    "tools": [
     "claude"
    ],
@@ -1332,15 +1432,15 @@
    "channelId": "UCG54vwVpmt6U-yj-RaGlxdA",
    "publishedAt": "2026-09-25T13:15:02Z",
    "duration": 666,
-   "views": 7069,
-   "likes": 124,
+   "views": 7903,
+   "likes": 139,
    "tools": [],
    "topics": [
     "data"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 58,
+   "score": 57,
    "firstSeen": "2026-09-27"
   },
   {
@@ -1350,8 +1450,8 @@
    "channelId": "UCmXmlB4-HJytD7wek0Uo97A",
    "publishedAt": "2026-09-25T12:37:19Z",
    "duration": 8020,
-   "views": 155023,
-   "likes": 2256,
+   "views": 163726,
+   "likes": 2352,
    "tools": [
     "claude-code"
    ],
@@ -1362,7 +1462,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 67,
+   "score": 66,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1372,7 +1472,7 @@
    "channelId": "UCx9mhvLaKCpQ6rMLwK9t57Q",
    "publishedAt": "2026-09-25T12:10:35Z",
    "duration": 483,
-   "views": 4162,
+   "views": 4187,
    "likes": 100,
    "tools": [
     "elevenlabs"
@@ -1392,8 +1492,8 @@
    "channelId": "UCs_Fxf_ikfQbFaTTUrjdnpg",
    "publishedAt": "2026-09-25T08:52:24Z",
    "duration": 976,
-   "views": 9618,
-   "likes": 2691,
+   "views": 9810,
+   "likes": 2690,
    "tools": [
     "claude"
    ],
@@ -1405,7 +1505,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 67,
+   "score": 66,
    "firstSeen": "2026-09-28"
   },
   {
@@ -1415,18 +1515,16 @@
    "channelId": "UCzd4ZN716evEjtbJERBMTfg",
    "publishedAt": "2026-09-25T06:04:32Z",
    "duration": 919,
-   "views": 22001,
-   "likes": 167,
-   "tools": [
-    "grammarly"
-   ],
+   "views": 22614,
+   "likes": 169,
+   "tools": [],
    "topics": [
     "multimodal",
     "agents"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 58,
+   "score": 57,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1436,8 +1534,8 @@
    "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
    "publishedAt": "2026-09-25T05:25:04Z",
    "duration": 5907,
-   "views": 27698,
-   "likes": 508,
+   "views": 28627,
+   "likes": 525,
    "tools": [
     "gemini"
    ],
@@ -1454,8 +1552,8 @@
    "channelId": "UCtQ8rhXq1132NcdTbVUI1tg",
    "publishedAt": "2026-09-25T01:45:09Z",
    "duration": 185,
-   "views": 16334,
-   "likes": 77,
+   "views": 17517,
+   "likes": 83,
    "tools": [
     "claude"
    ],
@@ -1472,7 +1570,7 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-24T18:24:11+00:00",
    "duration": 5896,
-   "views": 13066,
+   "views": 13123,
    "likes": 191,
    "tools": [
     "github-copilot"
@@ -1494,15 +1592,15 @@
    "channelId": "UC3PhOJM5EpgVJgurVPrnqiw",
    "publishedAt": "2026-09-24T18:00:06Z",
    "duration": 325,
-   "views": 2212,
-   "likes": 24,
+   "views": 2401,
+   "likes": 26,
    "tools": [],
    "topics": [
     "agents"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 51,
+   "score": 50,
    "firstSeen": "2026-09-30"
   },
   {
@@ -1512,7 +1610,7 @@
    "channelId": "UCSSB338C8A9ZOXtsbfM7phg",
    "publishedAt": "2026-09-24T14:15:06Z",
    "duration": 1197,
-   "views": 21799,
+   "views": 22109,
    "tools": [
     "claude-code"
    ],
@@ -1521,7 +1619,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 62,
+   "score": 61,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1531,8 +1629,8 @@
    "channelId": "UCxYBda_YEwafkLiBC6bU0hA",
    "publishedAt": "2026-09-24T04:31:23Z",
    "duration": 862,
-   "views": 75120,
-   "likes": 598,
+   "views": 76804,
+   "likes": 616,
    "tools": [
     "chatgpt"
    ],
@@ -1552,7 +1650,7 @@
    "channelId": "UCsvqVGtbbyHaMoevxPAq9Fg",
    "publishedAt": "2026-09-24T04:13:23Z",
    "duration": 13703,
-   "views": 16822,
+   "views": 16887,
    "likes": 88,
    "tools": [],
    "topics": [
@@ -1572,8 +1670,8 @@
    "channelId": "UCwSozl89jl2zUDzQ4jGJD3g",
    "publishedAt": "2026-09-23T21:47:49Z",
    "duration": 1266,
-   "views": 59728,
-   "likes": 601,
+   "views": 62166,
+   "likes": 627,
    "tools": [
     "chatgpt"
    ],
@@ -1592,7 +1690,7 @@
    "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
    "publishedAt": "2026-09-23T19:30:17Z",
    "duration": 858,
-   "views": 14422,
+   "views": 14759,
    "likes": 56,
    "tools": [
     "adobe-firefly"
@@ -1603,7 +1701,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-09-27"
   },
   {
@@ -1613,7 +1711,7 @@
    "channelId": "UCbNIC-svDbtUOH2qsLnPQPg",
    "publishedAt": "2026-09-23T19:00:31Z",
    "duration": 537,
-   "views": 3207,
+   "views": 3267,
    "likes": 42,
    "tools": [
     "n8n"
@@ -1635,8 +1733,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-23T18:35:30+00:00",
    "duration": 564,
-   "views": 32914,
-   "likes": 207,
+   "views": 33262,
+   "likes": 208,
    "tools": [
     "zapier"
    ],
@@ -1646,7 +1744,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 70,
+   "score": 69,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1656,14 +1754,14 @@
    "channelId": "UCdR7eGozLjafYMTd2BFnJaQ",
    "publishedAt": "2026-09-23T15:30:58Z",
    "duration": 1186,
-   "views": 33086,
+   "views": 33609,
    "tools": [],
    "topics": [
     "multimodal"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 63,
+   "score": 62,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1673,7 +1771,7 @@
    "channelId": "UC2EsmbKnDNE7y1N3nZYCuGw",
    "publishedAt": "2026-09-23T13:30:02Z",
    "duration": 2168,
-   "views": 28413,
+   "views": 28416,
    "likes": 12,
    "tools": [
     "claude-code"
@@ -1684,7 +1782,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 55,
+   "score": 54,
    "firstSeen": "2026-09-30"
   },
   {
@@ -1694,7 +1792,7 @@
    "channelId": "UCx9mhvLaKCpQ6rMLwK9t57Q",
    "publishedAt": "2026-09-23T01:57:50Z",
    "duration": 469,
-   "views": 3015,
+   "views": 3048,
    "likes": 36,
    "tools": [
     "perplexity"
@@ -1715,7 +1813,7 @@
    "channelId": "UCiHVTkJtWSdc9N3h0nUGWLg",
    "publishedAt": "2026-09-22T16:04:08Z",
    "duration": 1529,
-   "views": 11492,
+   "views": 11663,
    "likes": 148,
    "tools": [
     "n8n"
@@ -1725,7 +1823,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 56,
+   "score": 55,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1735,8 +1833,8 @@
    "channelId": "UCJ9905MRHxwLZ2jeNQGIWxA",
    "publishedAt": "2026-09-22T16:00:01Z",
    "duration": 575,
-   "views": 18811,
-   "likes": 170,
+   "views": 19165,
+   "likes": 173,
    "tools": [],
    "topics": [
     "agents",
@@ -1755,8 +1853,8 @@
    "channelId": "UCuWfeln7mZaSVkxZtiNTtqQ",
    "publishedAt": "2026-09-22T14:42:47Z",
    "duration": 218,
-   "views": 1579,
-   "likes": 46,
+   "views": 1600,
+   "likes": 48,
    "tools": [
     "consensus"
    ],
@@ -1773,7 +1871,7 @@
    "channelId": "UCde0vB0fTwC8AT3sJofFV0w",
    "publishedAt": "2026-09-22T14:15:14Z",
    "duration": 1315,
-   "views": 66166,
+   "views": 69492,
    "tools": [
     "claude-code"
    ],
@@ -1785,7 +1883,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 65,
+   "score": 64,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1795,7 +1893,7 @@
    "channelId": "UCa6jen0g1qJH8MHY8NOTElA",
    "publishedAt": "2026-09-22T14:15:02Z",
    "duration": 1293,
-   "views": 21140,
+   "views": 21693,
    "tools": [
     "claude"
    ],
@@ -1807,7 +1905,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 61,
+   "score": 60,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1817,7 +1915,7 @@
    "channelId": "UCY6N8zZhs2V7gNTUxPuKWoQ",
    "publishedAt": "2026-09-22T13:44:56Z",
    "duration": 793,
-   "views": 172088,
+   "views": 172440,
    "likes": 1081,
    "tools": [
     "chatgpt"
@@ -1827,7 +1925,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 63,
+   "score": 62,
    "firstSeen": "2026-10-02"
   },
   {
@@ -1837,8 +1935,8 @@
    "channelId": "UCs_Fxf_ikfQbFaTTUrjdnpg",
    "publishedAt": "2026-09-22T11:44:05Z",
    "duration": 631,
-   "views": 8099,
-   "likes": 3006,
+   "views": 8126,
+   "likes": 3005,
    "tools": [
     "claude-code"
    ],
@@ -1849,7 +1947,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 65,
+   "score": 64,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1859,7 +1957,7 @@
    "channelId": "UCWPJwoVXJhv0-ucr3pUs1dA",
    "publishedAt": "2026-09-22T10:00:30Z",
    "duration": 988,
-   "views": 6609,
+   "views": 6658,
    "likes": 46,
    "tools": [
     "n8n"
@@ -1869,7 +1967,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 39,
+   "score": 38,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1879,8 +1977,8 @@
    "channelId": "UCnv9vvr7tQVQ07iSe4rZgWQ",
    "publishedAt": "2026-09-22T10:00:18Z",
    "duration": 736,
-   "views": 2904,
-   "likes": 23,
+   "views": 2930,
+   "likes": 24,
    "tools": [
     "copilot"
    ],
@@ -1902,8 +2000,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-22T07:00:32+00:00",
    "duration": 475,
-   "views": 70472,
-   "likes": 874,
+   "views": 72267,
+   "likes": 897,
    "tools": [
     "chatgpt"
    ],
@@ -1912,7 +2010,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 74,
+   "score": 73,
    "firstSeen": "2026-09-26"
   },
   {
@@ -1922,8 +2020,8 @@
    "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
    "publishedAt": "2026-09-21T19:00:28Z",
    "duration": 1235,
-   "views": 34358,
-   "likes": 339,
+   "views": 35834,
+   "likes": 348,
    "tools": [
     "gemini"
    ],
@@ -1937,32 +2035,14 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "V690IKm5G5k",
-   "title": "I Built an INSANELY Profitable AI Trading Bot for FREE (Full Guide)",
-   "channel": "Trading with DaviddTech",
-   "channelId": "UC7NJLsf6IonOy8QI8gt5BeA",
-   "publishedAt": "2026-09-21T13:00:23Z",
-   "duration": 1291,
-   "views": 43108,
-   "likes": 604,
-   "tools": [],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 45,
-   "firstSeen": "2026-10-03"
-  },
-  {
    "id": "VeJf9w6U5Fo",
    "title": "Teachers, Make Any Topic VISUAL With AI! | Static + Interactive Lessons Made Easy",
    "channel": "Home School",
    "channelId": "UCYTgs1v3TeOMdv4lICRryOA",
    "publishedAt": "2026-09-21T12:51:28Z",
    "duration": 2886,
-   "views": 43022,
-   "likes": 274,
+   "views": 44361,
+   "likes": 281,
    "tools": [],
    "topics": [
     "teaching"
@@ -1979,8 +2059,8 @@
    "channelId": "UCOXRjenlq9PmlTqd_JhAbMQ",
    "publishedAt": "2026-09-20T22:42:43Z",
    "duration": 1263,
-   "views": 140154,
-   "likes": 1083,
+   "views": 147731,
+   "likes": 1133,
    "tools": [
     "claude-code"
    ],
@@ -1989,7 +2069,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 62,
+   "score": 61,
    "firstSeen": "2026-09-27"
   },
   {
@@ -1999,8 +2079,8 @@
    "channelId": "UC0yHbz4OxdQFwmVX2BBQqLg",
    "publishedAt": "2026-09-20T18:23:50Z",
    "duration": 1279,
-   "views": 12281,
-   "likes": 87,
+   "views": 12486,
+   "likes": 89,
    "tools": [
     "copilot"
    ],
@@ -2022,8 +2102,8 @@
    "channelId": "UCVe8CMJF4caRzuckVYV8CaQ",
    "publishedAt": "2026-09-20T08:09:23Z",
    "duration": 1507,
-   "views": 25354,
-   "likes": 194,
+   "views": 25788,
+   "likes": 199,
    "tools": [
     "gemini",
     "notebooklm"
@@ -2033,7 +2113,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 43,
+   "score": 42,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2043,8 +2123,8 @@
    "channelId": "UCF-uUxo43IPpnEwnR62WGlA",
    "publishedAt": "2026-09-19T18:58:57Z",
    "duration": 176,
-   "views": 4519,
-   "likes": 31,
+   "views": 4554,
+   "likes": 32,
    "tools": [],
    "topics": [
     "agents"
@@ -2061,7 +2141,7 @@
    "channelId": "UCaNk22cLid93kifuVbVapcQ",
    "publishedAt": "2026-09-19T16:06:30Z",
    "duration": 644,
-   "views": 60743,
+   "views": 61372,
    "tools": [
     "gemini"
    ],
@@ -2073,7 +2153,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 63,
+   "score": 62,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2083,7 +2163,7 @@
    "channelId": "UCde0vB0fTwC8AT3sJofFV0w",
    "publishedAt": "2026-09-19T14:15:07Z",
    "duration": 1119,
-   "views": 46984,
+   "views": 49010,
    "tools": [],
    "topics": [
     "agents",
@@ -2102,7 +2182,7 @@
    "channelId": "UCsvqVGtbbyHaMoevxPAq9Fg",
    "publishedAt": "2026-09-19T04:34:09Z",
    "duration": 13712,
-   "views": 18084,
+   "views": 18125,
    "likes": 120,
    "tools": [],
    "topics": [
@@ -2112,7 +2192,7 @@
    ],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2122,8 +2202,8 @@
    "channelId": "UCUBqu_z5uP0AZhYtuyFZB3g",
    "publishedAt": "2026-09-18T16:49:23Z",
    "duration": 781,
-   "views": 13996,
-   "likes": 278,
+   "views": 14127,
+   "likes": 284,
    "tools": [],
    "topics": [
     "agents",
@@ -2141,7 +2221,7 @@
    "channelId": "UCde0vB0fTwC8AT3sJofFV0w",
    "publishedAt": "2026-09-18T14:15:21Z",
    "duration": 1679,
-   "views": 39406,
+   "views": 39806,
    "tools": [
     "claude-code"
    ],
@@ -2163,8 +2243,8 @@
    "channelId": "UC2ojq-nuP8ceeHqiroeKhBA",
    "publishedAt": "2026-09-18T13:01:25Z",
    "duration": 700,
-   "views": 167754,
-   "likes": 1844,
+   "views": 168651,
+   "likes": 1857,
    "tools": [
     "claude"
    ],
@@ -2183,7 +2263,7 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-18T07:00:30+00:00",
    "duration": 1103,
-   "views": 25510,
+   "views": 25687,
    "likes": 130,
    "tools": [
     "claude-code"
@@ -2194,7 +2274,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 66,
+   "score": 65,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2204,8 +2284,8 @@
    "channelId": "UC-PQKtrPhk3JXyjUleBLgQQ",
    "publishedAt": "2026-09-17T20:43:57Z",
    "duration": 1257,
-   "views": 106914,
-   "likes": 1275,
+   "views": 108597,
+   "likes": 1289,
    "tools": [
     "claude"
    ],
@@ -2225,8 +2305,8 @@
    "channelId": "UCs5Y5_7XK8HLDX0SLNwkd3w",
    "publishedAt": "2026-09-17T17:15:06Z",
    "duration": 2934,
-   "views": 26343,
-   "likes": 332,
+   "views": 26533,
+   "likes": 338,
    "tools": [],
    "topics": [
     "agents",
@@ -2245,7 +2325,7 @@
    "channelId": "UCSSB338C8A9ZOXtsbfM7phg",
    "publishedAt": "2026-09-17T14:15:02Z",
    "duration": 1119,
-   "views": 34264,
+   "views": 34972,
    "tools": [
     "claude"
    ],
@@ -2267,8 +2347,8 @@
    "channelId": "UCMVG4U2L2ocqgdYLAubuYGQ",
    "publishedAt": "2026-09-17T13:00:02Z",
    "duration": 594,
-   "views": 6507,
-   "likes": 121,
+   "views": 6548,
+   "likes": 123,
    "tools": [],
    "topics": [
     "prompting",
@@ -2287,8 +2367,8 @@
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-17T11:00:24+00:00",
    "duration": 578,
-   "views": 75029,
-   "likes": 1081,
+   "views": 75286,
+   "likes": 1084,
    "tools": [],
    "topics": [
     "llms",
@@ -2297,7 +2377,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 73,
+   "score": 72,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2307,15 +2387,15 @@
    "channelId": "UCEJoO7Zkfv45zIjuALuJLTQ",
    "publishedAt": "2026-09-17T10:00:04Z",
    "duration": 2088,
-   "views": 46717,
-   "likes": 529,
+   "views": 48084,
+   "likes": 545,
    "tools": [],
    "topics": [
     "agents"
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 58,
+   "score": 57,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2325,8 +2405,8 @@
    "channelId": "UC5deKm1RRbcoUIuLuSCFprg",
    "publishedAt": "2026-09-16T22:14:36Z",
    "duration": 1224,
-   "views": 26425,
-   "likes": 420,
+   "views": 26650,
+   "likes": 423,
    "tools": [
     "claude"
    ],
@@ -2343,7 +2423,7 @@
    "channelId": "UCh04CepWeaJT7wJUIgnmzJQ",
    "publishedAt": "2026-09-16T21:15:10Z",
    "duration": 712,
-   "views": 3468,
+   "views": 3483,
    "likes": 2,
    "tools": [
     "copilot"
@@ -2356,7 +2436,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 45,
+   "score": 44,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2380,31 +2460,14 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "kGku3TTiYO8",
-   "title": "Create Cinematic AI Ads with Seedance 2.5 - Full guide",
-   "channel": "Dan Kieft",
-   "channelId": "UCdNj_PP__5kKtjZabuEjbqA",
-   "publishedAt": "2026-09-16T15:36:39Z",
-   "duration": 1016,
-   "views": 135257,
-   "tools": [],
-   "topics": [
-    "prompting"
-   ],
-   "difficulty": "beginner",
-   "difficultySource": "heuristic",
-   "score": 64,
-   "firstSeen": "2026-09-26"
-  },
-  {
    "id": "c8_fwGEQoUQ",
    "title": "How to Use ChatGPT Images 2.5 (Step-by-Step Tutorial)",
    "channel": "Kevin Stratvert",
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-16T07:00:11+00:00",
    "duration": 585,
-   "views": 112892,
-   "likes": 1339,
+   "views": 113832,
+   "likes": 1358,
    "tools": [
     "chatgpt"
    ],
@@ -2415,7 +2478,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 73,
+   "score": 72,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2425,7 +2488,7 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-15T15:00:25Z",
    "duration": 186,
-   "views": 26150,
+   "views": 26239,
    "likes": 72,
    "tools": [
     "github-copilot"
@@ -2446,8 +2509,8 @@
    "channelId": "UCvxCGKv4WSq49LfNIfZEEtg",
    "publishedAt": "2026-09-15T11:30:26Z",
    "duration": 4211,
-   "views": 13276,
-   "likes": 250,
+   "views": 13556,
+   "likes": 260,
    "tools": [
     "copilot"
    ],
@@ -2457,7 +2520,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 56,
+   "score": 55,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2467,7 +2530,7 @@
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-15T11:00:31+00:00",
    "duration": 551,
-   "views": 42961,
+   "views": 43025,
    "likes": 484,
    "tools": [],
    "topics": [
@@ -2475,7 +2538,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 69,
+   "score": 68,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2485,8 +2548,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-15T07:00:27+00:00",
    "duration": 512,
-   "views": 44474,
-   "likes": 282,
+   "views": 44865,
+   "likes": 284,
    "tools": [
     "claude"
    ],
@@ -2505,15 +2568,15 @@
    "channelId": "UCzCsyvyrq38R6TnztEzOmgg",
    "publishedAt": "2026-09-15T04:05:20Z",
    "duration": 1287,
-   "views": 32265,
-   "likes": 292,
+   "views": 32396,
+   "likes": 293,
    "tools": [],
    "topics": [
     "agents"
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 55,
+   "score": 54,
    "firstSeen": "2026-09-27"
   },
   {
@@ -2523,8 +2586,8 @@
    "channelId": "UC-3e3hAUhDV2lwcoQGD2grg",
    "publishedAt": "2026-09-14T14:00:12Z",
    "duration": 397,
-   "views": 4996,
-   "likes": 26,
+   "views": 5031,
+   "likes": 27,
    "tools": [],
    "topics": [
     "agents",
@@ -2543,7 +2606,7 @@
    "channelId": "UCrxw9tSE5fsCgLnp5BrlA4g",
    "publishedAt": "2026-09-14T06:53:41Z",
    "duration": 338,
-   "views": 2574,
+   "views": 2591,
    "likes": 166,
    "tools": [
     "gamma"
@@ -2564,17 +2627,16 @@
    "channelId": "UCxmdDlVTg4qeFI7Bhf-zNAQ",
    "publishedAt": "2026-09-13T04:30:31Z",
    "duration": 6876,
-   "views": 8825,
-   "likes": 125,
+   "views": 9147,
+   "likes": 128,
    "tools": [],
    "topics": [
     "genai-basics",
-    "prompting",
-    "coding"
+    "prompting"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 52,
+   "score": 51,
    "firstSeen": "2026-10-03"
   },
   {
@@ -2584,8 +2646,8 @@
    "channelId": "UCOQ6GGRyyu8S3jahnUz2zHw",
    "publishedAt": "2026-09-13T02:01:42Z",
    "duration": 3785,
-   "views": 9613,
-   "likes": 110,
+   "views": 9649,
+   "likes": 112,
    "tools": [
     "claude-code"
    ],
@@ -2605,7 +2667,7 @@
    "channelId": "UCObs0kLIrDjX2LLSybqNaEA",
    "publishedAt": "2026-09-12T14:30:08Z",
    "duration": 1321,
-   "views": 2957,
+   "views": 2972,
    "likes": 36,
    "tools": [
     "gemini"
@@ -2625,7 +2687,7 @@
    "channelId": "UC512aL5wp8icOicjwwWtOyg",
    "publishedAt": "2026-09-12T13:16:03Z",
    "duration": 1348,
-   "views": 4978,
+   "views": 5045,
    "likes": 61,
    "tools": [],
    "topics": [
@@ -2634,7 +2696,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 49,
+   "score": 48,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2644,8 +2706,8 @@
    "channelId": "UCEZFNESm9YT_A9TfAr0RTrw",
    "publishedAt": "2026-09-11T14:17:48Z",
    "duration": 684,
-   "views": 5600,
-   "likes": 444,
+   "views": 5707,
+   "likes": 446,
    "tools": [
     "n8n"
    ],
@@ -2665,8 +2727,8 @@
    "channelId": "UC4JX40jDee_tINbkjycV4Sg",
    "publishedAt": "2026-09-11T14:00:35Z",
    "duration": 488,
-   "views": 141142,
-   "likes": 1433,
+   "views": 143005,
+   "likes": 1452,
    "tools": [],
    "topics": [
     "agents",
@@ -2684,7 +2746,7 @@
    "channelId": "UCF5_adlZTaoAzxqEh5SSCVA",
    "publishedAt": "2026-09-11T12:46:38Z",
    "duration": 329,
-   "views": 1968,
+   "views": 1984,
    "likes": 4,
    "tools": [],
    "topics": [
@@ -2702,8 +2764,8 @@
    "channelId": "UC3q8O3Bh2Le8Rj1-Q-_UUbA",
    "publishedAt": "2026-09-10T15:30:31Z",
    "duration": 185,
-   "views": 3254,
-   "likes": 27,
+   "views": 3289,
+   "likes": 28,
    "tools": [
     "replit"
    ],
@@ -2720,8 +2782,8 @@
    "channelId": "UC2wUTmjFacOeGWxM6ijR0LA",
    "publishedAt": "2026-09-10T15:15:04Z",
    "duration": 1148,
-   "views": 4245,
-   "likes": 92,
+   "views": 4297,
+   "likes": 96,
    "tools": [
     "notebooklm"
    ],
@@ -2738,8 +2800,8 @@
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
    "publishedAt": "2026-09-10T15:04:22Z",
    "duration": 2479,
-   "views": 152151,
-   "likes": 1394,
+   "views": 153143,
+   "likes": 1410,
    "tools": [],
    "topics": [
     "coding",
@@ -2747,7 +2809,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 71,
+   "score": 70,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2757,8 +2819,8 @@
    "channelId": "UCNQbF87QPV685oFnHxb0zPg",
    "publishedAt": "2026-09-10T15:00:32Z",
    "duration": 491,
-   "views": 11671,
-   "likes": 234,
+   "views": 11744,
+   "likes": 236,
    "tools": [
     "gemini"
    ],
@@ -2775,7 +2837,7 @@
    "channelId": "UCxLzvFAUbpdNUIh0hGsEH0w",
    "publishedAt": "2026-09-10T14:00:27Z",
    "duration": 1750,
-   "views": 6015,
+   "views": 6029,
    "likes": 93,
    "tools": [
     "claude-code"
@@ -2797,7 +2859,7 @@
    "channelId": "UCYEHmQ-b1iC02-LMeseQsvw",
    "publishedAt": "2026-09-10T13:11:33Z",
    "duration": 527,
-   "views": 26904,
+   "views": 26953,
    "likes": 23,
    "tools": [
     "julius"
@@ -2808,7 +2870,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 50,
+   "score": 49,
    "firstSeen": "2026-09-27"
   },
   {
@@ -2818,8 +2880,8 @@
    "channelId": "UC4ZVkG3RQPzvZk7alIVjcCg",
    "publishedAt": "2026-09-10T12:04:46Z",
    "duration": 1067,
-   "views": 314472,
-   "likes": 4242,
+   "views": 317332,
+   "likes": 4287,
    "tools": [
     "claude-code"
    ],
@@ -2828,7 +2890,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 63,
+   "score": 62,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2838,17 +2900,15 @@
    "channelId": "UCchfCBPdLeDf5hjKUmGpVqQ",
    "publishedAt": "2026-09-09T23:53:09Z",
    "duration": 2398,
-   "views": 20244,
-   "likes": 670,
+   "views": 20553,
+   "likes": 675,
    "tools": [
     "chatgpt"
    ],
-   "topics": [
-    "prompting"
-   ],
+   "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 61,
+   "score": 60,
    "firstSeen": "2026-09-30"
   },
   {
@@ -2858,7 +2918,7 @@
    "channelId": "UCTQuKo8v0PaPCvk5aRxc_Yg",
    "publishedAt": "2026-09-09T20:46:04Z",
    "duration": 749,
-   "views": 10814,
+   "views": 10857,
    "likes": 104,
    "tools": [
     "claude-code"
@@ -2870,7 +2930,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 50,
+   "score": 49,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2880,7 +2940,7 @@
    "channelId": "UCJFMlSxcvlZg5yZUYJT0Pug",
    "publishedAt": "2026-09-09T14:15:21Z",
    "duration": 511,
-   "views": 4006,
+   "views": 4018,
    "likes": 38,
    "tools": [
     "zapier"
@@ -2900,7 +2960,7 @@
    "channelId": "UCVe8CMJF4caRzuckVYV8CaQ",
    "publishedAt": "2026-09-09T14:10:13Z",
    "duration": 1720,
-   "views": 25271,
+   "views": 25338,
    "likes": 190,
    "tools": [
     "claude-code"
@@ -2910,7 +2970,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 52,
+   "score": 51,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2920,8 +2980,8 @@
    "channelId": "UClkZM098Hy9QdN6tThcimfg",
    "publishedAt": "2026-09-09T14:00:22Z",
    "duration": 169,
-   "views": 1024,
-   "likes": 18,
+   "views": 1051,
+   "likes": 19,
    "tools": [
     "gamma"
    ],
@@ -2940,8 +3000,8 @@
    "channelId": "UC0T6MVd3wQDB5ICAe45OxaQ",
    "publishedAt": "2026-09-09T13:30:16Z",
    "duration": 1248,
-   "views": 49878,
-   "likes": 461,
+   "views": 50040,
+   "likes": 465,
    "tools": [
     "chatgpt"
    ],
@@ -2950,7 +3010,7 @@
    ],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 55,
+   "score": 54,
    "firstSeen": "2026-09-29"
   },
   {
@@ -2960,8 +3020,8 @@
    "channelId": "UCg60QRUSvLZMF4zHv2ajBqA",
    "publishedAt": "2026-09-09T13:04:47Z",
    "duration": 670,
-   "views": 90398,
-   "likes": 845,
+   "views": 92010,
+   "likes": 854,
    "tools": [
     "gemini"
    ],
@@ -2970,7 +3030,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 57,
+   "score": 56,
    "firstSeen": "2026-09-26"
   },
   {
@@ -2980,8 +3040,8 @@
    "channelId": "UC2D6eRvCeMtcF5OGHf1-trw",
    "publishedAt": "2026-09-09T13:00:24Z",
    "duration": 795,
-   "views": 5779,
-   "likes": 32,
+   "views": 5901,
+   "likes": 34,
    "tools": [],
    "topics": [
     "agents"
@@ -2998,8 +3058,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-09T07:00:13Z",
    "duration": 811,
-   "views": 74143,
-   "likes": 791,
+   "views": 75151,
+   "likes": 803,
    "tools": [],
    "topics": [
     "prompting",
@@ -3017,8 +3077,8 @@
    "channelId": "UC2ojq-nuP8ceeHqiroeKhBA",
    "publishedAt": "2026-09-08T22:11:53Z",
    "duration": 1798,
-   "views": 331377,
-   "likes": 4136,
+   "views": 332688,
+   "likes": 4145,
    "tools": [],
    "topics": [
     "multimodal"
@@ -3035,15 +3095,15 @@
    "channelId": "UC2LUqhg0ZqCTPeBbP7rEUlw",
    "publishedAt": "2026-09-08T17:24:51Z",
    "duration": 1035,
-   "views": 8297,
-   "likes": 0,
+   "views": 8428,
+   "likes": 331,
    "tools": [
     "midjourney"
    ],
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 52,
+   "score": 59,
    "firstSeen": "2026-09-26"
   },
   {
@@ -3053,8 +3113,8 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-08T15:00:30Z",
    "duration": 366,
-   "views": 25011,
-   "likes": 104,
+   "views": 25096,
+   "likes": 105,
    "tools": [
     "github-copilot"
    ],
@@ -3075,8 +3135,8 @@
    "channelId": "UCldyi11QYNXYXiLjVbyw5dA",
    "publishedAt": "2026-09-08T13:25:39Z",
    "duration": 904,
-   "views": 116032,
-   "likes": 763,
+   "views": 116261,
+   "likes": 764,
    "tools": [],
    "topics": [
     "rag",
@@ -3094,8 +3154,8 @@
    "channelId": "UC2dSE9W3lGYbFi_CPmVtA-A",
    "publishedAt": "2026-09-08T12:45:49Z",
    "duration": 1004,
-   "views": 39850,
-   "likes": 396,
+   "views": 40462,
+   "likes": 397,
    "tools": [
     "copilot"
    ],
@@ -3104,8 +3164,26 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-09-26"
+  },
+  {
+   "id": "gz8p26bn2Qw",
+   "title": "How to Turn PDFs into a Podcast with NotebookLM | AI Podcast Tutorial",
+   "channel": "MIM Technovate ",
+   "channelId": "UCHZVWKZyu2LfwwD0zZQ1mPA",
+   "publishedAt": "2026-09-08T10:36:26Z",
+   "duration": 266,
+   "views": 1125,
+   "likes": 8,
+   "tools": [
+    "notebooklm"
+   ],
+   "topics": [],
+   "difficulty": "beginner",
+   "difficultySource": "heuristic",
+   "score": 40,
+   "firstSeen": "2026-10-04"
   },
   {
    "id": "OmHmO-s0Rqo",
@@ -3114,8 +3192,8 @@
    "channelId": "UCFqXmQ56-Gp1rIKa-GoAJvQ",
    "publishedAt": "2026-09-08T02:30:26Z",
    "duration": 1058,
-   "views": 57479,
-   "likes": 676,
+   "views": 57773,
+   "likes": 679,
    "tools": [
     "gemini",
     "notebooklm"
@@ -3123,7 +3201,7 @@
    "topics": [],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 56,
+   "score": 55,
    "firstSeen": "2026-09-26"
   },
   {
@@ -3133,8 +3211,8 @@
    "channelId": "UCfQNB91qRP_5ILeu_S_bSkg",
    "publishedAt": "2026-09-07T21:40:19Z",
    "duration": 982,
-   "views": 160828,
-   "likes": 2611,
+   "views": 161250,
+   "likes": 2616,
    "tools": [
     "chatgpt"
    ],
@@ -3143,7 +3221,7 @@
    ],
    "difficulty": "intermediate",
    "difficultySource": "heuristic",
-   "score": 61,
+   "score": 60,
    "firstSeen": "2026-09-26"
   },
   {
@@ -3153,8 +3231,8 @@
    "channelId": "UC4JX40jDee_tINbkjycV4Sg",
    "publishedAt": "2026-09-07T18:07:20Z",
    "duration": 1178,
-   "views": 103190,
-   "likes": 855,
+   "views": 104463,
+   "likes": 862,
    "tools": [
     "claude-code"
    ],
@@ -3173,8 +3251,8 @@
    "channelId": "UCsvqVGtbbyHaMoevxPAq9Fg",
    "publishedAt": "2026-09-07T15:30:08Z",
    "duration": 3016,
-   "views": 21711,
-   "likes": 164,
+   "views": 22160,
+   "likes": 166,
    "tools": [],
    "topics": [
     "agents",
@@ -3192,8 +3270,8 @@
    "channelId": "UC-Iu-wRWwWX8NjVRxDnW8JA",
    "publishedAt": "2026-09-07T15:00:37Z",
    "duration": 1199,
-   "views": 73667,
-   "likes": 595,
+   "views": 74590,
+   "likes": 597,
    "tools": [
     "copilot"
    ],
@@ -3212,8 +3290,8 @@
    "channelId": "UCLjuoEeCf_lsKyNgq-JOGhQ",
    "publishedAt": "2026-09-07T14:59:40Z",
    "duration": 411,
-   "views": 84377,
-   "likes": 2633,
+   "views": 84421,
+   "likes": 2632,
    "tools": [
     "julius"
    ],
@@ -3234,8 +3312,8 @@
    "channelId": "UCh9nVJoWXmFb7sLApWGcLPQ",
    "publishedAt": "2026-09-07T13:30:07Z",
    "duration": 833,
-   "views": 43940,
-   "likes": 405,
+   "views": 44142,
+   "likes": 408,
    "tools": [],
    "topics": [
     "rag"
@@ -3252,8 +3330,8 @@
    "channelId": "UCi-Vvzs6FSpwwbJFqkFo4IQ",
    "publishedAt": "2026-09-06T17:00:24Z",
    "duration": 849,
-   "views": 51181,
-   "likes": 622,
+   "views": 51862,
+   "likes": 627,
    "tools": [
     "gemini"
    ],
@@ -3270,7 +3348,7 @@
    "channelId": "UCs87vsqz30wv6QzVsrCtNGQ",
    "publishedAt": "2026-09-06T10:00:28Z",
    "duration": 375,
-   "views": 1915,
+   "views": 1958,
    "likes": 57,
    "tools": [
     "midjourney"
@@ -3288,7 +3366,7 @@
    "channelId": "UCJqx8MM4gDPDy8TqVVlPyLw",
    "publishedAt": "2026-09-05T15:52:30Z",
    "duration": 1347,
-   "views": 4108,
+   "views": 4236,
    "tools": [
     "elevenlabs"
    ],
@@ -3307,8 +3385,8 @@
    "channelId": "UCC4BWRoVCLQJ4JYX3Fbx7qg",
    "publishedAt": "2026-09-05T14:00:27Z",
    "duration": 1096,
-   "views": 440330,
-   "likes": 4700,
+   "views": 444279,
+   "likes": 4752,
    "tools": [
     "claude"
    ],
@@ -3321,14 +3399,31 @@
    "firstSeen": "2026-09-26"
   },
   {
+   "id": "qfXxWLxNGuM",
+   "title": "How to Set Up AI Agents in 2026 (Use this FREE AI Tool)",
+   "channel": "Youri van Hofwegen",
+   "channelId": "UCdR7eGozLjafYMTd2BFnJaQ",
+   "publishedAt": "2026-09-05T13:39:25Z",
+   "duration": 777,
+   "views": 60144,
+   "tools": [],
+   "topics": [
+    "agents"
+   ],
+   "difficulty": "advanced",
+   "difficultySource": "heuristic",
+   "score": 58,
+   "firstSeen": "2026-10-04"
+  },
+  {
    "id": "g326FZa94FU",
    "title": "FULL Claude AI Course for Beginners in 2026 — Zero to Pro (And How To Get Paid For It)",
    "channel": "Shane Hummus",
    "channelId": "UCLKZ20yD2tNMBOkSDZo4FeQ",
    "publishedAt": "2026-09-05T12:00:35Z",
    "duration": 6014,
-   "views": 77733,
-   "likes": 2554,
+   "views": 79524,
+   "likes": 2598,
    "tools": [
     "claude"
    ],
@@ -3339,37 +3434,16 @@
    "firstSeen": "2026-09-26"
   },
   {
-   "id": "gmwDBNcFXFU",
-   "title": "Make Money With This New AI Agent That Works 24/7",
-   "channel": "Chris Koerner on The Koerner Office Podcast",
-   "channelId": "UCn4dfcINwD3_z41IDFPsFcA",
-   "publishedAt": "2026-09-04T23:16:28Z",
-   "duration": 661,
-   "views": 54398,
-   "likes": 615,
-   "tools": [],
-   "topics": [
-    "agents"
-   ],
-   "difficulty": "advanced",
-   "difficultySource": "heuristic",
-   "score": 41,
-   "firstSeen": "2026-10-02"
-  },
-  {
    "id": "x-KRw9TkqQE",
    "title": "Every AI Agent Term Explained Like You’re 5",
    "channel": "Theo - Dawnspire Academy",
    "channelId": "UCIBN_ixxnop1MGbeGVvNUSA",
    "publishedAt": "2026-09-04T12:30:45Z",
    "duration": 590,
-   "views": 11491,
+   "views": 11517,
    "tools": [],
    "topics": [
-    "llms",
-    "agents",
-    "rag",
-    "teaching"
+    "agents"
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
@@ -3383,18 +3457,17 @@
    "channelId": "UCGpsgNbzdF7BECCVbB1COHw",
    "publishedAt": "2026-09-04T03:00:01Z",
    "duration": 3642,
-   "views": 16355,
+   "views": 16413,
    "likes": 348,
    "tools": [
     "gemini"
    ],
    "topics": [
-    "agents",
     "automation"
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 39,
+   "score": 38,
    "firstSeen": "2026-09-30"
   },
   {
@@ -3404,8 +3477,8 @@
    "channelId": "UC4JX40jDee_tINbkjycV4Sg",
    "publishedAt": "2026-09-03T14:00:11Z",
    "duration": 1168,
-   "views": 177903,
-   "likes": 2574,
+   "views": 180595,
+   "likes": 2609,
    "tools": [],
    "topics": [
     "agents"
@@ -3422,7 +3495,7 @@
    "channelId": "UC3i3qKQ5aR_guegQj5bhOMw",
    "publishedAt": "2026-09-03T13:38:41Z",
    "duration": 895,
-   "views": 62454,
+   "views": 63274,
    "tools": [],
    "topics": [
     "agents",
@@ -3440,7 +3513,7 @@
    "channelId": "UCWt1kyzL6YmUJ55cdhSTNMw",
    "publishedAt": "2026-09-03T13:28:55Z",
    "duration": 455,
-   "views": 3690,
+   "views": 3790,
    "likes": 12,
    "tools": [
     "cursor"
@@ -3458,8 +3531,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-03T07:00:28+00:00",
    "duration": 762,
-   "views": 115523,
-   "likes": 1063,
+   "views": 116509,
+   "likes": 1070,
    "tools": [
     "claude"
    ],
@@ -3469,7 +3542,7 @@
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 68,
+   "score": 67,
    "firstSeen": "2026-09-26"
   },
   {
@@ -3479,8 +3552,8 @@
    "channelId": "UCeNYDojo4nU2sbHz1sMsBXw",
    "publishedAt": "2026-09-03T04:30:17Z",
    "duration": 345,
-   "views": 2634,
-   "likes": 11,
+   "views": 2724,
+   "likes": 12,
    "tools": [
     "claude-code"
    ],
@@ -3499,8 +3572,8 @@
    "channelId": "UCEuQ7YIThAps6wERHfsY7fQ",
    "publishedAt": "2026-09-02T15:27:58Z",
    "duration": 723,
-   "views": 12647,
-   "likes": 501,
+   "views": 12684,
+   "likes": 503,
    "tools": [
     "midjourney"
    ],
@@ -3517,8 +3590,8 @@
    "channelId": "UCCktnahuRFYIBtNnKT5IYyg",
    "publishedAt": "2026-09-02T15:00:06Z",
    "duration": 1014,
-   "views": 11144,
-   "likes": 80,
+   "views": 11238,
+   "likes": 82,
    "tools": [
     "canva"
    ],
@@ -3535,8 +3608,8 @@
    "channelId": "UCpFMU1JVTtrK4EqtuAeT78g",
    "publishedAt": "2026-09-02T13:00:37Z",
    "duration": 846,
-   "views": 12195,
-   "likes": 132,
+   "views": 12268,
+   "likes": 133,
    "tools": [],
    "topics": [
     "chat-basics"
@@ -3553,7 +3626,7 @@
    "channelId": "UCwvXnrOCRlhokHlJwohf2OA",
    "publishedAt": "2026-09-02T12:46:25Z",
    "duration": 972,
-   "views": 11658,
+   "views": 11664,
    "likes": 99,
    "tools": [
     "claude-code"
@@ -3573,15 +3646,15 @@
    "channelId": "UCgpxEV63ZZR1B6r_KYgY72Q",
    "publishedAt": "2026-09-01T23:02:43Z",
    "duration": 3768,
-   "views": 1214,
-   "likes": 25,
+   "views": 1252,
+   "likes": 28,
    "tools": [
     "descript"
    ],
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 44,
+   "score": 45,
    "firstSeen": "2026-09-29"
   },
   {
@@ -3591,8 +3664,8 @@
    "channelId": "UCxVxcTULO9cFU6SB9qVaisQ",
    "publishedAt": "2026-09-01T20:27:05Z",
    "duration": 673,
-   "views": 144564,
-   "likes": 1695,
+   "views": 146706,
+   "likes": 1711,
    "tools": [
     "claude-code"
    ],
@@ -3612,7 +3685,7 @@
    "channelId": "UCsMica-v34Irf9KVTh6xx-g",
    "publishedAt": "2026-09-01T19:15:44Z",
    "duration": 7553,
-   "views": 10632,
+   "views": 10663,
    "likes": 92,
    "tools": [
     "github-copilot"
@@ -3630,7 +3703,7 @@
    "channelId": "UCdNj_PP__5kKtjZabuEjbqA",
    "publishedAt": "2026-09-01T15:38:51Z",
    "duration": 1363,
-   "views": 247971,
+   "views": 250846,
    "tools": [],
    "topics": [
     "multimodal"
@@ -3647,8 +3720,8 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-01T15:00:33Z",
    "duration": 208,
-   "views": 10979,
-   "likes": 59,
+   "views": 11060,
+   "likes": 60,
    "tools": [
     "github-copilot"
    ],
@@ -3667,8 +3740,8 @@
    "channelId": "UCqKRlX8Pi6xg-lAAzkt3wfA",
    "publishedAt": "2026-09-01T10:00:07Z",
    "duration": 679,
-   "views": 12807,
-   "likes": 131,
+   "views": 13131,
+   "likes": 133,
    "tools": [
     "runway"
    ],
@@ -3685,8 +3758,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-01T07:00:04+00:00",
    "duration": 342,
-   "views": 54622,
-   "likes": 441,
+   "views": 55375,
+   "likes": 443,
    "tools": [
     "chatgpt"
    ],
@@ -3705,8 +3778,8 @@
    "channelId": "UCcCzzSbdw5-qmdF_NuTtb2w",
    "publishedAt": "2026-09-01T05:18:21Z",
    "duration": 1124,
-   "views": 14872,
-   "likes": 294,
+   "views": 14959,
+   "likes": 296,
    "tools": [
     "midjourney"
    ],
@@ -3723,7 +3796,7 @@
    "channelId": "UCVMJPRXrBIOFDBZEaF-_pEA",
    "publishedAt": "2026-08-31T23:30:31Z",
    "duration": 209,
-   "views": 305061,
+   "views": 305068,
    "likes": 57,
    "tools": [
     "adobe-firefly"
@@ -3741,8 +3814,8 @@
    "channelId": "UCTQuKo8v0PaPCvk5aRxc_Yg",
    "publishedAt": "2026-08-31T17:20:54Z",
    "duration": 1176,
-   "views": 31345,
-   "likes": 353,
+   "views": 31472,
+   "likes": 354,
    "tools": [
     "chatgpt"
    ],
@@ -3761,7 +3834,7 @@
    "channelId": "UCxkOnB_ojDRWywB2W1fGCdg",
    "publishedAt": "2026-08-31T15:26:27Z",
    "duration": 1614,
-   "views": 6347,
+   "views": 6354,
    "likes": 42,
    "tools": [
     "midjourney"
@@ -3779,8 +3852,8 @@
    "channelId": "UCfAkjqedCeeFWR291PZcEaw",
    "publishedAt": "2026-08-31T10:30:26Z",
    "duration": 388,
-   "views": 10164,
-   "likes": 166,
+   "views": 10742,
+   "likes": 169,
    "tools": [
     "elevenlabs"
    ],
@@ -3797,7 +3870,7 @@
    "channelId": "UC2WmuBuFq6gL08QYG-JjXKw",
    "publishedAt": "2026-08-31T06:15:28Z",
    "duration": 615,
-   "views": 25574,
+   "views": 25575,
    "likes": 92,
    "tools": [],
    "topics": [
@@ -3815,15 +3888,15 @@
    "channelId": "UCgDqL4yzXb4BflimZaxL4Vg",
    "publishedAt": "2026-08-30T23:36:26Z",
    "duration": 829,
-   "views": 120397,
-   "likes": 1928,
+   "views": 120425,
+   "likes": 1929,
    "tools": [],
    "topics": [
     "multimodal"
    ],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 58,
+   "score": 57,
    "firstSeen": "2026-09-27"
   },
   {
@@ -3833,7 +3906,7 @@
    "channelId": "UCs6nmQViDpUw0nuIx9c_WvA",
    "publishedAt": "2026-08-30T21:44:16Z",
    "duration": 625,
-   "views": 3596,
+   "views": 3598,
    "likes": 15,
    "tools": [
     "n8n"
@@ -3853,7 +3926,7 @@
    "channelId": "UCeNYDojo4nU2sbHz1sMsBXw",
    "publishedAt": "2026-08-30T14:32:51Z",
    "duration": 406,
-   "views": 1952,
+   "views": 1957,
    "likes": 14,
    "tools": [
     "claude-code"
@@ -3873,8 +3946,8 @@
    "channelId": "UCEJoO7Zkfv45zIjuALuJLTQ",
    "publishedAt": "2026-08-30T12:00:27Z",
    "duration": 790,
-   "views": 29384,
-   "likes": 235,
+   "views": 29663,
+   "likes": 237,
    "tools": [],
    "topics": [
     "agents"
@@ -3891,7 +3964,7 @@
    "channelId": "UC8lYUyMDFZkyD9Qt-uT1Vkg",
    "publishedAt": "2026-08-30T08:22:34Z",
    "duration": 358,
-   "views": 6352,
+   "views": 6361,
    "likes": 202,
    "tools": [
     "gamma"
@@ -3911,7 +3984,7 @@
    "channelId": "UCrxw9tSE5fsCgLnp5BrlA4g",
    "publishedAt": "2026-08-29T07:31:10Z",
    "duration": 227,
-   "views": 3116,
+   "views": 3141,
    "likes": 123,
    "tools": [
     "notebooklm"
@@ -3919,7 +3992,7 @@
    "topics": [],
    "difficulty": "beginner",
    "difficultySource": "heuristic",
-   "score": 39,
+   "score": 38,
    "firstSeen": "2026-09-26"
   },
   {
@@ -3929,8 +4002,8 @@
    "channelId": "UCR1B5ilfJ14nsEzNa9-aS_g",
    "publishedAt": "2026-08-28T21:17:37Z",
    "duration": 2100,
-   "views": 13783,
-   "likes": 267,
+   "views": 13810,
+   "likes": 268,
    "tools": [
     "gemini"
    ],
@@ -3947,8 +4020,8 @@
    "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
    "publishedAt": "2026-08-28T20:51:11Z",
    "duration": 234,
-   "views": 62448,
-   "likes": 548,
+   "views": 62650,
+   "likes": 549,
    "tools": [
     "chatgpt"
    ],
@@ -3967,8 +4040,8 @@
    "channelId": "UCX-znXB00avwiMyXU9GRlWA",
    "publishedAt": "2026-08-28T20:32:34Z",
    "duration": 195,
-   "views": 7897,
-   "likes": 104,
+   "views": 8124,
+   "likes": 106,
    "tools": [
     "gemini"
    ],
@@ -3985,8 +4058,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-08-27T07:00:37+00:00",
    "duration": 563,
-   "views": 58499,
-   "likes": 537,
+   "views": 58930,
+   "likes": 539,
    "tools": [
     "chatgpt"
    ],
@@ -4003,7 +4076,7 @@
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
    "publishedAt": "2026-08-26T15:08:03+00:00",
    "duration": 10833,
-   "views": 68409,
+   "views": 68600,
    "likes": 504,
    "tools": [],
    "topics": [
@@ -4013,7 +4086,7 @@
    ],
    "difficulty": "advanced",
    "difficultySource": "heuristic",
-   "score": 64,
+   "score": 63,
    "firstSeen": "2026-09-26"
   },
   {
@@ -4023,8 +4096,8 @@
    "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
    "publishedAt": "2026-08-25T13:00:23+00:00",
    "duration": 1175,
-   "views": 342853,
-   "likes": 4251,
+   "views": 348546,
+   "likes": 4312,
    "tools": [
     "chatgpt"
    ],
@@ -4041,8 +4114,8 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-08-24T07:00:05+00:00",
    "duration": 234,
-   "views": 17341,
-   "likes": 322,
+   "views": 17579,
+   "likes": 325,
    "tools": [
     "chatgpt"
    ],
@@ -4059,8 +4132,8 @@
    "channelId": "UC8butISFwT-Wl7EV0hUK0BQ",
    "publishedAt": "2026-08-19T10:00:28+00:00",
    "duration": 8282,
-   "views": 43995,
-   "likes": 1055,
+   "views": 44107,
+   "likes": 1056,
    "tools": [],
    "topics": [
     "coding"
@@ -4077,8 +4150,8 @@
    "channelId": "UC2UXDak6o7rBm23k3Vv5dww",
    "publishedAt": "2026-08-10T13:02:38Z",
    "duration": 1224,
-   "views": 154516,
-   "likes": 4732,
+   "views": 156762,
+   "likes": 4792,
    "tools": [],
    "topics": [
     "coding"
@@ -4091,20 +4164,18 @@
  ],
  "trends": [
   {
-   "id": "CBlzMCUJLv8",
-   "title": "Copilot Connect — Chat, Notebooks, Create, & Search | Ep 05 (2026)",
-   "channel": "M365 Copilot Connection",
-   "channelId": "UCMVG4U2L2ocqgdYLAubuYGQ",
-   "publishedAt": "2026-10-03T05:03:14Z",
-   "duration": 3411,
-   "views": 1422,
-   "likes": 33,
-   "kind": "talk",
-   "tools": [
-    "copilot"
-   ],
-   "score": 48,
-   "firstSeen": "2026-10-03"
+   "id": "83HMZrhL_Uw",
+   "title": "AI & Music: How AI Is Changing Music Creation & Creativity",
+   "channel": "IBM Technology",
+   "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
+   "publishedAt": "2026-10-04T11:00:25Z",
+   "duration": 1038,
+   "views": 10065,
+   "likes": 234,
+   "kind": "news",
+   "tools": [],
+   "score": 67,
+   "firstSeen": "2026-10-04"
   },
   {
    "id": "EeOz2w5wPEI",
@@ -4113,13 +4184,13 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-10-02T15:00:29Z",
    "duration": 804,
-   "views": 3047,
-   "likes": 47,
+   "views": 3816,
+   "likes": 54,
    "kind": "news",
    "tools": [
     "github-copilot"
    ],
-   "score": 60,
+   "score": 58,
    "firstSeen": "2026-10-02"
   },
   {
@@ -4129,13 +4200,13 @@
    "channelId": "UChpleBmo18P08aKCIgti38g",
    "publishedAt": "2026-10-02T15:00:16Z",
    "duration": 1822,
-   "views": 92177,
-   "likes": 1925,
+   "views": 115797,
+   "likes": 2262,
    "kind": "news",
    "tools": [
     "gemini"
    ],
-   "score": 73,
+   "score": 72,
    "firstSeen": "2026-10-02"
   },
   {
@@ -4178,11 +4249,11 @@
    "channelId": "UCP7jMXSY2xbc3KCAE0MHQ-A",
    "publishedAt": "2026-10-01T16:37:46Z",
    "duration": 2290,
-   "views": 39037,
-   "likes": 344,
+   "views": 54958,
+   "likes": 382,
    "kind": "news",
    "tools": [],
-   "score": 64,
+   "score": 63,
    "firstSeen": "2026-10-01"
   },
   {
@@ -4224,13 +4295,13 @@
    "channelId": "UC-ew9TfeD887qUSiWWAAj1w",
    "publishedAt": "2026-09-30T15:35:24Z",
    "duration": 266,
-   "views": 69859,
-   "likes": 1100,
+   "views": 75734,
+   "likes": 1170,
    "kind": "launch",
    "tools": [
     "elevenlabs"
    ],
-   "score": 56,
+   "score": 55,
    "firstSeen": "2026-10-01"
   },
   {
@@ -4240,11 +4311,11 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-30T15:00:23Z",
    "duration": 1822,
-   "views": 2533,
-   "likes": 23,
+   "views": 2677,
+   "likes": 24,
    "kind": "talk",
    "tools": [],
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-09-30"
   },
   {
@@ -4270,14 +4341,28 @@
    "channelId": "UCOmcA3f_RrH6b9NmcNa4tdg",
    "publishedAt": "2026-09-29T22:48:01Z",
    "duration": 965,
-   "views": 703153,
-   "likes": 4793,
+   "views": 744433,
+   "likes": 4893,
    "kind": "news",
    "tools": [
     "chatgpt"
    ],
    "score": 58,
    "firstSeen": "2026-09-30"
+  },
+  {
+   "id": "k1sAOxPXt70",
+   "title": "Trump press conference addresses AI 'accord' signed by tech leaders Amodei, Huang, Musk & Zuckerberg",
+   "channel": "USA TODAY",
+   "channelId": "UCP6HGa63sBC7-KHtkme-p-g",
+   "publishedAt": "2026-09-29T20:39:14Z",
+   "duration": 1720,
+   "views": 113597,
+   "likes": 813,
+   "kind": "talk",
+   "tools": [],
+   "score": 52,
+   "firstSeen": "2026-10-04"
   },
   {
    "id": "DFizaobJVVc",
@@ -4300,7 +4385,7 @@
    "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
    "publishedAt": "2026-09-29T18:42:29Z",
    "duration": 3215,
-   "views": 625455,
+   "views": 637710,
    "kind": "talk",
    "tools": [
     "chatgpt"
@@ -4315,27 +4400,13 @@
    "channelId": "UCwAnu01qlnVg1Ai2AbtTMaA",
    "publishedAt": "2026-09-29T13:00:30Z",
    "duration": 877,
-   "views": 94286,
-   "likes": 1203,
+   "views": 109158,
+   "likes": 1341,
    "kind": "news",
    "tools": [
     "chatgpt"
    ],
    "score": 66,
-   "firstSeen": "2026-09-29"
-  },
-  {
-   "id": "irKu5K2S45g",
-   "title": "OpenAI delays release of AI model GPT-6.1 Astra, citing safety concerns",
-   "channel": "Al Jazeera English",
-   "channelId": "UCNye-wNBqNL5ZzHSJj3l8Bg",
-   "publishedAt": "2026-09-29T03:30:00Z",
-   "duration": 305,
-   "views": 12728,
-   "likes": 36,
-   "kind": "launch",
-   "tools": [],
-   "score": 46,
    "firstSeen": "2026-09-29"
   },
   {
@@ -4345,13 +4416,13 @@
    "channelId": "UCfJT_eYDTmDE-ovKaxVE1ig",
    "publishedAt": "2026-09-28T23:31:02Z",
    "duration": 471,
-   "views": 102586,
-   "likes": 1214,
+   "views": 110001,
+   "likes": 1263,
    "kind": "news",
    "tools": [
     "copilot"
    ],
-   "score": 66,
+   "score": 65,
    "firstSeen": "2026-09-29"
   },
   {
@@ -4361,13 +4432,13 @@
    "channelId": "UC-Iu-wRWwWX8NjVRxDnW8JA",
    "publishedAt": "2026-09-28T16:53:09Z",
    "duration": 948,
-   "views": 21262,
-   "likes": 276,
+   "views": 22177,
+   "likes": 290,
    "kind": "news",
    "tools": [
     "copilot"
    ],
-   "score": 49,
+   "score": 48,
    "firstSeen": "2026-09-29"
   },
   {
@@ -4377,12 +4448,28 @@
    "channelId": "UC2UXDak6o7rBm23k3Vv5dww",
    "publishedAt": "2026-09-28T14:10:55Z",
    "duration": 1463,
-   "views": 642448,
-   "likes": 12319,
+   "views": 828349,
+   "likes": 15205,
    "kind": "news",
    "tools": [],
    "score": 74,
    "firstSeen": "2026-09-28"
+  },
+  {
+   "id": "th_tXR2QQ6U",
+   "title": "Introducing Eleven v4 and Eleven v4 Turbo",
+   "channel": "ElevenLabs",
+   "channelId": "UC-ew9TfeD887qUSiWWAAj1w",
+   "publishedAt": "2026-09-28T14:01:57Z",
+   "duration": 157,
+   "views": 120284,
+   "likes": 3197,
+   "kind": "launch",
+   "tools": [
+    "elevenlabs"
+   ],
+   "score": 59,
+   "firstSeen": "2026-10-04"
   },
   {
    "id": "5zarth6OMdo",
@@ -4419,12 +4506,26 @@
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-28T11:00:25Z",
    "duration": 435,
-   "views": 55041,
-   "likes": 754,
+   "views": 58254,
+   "likes": 780,
    "kind": "news",
    "tools": [],
-   "score": 64,
+   "score": 63,
    "firstSeen": "2026-09-28"
+  },
+  {
+   "id": "AbMxbgIahtE",
+   "title": "Bill Gates says it’s ‘not enough to have a kill switch’ for AI: Full interview",
+   "channel": "NBC News",
+   "channelId": "UCeY0bbntWzzVIaj2z3QigXg",
+   "publishedAt": "2026-09-27T13:00:00Z",
+   "duration": 1926,
+   "views": 391686,
+   "likes": 2644,
+   "kind": "talk",
+   "tools": [],
+   "score": 55,
+   "firstSeen": "2026-10-04"
   },
   {
    "id": "kyJ1vd7yEPc",
@@ -4433,8 +4534,8 @@
    "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
    "publishedAt": "2026-09-27T11:00:22Z",
    "duration": 689,
-   "views": 125844,
-   "likes": 1385,
+   "views": 131746,
+   "likes": 1419,
    "kind": "news",
    "tools": [],
    "score": 65,
@@ -4447,11 +4548,11 @@
    "channelId": "UChpleBmo18P08aKCIgti38g",
    "publishedAt": "2026-09-26T02:37:49Z",
    "duration": 2078,
-   "views": 193979,
-   "likes": 3154,
+   "views": 195249,
+   "likes": 3163,
    "kind": "news",
    "tools": [],
-   "score": 68,
+   "score": 67,
    "firstSeen": "2026-09-27"
   },
   {
@@ -4461,13 +4562,13 @@
    "channelId": "UCYyaQsm2HyneP9CsIOdihBw",
    "publishedAt": "2026-09-25T18:19:49Z",
    "duration": 272,
-   "views": 60374,
-   "likes": 503,
+   "views": 61555,
+   "likes": 507,
    "kind": "launch",
    "tools": [
     "copilot"
    ],
-   "score": 49,
+   "score": 48,
    "firstSeen": "2026-09-27"
   },
   {
@@ -4477,13 +4578,13 @@
    "channelId": "UCmeU2DYiVy80wMBGZzEWnbw",
    "publishedAt": "2026-09-25T13:00:31Z",
    "duration": 1576,
-   "views": 131215,
-   "likes": 1493,
+   "views": 132199,
+   "likes": 1496,
    "kind": "news",
    "tools": [
     "notebooklm"
    ],
-   "score": 53,
+   "score": 52,
    "firstSeen": "2026-09-28"
   },
   {
@@ -4523,13 +4624,13 @@
    "channelId": "UCbfYPyITQ-7l4upoX8nvctg",
    "publishedAt": "2026-09-24T08:40:55Z",
    "duration": 314,
-   "views": 354723,
-   "likes": 4777,
+   "views": 357192,
+   "likes": 4794,
    "kind": "news",
    "tools": [
     "claude"
    ],
-   "score": 68,
+   "score": 67,
    "firstSeen": "2026-09-27"
   },
   {
@@ -4539,13 +4640,13 @@
    "channelId": "UChpleBmo18P08aKCIgti38g",
    "publishedAt": "2026-09-22T22:30:04Z",
    "duration": 1097,
-   "views": 220336,
-   "likes": 2598,
+   "views": 220683,
+   "likes": 2602,
    "kind": "news",
    "tools": [
     "claude"
    ],
-   "score": 65,
+   "score": 64,
    "firstSeen": "2026-09-27"
   },
   {
@@ -4555,28 +4656,14 @@
    "channelId": "UC7c3Kb6jYCRj4JOHHZTxKsQ",
    "publishedAt": "2026-09-22T18:00:31Z",
    "duration": 286,
-   "views": 17213,
+   "views": 17314,
    "likes": 93,
    "kind": "news",
    "tools": [
     "github-copilot"
    ],
-   "score": 54,
+   "score": 53,
    "firstSeen": "2026-09-27"
-  },
-  {
-   "id": "0z0mWA8plRc",
-   "title": "99% Chance of Extinction?! This AI Debate Got HEATED…",
-   "channel": "AI Copium",
-   "channelId": "UCOFl0wDeBMSBbK3jNJQHHFg",
-   "publishedAt": "2026-09-22T14:00:22Z",
-   "duration": 1402,
-   "views": 23509,
-   "likes": 284,
-   "kind": "talk",
-   "tools": [],
-   "score": 45,
-   "firstSeen": "2026-09-29"
   },
   {
    "id": "XzL_vtYAO-4",
@@ -4599,11 +4686,11 @@
    "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
    "publishedAt": "2026-09-21T19:25:46Z",
    "duration": 164,
-   "views": 50925,
+   "views": 51108,
    "likes": 304,
    "kind": "news",
    "tools": [],
-   "score": 57,
+   "score": 56,
    "firstSeen": "2026-09-27"
   },
   {
@@ -4613,25 +4700,11 @@
    "channelId": "UCXZCJLdBC09xxGZ6gcdrc6A",
    "publishedAt": "2026-09-21T19:22:03Z",
    "duration": 193,
-   "views": 24299,
+   "views": 24360,
    "likes": 131,
    "kind": "news",
    "tools": [],
    "score": 54,
-   "firstSeen": "2026-09-27"
-  },
-  {
-   "id": "FheRqx7DjbU",
-   "title": "Goodbye Tokenmaxxing: From AI Usage to Agentic AI Outcomes",
-   "channel": "IBM Technology",
-   "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
-   "publishedAt": "2026-09-21T11:00:44Z",
-   "duration": 506,
-   "views": 82711,
-   "likes": 1041,
-   "kind": "news",
-   "tools": [],
-   "score": 61,
    "firstSeen": "2026-09-27"
   },
   {
