@@ -218,6 +218,6 @@ export const chatAssistants: GuidedLesson = {
       license: "MIT",
       note: "Adapted the points on context retention, custom instructions, and the trade-off between remembered context and privacy.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/chat-assistants", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/chat-assistants", license: "Original" },
   ],
 };

@@ -217,6 +217,6 @@ export const coding: GuidedLesson = {
       license: "MIT",
       note: "Adapted the idea of prompt injection and the need to treat content an AI reads as untrusted.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/coding", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/coding", license: "Original" },
   ],
 };

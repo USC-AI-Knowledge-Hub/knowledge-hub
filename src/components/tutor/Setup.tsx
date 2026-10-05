@@ -176,8 +176,8 @@ export function Setup() {
         })}
         {LINEUP === "webllm" && device !== "wasm" && (
           <p className="body-s muted">
-            Preview: these run on WebLLM, which downloads the same models about a third smaller. To go back, add ?engine=default to the page
-            address.
+            These are compact WebLLM builds, about a third smaller than the standard ones. If a model won't load, add ?engine=transformers
+            to the page address to try the standard builds.
           </p>
         )}
         {noGpu && MODELS.length > options.length && (

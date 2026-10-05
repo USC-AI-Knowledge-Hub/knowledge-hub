@@ -108,16 +108,18 @@ const WEBLLM_MODELS: TutorModel[] = [
 ];
 
 /**
- * Which lineup this browser uses. WebLLM is opt-in while it's being tried on real hardware:
- * visiting any page with ?engine=webllm turns it on for this browser, ?engine=default turns it off.
+ * Which lineup this browser uses. WebLLM is the default: its builds download about a third
+ * smaller. Visiting any page with ?engine=transformers switches this browser to the
+ * Transformers.js builds, and ?engine=webllm or ?engine=default switches it back.
  */
 function pickLineup(): "webllm" | "transformers" {
   try {
     const param = new URLSearchParams(location.search).get("engine");
-    if (param === "webllm" || param === "default") localStorage.setItem("kh-tutor-engine", param);
-    return localStorage.getItem("kh-tutor-engine") === "webllm" ? "webllm" : "transformers";
+    if (param === "transformers") localStorage.setItem("kh-tutor-lineup", param);
+    if (param === "webllm" || param === "default") localStorage.removeItem("kh-tutor-lineup");
+    return localStorage.getItem("kh-tutor-lineup") === "transformers" ? "transformers" : "webllm";
   } catch {
-    return "transformers";
+    return "webllm";
   }
 }
 

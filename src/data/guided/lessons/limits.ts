@@ -219,6 +219,6 @@ export const limits: GuidedLesson = {
       license: "CC BY-NC-SA 4.0",
       note: "Adapted the ideas of discernment (evaluating AI output) and diligence (taking responsibility for it).",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/limits", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/limits", license: "Original" },
   ],
 };

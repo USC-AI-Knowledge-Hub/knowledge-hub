@@ -218,6 +218,6 @@ export const llms: GuidedLesson = {
       license: "MIT",
       note: "Adapted the ideas of foundation models built by self-supervised training and adapted by fine-tuning, and decoder-only models.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/llms", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/llms", license: "Original" },
   ],
 };

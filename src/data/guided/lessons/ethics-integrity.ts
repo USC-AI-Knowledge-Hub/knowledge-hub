@@ -223,6 +223,6 @@ export const ethicsIntegrity: GuidedLesson = {
       license: "MIT",
       note: "Adapted the discussion of fairness and of outputs that reinforce stereotypes.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/ethics-integrity", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/ethics-integrity", license: "Original" },
   ],
 };

@@ -218,6 +218,6 @@ export const rag: GuidedLesson = {
       license: "MIT",
       note: "Adapted the explanation of semantic search, text embeddings and cosine similarity.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/rag", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/rag", license: "Original" },
   ],
 };
