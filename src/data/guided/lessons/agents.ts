@@ -231,6 +231,6 @@ export const agents: GuidedLesson = {
       license: "CC BY-NC-SA 4.0",
       note: "Adapted the idea of delegation: deciding what work to hand to AI.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/agents", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/agents", license: "Original" },
   ],
 };

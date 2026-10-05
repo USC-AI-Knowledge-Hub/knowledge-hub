@@ -201,6 +201,6 @@ export const multimodal: GuidedLesson = {
       license: "MIT",
       note: "Adapted the overview of models for speech, image generation and multimodal input.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/multimodal", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/multimodal", license: "Original" },
   ],
 };

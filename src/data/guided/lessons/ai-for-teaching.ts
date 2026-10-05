@@ -200,6 +200,6 @@ export const aiForTeaching: GuidedLesson = {
       license: "CC BY-NC-SA 4.0",
       note: "Adapted the four competencies (Delegation, Description, Discernment, Diligence) and applied them to teaching preparation.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/ai-for-teaching", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/ai-for-teaching", license: "Original" },
   ],
 };

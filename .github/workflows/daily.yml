@@ -80,8 +80,9 @@ jobs:
 
       - name: Build site
         env:
-          # A custom domain serves from the root: set the BASE_PATH repository variable to "/".
-          BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          # The site is served from the root of studentslearningai.com. To serve it from
+          # <owner>.github.io/<repo>/ instead, set the BASE_PATH repository variable to "/<repo>/".
+          BASE_PATH: ${{ vars.BASE_PATH || '/' }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3

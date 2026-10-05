@@ -200,6 +200,6 @@ export const aiForYourField: GuidedLesson = {
       license: "MIT",
       note: "Adapted the idea of testing a varied set of realistic inputs to see how a model fails before relying on it.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/ai-for-your-field", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/ai-for-your-field", license: "Original" },
   ],
 };

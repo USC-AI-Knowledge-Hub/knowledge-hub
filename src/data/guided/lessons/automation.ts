@@ -217,6 +217,6 @@ export const automation: GuidedLesson = {
       license: "MIT",
       note: "Adapted the idea of testing with a varied set of realistic inputs before launch and planning for incidents.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/automation", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/automation", license: "Original" },
   ],
 };

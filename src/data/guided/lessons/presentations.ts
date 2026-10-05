@@ -194,6 +194,6 @@ export const presentations: GuidedLesson = {
   ],
   reflect: "Look at the edited deck next to the generated one. Which change made the biggest difference to how convincing it is, and what does that tell you about where AI helps and where it doesn't?",
   sources: [
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/presentations", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/presentations", license: "Original" },
   ],
 };

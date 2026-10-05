@@ -207,6 +207,6 @@ export const researchVerification: GuidedLesson = {
       license: "MIT",
       note: "Adapted the framing of hallucinations as confident, persuasive answers that newcomers may not question.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/research-verification", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/research-verification", license: "Original" },
   ],
 };

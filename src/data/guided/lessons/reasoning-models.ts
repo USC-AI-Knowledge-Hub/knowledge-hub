@@ -196,6 +196,6 @@ export const reasoningModels: GuidedLesson = {
       license: "CC BY-NC-SA 4.0",
       note: "Adapted the idea of delegation: deciding how much to hand to AI, and in what mode, based on the task.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/reasoning-models", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/reasoning-models", license: "Original" },
   ],
 };

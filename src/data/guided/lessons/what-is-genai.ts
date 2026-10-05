@@ -207,6 +207,6 @@ export const whatIsGenai: GuidedLesson = {
       license: "MIT",
       note: "Adapted the distinction between a service and the model inside it.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/what-is-genai", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/what-is-genai", license: "Original" },
   ],
 };

@@ -218,6 +218,6 @@ export const dataAnalysis: GuidedLesson = {
       license: "MIT",
       note: "Adapted the points on data privacy, informed consent and data ownership.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/data-analysis", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/data-analysis", license: "Original" },
   ],
 };

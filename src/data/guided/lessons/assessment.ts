@@ -200,6 +200,6 @@ export const assessment: GuidedLesson = {
       license: "CC BY-NC-SA 4.0",
       note: "Adapted the Delegation and Diligence competencies to deciding AI's role in each assignment and making its use transparent.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/assessment", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/assessment", license: "Original" },
   ],
 };

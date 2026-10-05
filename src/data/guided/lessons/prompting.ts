@@ -183,6 +183,6 @@ export const prompting: GuidedLesson = {
       license: "MIT",
       note: "Adapted the ideas of primary content, zero/one/few-shot examples, cues, templates, doubling down and giving the model an out.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/prompting", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/prompting", license: "Original" },
   ],
 };

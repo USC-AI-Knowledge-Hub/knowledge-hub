@@ -213,9 +213,9 @@ describe("model registry", () => {
     expect(modelById.get("qwen3-0.6b-mlc")!.variants.webgpu!.mb).toBeLessThan(onnxQwen3);
   });
 
-  it("uses the Transformers.js lineup unless the browser opted in", () => {
-    expect(LINEUP).toBe("transformers");
-    expect(MODELS.every((m) => Object.values(m.variants).every((v) => v?.runtime === "transformers"))).toBe(true);
+  it("uses the compact WebLLM lineup unless the browser opted out", () => {
+    expect(LINEUP).toBe("webllm");
+    expect(MODELS.every((m) => m.variants.webgpu?.runtime === "webllm")).toBe(true);
   });
 
   it("maps dtypes to Transformers.js file names", () => {

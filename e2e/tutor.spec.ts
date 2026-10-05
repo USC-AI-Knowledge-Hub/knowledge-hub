@@ -318,12 +318,14 @@ test.describe("tutor with the mock model", () => {
     await setup(page);
     const sheet = await openTutor(page);
     await sheet.getByRole("button", { name: "Choose a model" }).click();
-    await expect(sheet.getByRole("radio", { name: /Qwen2.5 0.5B Instruct/ })).toBeChecked();
+    // The compact WebLLM builds are the default.
+    await expect(sheet.getByRole("radio", { name: /Qwen3 0.6B/ })).toBeChecked();
+    await expect(sheet.getByRole("button", { name: /^Download \d+ MB/ })).toHaveText(/Download 3\d0 MB/);
     await sheet.getByRole("button", { name: /^Download \d+ MB/ }).click();
     await expect(sheet.getByRole("progressbar", { name: "Download progress" })).toBeVisible();
     await expect(sheet.getByRole("button", { name: "Cancel" })).toBeVisible();
     await expect(sheet.getByRole("heading", { name: "The tutor is ready" })).toBeVisible({ timeout: 20_000 });
-    await expect(sheet.getByText(/Qwen2.5 0.5B on WebGPU/)).toBeVisible();
+    await expect(sheet.getByText(/Qwen3 0.6B on WebGPU/)).toBeVisible();
 
     await sheet.getByRole("button", { name: "Start learning" }).click();
     await ask(page, "What is a token?");
@@ -335,7 +337,15 @@ test.describe("tutor with the mock model", () => {
 
     // The choice is remembered.
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("kh-tutor-model") ?? "{}"));
-    expect(saved).toMatchObject({ status: "downloaded", model: "qwen2.5-0.5b", device: "webgpu" });
+    expect(saved).toMatchObject({ status: "downloaded", model: "qwen3-0.6b-mlc", device: "webgpu" });
+  });
+
+  test("?engine=transformers switches to the Transformers.js builds", async ({ page }) => {
+    await setup(page);
+    const sheet = await openTutor(page, "/?engine=transformers");
+    await sheet.getByRole("button", { name: "Choose a model" }).click();
+    await expect(sheet.getByRole("radio", { name: /Qwen2.5 0.5B Instruct/ })).toBeChecked();
+    await expect(sheet.getByRole("radio", { name: /Qwen3 0.6B/ })).toBeVisible();
   });
 
   test("follow-ups keep the topic, and answers suggest videos to watch", async ({ page }) => {

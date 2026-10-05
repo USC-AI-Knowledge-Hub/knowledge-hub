@@ -212,6 +212,6 @@ export const writing: GuidedLesson = {
       license: "CC BY-NC-SA 4.0",
       note: "Adapted the ideas of delegating deliberately, discerning the quality of output, and diligence through transparency about AI's role.",
     },
-    { title: "USC AI Knowledge Hub", url: "https://usc-ai-knowledge-hub.github.io/knowledge-hub/learn/writing", license: "Original" },
+    { title: "USC AI Knowledge Hub", url: "https://studentslearningai.com/learn/writing", license: "Original" },
   ],
 };
