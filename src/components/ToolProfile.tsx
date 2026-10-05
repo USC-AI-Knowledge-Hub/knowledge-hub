@@ -223,7 +223,7 @@ export function ToolVideos({ tool, variant }: { tool: Tool; variant: Variant }) 
           <H variant={variant} id={`levels-h-${variant}`} className={big}>
             Learn {tool.name}, level by level
           </H>
-          <p className="body-m muted">{videos.length ? "Updated daily. Start in the column that matches you." : "Videos appear here after the first daily run."}</p>
+          <p className="body-m muted">{videos.length ? "Updated daily. Start in the column that matches you." : "No tutorials for this tool have passed our checks yet. The daily search keeps looking, back as far as a year."}</p>
         </div>
         <Link to={`/watch?tool=${tool.id}`} className="btn text state">
           All {tool.name} videos

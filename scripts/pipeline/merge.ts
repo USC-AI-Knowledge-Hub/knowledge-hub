@@ -26,6 +26,7 @@ export function mergeFeed(existing: Video[], incoming: Video[], runDate: string)
       likes: v.likes ?? prev.likes,
       duration: v.duration || prev.duration,
       score: v.score,
+      evergreen: v.evergreen || prev.evergreen || undefined,
       ...(keepLabels
         ? {}
         : { difficulty: v.difficulty, difficultySource: v.difficultySource, tools: v.tools, topics: v.topics, summary: v.summary ?? prev.summary }),

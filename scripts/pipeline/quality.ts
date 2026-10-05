@@ -85,7 +85,7 @@ export function ageDays(publishedAt: string, now: Date): number {
 }
 
 /** Why a candidate was rejected, or null if it passes. */
-export function rejectReason(c: Candidate, now: Date): string | null {
+export function rejectReason(c: Candidate, now: Date, { evergreen = false }: { evergreen?: boolean } = {}): string | null {
   if (c.live) return "live or upcoming";
   if (c.short) return "short";
   if (/#shorts?\b/i.test(c.title) || /#shorts?\b/i.test(c.description.slice(0, 200))) return "short";
@@ -95,9 +95,10 @@ export function rejectReason(c: Candidate, now: Date): string | null {
   if (nonLatinRatio(c.title) > 0.3) return "not English";
   if (hypeLevel(c.title) >= 2) return "clickbait";
   if (ENTERTAINMENT.test(c.title)) return "entertainment";
-  if (ageDays(c.publishedAt, now) > SETTINGS.maxAgeDays) return "too old";
+  // Evergreen: a tutorial for a tool the library barely covers may be older and less viewed.
+  if (ageDays(c.publishedAt, now) > (evergreen ? SETTINGS.evergreenMaxAgeDays : SETTINGS.maxAgeDays)) return "too old";
   if (!c.trusted && c.views > 0) {
-    const min = ageDays(c.publishedAt, now) < 3 ? SETTINGS.minViewsFresh : SETTINGS.minViews;
+    const min = evergreen ? SETTINGS.evergreenMinViews : ageDays(c.publishedAt, now) < 3 ? SETTINGS.minViewsFresh : SETTINGS.minViews;
     if (c.views < min) return "too few views";
   }
   return null;
