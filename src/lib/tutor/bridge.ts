@@ -35,3 +35,15 @@ export function onAsk(cb: () => void): () => void {
   window.addEventListener(EVENT, cb);
   return () => window.removeEventListener(EVENT, cb);
 }
+
+const OPEN_EVENT = "kh-tutor-open";
+
+/** Opens the tutor with nothing asked, e.g. from the offline page. */
+export function openTutor() {
+  window.dispatchEvent(new Event(OPEN_EVENT));
+}
+
+export function onOpenTutor(cb: () => void): () => void {
+  window.addEventListener(OPEN_EVENT, cb);
+  return () => window.removeEventListener(OPEN_EVENT, cb);
+}

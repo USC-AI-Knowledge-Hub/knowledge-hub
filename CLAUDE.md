@@ -26,6 +26,11 @@ A daily GitHub Action refreshes the YouTube video library.
   HTML page per route plus `sitemap.xml` and `robots.txt`. A new page type needs an entry in
   `pageMeta` and `allPaths`; `src/lib/__tests__/seo.test.ts` fails if a title or description is
   missing, too long or repeated.
+- Offline mode: `/offline` (`src/pages/Offline.tsx`, `src/lib/offline.ts`) lets a visitor save the app
+  to their browser. It is opt-in: `scripts/offline/sw.template.js` becomes `dist/sw.js` at build time
+  (`scripts/service-worker.ts`) and only registers after "Save for offline use". Model files are
+  kept by the model libraries in Cache Storage, not by the worker. Change the worker's code and the
+  `e2e/offline.spec.ts` tests (they really go offline) must still pass.
 - `scripts/pipeline/`: the daily video pipeline.
 - `public/data/videos.json`: pipeline output, committed by the Action.
 - `public/data/courses.json`: live course check (lesson counts, hours, availability).

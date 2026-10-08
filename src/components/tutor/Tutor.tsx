@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { onAsk } from "../../lib/tutor/bridge";
+import { onAsk, onOpenTutor } from "../../lib/tutor/bridge";
 import "../../styles/tutor.css";
 import { Orb } from "./Shapes";
 
@@ -30,6 +30,7 @@ export function Tutor() {
 
   // A page asked the tutor something (e.g. "Ask the tutor about this section"): open it.
   useEffect(() => onAsk(() => setOpen(true)), []);
+  useEffect(() => onOpenTutor(() => setOpen(true)), []);
 
   // Lets pages make room for the sheet, so a lesson and the tutor sit side by side.
   useEffect(() => {

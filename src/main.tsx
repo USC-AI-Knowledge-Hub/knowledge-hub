@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { Layout } from "./components/Layout";
 import { FeedProvider } from "./lib/feed";
+import { resumeOffline } from "./lib/offline";
 import { About } from "./pages/About";
 import { Courses } from "./pages/Courses";
 import { Green } from "./pages/Green";
@@ -11,6 +12,7 @@ import { Learn } from "./pages/Learn";
 import { LessonPlayer } from "./pages/LessonPlayer";
 import { ModulePage } from "./pages/ModulePage";
 import { NotFound } from "./pages/NotFound";
+import { Offline } from "./pages/Offline";
 import { PathPage } from "./pages/PathPage";
 import { Search } from "./pages/Search";
 import { ToolPage } from "./pages/ToolPage";
@@ -36,6 +38,7 @@ const router = createBrowserRouter(
         { path: "tools/:id", element: <ToolPage /> },
         { path: "watch", element: <Watch /> },
         { path: "green", element: <Green /> },
+        { path: "offline", element: <Offline /> },
         { path: "search", element: <Search /> },
         { path: "about", element: <About /> },
         { path: "*", element: <NotFound /> },
@@ -44,6 +47,8 @@ const router = createBrowserRouter(
   ],
   { basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/" },
 );
+
+resumeOffline();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

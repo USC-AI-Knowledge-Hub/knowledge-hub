@@ -1,6 +1,6 @@
 /**
- * Draws public/og.png (the preview image shown when a page is shared) and public/favicon.png
- * from the brand shapes. Run `npm run brand-images` after changing the colors or wording here.
+ * Draws public/og.png (the preview image shown when a page is shared), public/favicon.png and
+ * public/icon-512.png (the install icon) from the brand shapes. Run `npm run brand-images` after changing the colors or wording here.
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -22,6 +22,8 @@ const card = `<!doctype html><meta charset="utf-8"><style>
 
 const icon = `<!doctype html><meta charset="utf-8"><style>body{margin:0;width:192px;height:192px;background:#fff}</style>${svg}`;
 
+const big = `<!doctype html><meta charset="utf-8"><style>body{margin:0;width:512px;height:512px;background:#fff;display:grid;place-items:center}div{width:384px;height:384px}</style><div>${svg}</div>`;
+
 const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH || undefined });
 const page = await browser.newPage();
 await page.setViewportSize({ width: 1200, height: 630 });
@@ -30,5 +32,8 @@ writeFileSync(join(pub, "og.png"), await page.screenshot());
 await page.setViewportSize({ width: 192, height: 192 });
 await page.setContent(icon);
 writeFileSync(join(pub, "favicon.png"), await page.screenshot());
+await page.setViewportSize({ width: 512, height: 512 });
+await page.setContent(big);
+writeFileSync(join(pub, "icon-512.png"), await page.screenshot());
 await browser.close();
-console.log("Wrote public/og.png and public/favicon.png");
+console.log("Wrote public/og.png, public/favicon.png and public/icon-512.png");

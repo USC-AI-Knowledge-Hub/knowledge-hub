@@ -490,6 +490,22 @@ test.describe("real model", () => {
     await page.getByRole("button", { name: /Ask the tutor/ }).click();
     await expect(page.getByRole("dialog", { name: "AI tutor" }).locator(".t-status")).toContainText(/SmolLM2/, { timeout: 3 * 60_000 });
     expect(modelRequests).toBe(0);
+
+    // Saved for offline use, the same page, tutor and model work with the network gone. The model
+    // libraries keep the model files in Cache Storage; the service worker keeps the app.
+    await page.goto("/offline/");
+    await page.getByRole("button", { name: "Save for offline use" }).click();
+    await expect(page.getByText("Saved. It works offline.")).toBeVisible({ timeout: 2 * 60_000 });
+    await page.evaluate(() => navigator.serviceWorker.ready);
+    await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
+    await context.setOffline(true);
+    await page.goto("/offline/");
+    await expect(page.getByRole("status").filter({ hasText: /You're offline/ })).toBeVisible();
+    await page.getByRole("button", { name: "Open the tutor" }).click();
+    const offlineSheet = page.getByRole("dialog", { name: "AI tutor" });
+    await expect(offlineSheet.locator(".t-status")).toContainText(/SmolLM2/, { timeout: 3 * 60_000 });
+    await ask(page, "What is a token?");
+    await expect(offlineSheet.locator(".t-msg.tutor .md").last()).toHaveText(/\w{3}/, { timeout: 5 * 60_000 });
     await context.close();
   });
 

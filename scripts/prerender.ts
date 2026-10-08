@@ -35,6 +35,10 @@ try {
     count += 1;
   }
 
+  // A generic page for the offline service worker to show for any address it hasn't saved.
+  // Unlike the real pages it isn't meant to be found, so it is kept out of search results.
+  writeFileSync(join(dist, "shell.html"), template.replace("</head>", '  <meta name="robots" content="noindex" />\n  </head>'));
+
   const listed = sitemapPaths();
   writeFileSync(join(dist, "sitemap.xml"), sitemapXml(listed));
   writeFileSync(join(dist, "robots.txt"), robotsTxt(SITE_URL));
