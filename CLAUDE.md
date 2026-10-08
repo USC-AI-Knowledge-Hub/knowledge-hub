@@ -11,6 +11,7 @@ A daily GitHub Action refreshes the YouTube video library.
 - `npm run videos`: run the video pipeline (see the video-curation skill)
 - `npm run courses`: check every course, editors' pick and talk against YouTube (`--check --strict` in CI)
 - `npm run theme`: regenerate `src/styles/tokens.css` from the brand colors
+- `npm run brand-images`: redraw `public/og.png` (the share preview) and `public/favicon.png`
 
 ## Layout
 
@@ -20,6 +21,11 @@ A daily GitHub Action refreshes the YouTube video library.
   `topics.ts`, `types.ts`.
 - `src/pages/`, `src/components/`, `src/lib/`: the app.
 - `src/styles/`: `tokens.css` (generated), `base.css` (system and components), `pages.css`.
+- `src/lib/seo.ts`: every page's title, description, canonical address, text and structured data,
+  built from the data files. `npm run build` ends with `scripts/prerender.ts`, which writes a real
+  HTML page per route plus `sitemap.xml` and `robots.txt`. A new page type needs an entry in
+  `pageMeta` and `allPaths`; `src/lib/__tests__/seo.test.ts` fails if a title or description is
+  missing, too long or repeated.
 - `scripts/pipeline/`: the daily video pipeline.
 - `public/data/videos.json`: pipeline output, committed by the Action.
 - `public/data/courses.json`: live course check (lesson counts, hours, availability).

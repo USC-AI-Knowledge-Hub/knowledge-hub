@@ -3,6 +3,7 @@ import { Icon } from "../components/Icon";
 import { Ladder } from "../components/Ladder";
 import { TrendCard } from "../components/TrendCard";
 import { VideoCard } from "../components/VideoCard";
+import { faqs } from "../data/faq";
 import { moduleById, paths } from "../data/learn";
 import { TASK_ICON, TASK_LABEL, tools } from "../data/tools";
 import type { Task } from "../data/types";
@@ -28,8 +29,8 @@ export function Home() {
         <div className="hero-copy">
           <h1 className="display-l">Learn AI. Use AI. Understand what's next.</h1>
           <p className="body-l muted measure">
-            Short learning paths, honest tool guides, and a video library that refreshes every morning, sorted by tool and by how much you
-            already know.
+            Short learning paths for students, professors and researchers, honest tool guides, and a video library that refreshes every
+            morning, sorted by tool and by how much you already know.
           </p>
           <div className="hero-actions">
             <Link to="/learn" className="btn filled state">
@@ -175,6 +176,31 @@ export function Home() {
               <span className="title-s">{TASK_LABEL[k]}</span>
               <span className="body-s muted">{taskCounts.get(k) ?? 0} tools</span>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="faq-h">
+        <div className="section-head">
+          <div>
+            <h2 id="faq-h" className="headline-m">
+              Questions people ask about learning AI
+            </h2>
+            <p className="body-m muted">Quick answers, and where to go next.</p>
+          </div>
+        </div>
+        <div className="faq">
+          {faqs.map((f) => (
+            <details key={f.q} className="faq-item">
+              <summary className="title-m">
+                {f.q}
+                <Icon name="expand_more" className="faq-chevron" />
+              </summary>
+              <p className="body-l measure">{f.a}</p>
+              <Link to={f.link.to} className="btn text sm state">
+                {f.link.label}
+              </Link>
+            </details>
           ))}
         </div>
       </section>

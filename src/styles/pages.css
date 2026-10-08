@@ -739,3 +739,27 @@
   .watch-tabs .segmented { flex-wrap: nowrap; max-width: 100%; }
   .watch-tabs .segmented button { padding: 0 11px; white-space: nowrap; }
 }
+
+/* Home: questions people ask. Each answer opens in place; the card rounds further when open. */
+.faq { display: grid; gap: 8px; max-width: 880px; }
+.faq-item {
+  padding: 0 20px;
+  border-radius: var(--md-shape-lg);
+  background: var(--md-sys-color-surface-container-low);
+  transition: border-radius var(--md-spring-fast), background-color var(--md-effect);
+}
+.faq-item[open] { padding-bottom: 16px; border-radius: var(--md-shape-xl); background: var(--md-sys-color-surface-container); }
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 2px; border-radius: var(--md-shape-md); }
+.faq-chevron { flex: none; transition: transform var(--md-spring-fast); }
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+.faq-item p { margin: 0 0 12px; }
