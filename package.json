@@ -4,7 +4,7 @@
   "description": "USC AI Knowledge Hub: learning paths, tool guides and a daily-curated AI video library.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && tsx scripts/prerender.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc -b",
@@ -12,6 +12,7 @@
     "videos": "tsx scripts/pipeline/index.ts",
     "courses": "tsx scripts/courses.ts",
     "model-sizes": "tsx scripts/model-sizes.ts",
+    "brand-images": "tsx scripts/brand-images.ts",
     "e2e": "playwright test"
   },
   "repository": {

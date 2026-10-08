@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
+import { useSeo } from "../lib/useSeo";
 import { useThemeMode } from "../lib/theme";
 import { Icon } from "./Icon";
 import { PlayerProvider } from "./Player";
@@ -69,6 +70,7 @@ function SearchBox() {
 export function Layout() {
   const { isDark, toggle } = useThemeMode();
   const { pathname } = useLocation();
+  useSeo();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
