@@ -414,6 +414,32 @@ const STATIC: Record<string, () => PageMeta> = {
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Green AI", path: "/green" }])],
   }),
+  "/offline": () => ({
+    path: "/offline",
+    title: `Use the AI tutor without internet${suffix}`,
+    description:
+      "Save the site and a small AI tutor model to your device, bookmark it, and keep learning on a flight, in a dead zone or when campus Wi-Fi fails.",
+    heading: "Use the tutor without internet",
+    type: "website",
+    content: [
+      {
+        kind: "p",
+        text: "Save the site and a tutor model to this device. Then open the bookmark offline, and the lessons and the tutor still work. The model runs in your browser, so nothing you type leaves your device.",
+      },
+      { kind: "h2", text: "How to set it up" },
+      {
+        kind: "ol",
+        items: [
+          "Save the site to this device.",
+          "Download a tutor model.",
+          "Ask the browser to protect the saved files from being cleared.",
+          "Bookmark the page or install the site as an app.",
+        ],
+      },
+    ],
+    links: [{ to: "/learn", label: "Learn" }],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Use offline", path: "/offline" }])],
+  }),
   "/about": () => ({
     path: "/about",
     title: `How the AI video library works${suffix}`,

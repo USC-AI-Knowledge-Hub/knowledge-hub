@@ -1,0 +1,14 @@
+{
+  "name": "USC AI Knowledge Hub",
+  "short_name": "AI Hub",
+  "description": "Lessons and an on-device AI tutor that keep working without internet once saved to this device.",
+  "start_url": "offline/",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#990000",
+  "icons": [
+    { "src": "favicon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -114,6 +114,7 @@ export function Layout() {
           <p className="body-s muted">Learn AI. Use AI. Understand what's next. Built and reviewed by USC AI Knowledge Hub Fellows.</p>
         </div>
         <nav className="footer-links body-s" aria-label="Footer">
+          <Link to="/offline">Use offline</Link>
           <Link to="/about">How the video library works</Link>
           <a href="https://sites.usc.edu/ai-knowledge-hub/" target="_blank" rel="noreferrer">
             Main Hub site
