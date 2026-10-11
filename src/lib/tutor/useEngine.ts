@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { detectCapability, type Capability } from "./capability";
 import { CancelledError, createEngine, isCached, isMockMode, removeDownloadedModels, removeUnusedOnnxFiles, type Engine, type GenerateResult } from "./engine";
-import type { ChatMessage } from "./prompt";
+import type { ChatMessage, Profile } from "./prompt";
 import { DEFAULT_MODEL, WASM_MODEL, modelById, type Device, type TutorModel } from "./registry";
 import { modelStore, useModelChoice } from "./storage";
 
@@ -28,12 +28,30 @@ export interface TutorEngine {
   decline(): void;
   /** Loads a previously downloaded model from the browser cache. Never downloads. */
   resume(): void;
-  generate(messages: ChatMessage[], onText: (t: string) => void, maxNewTokens?: number): Promise<GenerateResult>;
+  generate(messages: ChatMessage[], onText: (t: string) => void, maxNewTokens?: number, profile?: Profile): Promise<GenerateResult>;
   stop(): void;
 }
 
 let shared: Engine | null = null;
 const engine = () => (shared ??= createEngine());
+
+/**
+ * The model's state lives here, not in each component, because the model does too: the lesson tutor
+ * and the offline assistant use the same one, and either can be open. A second copy of the state
+ * would load the model a second time.
+ */
+let phaseNow: Phase = { name: "off" };
+const phaseListeners = new Set<() => void>();
+const setPhase = (next: Phase) => {
+  phaseNow = next;
+  phaseListeners.forEach((l) => l());
+};
+const subscribePhase = (cb: () => void) => {
+  phaseListeners.add(cb);
+  return () => void phaseListeners.delete(cb);
+};
+/** Once a model is loading in this session there's nothing to resume. */
+let resumed = false;
 
 function explain(err: unknown, device: Device): string {
   const msg = err instanceof Error ? err.message : String(err);
@@ -46,11 +64,10 @@ function explain(err: unknown, device: Device): string {
 
 export function useTutorEngine(): TutorEngine {
   const choice = useModelChoice();
-  const [phase, setPhase] = useState<Phase>({ name: "off" });
+  const phase = useSyncExternalStore(subscribePhase, () => phaseNow);
   const [capability, setCapability] = useState<Capability | null>(null);
   const [busy, setBusy] = useState(false);
   const mock = useRef(isMockMode()).current;
-  const resumed = useRef(false);
 
   useEffect(() => {
     let live = true;
@@ -61,10 +78,9 @@ export function useTutorEngine(): TutorEngine {
   }, [mock]);
 
   const start = useCallback((model: TutorModel, device: Device, fromCache: boolean) => {
-    // Once a model is loading in this session, there's nothing to resume. Without this,
-    // saving "downloaded" at the end of a download re-triggered resume, and a failed cache
-    // check there reset a working model to "off".
-    resumed.current = true;
+    // Without this, saving "downloaded" at the end of a download re-triggered resume, and a
+    // failed cache check there reset a working model to "off".
+    resumed = true;
     const v = model.variants[device];
     setPhase({ name: "loading", model, device, loaded: 0, total: (v?.mb ?? 0) * 1e6, file: "", fromCache });
     engine()
@@ -95,8 +111,8 @@ export function useTutorEngine(): TutorEngine {
   );
 
   const resume = useCallback(() => {
-    if (resumed.current || choice.status !== "downloaded") return;
-    resumed.current = true;
+    if (resumed || choice.status !== "downloaded") return;
+    resumed = true;
     const model = modelById.get(choice.model);
     if (!model?.variants[choice.device]) return;
     // Only load what's already on this device. If the cache was cleared, ask again.
@@ -115,7 +131,7 @@ export function useTutorEngine(): TutorEngine {
     engine().dispose();
     await removeDownloadedModels();
     modelStore.set({ status: "unset" });
-    resumed.current = false;
+    resumed = false;
     setPhase({ name: "off" });
   }, []);
 
@@ -124,14 +140,14 @@ export function useTutorEngine(): TutorEngine {
   }, [choice.status]);
 
   const inFlight = useRef(0);
-  const generate = useCallback(async (messages: ChatMessage[], onText: (t: string) => void, maxNewTokens?: number) => {
+  const generate = useCallback(async (messages: ChatMessage[], onText: (t: string) => void, maxNewTokens?: number, profile?: Profile) => {
     inFlight.current++;
     setBusy(true);
     try {
       // If a previous answer is still winding down after Stop, wait for it briefly.
       for (let attempt = 0; ; attempt++) {
         try {
-          return await engine().generate(messages, onText, maxNewTokens);
+          return await engine().generate(messages, onText, maxNewTokens, profile);
         } catch (err) {
           if (attempt < 40 && err instanceof Error && /still answering/.test(err.message)) {
             await new Promise((r) => setTimeout(r, 150));

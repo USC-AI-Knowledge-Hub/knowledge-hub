@@ -319,7 +319,7 @@ test.describe("tutor with the mock model", () => {
     const sheet = await openTutor(page);
     await sheet.getByRole("button", { name: "Choose a model" }).click();
     // The compact WebLLM builds are the default.
-    await expect(sheet.getByRole("radio", { name: /Qwen3 0.6B/ })).toBeChecked();
+    await expect(sheet.getByRole("radio", { name: /^Qwen3 0\.6B/ })).toBeChecked();
     await expect(sheet.getByRole("button", { name: /^Download \d+ MB/ })).toHaveText(/Download 3\d0 MB/);
     await sheet.getByRole("button", { name: /^Download \d+ MB/ }).click();
     await expect(sheet.getByRole("progressbar", { name: "Download progress" })).toBeVisible();
@@ -345,7 +345,7 @@ test.describe("tutor with the mock model", () => {
     const sheet = await openTutor(page, "/?engine=transformers");
     await sheet.getByRole("button", { name: "Choose a model" }).click();
     await expect(sheet.getByRole("radio", { name: /Qwen2.5 0.5B Instruct/ })).toBeChecked();
-    await expect(sheet.getByRole("radio", { name: /Qwen3 0.6B/ })).toBeVisible();
+    await expect(sheet.getByRole("radio", { name: /^Qwen3 0\.6B/ })).toBeVisible();
   });
 
   test("follow-ups keep the topic, and answers suggest videos to watch", async ({ page }) => {
@@ -501,7 +501,7 @@ test.describe("real model", () => {
     await context.setOffline(true);
     await page.goto("/offline/");
     await expect(page.getByRole("status").filter({ hasText: /You're offline/ })).toBeVisible();
-    await page.getByRole("button", { name: "Open the tutor" }).click();
+    await page.getByRole("button", { name: "Open the lesson tutor" }).click();
     const offlineSheet = page.getByRole("dialog", { name: "AI tutor" });
     await expect(offlineSheet.locator(".t-status")).toContainText(/SmolLM2/, { timeout: 3 * 60_000 });
     await ask(page, "What is a token?");

@@ -31,6 +31,10 @@ A daily GitHub Action refreshes the YouTube video library.
   (`scripts/service-worker.ts`) and only registers after "Save for offline use". Model files are
   kept by the model libraries in Cache Storage, not by the worker. Change the worker's code and the
   `e2e/offline.spec.ts` tests (they really go offline) must still pass.
+- Models: `src/lib/tutor/registry.ts`. `tutor: true` models appear in the lesson tutor's picker (keep
+  them compact); every model appears in the offline assistant (`/offline/assistant`), a general-purpose
+  chat that isn't grounded in lessons. A WebLLM model needs `vramMb` and an id that exists in the installed
+  WebLLM's list: `models.test.ts` checks both, and `npm run model-sizes` (browser CI) checks download sizes.
 - `scripts/pipeline/`: the daily video pipeline.
 - `public/data/videos.json`: pipeline output, committed by the Action.
 - `public/data/courses.json`: live course check (lesson counts, hours, availability).

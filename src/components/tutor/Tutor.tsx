@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
 import { onAsk, onOpenTutor } from "../../lib/tutor/bridge";
 import "../../styles/tutor.css";
 import { Orb } from "./Shapes";
@@ -20,6 +21,9 @@ export function Tutor() {
   const [started, setStarted] = useState(false);
   const fab = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
+  // The offline assistant is general-purpose and has its own message box where this button would sit.
+  const { pathname } = useLocation();
+  const showFab = !open && !pathname.startsWith("/offline/assistant");
 
   useEffect(() => {
     if (open) setStarted(true);
@@ -51,7 +55,7 @@ export function Tutor() {
 
   return (
     <>
-      {!open && (
+      {showFab && (
         <button
           ref={fab}
           type="button"

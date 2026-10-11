@@ -29,11 +29,12 @@ test.describe("offline mode", () => {
   test("a saved site and tutor work with the network off", async ({ page, context }) => {
     await setup(page);
     await save(page);
-    await expect(page.getByRole("button", { name: "Open the tutor" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Open the lesson tutor" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Open the offline assistant" })).toBeVisible();
 
     await context.setOffline(true);
     await page.goto("/offline/");
-    await expect(page.getByRole("heading", { level: 1, name: "Use the tutor without internet" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Use AI without internet" })).toBeVisible();
     await expect(page.getByRole("status").filter({ hasText: "You're offline, and everything you saved is here" })).toBeVisible();
 
     // A page nobody visited while online still opens, because the saved app handles any address.
@@ -53,11 +54,26 @@ test.describe("offline mode", () => {
     await expect(sheet.locator(".t-msg.tutor").last()).toContainText(/token/i, { timeout: 15_000 });
   });
 
+  test("the offline assistant chats with the network off", async ({ page, context }) => {
+    await setup(page);
+    await save(page);
+    await context.setOffline(true);
+    await page.goto("/offline/assistant/");
+    await expect(page.getByRole("heading", { level: 1, name: "Offline assistant" })).toBeVisible();
+    await expect(page.getByRole("status").filter({ hasText: "You're offline" })).toBeVisible();
+    // The model saved earlier loads from the browser, with no download.
+    const box = page.getByRole("textbox", { name: "Message the assistant" });
+    await expect(box).toBeVisible({ timeout: 20_000 });
+    await box.fill("What is photosynthesis?");
+    await box.press("Enter");
+    await expect(page.getByText("Mock reply to: What is photosynthesis?")).toBeVisible({ timeout: 15_000 });
+  });
+
   test("the offline page is the saved app's start page and says what's saved", async ({ page }) => {
     await setup(page);
     await page.goto("/offline/");
     await expect(page.getByRole("button", { name: "Save for offline use" })).toBeEnabled();
-    await expect(page.getByRole("button", { name: "Open the tutor" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Open the lesson tutor" })).toHaveCount(0);
     await expect(page.getByText(/qwen3 0.6b/i).first()).toBeVisible();
     const manifest = await (await page.request.get("/manifest.webmanifest")).json();
     expect(manifest.start_url).toBe("offline/");

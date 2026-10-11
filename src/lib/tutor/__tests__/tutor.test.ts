@@ -202,8 +202,10 @@ describe("model registry", () => {
     const webllm = ALL_MODELS.filter((m) => m.variants.webgpu?.runtime === "webllm");
     expect(webllm.length).toBeGreaterThanOrEqual(3);
     for (const m of webllm) expect(m.variants.webgpu!.mlcId, m.id).toMatch(/-MLC$/);
-    // Graphics chips without 16-bit floats get WebLLM's 32-bit builds instead of the CPU.
-    for (const m of webllm) expect(m.variants["webgpu-f32"]?.mlcId, m.id).toMatch(/q4f32_1-MLC$/);
+    // Graphics chips without 16-bit floats get WebLLM's 32-bit builds instead of the CPU. Gemma 3 has no
+    // 32-bit build, so it isn't offered to them.
+    for (const m of webllm.filter((x) => x.id !== "gemma3-1b-mlc")) expect(m.variants["webgpu-f32"]?.mlcId, m.id).toMatch(/q4f32_1-MLC$/);
+    expect(modelById.get("gemma3-1b-mlc")!.variants["webgpu-f32"]).toBeUndefined();
     const rec = webllm.find((m) => m.recommended)!;
     expect(rec.name).toMatch(/Qwen3/);
     expect(rec.variants.webgpu!.mb).toBeLessThan(400);

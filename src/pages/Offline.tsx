@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import { Link } from "react-router";
 import { Icon } from "../components/Icon";
 import { useOffline } from "../lib/offline";
 import { mbLabel, modelById, variantOf } from "../lib/tutor/registry";
@@ -87,10 +88,10 @@ export function Offline() {
     <>
       <header className="page-head">
         <p className="label-l muted">Offline mode</p>
-        <h1 className="display-s">Use the tutor without internet</h1>
+        <h1 className="display-s">Use AI without internet</h1>
         <p className="body-l muted measure">
-          Save the site and a tutor model to this device. Then open the bookmark on a flight, in a dead zone or when campus Wi-Fi fails, and
-          the lessons and the tutor still work.
+          Save the site and an AI model to this device. Then open the bookmark on a flight, in a dead zone or when campus Wi-Fi fails, and
+          you still have a general-purpose assistant, the lessons and the lesson tutor.
         </p>
         <div className="off-top">
           <p className={`off-net label-l ${off.online ? "online" : "offline"}`} role="status">
@@ -98,10 +99,16 @@ export function Offline() {
             {off.online ? "You're online" : ready ? "You're offline, and everything you saved is here" : "You're offline"}
           </p>
           {ready && (
-            <button type="button" className="btn filled state" onClick={openTutor}>
-              <Icon name="chat_bubble" />
-              Open the tutor
-            </button>
+            <>
+              <Link to="/offline/assistant" className="btn filled state">
+                <Icon name="chat_bubble" />
+                Open the offline assistant
+              </Link>
+              <button type="button" className="btn tonal state" onClick={openTutor}>
+                <Icon name="school" />
+                Open the lesson tutor
+              </button>
+            </>
           )}
         </div>
       </header>
@@ -154,7 +161,7 @@ export function Offline() {
           )}
         </Step>
 
-        <Step n={2} done={modelReady} title="Download a tutor model">
+        <Step n={2} done={modelReady} title="Download an AI model">
           {present === false && (
             <p className="body-s off-error" role="alert">
               The model you chose isn't on this device any more. Your browser may have cleared it. Download it again to use the tutor offline.
@@ -166,15 +173,15 @@ export function Offline() {
             </p>
           ) : (
             <p className="body-m muted measure">
-              The tutor answers using a small language model that runs on your device. It's a one-time download of roughly 200 to 600 MB, so
-              use Wi-Fi.
+              The assistant and the lesson tutor both run a language model on your device. It's a one-time download, from about 200 MB for a small
+              one to a few GB for a large one, so use Wi-Fi.
             </p>
           )}
           <div className="off-actions">
-            <button type="button" className={`btn ${chosen ? "text sm" : "filled"} state`} onClick={openTutor}>
+            <Link to="/offline/assistant" className={`btn ${chosen ? "text sm" : "filled"} state`}>
               <Icon name={chosen ? "swap_horiz" : "psychology"} />
               {chosen ? "Change the model" : "Choose a model"}
-            </button>
+            </Link>
           </div>
         </Step>
 
@@ -238,7 +245,8 @@ export function Offline() {
           </h2>
           <ul className="ideas">
             <li className="body-m">Lessons, quests and quizzes, with your progress.</li>
-            <li className="body-m">The tutor, using the model you downloaded.</li>
+            <li className="body-m">The assistant, for writing, study help, code and questions of any kind, using the model you downloaded.</li>
+            <li className="body-m">The lesson tutor, using the same model.</li>
             <li className="body-m">The tool guides, learning paths and last-saved video library.</li>
           </ul>
         </div>
@@ -254,7 +262,7 @@ export function Offline() {
 
       <p className="body-s muted measure off-foot">
         {off.usage !== null ? `This site is using ${size(off.usage)} on this device, including any model. ` : ""}
-        The tutor runs on your graphics chip in browsers with WebGPU (recent Chrome and Edge), or more slowly on your processor.
+        Models run on your graphics chip in browsers with WebGPU (recent Chrome and Edge), or much more slowly on your processor.
       </p>
     </>
   );
