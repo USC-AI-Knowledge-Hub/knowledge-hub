@@ -11,6 +11,7 @@
     "theme": "tsx scripts/gen-theme.ts",
     "videos": "tsx scripts/pipeline/index.ts",
     "courses": "tsx scripts/courses.ts",
+    "discover": "tsx scripts/discovery/index.ts",
     "model-sizes": "tsx scripts/model-sizes.ts",
     "brand-images": "tsx scripts/brand-images.ts",
     "e2e": "playwright test"
