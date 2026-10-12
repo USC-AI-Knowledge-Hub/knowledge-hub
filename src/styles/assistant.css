@@ -1,0 +1,107 @@
+/* The offline assistant: choosing a model, then a plain conversation. */
+
+.as-net {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 8px 16px;
+  border-radius: var(--md-shape-full);
+}
+.as-net.online { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.as-net.offline { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
+
+.as-picker { display: grid; gap: 16px; max-width: 820px; margin-top: 32px; }
+.as-card.card { display: grid; gap: 12px; max-width: 820px; margin-top: 32px; padding: 22px 24px; }
+.as-card h2, .as-card p { margin: 0; }
+.as-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.as-actions .btn { height: auto; min-height: 40px; padding-block: 8px; white-space: normal; text-align: left; max-width: 100%; }
+
+.as-tier { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 8px; }
+.as-tier legend { padding: 0; margin-bottom: 2px; }
+.as-tier > p { margin: 0 0 4px; }
+.as-model {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 16px;
+  border-radius: var(--md-shape-lg);
+  background: var(--md-sys-color-surface-container-low);
+  cursor: pointer;
+  transition: border-radius var(--md-spring-fast), background-color var(--md-effect);
+}
+.as-model:hover { border-radius: var(--md-shape-xl); }
+.as-model.picked { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.as-model.picked .muted { color: inherit; opacity: 0.8; }
+.as-model input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--md-sys-color-primary); }
+.as-model-body { display: grid; gap: 2px; min-width: 0; }
+.as-model-name { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.as-tag { padding: 2px 10px; border-radius: var(--md-shape-full); background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
+.as-size { white-space: nowrap; }
+
+.as-alert { display: flex; gap: 10px; align-items: flex-start; margin: 0; padding: 12px 14px; border-radius: var(--md-shape-md); background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
+.as-alert.error { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
+.as-consent { display: flex; gap: 10px; align-items: center; }
+.as-consent input { width: 20px; height: 20px; accent-color: var(--md-sys-color-primary); }
+
+.as-chat { display: grid; gap: 12px; max-width: 820px; margin-top: 24px; }
+.as-bar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.as-model-chip { display: inline-flex; align-items: center; gap: 8px; margin: 0; flex-wrap: wrap; }
+.as-bar-actions { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.as-thread { display: grid; gap: 12px; min-height: 240px; align-content: start; }
+.as-empty { display: grid; gap: 8px; padding: 24px; border-radius: var(--md-shape-xl); background: var(--md-sys-color-surface-container-low); }
+.as-empty p { margin: 0; }
+.as-starters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.as-starters .btn { height: auto; min-height: 36px; padding-block: 6px; white-space: normal; text-align: left; }
+
+.as-msg { display: flex; }
+.as-msg.user { justify-content: flex-end; }
+.as-msg .as-bubble { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.as-msg.user .as-bubble {
+  max-width: 85%;
+  padding: 10px 16px;
+  border-radius: var(--md-shape-lg) var(--md-shape-lg) var(--md-shape-xs) var(--md-shape-lg);
+  background: var(--md-sys-color-primary-container);
+  color: #fff;
+  white-space: pre-wrap;
+}
+.as-msg.assistant .as-bubble {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--md-shape-xs) var(--md-shape-lg) var(--md-shape-lg) var(--md-shape-lg);
+  background: var(--md-sys-color-surface-container-high);
+}
+.as-error { margin: 0; color: var(--md-sys-color-error); }
+
+/* The box stays at the bottom while the conversation scrolls, above the phone's bottom navigation. */
+.as-composer {
+  position: sticky;
+  bottom: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: end;
+  padding: 8px;
+  border-radius: var(--md-shape-xl);
+  background: var(--md-sys-color-surface-container);
+  box-shadow: 0 0 0 1px var(--md-sys-color-outline-variant);
+}
+@media (max-width: 839px) {
+  .as-composer { bottom: 92px; }
+}
+.as-composer textarea {
+  width: 100%;
+  min-height: 48px;
+  max-height: 200px;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: var(--md-shape-lg);
+  background: transparent;
+  color: var(--md-sys-color-on-surface);
+  font: inherit;
+  resize: vertical;
+}
+.as-composer textarea:focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: -2px; }
+.as-foot { margin: 0; }

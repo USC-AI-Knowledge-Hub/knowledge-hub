@@ -5,6 +5,7 @@ import { Layout } from "./components/Layout";
 import { FeedProvider } from "./lib/feed";
 import { resumeOffline } from "./lib/offline";
 import { About } from "./pages/About";
+import { Assistant } from "./pages/Assistant";
 import { Courses } from "./pages/Courses";
 import { Green } from "./pages/Green";
 import { Home } from "./pages/Home";
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
         { path: "watch", element: <Watch /> },
         { path: "green", element: <Green /> },
         { path: "offline", element: <Offline /> },
+        { path: "offline/assistant", element: <Assistant /> },
         { path: "search", element: <Search /> },
         { path: "about", element: <About /> },
         { path: "*", element: <NotFound /> },

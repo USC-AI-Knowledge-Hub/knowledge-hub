@@ -30,6 +30,8 @@ export interface ModelVariant {
   mlcId?: string;
   /** Approximate download in MB. */
   mb: number;
+  /** Graphics memory WebLLM says the model needs, in MB (checked against WebLLM's own list by a test). */
+  vramMb?: number;
 }
 
 export interface TutorModel {
@@ -41,7 +43,16 @@ export interface TutorModel {
   /** Qwen3 thinks out loud unless it's told not to. */
   thinking?: boolean;
   recommended?: boolean;
+  /**
+   * Offered in the lesson tutor's picker. Every model is offered in the offline assistant; the
+   * ones left out of the tutor are bigger than a lesson helper needs to be.
+   */
+  tutor?: boolean;
 }
+
+/** How big a download is, for grouping the offline assistant's picker. */
+export type SizeTier = "compact" | "standard" | "large";
+export const sizeTier = (mb: number): SizeTier => (mb < 750 ? "compact" : mb < 1900 ? "standard" : "large");
 
 /** The CPU fallback, shared by both lineups: WASM is slow, so it gets the smallest model. */
 const SMOLLM_WASM: ModelVariant = { runtime: "transformers", repo: "HuggingFaceTB/SmolLM2-360M-Instruct", dtype: "q8", mb: 370 };
@@ -73,37 +84,93 @@ const TRANSFORMERS_MODELS: TutorModel[] = [
 /**
  * WebLLM on WebGPU. MLC builds quantize the vocabulary table too, so the same models download
  * 35–40% smaller. Sizes include WebLLM's few-MB model library, fetched from GitHub.
+ *
+ * Sizes are checked against Hugging Face by `npm run model-sizes`; `vramMb` is checked against
+ * the list WebLLM ships (src/lib/tutor/__tests__/models.test.ts). The 32-bit build downloads the same
+ * weights as the 16-bit one, so both have the same size; only the memory it needs differs.
  */
+const mlc = (name: string, mb: number, vramMb: number, f32?: { mb: number; vramMb: number }): Partial<Record<Device, ModelVariant>> => ({
+  webgpu: { runtime: "webllm", repo: `mlc-ai/${name}-q4f16_1-MLC`, mlcId: `${name}-q4f16_1-MLC`, mb, vramMb },
+  ...(f32 ? { "webgpu-f32": { runtime: "webllm", repo: `mlc-ai/${name}-q4f32_1-MLC`, mlcId: `${name}-q4f32_1-MLC`, mb: f32.mb, vramMb: f32.vramMb } } : {}),
+});
+
 const WEBLLM_MODELS: TutorModel[] = [
   {
     id: "qwen3-0.6b-mlc",
     name: "Qwen3 0.6B",
     blurb: "The best explainer here, for its size.",
-    variants: {
-      webgpu: { runtime: "webllm", repo: "mlc-ai/Qwen3-0.6B-q4f16_1-MLC", mlcId: "Qwen3-0.6B-q4f16_1-MLC", mb: 355 },
-      "webgpu-f32": { runtime: "webllm", repo: "mlc-ai/Qwen3-0.6B-q4f32_1-MLC", mlcId: "Qwen3-0.6B-q4f32_1-MLC", mb: 390 },
-    },
+    variants: mlc("Qwen3-0.6B", 352, 1403, { mb: 352, vramMb: 1925 }),
     thinking: true,
     recommended: true,
+    tutor: true,
+  },
+  {
+    id: "qwen3.5-0.8b-mlc",
+    name: "Qwen3.5 0.8B",
+    blurb: "Newer than Qwen3, a little bigger. Should answer better; try it against Qwen3 0.6B.",
+    variants: mlc("Qwen3.5-0.8B", 447, 1629, { mb: 447, vramMb: 1894 }),
+    thinking: true,
+    tutor: true,
+  },
+  {
+    id: "gemma3-1b-mlc",
+    name: "Gemma 3 1B",
+    blurb: "Google's small model. Fluent and light on memory. Needs a graphics chip with 16-bit math.",
+    variants: mlc("gemma3-1b-it", 602, 711),
+    tutor: true,
   },
   {
     id: "qwen2.5-0.5b-mlc",
     name: "Qwen2.5 0.5B Instruct",
     blurb: "Smaller download, slightly simpler answers.",
-    variants: {
-      webgpu: { runtime: "webllm", repo: "mlc-ai/Qwen2.5-0.5B-Instruct-q4f16_1-MLC", mlcId: "Qwen2.5-0.5B-Instruct-q4f16_1-MLC", mb: 295 },
-      "webgpu-f32": { runtime: "webllm", repo: "mlc-ai/Qwen2.5-0.5B-Instruct-q4f32_1-MLC", mlcId: "Qwen2.5-0.5B-Instruct-q4f32_1-MLC", mb: 320 },
-    },
+    variants: mlc("Qwen2.5-0.5B-Instruct", 290, 945, { mb: 290, vramMb: 1060 }),
+    tutor: true,
   },
   {
     id: "smollm2-360m-mlc",
     name: "SmolLM2 360M Instruct",
     blurb: "Smallest and fastest. Answers are simpler and slip up more often.",
-    variants: {
-      webgpu: { runtime: "webllm", repo: "mlc-ai/SmolLM2-360M-Instruct-q4f16_1-MLC", mlcId: "SmolLM2-360M-Instruct-q4f16_1-MLC", mb: 210 },
-      "webgpu-f32": { runtime: "webllm", repo: "mlc-ai/SmolLM2-360M-Instruct-q4f32_1-MLC", mlcId: "SmolLM2-360M-Instruct-q4f32_1-MLC", mb: 230 },
-      wasm: SMOLLM_WASM,
-    },
+    variants: { ...mlc("SmolLM2-360M-Instruct", 207, 376, { mb: 207, vramMb: 580 }), wasm: SMOLLM_WASM },
+    tutor: true,
+  },
+  {
+    id: "llama3.2-1b-mlc",
+    name: "Llama 3.2 1B",
+    blurb: "Meta's small model. Clear, even writing. Built with Llama.",
+    variants: mlc("Llama-3.2-1B-Instruct", 705, 879, { mb: 705, vramMb: 1129 }),
+  },
+  {
+    id: "qwen3-1.7b-mlc",
+    name: "Qwen3 1.7B",
+    blurb: "A clear step up from the small models, for writing, study help and code.",
+    variants: mlc("Qwen3-1.7B", 984, 2037, { mb: 984, vramMb: 2635 }),
+    thinking: true,
+  },
+  {
+    id: "qwen3.5-2b-mlc",
+    name: "Qwen3.5 2B",
+    blurb: "Newest mid-size Qwen. Better at following detailed instructions.",
+    variants: mlc("Qwen3.5-2B", 1083, 2245, { mb: 1083, vramMb: 2592 }),
+    thinking: true,
+  },
+  {
+    id: "llama3.2-3b-mlc",
+    name: "Llama 3.2 3B",
+    blurb: "The most capable of the mid-size models. Best on a laptop with a real graphics chip.",
+    variants: mlc("Llama-3.2-3B-Instruct", 1817, 2264, { mb: 1817, vramMb: 2952 }),
+  },
+  {
+    id: "qwen3.5-4b-mlc",
+    name: "Qwen3.5 4B",
+    blurb: "Closest to a full assistant here. Needs a recent laptop or desktop graphics chip.",
+    variants: mlc("Qwen3.5-4B", 2391, 3868, { mb: 2391, vramMb: 4680 }),
+    thinking: true,
+  },
+  {
+    id: "phi-4-mini-mlc",
+    name: "Phi-4 mini",
+    blurb: "Microsoft's small model, strong at reasoning and maths. Large download.",
+    variants: mlc("Phi-4-mini-instruct", 2180, 3438, { mb: 2180, vramMb: 4221 }),
   },
 ];
 
@@ -126,8 +193,10 @@ function pickLineup(): "webllm" | "transformers" {
 export const LINEUP = pickLineup();
 /** Every model in both lineups, for the size check and for recognizing a saved choice. */
 export const ALL_MODELS = [...TRANSFORMERS_MODELS, ...WEBLLM_MODELS];
-/** The models this browser offers. */
-export const MODELS = LINEUP === "webllm" ? WEBLLM_MODELS : TRANSFORMERS_MODELS;
+/** The models the lesson tutor offers: small enough to be a helper beside a lesson. */
+export const MODELS = LINEUP === "webllm" ? WEBLLM_MODELS.filter((m) => m.tutor) : TRANSFORMERS_MODELS;
+/** The models the offline assistant offers: the tutor's, plus bigger ones for a general-purpose assistant. */
+export const ASSISTANT_MODELS = LINEUP === "webllm" ? WEBLLM_MODELS : TRANSFORMERS_MODELS;
 
 export const modelById = new Map(ALL_MODELS.map((m) => [m.id, m]));
 export const DEFAULT_MODEL = MODELS.find((m) => m.recommended)!.id;
@@ -136,6 +205,10 @@ export const WASM_MODEL = MODELS.find((m) => m.variants.wasm)!.id;
 
 export function modelsFor(device: Device): TutorModel[] {
   return MODELS.filter((m) => m.variants[device]);
+}
+
+export function assistantModelsFor(device: Device): TutorModel[] {
+  return ASSISTANT_MODELS.filter((m) => m.variants[device]);
 }
 
 export function variantOf(model: TutorModel, device: Device): ModelVariant | undefined {

@@ -21,6 +21,15 @@ export const LIMITS = {
 
 export const GENERATION = { maxNewTokens: 256, temperature: 0.4, topP: 0.9, repetitionPenalty: 1.15 } as const;
 
+/**
+ * Sampling for the offline assistant. Open-ended chat wants longer answers and more varied wording
+ * than a lesson helper, and a light repetition penalty, since code and lists repeat on purpose.
+ */
+export const CHAT_GENERATION = { maxNewTokens: 768, temperature: 0.6, topP: 0.9, repetitionPenalty: 1.05 } as const;
+
+/** "tutor" answers from lesson notes and is tidied up afterwards; "chat" is the open-ended assistant, left as the model wrote it. */
+export type Profile = "tutor" | "chat";
+
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
 /**
@@ -116,4 +125,35 @@ export function stripThink(text: string): string {
   const close = t.lastIndexOf("</think>");
   if (close >= 0) t = t.slice(close + "</think>".length);
   return t.replace(/^\s+/, "");
+}
+
+/** What the offline assistant remembers. The models have a 4,096-token window, and the answer needs room too. */
+export const CHAT_LIMITS = { turn: 3000, question: 3000, total: 9000, turns: 12 } as const;
+
+const CHAT_SYSTEM =
+  "You are a helpful, honest assistant running privately on the user's own device, with no internet access. Answer clearly and directly, in the language the user writes in. Use short paragraphs, lists or code blocks when they help. If a question needs current information or something you can't look up, say so instead of guessing, and don't invent facts, quotes, links or sources.";
+
+/** The assistant's system prompt. The date comes from the device's clock, since there's no other way to know it offline. */
+export function chatSystemPrompt(now = new Date()): string {
+  const day = now.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  return `${CHAT_SYSTEM} Today is ${day}.`;
+}
+
+/**
+ * Builds the assistant's message list: the system prompt, as much recent conversation as fits, and the
+ * new question. Older turns drop first, whole, so the model never sees half a message from a long way back.
+ */
+export function buildChatMessages(history: ChatMessage[], question: string, now = new Date()): ChatMessage[] {
+  const system: ChatMessage = { role: "system", content: chatSystemPrompt(now) };
+  const user: ChatMessage = { role: "user", content: clip(question, CHAT_LIMITS.question) };
+  const turns = history
+    .filter((m) => m.role !== "system" && m.content.trim())
+    .slice(-CHAT_LIMITS.turns)
+    .map((m) => ({ role: m.role, content: m.role === "assistant" ? stripThink(m.content) : m.content }))
+    .map((m) => (m.content.length > CHAT_LIMITS.turn ? { ...m, content: clip(m.content, CHAT_LIMITS.turn) } : m));
+  const size = (ms: ChatMessage[]) => ms.reduce((n, m) => n + m.content.length, 0);
+  while (turns.length && size([system, ...turns, user]) > CHAT_LIMITS.total) turns.shift();
+  // Chat templates expect user/assistant alternation starting with a user turn.
+  while (turns.length && turns[0].role !== "user") turns.shift();
+  return [system, ...turns, user];
 }

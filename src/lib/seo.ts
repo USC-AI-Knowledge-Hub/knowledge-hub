@@ -416,29 +416,54 @@ const STATIC: Record<string, () => PageMeta> = {
   }),
   "/offline": () => ({
     path: "/offline",
-    title: `Use the AI tutor without internet${suffix}`,
+    title: `Use AI without internet${suffix}`,
     description:
-      "Save the site and a small AI tutor model to your device, bookmark it, and keep learning on a flight, in a dead zone or when campus Wi-Fi fails.",
-    heading: "Use the tutor without internet",
+      "Save an AI model and this site to your device, bookmark it, and keep a private assistant and the lessons on a flight, in a dead zone or when campus Wi-Fi fails.",
+    heading: "Use AI without internet",
     type: "website",
     content: [
       {
         kind: "p",
-        text: "Save the site and a tutor model to this device. Then open the bookmark offline, and the lessons and the tutor still work. The model runs in your browser, so nothing you type leaves your device.",
+        text: "Save the site and an AI model to this device. Then open the bookmark offline and you still have a general-purpose assistant, the lessons and the lesson tutor. The model runs in your browser, so nothing you type leaves your device.",
       },
       { kind: "h2", text: "How to set it up" },
       {
         kind: "ol",
         items: [
           "Save the site to this device.",
-          "Download a tutor model.",
+          "Download an AI model.",
           "Ask the browser to protect the saved files from being cleared.",
           "Bookmark the page or install the site as an app.",
         ],
       },
     ],
-    links: [{ to: "/learn", label: "Learn" }],
+    links: [
+      { to: "/offline/assistant", label: "Offline assistant" },
+      { to: "/learn", label: "Learn" },
+    ],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Use offline", path: "/offline" }])],
+  }),
+  "/offline/assistant": () => ({
+    path: "/offline/assistant",
+    title: `Offline AI assistant that runs on your device${suffix}`,
+    description:
+      "A private, general-purpose AI assistant that runs in your browser. Download a model once, then chat with no internet. Choose from compact to large models.",
+    heading: "Offline assistant",
+    type: "website",
+    content: [
+      {
+        kind: "p",
+        text: "A general-purpose AI assistant that runs on your own device. After a one-time model download it works with no internet, and what you type never leaves your browser. Use it for writing, studying, coding or any question. Small models can be wrong, so check anything important.",
+      },
+    ],
+    links: [{ to: "/offline", label: "Use AI without internet" }],
+    jsonLd: [
+      breadcrumbs([
+        { name: "Home", path: "/" },
+        { name: "Use offline", path: "/offline" },
+        { name: "Offline assistant", path: "/offline/assistant" },
+      ]),
+    ],
   }),
   "/about": () => ({
     path: "/about",

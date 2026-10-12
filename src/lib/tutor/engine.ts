@@ -4,7 +4,7 @@
  * development and tests: `?tutor=mock` or localStorage["kh-tutor-mock"]="1")
  * fakes the download and streams answers built from the notes it was given.
  */
-import { GENERATION, stripFiller, stripThink, trimRepetition, type ChatMessage } from "./prompt";
+import { CHAT_GENERATION, GENERATION, stripFiller, stripThink, trimRepetition, type ChatMessage, type Profile } from "./prompt";
 import type { FromWorker, ToWorker } from "./protocol";
 import { ALL_MODELS, onnxFile, type Device, type TutorModel } from "./registry";
 
@@ -29,7 +29,8 @@ export interface GenerateResult {
 export interface Engine {
   readonly kind: "real" | "mock";
   load(model: TutorModel, device: Device, cb: LoadCallbacks): Promise<void>;
-  generate(messages: ChatMessage[], onText: (text: string) => void, maxNewTokens?: number): Promise<GenerateResult>;
+  /** `profile` "chat" is the offline assistant: its own sampling, and the answer isn't tidied up. */
+  generate(messages: ChatMessage[], onText: (text: string) => void, maxNewTokens?: number, profile?: Profile): Promise<GenerateResult>;
   stop(): void;
   /** Cancels a download or load and frees the model. */
   dispose(): void;
@@ -144,7 +145,7 @@ class WorkerEngine implements Engine {
   private worker: Worker | null = null;
   private nextId = 1;
   private pendingLoad: { resolve(): void; reject(e: Error): void; cb: LoadCallbacks } | null = null;
-  private pendingGen: { id: number; resolve(r: GenerateResult): void; reject(e: Error): void; onText(t: string): void; stopped: boolean } | null =
+  private pendingGen: { id: number; resolve(r: GenerateResult): void; reject(e: Error): void; onText(t: string): void; stopped: boolean; profile: Profile } | null =
     null;
 
   private send(m: ToWorker) {
@@ -168,17 +169,22 @@ class WorkerEngine implements Engine {
         break;
       case "text":
         if (this.pendingGen?.id === m.id) {
-          const { text, looping } = trimRepetition(stripThink(m.text));
-          this.pendingGen.onText(text);
-          // A repeated sentence means the model is looping: stop it rather than show the loop.
-          if (looping && !this.pendingGen.stopped) this.send({ type: "stop" });
+          // The assistant's text is shown as written: repeated lines are normal in code and lists.
+          if (this.pendingGen.profile === "chat") this.pendingGen.onText(stripThink(m.text));
+          else {
+            const { text, looping } = trimRepetition(stripThink(m.text));
+            this.pendingGen.onText(text);
+            // A repeated sentence means the model is looping: stop it rather than show the loop.
+            if (looping && !this.pendingGen.stopped) this.send({ type: "stop" });
+          }
         }
         break;
       case "done":
         if (this.pendingGen?.id === m.id) {
           const g = this.pendingGen;
           this.pendingGen = null;
-          g.resolve({ text: stripFiller(trimRepetition(stripThink(m.text)).text.trim()), tokens: m.tokens, ms: m.ms, stopped: g.stopped });
+          const text = g.profile === "chat" ? stripThink(m.text).trim() : stripFiller(trimRepetition(stripThink(m.text)).text.trim());
+          g.resolve({ text, tokens: m.tokens, ms: m.ms, stopped: g.stopped });
         }
         break;
       case "error": {
@@ -212,20 +218,21 @@ class WorkerEngine implements Engine {
     });
   }
 
-  generate(messages: ChatMessage[], onText: (text: string) => void, maxNewTokens: number = GENERATION.maxNewTokens): Promise<GenerateResult> {
+  generate(messages: ChatMessage[], onText: (text: string) => void, maxNewTokens?: number, profile: Profile = "tutor"): Promise<GenerateResult> {
     if (!this.worker) return Promise.reject(new Error("The model isn't loaded."));
     if (this.pendingGen) return Promise.reject(new Error("The tutor is still answering."));
     const id = this.nextId++;
+    const sampling = profile === "chat" ? CHAT_GENERATION : GENERATION;
     return new Promise((resolve, reject) => {
-      this.pendingGen = { id, resolve, reject, onText, stopped: false };
+      this.pendingGen = { id, resolve, reject, onText, stopped: false, profile };
       this.send({
         type: "generate",
         id,
         messages: shortPrompt() ? [...new Set([messages[0], messages[messages.length - 1]])].map((m) => ({ ...m, content: m.content.slice(0, 240) })) : messages,
-        maxNewTokens,
-        temperature: GENERATION.temperature,
-        topP: GENERATION.topP,
-        repetitionPenalty: GENERATION.repetitionPenalty,
+        maxNewTokens: maxNewTokens ?? sampling.maxNewTokens,
+        temperature: sampling.temperature,
+        topP: sampling.topP,
+        repetitionPenalty: sampling.repetitionPenalty,
       });
     });
   }
@@ -285,11 +292,16 @@ class MockEngine implements Engine {
     });
   }
 
-  generate(messages: ChatMessage[], onText: (text: string) => void): Promise<GenerateResult> {
+  generate(messages: ChatMessage[], onText: (text: string) => void, _maxNewTokens?: number, profile: Profile = "tutor"): Promise<GenerateResult> {
     const notes = notesOf(messages).replace(/\s+/g, " ").trim();
     const sentences = notes.split(/(?<=[.!?])\s+(?=[A-Z“"])/).filter(Boolean);
     const body = sentences.slice(0, 3).join(" ").trim();
-    const answer = body
+    // The assistant has no notes: the mock answers with a fixed shape that includes the question and how much it remembers.
+    const asked = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
+    const remembered = messages.filter((m) => m.role === "user").length - 1;
+    const answer = profile === "chat"
+      ? `Mock reply to: ${asked}\n\n- **Remembered earlier questions:** ${remembered}\n- This is a stand-in for the on-device model.`
+      : body
       ? `Here's the short version. ${body}\n\n- **In one line:** ${(sentences[0] ?? "").trim()}\n- Ask a follow-up if any part is unclear.`
       : "My notes don't cover that. Try the **Learn** page, or ask me about tokens, attention or how to prompt well.";
     const words = answer.split(/(?<=\s)/);
