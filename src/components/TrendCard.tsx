@@ -1,4 +1,4 @@
-import { toolById } from "../data/tools";
+import { useCatalog } from "../lib/catalogStore";
 import type { Trend, TrendKind } from "../data/types";
 import { ago, compact, duration, thumb } from "../lib/format";
 import { Icon } from "./Icon";
@@ -10,6 +10,7 @@ export const TREND_ICON: Record<TrendKind, string> = { launch: "rocket_launch", 
 /** A news, launch, research or talk video. No difficulty: trends aren't lessons. */
 export function TrendCard({ trend }: { trend: Trend }) {
   const play = usePlayer();
+  const { toolById } = useCatalog();
   const open = () => play({ ...trend, tools: trend.tools });
   const toolNames = trend.tools.map((id) => toolById.get(id)?.name).filter(Boolean);
   return (

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
+import { useCatalog } from "./catalogStore";
 import { SITE_NAME, canonicalUrl, headTags, pageMeta } from "./seo";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
@@ -19,8 +20,20 @@ function setMeta(attr: "name" | "property", key: string, content: string) {
  */
 export function useSeo() {
   const { pathname } = useLocation();
+  const { toolById } = useCatalog();
   useEffect(() => {
     const meta = pageMeta(pathname);
+    // A tool the daily run found has a page but isn't part of the site's reviewed content: it gets a title
+    // and stays out of search results.
+    const found = /^\/tools\/([^/]+)\/?$/.exec(pathname);
+    const listed = !meta && found ? toolById.get(found[1]) : undefined;
+    if (listed && !listed.reviewed) {
+      document.title = `${listed.name} (not reviewed yet) | ${SITE_NAME}`;
+      setMeta("name", "robots", "noindex, follow");
+      document.head.querySelector('link[rel="canonical"]')?.remove();
+      document.head.querySelectorAll('script[type="application/ld+json"]').forEach((s) => s.remove());
+      return;
+    }
     if (!meta) {
       document.title = `Page not found | ${SITE_NAME}`;
       setMeta("name", "robots", "noindex, follow");
@@ -46,5 +59,5 @@ export function useSeo() {
       script.textContent = JSON.stringify(meta.jsonLd.length === 1 ? meta.jsonLd[0] : meta.jsonLd);
       document.head.appendChild(script);
     }
-  }, [pathname]);
+  }, [pathname, toolById]);
 }

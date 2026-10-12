@@ -763,3 +763,18 @@
 .faq-chevron { flex: none; transition: transform var(--md-spring-fast); }
 .faq-item[open] .faq-chevron { transform: rotate(180deg); }
 .faq-item p { margin: 0 0 12px; }
+
+/* Tools the daily run found: marked wherever they appear, since nobody has tested them yet. */
+.not-reviewed {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px 2px 6px;
+  border-radius: var(--md-shape-full);
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+}
+.found-list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+/* A category created by the daily run can have any label length: keep its chip inside the screen. */
+.finder .chip { max-width: 100%; }
+.finder .chip > :not(.icon) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

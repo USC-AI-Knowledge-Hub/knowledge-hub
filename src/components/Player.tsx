@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
-import { toolById } from "../data/tools";
+import { useCatalog } from "../lib/catalogStore";
 import { topicById } from "../data/topics";
 import type { Video } from "../data/types";
 import { ago, compact, duration } from "../lib/format";
@@ -26,6 +26,7 @@ const PlayerContext = createContext<(v: Playable) => void>(() => {});
 export const usePlayer = () => useContext(PlayerContext);
 
 export function PlayerProvider({ children }: { children: ReactNode }) {
+  const { toolById } = useCatalog();
   const [video, setVideo] = useState<Playable | null>(null);
   const ref = useRef<HTMLDialogElement>(null);
 

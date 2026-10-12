@@ -9,8 +9,10 @@ import { COST_LABEL, UscBadge } from "../components/ToolProfile";
 import { ToolSheet } from "../components/ToolSheet";
 import { ToolMark } from "../components/ToolMark";
 import { clusterById, clusterOf, clusters, type ClusterId } from "../data/toolMap";
-import { TASK_ICON, TASK_LABEL, tools } from "../data/tools";
-import { DIFFICULTIES, DIFFICULTY_LABEL, type Difficulty, type Task } from "../data/types";
+import { tools } from "../data/tools";
+import { NotReviewed } from "../components/NotReviewed";
+import { useCatalog } from "../lib/catalogStore";
+import { DIFFICULTIES, DIFFICULTY_LABEL, type Difficulty } from "../data/types";
 import { useFeed } from "../lib/feed";
 import { searchTools, type ToolHit } from "../lib/siteSearch";
 import "../styles/map.css";
@@ -88,21 +90,32 @@ function Legend() {
 
 function HitButton({ hit, onOpen }: { hit: ToolHit; onOpen: (id: string) => void }) {
   const t = hit.tool;
+  const { categoryById } = useCatalog();
   const cat = clusterById.get(clusterOf[t.id]);
+  const label = cat?.label ?? categoryById.get(t.tasks[0])?.label;
+  // Tools the daily run found have no pop-up review: they open their own, shorter page.
+  const body = (
+    <>
+      <PixelMark tool={t} size={32} />
+      <span className="map-hit-body">
+        <span className="title-s">{t.name}</span>
+        <span className="body-s muted">{label}</span>
+        {!t.reviewed && <NotReviewed />}
+        {hit.why.length ? <span className="map-hit-why body-s">{hit.why.join(". ")}</span> : <span className="map-hit-why body-s">{t.bestFor}</span>}
+      </span>
+    </>
+  );
   return (
     <li>
-      <button type="button" className="map-hit state" onClick={() => onOpen(t.id)}>
-        <PixelMark tool={t} size={32} />
-        <span className="map-hit-body">
-          <span className="title-s">{t.name}</span>
-          <span className="body-s muted">{cat?.label}</span>
-          {hit.why.length ? (
-            <span className="map-hit-why body-s">{hit.why.join(". ")}</span>
-          ) : (
-            <span className="map-hit-why body-s">{t.bestFor}</span>
-          )}
-        </span>
-      </button>
+      {t.reviewed ? (
+        <button type="button" className="map-hit state" onClick={() => onOpen(t.id)}>
+          {body}
+        </button>
+      ) : (
+        <Link to={`/tools/${t.id}`} className="map-hit state">
+          {body}
+        </Link>
+      )}
     </li>
   );
 }
@@ -270,7 +283,7 @@ function MapView({
                 <p className="body-m muted">{c.blurb}</p>
                 <ol className="map-hits">
                   {clusterTools.map((t) => (
-                    <HitButton key={t.id} hit={{ tool: t, score: 0, why: [] }} onOpen={onOpen} />
+                    <HitButton key={t.id} hit={{ tool: { ...t, reviewed: true }, score: 0, why: [] }} onOpen={onOpen} />
                   ))}
                 </ol>
               </>
@@ -293,7 +306,9 @@ function MapView({
 
 function ListView({ onOpen, viewSwitch }: { onOpen: (id: string, e: MouseEvent) => void; viewSwitch: ReactNode }) {
   const [params, setParams] = useSearchParams();
-  const task = params.get("task") as Task | null;
+  const catalog = useCatalog();
+  const taskParam = params.get("task");
+  const task = taskParam && catalog.categoryById.has(taskParam) ? taskParam : null;
   const level = params.get("level") as Difficulty | null;
   const { feed } = useFeed();
 
@@ -307,12 +322,23 @@ function ListView({ onOpen, viewSwitch }: { onOpen: (id: string, e: MouseEvent) 
     setParams(next, { replace: true, preventScrollReset: true });
   };
 
-  const list = tools.filter((t) => (!task || t.tasks.includes(task)) && (!level || t.difficulty === level));
+  // Choosing a sub-category keeps its broad category on screen, so you can step back out.
+  const active = task ? catalog.categoryById.get(task) : undefined;
+  const root = active?.parent ? catalog.categoryById.get(active.parent) : active;
+  const subs = root ? catalog.childrenOf(root.id) : [];
+  // Difficulty is only known for reviewed tools, so filtering by it leaves the others out.
+  const list = catalog.tools.filter((t) => (!task || catalog.inCategory(t, task)) && (!level || (t.reviewed && t.difficulty === level)));
   const hrefFor = (id: string) => {
     const next = new URLSearchParams(params);
     next.set("tool", id);
     return `?${next}`;
   };
+  const chip = (id: string, label: string, icon: string, selected: boolean, onPick: () => void) => (
+    <button key={id} type="button" className="chip state" aria-pressed={selected} onClick={onPick}>
+      <Icon name={selected ? "check" : icon} />
+      {label}
+    </button>
+  );
 
   return (
     <>
@@ -322,13 +348,14 @@ function ListView({ onOpen, viewSwitch }: { onOpen: (id: string, e: MouseEvent) 
           What are you trying to do?
         </h2>
         <div className="chip-row">
-          {(Object.keys(TASK_LABEL) as Task[]).map((k) => (
-            <button key={k} type="button" className="chip state" aria-pressed={task === k} onClick={() => set("task", task === k ? null : k)}>
-              <Icon name={task === k ? "check" : TASK_ICON[k]} />
-              {TASK_LABEL[k]}
-            </button>
-          ))}
+          {catalog.roots.map((c) => chip(c.id, c.label, c.icon, root?.id === c.id, () => set("task", root?.id === c.id && task === c.id ? null : c.id)))}
         </div>
+        {subs.length > 0 && root && (
+          <div className="chip-row" aria-label={`Kinds of ${root.label.toLowerCase()}`}>
+            {chip(root.id, `All ${root.label.toLowerCase()}`, root.icon, task === root.id, () => set("task", root.id))}
+            {subs.map((c) => chip(c.id, c.label, c.icon, task === c.id, () => set("task", task === c.id ? root.id : c.id)))}
+          </div>
+        )}
         <div className="chip-row">
           <span className="label-l muted finder-sub">Day-one difficulty</span>
           {DIFFICULTIES.map((d) => (
@@ -342,13 +369,21 @@ function ListView({ onOpen, viewSwitch }: { onOpen: (id: string, e: MouseEvent) 
 
       <p className="body-m muted result-count" aria-live="polite">
         {list.length} {list.length === 1 ? "tool" : "tools"}
-        {task ? ` for “${TASK_LABEL[task].toLowerCase()}”` : ""}
+        {active ? ` for “${active.label.toLowerCase()}”` : ""}
       </p>
+      {active && <p className="body-m muted measure">{active.definition}</p>}
 
       <div className="grid cols-auto">
         {list.map((t) => (
-          // A real link, so it can open in a new tab; a plain click opens the pop-up instead.
-          <Link key={t.id} to={hrefFor(t.id)} className="tool-card card state" onClick={(e) => onOpen(t.id, e)} preventScrollReset>
+          // A real link, so it can open in a new tab. For a reviewed tool a plain click opens the pop-up instead;
+          // a tool the daily run found goes to its own page.
+          <Link
+            key={t.id}
+            to={t.reviewed ? hrefFor(t.id) : `/tools/${t.id}`}
+            className="tool-card card state"
+            onClick={(e) => t.reviewed && onOpen(t.id, e)}
+            preventScrollReset
+          >
             <div className="tool-card-top">
               <ToolMark tool={t} size={56} />
               <div>
@@ -358,9 +393,15 @@ function ListView({ onOpen, viewSwitch }: { onOpen: (id: string, e: MouseEvent) 
             </div>
             <p className="body-m">{t.bestFor}</p>
             <div className="tool-card-meta">
-              <Level level={t.difficulty} />
-              <span className="label-m muted">{COST_LABEL[t.cost]}</span>
-              <UscBadge usc={t.usc} />
+              {t.reviewed ? (
+                <>
+                  <Level level={t.difficulty} />
+                  <span className="label-m muted">{COST_LABEL[t.cost]}</span>
+                  <UscBadge usc={t.usc} />
+                </>
+              ) : (
+                <NotReviewed />
+              )}
               {counts.get(t.id) ? (
                 <span className="label-m muted tool-card-videos">
                   <Icon name="smart_display" size={16} />

@@ -1,10 +1,11 @@
-import { toolById } from "../data/tools";
+import { useCatalog } from "../lib/catalogStore";
 import { ago, compact, duration, thumb } from "../lib/format";
 import { Level } from "./Level";
 import { usePlayer, type Playable } from "./Player";
 
 export function VideoCard({ video, isNew }: { video: Playable; isNew?: boolean }) {
   const play = usePlayer();
+  const { toolById } = useCatalog();
   const toolNames = (video.tools ?? []).map((id) => toolById.get(id)?.name).filter(Boolean);
   return (
     <article className="vcard">

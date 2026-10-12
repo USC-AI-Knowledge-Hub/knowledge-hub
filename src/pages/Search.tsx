@@ -7,7 +7,7 @@ import { ToolMark } from "../components/ToolMark";
 import { VideoCard } from "../components/VideoCard";
 import { courses } from "../data/courses";
 import { modules } from "../data/learn";
-import { tools } from "../data/tools";
+import { useCatalog } from "../lib/catalogStore";
 import { live, useCourseStatus } from "../lib/courses";
 import { useFeed } from "../lib/feed";
 
@@ -23,6 +23,7 @@ export function Search() {
   const [draft, setDraft] = useState(q);
   const input = useRef<HTMLInputElement>(null);
   const { feed } = useFeed();
+  const catalog = useCatalog();
   const status = useCourseStatus();
 
   useEffect(() => setDraft(q), [q]);
@@ -31,7 +32,7 @@ export function Search() {
   }, [q]);
 
   const words = q.toLowerCase().split(/\s+/).filter(Boolean);
-  const toolHits = words.length ? tools.filter((t) => has(`${t.name} ${t.maker} ${t.bestFor} ${t.tasks.join(" ")}`, words)) : [];
+  const toolHits = words.length ? catalog.tools.filter((t) => has(`${t.name} ${t.maker} ${t.bestFor} ${catalog.categoriesOf(t).map((c) => c.label).join(" ")}`, words)) : [];
   const moduleHits = words.length ? modules.filter((m) => has(`${m.title} ${m.summary} ${m.what} ${m.keyIdeas.join(" ")}`, words)) : [];
   const courseHits = words.length
     ? courses

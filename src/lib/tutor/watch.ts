@@ -8,13 +8,14 @@ import { talkPlayable, TALK_LABEL } from "../../components/TalkCard";
 import { coursesFor } from "../../data/courses";
 import { moduleById } from "../../data/learn";
 import { talksFor } from "../../data/talks";
-import type { CourseStatus } from "../../data/types";
+import type { CourseStatus, Video } from "../../data/types";
 import { hoursLabel, live, liveTalk } from "../courses";
 import { minutesLabel } from "../format";
+import { searchTools, tokenize } from "../siteSearch";
 
 export interface WatchItem {
   key: string;
-  kind: "course" | "pick" | "talk";
+  kind: "course" | "pick" | "talk" | "video";
   title: string;
   /** Video ID for the thumbnail, if there is one. */
   thumb?: string;
@@ -23,7 +24,51 @@ export interface WatchItem {
   playable: Playable;
 }
 
-export function watchFor(modules: string[], status: CourseStatus | null, limit = 6): WatchItem[] {
+const stem = (w: string) => (w.length <= 3 ? w : w.replace(/(ings?|ed|es|s)$/, "").replace(/e$/, ""));
+
+/**
+ * Videos from the daily library that fit what was asked, when the lessons don't cover it ("how do I
+ * generate a video?" has no lesson, but the library has tutorials for the tools that do it). A video fits when
+ * it's tagged with a tool the question points to, or when its title says what was asked. `toolId` is the
+ * best-matching tool, for a "more videos" link.
+ */
+export function libraryFor(ask: string, videos: Video[], limit = 3): { items: WatchItem[]; toolId?: string; named: boolean } {
+  const hits = searchTools(ask).slice(0, 4);
+  const tools = new Map(hits.filter((h) => h.score >= 14).map((h, i) => [h.tool.id, i === 0 ? 14 : 10] as const));
+  const terms = tokenize(ask).map(stem).filter((t) => t.length > 2);
+  const scored = videos
+    .map((v) => {
+      const text = `${v.title} ${v.summary ?? ""}`.toLowerCase();
+      const words = terms.filter((t) => text.includes(t)).length;
+      const tool = Math.max(0, ...v.tools.map((t) => tools.get(t) ?? 0));
+      return { v, score: tool + words * 4 };
+    })
+    .filter((x) => x.score >= 10)
+    .sort((a, b) => b.score - a.score || b.v.score - a.v.score)
+    .slice(0, limit);
+  const items = scored.map(({ v }) => ({
+    key: `l:${v.id}`,
+    kind: "video" as const,
+    title: v.title,
+    thumb: v.id,
+    meta: `Video library · ${v.duration ? minutesLabel(Math.max(1, Math.round(v.duration / 60))) + " · " : ""}${v.channel}`,
+    playable: v,
+  }));
+  return { items, toolId: hits[0] && hits[0].score >= 14 ? hits[0].tool.id : undefined, named: (hits[0]?.score ?? 0) >= 40 };
+}
+
+/** Lessons' videos plus, when `ask` is given, library videos that fit the question. A tool named in the question leads. */
+export function watchFor(modules: string[], status: CourseStatus | null, limit = 6, library?: { ask: string; videos: Video[] }): WatchItem[] {
+  const lessons = watchLessons(modules, status, limit);
+  if (!library) return lessons;
+  const lib = libraryFor(library.ask, library.videos).items;
+  if (!lib.length) return lessons;
+  const named = libraryFor(library.ask, library.videos).named;
+  const room = Math.max(limit - lib.length, 0);
+  return (named ? [...lib, ...lessons.slice(0, room)] : [...lessons.slice(0, room), ...lib]).slice(0, limit);
+}
+
+function watchLessons(modules: string[], status: CourseStatus | null, limit: number): WatchItem[] {
   const out: WatchItem[] = [];
   const seen = new Set<string>();
   const add = (x: WatchItem) => {

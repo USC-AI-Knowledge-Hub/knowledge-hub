@@ -125,7 +125,7 @@ export const SEED_CATEGORIES: Category[] = [
   }),
   seed({
     id: "design3d",
-    label: "3D, design & game development",
+    label: "3D & game design",
     icon: "view_in_ar",
     definition: "3D models, CAD and engineering design, and building games.",
     keywords: ["3d", "3d model", "cad", "game engine", "game development", "game", "rendering", "architecture design", "product design", "engineering design", "animation pipeline", "digital twin"],

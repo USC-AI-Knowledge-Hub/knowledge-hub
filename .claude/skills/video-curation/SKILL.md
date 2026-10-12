@@ -35,10 +35,34 @@ description: How the daily YouTube pipeline finds, filters, labels and ranks vid
 7. **Merge** (`merge.ts`): known videos keep `firstSeen` and Claude labels;
    entries age out after 120 days; each tool × difficulty cell keeps its best 15.
 
+## Tool discovery (`scripts/discovery`, `npm run discover`)
+
+The daily workflow runs discovery before the video search. It reads the trusted feeds in `sources.ts`
+(vendor blogs weigh 3, press 2, community 1; a product is listed at score 3 across distinct sources, and evidence
+accumulates for 21 days), finds product names in the posts (`extract.ts`; a language model also reads posts the patterns
+miss when `ANTHROPIC_API_KEY` is set), checks the product's own site is real (`site.ts`: public https only, no
+credentials, size and time limits), and writes:
+
+- `public/data/discovered.json`: listed tools, the waiting list, feed health. Tools with no mention for 150 days and
+  fewer than 3 videos expire; editor-seeded tools (`seeds.ts`) never do; at most 150 are listed.
+- `public/data/taxonomy.json`: categories the run created. The seed categories live in `src/data/categories.ts`.
+
+Categories are a two-level tree. `src/lib/taxonomy.ts#classify` files a tool in the most specific category its text
+fits. `scripts/discovery/grow.ts` creates a category only when at least 3 unfiled tools share a phrase nothing else
+describes (a narrower phrase becomes a sub-category of the best-fitting broad category; one new category per run, at
+most 30 automatic ones; one with fewer than 2 tools for 90 days is retired). Block a name in `overrides.json`.
+
+Discovered tools are tagged and searched like reviewed ones (`scripts/pipeline/catalog.ts`; at most
+`SETTINGS.maxDiscoveredSearches` of them per day, one query each). The site labels them "Not reviewed yet" and makes no
+USC, cost or difficulty claim for them; their pages are `noindex`. To make one a reviewed tool, add a full entry to
+`tools.ts` with the same id (a reviewed tool always wins). A feed that fails 7 days in a row is tried weekly, and a
+failed run changes nothing, so a dead feed or no key never stops the deploy. New feed addresses go in `sources.ts`;
+check them with `npm run discover -- --dry-run`.
+
 ## Quota
 
 search.list is 100 units; the default daily quota is 10,000. Today:
-47 tool queries + 7 topic queries = 5,400 units, plus a few units for
+47 tool queries + 7 topic queries (+ up to 12 discovered-tool queries) = 5,400 to 6,600 units, plus a few units for
 videos.list and about 100 for the course check (`npm run courses`).
 `SETTINGS.maxSearches` (90) caps searches per run; above it, `rotation.ts`
 cycles through the queries day by day. Give a new tool one query, not three.

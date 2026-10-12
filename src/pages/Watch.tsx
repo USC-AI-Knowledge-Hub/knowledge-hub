@@ -8,7 +8,7 @@ import { ToolMark } from "../components/ToolMark";
 import { TREND_ICON, TREND_LABEL, TrendCard } from "../components/TrendCard";
 import { VideoCard } from "../components/VideoCard";
 import { TALK_KINDS, talks } from "../data/talks";
-import { toolById, tools } from "../data/tools";
+import { useCatalog } from "../lib/catalogStore";
 import {
   DIFFICULTIES,
   DIFFICULTY_BLURB,
@@ -169,6 +169,7 @@ function Talks() {
 
 export function Watch() {
   const { feed, error, today } = useFeed();
+  const { toolById, tools } = useCatalog();
   const [params, setParams] = useSearchParams();
   const tabParam = params.get("tab");
   const tab: Tab = tabParam === "trends" || tabParam === "talks" ? tabParam : "lessons";

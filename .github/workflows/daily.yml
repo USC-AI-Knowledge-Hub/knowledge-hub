@@ -51,6 +51,15 @@ jobs:
             echo "run=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Discover new tools
+        # Reads the trusted feeds, lists new tools and files them in the category tree. Runs before the
+        # video search so a tool found today is searched today. It never blocks the deploy.
+        if: steps.refresh.outputs.run == 'true'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npm run discover
+
       - name: Refresh video library
         if: steps.refresh.outputs.run == 'true'
         env:
@@ -70,7 +79,7 @@ jobs:
         run: |
           git config user.name "knowledge-hub-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/videos.json public/data/courses.json scripts/pipeline/channels.lock.json
+          git add public/data/videos.json public/data/courses.json public/data/discovered.json public/data/taxonomy.json scripts/pipeline/channels.lock.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
