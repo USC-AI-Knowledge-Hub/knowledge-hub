@@ -3,11 +3,15 @@ import { topics } from "../../src/data/topics";
 
 const compile = (patterns: string[] = []) => patterns.map((p) => new RegExp(p, "i"));
 
-const toolMatchers = tools.map((t) => ({
-  id: t.id,
-  match: compile(t.match),
-  exclude: compile(t.exclude),
-}));
+const matchersFor = (list: { id: string; match: string[]; exclude?: string[] }[]) =>
+  list.map((t) => ({ id: t.id, match: compile(t.match), exclude: compile(t.exclude) }));
+
+let toolMatchers = matchersFor(tools);
+
+/** Tag against this list (the reviewed tools plus discovered ones) instead of the reviewed tools alone. */
+export function useTools(list: { id: string; match: string[]; exclude?: string[] }[]) {
+  toolMatchers = matchersFor(list);
+}
 
 const topicMatchers = topics.map((t) => ({ id: t.id, match: compile(t.match) }));
 

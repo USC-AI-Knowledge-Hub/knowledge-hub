@@ -33,7 +33,10 @@ export function buildMatch(name: string, maker = ""): string[] {
 }
 
 /** The one YouTube search a tool gets (the pipeline's rule: one query per tool, not three). */
-export const queryFor = (name: string, kind: "tool" | "model") => (kind === "model" ? `${name} AI model how to use` : `${name} AI tutorial`);
+export const queryFor = (name: string, kind: "tool" | "model") => {
+  const named = /\bai\b/i.test(name) ? name : `${name} AI`;
+  return kind === "model" ? `${named} model how to use` : `${named} tutorial`;
+};
 
 /** A post's own first sentence about the product, trimmed. Marketing copy, so it's kept short. */
 export function firstSentences(text: string, max = 200): string {

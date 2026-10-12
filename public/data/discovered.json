@@ -1,0 +1,536 @@
+{
+  "updatedAt": "2026-10-12",
+  "sources": [
+    {
+      "id": "hf-blog",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "openai",
+      "url": "https://openai.com/news/rss.xml",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "google-ai",
+      "url": "https://blog.google/technology/ai/rss/",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "deepmind",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "microsoft-ai",
+      "url": "https://blogs.microsoft.com/ai/feed/",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "nvidia",
+      "url": "https://blogs.nvidia.com/feed/",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "techcrunch-ai",
+      "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "verge-ai",
+      "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "venturebeat-ai",
+      "url": "https://venturebeat.com/category/ai/feed/",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "simonw",
+      "url": "https://simonwillison.net/atom/everything/",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "one-useful-thing",
+      "url": "https://www.oneusefulthing.org/feed",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "producthunt-ai",
+      "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "hn-show",
+      "url": "https://hnrss.org/show?q=AI&points=60",
+      "ok": false,
+      "lastOk": null,
+      "failures": 1,
+      "items": 0,
+      "error": "fetch failed"
+    }
+  ],
+  "tools": [
+    {
+      "id": "autodesk-ai",
+      "name": "Autodesk AI",
+      "maker": "Autodesk",
+      "url": "https://www.autodesk.com/",
+      "monogram": "Au",
+      "bestFor": "Autodesk's AI features across its design, 3D and engineering software for CAD and product design.",
+      "tasks": [
+        "cad-design"
+      ],
+      "queries": [
+        "Autodesk AI tutorial"
+      ],
+      "match": [
+        "\\bAutodesk[\\s-]*AI\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "google-flow",
+      "name": "Google Flow",
+      "maker": "Google",
+      "url": "https://labs.google/flow",
+      "monogram": "Go",
+      "bestFor": "Google's AI filmmaking tool for generating and editing video scenes, built on its Veo video model.",
+      "tasks": [
+        "text-to-video",
+        "video-editing"
+      ],
+      "queries": [
+        "Google Flow AI tutorial"
+      ],
+      "match": [
+        "\\bGoogle[\\s-]*Flow\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "hailuo",
+      "name": "Hailuo",
+      "maker": "MiniMax",
+      "url": "https://hailuoai.video/",
+      "monogram": "Ha",
+      "bestFor": "MiniMax's AI video generator for text-to-video and image-to-video clips.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Hailuo AI tutorial"
+      ],
+      "match": [
+        "\\bHailuo\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "harvey",
+      "name": "Harvey",
+      "maker": "Harvey",
+      "url": "https://www.harvey.ai/",
+      "monogram": "Ha",
+      "bestFor": "An AI assistant for legal work such as contract review and legal research.",
+      "tasks": [],
+      "queries": [
+        "Harvey AI tutorial"
+      ],
+      "match": [
+        "\\bHarvey\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "higgsfield",
+      "name": "Higgsfield",
+      "maker": "Higgsfield",
+      "url": "https://higgsfield.ai/",
+      "monogram": "Hi",
+      "bestFor": "An AI video and image creation platform with camera-motion controls for short cinematic clips.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Higgsfield AI tutorial"
+      ],
+      "match": [
+        "\\bHiggsfield\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "kling",
+      "name": "Kling",
+      "maker": "Kuaishou",
+      "url": "https://klingai.com/",
+      "monogram": "Kl",
+      "bestFor": "An AI video generator that makes clips from text prompts or still images.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Kling AI tutorial"
+      ],
+      "match": [
+        "\\bKling\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "luma-dream-machine",
+      "name": "Luma Dream Machine",
+      "maker": "Luma AI",
+      "url": "https://lumalabs.ai/dream-machine",
+      "monogram": "Lu",
+      "bestFor": "An AI video generator from Luma AI that turns text and images into video.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Luma Dream Machine AI tutorial"
+      ],
+      "match": [
+        "\\bLuma[\\s-]*Dream[\\s-]*Machine\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "meshy",
+      "name": "Meshy",
+      "maker": "Meshy",
+      "url": "https://www.meshy.ai/",
+      "monogram": "Me",
+      "bestFor": "Turns text prompts and images into 3D models and 3D assets.",
+      "tasks": [
+        "3d-generation"
+      ],
+      "queries": [
+        "Meshy AI tutorial"
+      ],
+      "match": [
+        "\\bMeshy\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "openevidence",
+      "name": "OpenEvidence",
+      "maker": "OpenEvidence",
+      "url": "https://www.openevidence.com/",
+      "monogram": "Op",
+      "bestFor": "An AI search tool that answers medical questions with citations from the clinical literature.",
+      "tasks": [],
+      "queries": [
+        "OpenEvidence AI tutorial"
+      ],
+      "match": [
+        "\\bOpenEvidence\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "pika",
+      "name": "Pika",
+      "maker": "Pika",
+      "url": "https://pika.art/",
+      "monogram": "Pi",
+      "bestFor": "An AI video generator for turning text and images into short, stylised clips.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Pika AI tutorial"
+      ],
+      "match": [
+        "\\bPika\\s+(?:ai|app|video|model|studio|tutorial)\\b",
+        "\\bPika\\s+Pika\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "seedance",
+      "name": "Seedance",
+      "maker": "ByteDance",
+      "url": "https://seed.bytedance.com/",
+      "monogram": "Se",
+      "bestFor": "ByteDance's video generation model for short clips from text or images.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Seedance AI model how to use"
+      ],
+      "match": [
+        "\\bSeedance\\b"
+      ],
+      "exclude": [],
+      "kind": "model",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "sora",
+      "name": "Sora",
+      "maker": "OpenAI",
+      "url": "https://sora.com/",
+      "monogram": "So",
+      "bestFor": "OpenAI's text-to-video generation model and app.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Sora AI tutorial"
+      ],
+      "match": [
+        "\\bSora\\s+(?:ai|app|video|model|studio|tutorial)\\b",
+        "\\bOpenAI\\s+Sora\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "suno",
+      "name": "Suno",
+      "maker": "Suno",
+      "url": "https://suno.com/",
+      "monogram": "Su",
+      "bestFor": "An AI music generator that makes songs with vocals from a text prompt.",
+      "tasks": [
+        "music"
+      ],
+      "queries": [
+        "Suno AI tutorial"
+      ],
+      "match": [
+        "\\bSuno\\s+(?:ai|app|video|model|studio|tutorial)\\b",
+        "\\bSuno\\s+Suno\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "tripo",
+      "name": "Tripo",
+      "maker": "VAST",
+      "url": "https://www.tripo3d.ai/",
+      "monogram": "Tr",
+      "bestFor": "Generates 3D models from text or images for games and design.",
+      "tasks": [
+        "3d-generation"
+      ],
+      "queries": [
+        "Tripo AI tutorial"
+      ],
+      "match": [
+        "\\bTripo\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "udio",
+      "name": "Udio",
+      "maker": "Udio",
+      "url": "https://www.udio.com/",
+      "monogram": "Ud",
+      "bestFor": "An AI music generator that composes songs from a text prompt.",
+      "tasks": [
+        "music"
+      ],
+      "queries": [
+        "Udio AI tutorial"
+      ],
+      "match": [
+        "\\bUdio\\s+(?:ai|app|video|model|studio|tutorial)\\b",
+        "\\bUdio\\s+Udio\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "unity-ai",
+      "name": "Unity AI",
+      "maker": "Unity",
+      "url": "https://unity.com/ai",
+      "monogram": "Un",
+      "bestFor": "Unity's AI assistant and generators built into the Unity game engine for game development.",
+      "tasks": [
+        "game-dev"
+      ],
+      "queries": [
+        "Unity AI tutorial"
+      ],
+      "match": [
+        "\\bUnity[\\s-]*AI\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    },
+    {
+      "id": "veo",
+      "name": "Veo",
+      "maker": "Google DeepMind",
+      "url": "https://deepmind.google/models/veo/",
+      "monogram": "Ve",
+      "bestFor": "Google DeepMind's text-to-video generation model.",
+      "tasks": [
+        "text-to-video"
+      ],
+      "queries": [
+        "Veo AI model how to use"
+      ],
+      "match": [
+        "\\bVeo\\s+(?:ai|app|video|model|studio|tutorial)\\b",
+        "\\bGoogle\\s+Veo\\b"
+      ],
+      "exclude": [],
+      "kind": "model",
+      "urlKind": "site",
+      "origin": "editor",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": []
+    }
+  ],
+  "pending": [],
+  "retired": []
+}

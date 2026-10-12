@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
-import { tools } from "../../src/data/tools";
+import type { PipelineTool } from "./catalog";
 import { topics } from "../../src/data/topics";
 import type { Difficulty } from "../../src/data/types";
 import type { Candidate } from "./quality";
@@ -16,16 +16,15 @@ import type { Candidate } from "./quality";
 
 const MODEL = process.env.CLAUDE_MODEL || "claude-opus-5";
 
-const TOOL_IDS = tools.map((t) => t.id) as [string, ...string[]];
 const TOPIC_IDS = topics.map((t) => t.id) as [string, ...string[]];
 
-const Result = z.object({
+const resultFor = (toolIds: [string, ...string[]]) => z.object({
   items: z.array(
     z.object({
       id: z.string(),
       educational: z.boolean(),
       difficulty: z.enum(["beginner", "intermediate", "advanced"]),
-      tools: z.array(z.enum(TOOL_IDS)),
+      tools: z.array(z.enum(toolIds)),
       topics: z.array(z.enum(TOPIC_IDS)),
       summary: z.string(),
     }),
@@ -40,7 +39,7 @@ export interface ClaudeLabel {
   summary: string;
 }
 
-const SYSTEM = `You label YouTube videos for the USC AI Knowledge Hub, a site where USC students and faculty learn to use AI tools. Your labels decide which videos appear on the site and at what level.
+const systemFor = (tools: PipelineTool[]) => `You label YouTube videos for the USC AI Knowledge Hub, a site where USC students and faculty learn to use AI tools. Your labels decide which videos appear on the site and at what level.
 
 For each video decide:
 - educational: true only if a viewer would come away able to do or understand something new about AI tools. News roundups with substance count. Pure hype, reaction videos, get-rich-quick schemes, giveaways and trailers with no teaching do not.
@@ -59,8 +58,10 @@ Return one item per input video, using the input id.`;
 
 export async function classifyWithClaude(
   batch: (Candidate & { heuristicTools: string[] })[],
+  tools: PipelineTool[],
 ): Promise<Map<string, ClaudeLabel>> {
   const client = new Anthropic();
+  const Result = resultFor(tools.map((t) => t.id) as [string, ...string[]]);
   const input = batch.map((v) => ({
     id: v.id,
     title: v.title,
@@ -76,7 +77,7 @@ export async function classifyWithClaude(
     betas: ["server-side-fallback-2026-07-01"],
     fallbacks: "default",
     output_config: { effort: "low", format: betaZodOutputFormat(Result) },
-    system: SYSTEM,
+    system: systemFor(tools),
     messages: [{ role: "user", content: JSON.stringify(input, null, 1) }],
   });
 
