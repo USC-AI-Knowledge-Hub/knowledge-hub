@@ -86,7 +86,8 @@ const TRANSFORMERS_MODELS: TutorModel[] = [
  * 35–40% smaller. Sizes include WebLLM's few-MB model library, fetched from GitHub.
  *
  * Sizes are checked against Hugging Face by `npm run model-sizes`; `vramMb` is checked against
- * the list WebLLM ships (src/lib/tutor/__tests__/tutor.test.ts).
+ * the list WebLLM ships (src/lib/tutor/__tests__/models.test.ts). The 32-bit build downloads the same
+ * weights as the 16-bit one, so both have the same size; only the memory it needs differs.
  */
 const mlc = (name: string, mb: number, vramMb: number, f32?: { mb: number; vramMb: number }): Partial<Record<Device, ModelVariant>> => ({
   webgpu: { runtime: "webllm", repo: `mlc-ai/${name}-q4f16_1-MLC`, mlcId: `${name}-q4f16_1-MLC`, mb, vramMb },
@@ -98,7 +99,7 @@ const WEBLLM_MODELS: TutorModel[] = [
     id: "qwen3-0.6b-mlc",
     name: "Qwen3 0.6B",
     blurb: "The best explainer here, for its size.",
-    variants: mlc("Qwen3-0.6B", 355, 1403, { mb: 390, vramMb: 1925 }),
+    variants: mlc("Qwen3-0.6B", 352, 1403, { mb: 352, vramMb: 1925 }),
     thinking: true,
     recommended: true,
     tutor: true,
@@ -107,7 +108,7 @@ const WEBLLM_MODELS: TutorModel[] = [
     id: "qwen3.5-0.8b-mlc",
     name: "Qwen3.5 0.8B",
     blurb: "Newer than Qwen3, a little bigger. Should answer better; try it against Qwen3 0.6B.",
-    variants: mlc("Qwen3.5-0.8B", 470, 1629, { mb: 520, vramMb: 1894 }),
+    variants: mlc("Qwen3.5-0.8B", 447, 1629, { mb: 447, vramMb: 1894 }),
     thinking: true,
     tutor: true,
   },
@@ -115,61 +116,61 @@ const WEBLLM_MODELS: TutorModel[] = [
     id: "gemma3-1b-mlc",
     name: "Gemma 3 1B",
     blurb: "Google's small model. Fluent and light on memory. Needs a graphics chip with 16-bit math.",
-    variants: mlc("gemma3-1b-it", 590, 711),
+    variants: mlc("gemma3-1b-it", 602, 711),
     tutor: true,
   },
   {
     id: "qwen2.5-0.5b-mlc",
     name: "Qwen2.5 0.5B Instruct",
     blurb: "Smaller download, slightly simpler answers.",
-    variants: mlc("Qwen2.5-0.5B-Instruct", 295, 945, { mb: 320, vramMb: 1060 }),
+    variants: mlc("Qwen2.5-0.5B-Instruct", 290, 945, { mb: 290, vramMb: 1060 }),
     tutor: true,
   },
   {
     id: "smollm2-360m-mlc",
     name: "SmolLM2 360M Instruct",
     blurb: "Smallest and fastest. Answers are simpler and slip up more often.",
-    variants: { ...mlc("SmolLM2-360M-Instruct", 210, 376, { mb: 230, vramMb: 580 }), wasm: SMOLLM_WASM },
+    variants: { ...mlc("SmolLM2-360M-Instruct", 207, 376, { mb: 207, vramMb: 580 }), wasm: SMOLLM_WASM },
     tutor: true,
   },
   {
     id: "llama3.2-1b-mlc",
     name: "Llama 3.2 1B",
     blurb: "Meta's small model. Clear, even writing. Built with Llama.",
-    variants: mlc("Llama-3.2-1B-Instruct", 705, 879, { mb: 770, vramMb: 1129 }),
+    variants: mlc("Llama-3.2-1B-Instruct", 705, 879, { mb: 705, vramMb: 1129 }),
   },
   {
     id: "qwen3-1.7b-mlc",
     name: "Qwen3 1.7B",
     blurb: "A clear step up from the small models, for writing, study help and code.",
-    variants: mlc("Qwen3-1.7B", 980, 2037, { mb: 1080, vramMb: 2635 }),
+    variants: mlc("Qwen3-1.7B", 984, 2037, { mb: 984, vramMb: 2635 }),
     thinking: true,
   },
   {
     id: "qwen3.5-2b-mlc",
     name: "Qwen3.5 2B",
     blurb: "Newest mid-size Qwen. Better at following detailed instructions.",
-    variants: mlc("Qwen3.5-2B", 1100, 2245, { mb: 1200, vramMb: 2592 }),
+    variants: mlc("Qwen3.5-2B", 1083, 2245, { mb: 1083, vramMb: 2592 }),
     thinking: true,
   },
   {
     id: "llama3.2-3b-mlc",
     name: "Llama 3.2 3B",
     blurb: "The most capable of the mid-size models. Best on a laptop with a real graphics chip.",
-    variants: mlc("Llama-3.2-3B-Instruct", 1810, 2264, { mb: 1980, vramMb: 2952 }),
+    variants: mlc("Llama-3.2-3B-Instruct", 1817, 2264, { mb: 1817, vramMb: 2952 }),
   },
   {
     id: "qwen3.5-4b-mlc",
     name: "Qwen3.5 4B",
     blurb: "Closest to a full assistant here. Needs a recent laptop or desktop graphics chip.",
-    variants: mlc("Qwen3.5-4B", 2260, 3868, { mb: 2470, vramMb: 4680 }),
+    variants: mlc("Qwen3.5-4B", 2391, 3868, { mb: 2391, vramMb: 4680 }),
     thinking: true,
   },
   {
     id: "phi-4-mini-mlc",
     name: "Phi-4 mini",
     blurb: "Microsoft's small model, strong at reasoning and maths. Large download.",
-    variants: mlc("Phi-4-mini-instruct", 2170, 3438, { mb: 2370, vramMb: 4221 }),
+    variants: mlc("Phi-4-mini-instruct", 2180, 3438, { mb: 2180, vramMb: 4221 }),
   },
 ];
 

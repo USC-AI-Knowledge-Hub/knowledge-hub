@@ -19,12 +19,12 @@ describe("WebLLM models", () => {
     }
   });
 
-  it("keeps the 32-bit build bigger than the 16-bit one, and its memory need too", () => {
+  it("downloads the same weights for the 32-bit build, which needs more memory to run", () => {
     for (const m of ALL_MODELS) {
       const a = m.variants.webgpu;
       const b = m.variants["webgpu-f32"];
       if (a?.runtime !== "webllm" || !b) continue;
-      expect(b.mb, m.id).toBeGreaterThanOrEqual(a.mb);
+      expect(b.mb, m.id).toBe(a.mb);
       expect(b.vramMb!, m.id).toBeGreaterThan(a.vramMb!);
     }
   });
