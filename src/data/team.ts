@@ -11,7 +11,7 @@ export const GISCUS = {
   repoId: "R_kgDOUtX0aA",
   category: "AI Team",
   /** From giscus.app once the category exists. Empty means the board isn't switched on yet. */
-  categoryId: "",
+  categoryId: "DIC_kwDOUtX0aM4DIW5d",
 };
 
 export const DEFAULT_TEAM_TOOL = TEAM_TOOLS[0];
