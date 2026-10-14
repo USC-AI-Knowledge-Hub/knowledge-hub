@@ -65,6 +65,11 @@ export const SETTINGS = {
    * queries than this, the pipeline rotates through them day by day.
    */
   maxSearches: 90,
+  /**
+   * Of those, at most this many go to tools found by daily discovery (one query each), so a burst of new
+   * tools can't crowd out the reviewed catalog. They rotate like the rest when there are more.
+   */
+  maxDiscoveredSearches: 12,
   /** Drop videos from the feed once they were first seen this many days ago. */
   retentionDays: 120,
   /** Keep at most this many videos per tool × difficulty cell. */

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { Link, useSearchParams } from "react-router";
 import { Icon } from "../components/Icon";
+import { GreenTabs } from "../components/GreenTabs";
 import { ToolMark } from "../components/ToolMark";
 import {
   DATA_CENTRES,
@@ -566,6 +567,7 @@ export function Green() {
 
   return (
     <div className="green-page">
+      <GreenTabs />
       <section className="green-hero">
         <div className="green-hero-copy">
           <h1 className="display-l">Use AI well, and lightly.</h1>

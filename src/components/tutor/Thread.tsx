@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useCourseStatus } from "../../lib/courses";
+import { useFeed } from "../../lib/feed";
 import { thumb } from "../../lib/format";
 import type { SiteHit } from "../../lib/siteSearch";
 import { watchFor } from "../../lib/tutor/watch";
@@ -7,6 +8,7 @@ import { PATH_QUESTIONS, pickPath, type Goal, type Role } from "../../lib/tutor/
 import { pathStore } from "../../lib/tutor/storage";
 import { Icon } from "../Icon";
 import { usePlayer } from "../Player";
+import { NotReviewed } from "../NotReviewed";
 import { ToolMark } from "../ToolMark";
 import { WavyProgress } from "../WavyProgress";
 import { useTutor, type Item } from "./context";
@@ -47,14 +49,15 @@ export function Related({ hits }: { hits: SiteHit[] }) {
   );
 }
 
-const WATCH_ICON = { course: "playlist_play", pick: "smart_display", talk: "podium" } as const;
+const WATCH_ICON = { course: "playlist_play", pick: "smart_display", talk: "podium", video: "play_circle" } as const;
 
 /** Playlists, editors' picks and talks for the lessons an answer drew on. They open in the player. */
-export function WatchNext({ modules }: { modules?: string[] }) {
+export function WatchNext({ modules, ask }: { modules?: string[]; ask?: string }) {
   const status = useCourseStatus();
+  const { feed } = useFeed();
   const play = usePlayer();
   const { go } = useTutor();
-  const list = modules?.length ? watchFor(modules, status) : [];
+  const list = modules?.length || ask ? watchFor(modules ?? [], status, 6, ask ? { ask, videos: feed?.videos ?? [] } : undefined) : [];
   if (!list.length) return null;
   return (
     <div className="t-watch">
@@ -73,9 +76,15 @@ export function WatchNext({ modules }: { modules?: string[] }) {
           </li>
         ))}
       </ul>
-      <button type="button" className="t-link body-s" onClick={() => go(`/learn/${modules![0]}`)}>
-        More videos in the lesson
-      </button>
+      {modules?.length ? (
+        <button type="button" className="t-link body-s" onClick={() => go(`/learn/${modules[0]}`)}>
+          More videos in the lesson
+        </button>
+      ) : (
+        <button type="button" className="t-link body-s" onClick={() => go("/watch")}>
+          More on the Watch page
+        </button>
+      )}
     </div>
   );
 }
@@ -117,7 +126,7 @@ function Answer({ item }: { item: Extract<Item, { kind: "answer" }> }) {
               {item.state === "stopped" ? "Stopped. " : ""}Small on-device model. It can be wrong.
               {item.sources?.length ? ` Based on: ${item.sources.map((s) => s.title).join(", ")}.` : ""}
             </p>
-            <WatchNext modules={item.watch} />
+            <WatchNext modules={item.watch} ask={item.ask} />
             {item.related && <Related hits={item.related} />}
           </>
         )}
@@ -309,12 +318,14 @@ function Tools({ item }: { item: Extract<Item, { kind: "tools" }> }) {
               <span className="grow">
                 <span className="label-l">{h.tool.name}</span>
                 <span className="body-s muted">{h.tool.bestFor}</span>
+                {!h.tool.reviewed && <NotReviewed />}
               </span>
               <Icon name="chevron_right" />
             </button>
           </li>
         ))}
       </ul>
+      <WatchNext ask={item.task} />
     </div>
   );
 }
@@ -366,7 +377,7 @@ function Reading({ item }: { item: Extract<Item, { kind: "reading" }> }) {
           </button>
         </div>
       )}
-      <WatchNext modules={item.watch} />
+      <WatchNext modules={item.watch} ask={item.ask} />
       {item.related && <Related hits={item.related} />}
       <ModelHint />
     </div>

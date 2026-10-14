@@ -1,3 +1,4 @@
+import { loadCatalog } from "./lib/catalogStore";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
@@ -8,6 +9,7 @@ import { About } from "./pages/About";
 import { Assistant } from "./pages/Assistant";
 import { Courses } from "./pages/Courses";
 import { Green } from "./pages/Green";
+import { Team } from "./pages/Team";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
 import { LessonPlayer } from "./pages/LessonPlayer";
@@ -39,6 +41,7 @@ const router = createBrowserRouter(
         { path: "tools/:id", element: <ToolPage /> },
         { path: "watch", element: <Watch /> },
         { path: "green", element: <Green /> },
+        { path: "green/team", element: <Team /> },
         { path: "offline", element: <Offline /> },
         { path: "offline/assistant", element: <Assistant /> },
         { path: "search", element: <Search /> },
@@ -50,6 +53,7 @@ const router = createBrowserRouter(
   { basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/" },
 );
 
+void loadCatalog();
 resumeOffline();
 
 createRoot(document.getElementById("root")!).render(

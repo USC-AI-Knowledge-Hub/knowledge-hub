@@ -316,3 +316,20 @@ describe("evergreen search for barely covered tools", () => {
     expect(merged.evergreen).toBe(true);
   });
 });
+
+describe("tagging discovered tools", () => {
+  it("tags against the reviewed tools plus the discovered ones", async () => {
+    const { loadPipelineTools } = await import("../catalog");
+    const { useTools } = await import("../tagging");
+    const { all, discovered } = loadPipelineTools();
+    expect(discovered.some((t) => t.id === "higgsfield")).toBe(true);
+    useTools(all);
+    try {
+      expect(tagTools("Higgsfield tutorial: cinematic AI video camera moves")).toEqual(["higgsfield"]);
+      expect(tagTools("Claude Code full course")).toEqual(["claude-code"]);
+      expect(discovered.every((t) => t.queries.length === 1)).toBe(true);
+    } finally {
+      useTools((await import("../../../src/data/tools")).tools);
+    }
+  });
+});

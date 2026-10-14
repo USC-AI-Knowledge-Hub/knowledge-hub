@@ -17,9 +17,9 @@
  */
 import { appendFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { modules } from "../../src/data/learn";
-import { tools } from "../../src/data/tools";
 import type { Trend, Video, VideoFeed } from "../../src/data/types";
 import { classifyWithClaude, type ClaudeLabel } from "./classify-claude";
+import { loadPipelineTools } from "./catalog";
 import { sparseTools } from "./coverage";
 import { SETTINGS, TOPIC_QUERIES, TREND_QUERIES, TRUSTED_CHANNELS } from "./config";
 import { guessDifficulty } from "./difficulty";
@@ -27,7 +27,7 @@ import { mergeFeed, mergeTrends } from "./merge";
 import { ageDays, looksEducational, mentionsAI, qualityScore, rejectReason, trendKind, type Candidate } from "./quality";
 import { fetchChannelFeed, resolveHandle } from "./rss";
 import { todaysQueries } from "./rotation";
-import { tagTools, tagTopics } from "./tagging";
+import { tagTools, tagTopics, useTools } from "./tagging";
 import { existingIds, searchVideoIds, videoDetails } from "./youtube-api";
 
 const FEED_PATH = process.env.PIPELINE_OUT ?? new URL("../../public/data/videos.json", import.meta.url);
@@ -70,7 +70,7 @@ async function trustedChannelIds(): Promise<Map<string, string>> {
   return new Map(Object.entries(lock));
 }
 
-async function collect(trusted: Set<string>, sparse: Set<string>): Promise<{ candidates: Candidate[]; sourcesOk: number }> {
+async function collect(trusted: Set<string>, sparse: Set<string>, catalog: ReturnType<typeof loadPipelineTools>): Promise<{ candidates: Candidate[]; sourcesOk: number }> {
   if (fixture) {
     const list: Candidate[] = JSON.parse(readFileSync(fixture, "utf8"));
     return { candidates: list.map((c) => ({ ...c, trusted: c.trusted ?? trusted.has(c.channelId) })), sourcesOk: 1 };
@@ -91,9 +91,15 @@ async function collect(trusted: Set<string>, sparse: Set<string>): Promise<{ can
 
   const daysAgo = (n: number) => new Date(now.getTime() - n * 86_400_000);
   const ids = new Set(rssCandidates.map((c) => c.id));
-  const evergreenQueries = new Set(tools.filter((t) => sparse.has(t.id)).flatMap((t) => t.queries));
+  const evergreenQueries = new Set(catalog.all.filter((t) => sparse.has(t.id)).flatMap((t) => t.queries));
   if (evergreenQueries.size) log(`Evergreen search for ${[...sparse].join(", ")}.`);
-  const queries = todaysQueries([...tools.flatMap((t) => t.queries), ...TOPIC_QUERIES, ...TREND_QUERIES], now, SETTINGS.maxSearches);
+  const found = catalog.discovered.flatMap((t) => t.queries.slice(0, 1));
+  const foundToday = todaysQueries(found, now, SETTINGS.maxDiscoveredSearches);
+  const reviewedIds = new Set(catalog.all.filter((t) => !catalog.discovered.includes(t)).map((t) => t.id));
+  const queries = [
+    ...todaysQueries([...catalog.all.filter((t) => reviewedIds.has(t.id)).flatMap((t) => t.queries), ...TOPIC_QUERIES, ...TREND_QUERIES], now, SETTINGS.maxSearches - foundToday.length),
+    ...foundToday,
+  ];
   for (const q of queries) {
     const after = daysAgo(evergreenQueries.has(q) ? SETTINGS.evergreenWindowDays : SETTINGS.searchWindowDays);
     try {
@@ -124,8 +130,11 @@ async function main() {
   const knownTrends = new Map((feed.trends ?? []).map((t) => [t.id, t]));
   const channels = await trustedChannelIds();
   const trusted = new Set(channels.values());
-  const sparse = sparseTools(feed.videos);
-  const { candidates, sourcesOk } = await collect(trusted, sparse);
+  const catalog = loadPipelineTools();
+  useTools(catalog.all);
+  if (catalog.discovered.length) log(`${catalog.discovered.length} discovered tools are tagged and searched alongside the reviewed ones.`);
+  const sparse = sparseTools(feed.videos, catalog.all);
+  const { candidates, sourcesOk } = await collect(trusted, sparse, catalog);
 
   if (sourcesOk === 0) {
     console.error("Every source failed; leaving the feed untouched.\n" + errors.join("\n"));
@@ -196,7 +205,7 @@ async function main() {
     for (let i = 0; i < fresh.length; i += SETTINGS.claudeBatch) {
       const batch = fresh.slice(i, i + SETTINGS.claudeBatch);
       try {
-        for (const [id, label] of await classifyWithClaude(batch)) labels.set(id, label);
+        for (const [id, label] of await classifyWithClaude(batch, catalog.all)) labels.set(id, label);
       } catch (e) {
         errors.push(`Claude batch ${i / SETTINGS.claudeBatch + 1}: ${(e as Error).message}`);
       }

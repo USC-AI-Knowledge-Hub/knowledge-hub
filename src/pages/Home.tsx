@@ -5,8 +5,7 @@ import { TrendCard } from "../components/TrendCard";
 import { VideoCard } from "../components/VideoCard";
 import { faqs } from "../data/faq";
 import { moduleById, paths } from "../data/learn";
-import { TASK_ICON, TASK_LABEL, tools } from "../data/tools";
-import type { Task } from "../data/types";
+import { useCatalog } from "../lib/catalogStore";
 import { useFeed } from "../lib/feed";
 import { longDate, minutesLabel } from "../lib/format";
 import { useProgress } from "../lib/progress";
@@ -20,8 +19,7 @@ export function Home() {
   const { isDone } = useProgress();
   const videos = feed?.videos ?? [];
   const picks = (today.length ? today : [...videos].sort((a, b) => b.score - a.score)).slice(0, 6);
-  const taskCounts = new Map<Task, number>();
-  for (const t of tools) for (const k of t.tasks) taskCounts.set(k, (taskCounts.get(k) ?? 0) + 1);
+  const catalog = useCatalog();
 
   return (
     <>
@@ -170,11 +168,11 @@ export function Home() {
           </div>
         </div>
         <div className="tasks">
-          {(Object.keys(TASK_LABEL) as Task[]).map((k) => (
-            <Link key={k} to={`/tools?task=${k}`} className="task state">
-              <Icon name={TASK_ICON[k]} size={28} />
-              <span className="title-s">{TASK_LABEL[k]}</span>
-              <span className="body-s muted">{taskCounts.get(k) ?? 0} tools</span>
+          {catalog.roots.map((c) => (
+            <Link key={c.id} to={`/tools?view=list&task=${c.id}`} className="task state">
+              <Icon name={c.icon} size={28} />
+              <span className="title-s">{c.label}</span>
+              <span className="body-s muted">{catalog.toolsIn(c.id).length} tools</span>
             </Link>
           ))}
         </div>

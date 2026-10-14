@@ -206,7 +206,7 @@ export function ToolReview({ tool, variant }: { tool: Tool; variant: Variant }) 
 }
 
 /** Feed videos for a tool in three difficulty columns, plus full courses that teach it. */
-export function ToolVideos({ tool, variant }: { tool: Tool; variant: Variant }) {
+export function ToolVideos({ tool, variant }: { tool: Pick<Tool, "id" | "name">; variant: Variant }) {
   const { feed } = useFeed();
   const status = useCourseStatus();
   const videos = (feed?.videos ?? []).filter((v) => v.tools.includes(tool.id));

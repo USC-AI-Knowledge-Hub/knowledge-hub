@@ -13,10 +13,11 @@ export const DIFFICULTY_BLURB: Record<Difficulty, string> = {
   advanced: "APIs, agents, automation and building your own workflows.",
 };
 
-/** "What are you trying to do?" — the Tool Finder's first question. */
-export type Task =
-  | "write" | "research" | "analyze" | "present" | "image"
-  | "video" | "audio" | "code" | "study" | "teach" | "automate";
+/**
+ * A category in the tool finder ("What are you trying to do?"). The tree of categories lives in
+ * categories.ts and public/data/taxonomy.json; a tool lists the ids it belongs to, most specific first.
+ */
+export type Task = string;
 
 export type Cost = "free" | "freemium" | "paid";
 export type UscAccess = "provided" | "check" | "personal";
@@ -52,6 +53,39 @@ export interface Tool {
   /** Pipeline: patterns that veto a match (e.g. "claude code" for Claude). */
   exclude?: string[];
 }
+
+/** What every entry in the tool finder has, whether editors reviewed it or the discovery run found it. */
+export type ToolCore = Pick<Tool, "id" | "name" | "maker" | "url" | "monogram" | "bestFor" | "tasks" | "queries" | "match" | "exclude">;
+
+/** Where a discovered tool was mentioned. */
+export interface Evidence {
+  /** The feed's name, e.g. "Hugging Face blog". */
+  source: string;
+  title: string;
+  url: string;
+  date: string;
+}
+
+/**
+ * A tool found automatically in trusted feeds (scripts/discovery) and listed in public/data/discovered.json.
+ * Editors haven't reviewed it: the site says so wherever it shows one.
+ */
+export interface DiscoveredTool extends ToolCore {
+  /** A product ("Higgsfield") or a model family ("Veo"). */
+  kind: "tool" | "model";
+  /** "site" when `url` is the product's own address; "announcement" when it's a post about it. */
+  urlKind: "site" | "announcement";
+  /** "feed": found by the daily run. "editor": added by hand to get it started. */
+  origin: "feed" | "editor";
+  firstSeen: string;
+  lastSeen: string;
+  evidence: Evidence[];
+  /** Daily-run bookkeeping: checks in a row that found the product's own site down. */
+  siteFailures?: number;
+}
+
+/** A catalog entry: a reviewed tool with a full profile, or a discovered one with the basics. */
+export type CatalogTool = (Tool & { reviewed: true }) | (DiscoveredTool & { reviewed: false });
 
 export type Track = "foundations" | "skills";
 

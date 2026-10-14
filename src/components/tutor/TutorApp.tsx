@@ -133,10 +133,10 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
       mode: Mode,
       notes: string,
       question: string,
-      extra: { label?: string; related?: SiteHit[]; sources?: Source[]; withHistory?: boolean; maxNewTokens?: number; page?: string; watch?: string[] },
+      extra: { label?: string; related?: SiteHit[]; sources?: Source[]; withHistory?: boolean; maxNewTokens?: number; page?: string; watch?: string[]; ask?: string },
     ) => {
       const msgs = buildMessages(mode, notes, question, extra.withHistory ? history() : [], extra.page);
-      const id = push({ kind: "answer", text: "", state: "thinking", label: extra.label, related: extra.related, sources: extra.sources, watch: extra.watch });
+      const id = push({ kind: "answer", text: "", state: "thinking", label: extra.label, related: extra.related, sources: extra.sources, watch: extra.watch, ask: extra.ask });
       try {
         const r = await engine.generate(msgs, (t) => update(id, { text: t, state: "streaming" } as Partial<Item>), extra.maxNewTokens);
         const text = r.text || "I couldn't come up with an answer. Try asking a different way.";
@@ -253,7 +253,7 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
       const ctx = pageRef.current;
       const g = ground(text, { context, prefer: ctx?.kind === "lesson" ? ctx.id : undefined });
       if (engine.ready) {
-        void generate("answer", g.notes, text, { related: g.related, sources: g.sources, withHistory: true, page: pageLabel(pathname), watch: g.modules });
+        void generate("answer", g.notes, text, { related: g.related, sources: g.sources, withHistory: true, page: pageLabel(pathname), watch: g.modules, ask: text });
       } else if (g.lesson) {
         push({
           kind: "reading",
@@ -264,6 +264,7 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
           route: `/learn/${g.lesson.id}`,
           related: g.related.filter((h) => h.route !== `/learn/${g.lesson!.id}`),
           watch: g.modules,
+          ask: text,
         });
         announce(`From the lesson ${g.lesson.title}: ${g.lesson.what}`);
       } else {
@@ -274,6 +275,7 @@ export default function TutorApp({ open, setOpen }: { open: boolean; setOpen(ope
           intro: related.length ? "These might help:" : "Try the quests below, or ask about tokens, prompting or AI tools.",
           paragraphs: [],
           related,
+          ask: text,
         });
       }
     },

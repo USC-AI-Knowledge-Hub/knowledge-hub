@@ -291,7 +291,7 @@ test.describe("tutor without a model", () => {
     const sheet = await openTutor(page, "/tools");
     await sheet.getByRole("button", { name: "Which tool for…?" }).first().click();
     await sheet.getByRole("button", { name: "Make a presentation" }).click();
-    await expect(sheet.getByRole("button", { name: /Gamma/ })).toBeVisible();
+    await expect(sheet.getByRole("button", { name: /^Gamma/ })).toBeVisible();
   });
 
   test("shows page-aware help on a lesson", async ({ page }) => {

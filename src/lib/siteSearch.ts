@@ -6,24 +6,13 @@
  */
 import { courses } from "../data/courses";
 import { modules, paths } from "../data/learn";
-import { TASK_LABEL, tools } from "../data/tools";
+import type { Category } from "../data/categories";
+import { getCatalog } from "./catalogStore";
 import { topics } from "../data/topics";
-import type { Task, Tool } from "../data/types";
+import type { CatalogTool, Task } from "../data/types";
 
-/** Everyday words mapped to the tool finder's tasks. Phrases are matched before single words. */
-const TASK_WORDS: Record<Task, string[]> = {
-  write: ["write", "writing", "essay", "draft", "email", "proofread", "grammar", "paraphrase", "rephrase", "reword", "cover letter", "edit my writing", "spelling"],
-  research: ["research", "paper", "papers", "literature", "lit review", "sources", "source", "citation", "citations", "cite", "journal", "studies", "evidence", "disputed", "peer reviewed", "academic"],
-  analyze: ["data", "spreadsheet", "excel", "csv", "chart", "charts", "graph", "statistics", "stats", "analyze", "analysis", "dataset", "regression"],
-  present: ["slides", "slide", "deck", "presentation", "powerpoint", "ppt", "keynote", "poster", "diagram", "pitch"],
-  image: ["image", "images", "picture", "photo", "art", "logo", "illustration", "drawing", "generate an image"],
-  video: ["video", "videos", "film", "clip", "edit video", "youtube"],
-  audio: ["audio", "voice", "podcast", "transcribe", "transcript", "transcription", "recording", "captions", "speech", "narration", "lecture recording", "meeting notes"],
-  code: ["code", "coding", "program", "programming", "debug", "app", "website", "python", "javascript", "script", "developer"],
-  study: ["study", "learn", "exam", "quiz", "flashcards", "notes", "revise", "understand", "explain", "reading"],
-  teach: ["teach", "teaching", "lesson plan", "class", "students", "rubric", "syllabus", "instructor", "lecture slides"],
-  automate: ["automate", "automation", "workflow", "workflows", "integrate", "connect apps", "zap", "repetitive"],
-};
+/** Words that point at a category: its label, keywords and everyday cues. Phrases are matched before single words. */
+const wordsOf = (c: Category) => [c.label.toLowerCase(), ...c.keywords, ...(c.cues ?? [])];
 
 const STOP = new Set(
   "a an the to of for and or in on with my me i want need how do can could would should is are be it this that from into about help some any use using tool tools ai".split(" "),
@@ -46,11 +35,11 @@ export function tasksFor(q: string): Map<Task, string> {
   const text = ` ${norm(q)} `;
   const words = new Set(tokenize(q).map(stem));
   const out = new Map<Task, string>();
-  for (const [task, list] of Object.entries(TASK_WORDS) as [Task, string[]][]) {
-    for (const w of list) {
+  for (const c of getCatalog().categories) {
+    for (const w of wordsOf(c).map(norm).map((x) => x.trim())) {
       const hit = w.includes(" ") ? text.includes(` ${w} `) : words.has(stem(w));
       if (hit) {
-        out.set(task, w);
+        out.set(c.id, w);
         break;
       }
     }
@@ -66,7 +55,7 @@ function fieldScore(text: string, terms: string[], weight: number): number {
 }
 
 export interface ToolHit {
-  tool: Tool;
+  tool: CatalogTool;
   score: number;
   /** Short reasons for the match, for the UI ("Good for: Make a presentation"). */
   why: string[];
@@ -78,7 +67,8 @@ export function searchTools(q: string): ToolHit[] {
   const tasks = tasksFor(q);
   const whole = norm(q).trim();
   const hits: ToolHit[] = [];
-  for (const tool of tools) {
+  const catalog = getCatalog();
+  for (const tool of catalog.tools) {
     const why: string[] = [];
     let score = 0;
     const name = norm(tool.name);
@@ -86,14 +76,16 @@ export function searchTools(q: string): ToolHit[] {
     else if (terms.some((t) => name.split(/\s+/).some((w) => w.startsWith(t)))) score += 40;
     score += fieldScore(tool.maker, terms, 4);
     score += fieldScore(tool.bestFor, terms, 4);
-    score += fieldScore(tool.bestUses.join(" "), terms, 2);
-    score += fieldScore(tool.different, terms, 1.5);
-    score += fieldScore(tool.strengths.join(" "), terms, 1);
+    if (tool.reviewed) {
+      score += fieldScore(tool.bestUses.join(" "), terms, 2);
+      score += fieldScore(tool.different, terms, 1.5);
+      score += fieldScore(tool.strengths.join(" "), terms, 1);
+    }
     for (const [task, word] of tasks) {
-      if (tool.tasks.includes(task)) {
-        // A tool's first-listed task is its main job.
-        score += tool.tasks[0] === task ? 14 : 8;
-        why.push(`Good for: ${TASK_LABEL[task].toLowerCase()} (“${word}”)`);
+      if (catalog.inCategory(tool, task)) {
+        // A tool's first-listed category is its main job; a specific category beats its parent.
+        score += tool.tasks[0] === task ? 14 : tool.tasks.includes(task) ? 10 : 8;
+        why.push(`Good for: ${catalog.categoryById.get(task)?.label.toLowerCase()} (“${word}”)`);
       }
     }
     if (score > 0) hits.push({ tool, score, why });

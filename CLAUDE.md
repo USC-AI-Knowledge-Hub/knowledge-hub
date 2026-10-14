@@ -9,6 +9,7 @@ A daily GitHub Action refreshes the YouTube video library.
 - `npm run build`: typecheck and production build (`dist/`)
 - `npm test`: Vitest (pipeline unit tests plus an offline end-to-end run)
 - `npm run videos`: run the video pipeline (see the video-curation skill)
+- `npm run discover`: find new tools from the trusted feeds and file them in the category tree (`-- --dry-run` to preview)
 - `npm run courses`: check every course, editors' pick and talk against YouTube (`--check --strict` in CI)
 - `npm run theme`: regenerate `src/styles/tokens.css` from the brand colors
 - `npm run brand-images`: redraw `public/og.png` (the share preview) and `public/favicon.png`
@@ -35,7 +36,12 @@ A daily GitHub Action refreshes the YouTube video library.
   them compact); every model appears in the offline assistant (`/offline/assistant`), a general-purpose
   chat that isn't grounded in lessons. A WebLLM model needs `vramMb` and an id that exists in the installed
   WebLLM's list: `models.test.ts` checks both, and `npm run model-sizes` (browser CI) checks download sizes.
+- AI Team (`/green/team`, `src/pages/Team.tsx`, `src/data/team.ts`): a discussion board per tool, shown with giscus (GitHub Discussions).
+  It stays off until `GISCUS.categoryId` is set. The comment box's retro skin is `public/giscus-retro-*.css`.
 - `scripts/pipeline/`: the daily video pipeline.
+- `scripts/discovery/`: the daily tool discovery run (`npm run discover`). It writes `public/data/discovered.json`
+  and `taxonomy.json`; `src/data/catalog.ts` and `src/lib/catalogStore.ts` combine them with `tools.ts` for the site
+  and the pipeline. Discovered tools are always labelled "Not reviewed yet".
 - `public/data/videos.json`: pipeline output, committed by the Action.
 - `public/data/courses.json`: live course check (lesson counts, hours, availability).
 

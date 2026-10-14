@@ -16,6 +16,8 @@ export type Item =
       sources?: Source[];
       /** Lessons whose videos to suggest under the answer, most relevant first. */
       watch?: string[];
+      /** What was asked, so library videos that fit it can be suggested too. */
+      ask?: string;
     }
   | { id: number; kind: "nav"; dest: string; hits: SiteHit[]; opened: SiteHit | null }
   | { id: number; kind: "next"; rec: NextStep | null }
@@ -33,6 +35,7 @@ export type Item =
       related?: SiteHit[];
       /** Lessons whose videos to suggest. */
       watch?: string[];
+      ask?: string;
       /** Hidden-until-revealed bullets, for "quiz me" without a model. */
       recall?: boolean;
     };
