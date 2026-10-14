@@ -1,26 +1,23 @@
 /**
- * AI Team: a discussion board per tool, under Green AI. Each board is one
- * GitHub Discussion, shown with giscus. To switch it on: enable Discussions on
- * the repository, add a category (announcement-style, so only the app can open
- * threads), install the giscus app, then paste the category's id below.
+ * AI Team: a discussion board per tool, on GitHub Discussions. Each tool's tile opens the
+ * repository's "AI Team" category filtered to that tool, and "Start a topic" opens a new
+ * discussion with the tool's name in the title. The category must be open-ended, so students
+ * can start topics, and its address slug is set below.
  */
 export const TEAM_TOOLS = ["chatgpt", "claude", "gemini", "copilot", "perplexity", "notebooklm", "cursor", "midjourney"] as const;
 
-export const GISCUS = {
+export const BOARD = {
   repo: "USC-AI-Knowledge-Hub/knowledge-hub",
-  repoId: "R_kgDOUtX0aA",
-  category: "AI Team",
-  /** From giscus.app once the category exists. Empty means the board isn't switched on yet. */
-  categoryId: "DIC_kwDOUtX0aM4DIW5d",
+  /** The category's address name, from github.com/<repo>/discussions/categories/<slug>. */
+  categorySlug: "ai-team",
 };
 
-export const DEFAULT_TEAM_TOOL = TEAM_TOOLS[0];
+const base = `https://github.com/${BOARD.repo}/discussions`;
 
-export const teamTool = (id: string | null): (typeof TEAM_TOOLS)[number] =>
-  (TEAM_TOOLS as readonly string[]).includes(id ?? "") ? (id as (typeof TEAM_TOOLS)[number]) : DEFAULT_TEAM_TOOL;
+/** The category filtered to topics with the tool's name in the title. */
+export const boardUrl = (name: string) =>
+  `${base}?${new URLSearchParams({ discussions_q: `category:${BOARD.categorySlug} in:title ${name}` })}`;
 
-/** One thread per tool: giscus matches the discussion by this exact title. */
-export const threadTerm = (toolId: string) => `ai-team:${toolId}`;
-
-/** Starter topics. They're ideas for a first post, not separate threads. */
-export const TOPICS = ["Prompts that worked", "Study tips", "Things that went wrong", "Is it worth the energy?", "Cool projects"];
+/** A new discussion in the category, titled "<Tool>: " ready to finish. */
+export const newTopicUrl = (name: string) =>
+  `${base}/new?${new URLSearchParams({ category: BOARD.categorySlug, title: `${name}: ` })}`;
