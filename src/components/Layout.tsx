@@ -11,6 +11,7 @@ const NAV = [
   { to: "/learn", label: "Learn", icon: "school" },
   { to: "/tools", label: "Tools", icon: "handyman" },
   { to: "/watch", label: "Watch", icon: "smart_display" },
+  { to: "/team", label: "AI Team", icon: "forum" },
   { to: "/green", label: "Green AI", icon: "eco" },
 ];
 

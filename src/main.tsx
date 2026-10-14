@@ -1,7 +1,7 @@
 import { loadCatalog } from "./lib/catalogStore";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import { Layout } from "./components/Layout";
 import { FeedProvider } from "./lib/feed";
 import { resumeOffline } from "./lib/offline";
@@ -41,7 +41,8 @@ const router = createBrowserRouter(
         { path: "tools/:id", element: <ToolPage /> },
         { path: "watch", element: <Watch /> },
         { path: "green", element: <Green /> },
-        { path: "green/team", element: <Team /> },
+        { path: "team", element: <Team /> },
+        { path: "green/team", element: <Navigate to="/team" replace /> },
         { path: "offline", element: <Offline /> },
         { path: "offline/assistant", element: <Assistant /> },
         { path: "search", element: <Search /> },
