@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router";
-import { GreenTabs } from "../components/GreenTabs";
 import { Icon } from "../components/Icon";
 import { ToolMark } from "../components/ToolMark";
-import { GISCUS, TEAM_TOOLS, TOPICS, teamTool, threadTerm } from "../data/team";
+import { GISCUS, TEAM_TOOLS, teamTool, threadTerm } from "../data/team";
 import { toolById } from "../data/tools";
-import "../styles/green.css";
 import "../styles/team.css";
 
 const isDarkNow = () => {
@@ -43,7 +41,7 @@ function useOnline() {
   return on;
 }
 
-const themeUrl = (dark: boolean) => `${location.origin}/giscus-retro-${dark ? "dark" : "light"}.css`;
+const themeFor = (dark: boolean) => (dark ? "dark" : "light");
 
 /** Loads giscus for one tool's thread. Re-mounts the embed when the tool changes. */
 function Thread({ toolId }: { toolId: string }) {
@@ -71,7 +69,7 @@ function Thread({ toolId }: { toolId: string }) {
       "data-reactions-enabled": "1",
       "data-emit-metadata": "0",
       "data-input-position": "top",
-      "data-theme": themeUrl(darkRef.current),
+      "data-theme": themeFor(darkRef.current),
       "data-lang": "en",
       "data-loading": "lazy",
     };
@@ -83,7 +81,7 @@ function Thread({ toolId }: { toolId: string }) {
   useEffect(() => {
     document
       .querySelector<HTMLIFrameElement>("iframe.giscus-frame")
-      ?.contentWindow?.postMessage({ giscus: { setConfig: { theme: themeUrl(dark) } } }, "https://giscus.app");
+      ?.contentWindow?.postMessage({ giscus: { setConfig: { theme: themeFor(dark) } } }, "https://giscus.app");
   }, [dark]);
 
   return <div ref={host} className="team-thread" />;
@@ -162,57 +160,31 @@ export function Team() {
   };
 
   return (
-    <div className="green-page team-page">
-      <GreenTabs />
-      <section className="team-hero">
+    <div className="team-page">
+      <header className="page-head team-hero">
         <h1 className="display-l">AI Team</h1>
         <p className="body-l measure">
-          Eight tools, eight boards. Trade prompts, compare notes and ask what worked for other students. Everyone here is learning.
+          One board for each of eight tools. Share prompts, compare notes and ask what worked for other students.
         </p>
-      </section>
+      </header>
 
       <Switcher current={toolId} onPick={pick} />
 
       <section className="team-board" aria-labelledby="team-board-h">
-        <div className="team-titlebar">
-          <span className="team-dots" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </span>
-          <h2 id="team-board-h" className="label-l">
-            {tool?.name}.board
-          </h2>
-        </div>
-        <div className="team-ideas">
-          <span className="body-s muted">Ideas for a first post:</span>
-          {TOPICS.map((t) => (
-            <span key={t} className="team-idea label-m">
-              {t}
-            </span>
-          ))}
-        </div>
-
+        <h2 id="team-board-h" className="title-l">
+          {tool?.name} board
+        </h2>
         {!online ? (
           <p className="team-note body-m">The board needs the internet. Reconnect and it will load.</p>
         ) : !live ? (
           <p className="team-note body-m">The boards aren't switched on yet. Check back soon.</p>
         ) : (
-          <Thread toolId={toolId} />
+          <Thread key={toolId} toolId={toolId} />
         )}
-      </section>
-
-      <section className="team-rules" aria-labelledby="team-rules-h">
-        <h2 id="team-rules-h" className="title-m">
-          How this works
-        </h2>
-        <ul className="body-m">
-          <li>You sign in with a free GitHub account. Your GitHub username shows next to what you post, and posts are public.</li>
-          <li>You can reply, react, edit or delete your own comments, and use Markdown for code and lists.</li>
-          <li>Keep it kind and on topic. Don't share private details or anything you wouldn't want your professor to read.</li>
-          <li>Use the three-dot menu on a comment to report it. Moderators can hide comments and block accounts.</li>
-          <li>Students post their own views. Nothing here is advice from USC or from the tool's maker.</li>
-        </ul>
+        <p className="body-s muted team-foot">
+          Sign in with a free GitHub account to post. Your GitHub username shows next to your comments, and posts are public. Use the
+          menu on a comment to report it. Comments are students' own views, not advice from USC or the tool's maker.
+        </p>
       </section>
     </div>
   );

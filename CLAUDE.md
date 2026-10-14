@@ -36,8 +36,8 @@ A daily GitHub Action refreshes the YouTube video library.
   them compact); every model appears in the offline assistant (`/offline/assistant`), a general-purpose
   chat that isn't grounded in lessons. A WebLLM model needs `vramMb` and an id that exists in the installed
   WebLLM's list: `models.test.ts` checks both, and `npm run model-sizes` (browser CI) checks download sizes.
-- AI Team (`/green/team`, `src/pages/Team.tsx`, `src/data/team.ts`): a discussion board per tool, shown with giscus (GitHub Discussions).
-  It stays off until `GISCUS.categoryId` is set. The comment box's retro skin is `public/giscus-retro-*.css`.
+- AI Team (`/team`, `src/pages/Team.tsx`, `src/data/team.ts`): a discussion board per tool, shown with giscus (GitHub Discussions).
+  It stays off until `GISCUS.categoryId` is set. The tool switcher is the only retro part.
 - `scripts/pipeline/`: the daily video pipeline.
 - `scripts/discovery/`: the daily tool discovery run (`npm run discover`). It writes `public/data/discovered.json`
   and `taxonomy.json`; `src/data/catalog.ts` and `src/lib/catalogStore.ts` combine them with `tools.ts` for the site

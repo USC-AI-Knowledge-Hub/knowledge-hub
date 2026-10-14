@@ -64,7 +64,7 @@ test.describe("green AI page", () => {
   test("fits a 360px phone without sideways scrolling", async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 780 });
     await page.goto("/green");
-    await expect(page.locator(".bottom-nav .nav-item")).toHaveCount(5);
+    await expect(page.locator(".bottom-nav .nav-item")).toHaveCount(6);
     await expect(page.locator(".bottom-nav").getByRole("link", { name: "Green AI" })).toBeVisible();
     const [scroll, inner] = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
     expect(scroll).toBeLessThanOrEqual(inner);
