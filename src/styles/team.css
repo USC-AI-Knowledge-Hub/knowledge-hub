@@ -1,0 +1,51 @@
+/* AI Team board: a retro window around the comment box. Colors are the site's roles. */
+.green-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.green-tab {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 20px;
+  border-radius: var(--md-shape-full); color: var(--md-sys-color-on-surface-variant);
+  border: 1px solid var(--md-sys-color-outline-variant); text-decoration: none;
+}
+.green-tab.active { background: var(--kh-green-container); color: var(--kh-on-green-container); border-color: transparent; }
+
+.team-hero { margin-bottom: 24px; }
+.team-hero h1 { color: var(--kh-green); }
+
+.team-switch {
+  display: flex; align-items: center; gap: 16px; width: 100%; max-width: 560px; padding: 12px 16px; text-align: left;
+  background: var(--md-sys-color-surface-container); border: 2px solid var(--md-sys-color-on-surface);
+  border-radius: 0; box-shadow: 4px 4px 0 var(--md-sys-color-on-surface); color: var(--md-sys-color-on-surface);
+}
+.team-switch-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.team-switch-cta { pointer-events: none; }
+
+.team-dialog {
+  border: 2px solid var(--md-sys-color-on-surface); border-radius: 0; padding: 0; max-width: min(560px, calc(100vw - 32px));
+  width: 100%; background: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface);
+  box-shadow: 6px 6px 0 var(--md-sys-color-on-surface);
+}
+.team-dialog::backdrop { background: rgb(0 0 0 / 0.4); }
+.team-dialog-body { padding: 16px; }
+.team-dialog-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.team-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+.team-pick {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding: 12px 8px;
+  background: var(--md-sys-color-surface-container-low); border: 2px solid var(--md-sys-color-outline);
+  border-radius: 0; color: inherit;
+}
+.team-pick[aria-pressed="true"] { border-color: var(--kh-green); background: var(--kh-green-container); color: var(--kh-on-green-container); }
+
+.team-board {
+  margin-top: 24px; border: 2px solid var(--md-sys-color-on-surface); box-shadow: 6px 6px 0 var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container-lowest, var(--md-sys-color-surface));
+}
+.team-titlebar { display: flex; align-items: center; gap: 12px; padding: 8px 12px; background: var(--kh-green-container); color: var(--kh-on-green-container); border-bottom: 2px solid var(--md-sys-color-on-surface); }
+.team-titlebar h2 { margin: 0; font-family: "Pixelify Sans", monospace; font-size: 16px; }
+.team-dots { display: flex; gap: 6px; }
+.team-dots i { width: 10px; height: 10px; background: var(--md-sys-color-on-surface); display: block; }
+.team-ideas { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px; border-bottom: 2px dashed var(--md-sys-color-outline-variant); }
+.team-idea { padding: 2px 10px; border: 1px solid var(--md-sys-color-outline); }
+.team-thread { padding: 12px; min-height: 160px; }
+.team-note { padding: 24px 16px; margin: 0; }
+
+.team-rules { margin-top: 32px; max-width: 70ch; }
+.team-rules ul { padding-left: 20px; display: grid; gap: 8px; }

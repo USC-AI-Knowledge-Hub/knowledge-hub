@@ -414,6 +414,24 @@ const STATIC: Record<string, () => PageMeta> = {
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Green AI", path: "/green" }])],
   }),
+  "/green/team": () => ({
+    path: "/green/team",
+    title: `AI Team: student boards for eight AI tools${suffix}`,
+    description: "Discussion boards for ChatGPT, Claude, Gemini and five other tools, where students share prompts, tips and what went wrong.",
+    heading: "AI Team",
+    type: "website",
+    content: [
+      { kind: "p", text: "One board for each of eight AI tools. Students sign in with GitHub to post, reply and react. Posts are public." },
+    ],
+    links: [{ to: "/green", label: "Green AI" }],
+    jsonLd: [
+      breadcrumbs([
+        { name: "Home", path: "/" },
+        { name: "Green AI", path: "/green" },
+        { name: "AI Team", path: "/green/team" },
+      ]),
+    ],
+  }),
   "/offline": () => ({
     path: "/offline",
     title: `Use AI without internet${suffix}`,
