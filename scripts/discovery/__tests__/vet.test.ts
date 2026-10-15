@@ -33,6 +33,12 @@ describe("feed vetting", () => {
     expect(v.reason).toMatch(/about AI/);
   });
 
+  it("keeps every source unique and on https", () => {
+    expect(new Set(SOURCES.map((x) => x.id)).size).toBe(SOURCES.length);
+    expect(new Set(SOURCES.map((x) => x.url)).size).toBe(SOURCES.length);
+    expect(SOURCES.every((x) => x.url.startsWith("https://"))).toBe(true);
+  });
+
   it("keeps candidates distinct from the sources already in use, and the report readable", async () => {
     const used = new Set(SOURCES.map((s) => s.id));
     expect(CANDIDATES.filter((c) => used.has(c.id))).toEqual([]);
