@@ -1,0 +1,34 @@
+name: Vet feeds
+
+# Tests every candidate feed and every current source, and saves a report next to the code
+# (scripts/discovery/feed-report.md). Run it by hand, or it runs when the candidate list changes.
+# It never changes which feeds the daily run reads: that is a decision, made in sources.ts.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/discovery/candidates.ts
+      - scripts/discovery/vet-feeds.ts
+      - .github/workflows/feed-vet.yml
+
+permissions:
+  contents: write
+
+jobs:
+  vet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Check the feeds
+        run: npm run vet-feeds
+      - name: Save the report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/discovery/feed-report.md scripts/discovery/feed-report.json
+          if git diff --cached --quiet; then echo "No change."; else git commit -m "Feed check report"; git push; fi
