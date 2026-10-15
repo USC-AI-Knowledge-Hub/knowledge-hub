@@ -7,7 +7,7 @@
       "ok": true,
       "lastOk": "2026-10-15",
       "failures": 0,
-      "items": 16
+      "items": 20
     },
     {
       "id": "openai",
@@ -31,16 +31,15 @@
       "ok": true,
       "lastOk": "2026-10-15",
       "failures": 0,
-      "items": 11
+      "items": 12
     },
     {
       "id": "microsoft-ai",
-      "url": "https://blogs.microsoft.com/ai/feed/",
-      "ok": false,
-      "lastOk": null,
-      "failures": 4,
-      "items": 0,
-      "error": "HTTP 410"
+      "url": "https://news.microsoft.com/source/topics/ai/feed/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 2
     },
     {
       "id": "nvidia",
@@ -71,7 +70,7 @@
       "url": "https://venturebeat.com/category/ai/feed/",
       "ok": false,
       "lastOk": null,
-      "failures": 4,
+      "failures": 5,
       "items": 0,
       "error": "HTTP 429"
     },
@@ -92,6 +91,142 @@
       "items": 2
     },
     {
+      "id": "marktechpost",
+      "url": "https://www.marktechpost.com/feed/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 10
+    },
+    {
+      "id": "github-ai",
+      "url": "https://github.blog/ai-and-ml/feed/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 10
+    },
+    {
+      "id": "aws-ml",
+      "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 20
+    },
+    {
+      "id": "apple-ml",
+      "url": "https://machinelearning.apple.com/rss.xml",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 10
+    },
+    {
+      "id": "google-research",
+      "url": "https://research.google/blog/rss/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 12
+    },
+    {
+      "id": "microsoft-research",
+      "url": "https://www.microsoft.com/en-us/research/feed/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 9
+    },
+    {
+      "id": "nvidia-dev",
+      "url": "https://developer.nvidia.com/blog/feed",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 40
+    },
+    {
+      "id": "cloudflare-ai",
+      "url": "https://blog.cloudflare.com/tag/ai/rss/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 20
+    },
+    {
+      "id": "elevenlabs",
+      "url": "https://elevenlabs.io/blog/rss.xml",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 40
+    },
+    {
+      "id": "the-decoder",
+      "url": "https://the-decoder.com/feed/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 10
+    },
+    {
+      "id": "ars-ai",
+      "url": "https://arstechnica.com/ai/feed/",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 20
+    },
+    {
+      "id": "wired-ai",
+      "url": "https://www.wired.com/feed/tag/ai/latest/rss",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 10
+    },
+    {
+      "id": "mit-tr-ai",
+      "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 10
+    },
+    {
+      "id": "zdnet-ai",
+      "url": "https://www.zdnet.com/topic/artificial-intelligence/rss.xml",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 25
+    },
+    {
+      "id": "latent-space",
+      "url": "https://www.latent.space/feed",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 20
+    },
+    {
+      "id": "interconnects",
+      "url": "https://www.interconnects.ai/feed",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 5
+    },
+    {
+      "id": "bens-bites",
+      "url": "https://www.bensbites.com/feed",
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 11
+    },
+    {
       "id": "producthunt-ai",
       "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
       "ok": true,
@@ -100,12 +235,21 @@
       "items": 40
     },
     {
-      "id": "hn-show",
-      "url": "https://hnrss.org/show?q=AI&points=60",
+      "id": "reddit-localllama",
+      "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
       "ok": true,
       "lastOk": "2026-10-15",
       "failures": 0,
-      "items": 15
+      "items": 25
+    },
+    {
+      "id": "hn-show",
+      "url": "https://hnrss.org/show?q=AI&points=60",
+      "ok": false,
+      "lastOk": "2026-10-15",
+      "failures": 1,
+      "items": 0,
+      "error": "HTTP 502"
     }
   ],
   "tools": [
@@ -390,6 +534,35 @@
       "evidence": []
     },
     {
+      "id": "microsoft-s-latest-custom-chip",
+      "name": "Microsoft’s latest custom chip",
+      "maker": "Microsoft",
+      "url": "https://news.microsoft.com/maia-2026/",
+      "monogram": "Mi",
+      "bestFor": "The post Introducing Microsoft’s latest custom chip: Maia 300 appeared first on Source .",
+      "tasks": [],
+      "queries": [
+        "Microsoft’s latest custom chip AI tutorial"
+      ],
+      "match": [
+        "\\bMicrosoft’s[\\s-]*latest[\\s-]*custom[\\s-]*chip\\b"
+      ],
+      "exclude": [],
+      "kind": "tool",
+      "urlKind": "announcement",
+      "origin": "feed",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "evidence": [
+        {
+          "source": "Microsoft AI blog",
+          "title": "Introducing Microsoft’s latest custom chip: Maia 300",
+          "url": "https://news.microsoft.com/maia-2026/",
+          "date": "2026-10-12"
+        }
+      ]
+    },
+    {
       "id": "openevidence",
       "name": "OpenEvidence",
       "maker": "OpenEvidence",
@@ -433,7 +606,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -482,7 +655,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -607,9 +780,104 @@
       "firstSeen": "2026-10-12",
       "lastSeen": "2026-10-15",
       "evidence": []
+    },
+    {
+      "id": "muse-spark-open",
+      "name": "Muse Spark Open",
+      "maker": "Hugging Face",
+      "url": "https://huggingface.co/blog/meta-muse-spark-open",
+      "monogram": "Mu",
+      "bestFor": "Hey r/LocalLlama - Today we’re excited to release Muse Spark Open, the most capable US open-weight model to date.",
+      "tasks": [],
+      "queries": [
+        "Muse Spark Open AI model how to use"
+      ],
+      "match": [
+        "\\bMuse[\\s-]*Spark[\\s-]*Open\\b"
+      ],
+      "exclude": [],
+      "kind": "model",
+      "urlKind": "announcement",
+      "origin": "feed",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "evidence": [
+        {
+          "source": "Hugging Face blog",
+          "title": "Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta",
+          "url": "https://huggingface.co/blog/meta-muse-spark-open",
+          "date": "2026-10-15"
+        },
+        {
+          "source": "r/LocalLLaMA, top this week",
+          "title": "Introducing Muse Spark Open: the most capable US open-weight model to date",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x6r9pz/introducing_muse_spark_open_the_most_capable_us/",
+          "date": "2026-10-15"
+        }
+      ]
     }
   ],
   "pending": [
+    {
+      "key": "flux image klein",
+      "name": "FLUX Image Klein",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "Hugging Face blog",
+          "title": "Welcome FLUX.3 Image Klein in Diffusers",
+          "url": "https://huggingface.co/blog/flux-3",
+          "date": "2026-10-15",
+          "sourceId": "hf-blog",
+          "tier": "vendor"
+        }
+      ],
+      "summary": "",
+      "links": [],
+      "maker": "Hugging Face"
+    },
+    {
+      "key": "muse wonder",
+      "name": "Muse Wonder",
+      "kind": "tool",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Muse Wonder",
+          "url": "https://www.producthunt.com/products/meta-ai",
+          "date": "2026-10-12",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        },
+        {
+          "source": "MarkTechPost",
+          "title": "Meta Launches Muse Wonder and Muse Wonder Full: Benchmarks, Pricing and How to Use It",
+          "url": "https://www.marktechpost.com/2026/10/13/meta-muse-wonder-muse-wonder-full-release/",
+          "date": "2026-10-13",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Meta’s most capable models for personal agents Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/meta-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1278066?app_id=339",
+        "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+        "https://dev.meta.ai/models/muse-wonder/",
+        "https://research.meta.ai/static/muse-wonder-model-card",
+        "https://research.meta.ai/blog/introducing-muse-spark-msl",
+        "https://research.meta.ai/blog/muse-wonder",
+        "https://dev.meta.ai/resources/blog/build-with-muse-wonder",
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://dev.meta.ai/products/muse-code",
+        "https://dev.meta.ai/docs/quickstart"
+      ]
+    },
     {
       "key": "falcon asr",
       "name": "Falcon ASR",
@@ -670,6 +938,394 @@
       "links": []
     },
     {
+      "key": "clif",
+      "name": "CLiF",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "CopilotKit Releases CLiF: A Continual Learning Platform That Turns Agent Traces and User Actions into Skills, Evals, and Fine-Tuning Data",
+          "url": "https://www.marktechpost.com/2026/10/15/copilotkit-releases-clif-a-continual-learning-platform-that-turns-agent-traces-and-user-actions-into-skills-evals-and-fine-tuning-data/",
+          "date": "2026-10-15",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Introduction Teams shipping AI agents at scale keep running into the same pattern. Even agents built on top-tier models like Fable and Astra struggle to carry out complex, end-to-end tasks inside a specific product consistently enough to deploy.",
+      "links": [
+        "https://go.copilotkit.ai/trajectories-clif",
+        "https://github.com/CopilotKit/CopilotKit",
+        "https://www.copilotkit.ai/learning/what-is-agent-learning",
+        "https://www.copilotkit.ai/copilotkit-intelligence",
+        "https://github.com/ag-ui-protocol/ag-ui",
+        "https://docs.copilotkit.ai/learning",
+        "https://www.copilotkit.ai/solutions/self-improving-agents",
+        "https://docs.copilotkit.ai/threads",
+        "https://docs.copilotkit.ai/intelligence/learned-skills",
+        "https://docs.copilotkit.ai/intelligence/self-hosting",
+        "https://docs.copilotkit.ai/intelligence/managed-intelligence-platform",
+        "https://www.copilotkit.ai/blog/introducing-clif"
+      ]
+    },
+    {
+      "key": "copilotkit",
+      "name": "CopilotKit",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "CopilotKit Releases CLiF: A Continual Learning Platform That Turns Agent Traces and User Actions into Skills, Evals, and Fine-Tuning Data",
+          "url": "https://www.marktechpost.com/2026/10/15/copilotkit-releases-clif-a-continual-learning-platform-that-turns-agent-traces-and-user-actions-into-skills-evals-and-fine-tuning-data/",
+          "date": "2026-10-15",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Introduction Teams shipping AI agents at scale keep running into the same pattern. Even agents built on top-tier models like Fable and Astra struggle to carry out complex, end-to-end tasks inside a specific product consistently enough to deploy.",
+      "links": [
+        "https://go.copilotkit.ai/trajectories-clif",
+        "https://github.com/CopilotKit/CopilotKit",
+        "https://www.copilotkit.ai/learning/what-is-agent-learning",
+        "https://www.copilotkit.ai/copilotkit-intelligence",
+        "https://github.com/ag-ui-protocol/ag-ui",
+        "https://docs.copilotkit.ai/learning",
+        "https://www.copilotkit.ai/solutions/self-improving-agents",
+        "https://docs.copilotkit.ai/threads",
+        "https://docs.copilotkit.ai/intelligence/learned-skills",
+        "https://docs.copilotkit.ai/intelligence/self-hosting",
+        "https://docs.copilotkit.ai/intelligence/managed-intelligence-platform",
+        "https://www.copilotkit.ai/blog/introducing-clif"
+      ]
+    },
+    {
+      "key": "google s universal cart shopping",
+      "name": "Google’s Universal Cart shopping",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "TechCrunch AI",
+          "title": "Google’s Universal Cart shopping tool launches in the US",
+          "url": "https://techcrunch.com/2026/10/15/googles-universal-cart-shopping-tool-launches-in-the-us/",
+          "date": "2026-10-15",
+          "sourceId": "techcrunch-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "The new shopping tool is available in the U.S. across Google Search and the Gemini app.",
+      "links": []
+    },
+    {
+      "key": "grok voice",
+      "name": "Grok Voice",
+      "kind": "model",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Meet Grok Voice 3.0: SpaceXAI Voice Agent Model Ranks #1 on Artificial Analysis",
+          "url": "https://www.marktechpost.com/2026/10/14/meet-grok-voice-3-0-spacexai-voice-agent-model-ranks-1-on-artificial-analysis/",
+          "date": "2026-10-15",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "SpaceXAI just released Grok Voice 3.0. Grok Voice 3.0 is a SpaceXAI speech-to-speech model that listens, reasons, calls tools and speaks. It now ranks first on the Artificial Analysis Speech-to-Speech Index with a score of 86.9.",
+      "links": [
+        "https://x.ai/news/grok-voice-3",
+        "https://artificialanalysis.ai/speech-to-speech",
+        "https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech",
+        "https://servicenow.github.io/eva",
+        "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://docs.x.ai/developers/pricing",
+        "https://x.com/intent/follow?screen_name=marktechpost",
+        "https://www.reddit.com/r/machinelearningnews/",
+        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
+        "https://t.me/machinelearningresearchnews",
+        "https://www.marktechpost.com/2026/10/14/meet-grok-voice-3-0-spacexai-voice-agent-model-ranks-1-on-artificial-analysis/"
+      ]
+    },
+    {
+      "key": "instant soundtracks",
+      "name": "Instant Soundtracks",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "ElevenLabs blog",
+          "title": "Introducing Instant Soundtracks",
+          "url": "https://elevenlabs.io/blog/introducing-instant-soundtracks",
+          "date": "2026-10-15",
+          "sourceId": "elevenlabs",
+          "tier": "press"
+        }
+      ],
+      "summary": "Introducing Instant Soundtracks, convert video to music and sound effects automatically.",
+      "links": []
+    },
+    {
+      "key": "jev",
+      "name": "Jev",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "TypeSafe AI Releases Jev 1.14 With Images, Box Type and 262k Context",
+          "url": "https://www.marktechpost.com/2026/10/14/typesafe-ai-jev-1-14-images-box-long-context/",
+          "date": "2026-10-15",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "TypeSafe AI released Jev 1.14 under the jev-preview alias. The System One model adds experimental image input, a Box bounding-box type and an opt-in 262k-token context, at $0.042 per million input tokens.",
+      "links": [
+        "https://typesafe.ai/blog/jev-1-14",
+        "https://docs.typesafe.ai/concepts/system-one",
+        "https://docs.typesafe.ai/primitives",
+        "https://typesafe.ai/",
+        "https://docs.typesafe.ai/images",
+        "https://docs.typesafe.ai/images#limits",
+        "https://docs.typesafe.ai/primitives/box",
+        "https://docs.typesafe.ai/models#context-length",
+        "https://docs.typesafe.ai/models",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "https://ai.google.dev/gemini-api/docs/image-understanding",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "key": "typesafe ai",
+      "name": "TypeSafe AI",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "TypeSafe AI Releases Jev 1.14 With Images, Box Type and 262k Context",
+          "url": "https://www.marktechpost.com/2026/10/14/typesafe-ai-jev-1-14-images-box-long-context/",
+          "date": "2026-10-15",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "TypeSafe AI released Jev 1.14 under the jev-preview alias. The System One model adds experimental image input, a Box bounding-box type and an opt-in 262k-token context, at $0.042 per million input tokens.",
+      "links": [
+        "https://typesafe.ai/blog/jev-1-14",
+        "https://docs.typesafe.ai/concepts/system-one",
+        "https://docs.typesafe.ai/primitives",
+        "https://typesafe.ai/",
+        "https://docs.typesafe.ai/images",
+        "https://docs.typesafe.ai/images#limits",
+        "https://docs.typesafe.ai/primitives/box",
+        "https://docs.typesafe.ai/models#context-length",
+        "https://docs.typesafe.ai/models",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "https://ai.google.dev/gemini-api/docs/image-understanding",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "key": "datalab",
+      "name": "Datalab",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Datalab Releases OmniParseBench: An Open OCR Benchmark With 16,288 Pass/Fail Tests to Audit OCR Parsers",
+          "url": "https://www.marktechpost.com/2026/10/14/datalab-omniparsebench-open-ocr-document-parsing-benchmark/",
+          "date": "2026-10-14",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Datalab released OmniParseBench, an open OCR benchmark with 16,288 yes/no tests on 2,937 pages in 92 languages. Every score is a pass rate you can slice by tag, script or language.",
+      "links": [
+        "https://aicampaign.live/omnipar",
+        "https://huggingface.co/datasets/datalab-to/omni_parse_bench",
+        "https://huggingface.co/datasets/allenai/olmOCR-bench",
+        "https://github.com/run-llama/ParseBench",
+        "https://github.com/datalab-to/omni_parse_bench",
+        "https://github.com/datalab-to/omni_parse_bench/blob/main/docs/building-tests.md",
+        "https://www.datalab.to/blog/omni-parse-bench",
+        "https://github.com/datalab-to/omni_parse_bench/blob/main/docs/API.md#asking-a-question",
+        "https://github.com/opendatalab/OmniDocBench",
+        "https://www.marktechpost.com/2026/10/14/datalab-omniparsebench-open-ocr-document-parsing-benchmark/",
+        "https://www.marktechpost.com/"
+      ]
+    },
+    {
+      "key": "drama",
+      "name": "Drama",
+      "kind": "model",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Fish Audio Releases Drama 3, a 35B Open-Weight MoE Text-to-Speech Model",
+          "url": "https://www.marktechpost.com/2026/10/14/fish-audio-drama-3-open-weight-tts-model/",
+          "date": "2026-10-14",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Fish Audio released Drama 3, a 35B mixture-of-experts text-to-speech model with about 3B active parameters. It takes plain-language direction, covers 83 languages and ships open weights under a revenue-capped community license.",
+      "links": [
+        "https://beta.fish.audio/blog/fish-audio-drama-3/",
+        "https://huggingface.co/fishaudio/drama-3",
+        "https://docs.fish.audio/features/text-to-speech/drama-3",
+        "https://fish.audio/blog/fish-audio-open-sources-s2/",
+        "https://artificialanalysis.ai/text-to-speech#pronunciation-robustness",
+        "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+        "https://speech.fish.audio/install/",
+        "https://sgl-project.github.io/sglang-omni/cookbook/fishaudio_drama3.html",
+        "https://huggingface.co/fishaudio/drama-3/blob/main/LICENSE",
+        "https://huggingface.co/fishaudio/s2-pro",
+        "https://elevenlabs.io/blog/eleven-v4",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-audio-3-0-tts-plus"
+      ]
+    },
+    {
+      "key": "fish audio",
+      "name": "Fish Audio",
+      "kind": "model",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Fish Audio Releases Drama 3, a 35B Open-Weight MoE Text-to-Speech Model",
+          "url": "https://www.marktechpost.com/2026/10/14/fish-audio-drama-3-open-weight-tts-model/",
+          "date": "2026-10-14",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Fish Audio released Drama 3, a 35B mixture-of-experts text-to-speech model with about 3B active parameters. It takes plain-language direction, covers 83 languages and ships open weights under a revenue-capped community license.",
+      "links": [
+        "https://beta.fish.audio/blog/fish-audio-drama-3/",
+        "https://huggingface.co/fishaudio/drama-3",
+        "https://docs.fish.audio/features/text-to-speech/drama-3",
+        "https://fish.audio/blog/fish-audio-open-sources-s2/",
+        "https://artificialanalysis.ai/text-to-speech#pronunciation-robustness",
+        "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+        "https://speech.fish.audio/install/",
+        "https://sgl-project.github.io/sglang-omni/cookbook/fishaudio_drama3.html",
+        "https://huggingface.co/fishaudio/drama-3/blob/main/LICENSE",
+        "https://huggingface.co/fishaudio/s2-pro",
+        "https://elevenlabs.io/blog/eleven-v4",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-audio-3-0-tts-plus"
+      ]
+    },
+    {
+      "key": "lfm2 5 24b a",
+      "name": "LFM2.5-24B-A",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Liquid AI Releases LFM2.5-24B-A2B: A 2B-Active MoE for On-Device Agents",
+          "url": "https://www.marktechpost.com/2026/10/14/liquid-ai-lfm2-5-24b-a2b/",
+          "date": "2026-10-14",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Liquid AI released LFM2.5-24B-A2B, an open-weight 24B Mixture-of-Experts reasoning model with 2B active parameters. It targets local agents, scoring 48.09 on LiveClaw and decoding 184 tokens/s on an Apple M5 Max.",
+      "links": [
+        "https://www.liquid.ai/blog/lfm2-5-24b-a2b",
+        "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+        "https://docs.liquid.ai/lfm/models/lfm25-24b-a2b",
+        "https://www.liquid.ai/blog/lfm2-24b-a2b",
+        "https://www.liquid.ai/blog/tokenizer-expansion",
+        "https://openclaw.ai/",
+        "https://hermes-agent.nousresearch.com/",
+        "https://pi.dev/",
+        "https://opencode.ai/",
+        "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+        "https://huggingface.co/google/gemma-4-26B-A4B-it",
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16"
+      ]
+    },
+    {
+      "key": "liquid ai",
+      "name": "Liquid AI",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Liquid AI Releases LFM2.5-24B-A2B: A 2B-Active MoE for On-Device Agents",
+          "url": "https://www.marktechpost.com/2026/10/14/liquid-ai-lfm2-5-24b-a2b/",
+          "date": "2026-10-14",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Liquid AI released LFM2.5-24B-A2B, an open-weight 24B Mixture-of-Experts reasoning model with 2B active parameters. It targets local agents, scoring 48.09 on LiveClaw and decoding 184 tokens/s on an Apple M5 Max.",
+      "links": [
+        "https://www.liquid.ai/blog/lfm2-5-24b-a2b",
+        "https://huggingface.co/LiquidAI/LFM2.5-24B-A2B",
+        "https://docs.liquid.ai/lfm/models/lfm25-24b-a2b",
+        "https://www.liquid.ai/blog/lfm2-24b-a2b",
+        "https://www.liquid.ai/blog/tokenizer-expansion",
+        "https://openclaw.ai/",
+        "https://hermes-agent.nousresearch.com/",
+        "https://pi.dev/",
+        "https://opencode.ai/",
+        "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+        "https://huggingface.co/google/gemma-4-26B-A4B-it",
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16"
+      ]
+    },
+    {
+      "key": "omniparsebench",
+      "name": "OmniParseBench",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Datalab Releases OmniParseBench: An Open OCR Benchmark With 16,288 Pass/Fail Tests to Audit OCR Parsers",
+          "url": "https://www.marktechpost.com/2026/10/14/datalab-omniparsebench-open-ocr-document-parsing-benchmark/",
+          "date": "2026-10-14",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Datalab released OmniParseBench, an open OCR benchmark with 16,288 yes/no tests on 2,937 pages in 92 languages. Every score is a pass rate you can slice by tag, script or language.",
+      "links": [
+        "https://aicampaign.live/omnipar",
+        "https://huggingface.co/datasets/datalab-to/omni_parse_bench",
+        "https://huggingface.co/datasets/allenai/olmOCR-bench",
+        "https://github.com/run-llama/ParseBench",
+        "https://github.com/datalab-to/omni_parse_bench",
+        "https://github.com/datalab-to/omni_parse_bench/blob/main/docs/building-tests.md",
+        "https://www.datalab.to/blog/omni-parse-bench",
+        "https://github.com/datalab-to/omni_parse_bench/blob/main/docs/API.md#asking-a-question",
+        "https://github.com/opendatalab/OmniDocBench",
+        "https://www.marktechpost.com/2026/10/14/datalab-omniparsebench-open-ocr-document-parsing-benchmark/",
+        "https://www.marktechpost.com/"
+      ]
+    },
+    {
       "key": "scimplify",
       "name": "Scimplify",
       "kind": "tool",
@@ -727,6 +1383,27 @@
       "links": []
     },
     {
+      "key": "nvidia run",
+      "name": "NVIDIA Run",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "NVIDIA developer blog",
+          "title": "NVIDIA Run:ai Is Now Open Source as Part of NVIDIA DSX AI Factory Platform",
+          "url": "https://developer.nvidia.com/blog/nvidia-runai-is-now-open-source-as-part-of-nvidia-dsx-ai-factory-platform/",
+          "date": "2026-10-13",
+          "sourceId": "nvidia-dev",
+          "tier": "press"
+        }
+      ],
+      "summary": "NVIDIA is making the full NVIDIA Run:ai platform available as open source software, giving customers, developers, and ecosystem partners access to...",
+      "links": [
+        "https://developer.nvidia.com/blog/nvidia-runai-is-now-open-source-as-part-of-nvidia-dsx-ai-factory-platform/"
+      ]
+    },
+    {
       "key": "pluto security",
       "name": "Pluto Security",
       "kind": "tool",
@@ -743,6 +1420,235 @@
         }
       ],
       "summary": "The problem with giving everyone in a company access to AI tools is that people will use them in unexpected ways. And that fact is steadily seeding fears that companies now have new, gaping security holes in their systems or, at least, will soon.",
+      "links": []
+    },
+    {
+      "key": "brand kit",
+      "name": "Brand Kit",
+      "kind": "tool",
+      "firstSeen": "2026-10-09",
+      "lastSeen": "2026-10-09",
+      "mentions": [
+        {
+          "source": "ElevenLabs blog",
+          "title": "Introducing Brand Kit",
+          "url": "https://elevenlabs.io/blog/introducing-brand-kit",
+          "date": "2026-10-09",
+          "sourceId": "elevenlabs",
+          "tier": "press"
+        }
+      ],
+      "summary": "Add your logo, fonts and colors once, and everything you make pulls them in automatically. Ask for a launch campaign for a new product and it comes back on-brand.",
+      "links": []
+    },
+    {
+      "key": "clef omni",
+      "name": "Clef-omni",
+      "kind": "tool",
+      "firstSeen": "2026-10-09",
+      "lastSeen": "2026-10-09",
+      "mentions": [
+        {
+          "source": "Cloudflare blog: AI",
+          "title": "Introducing Clef-omni with full multimodality, plus a faster Clef and a cheaper Clef-flash",
+          "url": "https://blog.cloudflare.com/clef-faster-cheaper-multimodal/",
+          "date": "2026-10-09",
+          "sourceId": "cloudflare-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "We are expanding the Clef decision model family with Clef-omni, natively processing audio, video, images, and text in a single pipeline. We’ve also lowered Clef-flash pricing and boosted Clef inference speeds by up to 2.0x.",
+      "links": [
+        "https://blog.cloudflare.com/clef-decision-models/",
+        "https://developers.cloudflare.com/workers-ai/models/clef-omni",
+        "https://huggingface.co/Cloudflare/clef-omni",
+        "https://huggingface.co/Cloudflare/clef",
+        "https://huggingface.co/Cloudflare/clef-flash",
+        "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+        "https://evals.typesafe.ai/",
+        "https://developers.cloudflare.com/ai/models/",
+        "https://github.com/sgl-project/sglang/pull/42721",
+        "https://huggingface.co/collections/Cloudflare/clef",
+        "https://docs.sglang.io/cookbook/autoregressive/Cloudflare/clef#hw=h200&variant=clef&quant=bf16&strategy=balanced&nodes=single",
+        "https://github.com/cloudflare/cloudflare-docs/pull/34139"
+      ]
+    },
+    {
+      "key": "ai friendly hardware",
+      "name": "AI-friendly hardware",
+      "kind": "tool",
+      "firstSeen": "2026-10-08",
+      "lastSeen": "2026-10-08",
+      "mentions": [
+        {
+          "source": "Ars Technica AI",
+          "title": "Microsoft event debuts new AI-friendly hardware and Windows changes",
+          "url": "https://arstechnica.com/gadgets/2026/10/microsoft-event-debuts-new-ai-friendly-hardware-and-windows-changes/",
+          "date": "2026-10-08",
+          "sourceId": "ars-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "Get ready for more AI in your Windows and more AI on the desktop.",
+      "links": [
+        "https://arstechnica.com/gadgets/2026/06/microsoft-surface-laptop-ultra-will-be-among-the-first-nvidia-rtx-spark-arm-pcs/",
+        "https://www.microsoft.com/en-us/surface/devices/surface-laptop-ultra",
+        "https://store.steampowered.com/app/3010850/Gears_of_War_EDay/",
+        "https://arstechnica.com/gadgets/2026/10/microsoft-event-debuts-new-ai-friendly-hardware-and-windows-changes/",
+        "https://arstechnica.com/gadgets/2026/10/microsoft-event-debuts-new-ai-friendly-hardware-and-windows-changes/#comments"
+      ]
+    },
+    {
+      "key": "elevenreader",
+      "name": "ElevenReader",
+      "kind": "tool",
+      "firstSeen": "2026-10-08",
+      "lastSeen": "2026-10-08",
+      "mentions": [
+        {
+          "source": "ElevenLabs blog",
+          "title": "ElevenReader launches in Brazil with Fábio Porchat and 70,000 Brazilian Portuguese books in audio",
+          "url": "https://elevenlabs.io/blog/elevenreader-launches-in-brazil-with-fbio-porchat-and-70000-brazilian-portuguese-books-in-audio",
+          "date": "2026-10-08",
+          "sourceId": "elevenlabs",
+          "tier": "press"
+        }
+      ],
+      "summary": "ElevenReader launches in Brazil, Fábio Porchat joins alongside 70,000 Brazilian Portuguese titles in audio",
+      "links": []
+    },
+    {
+      "key": "elevenagents architect",
+      "name": "ElevenAgents Architect",
+      "kind": "tool",
+      "firstSeen": "2026-10-06",
+      "lastSeen": "2026-10-06",
+      "mentions": [
+        {
+          "source": "ElevenLabs blog",
+          "title": "Introducing ElevenAgents Architect",
+          "url": "https://elevenlabs.io/blog/elevenagents-architect",
+          "date": "2026-10-06",
+          "sourceId": "elevenlabs",
+          "tier": "press"
+        }
+      ],
+      "summary": "Find the improvements your team would otherwise miss. Bring a goal, get back proposals already drafted and validated in simulated conversations.",
+      "links": []
+    },
+    {
+      "key": "clef",
+      "name": "Clef",
+      "kind": "model",
+      "firstSeen": "2026-10-01",
+      "lastSeen": "2026-10-01",
+      "mentions": [
+        {
+          "source": "Cloudflare blog: AI",
+          "title": "Introducing Clef: our open-source decision models, and new RL fine-tuning platform",
+          "url": "https://blog.cloudflare.com/clef-decision-models/",
+          "date": "2026-10-01",
+          "sourceId": "cloudflare-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "We are introducing Clef and Clef-flash, open-source decision models hosted on Workers AI for high-speed classification and agentic workflows. Also launching: a new reinforcement learning platform that allows developers to fine-tune decision models using their own data.",
+      "links": [
+        "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+        "https://developers.cloudflare.com/workers-ai/models/clef",
+        "https://huggingface.co/spaces/multimodalart/jev-decision-index",
+        "https://clef-evals.workers-ai-mle.workers.dev/",
+        "https://huggingface.co/Cloudflare/clef",
+        "https://huggingface.co/Cloudflare/clef-flash",
+        "https://huggingface.co/jaredpalmer/kev-9b",
+        "https://huggingface.co/convaiinnovations/laya",
+        "https://huggingface.co/collections/typesafe/workflowevals",
+        "https://x.com/michellechen/status/2101091012559151480",
+        "https://x.com/mmastrac",
+        "https://github.com/vllm-project/vllm/pull/57250"
+      ]
+    },
+    {
+      "key": "quine",
+      "name": "Quine",
+      "kind": "tool",
+      "firstSeen": "2026-09-29",
+      "lastSeen": "2026-09-29",
+      "mentions": [
+        {
+          "source": "Microsoft Research",
+          "title": "Introducing Quine: An AI research system designed for the complexity of biology",
+          "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology/",
+          "date": "2026-09-29",
+          "sourceId": "microsoft-research",
+          "tier": "press"
+        }
+      ],
+      "summary": "Biology doesn't operate in silos, and neither should the AI representation of it. Quine is an early-stage research effort to create a multimodal world model of biology.",
+      "links": [
+        "https://microsoft.github.io/quine/#fellowship",
+        "https://techcommunity.microsoft.com/category/azure/blog/microsoft-discovery-blog",
+        "https://www.microsoft.com/en-us/research/publications/?facet%5Bdate%5D%5Bfixed%5D=any&facet%5Btax%5D%5Bmsr-research-area%5D[]=13553&pg=1&sort_by=most-recent",
+        "https://www.microsoft.com/en-us/research/project/project-ex-vivo/",
+        "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology/",
+        "https://www.microsoft.com/en-us/research"
+      ]
+    },
+    {
+      "key": "eleven",
+      "name": "Eleven",
+      "kind": "model",
+      "firstSeen": "2026-09-28",
+      "lastSeen": "2026-09-28",
+      "mentions": [
+        {
+          "source": "ElevenLabs blog",
+          "title": "Introducing Eleven v4, our most emotive model",
+          "url": "https://elevenlabs.io/blog/eleven-v4",
+          "date": "2026-09-28",
+          "sourceId": "elevenlabs",
+          "tier": "press"
+        }
+      ],
+      "summary": "Eleven v4 and v4 Turbo: more emotional nuance, faster responses, stronger voice cloning. Live now in ElevenAgents, ElevenCreative and API.",
+      "links": []
+    },
+    {
+      "key": "eleven v",
+      "name": "Eleven v",
+      "kind": "tool",
+      "firstSeen": "2026-09-28",
+      "lastSeen": "2026-09-28",
+      "mentions": [
+        {
+          "source": "ElevenLabs blog",
+          "title": "Eleven v4 Turbo is now available in ElevenAgents",
+          "url": "https://elevenlabs.io/blog/eleven-v4-turbo-in-elevenagents",
+          "date": "2026-09-28",
+          "sourceId": "elevenlabs",
+          "tier": "press"
+        }
+      ],
+      "summary": "Our fastest and most emotive voice model, now powering live conversations in over 90 languages.",
+      "links": []
+    },
+    {
+      "key": "image",
+      "name": "Image",
+      "kind": "tool",
+      "firstSeen": "2026-09-26",
+      "lastSeen": "2026-09-26",
+      "mentions": [
+        {
+          "source": "ElevenLabs blog",
+          "title": "Introducing the Image, Video, and Template APIs",
+          "url": "https://elevenlabs.io/blog/introducing-the-image-video-and-templates-apis",
+          "date": "2026-09-26",
+          "sourceId": "elevenlabs",
+          "tier": "press"
+        }
+      ],
+      "summary": "Image and video generation, and templates built in Flows, are now available via the ElevenLabs API.",
       "links": []
     },
     {
@@ -1472,25 +2378,27 @@
       ]
     },
     {
-      "key": "muse wonder",
-      "name": "Muse Wonder",
+      "key": "qwengyre",
+      "name": "QwenGyre",
       "kind": "tool",
       "firstSeen": "2026-10-12",
       "lastSeen": "2026-10-12",
       "mentions": [
         {
-          "source": "Product Hunt: AI",
-          "title": "Muse Wonder",
-          "url": "https://www.producthunt.com/products/meta-ai",
+          "source": "r/LocalLLaMA, top this week",
+          "title": "Qwen released QwenGyre - RL framework for training AI agents on extremely long complex tasks",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1x41myz/qwen_released_qwengyre_rl_framework_for_training/",
           "date": "2026-10-12",
-          "sourceId": "producthunt-ai",
+          "sourceId": "reddit-localllama",
           "tier": "community"
         }
       ],
-      "summary": "Meta’s most capable models for personal agents Discussion | Link",
+      "summary": "Introducing QwenGyre, bringing elastic RL to extreme-long-horizon (XLong) agent training. It launches with two core designs: - Elastic Scheduler: reallocates GPUs between rollout & training as demand shifts—live executions never interrupted. Up to 1.85× speedup over Colocate, 1.78× over Async.",
       "links": [
-        "https://www.producthunt.com/products/meta-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1278066?app_id=339"
+        "https://www.reddit.com/r/LocalLLaMA/comments/1x41myz/qwen_released_qwengyre_rl_framework_for_training/",
+        "https://arxiv.org/abs/2609.33848",
+        "https://www.reddit.com/user/ResearchCrafty1804",
+        "https://www.reddit.com/gallery/1x41myz"
       ]
     },
     {
