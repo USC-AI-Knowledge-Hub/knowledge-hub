@@ -34,6 +34,16 @@ describe("discovery run", () => {
     expect(s.added).toEqual([]);
   });
 
+  it("treats a removed feed (410) as dead at once, and a new address as a fresh start", async () => {
+    const gone = await discover(deps({ fetchText: async (u) => { if (u.includes("d.example")) throw new Error("HTTP 410"); return rss; } }), inputs());
+    const h = gone.discovered.sources.find((x) => x.id === "d")!;
+    expect(h.failures).toBeGreaterThanOrEqual(7);
+    expect(gone.warnings.join(" ")).toMatch(/Dead feed has failed/);
+    const moved: Source = { ...dead, url: "https://d.example/new-feed" };
+    const fresh = await discover(deps({ sources: [vendor, moved] }), { ...inputs(), discovered: gone.discovered });
+    expect(fresh.discovered.sources.find((x) => x.id === "d")?.failures).toBe(1);
+  });
+
   it("files every seeded tool somewhere", async () => {
     const s = await discover(deps(), inputs());
     const ids = new Set(s.taxonomy.categories.map((c) => c.id));

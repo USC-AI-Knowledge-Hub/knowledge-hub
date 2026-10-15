@@ -10,7 +10,7 @@ export const SOURCES: Source[] = [
   { id: "openai", name: "OpenAI news", url: "https://openai.com/news/rss.xml", tier: "vendor", maker: "OpenAI", aiOnly: true },
   { id: "google-ai", name: "Google AI blog", url: "https://blog.google/technology/ai/rss/", tier: "vendor", maker: "Google", aiOnly: true },
   { id: "deepmind", name: "Google DeepMind blog", url: "https://deepmind.google/blog/rss.xml", tier: "vendor", maker: "Google DeepMind", aiOnly: true },
-  { id: "microsoft-ai", name: "Microsoft AI blog", url: "https://blogs.microsoft.com/ai/feed/", tier: "vendor", maker: "Microsoft", aiOnly: true },
+  { id: "microsoft-ai", name: "Microsoft AI blog", url: "https://news.microsoft.com/source/topics/ai/feed/", tier: "vendor", maker: "Microsoft", aiOnly: true },
   { id: "nvidia", name: "NVIDIA blog", url: "https://blogs.nvidia.com/feed/", tier: "vendor" },
   { id: "techcrunch-ai", name: "TechCrunch AI", url: "https://techcrunch.com/category/artificial-intelligence/feed/", tier: "press", aiOnly: true },
   { id: "verge-ai", name: "The Verge AI", url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", tier: "press", aiOnly: true },
