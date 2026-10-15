@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-10-14",
+  "updatedAt": "2026-10-15",
   "sources": [
     {
       "id": "hf-blog",
       "url": "https://huggingface.co/blog/feed.xml",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 16
     },
@@ -13,7 +13,7 @@
       "id": "openai",
       "url": "https://openai.com/news/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 40
     },
@@ -21,15 +21,15 @@
       "id": "google-ai",
       "url": "https://blog.google/technology/ai/rss/",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
-      "items": 14
+      "items": 12
     },
     {
       "id": "deepmind",
       "url": "https://deepmind.google/blog/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 11
     },
@@ -38,7 +38,7 @@
       "url": "https://blogs.microsoft.com/ai/feed/",
       "ok": false,
       "lastOk": null,
-      "failures": 2,
+      "failures": 3,
       "items": 0,
       "error": "HTTP 410"
     },
@@ -46,7 +46,7 @@
       "id": "nvidia",
       "url": "https://blogs.nvidia.com/feed/",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 18
     },
@@ -54,7 +54,7 @@
       "id": "techcrunch-ai",
       "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 20
     },
@@ -62,7 +62,7 @@
       "id": "verge-ai",
       "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 10
     },
@@ -71,7 +71,7 @@
       "url": "https://venturebeat.com/category/ai/feed/",
       "ok": false,
       "lastOk": null,
-      "failures": 2,
+      "failures": 3,
       "items": 0,
       "error": "HTTP 429"
     },
@@ -79,7 +79,7 @@
       "id": "simonw",
       "url": "https://simonwillison.net/atom/everything/",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 30
     },
@@ -87,7 +87,7 @@
       "id": "one-useful-thing",
       "url": "https://www.oneusefulthing.org/feed",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 2
     },
@@ -95,17 +95,18 @@
       "id": "producthunt-ai",
       "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
       "ok": true,
-      "lastOk": "2026-10-14",
+      "lastOk": "2026-10-15",
       "failures": 0,
       "items": 40
     },
     {
       "id": "hn-show",
       "url": "https://hnrss.org/show?q=AI&points=60",
-      "ok": true,
+      "ok": false,
       "lastOk": "2026-10-14",
-      "failures": 0,
-      "items": 15
+      "failures": 1,
+      "items": 0,
+      "error": "HTTP 502"
     }
   ],
   "tools": [
@@ -188,7 +189,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-10-07",
-      "lastSeen": "2026-10-07",
+      "lastSeen": "2026-10-15",
       "evidence": [
         {
           "source": "Google AI blog",
@@ -273,7 +274,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -343,7 +344,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -486,7 +487,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -536,7 +537,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -560,7 +561,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -585,7 +586,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -609,7 +610,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -634,7 +635,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
+      "lastSeen": "2026-10-15",
       "evidence": []
     },
     {
@@ -656,8 +657,14 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-10-13",
-      "lastSeen": "2026-10-13",
+      "lastSeen": "2026-10-15",
       "evidence": [
+        {
+          "source": "NVIDIA blog",
+          "title": "NVIDIA Announces New Investments in the UK Startup Ecosystem",
+          "url": "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
+          "date": "2026-10-14"
+        },
         {
           "source": "NVIDIA blog",
           "title": "NVIDIA Announces New Investments in France’s Startups",
@@ -725,6 +732,44 @@
         }
       ],
       "summary": "Scimplify's annualized revenue run rate has tripled to $200 million as it eyes U.S. expansion.",
+      "links": []
+    },
+    {
+      "key": "youtube music",
+      "name": "YouTube Music",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "TechCrunch AI",
+          "title": "YouTube Music launches new labels as AI-generated music floods streaming platforms",
+          "url": "https://techcrunch.com/2026/10/14/youtube-music-launches-new-labels-as-ai-generated-music-floods-streaming-platforms/",
+          "date": "2026-10-14",
+          "sourceId": "techcrunch-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "The label will appear on the player page and include songs entirely generated by AI or partially, such as AI involved in composition and vocals.",
+      "links": []
+    },
+    {
+      "key": "zenzap",
+      "name": "Zenzap",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "TechCrunch AI",
+          "title": "Zenzap raises $44M for its AI chat app that aims to replace WhatsApp in the workplace",
+          "url": "https://techcrunch.com/2026/10/14/zenzap-raises-44m-for-its-ai-chat-app-that-aims-to-replace-whatsapp-in-the-workplace/",
+          "date": "2026-10-14",
+          "sourceId": "techcrunch-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "Zenzap is used by organizations including Starbucks and Taco Bell.",
       "links": []
     },
     {
@@ -1273,6 +1318,28 @@
       ]
     },
     {
+      "key": "cli manager",
+      "name": "CLI Manager",
+      "kind": "tool",
+      "firstSeen": "2026-10-10",
+      "lastSeen": "2026-10-10",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "CLI Manager",
+          "url": "https://www.producthunt.com/products/cli-manager",
+          "date": "2026-10-10",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Let one AI agent open and drive your other CLI agents Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/cli-manager?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1275664?app_id=339"
+      ]
+    },
+    {
       "key": "make brain",
       "name": "Make Brain",
       "kind": "tool",
@@ -1539,6 +1606,50 @@
       ]
     },
     {
+      "key": "postnitro",
+      "name": "PostNitro",
+      "kind": "tool",
+      "firstSeen": "2026-10-07",
+      "lastSeen": "2026-10-07",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "PostNitro for Agents",
+          "url": "https://www.producthunt.com/products/postnitro",
+          "date": "2026-10-07",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Let your AI agent design and publish social posts Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/postnitro?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1273007?app_id=339"
+      ]
+    },
+    {
+      "key": "upsolve row level security",
+      "name": "Upsolve Row-Level Security",
+      "kind": "tool",
+      "firstSeen": "2026-10-07",
+      "lastSeen": "2026-10-07",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Upsolve Row-Level Security",
+          "url": "https://www.producthunt.com/products/upsolve-ai",
+          "date": "2026-10-07",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Data permissions your AI agent can't talk its way past Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/upsolve-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1273136?app_id=339"
+      ]
+    },
+    {
       "key": "mausbot",
       "name": "MausBot",
       "kind": "tool",
@@ -1712,28 +1823,6 @@
       "links": [
         "https://www.producthunt.com/products/inferock?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1265035?app_id=339"
-      ]
-    },
-    {
-      "key": "kai",
-      "name": "Kai",
-      "kind": "tool",
-      "firstSeen": "2026-09-23",
-      "lastSeen": "2026-09-23",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Kai",
-          "url": "https://www.producthunt.com/products/hirekai",
-          "date": "2026-09-23",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Autonomous assistant designed to handle meetings and email Discussion | Link",
-      "links": [
-        "https://www.producthunt.com/products/hirekai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1259407?app_id=339"
       ]
     }
   ],
