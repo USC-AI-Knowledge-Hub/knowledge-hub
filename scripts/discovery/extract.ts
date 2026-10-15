@@ -63,6 +63,8 @@ export function validName(name: string): boolean {
   if (GENERIC_WORDS.has(tokens[tokens.length - 1].toLowerCase()) || GENERIC_WORDS.has(tokens[0].toLowerCase())) return false;
   const key = keyOf(name);
   if (!key || COMPANIES.has(key) || COMPANIES.has(key.replace(/ /g, ""))) return false;
+  // A date ("Oct. 15th") is not a name.
+  if (/^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+\d/i.test(name)) return false;
   // A leftover price, percentage or number is not a name.
   if (/[$%€£]|\d{4,}/.test(name)) return false;
   return true;

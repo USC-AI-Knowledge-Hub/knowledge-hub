@@ -14,7 +14,8 @@
     "discover": "tsx scripts/discovery/index.ts",
     "model-sizes": "tsx scripts/model-sizes.ts",
     "brand-images": "tsx scripts/brand-images.ts",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "vet-feeds": "tsx scripts/discovery/vet-feeds.ts"
   },
   "repository": {
     "type": "git",

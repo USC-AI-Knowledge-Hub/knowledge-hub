@@ -1,0 +1,831 @@
+{
+  "at": "2026-10-15T19:32:00.539Z",
+  "current": [
+    {
+      "id": "hf-blog",
+      "name": "Hugging Face blog",
+      "tier": "vendor",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "posts": 879,
+      "recent": 18,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Muse Spark Open",
+        "FLUX.3 Image Klein",
+        "Falcon ASR",
+        "RL Environments"
+      ],
+      "sample": [
+        "Apertus 1.5 Release Notes",
+        "Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Met",
+        "Welcome FLUX.3 Image Klein in Diffusers"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "4 product names in 18 recent posts; 100% on topic."
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI news",
+      "tier": "vendor",
+      "url": "https://openai.com/news/rss.xml",
+      "posts": 1294,
+      "recent": 68,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "GPT-6.1 Sol",
+        "MentalHealthBench",
+        "GPT-6 Sol",
+        "Australian Youth Safety Blueprint",
+        "Astra"
+      ],
+      "sample": [
+        "Teaching students to think and learn through questions",
+        "Amp puts AI agents to work beyond code with OpenAI models",
+        "SentinelOne cuts malware analysis from weeks to hours"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "5 product names in 68 recent posts; 100% on topic."
+    },
+    {
+      "id": "google-ai",
+      "name": "Google AI blog",
+      "tier": "vendor",
+      "url": "https://blog.google/technology/ai/rss/",
+      "posts": 20,
+      "recent": 8,
+      "newest": "2026-10-13",
+      "aiShare": 1,
+      "names": [
+        "Playground"
+      ],
+      "sample": [
+        "Gemini 4 Argon: Built to solve your hardest problems",
+        "Introducing Playground: Create and play custom games",
+        "The latest AI news we announced in September 2026"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "1 product names in 8 recent posts; 100% on topic."
+    },
+    {
+      "id": "deepmind",
+      "name": "Google DeepMind blog",
+      "tier": "vendor",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "posts": 100,
+      "recent": 11,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "SynthID Bio",
+        "Gemini 3.8 Live"
+      ],
+      "sample": [
+        "Accelerating the search for antimicrobial peptides with Google Antigravity",
+        "Google DeepMind and Singapore Government collaborate to build fine-tuned AI model for scam",
+        "Developing Gemini 4 Argon responsibly and safely"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "2 product names in 11 recent posts; 100% on topic."
+    },
+    {
+      "id": "microsoft-ai",
+      "name": "Microsoft AI blog",
+      "tier": "vendor",
+      "url": "https://news.microsoft.com/source/topics/ai/feed/",
+      "posts": 10,
+      "recent": 2,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Microsoft’s latest custom chip"
+      ],
+      "sample": [
+        "Missed a lecture? This AI agent at Bar-Ilan University helps students catch up",
+        "Introducing Microsoft’s latest custom chip: Maia 300",
+        "What if everything changes tomorrow? A Canadian company is using AI to help businesses nav"
+      ],
+      "reachable": true,
+      "verdict": "skip",
+      "reason": "Only 2 posts in 30 days: too quiet to matter."
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA blog",
+      "tier": "vendor",
+      "url": "https://blogs.nvidia.com/feed/",
+      "posts": 18,
+      "recent": 18,
+      "newest": "2026-10-15",
+      "aiShare": 0.72,
+      "names": [],
+      "sample": [
+        "Be There for the Beginning: Celebrate the Launch of NVIDIA RTX Spark",
+        "Open From Data Center to Desktop: NVIDIA Expands Nemotron Family With Highest Efficiency S",
+        "Dial Up the Cloud: NVIDIA DLSS 4.5 Controls Arrive on GeForce NOW"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "techcrunch-ai",
+      "name": "TechCrunch AI",
+      "tier": "press",
+      "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "posts": 20,
+      "recent": 20,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Google’s Universal Cart shopping",
+        "Amazon’s Bee",
+        "YouTube Music",
+        "Zenzap",
+        "Scimplify"
+      ],
+      "sample": [
+        "Anthropic is letting METR researchers look under the hood with employee-level access",
+        "Bluesky expands its AI-powered Attie app to let anyone build websites, games, and more",
+        "Last chance to save up to $200 on your TechCrunch Founder Summit pass: Early booking ends "
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "5 product names in 20 recent posts; 100% on topic."
+    },
+    {
+      "id": "verge-ai",
+      "name": "The Verge AI",
+      "tier": "press",
+      "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Meta and Apple team up to make Muse AI models run better on Macs",
+        "Friends don’t let friends feed their data to AI agents",
+        "How Windows is being optimized for Nvidia’s RTX Spark laptops"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "venturebeat-ai",
+      "name": "VentureBeat AI",
+      "tier": "press",
+      "url": "https://venturebeat.com/category/ai/feed/",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": false,
+      "error": "HTTP 429",
+      "verdict": "skip",
+      "reason": "Could not be read (HTTP 429)."
+    },
+    {
+      "id": "simonw",
+      "name": "Simon Willison's blog",
+      "tier": "press",
+      "url": "https://simonwillison.net/atom/everything/",
+      "posts": 30,
+      "recent": 30,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Anthropic tells investors quarterly revenue up nearly 50% to $16.8bn ahead of IPO",
+        "Tree Appreciator",
+        "AI is mass decompiling games. That's both awesome and scary."
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "one-useful-thing",
+      "name": "One Useful Thing",
+      "tier": "press",
+      "url": "https://www.oneusefulthing.org/feed",
+      "posts": 20,
+      "recent": 2,
+      "newest": "2026-10-01",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "The Dot and the Swarm",
+        "The Overhang",
+        "Agency and Agents"
+      ],
+      "reachable": true,
+      "verdict": "skip",
+      "reason": "Only 2 posts in 30 days: too quiet to matter."
+    },
+    {
+      "id": "marktechpost",
+      "name": "MarkTechPost",
+      "tier": "press",
+      "url": "https://www.marktechpost.com/feed/",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "CLiF",
+        "CopilotKit",
+        "Jev 1.14",
+        "TypeSafe AI",
+        "Grok Voice 3.0",
+        "OmniParseBench",
+        "Datalab",
+        "Drama 3"
+      ],
+      "sample": [
+        "CopilotKit Releases CLiF: A Continual Learning Platform That Turns Agent Traces and User A",
+        "openKylin Outlines Its Vision for Reimagining Linux in the AI Era at Open Source Summit Eu",
+        "TypeSafe AI Releases Jev 1.14 With Images, Box Type and 262k Context"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "13 product names in 10 recent posts; 100% on topic."
+    },
+    {
+      "id": "github-ai",
+      "name": "GitHub blog: AI and ML",
+      "tier": "press",
+      "url": "https://github.blog/ai-and-ml/feed/",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-13",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "GitHub’s model for secret detection: Finding more secrets with less noise",
+        "GitHub Copilot app for Beginners: How to teach Copilot about your codebase",
+        "Secret protection must scale with software"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "aws-ml",
+      "name": "AWS machine learning blog",
+      "tier": "press",
+      "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+      "posts": 20,
+      "recent": 20,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Claude Haiku 5.5"
+      ],
+      "sample": [
+        "Meta’s Muse Spark Open now available in Amazon SageMaker JumpStart",
+        "Trust in Depth: Giving agents more autonomy without losing control",
+        "Build self-improving document processing using Amazon Bedrock AgentCore"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "1 product names in 20 recent posts; 100% on topic."
+    },
+    {
+      "id": "apple-ml",
+      "name": "Apple machine learning research",
+      "tier": "press",
+      "url": "https://machinelearning.apple.com/rss.xml",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Local and Distributed Large LLM Inference with MLX and RDMA on Mac Studio",
+        "Code-Switching Detection via Language-Selective Dimensions in Speech Foundation Models",
+        "The Design Space of Tri-Modal Masked Diffusion Models"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "google-research",
+      "name": "Google Research blog",
+      "tier": "press",
+      "url": "https://research.google/blog/rss/",
+      "posts": 100,
+      "recent": 11,
+      "newest": "2026-10-14",
+      "aiShare": 0.55,
+      "names": [],
+      "sample": [
+        "Putting Earth AI to work: Geospatial agents for our planet's biggest challenges",
+        "Analyzing technical documents with Deep Review",
+        "Research@ 2026: 10 ways we're amplifying human ingenuity"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "microsoft-research",
+      "name": "Microsoft Research",
+      "tier": "press",
+      "url": "https://www.microsoft.com/en-us/research/feed/",
+      "posts": 10,
+      "recent": 9,
+      "newest": "2026-10-15",
+      "aiShare": 0.78,
+      "names": [
+        "Quine"
+      ],
+      "sample": [
+        "Proof-based general-purpose computing with Magnetar",
+        "Simulating student learning for better AI tutoring",
+        "Agent Lightning v1.0: A 3,500-Line Lightweight Agentic RL Framework for Training Agents wi"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "1 product names in 9 recent posts; 78% on topic."
+    },
+    {
+      "id": "nvidia-dev",
+      "name": "NVIDIA developer blog",
+      "tier": "press",
+      "url": "https://developer.nvidia.com/blog/feed",
+      "posts": 100,
+      "recent": 43,
+      "newest": "2026-10-15",
+      "aiShare": 0.67,
+      "names": [
+        "NVIDIA Run"
+      ],
+      "sample": [
+        "NVIDIA Nemotron 3.5 Super VL Powers Specialized Agents with Multimodal Reasoning",
+        "Scale Agentic Coding Workflows with Meta’s Muse Spark Open on NVIDIA GB300 NVL72",
+        "Optimizing Agent Reliability and Tool Calling Efficiency for Chip Design Using NVIDIA NeMo"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "1 product names in 43 recent posts; 67% on topic."
+    },
+    {
+      "id": "cloudflare-ai",
+      "name": "Cloudflare blog: AI",
+      "tier": "press",
+      "url": "https://blog.cloudflare.com/tag/ai/rss/",
+      "posts": 20,
+      "recent": 20,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Clef-omni",
+        "Clef"
+      ],
+      "sample": [
+        "Cloudflare and OpenAI: Making AI discovery better for everyone",
+        "Introducing Clef-omni with full multimodality, plus a faster Clef and a cheaper Clef-flash",
+        "Everything we launched during Birthday Week 2026"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "2 product names in 20 recent posts; 100% on topic."
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs blog",
+      "tier": "press",
+      "url": "https://elevenlabs.io/blog/rss.xml",
+      "posts": 50,
+      "recent": 44,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Instant Soundtracks",
+        "Brand Kit",
+        "ElevenReader",
+        "ElevenLabs",
+        "ElevenAgents Architect",
+        "Eleven v4 Turbo",
+        "Eleven v4",
+        "Image"
+      ],
+      "sample": [
+        "Introducing Instant Soundtracks",
+        "Audio deepfake detection: How it works & how to verify ElevenLabs audio",
+        "How we solve 22,000 support tickets every month with ElevenAgents"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "11 product names in 44 recent posts; 100% on topic."
+    },
+    {
+      "id": "the-decoder",
+      "name": "The Decoder",
+      "tier": "press",
+      "url": "https://the-decoder.com/feed/",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Muse Spark Open is Meta's answer to Qwen, GLM, and Kimi in the open-weight race",
+        "Black Forest Labs' open-weights image model FLUX 3 Image Klein runs on consumer GPUs with ",
+        "Google wants Gemini 4 Argon to be the only AI model robots need"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "ars-ai",
+      "name": "Ars Technica AI",
+      "tier": "press",
+      "url": "https://arstechnica.com/ai/feed/",
+      "posts": 20,
+      "recent": 20,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "AI-friendly hardware"
+      ],
+      "sample": [
+        "Report: FTC probes Anthropic, OpenAI after Trump dismissed AI fears as “hoax”",
+        "Singer or clanker? YouTube Music will tell you with new gen AI labeling.",
+        "Epic says its new vibe-coded Epic Games Launcher is faster than Steam"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "1 product names in 20 recent posts; 100% on topic."
+    },
+    {
+      "id": "wired-ai",
+      "name": "WIRED AI",
+      "tier": "press",
+      "url": "https://www.wired.com/feed/tag/ai/latest/rss",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-14",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "AI Came for Math. Now It’s Chasing the Rest of Science",
+        "My Friend Has No Soul",
+        "Men Can’t Stop Faking How Much They Know About AI"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "mit-tr-ai",
+      "name": "MIT Technology Review: AI",
+      "tier": "press",
+      "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-13",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Open models have real benefits. Do they outweigh the risks?",
+        "AI labs are buying data from dead startups to train their models",
+        "We’re putting too much faith in AI’s ability to say no"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "zdnet-ai",
+      "name": "ZDNET AI",
+      "tier": "press",
+      "url": "https://www.zdnet.com/topic/artificial-intelligence/rss.xml",
+      "posts": 25,
+      "recent": 25,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Renting? These 2 new Apple smart home devices are worth your money (and these 5 are not)",
+        "Apple’s first touchscreen MacBook is days away – with another OLED surprise",
+        "Claude sent a false homicide tip to police – and it’s part of a troubling AI pattern"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "latent-space",
+      "name": "Latent Space",
+      "tier": "press",
+      "url": "https://www.latent.space/feed",
+      "posts": 20,
+      "recent": 20,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "[AINews] Modal’s $1B ARR, $16B Series D makes it NYC’s newest AI Infra Decacorn, 3x usage ",
+        "Crossing the Threshold: How OpenAI and Anthropic Approach Autonomy and Safety in Financial",
+        "Lab-in-the-Loop at Compute Speed — Ian Quigley, Leash Bio"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "interconnects",
+      "name": "Interconnects",
+      "tier": "press",
+      "url": "https://www.interconnects.ai/feed",
+      "posts": 20,
+      "recent": 5,
+      "newest": "2026-10-09",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "I expect rapid progress but not towards general superintelligence",
+        "The Cyber Risk Discourse is Broken",
+        "Debating RSI, the US-China Gap, and Jaggedness with JS Denain of Epoch AI"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "bens-bites",
+      "name": "Ben's Bites",
+      "tier": "press",
+      "url": "https://www.bensbites.com/feed",
+      "posts": 20,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Prompt tips from Anthropic",
+        "Zuck’s wonder...full",
+        "Text is so 2023"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "producthunt-ai",
+      "name": "Product Hunt: AI",
+      "tier": "community",
+      "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
+      "posts": 50,
+      "recent": 48,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "SuperLocalMemory",
+        "Backdrop",
+        "Navige",
+        "Audimate",
+        "Rushilo",
+        "SaidTrace",
+        "Brussle",
+        "Atticus"
+      ],
+      "sample": [
+        "SuperLocalMemory",
+        "Backdrop",
+        "AI Sandboxes by Buddy"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "44 product names in 48 recent posts; 100% on topic."
+    },
+    {
+      "id": "reddit-localllama",
+      "name": "r/LocalLLaMA, top this week",
+      "tier": "community",
+      "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
+      "posts": 25,
+      "recent": 25,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Muse Spark Open",
+        "QwenGyre"
+      ],
+      "sample": [
+        "It's been too quiet on the other side of the Pacific",
+        "Open-source Mac app that runs EmbeddingGemma 2 locally to search your files by what’s in t",
+        "Qualcomm CEO reveals AI companies want phones running 100-billion-parameter models continu"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "2 product names in 25 recent posts; 100% on topic."
+    },
+    {
+      "id": "hn-show",
+      "name": "Show HN",
+      "tier": "community",
+      "url": "https://hnrss.org/show?q=AI&points=60",
+      "posts": 20,
+      "recent": 14,
+      "newest": "2026-10-14",
+      "aiShare": 1,
+      "names": [
+        "Pulse Local",
+        "Parsimony",
+        "Jevman",
+        "Agent.reviews",
+        "NanoMuse",
+        "Training a",
+        "Lossless-memory",
+        "Share your AI Setup"
+      ],
+      "sample": [
+        "Show HN: I built a tool to track what AI leaders say and how their views change",
+        "Show HN: Pulse Local, a Mac budgeting app whose AI models run on your machine",
+        "Show HN: Parsimony – an open-source benchmark for how much code AI models add"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "8 product names in 14 recent posts; 100% on topic."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "edsurge",
+      "name": "EdSurge",
+      "tier": "press",
+      "url": "https://www.edsurge.com/articles_rss",
+      "posts": 50,
+      "recent": 19,
+      "newest": "2026-10-15",
+      "aiShare": 0.42,
+      "names": [
+        "Learning Commons"
+      ],
+      "sample": [
+        "Can High-Impact Tutoring Survive Post-Pandemic Funding Loss?",
+        "Tech Addiction Was a Problem for My Student — and Myself",
+        "Who Is Building the AI Foundation for K-12 Classrooms?"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "1 product names in 19 recent posts; 42% on topic."
+    },
+    {
+      "id": "google-workspace-updates",
+      "name": "Google Workspace updates",
+      "tier": "vendor",
+      "url": "https://workspaceupdates.googleblog.com/atom.xml",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": true,
+      "verdict": "skip",
+      "reason": "The feed is empty."
+    },
+    {
+      "id": "microsoft-copilot",
+      "name": "Microsoft Copilot blog",
+      "tier": "vendor",
+      "url": "https://www.microsoft.com/en-us/microsoft-copilot/blog/feed/",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": true,
+      "verdict": "skip",
+      "reason": "The feed is empty."
+    },
+    {
+      "id": "stability",
+      "name": "Stability AI news",
+      "tier": "vendor",
+      "url": "https://stability.ai/news?format=rss",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": true,
+      "verdict": "skip",
+      "reason": "The feed is empty."
+    },
+    {
+      "id": "meta-ai",
+      "name": "Meta AI blog",
+      "tier": "vendor",
+      "url": "https://ai.meta.com/blog/rss/",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": false,
+      "error": "HTTP 404",
+      "verdict": "skip",
+      "reason": "Could not be read (HTTP 404)."
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic news",
+      "tier": "vendor",
+      "url": "https://www.anthropic.com/news/rss.xml",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": false,
+      "error": "HTTP 404",
+      "verdict": "skip",
+      "reason": "Could not be read (HTTP 404)."
+    },
+    {
+      "id": "replicate",
+      "name": "Replicate blog",
+      "tier": "vendor",
+      "url": "https://replicate.com/blog/rss",
+      "posts": 121,
+      "recent": 0,
+      "newest": "2026-04-15",
+      "aiShare": 0,
+      "names": [],
+      "sample": [
+        "How to make remarkable videos with Seedance 2.0",
+        "How to prompt Seedream 5.0",
+        "Recraft V4: image generation with design taste"
+      ],
+      "reachable": true,
+      "verdict": "skip",
+      "reason": "Only 0 posts in 30 days: too quiet to matter."
+    },
+    {
+      "id": "langchain",
+      "name": "LangChain blog",
+      "tier": "vendor",
+      "url": "https://blog.langchain.dev/rss/",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": true,
+      "verdict": "skip",
+      "reason": "The feed is empty."
+    },
+    {
+      "id": "import-ai",
+      "name": "Import AI",
+      "tier": "press",
+      "url": "https://importai.substack.com/feed",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": false,
+      "error": "HTTP 403",
+      "verdict": "skip",
+      "reason": "Could not be read (HTTP 403)."
+    },
+    {
+      "id": "taaft",
+      "name": "There's An AI For That",
+      "tier": "community",
+      "url": "https://theresanaiforthat.com/rss/",
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": false,
+      "error": "HTTP 403",
+      "verdict": "skip",
+      "reason": "Could not be read (HTTP 403)."
+    }
+  ]
+}

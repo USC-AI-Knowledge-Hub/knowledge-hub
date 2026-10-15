@@ -108,6 +108,7 @@ describe("posts that are not about a new product", () => {
     expect(namesInTitle("NVIDIA Announces New Investments in the UK Startup Ecosystem", vendor)).toEqual([]);
     expect(namesInTitle("Google finally launches something", press)).not.toContain("Google finally");
     expect(validName("Investments")).toBe(false);
+    expect(validName("Oct. 15th")).toBe(false);
     expect(validName("Google finally")).toBe(false);
   });
 

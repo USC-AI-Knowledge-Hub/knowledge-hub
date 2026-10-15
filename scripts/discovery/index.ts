@@ -91,7 +91,9 @@ async function readFeeds(deps: Deps, prior: SourceHealth[], today: string) {
   let ok = 0;
   let failed = 0;
   for (const s of deps.sources) {
-    const before = health.get(s.id);
+    // A new address starts fresh: the old one's failures say nothing about it.
+    const stored = health.get(s.id);
+    const before = stored && stored.url === s.url ? stored : undefined;
     if (!shouldTry(before, s.id, deps.now)) {
       next.push({ ...before!, url: s.url });
       failed++;
@@ -113,9 +115,11 @@ async function readFeeds(deps: Deps, prior: SourceHealth[], today: string) {
       ok++;
     } catch (e) {
       failed++;
-      const failures = (before?.failures ?? 0) + 1;
-      next.push({ id: s.id, url: s.url, ok: false, lastOk: before?.lastOk ?? null, failures, items: 0, error: (e as Error).message.slice(0, 120) });
-      if (failures === LIMITS.feedBackoff) warnings.push(`${s.name} has failed ${failures} days in a row; it will be tried weekly until it works.`);
+      const message = (e as Error).message;
+      // "410 Gone" means the publisher removed the feed for good, so go straight to the weekly check.
+      const failures = /HTTP 410/.test(message) ? Math.max(LIMITS.feedBackoff, (before?.failures ?? 0) + 1) : (before?.failures ?? 0) + 1;
+      next.push({ id: s.id, url: s.url, ok: false, lastOk: before?.lastOk ?? null, failures, items: 0, error: message.slice(0, 120) });
+      if (failures >= LIMITS.feedBackoff && (before?.failures ?? 0) < LIMITS.feedBackoff) warnings.push(`${s.name} has failed ${failures} days in a row; it will be tried weekly until it works.`);
     }
   }
   return { posts, next, ok, failed, warnings, mentions };
