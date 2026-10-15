@@ -84,6 +84,8 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "Daily video library update $(date -u +%F)"
+            # Something else may have landed on main during the run; replay this commit on top of it.
+            git pull --rebase origin main
             git push
           fi
 
