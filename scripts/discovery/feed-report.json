@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-15T19:27:28.640Z",
+  "at": "2026-10-15T19:29:05.846Z",
   "current": [
     {
       "id": "hf-blog",
@@ -232,6 +232,34 @@
       "reason": "Only 2 posts in 30 days: too quiet to matter."
     },
     {
+      "id": "marktechpost",
+      "name": "MarkTechPost",
+      "tier": "press",
+      "url": "https://www.marktechpost.com/feed/",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "CLiF",
+        "CopilotKit",
+        "Jev 1.14",
+        "TypeSafe AI",
+        "Grok Voice 3.0",
+        "OmniParseBench",
+        "Datalab",
+        "Drama 3"
+      ],
+      "sample": [
+        "CopilotKit Releases CLiF: A Continual Learning Platform That Turns Agent Traces and User A",
+        "openKylin Outlines Its Vision for Reimagining Linux in the AI Era at Open Source Summit Eu",
+        "TypeSafe AI Releases Jev 1.14 With Images, Box Type and 262k Context"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "13 product names in 10 recent posts; 100% on topic."
+    },
+    {
       "id": "producthunt-ai",
       "name": "Product Hunt: AI",
       "tier": "community",
@@ -241,23 +269,45 @@
       "newest": "2026-10-15",
       "aiShare": 1,
       "names": [
+        "Dreamscale Labs",
+        "Shrine",
+        "Afterparty",
+        "Basedash Connector gallery",
+        "CodeCrab",
+        "Polylane Impact Analysis",
         "SuperLocalMemory",
-        "Rushilo",
-        "OpenMuse",
-        "Navige",
-        "SaidTrace",
-        "Brussle",
-        "Backdrop",
-        "GLM-Legal"
+        "SaidTrace"
       ],
       "sample": [
-        "SuperLocalMemory",
-        "Rushilo",
-        "OpenMuse"
+        "AI Sandboxes by Buddy",
+        "Dreamscale Labs",
+        "Shrine"
       ],
       "reachable": true,
       "verdict": "add",
       "reason": "44 product names in 48 recent posts; 100% on topic."
+    },
+    {
+      "id": "reddit-localllama",
+      "name": "r/LocalLLaMA, top this week",
+      "tier": "community",
+      "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
+      "posts": 25,
+      "recent": 25,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Muse Spark Open",
+        "QwenGyre"
+      ],
+      "sample": [
+        "It's been too quiet on the other side of the Pacific",
+        "Open-source Mac app that runs EmbeddingGemma 2 locally to search your files by what’s in t",
+        "Qualcomm CEO reveals AI companies want phones running 100-billion-parameter models continu"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "2 product names in 25 recent posts; 100% on topic."
     },
     {
       "id": "hn-show",
@@ -403,34 +453,6 @@
       "reason": "11 product names in 44 recent posts; 100% on topic."
     },
     {
-      "id": "marktechpost",
-      "name": "MarkTechPost",
-      "tier": "press",
-      "url": "https://www.marktechpost.com/feed/",
-      "posts": 10,
-      "recent": 10,
-      "newest": "2026-10-15",
-      "aiShare": 1,
-      "names": [
-        "CLiF",
-        "CopilotKit",
-        "Jev 1.14",
-        "TypeSafe AI",
-        "Grok Voice 3.0",
-        "OmniParseBench",
-        "Datalab",
-        "Drama 3"
-      ],
-      "sample": [
-        "CopilotKit Releases CLiF: A Continual Learning Platform That Turns Agent Traces and User A",
-        "openKylin Outlines Its Vision for Reimagining Linux in the AI Era at Open Source Summit Eu",
-        "TypeSafe AI Releases Jev 1.14 With Images, Box Type and 262k Context"
-      ],
-      "reachable": true,
-      "verdict": "add",
-      "reason": "13 product names in 10 recent posts; 100% on topic."
-    },
-    {
       "id": "ars-ai",
       "name": "Ars Technica AI",
       "tier": "press",
@@ -471,29 +493,6 @@
       "reachable": true,
       "verdict": "add",
       "reason": "1 product names in 19 recent posts; 42% on topic."
-    },
-    {
-      "id": "reddit-localllama",
-      "name": "r/LocalLLaMA, top this week",
-      "tier": "community",
-      "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
-      "posts": 25,
-      "recent": 25,
-      "newest": "2026-10-15",
-      "aiShare": 1,
-      "names": [
-        "Oct. 15th",
-        "Muse Spark Open",
-        "QwenGyre"
-      ],
-      "sample": [
-        "It's been too quiet on the other side of the Pacific",
-        "Open-source Mac app that runs EmbeddingGemma 2 locally to search your files by what’s in t",
-        "Qualcomm CEO reveals AI companies want phones running 100-billion-parameter models continu"
-      ],
-      "reachable": true,
-      "verdict": "add",
-      "reason": "3 product names in 25 recent posts; 100% on topic."
     },
     {
       "id": "github-ai",
