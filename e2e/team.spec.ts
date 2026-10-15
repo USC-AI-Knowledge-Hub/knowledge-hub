@@ -17,7 +17,7 @@ test.describe("AI Team boards", () => {
 
     const topic = page.locator(".team-tile", { hasText: "Claude" }).getByRole("link", { name: /Start a topic/ });
     const start = decodeURIComponent(((await topic.getAttribute("href")) ?? "").replaceAll("+", " "));
-    expect(start).toContain("/discussions/new?category=ai-team&title=Claude: ");
+    expect(start).toContain("https://github.com/orgs/USC-AI-Knowledge-Hub/discussions/new?category=ai-team&title=Claude: ");
   });
 
   test("the old Green AI address leads to the new page", async ({ page }) => {
