@@ -13,6 +13,8 @@ export const BOARD = {
 };
 
 const base = `https://github.com/${BOARD.repo}/discussions`;
+/** The organization's discussions: where the new-topic form for the category opens. */
+const orgBase = `https://github.com/orgs/${BOARD.repo.split("/")[0]}/discussions`;
 
 /** The category filtered to topics with the tool's name in the title. */
 export const boardUrl = (name: string) =>
@@ -20,4 +22,4 @@ export const boardUrl = (name: string) =>
 
 /** A new discussion in the category, titled "<Tool>: " ready to finish. */
 export const newTopicUrl = (name: string) =>
-  `${base}/new?${new URLSearchParams({ category: BOARD.categorySlug, title: `${name}: ` })}`;
+  `${orgBase}/new?${new URLSearchParams({ category: BOARD.categorySlug, title: `${name}: ` })}`;
