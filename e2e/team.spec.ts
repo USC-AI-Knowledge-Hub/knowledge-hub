@@ -9,15 +9,19 @@ test.describe("AI Team boards", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("AI Team");
     await expect(page.locator(".team-tile")).toHaveCount(8);
 
-    const board = page.getByRole("link", { name: /Claude/ }).filter({ hasText: "Open the board" });
-    const href = (await board.getAttribute("href")) ?? "";
-    expect(href).toContain("https://github.com/USC-AI-Knowledge-Hub/knowledge-hub/discussions?discussions_q=");
-    expect(decodeURIComponent(href.replaceAll("+", " "))).toContain("category:ai-team in:title Claude");
-    await expect(board).toHaveAttribute("target", "_blank");
+    const tile = page.locator(".team-tile", { hasText: "Claude" });
+    const main = tile.locator(".team-tile-main");
+    const href = decodeURIComponent(((await main.getAttribute("href")) ?? "").replaceAll("+", " "));
+    expect(href).toContain("https://github.com/orgs/USC-AI-Knowledge-Hub/discussions?discussions_q=category:ai-team in:title Claude");
+    await expect(main).toHaveAttribute("target", "_blank");
 
-    const topic = page.locator(".team-tile", { hasText: "Claude" }).getByRole("link", { name: /Start a topic/ });
-    const start = decodeURIComponent(((await topic.getAttribute("href")) ?? "").replaceAll("+", " "));
-    expect(start).toContain("https://github.com/orgs/USC-AI-Knowledge-Hub/discussions/new?category=ai-team&title=Claude: ");
+    await expect(tile.getByRole("list", { name: "Claude topics" }).getByRole("link")).toHaveCount(5);
+    const videos = decodeURIComponent(((await tile.getByRole("link", { name: "Videos" }).getAttribute("href")) ?? "").replaceAll("+", " "));
+    expect(videos).toContain("in:title Claude Videos");
+
+    await tile.getByText("Start a topic").click();
+    const articles = decodeURIComponent(((await tile.getByRole("link", { name: /^Articles/ }).last().getAttribute("href")) ?? "").replaceAll("+", " "));
+    expect(articles).toContain("https://github.com/orgs/USC-AI-Knowledge-Hub/discussions/new?category=ai-team&title=Claude · Articles: ");
   });
 
   test("the old Green AI address leads to the new page", async ({ page }) => {

@@ -1,6 +1,6 @@
 import { Icon } from "../components/Icon";
 import { ToolMark } from "../components/ToolMark";
-import { TEAM_TOOLS, boardUrl, newTopicUrl } from "../data/team";
+import { TEAM_TOOLS, TOPICS, boardUrl, newTopicUrl } from "../data/team";
 import { toolById } from "../data/tools";
 import "../styles/team.css";
 
@@ -29,10 +29,32 @@ export function Team() {
                 </span>
                 <Icon name="arrow_outward" size={20} />
               </a>
-              <a href={newTopicUrl(tool.name)} target="_blank" rel="noreferrer" className="team-tile-new label-l state">
-                <Icon name="add" size={18} />
-                Start a topic
-              </a>
+              <ul className="team-topics" aria-label={`${tool.name} topics`}>
+                {TOPICS.map((t) => (
+                  <li key={t.id}>
+                    <a href={boardUrl(tool.name, t)} target="_blank" rel="noreferrer" className="team-topic label-m state">
+                      <Icon name={t.icon} size={16} />
+                      {t.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <details className="team-new">
+                <summary className="label-l state">
+                  <Icon name="add" size={18} />
+                  Start a topic
+                </summary>
+                <ul>
+                  {TOPICS.map((t) => (
+                    <li key={t.id}>
+                      <a href={newTopicUrl(tool.name, t)} target="_blank" rel="noreferrer" className="state">
+                        <span className="label-l">{t.label}</span>
+                        <span className="body-s muted">{t.hint}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </li>
           );
         })}
