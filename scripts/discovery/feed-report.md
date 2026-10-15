@@ -4,23 +4,7 @@
 
 | Feed | Tier | Recent / all posts | On topic | Names found | Verdict |
 |---|---|---|---|---|---|
-| AWS machine learning blog | vendor | 20/20 | 100% | Claude Haiku 5.5 | add: 1 product names in 20 recent posts; 100% on topic. |
-| Microsoft Research | vendor | 9/10 | 78% | Quine | add: 1 product names in 9 recent posts; 78% on topic. |
-| NVIDIA developer blog | vendor | 43/100 | 67% | NVIDIA Run | add: 1 product names in 43 recent posts; 67% on topic. |
-| Cloudflare blog: AI | vendor | 20/20 | 100% | Clef-omni, Clef | add: 2 product names in 20 recent posts; 100% on topic. |
-| ElevenLabs blog | vendor | 44/50 | 100% | Instant Soundtracks, Brand Kit, ElevenReader, ElevenLabs | add: 11 product names in 44 recent posts; 100% on topic. |
-| Ars Technica AI | press | 20/20 | 100% | AI-friendly hardware | add: 1 product names in 20 recent posts; 100% on topic. |
 | EdSurge | press | 19/50 | 42% | Learning Commons | add: 1 product names in 19 recent posts; 42% on topic. |
-| GitHub blog: AI and ML | vendor | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| Apple machine learning research | vendor | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| Google Research blog | vendor | 11/100 | 55% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| The Decoder | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| WIRED AI | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| MIT Technology Review: AI | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| ZDNET AI | press | 25/25 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| Latent Space | press | 20/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| Interconnects | press | 5/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| Ben's Bites | press | 10/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
 | Google Workspace updates | vendor | 0/0 | 0% | - | skip: The feed is empty. |
 | Microsoft Copilot blog | vendor | 0/0 | 0% | - | skip: The feed is empty. |
 | Stability AI news | vendor | 0/0 | 0% | - | skip: The feed is empty. |
@@ -47,6 +31,22 @@
 | Simon Willison's blog | press | 30/30 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
 | One Useful Thing | press | 2/20 | 100% | - | skip: Only 2 posts in 30 days: too quiet to matter. |
 | MarkTechPost | press | 10/10 | 100% | CLiF, CopilotKit, Jev 1.14, TypeSafe AI | add: 13 product names in 10 recent posts; 100% on topic. |
-| Product Hunt: AI | community | 48/50 | 100% | Dreamscale Labs, Shrine, Afterparty, Basedash Connector gallery | add: 44 product names in 48 recent posts; 100% on topic. |
+| GitHub blog: AI and ML | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| AWS machine learning blog | press | 20/20 | 100% | Claude Haiku 5.5 | add: 1 product names in 20 recent posts; 100% on topic. |
+| Apple machine learning research | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| Google Research blog | press | 11/100 | 55% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| Microsoft Research | press | 9/10 | 78% | Quine | add: 1 product names in 9 recent posts; 78% on topic. |
+| NVIDIA developer blog | press | 43/100 | 67% | NVIDIA Run | add: 1 product names in 43 recent posts; 67% on topic. |
+| Cloudflare blog: AI | press | 20/20 | 100% | Clef-omni, Clef | add: 2 product names in 20 recent posts; 100% on topic. |
+| ElevenLabs blog | press | 44/50 | 100% | Instant Soundtracks, Brand Kit, ElevenReader, ElevenLabs | add: 11 product names in 44 recent posts; 100% on topic. |
+| The Decoder | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| Ars Technica AI | press | 20/20 | 100% | AI-friendly hardware | add: 1 product names in 20 recent posts; 100% on topic. |
+| WIRED AI | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| MIT Technology Review: AI | press | 10/10 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| ZDNET AI | press | 25/25 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| Latent Space | press | 20/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| Interconnects | press | 5/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| Ben's Bites | press | 10/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
+| Product Hunt: AI | community | 48/50 | 100% | SuperLocalMemory, Backdrop, Navige, Audimate | add: 44 product names in 48 recent posts; 100% on topic. |
 | r/LocalLLaMA, top this week | community | 25/25 | 100% | Muse Spark Open, QwenGyre | add: 2 product names in 25 recent posts; 100% on topic. |
 | Show HN | community | 14/20 | 100% | Pulse Local, Parsimony, Jevman, Agent.reviews | add: 8 product names in 14 recent posts; 100% on topic. |

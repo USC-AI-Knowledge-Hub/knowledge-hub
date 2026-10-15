@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-15T19:29:05.846Z",
+  "at": "2026-10-15T19:32:00.539Z",
   "current": [
     {
       "id": "hf-blog",
@@ -260,89 +260,28 @@
       "reason": "13 product names in 10 recent posts; 100% on topic."
     },
     {
-      "id": "producthunt-ai",
-      "name": "Product Hunt: AI",
-      "tier": "community",
-      "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
-      "posts": 50,
-      "recent": 48,
-      "newest": "2026-10-15",
+      "id": "github-ai",
+      "name": "GitHub blog: AI and ML",
+      "tier": "press",
+      "url": "https://github.blog/ai-and-ml/feed/",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-13",
       "aiShare": 1,
-      "names": [
-        "Dreamscale Labs",
-        "Shrine",
-        "Afterparty",
-        "Basedash Connector gallery",
-        "CodeCrab",
-        "Polylane Impact Analysis",
-        "SuperLocalMemory",
-        "SaidTrace"
-      ],
+      "names": [],
       "sample": [
-        "AI Sandboxes by Buddy",
-        "Dreamscale Labs",
-        "Shrine"
+        "GitHub’s model for secret detection: Finding more secrets with less noise",
+        "GitHub Copilot app for Beginners: How to teach Copilot about your codebase",
+        "Secret protection must scale with software"
       ],
       "reachable": true,
-      "verdict": "add",
-      "reason": "44 product names in 48 recent posts; 100% on topic."
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
     },
-    {
-      "id": "reddit-localllama",
-      "name": "r/LocalLLaMA, top this week",
-      "tier": "community",
-      "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
-      "posts": 25,
-      "recent": 25,
-      "newest": "2026-10-15",
-      "aiShare": 1,
-      "names": [
-        "Muse Spark Open",
-        "QwenGyre"
-      ],
-      "sample": [
-        "It's been too quiet on the other side of the Pacific",
-        "Open-source Mac app that runs EmbeddingGemma 2 locally to search your files by what’s in t",
-        "Qualcomm CEO reveals AI companies want phones running 100-billion-parameter models continu"
-      ],
-      "reachable": true,
-      "verdict": "add",
-      "reason": "2 product names in 25 recent posts; 100% on topic."
-    },
-    {
-      "id": "hn-show",
-      "name": "Show HN",
-      "tier": "community",
-      "url": "https://hnrss.org/show?q=AI&points=60",
-      "posts": 20,
-      "recent": 14,
-      "newest": "2026-10-14",
-      "aiShare": 1,
-      "names": [
-        "Pulse Local",
-        "Parsimony",
-        "Jevman",
-        "Agent.reviews",
-        "NanoMuse",
-        "Training a",
-        "Lossless-memory",
-        "Share your AI Setup"
-      ],
-      "sample": [
-        "Show HN: I built a tool to track what AI leaders say and how their views change",
-        "Show HN: Pulse Local, a Mac budgeting app whose AI models run on your machine",
-        "Show HN: Parsimony – an open-source benchmark for how much code AI models add"
-      ],
-      "reachable": true,
-      "verdict": "add",
-      "reason": "8 product names in 14 recent posts; 100% on topic."
-    }
-  ],
-  "candidates": [
     {
       "id": "aws-ml",
       "name": "AWS machine learning blog",
-      "tier": "vendor",
+      "tier": "press",
       "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
       "posts": 20,
       "recent": 20,
@@ -361,9 +300,47 @@
       "reason": "1 product names in 20 recent posts; 100% on topic."
     },
     {
+      "id": "apple-ml",
+      "name": "Apple machine learning research",
+      "tier": "press",
+      "url": "https://machinelearning.apple.com/rss.xml",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Local and Distributed Large LLM Inference with MLX and RDMA on Mac Studio",
+        "Code-Switching Detection via Language-Selective Dimensions in Speech Foundation Models",
+        "The Design Space of Tri-Modal Masked Diffusion Models"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "google-research",
+      "name": "Google Research blog",
+      "tier": "press",
+      "url": "https://research.google/blog/rss/",
+      "posts": 100,
+      "recent": 11,
+      "newest": "2026-10-14",
+      "aiShare": 0.55,
+      "names": [],
+      "sample": [
+        "Putting Earth AI to work: Geospatial agents for our planet's biggest challenges",
+        "Analyzing technical documents with Deep Review",
+        "Research@ 2026: 10 ways we're amplifying human ingenuity"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
       "id": "microsoft-research",
       "name": "Microsoft Research",
-      "tier": "vendor",
+      "tier": "press",
       "url": "https://www.microsoft.com/en-us/research/feed/",
       "posts": 10,
       "recent": 9,
@@ -384,7 +361,7 @@
     {
       "id": "nvidia-dev",
       "name": "NVIDIA developer blog",
-      "tier": "vendor",
+      "tier": "press",
       "url": "https://developer.nvidia.com/blog/feed",
       "posts": 100,
       "recent": 43,
@@ -405,7 +382,7 @@
     {
       "id": "cloudflare-ai",
       "name": "Cloudflare blog: AI",
-      "tier": "vendor",
+      "tier": "press",
       "url": "https://blog.cloudflare.com/tag/ai/rss/",
       "posts": 20,
       "recent": 20,
@@ -427,7 +404,7 @@
     {
       "id": "elevenlabs",
       "name": "ElevenLabs blog",
-      "tier": "vendor",
+      "tier": "press",
       "url": "https://elevenlabs.io/blog/rss.xml",
       "posts": 50,
       "recent": 44,
@@ -453,6 +430,25 @@
       "reason": "11 product names in 44 recent posts; 100% on topic."
     },
     {
+      "id": "the-decoder",
+      "name": "The Decoder",
+      "tier": "press",
+      "url": "https://the-decoder.com/feed/",
+      "posts": 10,
+      "recent": 10,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [],
+      "sample": [
+        "Muse Spark Open is Meta's answer to Qwen, GLM, and Kimi in the open-weight race",
+        "Black Forest Labs' open-weights image model FLUX 3 Image Klein runs on consumer GPUs with ",
+        "Google wants Gemini 4 Argon to be the only AI model robots need"
+      ],
+      "reachable": true,
+      "verdict": "maybe",
+      "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
       "id": "ars-ai",
       "name": "Ars Technica AI",
       "tier": "press",
@@ -472,103 +468,6 @@
       "reachable": true,
       "verdict": "add",
       "reason": "1 product names in 20 recent posts; 100% on topic."
-    },
-    {
-      "id": "edsurge",
-      "name": "EdSurge",
-      "tier": "press",
-      "url": "https://www.edsurge.com/articles_rss",
-      "posts": 50,
-      "recent": 19,
-      "newest": "2026-10-15",
-      "aiShare": 0.42,
-      "names": [
-        "Learning Commons"
-      ],
-      "sample": [
-        "Can High-Impact Tutoring Survive Post-Pandemic Funding Loss?",
-        "Tech Addiction Was a Problem for My Student — and Myself",
-        "Who Is Building the AI Foundation for K-12 Classrooms?"
-      ],
-      "reachable": true,
-      "verdict": "add",
-      "reason": "1 product names in 19 recent posts; 42% on topic."
-    },
-    {
-      "id": "github-ai",
-      "name": "GitHub blog: AI and ML",
-      "tier": "vendor",
-      "url": "https://github.blog/ai-and-ml/feed/",
-      "posts": 10,
-      "recent": 10,
-      "newest": "2026-10-13",
-      "aiShare": 1,
-      "names": [],
-      "sample": [
-        "GitHub’s model for secret detection: Finding more secrets with less noise",
-        "GitHub Copilot app for Beginners: How to teach Copilot about your codebase",
-        "Secret protection must scale with software"
-      ],
-      "reachable": true,
-      "verdict": "maybe",
-      "reason": "Recent and on topic, but no product names were found in its titles."
-    },
-    {
-      "id": "apple-ml",
-      "name": "Apple machine learning research",
-      "tier": "vendor",
-      "url": "https://machinelearning.apple.com/rss.xml",
-      "posts": 10,
-      "recent": 10,
-      "newest": "2026-10-15",
-      "aiShare": 1,
-      "names": [],
-      "sample": [
-        "Local and Distributed Large LLM Inference with MLX and RDMA on Mac Studio",
-        "Code-Switching Detection via Language-Selective Dimensions in Speech Foundation Models",
-        "The Design Space of Tri-Modal Masked Diffusion Models"
-      ],
-      "reachable": true,
-      "verdict": "maybe",
-      "reason": "Recent and on topic, but no product names were found in its titles."
-    },
-    {
-      "id": "google-research",
-      "name": "Google Research blog",
-      "tier": "vendor",
-      "url": "https://research.google/blog/rss/",
-      "posts": 100,
-      "recent": 11,
-      "newest": "2026-10-14",
-      "aiShare": 0.55,
-      "names": [],
-      "sample": [
-        "Putting Earth AI to work: Geospatial agents for our planet's biggest challenges",
-        "Analyzing technical documents with Deep Review",
-        "Research@ 2026: 10 ways we're amplifying human ingenuity"
-      ],
-      "reachable": true,
-      "verdict": "maybe",
-      "reason": "Recent and on topic, but no product names were found in its titles."
-    },
-    {
-      "id": "the-decoder",
-      "name": "The Decoder",
-      "tier": "press",
-      "url": "https://the-decoder.com/feed/",
-      "posts": 10,
-      "recent": 10,
-      "newest": "2026-10-15",
-      "aiShare": 1,
-      "names": [],
-      "sample": [
-        "Muse Spark Open is Meta's answer to Qwen, GLM, and Kimi in the open-weight race",
-        "Black Forest Labs' open-weights image model FLUX 3 Image Klein runs on consumer GPUs with ",
-        "Google wants Gemini 4 Argon to be the only AI model robots need"
-      ],
-      "reachable": true,
-      "verdict": "maybe",
-      "reason": "Recent and on topic, but no product names were found in its titles."
     },
     {
       "id": "wired-ai",
@@ -683,6 +582,107 @@
       "reachable": true,
       "verdict": "maybe",
       "reason": "Recent and on topic, but no product names were found in its titles."
+    },
+    {
+      "id": "producthunt-ai",
+      "name": "Product Hunt: AI",
+      "tier": "community",
+      "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
+      "posts": 50,
+      "recent": 48,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "SuperLocalMemory",
+        "Backdrop",
+        "Navige",
+        "Audimate",
+        "Rushilo",
+        "SaidTrace",
+        "Brussle",
+        "Atticus"
+      ],
+      "sample": [
+        "SuperLocalMemory",
+        "Backdrop",
+        "AI Sandboxes by Buddy"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "44 product names in 48 recent posts; 100% on topic."
+    },
+    {
+      "id": "reddit-localllama",
+      "name": "r/LocalLLaMA, top this week",
+      "tier": "community",
+      "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
+      "posts": 25,
+      "recent": 25,
+      "newest": "2026-10-15",
+      "aiShare": 1,
+      "names": [
+        "Muse Spark Open",
+        "QwenGyre"
+      ],
+      "sample": [
+        "It's been too quiet on the other side of the Pacific",
+        "Open-source Mac app that runs EmbeddingGemma 2 locally to search your files by what’s in t",
+        "Qualcomm CEO reveals AI companies want phones running 100-billion-parameter models continu"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "2 product names in 25 recent posts; 100% on topic."
+    },
+    {
+      "id": "hn-show",
+      "name": "Show HN",
+      "tier": "community",
+      "url": "https://hnrss.org/show?q=AI&points=60",
+      "posts": 20,
+      "recent": 14,
+      "newest": "2026-10-14",
+      "aiShare": 1,
+      "names": [
+        "Pulse Local",
+        "Parsimony",
+        "Jevman",
+        "Agent.reviews",
+        "NanoMuse",
+        "Training a",
+        "Lossless-memory",
+        "Share your AI Setup"
+      ],
+      "sample": [
+        "Show HN: I built a tool to track what AI leaders say and how their views change",
+        "Show HN: Pulse Local, a Mac budgeting app whose AI models run on your machine",
+        "Show HN: Parsimony – an open-source benchmark for how much code AI models add"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "8 product names in 14 recent posts; 100% on topic."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "edsurge",
+      "name": "EdSurge",
+      "tier": "press",
+      "url": "https://www.edsurge.com/articles_rss",
+      "posts": 50,
+      "recent": 19,
+      "newest": "2026-10-15",
+      "aiShare": 0.42,
+      "names": [
+        "Learning Commons"
+      ],
+      "sample": [
+        "Can High-Impact Tutoring Survive Post-Pandemic Funding Loss?",
+        "Tech Addiction Was a Problem for My Student — and Myself",
+        "Who Is Building the AI Foundation for K-12 Classrooms?"
+      ],
+      "reachable": true,
+      "verdict": "add",
+      "reason": "1 product names in 19 recent posts; 42% on topic."
     },
     {
       "id": "google-workspace-updates",
