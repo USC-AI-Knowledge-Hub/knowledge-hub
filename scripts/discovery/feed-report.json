@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-15T19:50:27.607Z",
+  "at": "2026-10-15T19:46:45.532Z",
   "current": [
     {
       "id": "hf-blog",
@@ -589,27 +589,27 @@
       "tier": "community",
       "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
       "posts": 50,
-      "recent": 49,
+      "recent": 47,
       "newest": "2026-10-15",
       "aiShare": 1,
       "names": [
-        "OpenMuse",
-        "Brussle",
-        "Shrine",
+        "Audimate",
+        "SuperLocalMemory",
+        "SaidTrace",
+        "Superdraft",
         "Polylane Impact Analysis",
-        "GLM-Legal",
-        "Afterparty",
-        "Dreamscale Labs",
-        "Navige"
+        "Backdrop",
+        "Navige",
+        "CodeCrab"
       ],
       "sample": [
-        "OpenMuse",
-        "Brussle",
-        "Shrine"
+        "Audimate",
+        "SuperLocalMemory",
+        "withHuman"
       ],
       "reachable": true,
       "verdict": "add",
-      "reason": "45 product names in 49 recent posts; 100% on topic."
+      "reason": "43 product names in 47 recent posts; 100% on topic."
     },
     {
       "id": "reddit-localllama",
@@ -638,28 +638,16 @@
       "name": "Show HN",
       "tier": "community",
       "url": "https://hnrss.org/show?q=AI&points=60",
-      "posts": 20,
-      "recent": 14,
-      "newest": "2026-10-14",
-      "aiShare": 1,
-      "names": [
-        "Pulse Local",
-        "Parsimony",
-        "Jevman",
-        "Agent.reviews",
-        "NanoMuse",
-        "Training a",
-        "Lossless-memory",
-        "Share your AI Setup"
-      ],
-      "sample": [
-        "Show HN: I built a tool to track what AI leaders say and how their views change",
-        "Show HN: Pulse Local, a Mac budgeting app whose AI models run on your machine",
-        "Show HN: Parsimony – an open-source benchmark for how much code AI models add"
-      ],
-      "reachable": true,
-      "verdict": "add",
-      "reason": "8 product names in 14 recent posts; 100% on topic."
+      "posts": 0,
+      "recent": 0,
+      "newest": "",
+      "aiShare": 0,
+      "names": [],
+      "sample": [],
+      "reachable": false,
+      "error": "HTTP 502",
+      "verdict": "skip",
+      "reason": "Could not be read (HTTP 502)."
     }
   ],
   "candidates": [

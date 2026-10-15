@@ -47,6 +47,6 @@
 | Latent Space | press | 20/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
 | Interconnects | press | 5/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
 | Ben's Bites | press | 10/20 | 100% | - | maybe: Recent and on topic, but no product names were found in its titles. |
-| Product Hunt: AI | community | 49/50 | 100% | OpenMuse, Brussle, Shrine, Polylane Impact Analysis | add: 45 product names in 49 recent posts; 100% on topic. |
+| Product Hunt: AI | community | 47/50 | 100% | Audimate, SuperLocalMemory, SaidTrace, Superdraft | add: 43 product names in 47 recent posts; 100% on topic. |
 | r/LocalLLaMA, top this week | community | 25/25 | 100% | Muse Spark Open, QwenGyre | add: 2 product names in 25 recent posts; 100% on topic. |
-| Show HN | community | 14/20 | 100% | Pulse Local, Parsimony, Jevman, Agent.reviews | add: 8 product names in 14 recent posts; 100% on topic. |
+| Show HN | community | - | - | - | skip: Could not be read (HTTP 502). |
