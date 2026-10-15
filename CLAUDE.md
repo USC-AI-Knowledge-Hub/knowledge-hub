@@ -10,6 +10,7 @@ A daily GitHub Action refreshes the YouTube video library.
 - `npm test`: Vitest (pipeline unit tests plus an offline end-to-end run)
 - `npm run videos`: run the video pipeline (see the video-curation skill)
 - `npm run discover`: find new tools from the trusted feeds and file them in the category tree (`-- --dry-run` to preview)
+- `npm run vet-feeds`: test every candidate and current tool-discovery feed (reachable, recent, on topic, finds names) and write `scripts/discovery/feed-report.md`; also runs as the "Vet feeds" workflow
 - `npm run courses`: check every course, editors' pick and talk against YouTube (`--check --strict` in CI)
 - `npm run theme`: regenerate `src/styles/tokens.css` from the brand colors
 - `npm run brand-images`: redraw `public/og.png` (the share preview) and `public/favicon.png`

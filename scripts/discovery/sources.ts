@@ -17,7 +17,9 @@ export const SOURCES: Source[] = [
   { id: "venturebeat-ai", name: "VentureBeat AI", url: "https://venturebeat.com/category/ai/feed/", tier: "press", aiOnly: true },
   { id: "simonw", name: "Simon Willison's blog", url: "https://simonwillison.net/atom/everything/", tier: "press", aiOnly: true },
   { id: "one-useful-thing", name: "One Useful Thing", url: "https://www.oneusefulthing.org/feed", tier: "press", aiOnly: true },
+  { id: "marktechpost", name: "MarkTechPost", url: "https://www.marktechpost.com/feed/", tier: "press", aiOnly: true },
   { id: "producthunt-ai", name: "Product Hunt: AI", url: "https://www.producthunt.com/feed?category=artificial-intelligence", tier: "community", titles: "product", aiOnly: true },
+  { id: "reddit-localllama", name: "r/LocalLLaMA, top this week", url: "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week", tier: "community", aiOnly: true },
   { id: "hn-show", name: "Show HN", url: "https://hnrss.org/show?q=AI&points=60", tier: "community", titles: "product" },
 ];
 
