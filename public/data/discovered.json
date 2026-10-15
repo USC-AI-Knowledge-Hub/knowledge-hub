@@ -534,35 +534,6 @@
       "evidence": []
     },
     {
-      "id": "microsoft-s-latest-custom-chip",
-      "name": "Microsoft’s latest custom chip",
-      "maker": "Microsoft",
-      "url": "https://news.microsoft.com/maia-2026/",
-      "monogram": "Mi",
-      "bestFor": "The post Introducing Microsoft’s latest custom chip: Maia 300 appeared first on Source .",
-      "tasks": [],
-      "queries": [
-        "Microsoft’s latest custom chip AI tutorial"
-      ],
-      "match": [
-        "\\bMicrosoft’s[\\s-]*latest[\\s-]*custom[\\s-]*chip\\b"
-      ],
-      "exclude": [],
-      "kind": "tool",
-      "urlKind": "announcement",
-      "origin": "feed",
-      "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-12",
-      "evidence": [
-        {
-          "source": "Microsoft AI blog",
-          "title": "Introducing Microsoft’s latest custom chip: Maia 300",
-          "url": "https://news.microsoft.com/maia-2026/",
-          "date": "2026-10-12"
-        }
-      ]
-    },
-    {
       "id": "openevidence",
       "name": "OpenEvidence",
       "maker": "OpenEvidence",
@@ -919,25 +890,6 @@
       "maker": "Hugging Face"
     },
     {
-      "key": "amazon s bee",
-      "name": "Amazon’s Bee",
-      "kind": "tool",
-      "firstSeen": "2026-10-15",
-      "lastSeen": "2026-10-15",
-      "mentions": [
-        {
-          "source": "TechCrunch AI",
-          "title": "Amazon’s Bee launches two new personal AI devices, starting at $75",
-          "url": "https://techcrunch.com/2026/10/15/amazons-bee-launches-two-new-personal-ai-devices-starting-at-75/",
-          "date": "2026-10-15",
-          "sourceId": "techcrunch-ai",
-          "tier": "press"
-        }
-      ],
-      "summary": "Amazon-owned Bee has launched its first new AI devices since its acquisition, including an updated wearable and a credit-card-sized recorder that attaches to smartphones.",
-      "links": []
-    },
-    {
       "key": "clif",
       "name": "CLiF",
       "kind": "tool",
@@ -1000,25 +952,6 @@
         "https://docs.copilotkit.ai/intelligence/managed-intelligence-platform",
         "https://www.copilotkit.ai/blog/introducing-clif"
       ]
-    },
-    {
-      "key": "google s universal cart shopping",
-      "name": "Google’s Universal Cart shopping",
-      "kind": "tool",
-      "firstSeen": "2026-10-15",
-      "lastSeen": "2026-10-15",
-      "mentions": [
-        {
-          "source": "TechCrunch AI",
-          "title": "Google’s Universal Cart shopping tool launches in the US",
-          "url": "https://techcrunch.com/2026/10/15/googles-universal-cart-shopping-tool-launches-in-the-us/",
-          "date": "2026-10-15",
-          "sourceId": "techcrunch-ai",
-          "tier": "press"
-        }
-      ],
-      "summary": "The new shopping tool is available in the U.S. across Google Search and the Gemini app.",
-      "links": []
     },
     {
       "key": "grok voice",

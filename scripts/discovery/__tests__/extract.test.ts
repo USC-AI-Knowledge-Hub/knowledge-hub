@@ -109,6 +109,8 @@ describe("posts that are not about a new product", () => {
     expect(namesInTitle("Google finally launches something", press)).not.toContain("Google finally");
     expect(validName("Investments")).toBe(false);
     expect(validName("Oct. 15th")).toBe(false);
+    expect(validName("Microsoft’s latest custom chip")).toBe(false);
+    expect(validName("Google's Universal Cart shopping")).toBe(false);
     expect(validName("Google finally")).toBe(false);
   });
 
