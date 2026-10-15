@@ -417,11 +417,11 @@ const STATIC: Record<string, () => PageMeta> = {
   "/team": () => ({
     path: "/team",
     title: `AI Team: student boards for eight AI tools${suffix}`,
-    description: "Discussion boards for ChatGPT, Claude, Gemini and five other tools, where students share prompts, tips and what went wrong.",
+    description: "Discussion boards for ChatGPT, Claude, Gemini and five other tools, where students share prompts, videos, articles and tips.",
     heading: "AI Team",
     type: "website",
     content: [
-      { kind: "p", text: "One board for each of eight AI tools. Students sign in with GitHub to post, reply and react. Posts are public." },
+      { kind: "p", text: "One board for each of eight AI tools. Students add a name to post, reply and react, with no account. Posts are public." },
     ],
     links: [{ to: "/tools", label: "Tools" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "AI Team", path: "/team" }])],

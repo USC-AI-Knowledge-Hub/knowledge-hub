@@ -1,8 +1,7 @@
 /**
- * AI Team: a discussion board per tool, on GitHub Discussions. GitHub has no sub-categories, so each
- * topic is a tag in the title ("ChatGPT · Videos: ..."), and the site builds the filtered views and
- * the new-topic links from it. The "AI Team" category must be open-ended so students can start topics;
- * its address name is set below.
+ * AI Team: a discussion board per tool, kept on the site's own database (supabase/schema.sql, set up
+ * as described in supabase/README.md). Until a database is connected the boards work on each visitor's
+ * own device, so nothing is shared. Every tool starts with the same topics.
  */
 export const TEAM_TOOLS = ["chatgpt", "claude", "gemini", "copilot", "perplexity", "notebooklm", "cursor", "midjourney"] as const;
 
@@ -17,19 +16,13 @@ export const TOPICS = [
 
 export type Topic = (typeof TOPICS)[number];
 
+export const topicById = new Map<string, Topic>(TOPICS.map((t) => [t.id, t]));
+
+export const teamTool = (id: string | null): (typeof TEAM_TOOLS)[number] | null =>
+  (TEAM_TOOLS as readonly string[]).includes(id ?? "") ? (id as (typeof TEAM_TOOLS)[number]) : null;
+
+/** The shared database's address and its public key, set when the site is built (repository variables BOARD_URL and BOARD_ANON_KEY). */
 export const BOARD = {
-  org: "USC-AI-Knowledge-Hub",
-  /** The category's address name, from github.com/orgs/<org>/discussions/categories/<slug>. */
-  categorySlug: "ai-team",
+  url: (import.meta.env.VITE_BOARD_URL as string | undefined) ?? "",
+  anonKey: (import.meta.env.VITE_BOARD_KEY as string | undefined) ?? "",
 };
-
-/** The organization's discussions. The repository address redirects here and drops the filter, so use this one. */
-const base = `https://github.com/orgs/${BOARD.org}/discussions`;
-
-/** The category filtered to topics for a tool, and for one topic of it when given. */
-export const boardUrl = (name: string, topic?: Topic) =>
-  `${base}?${new URLSearchParams({ discussions_q: `category:${BOARD.categorySlug} in:title ${name}${topic ? ` ${topic.label}` : ""}` })}`;
-
-/** A new discussion in the category, titled so it lands on the right board: "ChatGPT · Videos: ". */
-export const newTopicUrl = (name: string, topic: Topic) =>
-  `${base}/new?${new URLSearchParams({ category: BOARD.categorySlug, title: `${name} · ${topic.label}: ` })}`;

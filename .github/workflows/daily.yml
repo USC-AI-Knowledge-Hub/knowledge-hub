@@ -91,6 +91,9 @@ jobs:
 
       - name: Build site
         env:
+          # The AI Team board's database address and public key (repository variables; see supabase/README.md).
+          VITE_BOARD_URL: ${{ vars.BOARD_URL }}
+          VITE_BOARD_KEY: ${{ vars.BOARD_ANON_KEY }}
           # The site is served from the root of studentslearningai.com. To serve it from
           # <owner>.github.io/<repo>/ instead, set the BASE_PATH repository variable to "/<repo>/".
           BASE_PATH: ${{ vars.BASE_PATH || '/' }}

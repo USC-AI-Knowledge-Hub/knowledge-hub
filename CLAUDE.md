@@ -37,8 +37,11 @@ A daily GitHub Action refreshes the YouTube video library.
   them compact); every model appears in the offline assistant (`/offline/assistant`), a general-purpose
   chat that isn't grounded in lessons. A WebLLM model needs `vramMb` and an id that exists in the installed
   WebLLM's list: `models.test.ts` checks both, and `npm run model-sizes` (browser CI) checks download sizes.
-- AI Team (`/team`, `src/pages/Team.tsx`, `src/data/team.ts`): a tile per tool that opens its GitHub Discussions board (no embed).
-  The category must be open-ended; its slug is `BOARD.categorySlug`.
+- AI Team (`/team`, `src/pages/Team.tsx`, `src/components/board/`, `src/lib/board/`, `src/data/team.ts`): a discussion board per tool,
+  no accounts. Posts live in a Supabase database (`supabase/schema.sql`, set up per `supabase/README.md`; the site reads the
+  `BOARD_URL` and `BOARD_ANON_KEY` repository variables at build). Without them the board keeps posts on the visitor's device.
+  All writes go through the schema's `board_*` functions, which enforce the rules (`src/lib/board/rules.ts` mirrors them).
+  `supabase/__tests__/schema.test.ts` runs the schema in an in-memory Postgres.
 - `scripts/pipeline/`: the daily video pipeline.
 - `scripts/discovery/`: the daily tool discovery run (`npm run discover`). It writes `public/data/discovered.json`
   and `taxonomy.json`; `src/data/catalog.ts` and `src/lib/catalogStore.ts` combine them with `tools.ts` for the site
