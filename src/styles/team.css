@@ -2,7 +2,7 @@
 .team-page { max-width: 960px; }
 .team-hero { margin-bottom: 24px; }
 
-.team-tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.team-tiles { list-style: none; margin: 0; padding: 0; align-items: start; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
 .team-tile {
   display: flex; flex-direction: column; background: var(--md-sys-color-surface-container);
   border: 2px solid var(--md-sys-color-on-surface); border-radius: 0; box-shadow: 4px 4px 0 var(--md-sys-color-on-surface);
@@ -11,9 +11,19 @@
   display: flex; align-items: center; gap: 16px; padding: 16px; color: var(--md-sys-color-on-surface); text-decoration: none; flex: 1;
 }
 .team-tile-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-.team-tile-new {
-  display: flex; align-items: center; gap: 6px; padding: 10px 16px; color: var(--md-sys-color-on-surface); text-decoration: none;
-  border-top: 2px dashed var(--md-sys-color-outline-variant);
+.team-topics { list-style: none; margin: 0; padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.team-topic {
+  display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; color: var(--md-sys-color-on-surface); text-decoration: none;
+  border: 1px solid var(--md-sys-color-outline); border-radius: 0;
 }
-.team-tile-main:hover, .team-tile-new:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
+.team-topic:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
+
+.team-new { border-top: 2px dashed var(--md-sys-color-outline-variant); }
+.team-new summary { display: flex; align-items: center; gap: 6px; padding: 10px 16px; cursor: pointer; list-style: none; }
+.team-new summary::-webkit-details-marker { display: none; }
+.team-new[open] summary { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.team-new ul { list-style: none; margin: 0; padding: 4px 0 8px; }
+.team-new li a { display: flex; flex-direction: column; padding: 8px 16px; color: var(--md-sys-color-on-surface); text-decoration: none; }
+.team-new li a:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
+.team-tile-main:hover { background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
 .team-foot { margin-top: 32px; max-width: 70ch; }

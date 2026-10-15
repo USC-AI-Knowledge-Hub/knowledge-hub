@@ -1,25 +1,35 @@
 /**
- * AI Team: a discussion board per tool, on GitHub Discussions. Each tool's tile opens the
- * repository's "AI Team" category filtered to that tool, and "Start a topic" opens a new
- * discussion with the tool's name in the title. The category must be open-ended, so students
- * can start topics, and its address slug is set below.
+ * AI Team: a discussion board per tool, on GitHub Discussions. GitHub has no sub-categories, so each
+ * topic is a tag in the title ("ChatGPT · Videos: ..."), and the site builds the filtered views and
+ * the new-topic links from it. The "AI Team" category must be open-ended so students can start topics;
+ * its address name is set below.
  */
 export const TEAM_TOOLS = ["chatgpt", "claude", "gemini", "copilot", "perplexity", "notebooklm", "cursor", "midjourney"] as const;
 
+/** The topics every tool's board starts with. Add one here and every tool gets it. */
+export const TOPICS = [
+  { id: "videos", label: "Videos", icon: "smart_display", hint: "A video that taught you something" },
+  { id: "articles", label: "Articles", icon: "article", hint: "A guide, post or paper worth reading" },
+  { id: "new", label: "New tools and features", icon: "new_releases", hint: "Something new it can do" },
+  { id: "prompts", label: "Prompts and tips", icon: "lightbulb", hint: "A prompt or habit that works" },
+  { id: "help", label: "Questions", icon: "help", hint: "Ask what worked for others" },
+] as const;
+
+export type Topic = (typeof TOPICS)[number];
+
 export const BOARD = {
-  repo: "USC-AI-Knowledge-Hub/knowledge-hub",
-  /** The category's address name, from github.com/<repo>/discussions/categories/<slug>. */
+  org: "USC-AI-Knowledge-Hub",
+  /** The category's address name, from github.com/orgs/<org>/discussions/categories/<slug>. */
   categorySlug: "ai-team",
 };
 
-const base = `https://github.com/${BOARD.repo}/discussions`;
-/** The organization's discussions: where the new-topic form for the category opens. */
-const orgBase = `https://github.com/orgs/${BOARD.repo.split("/")[0]}/discussions`;
+/** The organization's discussions. The repository address redirects here and drops the filter, so use this one. */
+const base = `https://github.com/orgs/${BOARD.org}/discussions`;
 
-/** The category filtered to topics with the tool's name in the title. */
-export const boardUrl = (name: string) =>
-  `${base}?${new URLSearchParams({ discussions_q: `category:${BOARD.categorySlug} in:title ${name}` })}`;
+/** The category filtered to topics for a tool, and for one topic of it when given. */
+export const boardUrl = (name: string, topic?: Topic) =>
+  `${base}?${new URLSearchParams({ discussions_q: `category:${BOARD.categorySlug} in:title ${name}${topic ? ` ${topic.label}` : ""}` })}`;
 
-/** A new discussion in the category, titled "<Tool>: " ready to finish. */
-export const newTopicUrl = (name: string) =>
-  `${orgBase}/new?${new URLSearchParams({ category: BOARD.categorySlug, title: `${name}: ` })}`;
+/** A new discussion in the category, titled so it lands on the right board: "ChatGPT · Videos: ". */
+export const newTopicUrl = (name: string, topic: Topic) =>
+  `${base}/new?${new URLSearchParams({ category: BOARD.categorySlug, title: `${name} · ${topic.label}: ` })}`;
