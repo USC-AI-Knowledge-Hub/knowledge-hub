@@ -101,3 +101,18 @@ describe("mentions", () => {
     expect(aiRelated("A new kettle")).toBe(false);
   });
 });
+
+describe("posts that are not about a new product", () => {
+  it("skips customer stories and generic headlines", () => {
+    expect(namesInTitle("Radisson Hotel Group brings hotel discovery into ChatGPT", vendor)).toEqual([]);
+    expect(namesInTitle("NVIDIA Announces New Investments in the UK Startup Ecosystem", vendor)).toEqual([]);
+    expect(namesInTitle("Google finally launches something", press)).not.toContain("Google finally");
+    expect(validName("Investments")).toBe(false);
+    expect(validName("Google finally")).toBe(false);
+  });
+
+  it("still finds real launches", () => {
+    expect(namesInTitle("Introducing SynthID Bio", vendor)).toEqual(["SynthID Bio"]);
+    expect(namesInTitle("Introducing Playground: Create and play custom games", vendor)).toEqual(["Playground"]);
+  });
+});

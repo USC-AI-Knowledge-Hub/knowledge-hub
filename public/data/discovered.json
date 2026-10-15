@@ -200,35 +200,6 @@
       ]
     },
     {
-      "id": "radisson-hotel-group",
-      "name": "Radisson Hotel Group",
-      "maker": "OpenAI",
-      "url": "https://openai.com/index/radisson",
-      "monogram": "Ra",
-      "bestFor": "Radisson partnered with Accenture to build a ChatGPT plugin using OpenAI technology, helping travelers find, compare, and book hotels while planning their trips.",
-      "tasks": [],
-      "queries": [
-        "Radisson Hotel Group AI tutorial"
-      ],
-      "match": [
-        "\\bRadisson[\\s-]*Hotel[\\s-]*Group\\b"
-      ],
-      "exclude": [],
-      "kind": "tool",
-      "urlKind": "announcement",
-      "origin": "feed",
-      "firstSeen": "2026-10-07",
-      "lastSeen": "2026-10-07",
-      "evidence": [
-        {
-          "source": "OpenAI news",
-          "title": "Radisson Hotel Group brings hotel discovery into ChatGPT",
-          "url": "https://openai.com/index/radisson",
-          "date": "2026-10-07"
-        }
-      ]
-    },
-    {
       "id": "autodesk-ai",
       "name": "Autodesk AI",
       "maker": "Autodesk",
@@ -637,41 +608,6 @@
       "firstSeen": "2026-10-12",
       "lastSeen": "2026-10-15",
       "evidence": []
-    },
-    {
-      "id": "investments",
-      "name": "Investments",
-      "maker": "",
-      "url": "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
-      "monogram": "In",
-      "bestFor": "Companies in France are deploying agentic computing across industries spanning space, financial services, the public sector and scientific research, demonstrating how the country’s ecosystem has…",
-      "tasks": [],
-      "queries": [
-        "Investments AI tutorial"
-      ],
-      "match": [
-        "\\bInvestments\\b"
-      ],
-      "exclude": [],
-      "kind": "tool",
-      "urlKind": "announcement",
-      "origin": "feed",
-      "firstSeen": "2026-10-13",
-      "lastSeen": "2026-10-15",
-      "evidence": [
-        {
-          "source": "NVIDIA blog",
-          "title": "NVIDIA Announces New Investments in the UK Startup Ecosystem",
-          "url": "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
-          "date": "2026-10-14"
-        },
-        {
-          "source": "NVIDIA blog",
-          "title": "NVIDIA Announces New Investments in France’s Startups",
-          "url": "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
-          "date": "2026-10-13"
-        }
-      ]
     }
   ],
   "pending": [
@@ -771,48 +707,6 @@
       ],
       "summary": "Zenzap is used by organizations including Starbucks and Taco Bell.",
       "links": []
-    },
-    {
-      "key": "amex",
-      "name": "Amex",
-      "kind": "tool",
-      "firstSeen": "2026-10-13",
-      "lastSeen": "2026-10-13",
-      "mentions": [
-        {
-          "source": "TechCrunch AI",
-          "title": "Amex introduces a framework to prevent AI agents from making unauthorized purchases",
-          "url": "https://techcrunch.com/2026/10/13/amex-introduces-a-framework-to-prevent-ai-agents-from-making-unauthorized-purchases/",
-          "date": "2026-10-13",
-          "sourceId": "techcrunch-ai",
-          "tier": "press"
-        }
-      ],
-      "summary": "American Express is introducing a new framework designed to ensure AI agents only make purchases their users have authorized, potentially preventing costly mistakes and disputes as AI-powered shopping grows.",
-      "links": []
-    },
-    {
-      "key": "google finally",
-      "name": "Google finally",
-      "kind": "tool",
-      "firstSeen": "2026-10-13",
-      "lastSeen": "2026-10-13",
-      "mentions": [
-        {
-          "source": "The Verge AI",
-          "title": "Google finally releases Gemini 4 Argon",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1009862/google-releases-gemini-4-argon",
-          "date": "2026-10-13",
-          "sourceId": "verge-ai",
-          "tier": "press"
-        }
-      ],
-      "summary": "After months sitting on the sidelines of the frontier AI race, Google has finally launched its long-awaited Gemini 4 Argon model, claiming it can compete with the best the industry has to offer.",
-      "links": [
-        "https://blog.google/innovation-and-ai/products/gemini-app/gemini-4-availability",
-        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/#workingharder",
-        "https://www.theverge.com/ai-artificial-intelligence/1009862/google-releases-gemini-4-argon"
-      ]
     },
     {
       "key": "pluto security",
@@ -1757,28 +1651,6 @@
       "links": [
         "https://www.producthunt.com/products/vincentt?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1270905?app_id=339"
-      ]
-    },
-    {
-      "key": "reason",
-      "name": "Reason",
-      "kind": "tool",
-      "firstSeen": "2026-10-04",
-      "lastSeen": "2026-10-04",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Reason",
-          "url": "https://www.producthunt.com/products/dereference-the-100x-ide",
-          "date": "2026-10-04",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "A state-of-the-art coding agent for cost efficiency Discussion | Link",
-      "links": [
-        "https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1269704?app_id=339"
       ]
     },
     {

@@ -17,6 +17,11 @@ const NOT_NAMES = new Set(
   `ai the a an this that these those it its we our you your i how why what when where who which top best new here now today just more most all every why some any one two three first next last big small open free faster better smarter introducing announcing meet say hello welcome launch launches launching update updates release releases releasing report reports study studies week month year news weekly daily guide guides tips tip review reviews opinion analysis interview podcast video watch read join sign comparison versus vs exclusive breaking`.split(" "),
 );
 
+/** Generic nouns and adverbs that are never a product name, alone or as the last word ("Google finally"). */
+const GENERIC_WORDS = new Set(
+  `investments investment partnership partnerships collaboration collaborations expansion funding commitment commitments initiative initiatives program programs results research summit conference event events grant grants earnings revenue plan plans strategy deal deals acquisition acquisitions finally officially reportedly quietly also still again`.split(" "),
+);
+
 /** Trailing words that describe the thing instead of naming it. */
 const GENERIC_TAIL = /\s+(?:model|models|tool|tools|app|apps|api|apis|update|updates|version|versions|feature|features|release|assistant|platform|agent|agents|suite|series|family|studio|launch|beta|preview)$/i;
 /** Words after a version that mark a variant of the same product. */
@@ -55,6 +60,7 @@ export function validName(name: string): boolean {
   if (!/^[A-Z0-9]/.test(name)) return false;
   if (NOT_NAMES.has(tokens[0].toLowerCase())) return false;
   if (tokens.every((t) => NOT_NAMES.has(t.toLowerCase()))) return false;
+  if (GENERIC_WORDS.has(tokens[tokens.length - 1].toLowerCase()) || GENERIC_WORDS.has(tokens[0].toLowerCase())) return false;
   const key = keyOf(name);
   if (!key || COMPANIES.has(key) || COMPANIES.has(key.replace(/ /g, ""))) return false;
   // A leftover price, percentage or number is not a name.
@@ -75,7 +81,7 @@ export function cleanName(raw: string): string {
 const ANNOUNCE = /^(?:introducing|announcing|meet|say hello to|welcome|launching|launches|unveiling|unveils|releasing|releases|debuts?|presenting|rolling out|open[- ]sourcing|new:)\s+(.+)$/i;
 const AVAILABLE = /^(.+?)\s+(?:is|are)\s+(?:now\s+)?(?:available|live|here|rolling out|launching|generally available|open source|open-source|out now|coming)\b/i;
 const HEADLINE_OBJECT = /^(.{2,40}?)\s+(?:launches|unveils|releases|debuts|introduces|announces|rolls out|open-sources|unveiled|launched|released)\s+(.+)$/i;
-const HEADLINE_SUBJECT = /^(.{2,40}?)\s+(?:raises|launches|unveils|releases|debuts|introduces|announces|rolls out|lands|emerges|comes out of stealth|adds|brings|rolls out)\b/i;
+const HEADLINE_SUBJECT = /^(.{2,40}?)\s+(?:raises|launches|unveils|releases|debuts|introduces|announces|rolls out|emerges|comes out of stealth)\b/i;
 const SHOW_HN = /^(?:show|launch) hn\s*:\s*/i;
 
 /**
