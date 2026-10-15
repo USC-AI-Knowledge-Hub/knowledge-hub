@@ -38,7 +38,7 @@
       "url": "https://blogs.microsoft.com/ai/feed/",
       "ok": false,
       "lastOk": null,
-      "failures": 3,
+      "failures": 4,
       "items": 0,
       "error": "HTTP 410"
     },
@@ -71,7 +71,7 @@
       "url": "https://venturebeat.com/category/ai/feed/",
       "ok": false,
       "lastOk": null,
-      "failures": 3,
+      "failures": 4,
       "items": 0,
       "error": "HTTP 429"
     },
@@ -102,11 +102,10 @@
     {
       "id": "hn-show",
       "url": "https://hnrss.org/show?q=AI&points=60",
-      "ok": false,
-      "lastOk": "2026-10-14",
-      "failures": 1,
-      "items": 0,
-      "error": "HTTP 502"
+      "ok": true,
+      "lastOk": "2026-10-15",
+      "failures": 0,
+      "items": 15
     }
   ],
   "tools": [
@@ -652,6 +651,25 @@
       "maker": "Hugging Face"
     },
     {
+      "key": "amazon s bee",
+      "name": "Amazon’s Bee",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "TechCrunch AI",
+          "title": "Amazon’s Bee launches two new personal AI devices, starting at $75",
+          "url": "https://techcrunch.com/2026/10/15/amazons-bee-launches-two-new-personal-ai-devices-starting-at-75/",
+          "date": "2026-10-15",
+          "sourceId": "techcrunch-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "Amazon-owned Bee has launched its first new AI devices since its acquisition, including an updated wearable and a credit-card-sized recorder that attaches to smartphones.",
+      "links": []
+    },
+    {
       "key": "scimplify",
       "name": "Scimplify",
       "kind": "tool",
@@ -728,6 +746,138 @@
       "links": []
     },
     {
+      "key": "brussle",
+      "name": "Brussle",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Brussle",
+          "url": "https://www.producthunt.com/products/brussle-2",
+          "date": "2026-10-15",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Improve Jev's accuracy on your data Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/brussle-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280944?app_id=339"
+      ]
+    },
+    {
+      "key": "actually asked",
+      "name": "Actually Asked",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Actually Asked",
+          "url": "https://www.producthunt.com/products/actually-asked",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "A self-improving branded AI FAQ page Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/actually-asked?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280414?app_id=339"
+      ]
+    },
+    {
+      "key": "atticus",
+      "name": "Atticus",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Atticus",
+          "url": "https://www.producthunt.com/products/atticus",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Hold a key, talk, and your Mac does what you asked Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/atticus?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280688?app_id=339"
+      ]
+    },
+    {
+      "key": "basedash connector gallery",
+      "name": "Basedash Connector gallery",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Basedash Connector gallery",
+          "url": "https://www.producthunt.com/products/basedash",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "See what you'll build before you connect a data source Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/basedash?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280704?app_id=339"
+      ]
+    },
+    {
+      "key": "cmdround",
+      "name": "CmdRound",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "CmdRound",
+          "url": "https://www.producthunt.com/products/cmdround",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Assess how engineers build with artificial intelligence Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/cmdround?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280104?app_id=339"
+      ]
+    },
+    {
+      "key": "navige",
+      "name": "Navige",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Navige",
+          "url": "https://www.producthunt.com/products/navige",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Cut AI agent costs and control runaway spending Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/navige?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1279864?app_id=339"
+      ]
+    },
+    {
       "key": "pixlate",
       "name": "PixLate",
       "kind": "tool",
@@ -769,6 +919,50 @@
       "links": [
         "https://www.producthunt.com/products/rolefit?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1279777?app_id=339"
+      ]
+    },
+    {
+      "key": "rushilo",
+      "name": "Rushilo",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Rushilo",
+          "url": "https://www.producthunt.com/products/rushilo",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Edit video by talking to Claude Code or Codex Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/rushilo?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280413?app_id=339"
+      ]
+    },
+    {
+      "key": "superdraft",
+      "name": "Superdraft",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Superdraft",
+          "url": "https://www.producthunt.com/products/superdraft",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Automatically identify opportunities to email your customers Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/superdraft?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280610?app_id=339"
       ]
     },
     {
@@ -857,6 +1051,72 @@
       "links": [
         "https://www.producthunt.com/products/aurora-lifeline?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1279319?app_id=339"
+      ]
+    },
+    {
+      "key": "backdrop",
+      "name": "Backdrop",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Backdrop",
+          "url": "https://www.producthunt.com/products/backdrop",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Build AI coworkers for any workflow, any industry Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/backdrop?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1278526?app_id=339"
+      ]
+    },
+    {
+      "key": "codecrab",
+      "name": "CodeCrab",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "CodeCrab",
+          "url": "https://www.producthunt.com/products/codecrab",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI code reviews with deep analysis & multi-tool integrations Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/codecrab?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1278417?app_id=339"
+      ]
+    },
+    {
+      "key": "dreamscale labs",
+      "name": "Dreamscale Labs",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Dreamscale Labs",
+          "url": "https://www.producthunt.com/products/dreamscale-labs",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Run the best robot AI models over the cloud Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/dreamscale-labs?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1278586?app_id=339"
       ]
     },
     {
@@ -970,6 +1230,28 @@
       ]
     },
     {
+      "key": "lleverage",
+      "name": "Lleverage",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Lleverage",
+          "url": "https://www.producthunt.com/products/lleverage",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "The autonomous back office for the physical economy Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/lleverage?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1279213?app_id=339"
+      ]
+    },
+    {
       "key": "nimble",
       "name": "Nimble",
       "kind": "tool",
@@ -1011,6 +1293,28 @@
       "links": [
         "https://github.com/La5u/Parsimony",
         "https://news.ycombinator.com/item?id=50077619"
+      ]
+    },
+    {
+      "key": "polylane impact analysis",
+      "name": "Polylane Impact Analysis",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Polylane Impact Analysis",
+          "url": "https://www.producthunt.com/products/polylane",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Catch risky pull requests before they break production Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/polylane?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1279416?app_id=339"
       ]
     },
     {
@@ -1058,6 +1362,50 @@
       ]
     },
     {
+      "key": "superlocalmemory",
+      "name": "SuperLocalMemory",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "SuperLocalMemory",
+          "url": "https://www.producthunt.com/products/superlocalmemory-v2",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Agent memory with Laya, Jev + Google Gemma Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/superlocalmemory-v2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1279449?app_id=339"
+      ]
+    },
+    {
+      "key": "audimate",
+      "name": "Audimate",
+      "kind": "tool",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Audimate",
+          "url": "https://www.producthunt.com/products/audimate",
+          "date": "2026-10-12",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI assistant that works right in the apps you already use Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/audimate?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1277361?app_id=339"
+      ]
+    },
+    {
       "key": "cravelens",
       "name": "CraveLens",
       "kind": "tool",
@@ -1077,6 +1425,28 @@
       "links": [
         "https://www.producthunt.com/products/cravelens?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1278222?app_id=339"
+      ]
+    },
+    {
+      "key": "glm legal",
+      "name": "GLM-Legal",
+      "kind": "tool",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "GLM-Legal",
+          "url": "https://www.producthunt.com/products/z-ai",
+          "date": "2026-10-12",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Z.ai’s legal AI model for contract review and compliance Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/z-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1278021?app_id=339"
       ]
     },
     {
@@ -1121,6 +1491,28 @@
       "links": [
         "https://www.producthunt.com/products/meta-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1278066?app_id=339"
+      ]
+    },
+    {
+      "key": "shrine",
+      "name": "Shrine",
+      "kind": "tool",
+      "firstSeen": "2026-10-12",
+      "lastSeen": "2026-10-12",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Shrine",
+          "url": "https://www.producthunt.com/products/shrine-2",
+          "date": "2026-10-12",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "A home for your agents Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/shrine-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1278267?app_id=339"
       ]
     },
     {
@@ -1588,6 +1980,28 @@
       ]
     },
     {
+      "key": "afterparty",
+      "name": "Afterparty",
+      "kind": "tool",
+      "firstSeen": "2026-10-05",
+      "lastSeen": "2026-10-05",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Afterparty",
+          "url": "https://www.producthunt.com/products/afterparty",
+          "date": "2026-10-05",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Automated actions for meeting deliverables Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/afterparty?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1270278?app_id=339"
+      ]
+    },
+    {
       "key": "remocn",
       "name": "Remocn",
       "kind": "tool",
@@ -1651,6 +2065,50 @@
       "links": [
         "https://www.producthunt.com/products/vincentt?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1270905?app_id=339"
+      ]
+    },
+    {
+      "key": "reason",
+      "name": "Reason",
+      "kind": "tool",
+      "firstSeen": "2026-10-04",
+      "lastSeen": "2026-10-04",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Reason",
+          "url": "https://www.producthunt.com/products/dereference-the-100x-ide",
+          "date": "2026-10-04",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "A state-of-the-art coding agent for cost efficiency Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/dereference-the-100x-ide?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1269704?app_id=339"
+      ]
+    },
+    {
+      "key": "saidtrace",
+      "name": "SaidTrace",
+      "kind": "tool",
+      "firstSeen": "2026-10-03",
+      "lastSeen": "2026-10-03",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "SaidTrace",
+          "url": "https://www.producthunt.com/products/saidtrace",
+          "date": "2026-10-03",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Private voice memos. Your choice of AI. Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/saidtrace?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1268850?app_id=339"
       ]
     },
     {
