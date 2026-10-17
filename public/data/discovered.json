@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-17",
   "sources": [
     {
       "id": "hf-blog",
       "url": "https://huggingface.co/blog/feed.xml",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
-      "items": 18
+      "items": 19
     },
     {
       "id": "openai",
       "url": "https://openai.com/news/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 40
     },
@@ -21,7 +21,7 @@
       "id": "google-ai",
       "url": "https://blog.google/technology/ai/rss/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 8
     },
@@ -29,7 +29,7 @@
       "id": "deepmind",
       "url": "https://deepmind.google/blog/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 11
     },
@@ -37,7 +37,7 @@
       "id": "microsoft-ai",
       "url": "https://news.microsoft.com/source/topics/ai/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 2
     },
@@ -45,7 +45,7 @@
       "id": "nvidia",
       "url": "https://blogs.nvidia.com/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 18
     },
@@ -53,7 +53,7 @@
       "id": "techcrunch-ai",
       "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 20
     },
@@ -61,7 +61,7 @@
       "id": "verge-ai",
       "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -70,7 +70,7 @@
       "url": "https://venturebeat.com/category/ai/feed/",
       "ok": false,
       "lastOk": null,
-      "failures": 6,
+      "failures": 7,
       "items": 0,
       "error": "HTTP 429"
     },
@@ -78,7 +78,7 @@
       "id": "simonw",
       "url": "https://simonwillison.net/atom/everything/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 30
     },
@@ -86,7 +86,7 @@
       "id": "one-useful-thing",
       "url": "https://www.oneusefulthing.org/feed",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 2
     },
@@ -94,7 +94,7 @@
       "id": "marktechpost",
       "url": "https://www.marktechpost.com/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -102,7 +102,7 @@
       "id": "github-ai",
       "url": "https://github.blog/ai-and-ml/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -110,7 +110,7 @@
       "id": "aws-ml",
       "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 20
     },
@@ -118,7 +118,7 @@
       "id": "apple-ml",
       "url": "https://machinelearning.apple.com/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -126,15 +126,15 @@
       "id": "google-research",
       "url": "https://research.google/blog/rss/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
-      "items": 11
+      "items": 12
     },
     {
       "id": "microsoft-research",
       "url": "https://www.microsoft.com/en-us/research/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 9
     },
@@ -142,7 +142,7 @@
       "id": "nvidia-dev",
       "url": "https://developer.nvidia.com/blog/feed",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 40
     },
@@ -150,7 +150,7 @@
       "id": "cloudflare-ai",
       "url": "https://blog.cloudflare.com/tag/ai/rss/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 20
     },
@@ -158,7 +158,7 @@
       "id": "elevenlabs",
       "url": "https://elevenlabs.io/blog/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 40
     },
@@ -166,7 +166,7 @@
       "id": "the-decoder",
       "url": "https://the-decoder.com/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -174,7 +174,7 @@
       "id": "ars-ai",
       "url": "https://arstechnica.com/ai/feed/",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 20
     },
@@ -182,7 +182,7 @@
       "id": "wired-ai",
       "url": "https://www.wired.com/feed/tag/ai/latest/rss",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -190,7 +190,7 @@
       "id": "mit-tr-ai",
       "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -198,7 +198,7 @@
       "id": "zdnet-ai",
       "url": "https://www.zdnet.com/topic/artificial-intelligence/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 25
     },
@@ -206,7 +206,7 @@
       "id": "latent-space",
       "url": "https://www.latent.space/feed",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 20
     },
@@ -214,7 +214,7 @@
       "id": "interconnects",
       "url": "https://www.interconnects.ai/feed",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 5
     },
@@ -222,7 +222,7 @@
       "id": "bens-bites",
       "url": "https://www.bensbites.com/feed",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 10
     },
@@ -230,7 +230,7 @@
       "id": "producthunt-ai",
       "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 40
     },
@@ -238,17 +238,18 @@
       "id": "reddit-localllama",
       "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
       "ok": true,
-      "lastOk": "2026-10-16",
+      "lastOk": "2026-10-17",
       "failures": 0,
       "items": 25
     },
     {
       "id": "hn-show",
       "url": "https://hnrss.org/show?q=AI&points=60",
-      "ok": true,
+      "ok": false,
       "lastOk": "2026-10-16",
-      "failures": 0,
-      "items": 14
+      "failures": 1,
+      "items": 0,
+      "error": "HTTP 502"
     }
   ],
   "tools": [
@@ -331,7 +332,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-10-07",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": [
         {
           "source": "Google AI blog",
@@ -387,7 +388,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -457,7 +458,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -576,7 +577,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -600,7 +601,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -625,7 +626,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -650,7 +651,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -674,7 +675,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -699,7 +700,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -723,7 +724,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -748,7 +749,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-16",
+      "lastSeen": "2026-10-17",
       "evidence": []
     },
     {
@@ -794,6 +795,26 @@
     }
   ],
   "pending": [
+    {
+      "key": "beam",
+      "name": "Beam",
+      "kind": "model",
+      "firstSeen": "2026-10-16",
+      "lastSeen": "2026-10-16",
+      "mentions": [
+        {
+          "source": "Hugging Face blog",
+          "title": "Welcome Beam: a 501B open model you can own, customize, and scale",
+          "url": "https://huggingface.co/blog/reflection-beam",
+          "date": "2026-10-16",
+          "sourceId": "hf-blog",
+          "tier": "vendor"
+        }
+      ],
+      "summary": "",
+      "links": [],
+      "maker": "Hugging Face"
+    },
     {
       "key": "flux image klein",
       "name": "FLUX Image Klein",
@@ -935,6 +956,38 @@
       "maker": "Hugging Face"
     },
     {
+      "key": "stepfun",
+      "name": "StepFun",
+      "kind": "tool",
+      "firstSeen": "2026-10-17",
+      "lastSeen": "2026-10-17",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "StepFun Releases Step 5 Preview Open Weights: 600B MoE, 27B Active, 1M Context",
+          "url": "https://www.marktechpost.com/2026/10/16/stepfun-releases-step-5-preview-open-weights-600b-moe-27b-active-1m-context/",
+          "date": "2026-10-17",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "StepFun has released Step 5 Preview as open weights. FP8 and BF16 checkpoints are live on Hugging Face and ModelScope. Step 5 Preview is a sparse Mixture-of-Experts model from StepFun built for long-horizon agentic work.",
+      "links": [
+        "https://huggingface.co/stepfun-ai/Step-5-Preview",
+        "https://huggingface.co/stepfun-ai/Step-5-Preview-BF16",
+        "https://modelscope.ai/models/stepfun-ai/Step-5-Preview",
+        "https://cellcog.ai/blog/step-5-preview/",
+        "https://platform.stepfun.ai/blog/inside-step-5-preview",
+        "https://openrouter.ai/stepfun/step-5-preview",
+        "https://www.eesel.ai/blog/stepfun-step-5",
+        "https://huggingface.co/zai-org/GLM-5.3",
+        "https://huggingface.co/moonshotai/Kimi-K3",
+        "https://docs.z.ai/guides/llm/glm-5.3",
+        "https://platform.stepfun.ai/docs/en/guides/pricing/details",
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ]
+    },
+    {
       "key": "liquid ai",
       "name": "Liquid AI",
       "kind": "tool",
@@ -972,6 +1025,38 @@
         "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
         "https://huggingface.co/google/gemma-4-26B-A4B-it",
         "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16"
+      ]
+    },
+    {
+      "key": "reflection beam",
+      "name": "Reflection Beam",
+      "kind": "model",
+      "firstSeen": "2026-10-16",
+      "lastSeen": "2026-10-16",
+      "mentions": [
+        {
+          "source": "AWS machine learning blog",
+          "title": "Introducing Reflection Beam: an open-weight model for agentic coding on AWS",
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-reflection-beam-an-open-weight-model-for-agentic-coding-on-aws/",
+          "date": "2026-10-16",
+          "sourceId": "aws-ml",
+          "tier": "press"
+        }
+      ],
+      "summary": "Reflection AI's Beam is an open-weight model for agentic coding and long-horizon tasks. This post shows how to deploy Beam on AWS: start with an Amazon SageMaker JumpStart real-time endpoint, or use Amazon SageMaker HyperPod Inference with JumpStart, SGLang, or vLLM for Kubernetes-native control…",
+      "links": [
+        "https://reflection.ai/",
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-model-deployment.html",
+        "https://reflection.ai/about",
+        "https://reflection.ai/solutions",
+        "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2026/10/15/ML-22133-1-1.png",
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html",
+        "https://github.com/aws-samples/sagemaker-genai-hosting-examples/tree/main/SageMakerHyperpod/reflection-beam",
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-model-deployment-model-caching.html",
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-model-deployment-inference-gateway.html",
+        "https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-model-deployment-caching-routing.html",
+        "https://aws.amazon.com/blogs/machine-learning/amazon-sagemaker-inference-2026-year-to-date-launches-in-review/",
+        "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2026/10/15/ML-22133-2-1.png"
       ]
     },
     {
@@ -1638,6 +1723,72 @@
       "links": []
     },
     {
+      "key": "gpu terminal",
+      "name": "GPU Terminal",
+      "kind": "tool",
+      "firstSeen": "2026-10-17",
+      "lastSeen": "2026-10-17",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "GPU Terminal by Context.dev",
+          "url": "https://www.producthunt.com/products/context-dev",
+          "date": "2026-10-17",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Compare GPU rental prices across cloud providers Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/context-dev?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1283017?app_id=339"
+      ]
+    },
+    {
+      "key": "salience",
+      "name": "Salience",
+      "kind": "tool",
+      "firstSeen": "2026-10-17",
+      "lastSeen": "2026-10-17",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Salience",
+          "url": "https://www.producthunt.com/products/salience",
+          "date": "2026-10-17",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "See every request to your website and how it responds. Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/salience?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1283097?app_id=339"
+      ]
+    },
+    {
+      "key": "emochi",
+      "name": "Emochi",
+      "kind": "tool",
+      "firstSeen": "2026-10-16",
+      "lastSeen": "2026-10-16",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Emochi",
+          "url": "https://www.producthunt.com/products/emochi-2",
+          "date": "2026-10-16",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Voice journal to understand yourself through art and science Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/emochi-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1282248?app_id=339"
+      ]
+    },
+    {
       "key": "gbrain",
       "name": "GBrain",
       "kind": "tool",
@@ -1657,6 +1808,28 @@
       "links": [
         "https://www.producthunt.com/products/gbrain?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1281992?app_id=339"
+      ]
+    },
+    {
+      "key": "step",
+      "name": "Step",
+      "kind": "tool",
+      "firstSeen": "2026-10-16",
+      "lastSeen": "2026-10-16",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Step 5 Preview",
+          "url": "https://www.producthunt.com/products/step-3-5-flash",
+          "date": "2026-10-16",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "600B open weights, trained for long-running agents Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/step-3-5-flash?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1282623?app_id=339"
       ]
     },
     {
@@ -1704,6 +1877,28 @@
       ]
     },
     {
+      "key": "craft",
+      "name": "Craft",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Craft Agents",
+          "url": "https://www.producthunt.com/products/craft-agents",
+          "date": "2026-10-15",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "The world's most powerful agents, with the UX they deserve Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/craft-agents?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280962?app_id=339"
+      ]
+    },
+    {
       "key": "dottr",
       "name": "Dottr",
       "kind": "tool",
@@ -1723,6 +1918,28 @@
       "links": [
         "https://www.producthunt.com/products/dottr?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1280874?app_id=339"
+      ]
+    },
+    {
+      "key": "grablo spot",
+      "name": "Grablo Spot",
+      "kind": "tool",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-15",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Grablo Spot",
+          "url": "https://www.producthunt.com/products/grablo-spot",
+          "date": "2026-10-15",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Free AI NVR that finds any person or vehicle in seconds Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/grablo-spot?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1281375?app_id=339"
       ]
     },
     {
@@ -1921,6 +2138,28 @@
       "links": [
         "https://www.producthunt.com/products/cmdround?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1280104?app_id=339"
+      ]
+    },
+    {
+      "key": "crewtower mod",
+      "name": "CrewTower Mod",
+      "kind": "tool",
+      "firstSeen": "2026-10-14",
+      "lastSeen": "2026-10-14",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "CrewTower Mod for Claude Code",
+          "url": "https://www.producthunt.com/products/crew-tower",
+          "date": "2026-10-14",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Talk to Claude Code right from your MacBook notch Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/crew-tower?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1280692?app_id=339"
       ]
     },
     {
@@ -2364,6 +2603,28 @@
       ]
     },
     {
+      "key": "neophyte",
+      "name": "Neophyte",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Neophyte",
+          "url": "https://www.producthunt.com/products/neophyte",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Watch an AI agent sign up and onboard to any product Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/neophyte?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1278403?app_id=339"
+      ]
+    },
+    {
       "key": "nimble",
       "name": "Nimble",
       "kind": "tool",
@@ -2493,6 +2754,28 @@
       "links": [
         "https://www.producthunt.com/products/superlocalmemory-v2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1279449?app_id=339"
+      ]
+    },
+    {
+      "key": "train",
+      "name": "Train",
+      "kind": "tool",
+      "firstSeen": "2026-10-13",
+      "lastSeen": "2026-10-13",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Train with Pasta",
+          "url": "https://www.producthunt.com/products/train-with-pasta",
+          "date": "2026-10-13",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "A personal trainer powered by Apple Intelligence Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/train-with-pasta?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1279257?app_id=339"
       ]
     },
     {
@@ -3001,6 +3284,28 @@
       "links": [
         "https://github.com/opper-ai/jevman-benchmark/blob/main/CONTRIBUTING.md#benchmark-your-own-model",
         "https://news.ycombinator.com/item?id=50007993"
+      ]
+    },
+    {
+      "key": "nitrostack",
+      "name": "NitroStack",
+      "kind": "tool",
+      "firstSeen": "2026-10-08",
+      "lastSeen": "2026-10-08",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "NitroStack",
+          "url": "https://www.producthunt.com/products/nitrostack",
+          "date": "2026-10-08",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Build, test, and deploy MCP servers in one place Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/nitrostack?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1273961?app_id=339"
       ]
     },
     {
