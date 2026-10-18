@@ -62,7 +62,22 @@ describe("a board kept on this device", () => {
     await expect(theirs.edit(p.id, "Hacked")).rejects.toThrow(/your own/);
     await expect(theirs.remove(p.id)).rejects.toThrow(/your own/);
     await mine.remove(p.id);
-    expect((await mine.list("claude"))[0]).toMatchObject({ deleted: true, body: "" });
+    expect(await mine.list("claude")).toEqual([]);
+  });
+
+  it("keeps a stub for a deleted post with replies and clears it with the last reply", async () => {
+    const s = memory();
+    const store = localStore(s, identity(s));
+    await store.post(draft);
+    const [top] = await store.list("claude");
+    await store.post({ ...draft, parentId: top.id, body: "reply" });
+    await store.remove(top.id);
+    let list = await store.list("claude");
+    expect(list).toHaveLength(2);
+    expect(list[0]).toMatchObject({ deleted: true, body: "", name: "deleted" });
+    await store.remove(list[1].id);
+    list = await store.list("claude");
+    expect(list).toEqual([]);
   });
 
   it("toggles reactions and hides a post after three reports", async () => {

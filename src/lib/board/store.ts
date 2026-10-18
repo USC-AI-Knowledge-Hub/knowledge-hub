@@ -116,9 +116,18 @@ export function localStore(storage: Storage = localStorage, id: Identity = ident
       const rows = load();
       const r = find(rows, postId);
       if (!id.keyFor(postId)) throw new Error("You can only delete your own posts, in the browser you wrote them in.");
-      r.deleted = true;
-      r.body = "";
-      save(rows);
+      // Like the database: a post with replies stays as a stub so they keep their place; otherwise it goes.
+      if (rows.some((x) => x.parentId === postId)) {
+        r.deleted = true;
+        r.body = "";
+        save(rows);
+        return;
+      }
+      let next = rows.filter((x) => x.id !== postId);
+      const parent = r.parentId ? next.find((x) => x.id === r.parentId) : undefined;
+      if (parent?.deleted && !next.some((x) => x.parentId === parent.id)) next = next.filter((x) => x.id !== parent.id);
+      id.forgetKey(postId);
+      save(next);
     },
     async react(postId, emoji) {
       const rows = load();
