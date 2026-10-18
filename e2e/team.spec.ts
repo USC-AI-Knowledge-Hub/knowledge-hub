@@ -1,9 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
 
 /** Without a database address the board keeps posts on the device, which is what these tests use. */
-const openBoard = async (page: Page, query = "tool=claude") => {
+const openBoard = async (page: Page, query = "board=claude-101") => {
   await page.goto(`/team?${query}`);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("board");
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 };
 const post = async (page: Page, name: string, body: string) => {
   const box = page.locator(".board-new");
@@ -13,16 +13,20 @@ const post = async (page: Page, name: string, body: string) => {
 };
 
 test.describe("AI Team boards", () => {
-  test("is in the side navigation and has a tile per tool", async ({ page }) => {
+  test("is in the side navigation and lists a board per course by bucket, plus tools", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 860 });
     await page.goto("/");
     await page.getByRole("navigation", { name: "Primary" }).first().getByRole("link", { name: "AI Team" }).click();
     await expect(page).toHaveURL(/\/team$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("AI Team");
-    await expect(page.locator(".team-tile")).toHaveCount(8);
-    await page.locator(".team-tile", { hasText: "Claude" }).getByRole("link", { name: "Videos" }).click();
-    await expect(page).toHaveURL(/tool=claude&topic=videos/);
-    await expect(page.getByRole("button", { name: "Videos" })).toHaveAttribute("aria-pressed", "true");
+    for (const h of ["Tools", "Bucket 1: Foundations", "Bucket 2: Applied AI", "Bucket 3: Technical"]) await expect(page.getByRole("heading", { name: h })).toBeVisible();
+    await expect(page.locator(".team-tile")).toHaveCount(16);
+    await page.getByRole("link", { name: /Claude 101/ }).click();
+    await expect(page).toHaveURL(/board=claude-101/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Claude 101");
+    await expect(page.getByText("Anthropic · Bucket 1: Foundations")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Open the course" })).toHaveAttribute("href", "https://academy.claude.com/courses/claude-101");
+    await expect(page.getByRole("button", { name: "What I learned" })).toBeVisible();
   });
 
   test("posts, replies, reacts, edits and deletes, and remembers the name", async ({ page }) => {
@@ -30,7 +34,7 @@ test.describe("AI Team boards", () => {
     await expect(page.getByText("isn't connected to the shared database")).toBeVisible();
     await expect(page.getByText("No topics here yet")).toBeVisible();
 
-    await post(page, "Sam", "Claude helped me outline my paper. See https://example.com/guide.");
+    await post(page, "Sam", "The prompting module helped. See https://example.com/guide.");
     const first = page.locator(".board-post").first();
     await expect(first).toContainText("Sam");
     await expect(first.getByRole("link", { name: "https://example.com/guide" })).toHaveAttribute("href", "https://example.com/guide");
@@ -68,22 +72,29 @@ test.describe("AI Team boards", () => {
     await expect(page.getByRole("alert")).toContainText("Write something");
   });
 
-  test("keeps topics apart and switches tools from the pop-up", async ({ page }) => {
-    await openBoard(page, "tool=claude&topic=videos");
+  test("keeps topics and boards apart, and switches boards from the pop-up", async ({ page }) => {
+    await openBoard(page, "board=claude-101&topic=resources");
     await post(page, "Sam", "A great video");
-    await page.getByRole("button", { name: "Articles" }).click();
+    await page.getByRole("button", { name: "Questions" }).click();
     await expect(page.getByText("No topics here yet")).toBeVisible();
     await page.getByRole("button", { name: "All topics" }).click();
     await expect(page.locator(".board-post")).toHaveCount(1);
-    await expect(page.locator(".board-post").first()).toContainText("Videos");
+    await expect(page.locator(".board-post").first()).toContainText("Resources");
 
-    await page.getByRole("button", { name: /Switch tool/ }).click();
-    const dialog = page.getByRole("dialog", { name: "Pick a tool's board" });
-    await expect(dialog.getByRole("link")).toHaveCount(8);
-    await dialog.getByRole("link", { name: /Gemini/ }).click();
-    await expect(page).toHaveURL(/tool=gemini/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Gemini");
+    await page.getByRole("button", { name: /Switch board/ }).click();
+    const dialog = page.getByRole("dialog", { name: "Pick a board" });
+    await expect(dialog.getByRole("link")).toHaveCount(16);
+    await dialog.getByRole("link", { name: /Vibe Coding 101 with Replit/ }).click();
+    await expect(page).toHaveURL(/board=dlai-vibe-coding-replit/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Vibe Coding 101 with Replit");
     await expect(page.getByText("No topics here yet")).toBeVisible();
+  });
+
+  test("the tools board has its own topics", async ({ page }) => {
+    await openBoard(page, "board=tools");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("AI tools");
+    for (const t of ["Videos", "Articles", "New tools and features", "Prompts and tips", "Questions"]) await expect(page.getByRole("button", { name: t })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Open the course" })).toHaveCount(0);
   });
 
   test("sorts by top reactions", async ({ page }) => {
@@ -105,7 +116,7 @@ test.describe("AI Team boards", () => {
 
   test("fits a phone without sideways scrolling", async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 800 });
-    for (const url of ["/team", "/team?tool=claude"]) {
+    for (const url of ["/team", "/team?board=anthropic-ai-fluency-framework"]) {
       await page.goto(url);
       expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
     }

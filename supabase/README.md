@@ -34,7 +34,7 @@ Use **Table editor** in Supabase, or run these in the **SQL editor**.
 See what has been reported or hidden:
 
 ```sql
-select p.id, p.tool, p.topic, p.name, p.body, p.hidden, count(r.voter) as reports
+select p.id, p.board, p.topic, p.name, p.body, p.hidden, count(r.voter) as reports
 from board_posts p left join board_reports r on r.post_id = p.id
 group by p.id having count(r.voter) > 0 or p.hidden order by reports desc;
 ```
@@ -63,6 +63,6 @@ update board_posts set hidden = true where voter = (select voter from board_post
 
 ## Changing things
 
-- Tools and topics are lists in `src/data/team.ts`. The database accepts any tool or topic written in lower-case letters, digits and hyphens, so adding one needs no database change.
+- Boards (one per course, plus the tools board) and their topics are lists in `src/data/team.ts`. The database accepts any board or topic id written in lower-case letters, digits and hyphens, so adding a course needs no database change. Don't rename an id once posts use it.
 - Reactions are the five in `board_react` (schema) and `REACTIONS` (`src/lib/board/rules.ts`). Change both together.
 - Free Supabase projects pause after a week with no activity. Visiting the Supabase dashboard or any board traffic keeps it awake; if it ever pauses, restore it from the dashboard.

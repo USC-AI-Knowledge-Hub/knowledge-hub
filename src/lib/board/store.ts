@@ -3,7 +3,7 @@ import { clean, problemWith } from "./rules";
 
 export interface Post {
   id: string;
-  tool: string;
+  board: string;
   topic: string;
   parentId: string | null;
   name: string;
@@ -15,7 +15,7 @@ export interface Post {
 }
 
 export interface NewPost {
-  tool: string;
+  board: string;
   topic: string;
   parentId: string | null;
   name: string;
@@ -26,7 +26,7 @@ export interface NewPost {
 export interface BoardStore {
   /** True when posts are shared with everyone; false when they stay on this device. */
   shared: boolean;
-  list(tool: string, topic?: string): Promise<Post[]>;
+  list(board: string, topic?: string): Promise<Post[]>;
   post(p: NewPost): Promise<void>;
   edit(id: string, body: string): Promise<void>;
   remove(id: string): Promise<void>;
@@ -65,7 +65,7 @@ export function localStore(storage: Storage = localStorage, id: Identity = ident
   };
   const view = (r: Row): Post => ({
     id: r.id,
-    tool: r.tool,
+    board: r.board,
     topic: r.topic,
     parentId: r.parentId,
     name: r.deleted ? "deleted" : r.name,
@@ -82,9 +82,9 @@ export function localStore(storage: Storage = localStorage, id: Identity = ident
   };
   return {
     shared: false,
-    async list(tool, topic) {
+    async list(board, topic) {
       return load()
-        .filter((r) => r.tool === tool && (!topic || r.topic === topic) && r.reports.length < 3)
+        .filter((r) => r.board === board && (!topic || r.topic === topic) && r.reports.length < 3)
         .map(view);
     },
     async post(p) {
@@ -98,7 +98,7 @@ export function localStore(storage: Storage = localStorage, id: Identity = ident
       }
       const postId = uuid();
       id.rememberKey(postId, id.newKey());
-      rows.push({ id: postId, tool: p.tool, topic: p.topic, parentId: p.parentId, name: clean(p.name), body: clean(p.body), createdAt: now().toISOString(), editedAt: null, deleted: false, reactions: {}, reports: [] });
+      rows.push({ id: postId, board: p.board, topic: p.topic, parentId: p.parentId, name: clean(p.name), body: clean(p.body), createdAt: now().toISOString(), editedAt: null, deleted: false, reactions: {}, reports: [] });
       save(rows);
     },
     async edit(postId, body) {
@@ -143,7 +143,7 @@ export function localStore(storage: Storage = localStorage, id: Identity = ident
 
 interface Row {
   id: string;
-  tool: string;
+  board: string;
   topic: string;
   parent_id: string | null;
   name: string;
@@ -180,8 +180,8 @@ export function supabaseStore(cfg: BoardConfig, id: Identity = identity(), fetch
   };
   return {
     shared: true,
-    async list(tool, topic) {
-      const q = new URLSearchParams({ tool: `eq.${tool}`, order: "created_at.asc", limit: "1000" });
+    async list(board, topic) {
+      const q = new URLSearchParams({ board: `eq.${board}`, order: "created_at.asc", limit: "1000" });
       if (topic) q.set("topic", `eq.${topic}`);
       let res: Response;
       try {
@@ -192,7 +192,7 @@ export function supabaseStore(cfg: BoardConfig, id: Identity = identity(), fetch
       if (!res.ok) await fail(res);
       return ((await res.json()) as Row[]).map((r) => ({
         id: r.id,
-        tool: r.tool,
+        board: r.board,
         topic: r.topic,
         parentId: r.parent_id,
         name: r.name,
@@ -207,7 +207,7 @@ export function supabaseStore(cfg: BoardConfig, id: Identity = identity(), fetch
       const problem = problemWith(p.name, p.body);
       if (problem) throw new Error(problem);
       const key = id.newKey();
-      const newId = await call<string>("board_post", { p_tool: p.tool, p_topic: p.topic, p_parent: p.parentId, p_name: p.name, p_body: p.body, p_key: key, p_voter: id.voter() });
+      const newId = await call<string>("board_post", { p_board: p.board, p_topic: p.topic, p_parent: p.parentId, p_name: p.name, p_body: p.body, p_key: key, p_voter: id.voter() });
       id.rememberKey(newId, key);
     },
     async edit(postId, body) {

@@ -5,14 +5,15 @@ import { Composer } from "./Composer";
 import { PostItem, type PostActions } from "./PostItem";
 import { identity } from "../../lib/board/identity";
 import type { BoardStore, Post } from "../../lib/board/store";
-import { TOPICS } from "../../data/team";
+import type { BoardDef } from "../../data/team";
 
 type Sort = "new" | "old" | "top";
 
 const score = (p: Post) => Object.values(p.reactions).reduce((a, b) => a + b, 0);
 
 /** One tool's board: a box to post, the topic filter, and the conversation. */
-export function Board({ store, tool, topic, onTopic }: { store: BoardStore; tool: string; topic: string | null; onTopic: (id: string | null) => void }) {
+export function Board({ store, board, topic, onTopic }: { store: BoardStore; board: BoardDef; topic: string | null; onTopic: (id: string | null) => void }) {
+  const TOPICS = board.topics;
   const me = useMemo(() => identity(), []);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [loadError, setLoadError] = useState("");
@@ -24,12 +25,12 @@ export function Board({ store, tool, topic, onTopic }: { store: BoardStore; tool
 
   const load = useCallback(async () => {
     try {
-      setPosts(await store.list(tool, topic ?? undefined));
+      setPosts(await store.list(board.id, topic ?? undefined));
       setLoadError("");
     } catch (e) {
       setLoadError((e as Error).message);
     }
-  }, [store, tool, topic]);
+  }, [store, board.id, topic]);
 
   useEffect(() => {
     setPosts(null);
@@ -74,7 +75,7 @@ export function Board({ store, tool, topic, onTopic }: { store: BoardStore; tool
       await load();
     },
     reply: async (parent, n, body) => {
-      await store.post({ tool, topic: parent.topic, parentId: parent.id, name: n, body });
+      await store.post({ board: board.id, topic: parent.topic, parentId: parent.id, name: n, body });
       me.setName(n.trim());
       setName(n.trim());
       await load();
@@ -134,7 +135,7 @@ export function Board({ store, tool, topic, onTopic }: { store: BoardStore; tool
           label={TOPICS.find((t) => t.id === composeTopic)?.hint ?? "Your post"}
           submitLabel="Post"
           onSubmit={async (n, body) => {
-            await store.post({ tool, topic: topic ?? composeTopic, parentId: null, name: n, body });
+            await store.post({ board: board.id, topic: topic ?? composeTopic, parentId: null, name: n, body });
             me.setName(n.trim());
             setName(n.trim());
             await load();

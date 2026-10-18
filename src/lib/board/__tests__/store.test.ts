@@ -7,7 +7,7 @@ const memory = () => {
   const m = new Map<string, string>();
   return { getItem: (k: string) => m.get(k) ?? null, setItem: (k: string, v: string) => void m.set(k, v) };
 };
-const draft = { tool: "claude", topic: "videos", parentId: null, name: "Sam", body: "Hello" };
+const draft = { board: "claude", topic: "videos", parentId: null, name: "Sam", body: "Hello" };
 
 describe("rules", () => {
   it("says what is wrong with a post", () => {
@@ -93,7 +93,7 @@ describe("a shared board", () => {
     const fetchImpl = (async (url: string, init?: RequestInit) => {
       calls.push({ url, init });
       if (url.includes("/rpc/board_post")) return new Response(JSON.stringify("11111111-1111-1111-1111-111111111111"), { status: 200 });
-      if (url.includes("/board_public")) return new Response(JSON.stringify([{ id: "a", tool: "claude", topic: "videos", parent_id: null, name: "Sam", body: "Hi", created_at: "2026-10-15T00:00:00Z", edited_at: null, deleted: false, reactions: { "👍": 2 } }]), { status: 200 });
+      if (url.includes("/board_public")) return new Response(JSON.stringify([{ id: "a", board: "claude", topic: "videos", parent_id: null, name: "Sam", body: "Hi", created_at: "2026-10-15T00:00:00Z", edited_at: null, deleted: false, reactions: { "👍": 2 } }]), { status: 200 });
       return new Response("", { status: 200 });
     }) as unknown as typeof fetch;
     const s = memory();
@@ -102,11 +102,11 @@ describe("a shared board", () => {
     const posts = await store.list("claude", "videos");
     expect(posts[0]).toMatchObject({ id: "a", parentId: null, reactions: { "👍": 2 } });
     expect(calls[0].url).toContain("https://x.supabase.co/rest/v1/board_public?");
-    expect(calls[0].url).toContain("tool=eq.claude");
+    expect(calls[0].url).toContain("board=eq.claude");
     expect(calls[0].url).toContain("topic=eq.videos");
     await store.post(draft);
     const body = JSON.parse(String(calls[1].init?.body));
-    expect(body).toMatchObject({ p_tool: "claude", p_topic: "videos", p_parent: null, p_name: "Sam", p_body: "Hello" });
+    expect(body).toMatchObject({ p_board: "claude", p_topic: "videos", p_parent: null, p_name: "Sam", p_body: "Hello" });
     expect(String(body.p_key).length).toBeGreaterThanOrEqual(16);
     expect(id.keyFor("11111111-1111-1111-1111-111111111111")).toBe(body.p_key);
     await store.edit("11111111-1111-1111-1111-111111111111", "Edited");

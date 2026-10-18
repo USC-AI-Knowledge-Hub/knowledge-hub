@@ -2,13 +2,15 @@
 .team-page { max-width: 960px; }
 .team-hero { margin-bottom: 24px; }
 
+.team-section { margin-bottom: 32px; display: grid; gap: 12px; }
+.team-section h2 { margin: 0; }
 .team-tiles { list-style: none; margin: 0; padding: 0; align-items: start; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
 .team-tile {
   display: flex; flex-direction: column; background: var(--md-sys-color-surface-container);
   border: 2px solid var(--md-sys-color-on-surface); border-radius: 0; box-shadow: 4px 4px 0 var(--md-sys-color-on-surface);
 }
 .team-tile-main {
-  display: flex; align-items: center; gap: 16px; padding: 16px; color: var(--md-sys-color-on-surface); text-decoration: none; flex: 1;
+  display: flex; align-items: center; gap: 16px; padding: 16px; min-height: 56px; color: var(--md-sys-color-on-surface); text-decoration: none; flex: 1;
 }
 .team-tile-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .team-topics { list-style: none; margin: 0; padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -96,3 +98,9 @@
 }
 .board-confirm { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0; }
 .board-replies { display: grid; gap: 10px; padding-left: 16px; border-left: 2px solid var(--md-sys-color-outline-variant); }
+
+.team-course-link { margin: 8px 0; }
+.team-dialog-scroll { max-height: min(70vh, 560px); overflow: auto; display: grid; gap: 16px; }
+.team-dialog-scroll h3 { margin: 0 0 8px; }
+.team-picks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.team-pick { align-items: flex-start; text-align: left; }

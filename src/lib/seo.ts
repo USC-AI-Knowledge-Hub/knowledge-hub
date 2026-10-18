@@ -416,14 +416,14 @@ const STATIC: Record<string, () => PageMeta> = {
   }),
   "/team": () => ({
     path: "/team",
-    title: `AI Team: student boards for eight AI tools${suffix}`,
-    description: "Discussion boards for ChatGPT, Claude, Gemini and five other tools, where students share prompts, videos, articles and tips.",
+    title: `AI Team: discussion boards for every course${suffix}`,
+    description: "A discussion board for each course in the three proficiency buckets, plus one for AI tools. Ask questions and share what you learn, no account needed.",
     heading: "AI Team",
     type: "website",
     content: [
-      { kind: "p", text: "One board for each of eight AI tools. Students add a name to post, reply and react, with no account. Posts are public." },
+      { kind: "p", text: "A board for each course in Foundations, Applied AI and Technical, and one general board for AI tools. Students add a name to post, reply and react, with no account. Posts are public." },
     ],
-    links: [{ to: "/tools", label: "Tools" }],
+    links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "AI Team", path: "/team" }])],
   }),
   "/offline": () => ({

@@ -8,7 +8,7 @@
 
 create table if not exists board_posts (
   id uuid primary key default gen_random_uuid(),
-  tool text not null check (tool ~ '^[a-z0-9-]{1,40}$'),
+  board text not null check (board ~ '^[a-z0-9-]{1,40}$'),
   topic text not null check (topic ~ '^[a-z0-9-]{1,40}$'),
   parent_id uuid references board_posts(id) on delete cascade,
   name text not null check (char_length(name) between 1 and 40),
@@ -21,7 +21,7 @@ create table if not exists board_posts (
   deleted boolean not null default false,
   hidden boolean not null default false
 );
-create index if not exists board_posts_board on board_posts (tool, topic, created_at);
+create index if not exists board_posts_board on board_posts (board, topic, created_at);
 create index if not exists board_posts_parent on board_posts (parent_id);
 create index if not exists board_posts_voter on board_posts (voter, created_at);
 create index if not exists board_posts_ip on board_posts (ip_hash, created_at);
@@ -46,7 +46,7 @@ create table if not exists board_blocked_words (word text primary key check (wor
 -- What the site reads. Hidden posts are left out; deleted posts keep their place but lose their text.
 create or replace view board_public as
 select
-  p.id, p.tool, p.topic, p.parent_id,
+  p.id, p.board, p.topic, p.parent_id,
   case when p.deleted then 'deleted' else p.name end as name,
   case when p.deleted then '' else p.body end as body,
   p.created_at, p.edited_at, p.deleted,
@@ -79,11 +79,11 @@ declare h text; begin
 end $$;
 
 -- Post a topic (no parent) or a reply (parent given). Returns the new post's id.
-create or replace function board_post(p_tool text, p_topic text, p_parent uuid, p_name text, p_body text, p_key text, p_voter text)
+create or replace function board_post(p_board text, p_topic text, p_parent uuid, p_name text, p_body text, p_key text, p_voter text)
 returns uuid language plpgsql security definer set search_path = public as $$
 declare v_name text := board_clean(p_name); v_body text := board_clean(p_body); v_ip text := board_ip(); v_parent board_posts; v_id uuid;
 begin
-  if p_tool !~ '^[a-z0-9-]{1,40}$' or p_topic !~ '^[a-z0-9-]{1,40}$' then raise exception 'That board does not exist.'; end if;
+  if p_board !~ '^[a-z0-9-]{1,40}$' or p_topic !~ '^[a-z0-9-]{1,40}$' then raise exception 'That board does not exist.'; end if;
   if char_length(v_name) < 1 or char_length(v_name) > 40 then raise exception 'Use a name of 1 to 40 characters.'; end if;
   if char_length(v_body) < 1 or char_length(v_body) > 2000 then raise exception 'Write between 1 and 2000 characters.'; end if;
   if coalesce(char_length(p_key), 0) < 16 or coalesce(char_length(p_voter), 0) < 16 then raise exception 'Something went wrong. Reload the page and try again.'; end if;
@@ -97,10 +97,10 @@ begin
     select * into v_parent from board_posts where id = p_parent and not hidden and not deleted;
     if not found then raise exception 'That post is gone, so it can''t be replied to.'; end if;
     if v_parent.parent_id is not null then raise exception 'Reply to the original post instead.'; end if;
-    if v_parent.tool <> p_tool or v_parent.topic <> p_topic then raise exception 'That reply is on a different board.'; end if;
+    if v_parent.board <> p_board or v_parent.topic <> p_topic then raise exception 'That reply is on a different board.'; end if;
   end if;
-  insert into board_posts (tool, topic, parent_id, name, body, key_hash, voter, ip_hash)
-  values (p_tool, p_topic, p_parent, v_name, v_body, board_hash(p_key), p_voter, v_ip) returning id into v_id;
+  insert into board_posts (board, topic, parent_id, name, body, key_hash, voter, ip_hash)
+  values (p_board, p_topic, p_parent, v_name, v_body, board_hash(p_key), p_voter, v_ip) returning id into v_id;
   return v_id;
 end $$;
 

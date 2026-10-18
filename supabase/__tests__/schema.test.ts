@@ -15,9 +15,9 @@ beforeEach(async () => {
   await db.exec("truncate board_posts, board_reactions, board_reports, board_blocked_words cascade");
 });
 
-const post = async (over: Partial<Record<"tool" | "topic" | "parent" | "name" | "body" | "key" | "voter", string | null>> = {}) => {
-  const a = { tool: "claude", topic: "videos", parent: null, name: "Sam", body: "Hello there", key: KEY, voter: VOTER, ...over };
-  const r = await db.query<{ board_post: string }>("select board_post($1,$2,$3,$4,$5,$6,$7)", [a.tool, a.topic, a.parent, a.name, a.body, a.key, a.voter]);
+const post = async (over: Partial<Record<"board" | "topic" | "parent" | "name" | "body" | "key" | "voter", string | null>> = {}) => {
+  const a = { board: "claude", topic: "videos", parent: null, name: "Sam", body: "Hello there", key: KEY, voter: VOTER, ...over };
+  const r = await db.query<{ board_post: string }>("select board_post($1,$2,$3,$4,$5,$6,$7)", [a.board, a.topic, a.parent, a.name, a.body, a.key, a.voter]);
   return r.rows[0].board_post;
 };
 const rows = async () => (await db.query<Record<string, unknown>>("select * from board_public order by created_at, id")).rows;
@@ -38,7 +38,7 @@ describe("board schema", () => {
     expect(Object.keys(list[0])).not.toContain("key_hash");
     expect(Object.keys(list[0])).not.toContain("voter");
     await fails(post({ parent: reply, body: "Too deep", voter: "x".repeat(24) }), /original post/);
-    await fails(post({ parent: id, tool: "gemini", body: "Wrong board", voter: "y".repeat(24) }), /different board/);
+    await fails(post({ parent: id, board: "gemini", body: "Wrong board", voter: "y".repeat(24) }), /different board/);
   });
 
   it("checks names, length, links and bad boards", async () => {
@@ -47,7 +47,7 @@ describe("board schema", () => {
     await fails(post({ body: "" }), /between 1 and 2000/);
     await fails(post({ body: "x".repeat(2001) }), /between 1 and 2000/);
     await fails(post({ body: "https://a.example https://b.example https://c.example" }), /two links/);
-    await fails(post({ tool: "Bad Tool!" }), /does not exist/);
+    await fails(post({ board: "Bad Board!" }), /does not exist/);
     await fails(post({ key: "short" }), /Reload/);
   });
 
