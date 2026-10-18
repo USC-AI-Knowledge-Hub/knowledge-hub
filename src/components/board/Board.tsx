@@ -86,7 +86,10 @@ export function Board({ store, board, topic, onTopic }: { store: BoardStore; boa
     const all = posts ?? [];
     const byParent = new Map<string, Post[]>();
     for (const p of all) if (p.parentId) byParent.set(p.parentId, [...(byParent.get(p.parentId) ?? []), p]);
-    const tops = all.filter((p) => !p.parentId);
+    // A deleted post only shows as a stub while replies still hang from it; a deleted reply never shows.
+    const live = new Set(all.filter((p) => p.parentId && !p.deleted).map((p) => p.parentId));
+    for (const [id, list] of byParent) byParent.set(id, list.filter((r) => !r.deleted));
+    const tops = all.filter((p) => !p.parentId && (!p.deleted || live.has(p.id)));
     const dir = sort === "old" ? 1 : -1;
     tops.sort((a, b) => (sort === "top" ? score(b) - score(a) || b.createdAt.localeCompare(a.createdAt) : dir * a.createdAt.localeCompare(b.createdAt)));
     return { topLevel: tops, repliesOf: (id: string) => byParent.get(id) ?? [] };

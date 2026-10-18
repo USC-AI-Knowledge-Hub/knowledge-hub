@@ -63,18 +63,53 @@ describe("board schema", () => {
     await post({ body: "a different person", voter: "z".repeat(24), key: "q".repeat(24) });
   });
 
-  it("edits and deletes only with the right key", async () => {
+  it("edits with the right key only", async () => {
     const id = await post();
     await fails(db.query("select board_edit($1,$2,$3)", [id, "w".repeat(24), "hacked"]), /your own/);
     await db.query("select board_edit($1,$2,$3)", [id, KEY, "Edited text"]);
-    let [p] = await rows();
+    const [p] = await rows();
     expect(p.body).toBe("Edited text");
     expect(p.edited_at).not.toBeNull();
+  });
+
+  it("removes a deleted post outright when nothing replies to it", async () => {
+    const id = await post();
     await fails(db.query("select board_delete($1,$2)", [id, "w".repeat(24)]), /your own/);
     await db.query("select board_delete($1,$2)", [id, KEY]);
-    [p] = await rows();
-    expect(p).toMatchObject({ deleted: true, body: "", name: "deleted" });
+    expect(await rows()).toHaveLength(0);
+    expect((await db.query("select count(*)::int as n from board_posts")).rows[0]).toEqual({ n: 0 });
+  });
+
+  it("keeps a stub for a deleted post that has replies, then clears it with the last reply", async () => {
+    const id = await post();
+    const r1 = await post({ parent: id, body: "reply one", voter: "a".repeat(24), key: "a".repeat(24) });
+    const r2 = await post({ parent: id, body: "reply two", voter: "b".repeat(24), key: "b".repeat(24) });
+    await db.query("select board_delete($1,$2)", [id, KEY]);
+    expect(await rows()).toHaveLength(3);
+    expect((await rows())[0]).toMatchObject({ deleted: true, body: "", name: "deleted" });
     await fails(db.query("select board_edit($1,$2,$3)", [id, KEY, "again"]), /your own/);
+    await db.query("select board_delete($1,$2)", [r1, "a".repeat(24)]);
+    expect(await rows()).toHaveLength(2);
+    await db.query("select board_delete($1,$2)", [r2, "b".repeat(24)]);
+    expect(await rows()).toHaveLength(0);
+  });
+
+  it("deleting a reply leaves a live parent alone", async () => {
+    const id = await post();
+    const r = await post({ parent: id, body: "reply", voter: "a".repeat(24), key: "a".repeat(24) });
+    await db.query("select board_delete($1,$2)", [r, "a".repeat(24)]);
+    expect(await rows()).toHaveLength(1);
+  });
+
+  it("matches blocked words whole, and through look-alike characters", async () => {
+    await db.exec("insert into board_blocked_words values ('bad'), ('bad word')");
+    await post({ body: "A badge and a badminton court are fine" });
+    await fails(post({ body: "That is bad." }), /reword/);
+    await fails(post({ body: "so b@d" }), /reword/);
+    await fails(post({ body: "B4D!" }), /reword/);
+    await fails(post({ body: "a bad word here" }), /reword/);
+    await fails(post({ name: "Bad" }), /reword/);
+    await post({ body: "Totally fine text", voter: "z".repeat(24), key: "z".repeat(24) });
   });
 
   it("toggles reactions and counts them per emoji", async () => {
@@ -107,5 +142,36 @@ describe("board schema", () => {
     await post({ parent: id, body: "reply", voter: "w".repeat(24) });
     await db.query("delete from board_posts where id = $1", [id]);
     expect(await rows()).toHaveLength(0);
+  });
+});
+
+describe("the starter block list", () => {
+  const seed = readFileSync(new URL("../blocked-words.sql", import.meta.url), "utf8");
+
+  it("loads, and loads again", async () => {
+    await db.exec(seed);
+    const n = (await db.query<{ n: number }>("select count(*)::int as n from board_blocked_words")).rows[0].n;
+    expect(n).toBeGreaterThan(1000);
+    await db.exec(seed);
+    expect((await db.query<{ n: number }>("select count(*)::int as n from board_blocked_words")).rows[0].n).toBe(n);
+  });
+
+  it("lets ordinary posts and names through", async () => {
+    await db.exec(seed);
+    const fine = [
+      "I took a class on prompt engineering and the assignment on classification was great",
+      "Please assess the analysis of the passage; the cocktail example was a classic",
+      "Scunthorpe, Essex and Hancock are places and a name. Therapist notes: the button title",
+      "ChatGPT helped me draft a grape harvest essay for my basement document",
+      "The assistant explained how to write a clear, specific prompt for a research paper",
+    ];
+    for (const [i, body] of fine.entries()) await post({ body, voter: String(i).repeat(24), key: String(i).repeat(24) });
+    expect(await rows()).toHaveLength(fine.length);
+  });
+
+  it("blocks entries from the list", async () => {
+    await db.exec(seed);
+    const [{ word }] = (await db.query<{ word: string }>("select word from board_blocked_words where word ~ '^[a-z]{5,}$' order by word limit 1")).rows;
+    await fails(post({ body: `something ${word} something` }), /reword/);
   });
 });

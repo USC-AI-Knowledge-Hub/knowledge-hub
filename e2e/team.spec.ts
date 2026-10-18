@@ -63,6 +63,19 @@ test.describe("AI Team boards", () => {
     await expect(page.getByText("This post was deleted.")).toBeVisible();
   });
 
+  test("a deleted post with no replies disappears and isn't counted", async ({ page }) => {
+    await openBoard(page);
+    await post(page, "Sam", "Short lived");
+    await expect(page.getByRole("heading", { name: "1 topic" })).toBeVisible();
+    const p = page.locator(".board-post").first();
+    await p.getByRole("button", { name: "Delete" }).first().click();
+    await p.locator(".board-confirm").getByRole("button", { name: "Delete" }).click();
+    await expect(page.locator(".board-post")).toHaveCount(0);
+    await expect(page.getByText("This post was deleted.")).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "0 topics" })).toBeVisible();
+    await expect(page.getByText("No topics here yet")).toBeVisible();
+  });
+
   test("asks before sending a post that can't go", async ({ page }) => {
     await openBoard(page);
     await page.locator(".board-new").getByRole("button", { name: "Post" }).click();

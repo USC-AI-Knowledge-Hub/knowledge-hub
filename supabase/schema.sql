@@ -67,8 +67,17 @@ create or replace function board_clean(t text) returns text language sql immutab
   select btrim(regexp_replace(regexp_replace(coalesce(t, ''), '[\u0000-\u0008\u000B\u000C\u000E-\u001F]', '', 'g'), '\r\n?', E'\n', 'g'))
 $$;
 
+-- Lower case, with the usual look-alikes swapped back to letters (0 for o, @ for a, $ for s ...).
+create or replace function board_norm(t text) returns text language sql immutable as $$
+  select translate(lower(coalesce(t, '')), '013457$@', 'oieastsa')
+$$;
+
+-- Whether the text holds a blocked word or phrase as a whole word, so "class" is fine when "ass" is blocked.
 create or replace function board_has_blocked(t text) returns boolean language sql stable as $$
-  select exists (select 1 from board_blocked_words w where lower(t) like '%' || w.word || '%')
+  select exists (
+    select 1 from board_blocked_words w
+    where board_norm(t) ~ ('(^|[^a-z])' || regexp_replace(board_norm(w.word), '([.*+?^$(){}|\[\]\\])', '\\\1', 'g') || '([^a-z]|$)')
+  )
 $$;
 
 create or replace function board_ip() returns text language plpgsql stable as $$
@@ -114,11 +123,22 @@ begin
   if not found then raise exception 'You can only edit your own posts, in the browser you wrote them in.'; end if;
 end $$;
 
+-- Delete your own post. With no replies it is removed outright; a post that has replies stays as a stub so they keep
+-- their place. Deleting the last reply also clears a stub left behind by its deleted parent.
 create or replace function board_delete(p_id uuid, p_key text) returns void
 language plpgsql security definer set search_path = public as $$
+declare v board_posts;
 begin
-  update board_posts set deleted = true, body = '' where id = p_id and key_hash = board_hash(p_key);
+  select * into v from board_posts where id = p_id and key_hash = board_hash(p_key);
   if not found then raise exception 'You can only delete your own posts, in the browser you wrote them in.'; end if;
+  if exists (select 1 from board_posts where parent_id = p_id) then
+    update board_posts set deleted = true, body = '' where id = p_id;
+  else
+    delete from board_posts where id = p_id;
+    if v.parent_id is not null then
+      delete from board_posts where id = v.parent_id and deleted and not exists (select 1 from board_posts where parent_id = v.parent_id);
+    end if;
+  end if;
 end $$;
 
 -- Add the reaction, or take it back if this voter already gave it. Returns true when it is now on.
@@ -145,7 +165,7 @@ begin
 end $$;
 
 -- The helpers are for the functions below, not for the site to call.
-revoke execute on function board_hash(text), board_clean(text), board_has_blocked(text), board_ip() from public;
+revoke execute on function board_hash(text), board_clean(text), board_norm(text), board_has_blocked(text), board_ip() from public;
 
 -- Lock the tables and open only the view and the functions to the site (skipped where there is no "anon" role).
 do $$ begin
