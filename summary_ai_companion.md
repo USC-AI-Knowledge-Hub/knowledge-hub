@@ -1,6 +1,6 @@
 # USC AI Knowledge Hub: companion summary for another AI
 
-Read this first. It describes what the site is, how it is built, every page and feature, how data flows, and the rules the project follows. Facts below were read from the code on 2026-10-19; counts will drift as content changes.
+Start here: section 3 says where the project lives and how to get access; section 2 is the stack; sections 4-5 are the pages. It describes what the site is, how it is built, every page and feature, how data flows, and the rules the project follows. Facts below were read from the code on 2026-10-19; counts will drift as content changes.
 
 ## 1. What the site is
 
@@ -17,11 +17,62 @@ Read this first. It describes what the site is, how it is built, every page and 
 - No UI library: hand-rolled Material 3 Expressive design system on generated tokens (`src/styles/tokens.css` from `npm run theme`). Brand seed is USC Cardinal `#990000` with USC Gold; one type family (Google Sans Flex); Material Symbols Rounded icons.
 - Static hosting on GitHub Pages. `npm run build` typechecks, builds, then `scripts/prerender.ts` writes a real HTML page per route plus `sitemap.xml` and `robots.txt` (114 pages at last build).
 - The only server-side piece is the AI Team board's database (Supabase), reached directly from the browser over REST.
-- Automation lives in GitHub Actions (section 9). There is no other backend.
+- Automation lives in GitHub Actions (sections 3 and 9). There is no other backend.
 - Tests: Vitest (~430 unit tests, including the board's SQL run in an in-memory Postgres via PGlite) and Playwright (`e2e/`, 10 spec files).
 - Repository: `USC-AI-Knowledge-Hub/knowledge-hub`. Working branch for Claude sessions: `claude/zen-knuth-q2f72j`; work lands in `main` by squash-merged PR, only when the user says "merge".
+## 3. GitHub: where the project lives and how to get in
 
-## 3. Navigation
+### The repository
+- Home: https://github.com/USC-AI-Knowledge-Hub/knowledge-hub (public; owner is the GitHub organization `USC-AI-Knowledge-Hub`, a small team of members).
+- Default branch `main` is what gets deployed; no branch protection or rulesets were reported at last look, and there is no license file yet.
+- Other branches: Claude sessions work on a designated branch (currently `claude/zen-knuth-q2f72j`); everything else is a short-lived feature branch.
+- Language is TypeScript; the repo is small (about 1.3 MB). Merge settings allow squash, merge and rebase; the project squash-merges.
+- Instruction files an agent should read first: `CLAUDE.md` (root) and `.claude/skills/` (`m3-expressive` for UI, `video-curation` for the pipeline and tool catalog, `frontend-design` for general visual work). This file is `summary_ai_companion.md` in the root.
+- Pull-request history: #1 onward, recent ones #13 (offline assistant), #14 (tool discovery), #16-#17 and #22 (AI Team tiles), #18-#21 (discovery fixes and feeds), #23 (in-site boards), #24 (delete behaviour and block list).
+
+### How changes ship
+- Branch, commit (with the co-author and session trailers, section 12), push, open a PR against `main`, wait for all checks, squash-merge only when the owner says "merge".
+- PR checks: `check` (unit tests, strict course check, build), `e2e` (Playwright, including the real on-device model on WASM), and on branches that touch the feed list a `vet` check.
+- After a squash merge, reset the working branch to `main` and sync history with `git merge -s ours origin/<branch>` plus a normal push (force-pushes are blocked in the agent environment).
+- A push to `main` triggers `daily.yml`, which builds and deploys the site; a failed build leaves the previous site live, so a stale site usually means a failed deploy run (check the Actions tab).
+- The daily bot (`knowledge-hub-bot`) commits "Daily video library update YYYY-MM-DD" to `main`; `github-actions[bot]` commits "Feed check report" on branches only.
+
+### Hosting and deploy
+- GitHub Pages, deployed from Actions (`actions/upload-pages-artifact` and `actions/deploy-pages`), not from a branch.
+- Custom domain `studentslearningai.com` set by `public/CNAME`; DNS is held by the owner and is not in the repo. `BASE_PATH` (a repository variable, default `/`) exists for serving from a sub-path.
+
+### Actions secrets and variables the workflows read (names only; values are the owner's)
+- Secrets: `YOUTUBE_API_KEY` (video search, API mode), `ANTHROPIC_API_KEY` (optional; language-model reading and filing).
+- Variables: `BOARD_URL` and `BOARD_ANON_KEY` (AI Team database address and public key; the anon key is meant to be public), optional `BASE_PATH`.
+- Set under Settings, Secrets and variables, Actions; the site only reads variables at build time, so changing one needs a new deploy (run "Daily videos and deploy").
+
+### Workflows
+- `daily.yml` "Daily videos and deploy": nightly at 07:17 UTC, on manual dispatch (input `refresh`: true refreshes videos and discovery first), and on every push to `main`.
+- `ci.yml` "CI": `npm test`, `npm run courses -- --check --strict`, `npm run build`.
+- `browser.yml` "Browser tests": build, model-size check against Hugging Face, `npx playwright test`.
+- `feed-vet.yml` "Vet feeds": manual or on branch pushes touching the candidate feed list; writes `scripts/discovery/feed-report.md` and `.json`.
+- Manual dispatch from an agent: `mcp__github__actions_run_trigger` with `workflow_id: daily.yml`, `ref: main`, `inputs: {"refresh": "true"}`; avoid refreshing twice in one day because the YouTube quota is shared.
+
+### Other GitHub features
+- Issues are enabled but no process is defined for them.
+- Discussions are still switched on but unused: the site no longer links to GitHub Discussions. The giscus app may still be installed and can be uninstalled; thread #15 is an old closed test. (Organization discussions appear at https://github.com/orgs/USC-AI-Knowledge-Hub/discussions.)
+- Other accounts that matter, all held by the owner and not in the repo: the Supabase project (dashboard, table editor, SQL editor), the Google Cloud project that owns the YouTube key, the DNS provider, and an Anthropic API account if the optional key is used.
+
+### Getting the code running
+- Prerequisites: Node 22 and npm. `git clone https://github.com/USC-AI-Knowledge-Hub/knowledge-hub && cd knowledge-hub && npm ci`.
+- `npm run dev` for a local server; `npm test` for unit tests; `npm run build` to typecheck, build and prerender; `npm run preview` is Vite's preview of `dist/`.
+- Browser tests: `npx playwright install chromium`, then `npx playwright test`; set `PW_CHROMIUM_PATH` to use an already-installed Chromium.
+- Nothing is required to run the site. Optional environment variables: `VITE_BOARD_URL` and `VITE_BOARD_KEY` (point the local board at Supabase; otherwise it stores posts on the device), `YOUTUBE_API_KEY` and `ANTHROPIC_API_KEY` (pipeline and discovery), `DISCOVERY_NOW`, `DISCOVERY_OUT`, `DISCOVERY_TAXONOMY_OUT` (test overrides for discovery).
+- Safe experiments: `npm run discover -- --dry-run` writes nothing; `npm run vet-feeds` only needs network access and writes the report files.
+
+### If you are an AI agent in a Claude Code remote session
+- GitHub access is scoped to this repository: use the `mcp__github__*` tools (pull requests, check runs, merging, workflow dispatch) or `gh api repos/USC-AI-Knowledge-Hub/knowledge-hub/...` through the session proxy.
+- Blocked or unavailable through the proxy: GraphQL, Actions secrets and variables, the Pages settings, creating discussions, and downloading job logs. For a failed run, read `gh api .../actions/runs/<id>/jobs` for the failing step and `.../check-runs/<job id>/annotations` for the error line.
+- The sandbox cannot reach most external sites (news feeds, Supabase, the live site); verify those through GitHub Actions runs or ask the owner. Chromium is preinstalled at `/opt/pw-browsers`; do not run `playwright install`.
+- Watch out: pushing to `main` redeploys the site, so confirm the deploy run finished green before telling the owner a change is live.
+
+
+## 4. Navigation
 
 - **Navigation rail** (left, ≥ 840px) and **bottom bar** (below that): Home `/`, Learn `/learn`, Tools `/tools`, Watch `/watch`, AI Team `/team`, Green AI `/green`. Defined in `src/components/Layout.tsx` (`NAV`).
 - **Top bar:** global search box (submits to `/search?q=`), light/dark theme toggle (`kh-theme` in localStorage), search icon on mobile.
@@ -31,7 +82,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 - Unknown paths render `NotFound` ("This page doesn't exist"). `/green/team` redirects to `/team`.
 - Layout mounts a `PlayerProvider` (the YouTube video dialog) and `useSeo` (sets title, description, canonical, robots and JSON-LD per route).
 
-## 4. Routes and pages
+## 5. Routes and pages
 
 | Route | Page file | One-line purpose |
 |---|---|---|
@@ -81,7 +132,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 **Tools**
 - 30 reviewed tools (`src/data/tools.ts`) with the same fields each: maker, tasks, cost, difficulty, USC access (`provided`, `check`, `personal`), pros and cons, review dates, and pipeline search/match rules.
 - Map view groups tools into 7 clusters (assistants, research, study, code, create, media, automate) with "built on" and "lets you pick" links; list view is the default on phones.
-- Categories are a two-level tree: 26 editor-seeded categories plus ones created automatically (section 8). A tool is filed in the most specific category that fits.
+- Categories are a two-level tree: 26 editor-seeded categories plus ones created automatically (section 9). A tool is filed in the most specific category that fits.
 - Tool pop-up (`ToolSheet`) is a glass dialog: pixel-art card, access, lineage, full review, videos; deep link `?tool=<id>`.
 - Discovered tools appear in lists and search labelled "Not reviewed yet" and make no cost, difficulty or USC claim.
 
@@ -105,7 +156,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 **About**
 - Explains how videos are found, filtered and ranked, what beginner/intermediate/advanced mean, and what the library cannot do.
 
-## 5. Features that cut across pages
+## 6. Features that cut across pages
 
 ### On-device AI tutor (`src/components/tutor/`, `src/lib/tutor/`)
 - A floating panel that loads lazily; the model only downloads when the student chooses to.
@@ -131,7 +182,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 - Tool logos are 8-bit pixel art (`src/data/pixelLogos.ts`), shown only to identify a tool next to its name; official shapes come from Simple Icons (CC0).
 - Retro accents (square corners, hard shadow) are used for the pixel tool tiles and the AI Team tiles and board switcher only.
 
-## 6. AI Team boards (`/team`)
+## 7. AI Team boards (`/team`)
 
 - One board for each of 15 courses in three proficiency buckets, plus one general "AI tools" board (16 total); definitions in `src/data/team.ts`.
 - Buckets: 1 Foundations (new to AI; 4 courses), 2 Applied AI (uses AI regularly; 6 courses), 3 Technical (builds with AI; 5 courses). Courses are Google, OpenAI, DeepLearning.AI, Anthropic, Kaggle, Hugging Face and Replit courses; each board links to its course page.
@@ -147,7 +198,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 - Code: `src/pages/Team.tsx`, `src/components/board/` (Board, PostItem, Composer, Linked), `src/lib/board/` (rules, identity, store with `localStore` and `supabaseStore`).
 - GitHub Discussions and giscus are no longer used anywhere in the site.
 
-## 7. Data files and where content lives
+## 8. Data files and where content lives
 
 - `src/data/tools.ts`: reviewed tool profiles and the pipeline's match rules.
 - `src/data/learn.ts`: 19 modules and the four learning paths; `src/data/topics.ts`: 19 video topics.
@@ -157,7 +208,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 - `public/data/videos.json` (daily library, committed by the Action), `courses.json` (live course check), `discovered.json` and `taxonomy.json` (daily tool discovery).
 - Content rules: only claim USC access (`usc: "provided"`) when confirmed, otherwise `"check"`; curated videos, courses and talks must be ones an editor has watched and come from the original publisher's channel; update `lastReviewed`/`nextReview` when a tool is re-tested.
 
-## 8. Daily automation
+## 9. Daily automation
 
 ### Video pipeline (`scripts/pipeline/`, `npm run videos`)
 - Finds YouTube videos for each tool and topic; API mode when a YouTube key is present (search costs 100 quota units; max 90 searches a day, rotating through queries), RSS from 14 trusted channels otherwise.
@@ -179,12 +230,12 @@ Read this first. It describes what the site is, how it is built, every page and 
 - `ci.yml`: unit tests, strict course check against YouTube, build. `browser.yml`: build, check model sizes against Hugging Face, run Playwright including a real on-device model on WASM.
 - `feed-vet.yml`: manual or on branches when the candidate list changes; commits its report on branches only (never on `main`).
 
-## 9. Commands
+## 10. Commands
 
 - `npm run dev` / `build` / `test`; `npm run videos`; `npm run discover [-- --dry-run]`; `npm run vet-feeds`; `npm run courses [-- --check --strict]`.
 - `npm run theme` (tokens), `npm run brand-images` (og and favicon), `npm run block-words` (rebuild `supabase/blocked-words.sql`), `npm run model-sizes`.
 
-## 10. External setup and current state
+## 11. External setup and current state
 
 - Domain `studentslearningai.com` is live on GitHub Pages.
 - Supabase project for the board: created by the owner; `schema.sql` and `blocked-words.sql` have been run; repository variables `BOARD_URL` and `BOARD_ANON_KEY` are set and the board works for the owner.
@@ -193,7 +244,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 - Discovery feed state at last check: 29 of 31 reachable; VentureBeat returns 429 (rate limited) and Show HN occasionally 502; both only warn.
 - AI Team moderators: everyone with Supabase access; no admin screen exists.
 
-## 11. Working agreements for contributors (human or AI)
+## 12. Working agreements for contributors (human or AI)
 
 - Copy is sentence case, plain and specific; no hype, no all-caps labels, no eyebrow text above headings.
 - Load the `m3-expressive` skill before any UI change and the `video-curation` skill before touching the pipeline or tool catalog.
@@ -203,7 +254,7 @@ Read this first. It describes what the site is, how it is built, every page and 
 - Unreviewed tools: no USC, cost or difficulty claims; label "Not reviewed yet".
 - Verify before claiming: this environment cannot reach most external sites, so feeds, Supabase and GitHub-hosted behaviour are checked via Actions or the user, and the Material Symbols icon font does not load in screenshots (icon names show as words).
 
-## 12. Quick glossary
+## 13. Quick glossary
 
 - **Module:** a Learn topic page; **lesson:** a guided teaching unit wrapped around a module; **path:** a sequence of units and lessons for one audience.
 - **Bucket:** a proficiency level (Foundations, Applied AI, Technical) used by the AI Team boards.
