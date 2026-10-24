@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-10-23",
+  "updatedAt": "2026-10-24",
   "sources": [
     {
       "id": "hf-blog",
       "url": "https://huggingface.co/blog/feed.xml",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
-      "items": 24
+      "items": 25
     },
     {
       "id": "openai",
       "url": "https://openai.com/news/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 40
     },
@@ -21,23 +21,23 @@
       "id": "google-ai",
       "url": "https://blog.google/technology/ai/rss/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
-      "items": 6
+      "items": 5
     },
     {
       "id": "deepmind",
       "url": "https://deepmind.google/blog/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
-      "items": 12
+      "items": 10
     },
     {
       "id": "microsoft-ai",
       "url": "https://news.microsoft.com/source/topics/ai/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 4
     },
@@ -45,7 +45,7 @@
       "id": "nvidia",
       "url": "https://blogs.nvidia.com/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 18
     },
@@ -53,7 +53,7 @@
       "id": "techcrunch-ai",
       "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 20
     },
@@ -61,7 +61,7 @@
       "id": "verge-ai",
       "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -70,7 +70,7 @@
       "url": "https://venturebeat.com/category/ai/feed/",
       "ok": false,
       "lastOk": null,
-      "failures": 7,
+      "failures": 8,
       "items": 0,
       "error": "HTTP 429"
     },
@@ -78,7 +78,7 @@
       "id": "simonw",
       "url": "https://simonwillison.net/atom/everything/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 30
     },
@@ -86,7 +86,7 @@
       "id": "one-useful-thing",
       "url": "https://www.oneusefulthing.org/feed",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 2
     },
@@ -94,7 +94,7 @@
       "id": "marktechpost",
       "url": "https://www.marktechpost.com/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -102,7 +102,7 @@
       "id": "github-ai",
       "url": "https://github.blog/ai-and-ml/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -110,7 +110,7 @@
       "id": "aws-ml",
       "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 20
     },
@@ -118,7 +118,7 @@
       "id": "apple-ml",
       "url": "https://machinelearning.apple.com/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -126,15 +126,15 @@
       "id": "google-research",
       "url": "https://research.google/blog/rss/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
-      "items": 11
+      "items": 12
     },
     {
       "id": "microsoft-research",
       "url": "https://www.microsoft.com/en-us/research/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -142,7 +142,7 @@
       "id": "nvidia-dev",
       "url": "https://developer.nvidia.com/blog/feed",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 40
     },
@@ -150,7 +150,7 @@
       "id": "cloudflare-ai",
       "url": "https://blog.cloudflare.com/tag/ai/rss/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 20
     },
@@ -158,7 +158,7 @@
       "id": "elevenlabs",
       "url": "https://elevenlabs.io/blog/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 40
     },
@@ -166,7 +166,7 @@
       "id": "the-decoder",
       "url": "https://the-decoder.com/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -174,7 +174,7 @@
       "id": "ars-ai",
       "url": "https://arstechnica.com/ai/feed/",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 20
     },
@@ -182,7 +182,7 @@
       "id": "wired-ai",
       "url": "https://www.wired.com/feed/tag/ai/latest/rss",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -190,7 +190,7 @@
       "id": "mit-tr-ai",
       "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -198,7 +198,7 @@
       "id": "zdnet-ai",
       "url": "https://www.zdnet.com/topic/artificial-intelligence/rss.xml",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 25
     },
@@ -206,7 +206,7 @@
       "id": "latent-space",
       "url": "https://www.latent.space/feed",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 20
     },
@@ -214,7 +214,7 @@
       "id": "interconnects",
       "url": "https://www.interconnects.ai/feed",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 4
     },
@@ -222,7 +222,7 @@
       "id": "bens-bites",
       "url": "https://www.bensbites.com/feed",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 10
     },
@@ -230,7 +230,7 @@
       "id": "producthunt-ai",
       "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 40
     },
@@ -238,17 +238,18 @@
       "id": "reddit-localllama",
       "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
       "ok": true,
-      "lastOk": "2026-10-23",
+      "lastOk": "2026-10-24",
       "failures": 0,
       "items": 25
     },
     {
       "id": "hn-show",
       "url": "https://hnrss.org/show?q=AI&points=60",
-      "ok": true,
+      "ok": false,
       "lastOk": "2026-10-23",
-      "failures": 0,
-      "items": 14
+      "failures": 1,
+      "items": 0,
+      "error": "HTTP 502"
     }
   ],
   "tools": [
@@ -273,7 +274,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-09-29",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "OpenAI news",
@@ -332,7 +333,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-10-06",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "Hugging Face blog",
@@ -367,7 +368,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-10-07",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "Google AI blog",
@@ -423,7 +424,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -447,7 +448,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -493,7 +494,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -517,7 +518,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "Product Hunt: AI",
@@ -572,7 +573,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -619,7 +620,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -643,7 +644,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -668,7 +669,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -693,7 +694,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -717,7 +718,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -742,7 +743,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -766,7 +767,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -791,7 +792,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": []
     },
     {
@@ -813,7 +814,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-10-15",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "MarkTechPost",
@@ -854,7 +855,7 @@
       "urlKind": "site",
       "origin": "feed",
       "firstSeen": "2026-10-19",
-      "lastSeen": "2026-10-20",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "MarkTechPost",
@@ -892,7 +893,7 @@
       "urlKind": "site",
       "origin": "feed",
       "firstSeen": "2026-10-19",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "MarkTechPost",
@@ -933,7 +934,7 @@
       "urlKind": "site",
       "origin": "feed",
       "firstSeen": "2026-10-21",
-      "lastSeen": "2026-10-23",
+      "lastSeen": "2026-10-24",
       "evidence": [
         {
           "source": "TechCrunch AI",
@@ -980,6 +981,46 @@
     }
   ],
   "pending": [
+    {
+      "key": "kimi k",
+      "name": "Kimi K",
+      "kind": "tool",
+      "firstSeen": "2026-10-23",
+      "lastSeen": "2026-10-23",
+      "mentions": [
+        {
+          "source": "Simon Willison's blog",
+          "title": "Introducing Kimi K3.1 Pro",
+          "url": "https://simonwillison.net/2026/Oct/23/kimi-k31-pro/",
+          "date": "2026-10-23",
+          "sourceId": "simonw",
+          "tier": "press"
+        },
+        {
+          "source": "MarkTechPost",
+          "title": "Moonshot AI Releases Kimi K3.1 Pro: A 2.8T Total/104B Active Params (MoE) Model with 1M Context",
+          "url": "https://www.marktechpost.com/2026/10/23/moonshot-ai-kimi-k3-1-pro-open-weight-model/",
+          "date": "2026-10-23",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Introducing Kimi K3.1 Pro Kimi K3.1 Pro landed on the Kimi API today - it's not yet open weights, but Moonshot promise \"Full model weights will be released by Nov 4, 2026\".",
+      "links": [
+        "https://www.kimi.ai/blog/kimi-k3-1-pro",
+        "https://platform.kimi.ai/docs/pricing/chat",
+        "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+        "https://platform.kimi.ai/docs/get-your-api-key",
+        "https://llm.datasette.io/en/stable/other-models.html#openai-endpoint",
+        "https://llm.datasette.io/en/stable/changelog.html#v0-32",
+        "https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F9b7181492209387da1d4f53002f26663",
+        "https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Feba9a4283c9e94cbbb5325902a3921a8",
+        "https://news.ycombinator.com/item?id=50212065",
+        "https://simonwillison.net/tags/ai",
+        "https://simonwillison.net/tags/generative-ai",
+        "https://simonwillison.net/tags/llms"
+      ]
+    },
     {
       "key": "flint",
       "name": "Flint",
@@ -1058,6 +1099,36 @@
         "https://elevenlabs.io/pricing/api",
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
         "https://x.com/OpenRouter/status/2112595979950334291"
+      ]
+    },
+    {
+      "key": "1password",
+      "name": "1Password",
+      "kind": "tool",
+      "firstSeen": "2026-10-22",
+      "lastSeen": "2026-10-22",
+      "mentions": [
+        {
+          "source": "TechCrunch AI",
+          "title": "1Password launches a way for AI agents to log in on your behalf without seeing your password",
+          "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+          "date": "2026-10-22",
+          "sourceId": "techcrunch-ai",
+          "tier": "press"
+        },
+        {
+          "source": "Product Hunt: AI",
+          "title": "1Password for Agents",
+          "url": "https://www.producthunt.com/products/1password",
+          "date": "2026-10-22",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "The new feature allows agents to log into a customer's personal accounts while still protecting the private credentials that secure those accounts.",
+      "links": [
+        "https://www.producthunt.com/products/1password?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1289449?app_id=339"
       ]
     },
     {
@@ -1365,6 +1436,38 @@
       ]
     },
     {
+      "key": "moonshot ai",
+      "name": "Moonshot AI",
+      "kind": "model",
+      "firstSeen": "2026-10-23",
+      "lastSeen": "2026-10-23",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Moonshot AI Releases Kimi K3.1 Pro: A 2.8T Total/104B Active Params (MoE) Model with 1M Context",
+          "url": "https://www.marktechpost.com/2026/10/23/moonshot-ai-kimi-k3-1-pro-open-weight-model/",
+          "date": "2026-10-23",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Moonshot AI released Kimi K3.1 Pro, a 2.8T-parameter, 104B-active MoE model with 1M-token context. It scores 65.7% on Terminal-Bench 4.0, costs $2/$10 per million tokens, and open weights arrive by Nov 4, 2026.",
+      "links": [
+        "https://www.kimi.ai/blog/kimi-k3-1-pro",
+        "https://x.com/Kimi_Moonshot/status/2113680701770068067",
+        "https://www.kimi.ai/blog/kimi-k3",
+        "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+        "https://platform.kimi.ai/",
+        "https://x.com/intent/follow?screen_name=marktechpost",
+        "https://www.reddit.com/r/machinelearningnews/",
+        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
+        "https://t.me/machinelearningresearchnews",
+        "https://promotions.marktechpost.com/",
+        "https://www.marktechpost.com/2026/10/23/moonshot-ai-kimi-k3-1-pro-open-weight-model/",
+        "https://www.marktechpost.com/"
+      ]
+    },
+    {
       "key": "openai lowers valuation target",
       "name": "OpenAI lowers valuation target",
       "kind": "tool",
@@ -1417,25 +1520,6 @@
         "https://docs.fireworks.ai/guides/security_compliance/data_handling",
         "https://openrouter.ai/moonshotai/kimi-k3"
       ]
-    },
-    {
-      "key": "1password",
-      "name": "1Password",
-      "kind": "tool",
-      "firstSeen": "2026-10-22",
-      "lastSeen": "2026-10-22",
-      "mentions": [
-        {
-          "source": "TechCrunch AI",
-          "title": "1Password launches a way for AI agents to log in on your behalf without seeing your password",
-          "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-          "date": "2026-10-22",
-          "sourceId": "techcrunch-ai",
-          "tier": "press"
-        }
-      ],
-      "summary": "The new feature allows agents to log into a customer's personal accounts while still protecting the private credentials that secure those accounts.",
-      "links": []
     },
     {
       "key": "granite speech",
@@ -2694,6 +2778,28 @@
       "links": [
         "https://www.producthunt.com/products/monid?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1289806?app_id=339"
+      ]
+    },
+    {
+      "key": "basedash scheduled csv exports",
+      "name": "Basedash Scheduled CSV Exports",
+      "kind": "tool",
+      "firstSeen": "2026-10-23",
+      "lastSeen": "2026-10-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Basedash Scheduled CSV Exports",
+          "url": "https://www.producthunt.com/products/basedash",
+          "date": "2026-10-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Ask once. Get a fresh CSV in Slack or email every week. Discussion | Link",
+      "links": [
+        "https://www.producthunt.com/products/basedash?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1290612?app_id=339"
       ]
     },
     {
@@ -5711,50 +5817,6 @@
       "links": [
         "https://www.producthunt.com/products/inbox-zero-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1276034?app_id=339"
-      ]
-    },
-    {
-      "key": "make brain",
-      "name": "Make Brain",
-      "kind": "tool",
-      "firstSeen": "2026-10-10",
-      "lastSeen": "2026-10-10",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Make0 Brain",
-          "url": "https://www.producthunt.com/products/make0-brain",
-          "date": "2026-10-10",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "A memory store that works across all of your AI agents. Discussion | Link",
-      "links": [
-        "https://www.producthunt.com/products/make0-brain?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1275818?app_id=339"
-      ]
-    },
-    {
-      "key": "screenwell ai",
-      "name": "Screenwell.ai",
-      "kind": "tool",
-      "firstSeen": "2026-10-10",
-      "lastSeen": "2026-10-10",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Screenwell.ai",
-          "url": "https://www.producthunt.com/products/screenwell-ai",
-          "date": "2026-10-10",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "An AI interviewer that runs your first-round screening Discussion | Link",
-      "links": [
-        "https://www.producthunt.com/products/screenwell-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1275986?app_id=339"
       ]
     }
   ],
