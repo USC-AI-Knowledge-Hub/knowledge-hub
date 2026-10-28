@@ -1,0 +1,36 @@
+name: Check model sizes
+
+# Measures the real download size of the tutor's models and of candidates under consideration, against
+# Hugging Face, and saves scripts/model-sizes-report.json. Run it by hand, or it runs when the checker changes
+# on a branch. It never changes which models the site offers; that is decided in src/lib/tutor/registry.ts.
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore: [main]
+    paths:
+      - scripts/model-sizes.ts
+      - .github/workflows/model-sizes.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sizes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Measure
+        # The registry check may fail while new models are being added; the report is what matters here.
+        run: npx tsx scripts/model-sizes.ts --write-report || true
+      - name: Save the report
+        run: |
+          if [ "$GITHUB_REF_NAME" = "main" ]; then echo "On main: nothing is committed."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/model-sizes-report.json
+          if git diff --cached --quiet; then echo "No change."; else git commit -m "Model size report"; git push; fi

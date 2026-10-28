@@ -14,6 +14,8 @@ export interface Capability {
   lowMemory: boolean;
   /** On mobile data or with Data Saver on, when the browser reports it. */
   metered: boolean;
+  /** Space the browser says is left for this site's files, in MB, when it reports it. */
+  storageFreeMb: number | null;
 }
 
 interface NavigatorExtras {
@@ -21,6 +23,7 @@ interface NavigatorExtras {
     requestAdapter(): Promise<{ features: { has(f: string): boolean }; isFallbackAdapter?: boolean; info?: { isFallbackAdapter?: boolean } } | null>;
   };
   deviceMemory?: number;
+  storage?: { estimate?(): Promise<{ quota?: number; usage?: number }> };
   connection?: { type?: string; saveData?: boolean; effectiveType?: string };
 }
 
@@ -28,7 +31,10 @@ export async function detectCapability(mock = false): Promise<Capability> {
   const nav = (typeof navigator === "undefined" ? {} : navigator) as NavigatorExtras;
   const memoryGb = typeof nav.deviceMemory === "number" ? nav.deviceMemory : null;
   const conn = nav.connection;
+  // The browser's own figure for what's left to store; it varies by browser, so it's only used for a warning.
+  const est = mock ? null : await nav.storage?.estimate?.().catch(() => null);
   const base = {
+    storageFreeMb: est?.quota ? Math.max(0, Math.round(((est.quota ?? 0) - (est.usage ?? 0)) / 1e6)) : null,
     memoryGb,
     lowMemory: memoryGb !== null && memoryGb < 4,
     metered: !!conn && (conn.type === "cellular" || conn.saveData === true),

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LINEUP, MODELS, mbLabel, modelsFor, type Device } from "../../lib/tutor/registry";
+import { FIT_NOTE, fitFor, smallerThan } from "../../lib/tutor/fit";
 import { useModelChoice } from "../../lib/tutor/storage";
 import { Icon } from "../Icon";
 import { WavyProgress } from "../WavyProgress";
@@ -32,6 +33,9 @@ export function Setup() {
   const selected = options.find((m) => m.id === pick) ?? options[0];
   const size = selected?.variants[device]?.mb ?? 0;
   const noGpu = capability.device === "wasm";
+  const selFit = fitFor(selected?.variants[device], capability);
+  const noRoom = !!(selected && capability.storageFreeMb !== null && size * 1.15 > capability.storageFreeMb);
+  const smaller = phase.name === "error" ? smallerThan(phase.model, options, phase.device) : null;
 
   if (busy) {
     const pct = phase.name === "loading" ? phase.loaded / Math.max(1, phase.total) : 1;
@@ -132,6 +136,11 @@ export function Setup() {
         <p className="t-alert error body-m" role="alert">
           <Icon name="error" />
           <span>{phase.message}</span>
+          {smaller && (
+            <button type="button" className="btn tonal sm state" onClick={() => engine.download(smaller.id, phase.device)}>
+              Try {smaller.name} ({mbLabel(smaller.variants[phase.device]!.mb)})
+            </button>
+          )}
         </p>
       )}
       {noGpu && (
@@ -147,6 +156,23 @@ export function Setup() {
         <p className="t-alert body-m">
           <Icon name="warning" />
           <span>This device reports {capability.memoryGb} GB of memory. The model may not load, or may slow other apps. The smallest model is safest.</span>
+        </p>
+      )}
+      {!capability.lowMemory && (selFit === "tight" || selFit === "heavy") && selected && (
+        <p className="t-alert body-m">
+          <Icon name="warning" />
+          <span>
+            {selected.name}: {FIT_NOTE[selFit]} The smallest model is safest.
+          </span>
+        </p>
+      )}
+      {noRoom && (
+        <p className="t-alert body-m">
+          <Icon name="storage" />
+          <span>
+            This browser says it has about {mbLabel(capability.storageFreeMb!)} of space left for this site, and the download is {mbLabel(size)}. Free some
+            space or pick a smaller model.
+          </span>
         </p>
       )}
       {capability.metered && (

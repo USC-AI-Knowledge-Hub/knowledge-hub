@@ -26,6 +26,21 @@ async function ask(page: Page, text: string) {
 }
 
 test.describe("offline assistant", () => {
+  test("suggests a model that fits the memory the device reports, and warns about one that doesn't", async ({ page }) => {
+    await setup(page);
+    await page.addInitScript(() => Object.defineProperty(navigator, "deviceMemory", { value: 4, configurable: true }));
+    await page.goto("/offline/assistant/");
+    await expect(page.getByText("Best fit for this device")).toHaveCount(1);
+    // The newer, bigger models are offered, and the 9B one is flagged as too big for a 4 GB device.
+    const big = page.getByRole("radio", { name: /^Qwen3\.5 9B/ });
+    await expect(big).toBeVisible();
+    await big.check();
+    await expect(page.locator("label", { has: big }).getByText("Probably too big for this device.")).toBeVisible();
+    await expect(page.getByText(/probably won't load/)).toBeVisible();
+    await expect(page.getByRole("radio", { name: /^Gemma 4 E2B/ })).toBeVisible();
+    await expect(page.getByRole("radio", { name: /^Ministral 3 3B/ })).toBeVisible();
+  });
+
   test("offers models from compact to large, downloads one, then chats and remembers", async ({ page }) => {
     await setup(page);
     await page.goto("/offline/assistant/");
