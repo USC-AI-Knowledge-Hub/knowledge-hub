@@ -37,6 +37,8 @@ A daily GitHub Action refreshes the YouTube video library.
   them compact); every model appears in the offline assistant (`/offline/assistant`), a general-purpose
   chat that isn't grounded in lessons. A WebLLM model needs `vramMb` and an id that exists in the installed
   WebLLM's list: `models.test.ts` checks both, and `npm run model-sizes` (browser CI) checks download sizes.
+  `src/lib/tutor/fit.ts` guesses whether a model suits the device from its reported memory ("Best fit", warnings, "try a smaller model").
+  The "Check model sizes" workflow measures candidate models on Hugging Face and saves `scripts/model-sizes-report.json`; add a model only with a measured size.
 - AI Team (`/team`, `src/pages/Team.tsx`, `src/components/board/`, `src/lib/board/`, `src/data/team.ts`): a discussion board for each course in the three proficiency buckets plus a general tools board,
   no accounts. Posts live in a Supabase database (`supabase/schema.sql`, set up per `supabase/README.md`; the site reads the
   `BOARD_URL` and `BOARD_ANON_KEY` repository variables at build). Without them the board keeps posts on the visitor's device.

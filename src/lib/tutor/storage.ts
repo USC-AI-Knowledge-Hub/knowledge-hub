@@ -254,3 +254,18 @@ export function nextQuest(s: QuestState, after?: string): string | null {
   const order = [...all.slice(start), ...all.slice(0, start)];
   return order.find((id) => id !== after && !s.badges.includes(id) && questUnlocked(s, id)) ?? null;
 }
+
+
+/**
+ * Asks the browser not to clear the downloaded model when space runs low. Without this a browser may
+ * quietly delete a model it hasn't seen used for a while. Chrome decides on its own; Firefox may ask.
+ */
+export async function keepStorage(): Promise<void> {
+  try {
+    if (typeof navigator === "undefined" || !navigator.storage?.persist) return;
+    if (await navigator.storage.persisted?.()) return;
+    await navigator.storage.persist();
+  } catch {
+    /* Best effort: the model still downloads and works. */
+  }
+}
