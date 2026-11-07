@@ -7,6 +7,7 @@
  * a real HTML page per route (scripts/prerender.ts), and the app runs it in the browser to keep
  * the tab title and tags right while someone clicks around (useSeo).
  */
+import { STYLE_CHECKED, USES } from "../data/aiUse";
 import { BUCKETS, coursesIn } from "../data/buckets";
 import { courses } from "../data/courses";
 import { faqs } from "../data/faq";
@@ -414,6 +415,27 @@ const STATIC: Record<string, () => PageMeta> = {
     ],
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Green AI", path: "/green" }])],
+  }),
+  "/ai-use": () => ({
+    path: "/ai-use",
+    title: `Using AI in coursework: rules, disclosure and citations${suffix}`,
+    description: "What's usually fine to do with AI in a course, how to say you used it, how to cite it in APA, MLA and Chicago, and a syllabus policy builder for instructors.",
+    heading: "Using AI in your coursework",
+    type: "website",
+    content: [
+      { kind: "p", text: "Your instructor's rules decide what you can do with AI, and they differ between courses. This page helps you work out what's usually fine, write a short note saying how you used AI, and cite it in APA, MLA or Chicago. Instructors can build a draft syllabus statement." },
+      { kind: "h2", text: "Can I use AI for this?" },
+      { kind: "ul", items: USES.map((u) => `${u.label}: ${u.advice}`) },
+      { kind: "h2", text: "Cite it" },
+      { kind: "p", text: "APA changed its format for generative AI in September 2025: a specific chat is cited like a document, with a title and a link. MLA uses the prompt as the title and the tool as the container. Chicago uses a footnote." },
+      { kind: "p", text: `Formats were last checked on ${STYLE_CHECKED}. Check the official style guide and your instructor's preference.` },
+    ],
+    links: [
+      { to: "/learn/ethics-integrity", label: "Ethics and academic integrity" },
+      { to: "/learn/limits", label: "What AI gets wrong" },
+      { to: "/start", label: "Where to start" },
+    ],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Using AI in coursework", path: "/ai-use" }])],
   }),
   "/start": () => ({
     path: "/start",
