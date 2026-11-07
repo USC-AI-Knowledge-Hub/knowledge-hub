@@ -7,6 +7,7 @@ import { loadChat, saveChat, type Message } from "../lib/assistant";
 import { useOffline } from "../lib/offline";
 import { buildChatMessages } from "../lib/tutor/prompt";
 import { assistantModelsFor, mbLabel, sizeTier, type Device, type SizeTier } from "../lib/tutor/registry";
+import { FIT_NOTE, bestFit, fitFor, smallerThan } from "../lib/tutor/fit";
 import { useModelChoice } from "../lib/tutor/storage";
 import { useTutorEngine, type TutorEngine } from "../lib/tutor/useEngine";
 import "../styles/assistant.css";
@@ -42,7 +43,10 @@ function ModelPicker({ engine }: { engine: TutorEngine }) {
   const noGpu = capability.device === "wasm";
   const selected = options.find((m) => m.id === pick) ?? options.find((m) => m.recommended) ?? options[0];
   const sel = selected?.variants[device];
-  const lowOnMemory = !!(sel?.vramMb && capability.memoryGb !== null && sel.vramMb / 1024 > capability.memoryGb * 0.75);
+  const selFit = fitFor(sel, capability);
+  const best = noGpu ? null : bestFit(options, device, capability);
+  const noRoom = !!(sel && capability.storageFreeMb !== null && sel.mb * 1.15 > capability.storageFreeMb);
+  const smaller = phase.name === "error" ? smallerThan(phase.model, options, phase.device) : null;
 
   if (busy) {
     const pct = phase.name === "loading" ? phase.loaded / Math.max(1, phase.total) : 1;
@@ -92,6 +96,11 @@ function ModelPicker({ engine }: { engine: TutorEngine }) {
         <p className="as-alert error body-m" role="alert">
           <Icon name="error" />
           <span>{phase.message}</span>
+          {smaller && (
+            <button type="button" className="btn tonal sm state" onClick={() => engine.download(smaller.id, phase.device)}>
+              Try {smaller.name} ({mbLabel(smaller.variants[phase.device]!.mb)})
+            </button>
+          )}
         </p>
       )}
       {noGpu && (
@@ -125,10 +134,15 @@ function ModelPicker({ engine }: { engine: TutorEngine }) {
                     <span className="as-model-name">
                       <span className="title-s">{m.name}</span>
                       {m.recommended && !noGpu && <span className="as-tag label-m">Recommended</span>}
+                      {best === m.id && <span className="as-tag label-m">Best fit for this device</span>}
                       {choice.status === "downloaded" && choice.model === m.id && <span className="as-tag label-m">On this device</span>}
                     </span>
                     <span className="body-s muted">{m.blurb}</span>
                     {v.vramMb && device !== "wasm" && <span className="body-s muted">Needs about {gb(v.vramMb)} of memory on your graphics chip.</span>}
+                    {(() => {
+                      const f = fitFor(v, capability);
+                      return f === "tight" || f === "heavy" ? <span className={`body-s as-fit ${f}`}>{FIT_NOTE[f]}</span> : null;
+                    })()}
                   </span>
                   <span className="label-l as-size">{mbLabel(v.mb)}</span>
                 </label>
@@ -138,11 +152,21 @@ function ModelPicker({ engine }: { engine: TutorEngine }) {
         );
       })}
 
-      {lowOnMemory && selected && (
+      {(selFit === "tight" || selFit === "heavy") && selected && (
         <p className="as-alert body-m">
           <Icon name="warning" />
           <span>
-            This device reports {capability.memoryGb} GB of memory, and {selected.name} may not load or may slow other apps. A smaller model is safer.
+            This device reports {capability.memoryGb === 8 ? "8 GB or more" : `${capability.memoryGb} GB`} of memory, and {selected.name}{" "}
+            {selFit === "heavy" ? "probably won't load, or will slow other apps a lot" : "may be slow or slow other apps"}. A smaller model is safer.
+          </span>
+        </p>
+      )}
+      {noRoom && selected && (
+        <p className="as-alert body-m">
+          <Icon name="storage" />
+          <span>
+            This browser says it has about {gb(capability.storageFreeMb!)} of space left for this site, and the download is {mbLabel(sel!.mb)}. Free some
+            space or pick a smaller model.
           </span>
         </p>
       )}

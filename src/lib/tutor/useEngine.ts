@@ -3,7 +3,7 @@ import { detectCapability, type Capability } from "./capability";
 import { CancelledError, createEngine, isCached, isMockMode, removeDownloadedModels, removeUnusedOnnxFiles, type Engine, type GenerateResult } from "./engine";
 import type { ChatMessage, Profile } from "./prompt";
 import { DEFAULT_MODEL, WASM_MODEL, modelById, type Device, type TutorModel } from "./registry";
-import { modelStore, useModelChoice } from "./storage";
+import { keepStorage, modelStore, useModelChoice } from "./storage";
 
 export type Phase =
   /** No model in memory. The student hasn't downloaded one, said not now, or it was removed. */
@@ -81,6 +81,7 @@ export function useTutorEngine(): TutorEngine {
     // Without this, saving "downloaded" at the end of a download re-triggered resume, and a
     // failed cache check there reset a working model to "off".
     resumed = true;
+    if (!fromCache && !mock) void keepStorage();
     const v = model.variants[device];
     setPhase({ name: "loading", model, device, loaded: 0, total: (v?.mb ?? 0) * 1e6, file: "", fromCache });
     engine()

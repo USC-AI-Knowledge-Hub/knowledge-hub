@@ -8,6 +8,8 @@
  *
  * Needs network access to huggingface.co (CI has it).
  */
+import { prebuiltAppConfig } from "@mlc-ai/web-llm";
+import { writeFileSync } from "node:fs";
 import { ALL_MODELS, SIDE_FILES, onnxFile, type Device, type ModelVariant } from "../src/lib/tutor/registry";
 
 const TOLERANCE = 0.15;
@@ -92,6 +94,22 @@ const CANDIDATES: { label: string; repo: string; onnx?: string }[] = [
   { label: "ONNX Qwen2.5 0.5B q4", repo: "onnx-community/Qwen2.5-0.5B-Instruct", onnx: "model_q4.onnx" },
   { label: "ONNX Qwen3 0.6B q4", repo: "onnx-community/Qwen3-0.6B-ONNX", onnx: "model_q4.onnx" },
 ];
+
+// Newer WebLLM builds under consideration, by their WebLLM id, so the repo is the one WebLLM downloads from.
+for (const id of [
+  "gemma-4-E2B-it-q4f16_1-MLC",
+  "gemma-4-E2B-it-q4f32_1-MLC",
+  "Ministral-3-3B-Instruct-2512-BF16-q4f16_1-MLC",
+  "Ministral-3-3B-Instruct-2512-BF16-q4f32_1-MLC",
+  "Qwen3.5-9B-q4f16_1-MLC",
+  "Qwen3.5-9B-q4f32_1-MLC",
+  "Qwen3-4B-q4f16_1-MLC",
+  "SmolLM2-1.7B-Instruct-q4f16_1-MLC",
+]) {
+  const known = prebuiltAppConfig.model_list.find((m) => m.model_id === id);
+  if (known) CANDIDATES.push({ label: `WebLLM ${id.replace(/-MLC$/, "")}`, repo: known.model.replace("https://huggingface.co/", "") });
+}
+const report: { label: string; repo: string; mb: number | null; error?: string }[] = [];
 console.log("\nCandidates (report only):");
 for (const c of CANDIDATES) {
   try {
@@ -103,9 +121,15 @@ for (const c of CANDIDATES) {
       bytes = (await tree(c.repo)).filter((e) => e.type === "file" && !/\.(md|gitattributes)$|^\./.test(e.path)).reduce((n, e) => n + sizeOf(e), 0);
     }
     console.log(`  ${c.label.padEnd(26)} ${mb(bytes)} MB   ${c.repo}`);
+    report.push({ label: c.label, repo: c.repo, mb: Math.round(bytes / 1e6) });
   } catch (e) {
     console.log(`  ${c.label.padEnd(26)}    n/a   ${c.repo} (${(e as Error).message})`);
+    report.push({ label: c.label, repo: c.repo, mb: null, error: (e as Error).message });
   }
+}
+// `--write-report` saves the candidate sizes next to the script (the "Check model sizes" workflow commits it).
+if (process.argv.includes("--write-report")) {
+  writeFileSync(new URL("./model-sizes-report.json", import.meta.url), JSON.stringify({ at: new Date().toISOString(), candidates: report }, null, 2) + "\n");
 }
 if (failed) {
   console.error(`\nA registry size in src/lib/tutor/registry.ts is off by more than ${TOLERANCE * 100}%, or a file is missing. Update it from the table above.`);

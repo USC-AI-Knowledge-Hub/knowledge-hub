@@ -160,6 +160,12 @@ const WEBLLM_MODELS: TutorModel[] = [
     variants: mlc("Llama-3.2-3B-Instruct", 1817, 2264, { mb: 1817, vramMb: 2952 }),
   },
   {
+    id: "ministral3-3b-mlc",
+    name: "Ministral 3 3B",
+    blurb: "Mistral's compact model from December 2025. A newer alternative to Llama 3.2 3B.",
+    variants: mlc("Ministral-3-3B-Instruct-2512-BF16", 1946, 2864, { mb: 1946, vramMb: 3532 }),
+  },
+  {
     id: "qwen3.5-4b-mlc",
     name: "Qwen3.5 4B",
     blurb: "Closest to a full assistant here. Needs a recent laptop or desktop graphics chip.",
@@ -171,6 +177,19 @@ const WEBLLM_MODELS: TutorModel[] = [
     name: "Phi-4 mini",
     blurb: "Microsoft's small model, strong at reasoning and maths. Large download.",
     variants: mlc("Phi-4-mini-instruct", 2180, 3438, { mb: 2180, vramMb: 4221 }),
+  },
+  {
+    id: "gemma4-e2b-mlc",
+    name: "Gemma 4 E2B",
+    blurb: "Google's newest small model, released in April 2026, and good across many languages. A big download for its size.",
+    variants: mlc("gemma-4-E2B-it", 2831, 3387, { mb: 2831, vramMb: 3863 }),
+  },
+  {
+    id: "qwen3.5-9b-mlc",
+    name: "Qwen3.5 9B",
+    blurb: "The most capable model here and the biggest. Meant for a desktop or laptop with a dedicated graphics card with 8 GB or more of memory.",
+    variants: mlc("Qwen3.5-9B", 5061, 6433, { mb: 5061, vramMb: 7545 }),
+    thinking: true,
   },
 ];
 
