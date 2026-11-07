@@ -116,6 +116,7 @@ export function Layout() {
         </div>
         <nav className="footer-links body-s" aria-label="Footer">
           <Link to="/start">Where to start</Link>
+        <Link to="/prompts">Prompts that work</Link>
         <Link to="/ai-use">Using AI in coursework</Link>
         <Link to="/offline">Use offline</Link>
           <Link to="/about">How the video library works</Link>

@@ -119,6 +119,13 @@ export const PAGES: { id: string; title: string; route: string; blurb: string; w
     words: ["green", "green ai", "sustainability", "sustainable", "environment", "environmental", "energy", "climate", "carbon", "water", "planet", "efficient", "efficiency", "governance", "responsible ai", "responsible use", "pledge"],
   },
   {
+    id: "prompts",
+    title: "Prompts that work",
+    route: "/prompts",
+    blurb: "A library of copyable prompts for studying, writing, research, code and teaching.",
+    words: ["prompt", "prompts", "prompt library", "prompt examples", "templates", "what to ask", "chatgpt prompts", "study prompts"],
+  },
+  {
     id: "compare",
     title: "Compare tools",
     route: "/tools/compare",

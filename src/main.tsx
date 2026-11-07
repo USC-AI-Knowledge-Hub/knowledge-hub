@@ -13,6 +13,7 @@ import { Team } from "./pages/Team";
 import { Start } from "./pages/Start";
 import { AiUse } from "./pages/AiUse";
 import { Compare } from "./pages/Compare";
+import { Prompts } from "./pages/Prompts";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
 import { LessonPlayer } from "./pages/LessonPlayer";
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
         { path: "team", element: <Team /> },
         { path: "start", element: <Start /> },
         { path: "ai-use", element: <AiUse /> },
+        { path: "prompts", element: <Prompts /> },
         { path: "green/team", element: <Navigate to="/team" replace /> },
         { path: "offline", element: <Offline /> },
         { path: "offline/assistant", element: <Assistant /> },

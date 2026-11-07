@@ -29,7 +29,7 @@
   padding: 32px var(--kh-gutter) 48px;
   border-top: 1px solid var(--md-sys-color-outline-variant);
 }
-.footer-links { display: flex; gap: 24px; align-items: center; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; }
 .footer-links a { color: var(--md-sys-color-on-surface-variant); }
 @media (max-width: 839px) {
   .footer { padding-bottom: 112px; }

@@ -8,6 +8,7 @@
  * the tab title and tags right while someone clicks around (useSeo).
  */
 import { STYLE_CHECKED, USES } from "../data/aiUse";
+import { PROMPTS, PROMPT_CATEGORIES } from "../data/prompts";
 import { BUCKETS, coursesIn } from "../data/buckets";
 import { PAIRS, differences, pairSlug, parsePair, summary, textRows, toolsFor } from "../data/compare";
 import { courses } from "../data/courses";
@@ -467,6 +468,32 @@ const STATIC: Record<string, () => PageMeta> = {
     ],
     links: [...PAIRS.map(([a, b]) => ({ to: `/tools/compare/${pairSlug(a, b)}`, label: `${toolById.get(a)?.name} vs ${toolById.get(b)?.name}` })), { to: "/tools", label: "All AI tools" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Tools", path: "/tools" }, { name: "Compare", path: "/tools/compare" }])],
+  }),
+  "/prompts": () => ({
+    path: "/prompts",
+    title: `Prompts that work: copyable AI prompts for students${suffix}`,
+    description: "Copyable prompts for studying, writing, research, code, teaching and everyday work, each with what to check before you trust the answer.",
+    heading: "Prompts that work",
+    type: "website",
+    content: [
+      { kind: "p", text: "Good prompts say who the answer is for, what you want, what to avoid and what format to use. These starting points do that, and each says what to check before you trust the answer." },
+      ...PROMPT_CATEGORIES.flatMap<Block>((c) => [
+        { kind: "h2", text: c.label },
+        { kind: "p", text: c.blurb },
+        ...PROMPTS.filter((p) => p.category === c.id).flatMap<Block>((p) => [
+          { kind: "h3", text: p.title },
+          { kind: "p", text: p.when },
+          { kind: "p", text: p.prompt },
+          { kind: "p", text: `Check before you trust it: ${p.check}` },
+        ]),
+      ]),
+    ],
+    links: [
+      { to: "/learn/prompting", label: "Prompting that works, the lesson" },
+      { to: "/ai-use", label: "Using AI in coursework" },
+      { to: "/tools", label: "AI tool guides" },
+    ],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Prompts that work", path: "/prompts" }])],
   }),
   "/ai-use": () => ({
     path: "/ai-use",
