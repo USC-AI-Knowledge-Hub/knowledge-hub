@@ -14,10 +14,10 @@ import "../styles/new.css";
 export function WhatsNew() {
   const { tools: all } = useCatalog();
   const { trends } = useFeed();
-  const spotted = all.filter((t): t is Extract<typeof t, { reviewed: false }> => !t.reviewed) as unknown as DiscoveredTool[];
+  const spotted = all.filter((t) => !t.reviewed) as unknown as DiscoveredTool[];
   const items = newItems(spotted, tools, new Date().toISOString().slice(0, 10));
   const groups = [
-    { id: "spotted", title: "Spotted by the daily run", blurb: "New tools and models found in announcements and launch sites. Not reviewed yet: we haven't tested them, and we make no claims about cost, difficulty or USC access." },
+    { id: "spotted", title: "Spotted by the daily run", blurb: "New tools and models found automatically in announcements and launch sites, so the list can include mistakes. Not reviewed yet: we haven't tested them, and we make no claims about cost, difficulty or USC access." },
     { id: "reviewed", title: "Reviews updated", blurb: "Tools whose reviews we re-checked recently." },
   ] as const;
   return (
@@ -58,7 +58,12 @@ export function WhatsNew() {
                       </time>
                     </div>
                     <p className="body-m">{i.summary}</p>
-                    {i.kind === "spotted" && <NotReviewed />}
+                    {i.kind === "spotted" && (
+                      <div className="new-flags">
+                        <NotReviewed />
+                        <span className="label-m muted">{i.sources > 1 ? `Seen in ${i.sources} sources` : "Seen in one source"}</span>
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>

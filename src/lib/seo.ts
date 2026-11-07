@@ -472,7 +472,7 @@ const STATIC: Record<string, () => PageMeta> = {
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Tools", path: "/tools" }, { name: "Compare", path: "/tools/compare" }])],
   }),
   "/new": () => {
-    const items = newItems(discoveredFile.tools ?? [], tools, new Date().toISOString().slice(0, 10), 90, 25);
+    const items = newItems(discoveredFile.tools ?? [], tools, new Date().toISOString().slice(0, 10), 90, 25).filter((i) => i.confirmed);
     return {
       path: "/new",
       title: `What's new in AI tools${suffix}`,

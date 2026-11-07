@@ -2,5 +2,5 @@
 .new-item { display: grid; gap: 6px; padding: 16px; }
 .new-item-head { display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; align-items: baseline; }
 .new-item-head h3 { margin: 0; overflow-wrap: anywhere; }
-.new-item .not-reviewed { justify-self: start; }
+.new-flags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 .section-links { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }

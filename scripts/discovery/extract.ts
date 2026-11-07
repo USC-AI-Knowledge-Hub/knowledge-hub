@@ -9,7 +9,7 @@ import type { FeedItem, Mention, Source } from "./types";
 
 /** Companies are not tools: "Google launches Veo" is about Veo. */
 const COMPANIES = new Set(
-  `openai google microsoft meta anthropic nvidia apple amazon aws ibm intel amd samsung tesla xai mistral cohere huggingface hugging face stability deepmind github youtube linkedin salesforce adobe oracle sap baidu alibaba tencent bytedance cloudflare databricks snowflake figma notion slack zoom dropbox atlassian shopify stripe uber airbnb spotify netflix reuters bloomberg wired techcrunch verge venturebeat forbes wsj`.split(" "),
+  `openai google microsoft meta anthropic mistralai liquidai nvidia apple amazon aws ibm intel amd samsung tesla xai mistral cohere huggingface hugging face stability deepmind github youtube linkedin salesforce adobe oracle sap baidu alibaba tencent bytedance cloudflare databricks snowflake figma notion slack zoom dropbox atlassian shopify stripe uber airbnb spotify netflix reuters bloomberg wired techcrunch verge venturebeat forbes wsj`.split(" "),
 );
 
 /** Words that start a headline or aren't a name at all. */
@@ -21,6 +21,9 @@ const NOT_NAMES = new Set(
 const GENERIC_WORDS = new Set(
   `investments investment partnership partnerships collaboration collaborations expansion funding commitment commitments initiative initiatives program programs results research summit conference event events grant grants earnings revenue plan plans strategy deal deals acquisition acquisitions finally officially reportedly quietly also still again`.split(" "),
 );
+
+/** A single one of these is a kind of thing, not a product's name ("Images 2.6" is a version of something called Images by ChatGPT). */
+const GENERIC_SINGLE = new Set(`images image video videos audio voice search chat agents agent models model assistant assistants apps app api platform tools tool studio code`.split(" "));
 
 /** Trailing words that describe the thing instead of naming it. */
 const GENERIC_TAIL = /\s+(?:model|models|tool|tools|app|apps|api|apis|update|updates|version|versions|feature|features|release|assistant|platform|agent|agents|suite|series|family|studio|launch|beta|preview)$/i;
@@ -60,6 +63,7 @@ export function validName(name: string): boolean {
   if (!/^[A-Z0-9]/.test(name)) return false;
   if (NOT_NAMES.has(tokens[0].toLowerCase())) return false;
   if (tokens.every((t) => NOT_NAMES.has(t.toLowerCase()))) return false;
+  if (tokens.length === 1 && GENERIC_SINGLE.has(tokens[0].toLowerCase())) return false;
   if (GENERIC_WORDS.has(tokens[tokens.length - 1].toLowerCase()) || GENERIC_WORDS.has(tokens[0].toLowerCase())) return false;
   const key = keyOf(name);
   if (!key || COMPANIES.has(key) || COMPANIES.has(key.replace(/ /g, ""))) return false;

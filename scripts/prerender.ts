@@ -45,8 +45,8 @@ try {
   writeFileSync(join(dist, "sitemap.xml"), sitemapXml(listed));
   writeFileSync(join(dist, "robots.txt"), robotsTxt(SITE_URL));
   // What's new, as a feed: tools the daily run spotted and reviews that were updated.
-  const discovered = JSON.parse(readFileSync(join(root, "public/data/discovered.json"), "utf8")) as { tools?: { id: string; name: string; maker: string; bestFor: string; firstSeen: string }[] };
-  const items = newItems(discovered.tools ?? [], tools, new Date().toISOString().slice(0, 10));
+  const discovered = JSON.parse(readFileSync(join(root, "public/data/discovered.json"), "utf8")) as { tools?: { id: string; name: string; maker: string; bestFor: string; firstSeen: string; origin?: string; evidence?: { source: string }[] }[] };
+  const items = newItems(discovered.tools ?? [], tools, new Date().toISOString().slice(0, 10)).filter((i) => i.confirmed);
   writeFileSync(join(dist, "feed.xml"), atomXml(items, SITE_URL, "USC AI Knowledge Hub: what's new"));
   console.log(`Prerendered ${count} pages, a sitemap with ${listed.length} addresses and a feed with ${items.length} items.`);
 } finally {

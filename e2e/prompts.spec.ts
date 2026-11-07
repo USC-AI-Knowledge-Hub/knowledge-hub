@@ -35,7 +35,7 @@ test.describe("prompt library", () => {
 
   test("is linked from the footer and works on a phone", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: "Prompts that work" }).click();
+    await page.getByRole("link", { name: "Prompts that work", exact: true }).click();
     await expect(page).toHaveURL(/\/prompts$/);
     await page.setViewportSize({ width: 360, height: 800 });
     await page.goto("/prompts");

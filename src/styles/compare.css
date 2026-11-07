@@ -6,7 +6,7 @@
 .cmp-glance { display: grid; gap: 8px; padding-left: 24px; max-width: 80ch; }
 .cmp-grid { display: grid; gap: 4px; margin-top: 24px; }
 .cmp-head { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 16px; position: sticky; top: 0; z-index: 2; background: var(--md-sys-color-surface); padding: 8px 0; }
-.cmp-tool { display: grid; gap: 4px; justify-items: start; padding: 16px; text-decoration: none; color: inherit; }
+.cmp-tool.card { display: grid; gap: 4px; justify-items: start; padding: 16px; text-decoration: none; color: inherit; }
 .cmp-open { color: var(--md-sys-color-primary); }
 .cmp-row { display: grid; gap: 8px; padding: 16px 0; border-top: 1px solid var(--md-sys-color-outline-variant); }
 .cmp-row h2 { margin: 0; }

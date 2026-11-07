@@ -43,6 +43,9 @@ export function parsePair(slug: string): [string, string] | null {
 /** The pairs a tool is in, for "compare with" links. */
 export const pairsFor = (id: string) => PAIRS.filter(([a, b]) => a === id || b === id).map(([a, b]) => (a === id ? b : a));
 
+/** Lowercases the first word only, so "USC" stays capitalised. */
+const lower = (s: string) => (s.startsWith("USC") ? s : s[0].toLowerCase() + s.slice(1));
+
 export const USC_LABEL: Record<UscAccess, string> = { provided: "USC provides it", check: "Check whether USC provides it", personal: "Use a personal account" };
 export const COST_TEXT: Record<Cost, string> = { free: "Free", freemium: "Free tier, paid upgrades", paid: "Paid" };
 
@@ -62,7 +65,7 @@ export function differences(tools: Tool[]): string[] {
     out.push(`Getting started: ${easiest.name} is the easier one to get value from on day one (${DIFFICULTY_LABEL[easiest.difficulty].toLowerCase()}); ${tools.filter((t) => t !== easiest).map((t) => `${t.name} is ${DIFFICULTY_LABEL[t.difficulty].toLowerCase()}`).join("; ")}.`);
   }
   const uscs = new Set(tools.map((t) => t.usc));
-  out.push(uscs.size === 1 ? `USC access: for both, ${USC_LABEL[tools[0].usc].toLowerCase()}.` : `USC access: ${tools.map((t) => `${t.name}: ${USC_LABEL[t.usc].toLowerCase()}`).join("; ")}.`);
+  out.push(uscs.size === 1 ? `USC access: for both, ${lower(USC_LABEL[tools[0].usc])}.` : `USC access: ${tools.map((t) => `${t.name}: ${lower(USC_LABEL[t.usc])}`).join("; ")}.`);
   return out;
 }
 

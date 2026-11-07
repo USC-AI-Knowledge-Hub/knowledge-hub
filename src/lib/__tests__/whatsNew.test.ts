@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { atomXml } from "../../../scripts/seo/render";
 import { canonicalUrl } from "../seo";
-import { newItems } from "../whatsNew";
+import { clean, newItems } from "../whatsNew";
 
 const spotted = [
-  { id: "newer", name: "Newer", maker: "A", bestFor: "A video model.", firstSeen: "2026-11-05" },
-  { id: "older", name: "Older", maker: "B", bestFor: "x ".repeat(200), firstSeen: "2026-09-20" },
+  { id: "newer", name: "Newer", maker: "A", bestFor: "A video model.", firstSeen: "2026-11-05", origin: "feed", evidence: [{ source: "OpenAI news" }, { source: "TechCrunch AI" }] },
+  { id: "seeded", name: "Seeded", maker: "A", bestFor: "Added by an editor.", firstSeen: "2026-11-01", origin: "editor", evidence: [] },
+  { id: "older", name: "Older", maker: "B", bestFor: "x ".repeat(200), firstSeen: "2026-09-20", origin: "feed", evidence: [{ source: "OpenAI news" }, { source: "OpenAI news" }] },
   { id: "ancient", name: "Ancient", maker: "C", bestFor: "Old.", firstSeen: "2026-01-01" },
   { id: "future", name: "Future", maker: "D", bestFor: "Not yet.", firstSeen: "2026-12-31" },
 ];
@@ -21,6 +22,21 @@ describe("what's new", () => {
     expect(items.map((i) => i.id)).toEqual(["spotted-newer", "reviewed-claude-2026-10-30", "spotted-older"]);
     expect(newItems(spotted, reviewed, "2026-11-07", 400).map((i) => i.id)).toContain("spotted-ancient");
     expect(items.some((i) => i.id.includes("future") || i.id.includes("stale"))).toBe(false);
+  });
+
+  it("leaves out tools an editor added by hand", () => {
+    expect(items.some((i) => i.id.includes("seeded"))).toBe(false);
+  });
+
+  it("counts a spotted tool as confirmed only once two different sources have written about it", () => {
+    expect(items.find((i) => i.id === "spotted-newer")).toMatchObject({ confirmed: true, sources: 2 });
+    expect(items.find((i) => i.id === "spotted-older")).toMatchObject({ confirmed: false, sources: 1 });
+    expect(items.find((i) => i.kind === "reviewed")).toMatchObject({ confirmed: true });
+  });
+
+  it("cleans forum debris and encoded quotes out of a summary", () => {
+    expect(clean("Hey r/LocalLlama - Today we&#39;re releasing Beam &quot;fast&quot; Discussion | Link")).toBe('Today we\'re releasing Beam "fast"');
+    expect(clean("A model. | Link")).toBe("A model.");
   });
 
   it("labels spotted tools as not reviewed, and keeps summaries short", () => {

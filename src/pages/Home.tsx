@@ -14,6 +14,13 @@ import { WavyProgress } from "../components/WavyProgress";
 
 const PATH_SHAPES = [SHAPES.cookie9, SHAPES.clover4, SHAPES.sunny, SHAPES.cookie6];
 
+const HELP = [
+  { to: "/start", icon: "explore", title: "Find your level", text: "Four questions, then a short list of free courses that fit where you are." },
+  { to: "/prompts", icon: "edit_note", title: "Prompts that work", text: "Copyable prompts for studying, writing, research and code, each with what to check." },
+  { to: "/ai-use", icon: "rule", title: "Using AI in your coursework", text: "What's usually fine, how to disclose it, and how to cite it in APA, MLA or Chicago." },
+  { to: "/tools/compare", icon: "compare_arrows", title: "Compare tools", text: "ChatGPT vs Claude vs Gemini and more, side by side, from our reviews." },
+] as const;
+
 export function Home() {
   const { feed, today, trends } = useFeed();
   const { isDone } = useProgress();
@@ -102,6 +109,26 @@ export function Home() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="help-h">
+        <div className="section-head">
+          <div>
+            <h2 id="help-h" className="headline-m">
+              Practical help
+            </h2>
+            <p className="body-m muted">Short tools for the questions people ask first.</p>
+          </div>
+        </div>
+        <div className="help-grid">
+          {HELP.map((h) => (
+            <Link key={h.to} to={h.to} className="help-card card outlined state">
+              <Icon name={h.icon} size={28} />
+              <h3 className="title-l">{h.title}</h3>
+              <p className="body-m muted">{h.text}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

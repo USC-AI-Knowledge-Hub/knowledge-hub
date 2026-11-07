@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test.describe("where to start", () => {
   test("is reachable from the home page and the footer", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: "Find your level" }).click();
+    await page.getByRole("link", { name: "Find your level", exact: true }).click();
     await expect(page).toHaveURL(/\/start$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Where to start with AI");
     await expect(page.getByRole("link", { name: "Where to start" })).toBeVisible();
