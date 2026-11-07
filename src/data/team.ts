@@ -32,24 +32,10 @@ export const TOOL_TOPICS: readonly Topic[] = [
 
 export const topicById = new Map<string, Topic>([...COURSE_TOPICS, ...TOOL_TOPICS].map((t) => [t.id, t]));
 
-export interface Bucket {
-  id: 1 | 2 | 3;
-  name: string;
-  who: string;
-  focus: string;
-}
+import { BUCKETS, BUCKET_COURSES, type Bucket } from "./buckets";
 
-/** The three proficiency buckets, from the program's overview. */
-export const BUCKETS: readonly Bucket[] = [
-  { id: 1, name: "Foundations", who: "New to AI, or has only used ChatGPT casually", focus: "What generative AI is, and how to use the main tools" },
-  { id: 2, name: "Applied AI", who: "Uses AI regularly but not systematically", focus: "Prompting, workflows, agents and responsible use" },
-  {
-    id: 3,
-    name: "Technical",
-    who: "An advanced AI user who wants to build with AI; some courses assume basic Python or command-line familiarity",
-    focus: "Vibe coding, coding agents and agent skills",
-  },
-];
+export { BUCKETS };
+export type { Bucket };
 
 export interface BoardDef {
   id: string;
@@ -63,38 +49,18 @@ export interface BoardDef {
   topics: readonly Topic[];
 }
 
-const course = (bucket: Bucket["id"], id: string, title: string, provider: string, url: string): BoardDef => ({
-  id,
-  kind: "course",
-  title,
-  provider,
-  bucket,
-  url,
-  topics: COURSE_TOPICS,
-});
-
 export const TOOLS_BOARD: BoardDef = { id: "tools", kind: "tools", title: "AI tools", topics: TOOL_TOPICS };
 
-export const COURSE_BOARDS: readonly BoardDef[] = [
-  // Bucket 1: Foundations
-  course(1, "google-intro-genai", "Introduction to Generative AI", "Google", "https://www.skills.google/course_templates/536"),
-  course(1, "openai-ai-foundations", "AI Foundations", "OpenAI", "https://academy.openai.com/public/courses/ai-foundations-juzjs"),
-  course(1, "dlai-genai-for-everyone", "Generative AI for Everyone", "DeepLearning.AI", "https://www.deeplearning.ai/courses/generative-ai-for-everyone"),
-  course(1, "claude-101", "Claude 101", "Anthropic", "https://academy.claude.com/courses/claude-101"),
-  // Bucket 2: Applied AI
-  course(2, "openai-applied-ai-foundations", "Applied AI Foundations", "OpenAI", "https://academy.openai.com/public/courses/applied-ai-foundations-szsmv"),
-  course(2, "openai-agents-workflows", "Agents and Workflows", "OpenAI", "https://academy.openai.com/public/courses/agents-and-workflows-bieml"),
-  course(2, "anthropic-ai-fluency-framework", "AI Fluency: Framework and Foundations", "Anthropic", "https://academy.claude.com/courses/ai-fluency-framework-foundations"),
-  course(2, "anthropic-ai-fluency-students", "AI Fluency for Students", "Anthropic", "https://anthropic.skilljar.com/ai-fluency-for-students"),
-  course(2, "kaggle-ai-ethics", "Introduction to AI Ethics", "Kaggle", "https://www.kaggle.com/learn/intro-to-ai-ethics"),
-  course(2, "dlai-ai-prompting", "AI Prompting for Everyone", "DeepLearning.AI", "https://www.deeplearning.ai/courses/ai-prompting-for-everyone"),
-  // Bucket 3: Technical
-  course(3, "dlai-prompt-eng-developers", "ChatGPT Prompt Engineering for Developers", "DeepLearning.AI", "https://www.deeplearning.ai/courses/chatgpt-prompt-eng"),
-  course(3, "hf-ai-agents", "AI Agents (units 0-1)", "Hugging Face", "https://huggingface.co/learn/agents-course/en/unit0/introduction"),
-  course(3, "claude-code-101", "Claude Code 101", "Anthropic", "https://anthropic.skilljar.com/claude-code-101"),
-  course(3, "dlai-agent-skills", "Agent Skills with Anthropic", "Anthropic and DeepLearning.AI", "https://www.deeplearning.ai/courses/agent-skills-with-anthropic"),
-  course(3, "dlai-vibe-coding-replit", "Vibe Coding 101 with Replit", "Replit and DeepLearning.AI", "https://www.deeplearning.ai/courses/vibe-coding-101-with-replit"),
-];
+/** One board per course in the three buckets (the course list is in buckets.ts). */
+export const COURSE_BOARDS: readonly BoardDef[] = BUCKET_COURSES.map((c) => ({
+  id: c.id,
+  kind: "course" as const,
+  title: c.title,
+  provider: c.provider,
+  bucket: c.bucket,
+  url: c.url,
+  topics: COURSE_TOPICS,
+}));
 
 export const BOARDS: readonly BoardDef[] = [TOOLS_BOARD, ...COURSE_BOARDS];
 export const boardById = new Map(BOARDS.map((b) => [b.id, b]));

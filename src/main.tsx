@@ -10,6 +10,7 @@ import { Assistant } from "./pages/Assistant";
 import { Courses } from "./pages/Courses";
 import { Green } from "./pages/Green";
 import { Team } from "./pages/Team";
+import { Start } from "./pages/Start";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
 import { LessonPlayer } from "./pages/LessonPlayer";
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         { path: "watch", element: <Watch /> },
         { path: "green", element: <Green /> },
         { path: "team", element: <Team /> },
+        { path: "start", element: <Start /> },
         { path: "green/team", element: <Navigate to="/team" replace /> },
         { path: "offline", element: <Offline /> },
         { path: "offline/assistant", element: <Assistant /> },

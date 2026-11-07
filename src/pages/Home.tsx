@@ -35,6 +35,10 @@ export function Home() {
               <Icon name="route" />
               Start a learning path
             </Link>
+            <Link to="/start" className="btn tonal state">
+              <Icon name="explore" />
+              Find your level
+            </Link>
             <Link to="/watch" className="btn outlined state">
               <Icon name="smart_display" />
               Browse videos

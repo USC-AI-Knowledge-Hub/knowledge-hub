@@ -7,6 +7,7 @@
  * a real HTML page per route (scripts/prerender.ts), and the app runs it in the browser to keep
  * the tab title and tags right while someone clicks around (useSeo).
  */
+import { BUCKETS, coursesIn } from "../data/buckets";
 import { courses } from "../data/courses";
 import { faqs } from "../data/faq";
 import { guidedPathById, guidedPaths, pathModules } from "../data/guided/paths";
@@ -413,6 +414,27 @@ const STATIC: Record<string, () => PageMeta> = {
     ],
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Green AI", path: "/green" }])],
+  }),
+  "/start": () => ({
+    path: "/start",
+    title: `Where to start with AI: find your level${suffix}`,
+    description: "Answer four questions to find your AI starting point, then work through a short list of free courses from Google, OpenAI, Anthropic and more.",
+    heading: "Where to start with AI",
+    type: "website",
+    content: [
+      { kind: "p", text: "Three buckets take you from first steps to building with AI. Each has a short list of free courses and takes roughly 7 to 10 hours. A four-question self-rating tells you where to begin." },
+      ...BUCKETS.flatMap<Block>((b) => [
+        { kind: "h2", text: `Bucket ${b.id}: ${b.name}` },
+        { kind: "p", text: `${b.who}. ${b.focus}.` },
+        { kind: "ul", items: coursesIn(b.id).map((c) => `${c.title} (${c.provider})`) },
+      ]),
+    ],
+    links: [
+      { to: "/learn", label: "Learn" },
+      { to: "/team", label: "AI Team discussion boards" },
+      { to: "/tools", label: "AI tool guides" },
+    ],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Where to start", path: "/start" }])],
   }),
   "/team": () => ({
     path: "/team",

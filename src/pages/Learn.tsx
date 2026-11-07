@@ -48,6 +48,12 @@ export function Learn() {
           Each lesson answers three questions: what is it, why does it matter to me, and how do I use it. Follow a path, or pick any lesson on
           its own.
         </p>
+        <p className="body-m">
+          <Link to="/start" className="btn tonal sm state">
+            <Icon name="explore" size={18} />
+            Not sure where to start? Find your level
+          </Link>
+        </p>
         {done.length > 0 && (
           <p className="label-l progress-note">
             <Icon name="emoji_events" filled size={20} />
