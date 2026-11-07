@@ -7,6 +7,12 @@
  * a real HTML page per route (scripts/prerender.ts), and the app runs it in the browser to keep
  * the tab title and tags right while someone clicks around (useSeo).
  */
+import { STYLE_CHECKED, USES } from "../data/aiUse";
+import discoveredFile from "../../public/data/discovered.json";
+import { PROMPTS, PROMPT_CATEGORIES } from "../data/prompts";
+import { newItems } from "./whatsNew";
+import { BUCKETS, coursesIn } from "../data/buckets";
+import { PAIRS, differences, pairSlug, parsePair, summary, textRows, toolsFor } from "../data/compare";
 import { courses } from "../data/courses";
 import { faqs } from "../data/faq";
 import { guidedPathById, guidedPaths, pathModules } from "../data/guided/paths";
@@ -296,6 +302,43 @@ function modulePage(id: string): PageMeta | null {
   };
 }
 
+function comparePage(slug: string): PageMeta | null {
+  const ids = parsePair(slug);
+  if (!ids) return null;
+  const [a, b] = toolsFor(ids);
+  if (!a || !b) return null;
+  const path = `/tools/compare/${pairSlug(ids[0], ids[1])}`;
+  return {
+    path,
+    title: `${a.name} vs ${b.name}: how they compare${suffix}`,
+    description: clip(`${a.name} vs ${b.name}: cost, how hard each is to start, USC access, strengths, limits and privacy, side by side.`),
+    heading: `${a.name} vs ${b.name}`,
+    type: "article",
+    content: [
+      { kind: "p", text: summary([a, b]) },
+      { kind: "h2", text: "At a glance" },
+      { kind: "ul", items: differences([a, b]) },
+      ...textRows([a, b]).flatMap<Block>((r) => [
+        { kind: "h2", text: r.label },
+        { kind: "ul", items: r.items },
+      ]),
+    ],
+    links: [
+      { to: `/tools/${a.id}`, label: `${a.name} review` },
+      { to: `/tools/${b.id}`, label: `${b.name} review` },
+      { to: "/tools/compare", label: "Compare other tools" },
+    ],
+    jsonLd: [
+      breadcrumbs([
+        { name: "Home", path: "/" },
+        { name: "Tools", path: "/tools" },
+        { name: "Compare", path: "/tools/compare" },
+        { name: `${a.name} vs ${b.name}`, path },
+      ]),
+    ],
+  };
+}
+
 function toolPage(id: string): PageMeta | null {
   const t = toolById.get(id);
   if (!t) return null;
@@ -413,6 +456,108 @@ const STATIC: Record<string, () => PageMeta> = {
     ],
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Green AI", path: "/green" }])],
+  }),
+  "/tools/compare": () => ({
+    path: "/tools/compare",
+    title: `Compare AI tools side by side${suffix}`,
+    description: "Pick two or three AI tools and compare cost, how hard they are to start, USC access, strengths, limits, privacy and academic-integrity notes.",
+    heading: "Compare AI tools",
+    type: "website",
+    content: [
+      { kind: "p", text: "Pick up to three reviewed tools and see them side by side. Every row comes from our tool reviews, and each review shows when it was last checked." },
+      { kind: "h2", text: "Popular comparisons" },
+      { kind: "ul", items: PAIRS.map(([a, b]) => `${toolById.get(a)?.name} vs ${toolById.get(b)?.name}`) },
+    ],
+    links: [...PAIRS.map(([a, b]) => ({ to: `/tools/compare/${pairSlug(a, b)}`, label: `${toolById.get(a)?.name} vs ${toolById.get(b)?.name}` })), { to: "/tools", label: "All AI tools" }],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Tools", path: "/tools" }, { name: "Compare", path: "/tools/compare" }])],
+  }),
+  "/new": () => {
+    const items = newItems(discoveredFile.tools ?? [], tools, new Date().toISOString().slice(0, 10), 90, 25).filter((i) => i.confirmed);
+    return {
+      path: "/new",
+      title: `What's new in AI tools${suffix}`,
+      description: "New AI tools and models spotted by our daily run, and which tool reviews were updated lately, with an RSS feed.",
+      heading: "What's new",
+      type: "website",
+      content: [
+        { kind: "p", text: "AI tools change fast, so every review shows when it was last checked and a daily run looks for new tools. These changed in the last three months." },
+        { kind: "h2", text: "Spotted and reviewed lately" },
+        items.length ? { kind: "ul", items: items.map((i) => `${i.title} (${i.date})`) } : { kind: "p", text: "Nothing new in the last three months." },
+      ],
+      links: [
+        { to: "/tools", label: "All AI tools" },
+        { to: "/watch?tab=trends", label: "AI news videos" },
+      ],
+      jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "What's new", path: "/new" }])],
+    };
+  },
+  "/prompts": () => ({
+    path: "/prompts",
+    title: `Prompts that work: copyable AI prompts for students${suffix}`,
+    description: "Copyable prompts for studying, writing, research, code, teaching and everyday work, each with what to check before you trust the answer.",
+    heading: "Prompts that work",
+    type: "website",
+    content: [
+      { kind: "p", text: "Good prompts say who the answer is for, what you want, what to avoid and what format to use. These starting points do that, and each says what to check before you trust the answer." },
+      ...PROMPT_CATEGORIES.flatMap<Block>((c) => [
+        { kind: "h2", text: c.label },
+        { kind: "p", text: c.blurb },
+        ...PROMPTS.filter((p) => p.category === c.id).flatMap<Block>((p) => [
+          { kind: "h3", text: p.title },
+          { kind: "p", text: p.when },
+          { kind: "p", text: p.prompt },
+          { kind: "p", text: `Check before you trust it: ${p.check}` },
+        ]),
+      ]),
+    ],
+    links: [
+      { to: "/learn/prompting", label: "Prompting that works, the lesson" },
+      { to: "/ai-use", label: "Using AI in coursework" },
+      { to: "/tools", label: "AI tool guides" },
+    ],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Prompts that work", path: "/prompts" }])],
+  }),
+  "/ai-use": () => ({
+    path: "/ai-use",
+    title: `Using AI in coursework: rules, disclosure and citations${suffix}`,
+    description: "What's usually fine to do with AI in a course, how to say you used it, how to cite it in APA, MLA and Chicago, and a syllabus policy builder for instructors.",
+    heading: "Using AI in your coursework",
+    type: "website",
+    content: [
+      { kind: "p", text: "Your instructor's rules decide what you can do with AI, and they differ between courses. This page helps you work out what's usually fine, write a short note saying how you used AI, and cite it in APA, MLA or Chicago. Instructors can build a draft syllabus statement." },
+      { kind: "h2", text: "Can I use AI for this?" },
+      { kind: "ul", items: USES.map((u) => `${u.label}: ${u.advice}`) },
+      { kind: "h2", text: "Cite it" },
+      { kind: "p", text: "APA changed its format for generative AI in September 2025: a specific chat is cited like a document, with a title and a link. MLA uses the prompt as the title and the tool as the container. Chicago uses a footnote." },
+      { kind: "p", text: `Formats were last checked on ${STYLE_CHECKED}. Check the official style guide and your instructor's preference.` },
+    ],
+    links: [
+      { to: "/learn/ethics-integrity", label: "Ethics and academic integrity" },
+      { to: "/learn/limits", label: "What AI gets wrong" },
+      { to: "/start", label: "Where to start" },
+    ],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Using AI in coursework", path: "/ai-use" }])],
+  }),
+  "/start": () => ({
+    path: "/start",
+    title: `Where to start with AI: find your level${suffix}`,
+    description: "Answer four questions to find your AI starting point, then work through a short list of free courses from Google, OpenAI, Anthropic and more.",
+    heading: "Where to start with AI",
+    type: "website",
+    content: [
+      { kind: "p", text: "Three buckets take you from first steps to building with AI. Each has a short list of free courses and takes roughly 7 to 10 hours. A four-question self-rating tells you where to begin." },
+      ...BUCKETS.flatMap<Block>((b) => [
+        { kind: "h2", text: `Bucket ${b.id}: ${b.name}` },
+        { kind: "p", text: `${b.who}. ${b.focus}.` },
+        { kind: "ul", items: coursesIn(b.id).map((c) => `${c.title} (${c.provider})`) },
+      ]),
+    ],
+    links: [
+      { to: "/learn", label: "Learn" },
+      { to: "/team", label: "AI Team discussion boards" },
+      { to: "/tools", label: "AI tool guides" },
+    ],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Where to start", path: "/start" }])],
   }),
   "/team": () => ({
     path: "/team",
@@ -539,6 +684,7 @@ export function pageMeta(pathname: string): PageMeta | null {
   }
   if ((m = p.match(/^\/learn\/lesson\/([^/]+)$/))) return lessonPage(m[1]);
   if ((m = p.match(/^\/learn\/([^/]+)$/))) return modulePage(m[1]);
+  if ((m = p.match(/^\/tools\/compare\/([^/]+)$/))) return comparePage(m[1]);
   if ((m = p.match(/^\/tools\/([^/]+)$/))) return toolPage(m[1]);
   return null;
 }
@@ -552,6 +698,7 @@ export function allPaths(): string[] {
     ...[...lessonByModule.keys()].map((m) => `/learn/lesson/${m}`),
     ...modules.map((m) => `/learn/${m.id}`),
     ...tools.map((t) => `/tools/${t.id}`),
+    ...PAIRS.map(([a, b]) => `/tools/compare/${pairSlug(a, b)}`),
   ];
 }
 

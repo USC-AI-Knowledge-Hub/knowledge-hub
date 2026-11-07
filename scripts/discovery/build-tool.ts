@@ -38,9 +38,23 @@ export const queryFor = (name: string, kind: "tool" | "model") => {
   return kind === "model" ? `${named} model how to use` : `${named} tutorial`;
 };
 
+/** Page text without the debris forums and feeds leave: encoded quotes, "Discussion | Link", a greeting to a subreddit. */
+export function tidy(text: string): string {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;|&#34;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
+    .replace(/^(?:hey|hi|hello)\s+r\/\w+\s*[-–—:,!.]*\s*/i, "")
+    .replace(/\s*(?:\|\s*)?(?:discussion|comments?|link)(?:\s*\|\s*(?:discussion|comments?|link))*\s*$/i, "")
+    .trim();
+}
+
 /** A post's own first sentence about the product, trimmed. Marketing copy, so it's kept short. */
 export function firstSentences(text: string, max = 200): string {
-  const t = text.replace(/\s+/g, " ").trim();
+  const t = tidy(text);
   if (t.length <= max) return t;
   const cut = t.slice(0, max);
   const end = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("! "));

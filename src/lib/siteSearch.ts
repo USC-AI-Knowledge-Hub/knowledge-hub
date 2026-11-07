@@ -118,6 +118,48 @@ export const PAGES: { id: string; title: string; route: string; blurb: string; w
     blurb: "Use AI efficiently and responsibly: right-size models, energy and governance.",
     words: ["green", "green ai", "sustainability", "sustainable", "environment", "environmental", "energy", "climate", "carbon", "water", "planet", "efficient", "efficiency", "governance", "responsible ai", "responsible use", "pledge"],
   },
+  {
+    id: "new",
+    title: "What's new",
+    route: "/new",
+    blurb: "New tools spotted and reviews updated lately, with an RSS feed.",
+    words: ["new", "what's new", "latest", "recent", "updates", "rss", "feed", "newest tools"],
+  },
+  {
+    id: "prompts",
+    title: "Prompts that work",
+    route: "/prompts",
+    blurb: "A library of copyable prompts for studying, writing, research, code and teaching.",
+    words: ["prompt", "prompts", "prompt library", "prompt examples", "templates", "what to ask", "chatgpt prompts", "study prompts"],
+  },
+  {
+    id: "compare",
+    title: "Compare tools",
+    route: "/tools/compare",
+    blurb: "Put two or three AI tools side by side.",
+    words: ["compare", "comparison", "versus", "vs", "difference between", "which is better", "side by side"],
+  },
+  {
+    id: "start",
+    title: "Where to start",
+    route: "/start",
+    blurb: "Find your level and a short list of free courses.",
+    words: ["start", "where to start", "beginner", "level", "bucket", "buckets", "placement", "proficiency", "self rating", "free courses", "new to ai"],
+  },
+  {
+    id: "ai-use",
+    title: "Using AI in coursework",
+    route: "/ai-use",
+    blurb: "What's allowed, how to disclose and cite AI, and a syllabus policy builder.",
+    words: ["cite", "citation", "citing", "apa", "mla", "chicago", "disclose", "disclosure", "policy", "syllabus", "allowed", "cheating", "plagiarism", "academic integrity", "can i use ai", "reference"],
+  },
+  {
+    id: "team",
+    title: "AI Team",
+    route: "/team",
+    blurb: "Discussion boards for each course and for AI tools.",
+    words: ["team", "discussion", "discussions", "forum", "community", "board", "boards", "comments", "ask other students", "chat with students"],
+  },
   { id: "about", title: "How videos are chosen", route: "/about", blurb: "How the library works.", words: ["about", "how videos are chosen", "how it works"] },
 ];
 

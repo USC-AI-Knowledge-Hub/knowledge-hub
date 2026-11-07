@@ -29,7 +29,9 @@
   padding: 32px var(--kh-gutter) 48px;
   border-top: 1px solid var(--md-sys-color-outline-variant);
 }
-.footer-links { display: flex; gap: 24px; align-items: center; }
+.footer-groups { display: grid; gap: 8px; justify-items: end; }
+@media (max-width: 839px) { .footer-groups { justify-items: start; } }
+.footer-links { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; }
 .footer-links a { color: var(--md-sys-color-on-surface-variant); }
 @media (max-width: 839px) {
   .footer { padding-bottom: 112px; }
@@ -45,7 +47,7 @@
   padding-top: 32px;
 }
 .hero-copy { display: grid; gap: 24px; align-content: center; }
-.hero-copy h1 { color: var(--md-sys-color-primary-container); text-wrap: balance; }
+.hero-copy h1 { overflow-wrap: anywhere; font-size: clamp(2.75rem, 5vw, 4rem); color: var(--md-sys-color-primary-container); text-wrap: balance; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 
 .hero-panel {
@@ -778,3 +780,8 @@
 /* A category created by the daily run can have any label length: keep its chip inside the screen. */
 .finder .chip { max-width: 100%; }
 .finder .chip > :not(.icon) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.help-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.help-card { display: grid; gap: 8px; align-content: start; padding: 20px; text-decoration: none; color: inherit; }
+.help-card h3 { margin: 0; }
+.help-card p { margin: 0; }

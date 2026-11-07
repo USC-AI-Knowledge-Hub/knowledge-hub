@@ -114,13 +114,23 @@ export function Layout() {
           <p className="title-s">USC AI Knowledge Hub</p>
           <p className="body-s muted">Learn AI. Use AI. Understand what's next. Built and reviewed by USC AI Knowledge Hub Fellows.</p>
         </div>
-        <nav className="footer-links body-s" aria-label="Footer">
-          <Link to="/offline">Use offline</Link>
-          <Link to="/about">How the video library works</Link>
-          <a href="https://sites.usc.edu/ai-knowledge-hub/" target="_blank" rel="noreferrer">
-            Main Hub site
-          </a>
-        </nav>
+        <div className="footer-groups">
+          <nav className="footer-links body-s" aria-label="Practical help">
+            <Link to="/start">Where to start</Link>
+            <Link to="/prompts">Prompts that work</Link>
+            <Link to="/ai-use">Using AI in coursework</Link>
+            <Link to="/tools/compare">Compare tools</Link>
+            <Link to="/new">What's new</Link>
+          </nav>
+          <nav className="footer-links body-s" aria-label="About the site">
+            <Link to="/offline">Use offline</Link>
+            <Link to="/about">How the video library works</Link>
+            <a href="/feed.xml">RSS feed</a>
+            <a href="https://sites.usc.edu/ai-knowledge-hub/" target="_blank" rel="noreferrer">
+              Main Hub site
+            </a>
+          </nav>
+        </div>
       </footer>
 
       <nav className="bottom-nav" aria-label="Primary">

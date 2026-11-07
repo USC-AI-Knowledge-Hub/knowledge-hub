@@ -114,6 +114,15 @@ describe("posts that are not about a new product", () => {
     expect(validName("Google finally")).toBe(false);
   });
 
+  it("never takes a kind of thing or an organization for a product", () => {
+    expect(validName("Images")).toBe(false);
+    expect(validName("Video")).toBe(false);
+    expect(validName("Mistral AI")).toBe(false);
+    expect(validName("Voice Engine")).toBe(true);
+    // "Images 2.6" is a version of "Images", which is only a kind of thing.
+    expect(extractMentions([item("Introducing Images 2.6 in ChatGPT")], vendor, () => false)).toEqual([]);
+  });
+
   it("still finds real launches", () => {
     expect(namesInTitle("Introducing SynthID Bio", vendor)).toEqual(["SynthID Bio"]);
     expect(namesInTitle("Introducing Playground: Create and play custom games", vendor)).toEqual(["Playground"]);

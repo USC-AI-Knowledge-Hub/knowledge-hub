@@ -485,6 +485,12 @@ export function Tools() {
             Every tool gets the same review: what it's best at, where it fails, what it means for your privacy and your coursework. Reviewed
             by USC AI Knowledge Hub Fellows.
         </p>
+        <p className="body-m">
+          <Link to="/tools/compare" className="btn tonal sm state">
+            <Icon name="compare_arrows" size={18} />
+            Compare tools side by side
+          </Link>
+        </p>
       </header>
 
       {view === "map" ? (
