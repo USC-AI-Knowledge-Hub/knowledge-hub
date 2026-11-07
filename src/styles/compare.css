@@ -1,0 +1,24 @@
+/* Compare tools: pickers, then one row per question with a cell per tool. */
+.cmp-pickers { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0 24px; }
+.cmp-picker { display: grid; gap: 4px; min-width: 220px; flex: 1 1 220px; max-width: 320px; }
+.cmp-picker select { font: inherit; color: var(--md-sys-color-on-surface); background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); border-radius: var(--md-shape-sm); padding: 10px 12px; }
+.cmp-picker select:focus-visible { outline: 3px solid var(--md-sys-color-tertiary-fixed-dim); outline-offset: 1px; }
+.cmp-glance { display: grid; gap: 8px; padding-left: 24px; max-width: 80ch; }
+.cmp-grid { display: grid; gap: 4px; margin-top: 24px; }
+.cmp-head { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 16px; position: sticky; top: 0; z-index: 2; background: var(--md-sys-color-surface); padding: 8px 0; }
+.cmp-tool { display: grid; gap: 4px; justify-items: start; padding: 16px; text-decoration: none; color: inherit; }
+.cmp-open { color: var(--md-sys-color-primary); }
+.cmp-row { display: grid; gap: 8px; padding: 16px 0; border-top: 1px solid var(--md-sys-color-outline-variant); }
+.cmp-row h2 { margin: 0; }
+.cmp-cells { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 16px; }
+.cmp-cell { display: grid; gap: 4px; align-content: start; overflow-wrap: anywhere; }
+.cmp-cell p { margin: 0; }
+.cmp-cell-tool { display: none; }
+.cmp-list { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+@media (max-width: 720px) {
+  .cmp-head { position: static; grid-template-columns: 1fr; }
+  .cmp-cells { grid-template-columns: 1fr; }
+  .cmp-cell-tool { display: block; }
+}
+.tool-compare { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 8px; }
+.tool-compare .chip-row { margin: 0; padding: 0; list-style: none; }

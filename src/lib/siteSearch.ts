@@ -119,6 +119,13 @@ export const PAGES: { id: string; title: string; route: string; blurb: string; w
     words: ["green", "green ai", "sustainability", "sustainable", "environment", "environmental", "energy", "climate", "carbon", "water", "planet", "efficient", "efficiency", "governance", "responsible ai", "responsible use", "pledge"],
   },
   {
+    id: "compare",
+    title: "Compare tools",
+    route: "/tools/compare",
+    blurb: "Put two or three AI tools side by side.",
+    words: ["compare", "comparison", "versus", "vs", "difference between", "which is better", "side by side"],
+  },
+  {
     id: "start",
     title: "Where to start",
     route: "/start",

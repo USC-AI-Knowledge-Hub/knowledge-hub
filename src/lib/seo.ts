@@ -9,6 +9,7 @@
  */
 import { STYLE_CHECKED, USES } from "../data/aiUse";
 import { BUCKETS, coursesIn } from "../data/buckets";
+import { PAIRS, differences, pairSlug, parsePair, summary, textRows, toolsFor } from "../data/compare";
 import { courses } from "../data/courses";
 import { faqs } from "../data/faq";
 import { guidedPathById, guidedPaths, pathModules } from "../data/guided/paths";
@@ -298,6 +299,43 @@ function modulePage(id: string): PageMeta | null {
   };
 }
 
+function comparePage(slug: string): PageMeta | null {
+  const ids = parsePair(slug);
+  if (!ids) return null;
+  const [a, b] = toolsFor(ids);
+  if (!a || !b) return null;
+  const path = `/tools/compare/${pairSlug(ids[0], ids[1])}`;
+  return {
+    path,
+    title: `${a.name} vs ${b.name}: how they compare${suffix}`,
+    description: clip(`${a.name} vs ${b.name}: cost, how hard each is to start, USC access, strengths, limits and privacy, side by side.`),
+    heading: `${a.name} vs ${b.name}`,
+    type: "article",
+    content: [
+      { kind: "p", text: summary([a, b]) },
+      { kind: "h2", text: "At a glance" },
+      { kind: "ul", items: differences([a, b]) },
+      ...textRows([a, b]).flatMap<Block>((r) => [
+        { kind: "h2", text: r.label },
+        { kind: "ul", items: r.items },
+      ]),
+    ],
+    links: [
+      { to: `/tools/${a.id}`, label: `${a.name} review` },
+      { to: `/tools/${b.id}`, label: `${b.name} review` },
+      { to: "/tools/compare", label: "Compare other tools" },
+    ],
+    jsonLd: [
+      breadcrumbs([
+        { name: "Home", path: "/" },
+        { name: "Tools", path: "/tools" },
+        { name: "Compare", path: "/tools/compare" },
+        { name: `${a.name} vs ${b.name}`, path },
+      ]),
+    ],
+  };
+}
+
 function toolPage(id: string): PageMeta | null {
   const t = toolById.get(id);
   if (!t) return null;
@@ -415,6 +453,20 @@ const STATIC: Record<string, () => PageMeta> = {
     ],
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Green AI", path: "/green" }])],
+  }),
+  "/tools/compare": () => ({
+    path: "/tools/compare",
+    title: `Compare AI tools side by side${suffix}`,
+    description: "Pick two or three AI tools and compare cost, how hard they are to start, USC access, strengths, limits, privacy and academic-integrity notes.",
+    heading: "Compare AI tools",
+    type: "website",
+    content: [
+      { kind: "p", text: "Pick up to three reviewed tools and see them side by side. Every row comes from our tool reviews, and each review shows when it was last checked." },
+      { kind: "h2", text: "Popular comparisons" },
+      { kind: "ul", items: PAIRS.map(([a, b]) => `${toolById.get(a)?.name} vs ${toolById.get(b)?.name}`) },
+    ],
+    links: [...PAIRS.map(([a, b]) => ({ to: `/tools/compare/${pairSlug(a, b)}`, label: `${toolById.get(a)?.name} vs ${toolById.get(b)?.name}` })), { to: "/tools", label: "All AI tools" }],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Tools", path: "/tools" }, { name: "Compare", path: "/tools/compare" }])],
   }),
   "/ai-use": () => ({
     path: "/ai-use",
@@ -583,6 +635,7 @@ export function pageMeta(pathname: string): PageMeta | null {
   }
   if ((m = p.match(/^\/learn\/lesson\/([^/]+)$/))) return lessonPage(m[1]);
   if ((m = p.match(/^\/learn\/([^/]+)$/))) return modulePage(m[1]);
+  if ((m = p.match(/^\/tools\/compare\/([^/]+)$/))) return comparePage(m[1]);
   if ((m = p.match(/^\/tools\/([^/]+)$/))) return toolPage(m[1]);
   return null;
 }
@@ -596,6 +649,7 @@ export function allPaths(): string[] {
     ...[...lessonByModule.keys()].map((m) => `/learn/lesson/${m}`),
     ...modules.map((m) => `/learn/${m.id}`),
     ...tools.map((t) => `/tools/${t.id}`),
+    ...PAIRS.map(([a, b]) => `/tools/compare/${pairSlug(a, b)}`),
   ];
 }
 
