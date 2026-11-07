@@ -119,6 +119,13 @@ export const PAGES: { id: string; title: string; route: string; blurb: string; w
     words: ["green", "green ai", "sustainability", "sustainable", "environment", "environmental", "energy", "climate", "carbon", "water", "planet", "efficient", "efficiency", "governance", "responsible ai", "responsible use", "pledge"],
   },
   {
+    id: "new",
+    title: "What's new",
+    route: "/new",
+    blurb: "New tools spotted and reviews updated lately, with an RSS feed.",
+    words: ["new", "what's new", "latest", "recent", "updates", "rss", "feed", "newest tools"],
+  },
+  {
     id: "prompts",
     title: "Prompts that work",
     route: "/prompts",

@@ -23,7 +23,9 @@ const template = readFileSync(join(dist, "index.html"), "utf8");
 const vite = await createServer({ root, base: "/", appType: "custom", server: { middlewareMode: true }, logLevel: "error" });
 try {
   const { SITE_URL, allPaths, pageMeta, sitemapPaths } = (await vite.ssrLoadModule("/src/lib/seo.ts")) as Seo;
-  const { renderPage, robotsTxt, sitemapXml } = (await vite.ssrLoadModule("/scripts/seo/render.ts")) as Render;
+  const { atomXml, renderPage, robotsTxt, sitemapXml } = (await vite.ssrLoadModule("/scripts/seo/render.ts")) as Render;
+  const { newItems } = (await vite.ssrLoadModule("/src/lib/whatsNew.ts")) as typeof import("../src/lib/whatsNew");
+  const { tools } = (await vite.ssrLoadModule("/src/data/tools.ts")) as typeof import("../src/data/tools");
 
   let count = 0;
   for (const path of allPaths()) {
@@ -42,7 +44,11 @@ try {
   const listed = sitemapPaths();
   writeFileSync(join(dist, "sitemap.xml"), sitemapXml(listed));
   writeFileSync(join(dist, "robots.txt"), robotsTxt(SITE_URL));
-  console.log(`Prerendered ${count} pages and a sitemap with ${listed.length} addresses.`);
+  // What's new, as a feed: tools the daily run spotted and reviews that were updated.
+  const discovered = JSON.parse(readFileSync(join(root, "public/data/discovered.json"), "utf8")) as { tools?: { id: string; name: string; maker: string; bestFor: string; firstSeen: string }[] };
+  const items = newItems(discovered.tools ?? [], tools, new Date().toISOString().slice(0, 10));
+  writeFileSync(join(dist, "feed.xml"), atomXml(items, SITE_URL, "USC AI Knowledge Hub: what's new"));
+  console.log(`Prerendered ${count} pages, a sitemap with ${listed.length} addresses and a feed with ${items.length} items.`);
 } finally {
   await vite.close();
 }

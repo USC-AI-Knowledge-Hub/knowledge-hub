@@ -14,6 +14,7 @@ import { Start } from "./pages/Start";
 import { AiUse } from "./pages/AiUse";
 import { Compare } from "./pages/Compare";
 import { Prompts } from "./pages/Prompts";
+import { WhatsNew } from "./pages/WhatsNew";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
 import { LessonPlayer } from "./pages/LessonPlayer";
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
         { path: "start", element: <Start /> },
         { path: "ai-use", element: <AiUse /> },
         { path: "prompts", element: <Prompts /> },
+        { path: "new", element: <WhatsNew /> },
         { path: "green/team", element: <Navigate to="/team" replace /> },
         { path: "offline", element: <Offline /> },
         { path: "offline/assistant", element: <Assistant /> },

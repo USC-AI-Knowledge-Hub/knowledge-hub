@@ -150,9 +150,14 @@ export function Home() {
               </h2>
               <p className="body-m muted">Launches, research, talks and news from the last three weeks, official channels first.</p>
             </div>
-            <Link to="/watch?tab=trends" className="btn text state">
-              All trends
-            </Link>
+            <div className="section-links">
+              <Link to="/new" className="btn text state">
+                What's new on the Hub
+              </Link>
+              <Link to="/watch?tab=trends" className="btn text state">
+                All trends
+              </Link>
+            </div>
           </div>
           <div className="grid cols-videos">
             {trends.slice(0, 4).map((t) => (

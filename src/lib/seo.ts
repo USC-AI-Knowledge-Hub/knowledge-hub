@@ -8,7 +8,9 @@
  * the tab title and tags right while someone clicks around (useSeo).
  */
 import { STYLE_CHECKED, USES } from "../data/aiUse";
+import discoveredFile from "../../public/data/discovered.json";
 import { PROMPTS, PROMPT_CATEGORIES } from "../data/prompts";
+import { newItems } from "./whatsNew";
 import { BUCKETS, coursesIn } from "../data/buckets";
 import { PAIRS, differences, pairSlug, parsePair, summary, textRows, toolsFor } from "../data/compare";
 import { courses } from "../data/courses";
@@ -469,6 +471,26 @@ const STATIC: Record<string, () => PageMeta> = {
     links: [...PAIRS.map(([a, b]) => ({ to: `/tools/compare/${pairSlug(a, b)}`, label: `${toolById.get(a)?.name} vs ${toolById.get(b)?.name}` })), { to: "/tools", label: "All AI tools" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "Tools", path: "/tools" }, { name: "Compare", path: "/tools/compare" }])],
   }),
+  "/new": () => {
+    const items = newItems(discoveredFile.tools ?? [], tools, new Date().toISOString().slice(0, 10), 90, 25);
+    return {
+      path: "/new",
+      title: `What's new in AI tools${suffix}`,
+      description: "New AI tools and models spotted by our daily run, and which tool reviews were updated lately, with an RSS feed.",
+      heading: "What's new",
+      type: "website",
+      content: [
+        { kind: "p", text: "AI tools change fast, so every review shows when it was last checked and a daily run looks for new tools. These changed in the last three months." },
+        { kind: "h2", text: "Spotted and reviewed lately" },
+        items.length ? { kind: "ul", items: items.map((i) => `${i.title} (${i.date})`) } : { kind: "p", text: "Nothing new in the last three months." },
+      ],
+      links: [
+        { to: "/tools", label: "All AI tools" },
+        { to: "/watch?tab=trends", label: "AI news videos" },
+      ],
+      jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "What's new", path: "/new" }])],
+    };
+  },
   "/prompts": () => ({
     path: "/prompts",
     title: `Prompts that work: copyable AI prompts for students${suffix}`,
