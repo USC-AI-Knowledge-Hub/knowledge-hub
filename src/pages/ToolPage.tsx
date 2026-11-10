@@ -4,6 +4,7 @@ import { Level } from "../components/Level";
 import { ToolMark } from "../components/ToolMark";
 import { COST_LABEL, ToolReview, ToolVideos, UscBadge } from "../components/ToolProfile";
 import { DiscoveredNotes, NotReviewed } from "../components/NotReviewed";
+import { pairSlug, pairsFor } from "../data/compare";
 import { useCatalog } from "../lib/catalogStore";
 import { NotFound } from "./NotFound";
 
@@ -82,6 +83,23 @@ export function ToolPage() {
             5-minute quick start
           </a>
         </div>
+        {pairsFor(tool.id).length > 0 && (
+          <div className="tool-compare">
+            <span className="label-l muted">Compare with</span>
+            <ul className="chip-row">
+              {pairsFor(tool.id).map((other) => {
+                const o = toolById.get(other);
+                return o ? (
+                  <li key={other}>
+                    <Link className="chip state" to={`/tools/compare/${pairSlug(tool.id, other)}`}>
+                      {o.name}
+                    </Link>
+                  </li>
+                ) : null;
+              })}
+            </ul>
+          </div>
+        )}
       </header>
 
       <ToolVideos tool={tool} variant="page" />

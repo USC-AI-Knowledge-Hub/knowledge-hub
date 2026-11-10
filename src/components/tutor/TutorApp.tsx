@@ -61,6 +61,12 @@ export function pageLabel(pathname: string): string | undefined {
     "/learn/courses": "the list of full video courses",
     "/watch": "the Watch page, with videos, trends, talks and podcasts",
     "/green": "the Green AI page, about using AI efficiently and responsibly",
+    "/new": "the What's new page, with new tools and updated reviews",
+    "/prompts": "the prompt library, with copyable prompts",
+    "/tools/compare": "the page that compares AI tools side by side",
+    "/start": "the Where to start page, which finds your level and lists free courses",
+    "/ai-use": "the page on using AI in coursework, with citation formats and a policy builder",
+    "/team": "the AI Team discussion boards",
     "/search": "the search page",
     "/about": "the About page",
   };

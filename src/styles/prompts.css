@@ -1,0 +1,17 @@
+/* Prompt library. */
+.pr-privacy { display: flex; gap: 8px; align-items: flex-start; }
+.pr-habits { display: grid; gap: 8px; padding-left: 24px; max-width: 70ch; }
+.pr-controls { display: grid; gap: 12px; margin: 12px 0; }
+.pr-search { display: grid; gap: 4px; max-width: 420px; }
+.pr-search input, .pr-field input, .pr-field textarea { font: inherit; color: var(--md-sys-color-on-surface); background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); border-radius: var(--md-shape-sm); padding: 10px 12px; width: 100%; box-sizing: border-box; }
+.pr-search input:focus-visible, .pr-field input:focus-visible, .pr-field textarea:focus-visible { outline: 3px solid var(--md-sys-color-tertiary-fixed-dim); outline-offset: 1px; }
+.pr-list { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); align-items: start; }
+.pr-card { display: grid; gap: 12px; padding: 20px; scroll-margin-top: 80px; }
+.pr-card:target { outline: 3px solid var(--md-sys-color-tertiary-fixed-dim); }
+.pr-card header h3 { margin: 0 0 4px; }
+.pr-text { margin: 0; padding: 12px 14px; background: var(--md-sys-color-surface-container-low); border-radius: var(--md-shape-md); white-space: pre-wrap; overflow-wrap: anywhere; }
+.pr-blank { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); border-radius: 4px; padding: 0 4px; }
+.pr-fields { display: grid; gap: 10px; }
+.pr-field { display: grid; gap: 4px; }
+.pr-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.pr-check { display: flex; gap: 8px; align-items: flex-start; margin: 0; color: var(--md-sys-color-on-surface-variant); }

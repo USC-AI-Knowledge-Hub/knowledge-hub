@@ -39,4 +39,17 @@ export function sitemapXml(paths: string[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
+/** An Atom feed of what's new. `updated` is the newest entry's date, so the feed only changes when something does. */
+export function atomXml(items: { id: string; title: string; summary: string; path: string; date: string }[], siteUrl: string, title: string): string {
+  const stamp = (d: string) => `${d}T00:00:00Z`;
+  const updated = items[0]?.date ?? "2026-01-01";
+  const entries = items
+    .map(
+      (i) =>
+        `  <entry>\n    <id>tag:${new URL(siteUrl).hostname},${i.date}:${esc(i.id)}</id>\n    <title>${esc(i.title)}</title>\n    <link href="${esc(canonicalUrl(i.path))}" />\n    <updated>${stamp(i.date)}</updated>\n    <summary>${esc(i.summary)}</summary>\n  </entry>`,
+    )
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n  <id>${esc(siteUrl)}/feed.xml</id>\n  <title>${esc(title)}</title>\n  <link rel="self" href="${esc(siteUrl)}/feed.xml" />\n  <link href="${esc(siteUrl)}/new" />\n  <updated>${stamp(updated)}</updated>\n${entries}\n</feed>\n`;
+}
+
 export const robotsTxt = (siteUrl: string) => `User-agent: *\nAllow: /\nDisallow: /search\n\nSitemap: ${siteUrl}/sitemap.xml\n`;

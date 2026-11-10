@@ -10,6 +10,11 @@ import { Assistant } from "./pages/Assistant";
 import { Courses } from "./pages/Courses";
 import { Green } from "./pages/Green";
 import { Team } from "./pages/Team";
+import { Start } from "./pages/Start";
+import { AiUse } from "./pages/AiUse";
+import { Compare } from "./pages/Compare";
+import { Prompts } from "./pages/Prompts";
+import { WhatsNew } from "./pages/WhatsNew";
 import { Home } from "./pages/Home";
 import { Learn } from "./pages/Learn";
 import { LessonPlayer } from "./pages/LessonPlayer";
@@ -38,10 +43,16 @@ const router = createBrowserRouter(
         { path: "learn/lesson/:id", element: <LessonPlayer /> },
         { path: "learn/:id", element: <ModulePage /> },
         { path: "tools", element: <Tools /> },
+        { path: "tools/compare", element: <Compare /> },
+        { path: "tools/compare/:pair", element: <Compare /> },
         { path: "tools/:id", element: <ToolPage /> },
         { path: "watch", element: <Watch /> },
         { path: "green", element: <Green /> },
         { path: "team", element: <Team /> },
+        { path: "start", element: <Start /> },
+        { path: "ai-use", element: <AiUse /> },
+        { path: "prompts", element: <Prompts /> },
+        { path: "new", element: <WhatsNew /> },
         { path: "green/team", element: <Navigate to="/team" replace /> },
         { path: "offline", element: <Offline /> },
         { path: "offline/assistant", element: <Assistant /> },

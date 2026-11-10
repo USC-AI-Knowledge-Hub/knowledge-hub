@@ -876,50 +876,6 @@
       ]
     },
     {
-      "id": "mistral-ai",
-      "name": "Mistral AI",
-      "maker": "",
-      "url": "https://huggingface.co/mistralai",
-      "monogram": "Mi",
-      "bestFor": "Org profile for Mistral AI_ on Hugging Face, the AI community building the future.",
-      "tasks": [
-        "speech-voice",
-        "transcription"
-      ],
-      "queries": [
-        "Mistral AI model how to use"
-      ],
-      "match": [
-        "\\bMistral[\\s-]*AI\\b"
-      ],
-      "exclude": [],
-      "kind": "model",
-      "urlKind": "site",
-      "origin": "feed",
-      "firstSeen": "2026-10-19",
-      "lastSeen": "2026-11-09",
-      "evidence": [
-        {
-          "source": "MarkTechPost",
-          "title": "Mistral AI Releases Voxtral 3: Speech-to-Text, TTS and a Voice Agent SDK",
-          "url": "https://www.marktechpost.com/2026/10/20/mistral-voxtral-3-speech-models-voice-agent-sdk/",
-          "date": "2026-10-21"
-        },
-        {
-          "source": "The Decoder",
-          "title": "Mistral AI launches Voxtral 3, a full voice agent stack that listens, thinks, and talks in real time",
-          "url": "https://the-decoder.com/mistral-ai-launches-voxtral-3-a-full-voice-agent-stack-that-listens-thinks-and-talks-in-real-time/",
-          "date": "2026-10-20"
-        },
-        {
-          "source": "MarkTechPost",
-          "title": "Mistral AI Releases Timestral: A 209M Forecasting Model Family That Outperforms Google’s TimesFM-3",
-          "url": "https://www.marktechpost.com/2026/10/18/mistral-timestral-time-series-foundation-model/",
-          "date": "2026-10-19"
-        }
-      ]
-    },
-    {
       "id": "recursive",
       "name": "Recursive",
       "maker": "",
@@ -1119,37 +1075,6 @@
           "source": "OpenAI news",
           "title": "Daybreak Red is now available in AWS GovCloud (US-East)",
           "url": "https://openai.com/index/daybreak-red-aws-govcloud",
-          "date": "2026-11-04"
-        }
-      ]
-    },
-    {
-      "id": "images",
-      "name": "Images",
-      "maker": "OpenAI",
-      "url": "https://openai.com/index/introducing-images-2-6",
-      "monogram": "Im",
-      "bestFor": "Images 2.6 brings faster image generation, GIF creation, more precise editing, and new API controls across ChatGPT, Codex, and the API.",
-      "tasks": [
-        "image-generation"
-      ],
-      "queries": [
-        "Images AI tutorial"
-      ],
-      "match": [
-        "\\bImages\\b"
-      ],
-      "exclude": [],
-      "kind": "tool",
-      "urlKind": "announcement",
-      "origin": "feed",
-      "firstSeen": "2026-11-04",
-      "lastSeen": "2026-11-09",
-      "evidence": [
-        {
-          "source": "OpenAI news",
-          "title": "Introducing Images 2.6",
-          "url": "https://openai.com/index/introducing-images-2-6",
           "date": "2026-11-04"
         }
       ]
