@@ -571,6 +571,17 @@ const STATIC: Record<string, () => PageMeta> = {
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "AI Team", path: "/team" }])],
   }),
+  "/team/test": () => ({
+    path: "/team/test",
+    title: `Video picks: videos students recommend${suffix}`,
+    description: "Students recommend AI videos in one line, with the video's picture and their name, and vote for the picks that helped them most.",
+    heading: "Video picks",
+    type: "website",
+    noindex: true,
+    content: [{ kind: "p", text: "Recommend a video you watched in one line, and vote for other students' picks. The most helpful rise to the top." }],
+    links: [{ to: "/team", label: "AI Team discussion boards" }],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "AI Team", path: "/team" }, { name: "Video picks", path: "/team/test" }])],
+  }),
   "/offline": () => ({
     path: "/offline",
     title: `Use AI without internet${suffix}`,
@@ -704,7 +715,10 @@ export function allPaths(): string[] {
 
 /** The addresses that go in the sitemap: each page once, at its canonical address. */
 export function sitemapPaths(): string[] {
-  return allPaths().filter((p) => pageMeta(p)?.path === p);
+  return allPaths().filter((p) => {
+    const m = pageMeta(p);
+    return m?.path === p && !m.noindex;
+  });
 }
 
 /** The tags that go in a page's head, as plain data. Used by both the build and the app. */

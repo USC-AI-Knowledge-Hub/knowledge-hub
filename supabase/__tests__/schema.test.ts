@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { REC_BOARD, VOTE, encodeRec, recsFrom } from "../../src/lib/board/recs";
 
 const schema = readFileSync(new URL("../schema.sql", import.meta.url), "utf8");
 const KEY = "k".repeat(24);
@@ -135,6 +136,25 @@ describe("board schema", () => {
     expect(await rows()).toHaveLength(0);
     const hidden = await db.query<{ hidden: boolean }>("select hidden from board_posts where id = $1", [id]);
     expect(hidden.rows[0].hidden).toBe(true);
+  });
+
+  it("takes a video pick as the page sends it, and counts its votes", async () => {
+    const body = encodeRec({ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", why: "Skip to 4:10." });
+    const id = await post({ board: REC_BOARD, topic: "found", body });
+    for (const v of ["a", "b"]) await db.query("select board_react($1,$2,$3)", [id, v.repeat(24), VOTE]);
+    const list = (await rows()).map((r) => ({
+      id: r.id as string,
+      board: r.board as string,
+      topic: r.topic as string,
+      parentId: r.parent_id as string | null,
+      name: r.name as string,
+      body: r.body as string,
+      createdAt: String(r.created_at),
+      editedAt: null,
+      deleted: r.deleted as boolean,
+      reactions: r.reactions as Record<string, number>,
+    }));
+    expect(recsFrom(list)).toMatchObject([{ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", why: "Skip to 4:10.", source: "found", votes: 2 }]);
   });
 
   it("removes replies with their post", async () => {
