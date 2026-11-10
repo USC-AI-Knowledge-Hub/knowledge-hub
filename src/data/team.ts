@@ -68,8 +68,18 @@ export const boardById = new Map(BOARDS.map((b) => [b.id, b]));
 /** A board from an address's `board` value, or null when it isn't one. */
 export const boardFor = (id: string | null): BoardDef | null => (id ? (boardById.get(id) ?? null) : null);
 
-/** The shared database's address and its public key, set when the site is built (repository variables BOARD_URL and BOARD_ANON_KEY). */
+/**
+ * Where posts are shared, set when the site is built from repository variables. Firebase (FIREBASE_API_KEY and
+ * FIREBASE_PROJECT_ID, see firebase/README.md) is used when it's set; the older Supabase database (BOARD_URL and
+ * BOARD_ANON_KEY) otherwise. With neither, posts stay on each visitor's device.
+ */
 export const DATABASE = {
   url: (import.meta.env.VITE_BOARD_URL as string | undefined) ?? "",
   anonKey: (import.meta.env.VITE_BOARD_KEY as string | undefined) ?? "",
+  firebase: {
+    apiKey: (import.meta.env.VITE_FIREBASE_API_KEY as string | undefined) ?? "",
+    projectId: (import.meta.env.VITE_FIREBASE_PROJECT_ID as string | undefined) ?? "",
+    /** For testing a build against the local emulators: "127.0.0.1:8080,http://127.0.0.1:9099". */
+    emulators: (import.meta.env.VITE_FIREBASE_EMULATORS as string | undefined) ?? "",
+  },
 };

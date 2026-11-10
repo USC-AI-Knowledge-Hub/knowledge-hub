@@ -12,6 +12,8 @@ export interface Post {
   editedAt: string | null;
   deleted: boolean;
   reactions: Record<string, number>;
+  /** Whether this browser wrote it. Stores that know their author set it; otherwise the page checks its saved keys. */
+  mine?: boolean;
 }
 
 export interface NewPost {
@@ -26,6 +28,8 @@ export interface NewPost {
 export interface BoardStore {
   /** True when posts are shared with everyone; false when they stay on this device. */
   shared: boolean;
+  /** How often an open page reloads the posts, in milliseconds (default 30 seconds). */
+  refreshMs?: number;
   list(board: string, topic?: string): Promise<Post[]>;
   post(p: NewPost): Promise<void>;
   edit(id: string, body: string): Promise<void>;
@@ -238,7 +242,37 @@ export function supabaseStore(cfg: BoardConfig, id: Identity = identity(), fetch
   };
 }
 
-/** The shared board when the site was built with a database address, otherwise this device's own. */
-export function makeStore(cfg: Partial<BoardConfig> | undefined, id: Identity = identity()): BoardStore {
+export interface Databases extends Partial<BoardConfig> {
+  /** Google Firebase (Firestore and anonymous sign-in). Used first when it's set. */
+  firebase?: { apiKey: string; projectId: string; emulators?: string };
+}
+
+/** A Firebase board that loads the Firebase code the first time it's used, so other pages don't download it. */
+export function lazyFirebaseStore(cfg: { apiKey: string; projectId: string; emulators?: string }): BoardStore {
+  let real: Promise<BoardStore> | null = null;
+  const [firestore, auth] = (cfg.emulators ?? "").split(",");
+  const get = () =>
+    (real ??= import("./firebaseStore")
+      .then((m) => m.firebaseStore({ apiKey: cfg.apiKey, projectId: cfg.projectId, ...(firestore && auth ? { emulators: { firestore, auth } } : {}) }))
+      .catch((e) => {
+        real = null;
+        throw e instanceof Error && e.message.startsWith("The board") ? e : new Error("The board couldn't be reached. Check your connection and try again.");
+      }));
+  return {
+    shared: true,
+    // Every reload reads each post once, and the free plan allows 50,000 reads a day, so reload less often.
+    refreshMs: 120_000,
+    list: (board, topic) => get().then((s) => s.list(board, topic)),
+    post: (p) => get().then((s) => s.post(p)),
+    edit: (postId, body) => get().then((s) => s.edit(postId, body)),
+    remove: (postId) => get().then((s) => s.remove(postId)),
+    react: (postId, emoji) => get().then((s) => s.react(postId, emoji)),
+    report: (postId) => get().then((s) => s.report(postId)),
+  };
+}
+
+/** The shared board the site was built with (Firebase, else Supabase), otherwise this device's own. */
+export function makeStore(cfg: Databases | undefined, id: Identity = identity()): BoardStore {
+  if (cfg?.firebase?.apiKey && cfg.firebase.projectId) return lazyFirebaseStore(cfg.firebase);
   return cfg?.url && cfg.anonKey ? supabaseStore({ url: cfg.url, anonKey: cfg.anonKey }, id) : localStore(localStorage, id);
 }
