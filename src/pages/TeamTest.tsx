@@ -3,40 +3,45 @@ import { Link } from "react-router";
 import { Icon } from "../components/Icon";
 import { Segmented } from "../components/Segmented";
 import { DATABASE } from "../data/team";
+import { useCatalog } from "../lib/catalogStore";
 import { useFeed } from "../lib/feed";
 import { identity } from "../lib/board/identity";
 import { ago, clean } from "../lib/board/rules";
 import { makeStore, type Post } from "../lib/board/store";
 import {
+  CATEGORIES,
   HEADLINE_MAX,
   REC_BOARD,
-  SOURCES,
+  TAG_MAX,
   VOTE,
   WHY_MAX,
+  categoryById,
+  categoryFor,
   encodeRec,
   leaders,
+  parseTags,
+  popularTags,
   rankRecs,
   recProblem,
   recsFrom,
+  searchRecs,
   thumbUrl,
   watchUrl,
   youtubeId,
   type Rec,
   type RecSort,
-  type RecSource,
 } from "../lib/board/recs";
 import type { Video } from "../data/types";
 import "../styles/team.css";
 import "../styles/recs.css";
 
-type Filter = "all" | RecSource;
+/** How many picks show before "Show more". */
+const PAGE = 24;
 
-/** A picture and headline for a pick, used both in the list and as the form's preview. */
-function Thumb({ videoId, title }: { videoId: string; title: string }) {
+function Thumb({ videoId }: { videoId: string }) {
   return (
     <span className="rec-thumb">
       <img src={thumbUrl(videoId)} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" width={480} height={360} />
-      <span className="visually-hidden">{title}</span>
     </span>
   );
 }
@@ -46,10 +51,7 @@ function LibraryPicker({ videos, onPick }: { videos: Video[]; onPick: (v: Video)
   const id = useId();
   const [q, setQ] = useState("");
   const hits = useMemo(() => {
-    const words = q
-      .toLowerCase()
-      .split(/\s+/)
-      .filter((w) => w.length > 1);
+    const words = q.toLowerCase().split(/\s+/).filter((w) => w.length > 1);
     if (!words.length) return [];
     return videos.filter((v) => words.every((w) => `${v.title} ${v.channel}`.toLowerCase().includes(w))).slice(0, 5);
   }, [q, videos]);
@@ -87,11 +89,45 @@ function LibraryPicker({ videos, onPick }: { videos: Video[]; onPick: (v: Video)
   );
 }
 
+/** Tags typed as a comma-separated list, shown as chips, with one-tap suggestions. */
+function TagField({ id, value, onChange, suggestions }: { id: string; value: string; onChange: (v: string) => void; suggestions: string[] }) {
+  const tags = parseTags(value);
+  const offer = suggestions.filter((s) => !tags.includes(s)).slice(0, 6);
+  return (
+    <div className="board-field">
+      <label htmlFor={id} className="label-l">
+        Tags <span className="muted">(up to {TAG_MAX}, separated by commas)</span>
+      </label>
+      <input id={id} value={value} placeholder="rag, n8n, beginner" autoComplete="off" onChange={(e) => onChange(e.target.value)} />
+      {(tags.length > 0 || offer.length > 0) && (
+        <div className="rec-tag-line">
+          {tags.map((t) => (
+            <span key={t} className="rec-tag">
+              #{t}
+            </span>
+          ))}
+          {offer.length > 0 && tags.length < TAG_MAX && (
+            <>
+              <span className="body-s muted">Suggested:</span>
+              {offer.map((s) => (
+                <button key={s} type="button" className="rec-tag is-offer state" onClick={() => onChange([...tags, s].join(", "))}>
+                  + {s}
+                </button>
+              ))}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function RecForm({
   videos,
   libraryById,
   existing,
   initialName,
+  tagNames,
   onPost,
   onShow,
 }: {
@@ -99,8 +135,9 @@ function RecForm({
   libraryById: Map<string, Video>;
   existing: Map<string, Rec>;
   initialName: string;
-  onPost: (name: string, source: RecSource, body: string) => Promise<void>;
-  /** Shows an existing pick in the list and scrolls to it. */
+  /** A library video's tools and topics, as tag suggestions. */
+  tagNames: (v: Video) => string[];
+  onPost: (name: string, category: string, body: string) => Promise<void>;
   onShow: (id: string) => void;
 }) {
   const id = useId();
@@ -108,9 +145,10 @@ function RecForm({
   const [link, setLink] = useState("");
   const [headline, setHeadline] = useState("");
   const [why, setWhy] = useState("");
+  const [category, setCategory] = useState("");
+  const [tags, setTags] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [done, setDone] = useState(false);
   useEffect(() => {
     if (!name && initialName) setName(initialName);
   }, [initialName, name]);
@@ -118,20 +156,26 @@ function RecForm({
   const videoId = youtubeId(link);
   const fromLibrary = videoId ? libraryById.get(videoId) : undefined;
   const already = videoId ? existing.get(videoId) : undefined;
-  const source: RecSource = fromLibrary ? "hub" : "found";
+  const suggested = fromLibrary ? categoryFor(fromLibrary.topics) : "";
+  // A library video suggests its category until the student picks one.
+  useEffect(() => {
+    if (suggested && !category) setCategory(suggested);
+  }, [suggested, category]);
 
   const submit = async () => {
-    const problem = recProblem(name, link, headline, why);
-    if (problem) return setError(problem);
+    // A video that's already here is the first thing to say: the rest of the form doesn't matter then.
     if (already) return setError(`${already.name} already recommended this video. Vote for their pick instead.`);
+    const problem = recProblem(name, link, headline, why, category);
+    if (problem) return setError(problem);
     setBusy(true);
     setError("");
     try {
-      await onPost(clean(name), source, encodeRec({ headline, videoId, why }));
+      await onPost(clean(name), category, encodeRec({ headline, videoId, why, tags: parseTags(tags) }));
       setLink("");
       setHeadline("");
       setWhy("");
-      setDone(true);
+      setTags("");
+      setCategory("");
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -153,17 +197,7 @@ function RecForm({
           <label htmlFor={`${id}-link`} className="label-l">
             YouTube link
           </label>
-          <input
-            id={`${id}-link`}
-            value={link}
-            inputMode="url"
-            placeholder="https://youtu.be/…"
-            autoComplete="off"
-            onChange={(e) => {
-              setLink(e.target.value);
-              setDone(false);
-            }}
-          />
+          <input id={`${id}-link`} value={link} inputMode="url" placeholder="https://youtu.be/…" autoComplete="off" onChange={(e) => setLink(e.target.value)} />
           {link.trim() && !videoId && <span className="body-s rec-hint-bad">That doesn't look like a YouTube video link yet.</span>}
           {fromLibrary && (
             <span className="body-s rec-hint">
@@ -179,13 +213,7 @@ function RecForm({
             </span>
           )}
         </div>
-        <LibraryPicker
-          videos={videos}
-          onPick={(v) => {
-            setLink(watchUrl(v.id));
-            setDone(false);
-          }}
-        />
+        <LibraryPicker videos={videos} onPick={(v) => setLink(watchUrl(v.id))} />
         <div className="board-field">
           <label htmlFor={`${id}-headline`} className="label-l">
             Your headline
@@ -201,18 +229,29 @@ function RecForm({
             {headline.length} / {HEADLINE_MAX}
           </span>
         </div>
+        <div className="rec-form-row">
+          <div className="board-field">
+            <label htmlFor={`${id}-cat`} className="label-l">
+              Category
+            </label>
+            <select id={`${id}-cat`} value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="" disabled>
+                Choose one
+              </option>
+              {CATEGORIES.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <TagField id={`${id}-tags`} value={tags} onChange={setTags} suggestions={fromLibrary ? tagNames(fromLibrary) : []} />
+        </div>
         <div className="board-field">
           <label htmlFor={`${id}-why`} className="label-l">
             Why watch it? <span className="muted">(optional)</span>
           </label>
-          <textarea
-            id={`${id}-why`}
-            rows={2}
-            value={why}
-            placeholder="Who it's for, or the part worth skipping to"
-            aria-describedby={`${id}-wcount`}
-            onChange={(e) => setWhy(e.target.value)}
-          />
+          <textarea id={`${id}-why`} rows={2} value={why} placeholder="Who it's for, or the part worth skipping to" aria-describedby={`${id}-wcount`} onChange={(e) => setWhy(e.target.value)} />
           <span id={`${id}-wcount`} className="body-s muted board-count" data-over={why.length > WHY_MAX}>
             {why.length} / {WHY_MAX}
           </span>
@@ -222,15 +261,11 @@ function RecForm({
             Your name
           </label>
           <input id={`${id}-name`} value={name} maxLength={40} autoComplete="nickname" onChange={(e) => setName(e.target.value)} />
+          {initialName && name === initialName && <span className="body-s muted">This browser remembers the name you used last. Change it if it isn't you.</span>}
         </div>
         {error && (
           <p role="alert" className="board-error body-m">
             <Icon name="error" size={18} /> {error}
-          </p>
-        )}
-        {done && !error && (
-          <p role="status" className="rec-done body-m">
-            <Icon name="check_circle" size={18} /> Posted. Thanks for the pick.
           </p>
         )}
         <div className="board-actions">
@@ -245,15 +280,25 @@ function RecForm({
         <span className="label-m muted">Preview</span>
         <div className="rec-card is-preview">
           {videoId ? (
-            <Thumb videoId={videoId} title={fromLibrary?.title ?? "Video thumbnail"} />
+            <Thumb videoId={videoId} />
           ) : (
             <span className="rec-thumb rec-thumb-empty">
               <Icon name="smart_display" size={40} />
             </span>
           )}
           <div className="rec-body">
+            {category && <span className="rec-cat label-m">{categoryById.get(category)?.label}</span>}
             <p className="title-m rec-headline">{clean(headline) || "Your headline goes here"}</p>
             <p className="body-s muted">by {clean(name) || "your name"}</p>
+            {parseTags(tags).length > 0 && (
+              <div className="rec-tag-line">
+                {parseTags(tags).map((t) => (
+                  <span key={t} className="rec-tag">
+                    #{t}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -272,6 +317,7 @@ function RecCard({
   onEdit,
   onRemove,
   onReport,
+  onTag,
 }: {
   rec: Rec;
   rank: number | null;
@@ -280,15 +326,17 @@ function RecCard({
   voted: boolean;
   reported: boolean;
   onVote: () => Promise<void>;
-  onEdit: (headline: string, why: string) => Promise<void>;
+  onEdit: (headline: string, why: string, tags: string[]) => Promise<void>;
   onRemove: () => Promise<void>;
   onReport: () => Promise<void>;
+  onTag: (tag: string) => void;
 }) {
   const [mode, setMode] = useState<"" | "edit" | "delete" | "report">("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [headline, setHeadline] = useState(rec.headline);
   const [why, setWhy] = useState(rec.why);
+  const [tags, setTags] = useState(rec.tags.join(", "));
   const run = async (f: () => Promise<void>) => {
     setError("");
     setBusy(true);
@@ -301,18 +349,13 @@ function RecCard({
       setBusy(false);
     }
   };
-  const source = SOURCES.find((s) => s.id === rec.source);
+  const category = categoryById.get(rec.category);
+  const votes = `${rec.votes} ${rec.votes === 1 ? "vote" : "votes"}`;
 
   return (
     <article className="rec-card" id={`rec-${rec.id}`} aria-labelledby={`rec-h-${rec.id}`}>
-      <a
-        href={watchUrl(rec.videoId)}
-        target="_blank"
-        rel="noreferrer noopener"
-        className="rec-watch"
-        aria-label={`Watch on YouTube: ${video?.title ?? rec.headline}`}
-      >
-        <Thumb videoId={rec.videoId} title={video?.title ?? rec.headline} />
+      <a href={watchUrl(rec.videoId)} target="_blank" rel="noreferrer noopener" className="rec-watch" aria-label={`Watch on YouTube: ${video?.title ?? rec.headline}`}>
+        <Thumb videoId={rec.videoId} />
         {rank !== null && rank <= 3 && rec.votes > 0 && <span className={`rec-rank rank-${rank}`}>#{rank}</span>}
         <span className="rec-play" aria-hidden="true">
           <Icon name="play_arrow" size={28} />
@@ -324,14 +367,18 @@ function RecCard({
             className="rec-edit"
             onSubmit={(e) => {
               e.preventDefault();
-              const problem = recProblem(rec.name, watchUrl(rec.videoId), headline, why);
+              const problem = recProblem(rec.name, watchUrl(rec.videoId), headline, why, rec.category);
               if (problem) return setError(problem);
-              void run(() => onEdit(headline, why));
+              void run(() => onEdit(headline, why, parseTags(tags)));
             }}
           >
             <label className="label-l">
               Headline
               <input value={headline} onChange={(e) => setHeadline(e.target.value)} autoFocus />
+            </label>
+            <label className="label-l">
+              Tags
+              <input value={tags} onChange={(e) => setTags(e.target.value)} />
             </label>
             <label className="label-l">
               Why watch it?
@@ -348,6 +395,11 @@ function RecCard({
           </form>
         ) : (
           <>
+            {category && (
+              <span className="rec-cat label-m">
+                <Icon name={category.icon} size={14} /> {category.label}
+              </span>
+            )}
             <h3 id={`rec-h-${rec.id}`} className="title-m rec-headline">
               {rec.headline}
             </h3>
@@ -355,16 +407,27 @@ function RecCard({
               <span className="label-l">{rec.name}</span>
               {mine && <span className="board-you label-m">You</span>}
               <span className="muted">
-                · <time dateTime={rec.createdAt}>{ago(rec.createdAt)}</time>
+                <time dateTime={rec.createdAt}>{ago(rec.createdAt)}</time>
                 {rec.editedAt && " · edited"}
               </span>
-              {source && <span className={`rec-source label-m src-${rec.source}`}>{source.label}</span>}
             </p>
             {rec.why && <p className="body-m rec-why">{rec.why}</p>}
             {video && (
               <p className="body-s muted rec-video">
-                <Icon name="smart_display" size={16} /> {video.title} · {video.channel}
+                <Icon name="smart_display" size={16} />
+                <span>
+                  {video.title} · {video.channel}
+                </span>
               </p>
+            )}
+            {rec.tags.length > 0 && (
+              <div className="rec-tag-line">
+                {rec.tags.map((t) => (
+                  <button key={t} type="button" className="rec-tag state" aria-label={`Show picks tagged ${t}`} onClick={() => onTag(t)}>
+                    #{t}
+                  </button>
+                ))}
+              </div>
             )}
           </>
         )}
@@ -372,14 +435,14 @@ function RecCard({
         <div className="rec-bar">
           {mine ? (
             <span className="rec-vote is-own label-l" title="You can't vote for your own pick">
-              <Icon name="thumb_up" size={18} /> {rec.votes} {rec.votes === 1 ? "vote" : "votes"}
+              <Icon name="thumb_up" size={18} /> {votes}
             </span>
           ) : (
             <button
               type="button"
               className="rec-vote state label-l"
               aria-pressed={voted}
-              aria-label={`${voted ? "Remove your vote" : "Vote for this pick"}, ${rec.votes} ${rec.votes === 1 ? "vote" : "votes"}`}
+              aria-label={`${voted ? "Remove your vote" : "Vote for this pick"}, ${votes}`}
               disabled={busy}
               onClick={() => void run(onVote)}
             >
@@ -389,18 +452,18 @@ function RecCard({
           <span className="rec-actions">
             {mine ? (
               <>
-                <button type="button" className="board-link label-l state" onClick={() => setMode("edit")}>
-                  <Icon name="edit" size={18} /> Edit
+                <button type="button" className="icon-btn sm state" aria-label="Edit" title="Edit" onClick={() => setMode("edit")}>
+                  <Icon name="edit" size={20} />
                 </button>
-                <button type="button" className="board-link label-l state" onClick={() => setMode("delete")}>
-                  <Icon name="delete" size={18} /> Delete
+                <button type="button" className="icon-btn sm state" aria-label="Delete" title="Delete" onClick={() => setMode("delete")}>
+                  <Icon name="delete" size={20} />
                 </button>
               </>
             ) : reported ? (
               <span className="body-s muted">Reported</span>
             ) : (
-              <button type="button" className="board-link label-l state" aria-label="Report this pick" onClick={() => setMode("report")}>
-                <Icon name="flag" size={18} />
+              <button type="button" className="icon-btn sm state" aria-label="Report this pick" title="Report" onClick={() => setMode("report")}>
+                <Icon name="flag" size={20} />
               </button>
             )}
           </span>
@@ -443,12 +506,16 @@ export function TeamTest() {
   const store = useMemo(() => makeStore(DATABASE), []);
   const me = useMemo(() => identity(), []);
   const { feed } = useFeed();
+  const { toolById } = useCatalog();
   const videos = useMemo(() => feed?.videos ?? [], [feed]);
   const libraryById = useMemo(() => new Map(videos.map((v) => [v.id, v])), [videos]);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [loadError, setLoadError] = useState("");
   const [sort, setSort] = useState<RecSort>("top");
-  const [filter, setFilter] = useState<Filter>("all");
+  const [category, setCategory] = useState("all");
+  const [tag, setTag] = useState("");
+  const [q, setQ] = useState("");
+  const [shown, setShown] = useState(PAGE);
   const [reacted, setReacted] = useState(() => me.reacted());
   const [reported, setReported] = useState(() => me.reported());
   const [name, setName] = useState(() => me.name());
@@ -478,10 +545,25 @@ export function TeamTest() {
   const byVideo = useMemo(() => new Map(recs.map((r) => [r.videoId, r])), [recs]);
   // Ranks come from all-time votes, so a pick keeps its number whatever the filter.
   const rankOf = useMemo(() => new Map(rankRecs(recs, "top", now).map((r, i) => [r.id, i + 1])), [recs, now]);
-  const shown = useMemo(() => rankRecs(recs, sort, now).filter((r) => filter === "all" || r.source === filter), [recs, sort, filter, now]);
+  const videoText = useCallback((id: string) => {
+    const v = libraryById.get(id);
+    return v ? `${v.title} ${v.channel}` : "";
+  }, [libraryById]);
+  const matching = useMemo(() => searchRecs(recs, q, videoText).filter((r) => !tag || r.tags.includes(tag)), [recs, q, tag, videoText]);
+  const counts = useMemo(() => {
+    const n = new Map<string, number>();
+    for (const r of matching) n.set(r.category, (n.get(r.category) ?? 0) + 1);
+    return n;
+  }, [matching]);
+  const list = useMemo(() => rankRecs(matching, sort, now).filter((r) => category === "all" || r.category === category), [matching, sort, category, now]);
   const top = useMemo(() => leaders(recs), [recs]);
+  const tagsUsed = useMemo(() => popularTags(recs), [recs]);
+  const filtered = q.trim() !== "" || tag !== "" || category !== "all";
   // Open by default only while there's nothing to look at yet.
   const showForm = formOpen ?? (posts !== null && recs.length === 0);
+  useEffect(() => setShown(PAGE), [q, tag, category, sort]);
+
+  const tagNames = useCallback((v: Video) => parseTags([...v.tools.map((t) => toolById.get(t)?.name ?? t), ...v.topics].join(",")), [toolById]);
 
   const vote = async (r: Rec) => {
     const on = await store.react(r.id, VOTE);
@@ -493,6 +575,15 @@ export function TeamTest() {
     me.setReacted(next);
     await load();
   };
+  const pickTag = (t: string) => {
+    setTag(t);
+    document.getElementById("recs-h")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  const clearFilters = () => {
+    setQ("");
+    setTag("");
+    setCategory("all");
+  };
 
   return (
     <div className="recs-page">
@@ -502,7 +593,7 @@ export function TeamTest() {
         </Link>
         <h1 className="display-m">Video picks</h1>
         <p className="body-l muted measure">
-          Watched something that taught you something? Recommend it in one line. Vote for the picks that helped you, and the best ones rise to the top.
+          Recommend a video that helped you learn, in one line. Vote for the picks you found useful, and the best rise to the top.
         </p>
       </header>
 
@@ -517,13 +608,7 @@ export function TeamTest() {
           <h2 id="rec-new-h" className="title-l">
             {showForm ? "Recommend a video" : "Seen a video worth sharing?"}
           </h2>
-          <button
-            type="button"
-            className={`btn ${showForm ? "text" : "filled"} state`}
-            aria-expanded={showForm}
-            aria-controls="rec-form"
-            onClick={() => setFormOpen(!showForm)}
-          >
+          <button type="button" className={`btn ${showForm ? "text" : "filled"} state`} aria-expanded={showForm} aria-controls="rec-form" onClick={() => setFormOpen(!showForm)}>
             <Icon name={showForm ? "close" : "add"} size={20} />
             {showForm ? "Close" : "Recommend a video"}
           </button>
@@ -533,29 +618,25 @@ export function TeamTest() {
             videos={videos}
             libraryById={libraryById}
             existing={byVideo}
+            initialName={name}
+            tagNames={tagNames}
             onShow={(id) => {
-              setFilter("all");
+              clearFilters();
               setSort("top");
               setFormOpen(false);
+              setShown(Number.MAX_SAFE_INTEGER);
               requestAnimationFrame(() => {
                 const el = document.getElementById(`rec-${id}`);
                 el?.scrollIntoView({ behavior: "smooth", block: "center" });
                 el?.querySelector<HTMLElement>(".rec-vote")?.focus({ preventScroll: true });
               });
             }}
-            initialName={name}
-            onPost={async (n, source, body) => {
-              await store.post({
-                board: REC_BOARD,
-                topic: source,
-                parentId: null,
-                name: n,
-                body,
-              });
+            onPost={async (n, cat, body) => {
+              await store.post({ board: REC_BOARD, topic: cat, parentId: null, name: n, body });
               me.setName(n);
               setName(n);
+              clearFilters();
               setSort("new");
-              setFilter("all");
               setFormOpen(false);
               await load();
             }}
@@ -565,10 +646,11 @@ export function TeamTest() {
 
       <div className="recs-layout">
         <section className="recs-list" aria-labelledby="recs-h">
-          <div className="recs-head">
-            <h2 id="recs-h" className="title-l">
-              {posts ? `${shown.length} ${shown.length === 1 ? "pick" : "picks"}` : "Picks"}
-            </h2>
+          <div className="recs-tools">
+            <div className="recs-search">
+              <Icon name="search" size={20} />
+              <input type="search" value={q} placeholder="Search picks, tags, names and videos" aria-label="Search picks" onChange={(e) => setQ(e.target.value)} />
+            </div>
             <Segmented<RecSort>
               label="Sort picks"
               value={sort}
@@ -580,12 +662,31 @@ export function TeamTest() {
               ]}
             />
           </div>
-          <div className="board-topics" role="group" aria-label="Where the video came from">
-            {(["all", ...SOURCES.map((s) => s.id)] as Filter[]).map((f) => (
-              <button key={f} type="button" className="chip state" aria-pressed={filter === f} onClick={() => setFilter(f)}>
-                {f === "all" ? "All picks" : SOURCES.find((s) => s.id === f)?.label}
+          <div className="recs-cats" role="group" aria-label="Filter by category">
+            <button type="button" className="chip state" aria-pressed={category === "all"} onClick={() => setCategory("all")}>
+              All <span className="rec-count">{matching.length}</span>
+            </button>
+            {CATEGORIES.filter((c) => counts.get(c.id) || category === c.id).map((c) => (
+              <button key={c.id} type="button" className="chip state" aria-pressed={category === c.id} onClick={() => setCategory(c.id)}>
+                <Icon name={c.icon} size={18} />
+                {c.label} <span className="rec-count">{counts.get(c.id) ?? 0}</span>
               </button>
             ))}
+          </div>
+          <div className="recs-head">
+            <h2 id="recs-h" className="title-l">
+              {posts ? `${list.length} ${list.length === 1 ? "pick" : "picks"}` : "Picks"}
+            </h2>
+            {tag && (
+              <button type="button" className="chip state rec-active-tag" aria-pressed="true" onClick={() => setTag("")} aria-label={`Remove tag filter ${tag}`}>
+                #{tag} <Icon name="close" size={16} />
+              </button>
+            )}
+            {filtered && (
+              <button type="button" className="btn text sm state" onClick={clearFilters}>
+                Clear filters
+              </button>
+            )}
           </div>
 
           {loadError && (
@@ -597,13 +698,13 @@ export function TeamTest() {
             </p>
           )}
           {!posts && !loadError && <p className="body-m muted">Loading…</p>}
-          {posts && shown.length === 0 && !loadError && (
+          {posts && list.length === 0 && !loadError && (
             <p className="body-l board-empty">
-              {recs.length === 0 ? "No picks yet. Be the first to recommend a video." : sort === "week" ? "No picks this week yet." : "No picks here yet."}
+              {recs.length === 0 ? "No picks yet. Be the first to recommend a video." : filtered ? "No picks match. Try other words or clear the filters." : sort === "week" ? "No picks this week yet." : "No picks here yet."}
             </p>
           )}
           <div className="rec-grid">
-            {shown.map((r) => (
+            {list.slice(0, shown).map((r) => (
               <RecCard
                 key={`${r.id}:${r.editedAt ?? ""}`}
                 rec={r}
@@ -613,8 +714,9 @@ export function TeamTest() {
                 voted={reacted.has(`${r.id}:${VOTE}`)}
                 reported={reported.has(r.id)}
                 onVote={() => vote(r)}
-                onEdit={async (headline, why) => {
-                  await store.edit(r.id, encodeRec({ headline, videoId: r.videoId, why }));
+                onTag={pickTag}
+                onEdit={async (headline, why, tags) => {
+                  await store.edit(r.id, encodeRec({ headline, videoId: r.videoId, why, tags }));
                   await load();
                 }}
                 onRemove={async () => {
@@ -631,36 +733,61 @@ export function TeamTest() {
               />
             ))}
           </div>
+          {list.length > shown && (
+            <button type="button" className="btn outlined state recs-more" onClick={() => setShown(shown + PAGE)}>
+              Show more ({list.length - shown} left)
+            </button>
+          )}
         </section>
 
-        <aside className="recs-side" aria-labelledby="leaders-h">
-          <h2 id="leaders-h" className="title-m">
-            Top recommenders
-          </h2>
-          {top.length ? (
-            <ol className="rec-leaders">
-              {top.map((l, i) => (
-                <li key={l.name.toLowerCase()}>
-                  <span className={`rec-leader-n label-l${i === 0 ? " first" : ""}`} aria-hidden="true">
-                    {i + 1}
-                  </span>
-                  <span className="label-l">{l.name}</span>
-                  <span className="body-s muted">
-                    {l.votes} {l.votes === 1 ? "vote" : "votes"} on {l.picks} {l.picks === 1 ? "pick" : "picks"}
-                  </span>
-                </li>
-              ))}
-            </ol>
-          ) : (
-            <p className="body-s muted">Nobody yet. Votes on your picks put you here.</p>
+        <aside className="recs-side" aria-label="About the picks">
+          <section aria-labelledby="leaders-h">
+            <h2 id="leaders-h" className="title-m">
+              Top recommenders
+            </h2>
+            {top.length ? (
+              <ol className="rec-leaders">
+                {top.map((l, i) => (
+                  <li key={l.name.toLowerCase()}>
+                    <span className={`rec-leader-n label-l${i === 0 ? " first" : ""}`} aria-hidden="true">
+                      {i + 1}
+                    </span>
+                    <span className="label-l">{l.name}</span>
+                    <span className="body-s muted">
+                      {l.votes} {l.votes === 1 ? "vote" : "votes"} on {l.picks} {l.picks === 1 ? "pick" : "picks"}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="body-s muted">Nobody yet. Votes on your picks put you here.</p>
+            )}
+          </section>
+          {tagsUsed.length > 0 && (
+            <section aria-labelledby="tags-h">
+              <h2 id="tags-h" className="title-m">
+                Popular tags
+              </h2>
+              <div className="rec-tag-line">
+                {tagsUsed.map((t) => (
+                  <button key={t.tag} type="button" className="rec-tag state" aria-pressed={tag === t.tag} onClick={() => pickTag(t.tag === tag ? "" : t.tag)}>
+                    #{t.tag} <span className="rec-count">{t.count}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
           )}
-          <h2 className="title-s">How it works</h2>
-          <ul className="body-s rec-rules">
-            <li>One vote per pick from each browser. You can take a vote back.</li>
-            <li>Each video can be recommended once, so votes add up in one place.</li>
-            <li>Names aren't checked, so keep it friendly. Three reports hide a pick until an editor looks.</li>
-            <li>Edit or delete your own picks from the browser you posted them in.</li>
-          </ul>
+          <section aria-labelledby="how-h">
+            <h2 id="how-h" className="title-s">
+              How it works
+            </h2>
+            <ul className="body-s rec-rules">
+              <li>One vote per pick from each browser. You can take a vote back.</li>
+              <li>Each video can be recommended once, so votes add up in one place.</li>
+              <li>Names aren't checked, so keep it friendly. Three reports hide a pick until an editor looks.</li>
+              <li>Edit or delete your own picks from the browser you posted them in.</li>
+            </ul>
+          </section>
         </aside>
       </div>
     </div>

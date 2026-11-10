@@ -139,8 +139,8 @@ describe("board schema", () => {
   });
 
   it("takes a video pick as the page sends it, and counts its votes", async () => {
-    const body = encodeRec({ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", why: "Skip to 4:10." });
-    const id = await post({ board: REC_BOARD, topic: "found", body });
+    const body = encodeRec({ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", why: "Skip to 4:10.", tags: ["rag"] });
+    const id = await post({ board: REC_BOARD, topic: "agents", body });
     for (const v of ["a", "b"]) await db.query("select board_react($1,$2,$3)", [id, v.repeat(24), VOTE]);
     const list = (await rows()).map((r) => ({
       id: r.id as string,
@@ -154,7 +154,7 @@ describe("board schema", () => {
       deleted: r.deleted as boolean,
       reactions: r.reactions as Record<string, number>,
     }));
-    expect(recsFrom(list)).toMatchObject([{ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", why: "Skip to 4:10.", source: "found", votes: 2 }]);
+    expect(recsFrom(list)).toMatchObject([{ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", why: "Skip to 4:10.", category: "agents", tags: ["rag"], votes: 2 }]);
   });
 
   it("removes replies with their post", async () => {

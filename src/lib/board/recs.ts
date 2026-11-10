@@ -2,8 +2,8 @@
  * Video picks: students recommend a video in one line, and vote on each other's picks.
  *
  * Picks are ordinary posts on the board database (board "video-recs"), so they need no new tables:
- * the post's topic says where the video came from, and its body holds the headline, the video's
- * address and an optional note, one after another. The picture is the video's own YouTube thumbnail,
+ * the post's topic is the pick's category, and its body holds the headline, the video's address, a
+ * "tags:" line and an optional note, one after another. The picture is the video's own YouTube thumbnail,
  * built from a checked video id, so nobody can make the page load an image from anywhere else.
  * A vote is the board's 👍 reaction: one per browser per pick, and the database enforces it.
  */
@@ -15,15 +15,55 @@ export const VOTE = "👍";
 export const HEADLINE_MAX = 90;
 export const WHY_MAX = 400;
 
-export type RecSource = "hub" | "found";
-export const SOURCES: readonly {
-  id: RecSource;
+/** What a pick is about. The id is stored as the post's topic, so don't rename one once it's in use. */
+export interface Category {
+  id: string;
   label: string;
-  long: string;
-}[] = [
-  { id: "hub", label: "From the Hub", long: "From the Hub's video library" },
-  { id: "found", label: "Found by students", long: "Found it myself" },
+  icon: string;
+  /** The library's topics (src/data/topics.ts) that suggest this category for a library video. */
+  topics: string[];
+}
+export const CATEGORIES: readonly Category[] = [
+  { id: "basics", label: "AI basics", icon: "school", topics: ["genai-basics", "chat-basics", "llms", "reasoning", "limits"] },
+  { id: "prompting", label: "Prompting", icon: "edit_note", topics: ["prompting"] },
+  { id: "writing-research", label: "Writing and research", icon: "menu_book", topics: ["writing", "research"] },
+  { id: "coding", label: "Coding and data", icon: "code", topics: ["coding", "data"] },
+  { id: "agents", label: "Agents and automation", icon: "smart_toy", topics: ["agents", "automation", "rag"] },
+  { id: "media", label: "Images, video and audio", icon: "palette", topics: ["multimodal"] },
+  { id: "work", label: "Work and presentations", icon: "work", topics: ["presenting", "field"] },
+  { id: "teaching", label: "Teaching and learning", icon: "cast_for_education", topics: ["teaching", "assessment"] },
+  { id: "ethics", label: "Ethics and policy", icon: "balance", topics: ["ethics"] },
+  { id: "other", label: "Other", icon: "category", topics: [] },
 ];
+export const categoryById = new Map(CATEGORIES.map((c) => [c.id, c]));
+
+/** The category a library video's topics point to, or "" when none does. */
+export function categoryFor(topics: readonly string[]): string {
+  for (const t of topics) {
+    const c = CATEGORIES.find((x) => x.topics.includes(t));
+    if (c) return c.id;
+  }
+  return "";
+}
+
+export const TAG_MAX = 5;
+export const TAG_LENGTH = 24;
+
+/** Tags from what someone typed: lower case, letters, numbers and dashes, no repeats, at most five. */
+export function parseTags(input: string): string[] {
+  const out: string[] = [];
+  for (const raw of input.split(/[,#\n]+/)) {
+    const t = raw
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/[\s-]+/g, "-")
+      .replace(/^-|-$/g, "")
+      .slice(0, TAG_LENGTH);
+    if (t && !out.includes(t)) out.push(t);
+  }
+  return out.slice(0, TAG_MAX);
+}
 
 const ID = /^[A-Za-z0-9_-]{11}$/;
 
@@ -55,14 +95,23 @@ export interface RecDraft {
   headline: string;
   videoId: string;
   why: string;
+  tags: string[];
 }
 
-/** The post body for a pick: headline, then the video's address, then the note if there is one. */
-export const encodeRec = (r: RecDraft) => [clean(r.headline).replace(/\s+/g, " "), watchUrl(r.videoId), ...(clean(r.why) ? ["", clean(r.why)] : [])].join("\n");
+/** The post body for a pick: headline, the video's address, its tags, then the note if there is one. */
+export const encodeRec = (r: RecDraft) =>
+  [
+    clean(r.headline).replace(/\s+/g, " "),
+    watchUrl(r.videoId),
+    ...(r.tags.length ? [`tags: ${parseTags(r.tags.join(",")).join(", ")}`] : []),
+    ...(clean(r.why) ? ["", clean(r.why)] : []),
+  ].join("\n");
 
 /** A pick from a post body, or null when the body isn't one (then the page leaves it out). */
 export function decodeRec(body: string): RecDraft | null {
-  const [headline = "", link = "", ...rest] = body.split("\n");
+  const [headline = "", link = "", ...more] = body.split("\n");
+  const tagLine = more[0]?.startsWith("tags:") ? more.shift()! : "";
+  const rest = more;
   const videoId = youtubeId(link);
   const h = headline.trim();
   if (!h || !videoId) return null;
@@ -71,11 +120,12 @@ export function decodeRec(body: string): RecDraft | null {
     headline: h.slice(0, HEADLINE_MAX),
     videoId,
     why: rest.join("\n").trim().slice(0, WHY_MAX),
+    tags: parseTags(tagLine.slice(5)),
   };
 }
 
 /** Why a pick can't be sent, or "" if it can. */
-export function recProblem(name: string, link: string, headline: string, why: string): string {
+export function recProblem(name: string, link: string, headline: string, why: string, category: string): string {
   const n = clean(name);
   if (!n) return "Add your name so people know whose pick it is.";
   if (n.length > NAME_MAX) return `Use a name of ${NAME_MAX} characters or fewer.`;
@@ -89,13 +139,15 @@ export function recProblem(name: string, link: string, headline: string, why: st
   const w = clean(why);
   if (w.length > WHY_MAX) return `Keep the note to ${WHY_MAX} characters. It's ${w.length - WHY_MAX} over.`;
   if (/(https?:\/\/|www\.)/i.test(w)) return "Leave links out of the note. The video link is enough.";
+  if (!categoryById.has(category)) return "Pick a category.";
   return "";
 }
 
 export interface Rec extends RecDraft {
   id: string;
   name: string;
-  source: RecSource;
+  /** A category id; older picks without one count as "other". */
+  category: string;
   votes: number;
   createdAt: string;
   editedAt: string | null;
@@ -107,14 +159,14 @@ export interface Rec extends RecDraft {
 export function recsFrom(posts: Post[]): Rec[] {
   const out: Rec[] = [];
   for (const p of posts) {
-    if (p.parentId || p.deleted || (p.topic !== "hub" && p.topic !== "found")) continue;
+    if (p.parentId || p.deleted) continue;
     const r = decodeRec(p.body);
     if (r)
       out.push({
         ...r,
         id: p.id,
         name: p.name,
-        source: p.topic,
+        category: categoryById.has(p.topic) ? p.topic : "other",
         votes: p.reactions[VOTE] ?? 0,
         createdAt: p.createdAt,
         editedAt: p.editedAt,
@@ -153,5 +205,25 @@ export function leaders(recs: Rec[], limit = 5): Leader[] {
   return [...by.values()]
     .filter((l) => l.votes > 0)
     .sort((a, b) => b.votes - a.votes || b.picks - a.picks || a.name.localeCompare(b.name))
+    .slice(0, limit);
+}
+
+/** Picks whose headline, note, name, tags or video (title and channel, when known) hold every word searched for. */
+export function searchRecs(recs: Rec[], q: string, videoText: (videoId: string) => string = () => ""): Rec[] {
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!words.length) return recs;
+  return recs.filter((r) => {
+    const hay = `${r.headline} ${r.why} ${r.name} ${r.tags.join(" ")} ${r.tags.join(" ").replace(/-/g, " ")} ${videoText(r.videoId)}`.toLowerCase();
+    return words.every((w) => hay.includes(w.replace(/^#/, "")));
+  });
+}
+
+/** The most used tags, most used first, ties in alphabetical order. */
+export function popularTags(recs: Rec[], limit = 12): { tag: string; count: number }[] {
+  const n = new Map<string, number>();
+  for (const r of recs) for (const t of r.tags) n.set(t, (n.get(t) ?? 0) + 1);
+  return [...n.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
     .slice(0, limit);
 }
