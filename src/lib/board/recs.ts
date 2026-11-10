@@ -99,6 +99,8 @@ export interface Rec extends RecDraft {
   votes: number;
   createdAt: string;
   editedAt: string | null;
+  /** Whether this browser posted it, when the store knows. */
+  mine?: boolean;
 }
 
 /** The picks in a board's posts. Replies, deleted posts and anything that isn't a pick are left out. */
@@ -116,6 +118,7 @@ export function recsFrom(posts: Post[]): Rec[] {
         votes: p.reactions[VOTE] ?? 0,
         createdAt: p.createdAt,
         editedAt: p.editedAt,
+        mine: p.mine,
       });
   }
   return out;

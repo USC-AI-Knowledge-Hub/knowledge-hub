@@ -16,7 +16,9 @@
     "brand-images": "tsx scripts/brand-images.ts",
     "e2e": "playwright test",
     "vet-feeds": "tsx scripts/discovery/vet-feeds.ts",
-    "block-words": "tsx scripts/gen-blocked-words.ts"
+    "block-words": "tsx scripts/gen-blocked-words.ts",
+    "test:firebase": "npx -y firebase-tools@15.35.0 emulators:exec --project demo-kh --only firestore,auth \"vitest run -c vitest.firebase.config.ts\"",
+    "firebase-rules": "tsx scripts/gen-firebase-rules.ts"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
   "dependencies": {
     "@huggingface/transformers": "^4.3.0",
     "@mlc-ai/web-llm": "^0.2.86",
+    "firebase": "^12.19.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router": "^7.18.4"
@@ -37,6 +40,7 @@
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
     "@electric-sql/pglite": "^0.5.10",
+    "@firebase/rules-unit-testing": "^5.0.2",
     "@material/material-color-utilities": "^0.4.0",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.3",

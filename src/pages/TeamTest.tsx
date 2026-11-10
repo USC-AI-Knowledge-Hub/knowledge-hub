@@ -470,9 +470,9 @@ export function TeamTest() {
     if (!store.shared) return;
     const t = setInterval(() => {
       if (!document.hidden) void load();
-    }, 30_000);
+    }, store.refreshMs ?? 30_000);
     return () => clearInterval(t);
-  }, [load, store.shared]);
+  }, [load, store]);
 
   const recs = useMemo(() => recsFrom(posts ?? []), [posts]);
   const byVideo = useMemo(() => new Map(recs.map((r) => [r.videoId, r])), [recs]);
@@ -609,7 +609,7 @@ export function TeamTest() {
                 rec={r}
                 rank={rankOf.get(r.id) ?? null}
                 video={libraryById.get(r.videoId)}
-                mine={me.keyFor(r.id) !== undefined}
+                mine={r.mine ?? me.keyFor(r.id) !== undefined}
                 voted={reacted.has(`${r.id}:${VOTE}`)}
                 reported={reported.has(r.id)}
                 onVote={() => vote(r)}

@@ -38,15 +38,15 @@ export function Board({ store, board, topic, onTopic }: { store: BoardStore; boa
     if (!store.shared) return;
     const t = setInterval(() => {
       if (!document.hidden) void load();
-    }, 30_000);
+    }, store.refreshMs ?? 30_000);
     return () => clearInterval(t);
-  }, [load, store.shared]);
+  }, [load, store]);
   useEffect(() => {
     if (topic) setComposeTopic(topic);
   }, [topic]);
 
   const actions: PostActions = {
-    mine: (id) => me.keyFor(id) !== undefined,
+    mine: (id) => posts?.find((p) => p.id === id)?.mine ?? me.keyFor(id) !== undefined,
     reacted,
     reported,
     name,
