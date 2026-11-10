@@ -1,7 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const ID = "b1j0Hf1GqZE";
-const enc = (h: string, id: string, why = "") => [h, `https://www.youtube.com/watch?v=${id}`, ...(why ? ["", why] : [])].join("\n");
+/** A video that isn't in the Hub's library, so nothing about it is filled in for the student. */
+const ID = "dQw4w9WgXcQ";
+const enc = (h: string, id: string, why = "", tags: string[] = []) =>
+  [h, `https://www.youtube.com/watch?v=${id}`, ...(tags.length ? [`tags: ${tags.join(", ")}`] : []), ...(why ? ["", why] : [])].join("\n");
 const ago = (hours: number) => new Date(Date.now() - hours * 3600e3).toISOString();
 const row = (id: string, name: string, topic: string, body: string, votes: number, hours: number) => ({
   id,
@@ -36,9 +38,9 @@ async function seed(page: Page, rows: unknown[]) {
 test.describe("video picks", () => {
   test("ranks picks by votes, and a vote can be given and taken back", async ({ page }) => {
     await seed(page, [
-      row("a", "Maya", "found", enc("Second best", "zjkBMFhNj_g"), 2, 30),
-      row("b", "Jordan", "found", enc("The best one", "ajfQWhGQGLE", "Watch from 4:10."), 5, 200),
-      row("c", "Priya", "hub", enc("Newest, no votes", "9Hwanevuhd8"), 0, 1),
+      row("a", "Maya", "basics", enc("Second best", "zjkBMFhNj_g", "", ["llms", "beginner"]), 2, 30),
+      row("b", "Jordan", "agents", enc("The best one", "ajfQWhGQGLE", "Watch from 4:10.", ["agents", "beginner"]), 5, 200),
+      row("c", "Priya", "work", enc("Newest, no votes", "9Hwanevuhd8"), 0, 1),
     ]);
     await page.goto("/team/test");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Video picks");
@@ -62,8 +64,21 @@ test.describe("video picks", () => {
     await page.getByRole("radio", { name: "This week" }).click();
     await expect(headlines).toHaveText(["Second best", "Newest, no votes"]);
     await page.getByRole("radio", { name: "Top" }).click();
-    await page.getByRole("button", { name: "From the Hub" }).click();
-    await expect(headlines).toHaveText(["Newest, no votes"]);
+
+    // Categories, tags and search narrow the list together.
+    await page.getByRole("group", { name: "Filter by category" }).getByRole("button", { name: /Agents and automation/ }).click();
+    await expect(headlines).toHaveText(["The best one"]);
+    await page.getByRole("group", { name: "Filter by category" }).getByRole("button", { name: /^All/ }).click();
+    await page.locator("#rec-a").getByRole("button", { name: "Show picks tagged beginner" }).click();
+    await expect(headlines).toHaveText(["The best one", "Second best"]);
+    await expect(page.getByRole("heading", { name: "Popular tags" })).toBeVisible();
+    await page.getByRole("button", { name: "Remove tag filter beginner" }).click();
+    await page.getByLabel("Search picks").fill("jordan 4:10");
+    await expect(headlines).toHaveText(["The best one"]);
+    await page.getByLabel("Search picks").fill("nothing like this");
+    await expect(page.getByText("No picks match")).toBeVisible();
+    await page.getByRole("button", { name: "Clear filters" }).click();
+    await expect(headlines).toHaveCount(3);
 
     const leaders = page.locator(".rec-leaders li");
     await expect(leaders.first()).toContainText("Jordan");
@@ -84,6 +99,11 @@ test.describe("video picks", () => {
     await page.getByLabel("Your headline").fill("The clearest RAG explainer");
     await page.getByLabel("Why watch it?").fill("Short, with a good diagram.");
     await page.getByLabel("Your name").fill("Ana");
+    await page.getByRole("button", { name: "Post my pick" }).click();
+    await expect(page.getByRole("alert")).toContainText("Pick a category");
+    await page.getByRole("combobox", { name: "Category" }).selectOption("agents");
+    await page.getByLabel(/^Tags/).fill("RAG, Vector DB");
+    await expect(page.locator(".rec-preview")).toContainText("#vector-db");
     await expect(page.locator(".rec-preview img")).toHaveAttribute("src", `https://i.ytimg.com/vi/${ID}/hqdefault.jpg`);
     await expect(page.locator(".rec-preview")).toContainText("The clearest RAG explainer");
     await expect(page.locator(".rec-preview")).toContainText("by Ana");
@@ -95,6 +115,8 @@ test.describe("video picks", () => {
     await expect(card).toContainText("You");
     await expect(card.getByRole("button", { name: /Vote for this pick/ })).toHaveCount(0);
     await expect(card).toContainText("0 votes");
+    await expect(card).toContainText("Agents and automation");
+    await expect(card.getByRole("button", { name: "Show picks tagged rag" })).toBeVisible();
 
     // The same video again points to the existing pick.
     await page.getByRole("button", { name: "Recommend a video" }).click();
@@ -108,24 +130,38 @@ test.describe("video picks", () => {
 
     await card.getByRole("button", { name: "Edit" }).click();
     await card.getByLabel("Headline").fill("The clearest RAG explainer, edited");
+    await card.getByLabel("Tags").fill("rag, beginner");
     await card.getByRole("button", { name: "Save" }).click();
     await expect(card.locator("h3")).toHaveText("The clearest RAG explainer, edited");
     await expect(card).toContainText("edited");
+    await expect(card.getByRole("button", { name: "Show picks tagged beginner" })).toBeVisible();
 
     await card.getByRole("button", { name: "Delete" }).click();
     await card.getByRole("alert").getByRole("button", { name: "Delete" }).click();
     await expect(page.getByText("No picks yet")).toBeVisible();
   });
 
+  test("fills in the category and suggests tags for a video from the Hub's library", async ({ page }) => {
+    await seed(page, []);
+    await page.goto("/team/test");
+    await page.getByLabel("Or find it in the Hub's library").fill("RAG vs Agentic");
+    await page.getByRole("list", { name: "Library matches" }).getByRole("button").first().click();
+    await expect(page.locator(".rec-hint")).toContainText("In the Hub's library");
+    await expect(page.getByRole("combobox", { name: "Category" })).not.toHaveValue("");
+    await expect(page.getByText("Suggested:")).toBeVisible();
+  });
+
   test("skips posts that aren't picks, and fits a phone", async ({ page }) => {
     await seed(page, [
-      row("x", "Spam", "found", "no link here", 9, 1),
-      row("y", "Bad", "found", enc("Fake", "too-short"), 9, 1),
+      row("x", "Spam", "agents", "no link here", 9, 1),
+      row("y", "Bad", "agents", enc("Fake", "too-short"), 9, 1),
       row("z", "Ok", "hub", enc("Real one", ID), 0, 2),
     ]);
     await page.setViewportSize({ width: 360, height: 800 });
     await page.goto("/team/test");
+    // An older pick from before categories still shows, under Other.
     await expect(page.locator(".rec-card h3")).toHaveText(["Real one"]);
+    await expect(page.locator(".rec-card")).toContainText("Other");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow).toBeLessThanOrEqual(0);
   });

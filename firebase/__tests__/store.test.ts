@@ -72,11 +72,11 @@ describe("the board on Firebase", () => {
   it("carries video picks and their votes", async () => {
     const ana = browser();
     const ben = browser();
-    await ana.post({ board: REC_BOARD, topic: "found", parentId: null, name: "Ana", body: encodeRec({ headline: "Best RAG intro", videoId: "b1j0Hf1GqZE", why: "" }) });
+    await ana.post({ board: REC_BOARD, topic: "agents", parentId: null, name: "Ana", body: encodeRec({ headline: "Best RAG intro", videoId: "b1j0Hf1GqZE", why: "", tags: ["rag"] }) });
     const mine = (await ana.list(REC_BOARD)).find((p) => p.name === "Ana" && p.mine)!;
     await ben.react(mine.id, VOTE);
     const recs = recsFrom(await ben.list(REC_BOARD)).filter((r) => r.id === mine.id);
-    expect(recs).toMatchObject([{ headline: "Best RAG intro", votes: 1, mine: false }]);
+    expect(recs).toMatchObject([{ headline: "Best RAG intro", category: "agents", tags: ["rag"], votes: 1, mine: false }]);
   });
 
   it("matches the block list the way the rules do", () => {

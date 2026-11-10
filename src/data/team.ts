@@ -23,7 +23,7 @@ export const COURSE_TOPICS: readonly Topic[] = [
 
 /** What students post about on the tools board. */
 export const TOOL_TOPICS: readonly Topic[] = [
-  { id: "videos", label: "Videos", icon: "smart_display", hint: "A video that taught you something" },
+  { id: "videos", label: "Videos", icon: "smart_display", hint: "A video that helped you learn" },
   { id: "articles", label: "Articles", icon: "article", hint: "A guide, post or paper worth reading" },
   { id: "new", label: "New tools and features", icon: "new_releases", hint: "Something new a tool can do" },
   { id: "prompts", label: "Prompts and tips", icon: "lightbulb", hint: "A prompt or habit that works" },
