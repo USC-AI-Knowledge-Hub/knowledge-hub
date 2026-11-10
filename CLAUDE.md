@@ -44,6 +44,9 @@ A daily GitHub Action refreshes the YouTube video library.
   `BOARD_URL` and `BOARD_ANON_KEY` repository variables at build). Without them the board keeps posts on the visitor's device.
   All writes go through the schema's `board_*` functions, which enforce the rules (`src/lib/board/rules.ts` mirrors them).
   `supabase/__tests__/schema.test.ts` runs the schema in an in-memory Postgres.
+- Video picks (`/team/test`, `src/pages/TeamTest.tsx`, `src/lib/board/recs.ts`): students recommend a YouTube video with a one-line
+  headline and their name, and vote (👍, one per browser) on each other's picks. Picks are posts on the board database
+  (board `video-recs`, topic `hub` or `found`), so they need no extra tables; the picture is the video's own thumbnail.
 - `scripts/pipeline/`: the daily video pipeline.
 - `scripts/discovery/`: the daily tool discovery run (`npm run discover`). It writes `public/data/discovered.json`
   and `taxonomy.json`; `src/data/catalog.ts` and `src/lib/catalogStore.ts` combine them with `tools.ts` for the site
