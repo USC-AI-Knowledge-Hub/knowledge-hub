@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volunteer guide: make your first exhibit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f3ec;--paper:#fffdf8;--ink:#23211c;--muted:#6b675d;--line:#e7e1d4;--accent:#1f6f6b;--accent-ink:#fff;--soft:#eaf3f1;--warm:#fbf0dc;--warm-ink:#7a5410}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141614;--paper:#1c1f1d;--ink:#ecebe5;--muted:#a6a39a;--line:#323632;--accent:#6cc2b8;--accent-ink:#0e1312;--soft:#1f302d;--warm:#33291a;--warm-ink:#f0c879}}
+:root[data-theme="dark"]{--bg:#141614;--paper:#1c1f1d;--ink:#ecebe5;--muted:#a6a39a;--line:#323632;--accent:#6cc2b8;--accent-ink:#0e1312;--soft:#1f302d;--warm:#33291a;--warm-ink:#f0c879}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:40px 16px 64px}
+header{margin-bottom:28px}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font:600 38px/1.15 Fraunces,Georgia,serif;margin:6px 0 10px}
+.lede{font-size:18px;color:var(--muted);margin:0}
+.lede b{color:var(--ink)}
+.glance{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.glance span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin:16px 0}
+.card h2{display:flex;align-items:center;gap:12px;font:600 23px/1.2 Fraunces,Georgia,serif;margin:0 0 6px}
+.n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:600 16px Inter,sans-serif}
+.sub{color:var(--muted);margin:0 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
+.chip{background:var(--soft);color:var(--ink);border-radius:999px;padding:6px 14px;font-size:15px}
+.qs{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+.qs li{border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.qs li span{color:var(--accent);font-weight:600;margin-right:6px}
+.tip{background:var(--warm);color:var(--ink);border-radius:12px;padding:12px 16px;margin:16px 0 0;font-size:15px}
+.tip b{color:var(--warm-ink)}
+ol.plain{padding-left:20px;margin:8px 0}
+ol.plain li{margin:6px 0}
+.chat{border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.chat h3{margin:0;font-size:17px}
+.chat .who{color:var(--muted);font-size:15px;margin:2px 0 10px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:7px 16px;font:600 14px Inter,sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+pre{display:none;white-space:pre-wrap;background:var(--soft);border-radius:10px;padding:14px;margin:12px 0 0;font:13.5px/1.55 ui-monospace,Menlo,Consolas,monospace}
+pre.open{display:block}
+.after{font-size:14px;color:var(--muted);margin:10px 0 0}
+.checks{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:8px}
+.checks li{display:flex;gap:10px;align-items:flex-start}
+.checks li::before{content:"✓";flex:none;width:24px;height:24px;border-radius:50%;background:var(--soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:13px;margin-top:2px}
+.or{font:600 18px/1.3 Fraunces,Georgia,serif;margin:26px 0 10px;padding-top:20px;border-top:1px dashed var(--line)}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.topic{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.topic .tag{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.topic .ti{font-weight:600;margin-bottom:2px}
+.topic p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.5}
+a.btn{text-decoration:none;display:inline-block}
+.sheps{font-size:14.5px;color:var(--muted);margin:14px 0 0}
+.topic p.src{margin-top:8px;font-size:13px;color:var(--muted)}
+.sheps a,.topic a,.lede a,.tip a{color:var(--accent)}
+.foot{text-align:center;color:var(--muted);margin-top:28px;font-size:15px}
+@media print{body{background:#fff}.card{break-inside:avoid}.btn{display:none}pre{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">California Health Care Affordability Project</div>
+  <h1>Welcome! Here's how you'll make your first exhibit.</h1>
+  <p class="lede">You'll use AI to dig into real California hospital data and come out with <b>one chart and a couple of sentences</b> that tell people something true. Our model is the <a href="https://www.shepscenter.unc.edu/programs-projects/rural-health/publications/" target="_blank">UNC Sheps Center</a>, which publishes short, chart-driven briefs on hospital finances. <b>Your job is to rebuild one of their exhibits with California data.</b> No coding needed. AI does the heavy lifting and you steer.</p>
+  <div class="glance"><span>⏱ About 2 hours</span><span>🤖 3 AI chats</span><span>📊 1 chart</span></div>
+</header>
+
+<section class="card">
+  <h2><span class="n">1</span>Choose what to explore</h2>
+  <p class="sub">A good place to start is hospital wages. Pick a job you're curious about:</p>
+  <div class="chips">
+    <span class="chip">Registered Nurses</span><span class="chip">Licensed Vocational Nurses</span>
+    <span class="chip">Aides &amp; Orderlies</span><span class="chip">Environmental &amp; Food Service</span>
+    <span class="chip">Clerical &amp; Admin</span><span class="chip">Technicians &amp; Specialists</span>
+    <span class="chip">Managers &amp; Supervisors</span><span class="chip">Nurse Practitioners &amp; PAs</span>
+  </div>
+  <p class="sub">Then choose a question to ask about that job:</p>
+  <ul class="qs">
+    <li><span>A</span>How much does pay change from one part of California to another?</li>
+    <li><span>B</span>At how many hospitals is the <b>average</b> pay for this job under <b>$25 an hour</b>, California's new health care minimum wage for large systems?</li>
+    <li><span>C</span>Do nonprofit, for-profit, and public hospitals pay differently? What about big vs. small hospitals?</li>
+  </ul>
+  <p class="sheps">📎 <b>Sheps exhibit to recreate:</b> <a href="https://www.shepscenter.unc.edu/product/average-salary-expense-in-rural-and-urban-hospitals-before-and-during-the-low-wage-index-policy-2018-2022/" target="_blank">Average Salary Expense in Rural and Urban Hospitals, 2018–2022</a>, Table 2 (median salary per employee, by hospital type). For the regional angle, see the companion brief <a href="https://www.shepscenter.unc.edu/download/29861" target="_blank">Geographic Variation in Average Salary Expense</a>.</p>
+  <h4 class="or">Or recreate another Sheps exhibit</h4>
+  <div class="topics">
+    <div class="topic"><div class="tag">Finances</div><div class="ti">💰 Who's making money?</div><p>Do nonprofit, for-profit, and public hospitals in California earn different profit margins?</p><p class="src">📎 Recreate: <a href="https://www.shepscenter.unc.edu/product/2018-23-profitability-of-rural-hospitals-by-ownership-and-system-affiliation/" target="_blank">2018–23 Profitability of Rural Hospitals by Ownership and System Affiliation</a>, median total margin by ownership</p></div>
+    <div class="topic"><div class="tag">Payment</div><div class="ti">🩺 Does Medicare cover the cost?</div><p>How much of a hospital's cost does Medicare actually pay, and is it worse for small hospitals? Try Medi-Cal and private insurance too.</p><p class="src">📎 Recreate: <a href="https://www.shepscenter.unc.edu/product/medicare-covers-a-lower-percentage-of-outpatient-costs-in-hospitals-located-in-rural-areas/" target="_blank">Medicare Covers a Lower Percentage of Outpatient Costs in Rural Hospitals</a>, Figure 3: Medicare payment as a % of cost, by number of beds</p></div>
+    <div class="topic"><div class="tag">Access</div><div class="ti">🤝 The burden of free care</div><p>Which California hospitals give the most uncompensated care (charity and unpaid bills), by size and ownership?</p><p class="src">📎 Recreate: <a href="https://www.shepscenter.unc.edu/product/a-comparison-of-2017-19-uncompensated-care-of-rural-and-urban-hospitals-by-net-patient-revenue-system-affiliation-and-ownership/" target="_blank">Uncompensated Care of Rural and Urban Hospitals, 2017–19</a>, Figures 2 and 4: uncompensated care as a % of expenses, by hospital size and ownership</p></div>
+    <div class="topic"><div class="tag">Services</div><div class="ti">🚶 The shift to outpatient care</div><p>How much of hospital revenue now comes from outpatient care, and how does that differ by hospital size?</p><p class="src">📎 Recreate: <a href="https://www.shepscenter.unc.edu/product/trends-in-revenue-sources-among-rural-hospitals/" target="_blank">Trends in Revenue Sources among Rural Hospitals</a>, Figure 1: outpatient share of patient revenue, by hospital group</p></div>
+    <div class="topic"><div class="tag">Capacity</div><div class="ti">🛏️ How full are hospitals?</div><p>What share of California's hospital beds are filled on an average day, and where are hospitals busiest?</p><p class="src">📎 Recreate: <a href="https://www.shepscenter.unc.edu/product/occupancy-rates-in-rural-and-urban-hospitals-value-and-limitations-in-use-as-a-measure-of-surge-capacity/" target="_blank">Occupancy Rates in Rural and Urban Hospitals</a>, Appendix 1: acute care occupancy, which includes a California row to compare with</p></div>
+  </div>
+  <div class="tip"><b>Found a different Sheps exhibit you like?</b> Go for it! Browse their <a href="https://www.shepscenter.unc.edu/programs-projects/rural-health/publications/" target="_blank">publications</a>, then check the data dictionary in step 2 to see whether California's data can rebuild it.</div>
+</section>
+
+<section class="card">
+  <h2><span class="n">2</span>Grab the data</h2>
+  <ol class="plain">
+    <li>Visit <b>data.chhs.ca.gov</b> and search for <i>"Hospital Annual Financial Disclosure Report Complete Data Set."</i></li>
+    <li>Download the newest year (2024–2025). It's one Excel file, about 12 MB.</li>
+    <li>Download our <b>data dictionary</b> too. It tells the AI where everything lives in the file.</li>
+  </ol>
+  <p class="row"><a class="btn" id="dict-dl" href="HCAI_Data_Dictionary.md" download="HCAI Data Dictionary.md">⬇ Download data dictionary</a></p>
+  <div class="tip"><b>Peek inside if you like:</b> each row is a hospital, and the first 4 rows explain each column. The dictionary is easy reading too.</div>
+</section>
+
+<section class="card">
+  <h2><span class="n">3</span>Work with AI</h2>
+  <p class="sub">Use an AI that can work with files, like ChatGPT or Claude. Open a <b>fresh chat</b> for each step. For Chats 1 and 2, <b>attach both files</b>: the data and the dictionary.</p>
+  <div class="tip"><b>These prompts are examples, not rules.</b> Start from them, then rewrite them your own way. Keep a few notes on what worked better or worse (a prompt that got a cleaner answer, or one that confused the AI). We'll compare notes as a group.</div>
+
+  <div class="chat">
+    <h3>Chat 1 · The Analyst</h3>
+    <p class="who">Crunches the numbers and makes your chart.</p>
+    <div class="row"><button class="btn" type="button" data-copy>Copy example</button><button class="btn ghost" type="button" data-show>See example</button></div>
+<pre>You're a careful data analyst helping me with California hospital data (HCAI). I've attached two files: the data (please use the first tab) and a data dictionary. Please read the dictionary first. It explains how the file is laid out, where each field lives, and the common traps. Use code for all calculations.
+
+I'm recreating this exhibit from the UNC Sheps Center with California data: [name the brief and figure, and paste its link].
+My question: [your question in one sentence]
+
+Before calculating, please show me your plan and wait for my OK:
+- which fields you'll use (Page / Column / Line)
+- which hospitals you'll include and how many (start with "Short-Term General" hospitals, as the dictionary describes)
+- how you'll calculate the answer, in plain words
+
+After I say OK, please share a results table, the top 5 and bottom 5 hospitals by name, a chart with a title that states the finding, and a short RESULTS SUMMARY.</pre>
+    <p class="after">💡 When it shows the plan, glance at the hospital count. Around 300 is about right. If it's way off, just ask why.</p>
+  </div>
+
+  <div class="chat">
+    <h3>Chat 2 · The Reviewer</h3>
+    <p class="who">A second opinion: it redoes the main number to catch mistakes.</p>
+    <div class="row"><button class="btn" type="button" data-copy>Copy example</button><button class="btn ghost" type="button" data-show>See example</button></div>
+<pre>You're a thoughtful health economist giving a second opinion on someone's analysis of California hospital data (HCAI). I've attached the data (please use the first tab) and a data dictionary. Please read the dictionary first.
+
+Question: [your question]
+Their results: [paste the Analyst's RESULTS SUMMARY]
+
+First, please calculate the main number yourself with code, before looking closely at theirs. Then compare. List up to 5 suggestions, marking each "fix first" or "nice to have." If it all looks good, just say so.</pre>
+    <p class="after">💡 If it flags anything to "fix first," take it back to Chat 1 and ask for an update.</p>
+  </div>
+
+  <div class="chat">
+    <h3>Chat 3 · The Writer</h3>
+    <p class="who">Turns your numbers into clear, careful words.</p>
+    <div class="row"><button class="btn" type="button" data-copy>Copy example</button><button class="btn ghost" type="button" data-show>See example</button></div>
+<pre>Please help me write up a finding for a short policy brief. Use only the numbers below and don't do any new math. I'd like:
+1. a chart title that states the finding
+2. 2–3 clear sentences describing it
+3. one sentence on the main limitation
+Keep the tone plain and careful, and avoid words like "caused" or "proves."
+
+[paste the final RESULTS SUMMARY]</pre>
+  </div>
+</section>
+
+<section class="card">
+  <h2><span class="n">4</span>Give it a quick look yourself</h2>
+  <p class="sub">AI is a great helper, but it can slip up while sounding sure of itself. A few minutes of checking makes your work trustworthy:</p>
+  <ul class="checks">
+    <li><span><b>Try one hospital by hand</b> in Excel. Do you get the same number?</span></li>
+    <li><span><b>Read the top 5 and bottom 5 names.</b> Do they look like regular hospitals, and do the numbers seem believable?</span></li>
+    <li><span><b>Compare with an outside source</b>, like a news story, a report, or (for wages) BLS pay for the same job in California, May 2024. In the same ballpark?</span></li>
+    <li><span><b>Match your sentences to the results.</b> Every number should come from the Analyst.</span></li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2><span class="n">5</span>Share what you made</h2>
+  <p>Send your organizer your <b>chart</b>, your <b>sentences</b>, a line about <b>what you checked</b>, and your <b>prompt notes</b> (what worked better or worse). Put your chart next to the Sheps original. How does California compare? Did you catch the AI making a mistake? We'd love to hear about it!</p>
+</section>
+
+<p class="foot">Questions at any point? Ask an organizer. We're here to help. 🙂</p>
+</div>
+
+<script>
+document.querySelectorAll('.chat').forEach(c=>{
+  const pre=c.querySelector('pre'), cp=c.querySelector('[data-copy]'), sh=c.querySelector('[data-show]');
+  sh.onclick=()=>{pre.classList.toggle('open');sh.textContent=pre.classList.contains('open')?'Hide example':'See example';};
+  cp.onclick=async()=>{
+    try{await navigator.clipboard.writeText(pre.textContent);cp.textContent='Copied ✓';}
+    catch(e){pre.classList.add('open');const r=document.createRange();r.selectNodeContents(pre);getSelection().removeAllRanges();getSelection().addRange(r);cp.textContent='Press Cmd/Ctrl+C';}
+    setTimeout(()=>cp.textContent='Copy example',2000);
+  };
+});
+</script>
+</body>
+</html>
