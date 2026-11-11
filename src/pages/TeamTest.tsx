@@ -12,12 +12,14 @@ import {
   CATEGORIES,
   HEADLINE_MAX,
   REC_BOARD,
+  TITLE_MAX,
   TAG_MAX,
   VOTE,
-  WHY_MAX,
   categoryById,
   categoryFor,
+  cleanTitle,
   encodeRec,
+  fetchTitle,
   leaders,
   parseTags,
   popularTags,
@@ -144,7 +146,8 @@ function RecForm({
   const [name, setName] = useState(initialName);
   const [link, setLink] = useState("");
   const [headline, setHeadline] = useState("");
-  const [why, setWhy] = useState("");
+  const [title, setTitle] = useState("");
+  const [looking, setLooking] = useState(false);
   const [category, setCategory] = useState("");
   const [tags, setTags] = useState("");
   const [busy, setBusy] = useState(false);
@@ -157,6 +160,21 @@ function RecForm({
   const fromLibrary = videoId ? libraryById.get(videoId) : undefined;
   const already = videoId ? existing.get(videoId) : undefined;
   const suggested = fromLibrary ? categoryFor(fromLibrary.topics) : "";
+  // The video's own title: from the library, else from YouTube; if neither works, the student types it.
+  useEffect(() => {
+    if (!videoId) return;
+    if (fromLibrary) return setTitle(fromLibrary.title);
+    let live = true;
+    setLooking(true);
+    void fetchTitle(videoId).then((t) => {
+      if (!live) return;
+      setLooking(false);
+      if (t) setTitle(t);
+    });
+    return () => {
+      live = false;
+    };
+  }, [videoId, fromLibrary]);
   // A library video suggests its category until the student picks one.
   useEffect(() => {
     if (suggested && !category) setCategory(suggested);
@@ -165,15 +183,15 @@ function RecForm({
   const submit = async () => {
     // A video that's already here is the first thing to say: the rest of the form doesn't matter then.
     if (already) return setError(`${already.name} already recommended this video. Vote for their pick instead.`);
-    const problem = recProblem(name, link, headline, why, category);
+    const problem = recProblem(name, link, headline, title, category);
     if (problem) return setError(problem);
     setBusy(true);
     setError("");
     try {
-      await onPost(clean(name), category, encodeRec({ headline, videoId, why, tags: parseTags(tags) }));
+      await onPost(clean(name), category, encodeRec({ headline, videoId, title, why: "", tags: parseTags(tags) }));
       setLink("");
       setHeadline("");
-      setWhy("");
+      setTitle("");
       setTags("");
       setCategory("");
     } catch (e) {
@@ -197,7 +215,10 @@ function RecForm({
           <label htmlFor={`${id}-link`} className="label-l">
             YouTube link
           </label>
-          <input id={`${id}-link`} value={link} inputMode="url" placeholder="https://youtu.be/…" autoComplete="off" onChange={(e) => setLink(e.target.value)} />
+          <input id={`${id}-link`} value={link} inputMode="url" placeholder="https://youtu.be/…" autoComplete="off" onChange={(e) => {
+              setLink(e.target.value);
+              setTitle("");
+            }} />
           {link.trim() && !videoId && <span className="body-s rec-hint-bad">That doesn't look like a YouTube video link yet.</span>}
           {fromLibrary && (
             <span className="body-s rec-hint">
@@ -214,9 +235,25 @@ function RecForm({
           )}
         </div>
         <LibraryPicker videos={videos} onPick={(v) => setLink(watchUrl(v.id))} />
+        {videoId && (
+          <div className="board-field">
+            <label htmlFor={`${id}-title`} className="label-l">
+              Video title
+            </label>
+            <input
+              id={`${id}-title`}
+              value={title}
+              maxLength={TITLE_MAX}
+              placeholder={looking ? "Looking it up on YouTube…" : "Copy the title from YouTube"}
+              readOnly={Boolean(fromLibrary)}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            {!fromLibrary && !looking && !title && <span className="body-s muted">We couldn't look the title up. Type it as it appears on YouTube.</span>}
+          </div>
+        )}
         <div className="board-field">
           <label htmlFor={`${id}-headline`} className="label-l">
-            Your headline
+            Your recommendation, in one line
           </label>
           <input
             id={`${id}-headline`}
@@ -246,15 +283,6 @@ function RecForm({
             </select>
           </div>
           <TagField id={`${id}-tags`} value={tags} onChange={setTags} suggestions={fromLibrary ? tagNames(fromLibrary) : []} />
-        </div>
-        <div className="board-field">
-          <label htmlFor={`${id}-why`} className="label-l">
-            Why watch it? <span className="muted">(optional)</span>
-          </label>
-          <textarea id={`${id}-why`} rows={2} value={why} placeholder="Who it's for, or the part worth skipping to" aria-describedby={`${id}-wcount`} onChange={(e) => setWhy(e.target.value)} />
-          <span id={`${id}-wcount`} className="body-s muted board-count" data-over={why.length > WHY_MAX}>
-            {why.length} / {WHY_MAX}
-          </span>
         </div>
         <div className="board-field">
           <label htmlFor={`${id}-name`} className="label-l">
@@ -288,8 +316,9 @@ function RecForm({
           )}
           <div className="rec-body">
             {category && <span className="rec-cat label-m">{categoryById.get(category)?.label}</span>}
-            <p className="title-m rec-headline">{clean(headline) || "Your headline goes here"}</p>
-            <p className="body-s muted">by {clean(name) || "your name"}</p>
+            <p className="title-m rec-title">{cleanTitle(title) || "The video's title"}</p>
+            <p className="body-l rec-quote">“{clean(headline) || "Your recommendation goes here"}”</p>
+            <p className="body-s muted">Recommended by {clean(name) || "your name"}</p>
             {parseTags(tags).length > 0 && (
               <div className="rec-tag-line">
                 {parseTags(tags).map((t) => (
@@ -326,7 +355,7 @@ function RecCard({
   voted: boolean;
   reported: boolean;
   onVote: () => Promise<void>;
-  onEdit: (headline: string, why: string, tags: string[]) => Promise<void>;
+  onEdit: (headline: string, title: string, tags: string[]) => Promise<void>;
   onRemove: () => Promise<void>;
   onReport: () => Promise<void>;
   onTag: (tag: string) => void;
@@ -335,7 +364,8 @@ function RecCard({
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [headline, setHeadline] = useState(rec.headline);
-  const [why, setWhy] = useState(rec.why);
+  const shownTitle = video?.title ?? (rec.title || "A YouTube video");
+  const [title, setTitle] = useState(video?.title ?? rec.title);
   const [tags, setTags] = useState(rec.tags.join(", "));
   const run = async (f: () => Promise<void>) => {
     setError("");
@@ -354,7 +384,7 @@ function RecCard({
 
   return (
     <article className="rec-card" id={`rec-${rec.id}`} aria-labelledby={`rec-h-${rec.id}`}>
-      <a href={watchUrl(rec.videoId)} target="_blank" rel="noreferrer noopener" className="rec-watch" aria-label={`Watch on YouTube: ${video?.title ?? rec.headline}`}>
+      <a href={watchUrl(rec.videoId)} target="_blank" rel="noreferrer noopener" className="rec-watch" aria-label={`Watch on YouTube: ${shownTitle}`}>
         <Thumb videoId={rec.videoId} />
         {rank !== null && rank <= 3 && rec.votes > 0 && <span className={`rec-rank rank-${rank}`}>#{rank}</span>}
         <span className="rec-play" aria-hidden="true">
@@ -367,22 +397,24 @@ function RecCard({
             className="rec-edit"
             onSubmit={(e) => {
               e.preventDefault();
-              const problem = recProblem(rec.name, watchUrl(rec.videoId), headline, why, rec.category);
+              const problem = recProblem(rec.name, watchUrl(rec.videoId), headline, title, rec.category);
               if (problem) return setError(problem);
-              void run(() => onEdit(headline, why, parseTags(tags)));
+              void run(() => onEdit(headline, title, parseTags(tags)));
             }}
           >
+            {!video && (
+              <label className="label-l">
+                Video title
+                <input value={title} maxLength={TITLE_MAX} onChange={(e) => setTitle(e.target.value)} />
+              </label>
+            )}
             <label className="label-l">
-              Headline
+              Your recommendation
               <input value={headline} onChange={(e) => setHeadline(e.target.value)} autoFocus />
             </label>
             <label className="label-l">
               Tags
               <input value={tags} onChange={(e) => setTags(e.target.value)} />
-            </label>
-            <label className="label-l">
-              Why watch it?
-              <textarea rows={2} value={why} onChange={(e) => setWhy(e.target.value)} />
             </label>
             <div className="board-actions">
               <button type="submit" className="btn filled sm state" disabled={busy}>
@@ -400,10 +432,13 @@ function RecCard({
                 <Icon name={category.icon} size={14} /> {category.label}
               </span>
             )}
-            <h3 id={`rec-h-${rec.id}`} className="title-m rec-headline">
-              {rec.headline}
+            <h3 id={`rec-h-${rec.id}`} className="title-m rec-title">
+              {shownTitle}
             </h3>
+            {video && <p className="body-s muted rec-channel">{video.channel}</p>}
+            <p className="body-l rec-quote">“{rec.headline}”</p>
             <p className="body-s rec-by">
+              <span className="muted">Recommended by</span>
               <span className="label-l">{rec.name}</span>
               {mine && <span className="board-you label-m">You</span>}
               <span className="muted">
@@ -411,15 +446,6 @@ function RecCard({
                 {rec.editedAt && " · edited"}
               </span>
             </p>
-            {rec.why && <p className="body-m rec-why">{rec.why}</p>}
-            {video && (
-              <p className="body-s muted rec-video">
-                <Icon name="smart_display" size={16} />
-                <span>
-                  {video.title} · {video.channel}
-                </span>
-              </p>
-            )}
             {rec.tags.length > 0 && (
               <div className="rec-tag-line">
                 {rec.tags.map((t) => (
@@ -715,8 +741,8 @@ export function TeamTest() {
                 reported={reported.has(r.id)}
                 onVote={() => vote(r)}
                 onTag={pickTag}
-                onEdit={async (headline, why, tags) => {
-                  await store.edit(r.id, encodeRec({ headline, videoId: r.videoId, why, tags }));
+                onEdit={async (headline, title, tags) => {
+                  await store.edit(r.id, encodeRec({ headline, videoId: r.videoId, title, why: r.why, tags }));
                   await load();
                 }}
                 onRemove={async () => {

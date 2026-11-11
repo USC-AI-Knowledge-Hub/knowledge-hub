@@ -91,18 +91,33 @@ export function youtubeId(input: string): string {
 export const watchUrl = (id: string) => `https://www.youtube.com/watch?v=${id}`;
 export const thumbUrl = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
+export const TITLE_MAX = 150;
+
 export interface RecDraft {
+  /** The student's one-line recommendation, shown in quotes. */
   headline: string;
   videoId: string;
+  /** The video's own title, from the Hub's library or YouTube, or typed by the student. */
+  title: string;
+  /** A longer note. The form no longer asks for one; older picks may have it. */
   why: string;
   tags: string[];
 }
 
-/** The post body for a pick: headline, the video's address, its tags, then the note if there is one. */
+/** A video title cleaned for storing: one line, no links, not too long. */
+export const cleanTitle = (t: string) =>
+  clean(t)
+    .replace(/\s+/g, " ")
+    .replace(/(https?:\/\/|www\.)\S*/gi, "")
+    .trim()
+    .slice(0, TITLE_MAX);
+
+/** The post body for a pick: headline, the video's address, "title:" and "tags:" lines, then any note. */
 export const encodeRec = (r: RecDraft) =>
   [
     clean(r.headline).replace(/\s+/g, " "),
     watchUrl(r.videoId),
+    ...(cleanTitle(r.title) ? [`title: ${cleanTitle(r.title)}`] : []),
     ...(r.tags.length ? [`tags: ${parseTags(r.tags.join(",")).join(", ")}`] : []),
     ...(clean(r.why) ? ["", clean(r.why)] : []),
   ].join("\n");
@@ -110,8 +125,14 @@ export const encodeRec = (r: RecDraft) =>
 /** A pick from a post body, or null when the body isn't one (then the page leaves it out). */
 export function decodeRec(body: string): RecDraft | null {
   const [headline = "", link = "", ...more] = body.split("\n");
-  const tagLine = more[0]?.startsWith("tags:") ? more.shift()! : "";
-  const rest = more;
+  let title = "";
+  let tagLine = "";
+  // The "title:" and "tags:" lines come straight after the address, in either order.
+  while (more.length && /^(title|tags):/.test(more[0])) {
+    const line = more.shift()!;
+    if (line.startsWith("title:")) title = line.slice(6);
+    else tagLine = line.slice(5);
+  }
   const videoId = youtubeId(link);
   const h = headline.trim();
   if (!h || !videoId) return null;
@@ -119,26 +140,25 @@ export function decodeRec(body: string): RecDraft | null {
   return {
     headline: h.slice(0, HEADLINE_MAX),
     videoId,
-    why: rest.join("\n").trim().slice(0, WHY_MAX),
-    tags: parseTags(tagLine.slice(5)),
+    title: cleanTitle(title),
+    why: more.join("\n").trim().slice(0, WHY_MAX),
+    tags: parseTags(tagLine),
   };
 }
 
 /** Why a pick can't be sent, or "" if it can. */
-export function recProblem(name: string, link: string, headline: string, why: string, category: string): string {
+export function recProblem(name: string, link: string, headline: string, title: string, category: string): string {
   const n = clean(name);
   if (!n) return "Add your name so people know whose pick it is.";
   if (n.length > NAME_MAX) return `Use a name of ${NAME_MAX} characters or fewer.`;
   if (/(https?:\/\/|www\.)/i.test(n)) return "Names can't contain links.";
   if (!link.trim()) return "Paste a YouTube link, or pick a video from the Hub's library.";
   if (!youtubeId(link)) return "That isn't a YouTube video link. Copy it from the Share button under the video.";
+  if (!cleanTitle(title)) return "Add the video's title, as it appears on YouTube.";
   const h = clean(headline);
-  if (!h) return "Write a one-line headline: why should someone watch it?";
-  if (h.length > HEADLINE_MAX) return `Keep the headline to ${HEADLINE_MAX} characters. It's ${h.length - HEADLINE_MAX} over.`;
-  if (/(https?:\/\/|www\.)/i.test(h)) return "Put the link in the video box, not the headline.";
-  const w = clean(why);
-  if (w.length > WHY_MAX) return `Keep the note to ${WHY_MAX} characters. It's ${w.length - WHY_MAX} over.`;
-  if (/(https?:\/\/|www\.)/i.test(w)) return "Leave links out of the note. The video link is enough.";
+  if (!h) return "Write your recommendation in one line: why should someone watch it?";
+  if (h.length > HEADLINE_MAX) return `Keep your recommendation to ${HEADLINE_MAX} characters. It's ${h.length - HEADLINE_MAX} over.`;
+  if (/(https?:\/\/|www\.)/i.test(h)) return "Put the link in the video box, not in your recommendation.";
   if (!categoryById.has(category)) return "Pick a category.";
   return "";
 }
@@ -213,7 +233,7 @@ export function searchRecs(recs: Rec[], q: string, videoText: (videoId: string) 
   const words = q.toLowerCase().split(/\s+/).filter(Boolean);
   if (!words.length) return recs;
   return recs.filter((r) => {
-    const hay = `${r.headline} ${r.why} ${r.name} ${r.tags.join(" ")} ${r.tags.join(" ").replace(/-/g, " ")} ${videoText(r.videoId)}`.toLowerCase();
+    const hay = `${r.headline} ${r.title} ${r.why} ${r.name} ${r.tags.join(" ")} ${r.tags.join(" ").replace(/-/g, " ")} ${videoText(r.videoId)}`.toLowerCase();
     return words.every((w) => hay.includes(w.replace(/^#/, "")));
   });
 }
@@ -226,4 +246,19 @@ export function popularTags(recs: Rec[], limit = 12): { tag: string; count: numb
     .map(([tag, count]) => ({ tag, count }))
     .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
     .slice(0, limit);
+}
+
+/**
+ * A YouTube video's title from YouTube's public oEmbed address, or "" when it can't be had (offline,
+ * blocked, a private video). The form then asks the student to type it.
+ */
+export async function fetchTitle(videoId: string, fetchImpl: typeof fetch = (...a) => fetch(...a)): Promise<string> {
+  try {
+    const res = await fetchImpl(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(watchUrl(videoId))}`);
+    if (!res.ok) return "";
+    const data = (await res.json()) as { title?: unknown };
+    return typeof data.title === "string" ? cleanTitle(data.title) : "";
+  } catch {
+    return "";
+  }
 }

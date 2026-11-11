@@ -21,8 +21,8 @@
 .rec-new[data-open="false"] {
   padding: 12px 20px;
 }
-.rec-form-row { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 14px; align-items: start; }
-.rec-form select { font: inherit; color: var(--md-sys-color-on-surface); background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); border-radius: var(--md-shape-sm); padding: 10px 12px; }
+.rec-form-row { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: 14px; align-items: start; }
+.rec-form select { font: inherit; color: var(--md-sys-color-on-surface); background: var(--md-sys-color-surface); border: 1px solid var(--md-sys-color-outline); border-radius: var(--md-shape-sm); padding: 10px 12px; width: 100%; }
 .rec-new-head {
   display: flex;
   flex-wrap: wrap;
@@ -53,8 +53,14 @@
   color: var(--md-sys-color-error);
 }
 .rec-inline-link {
+  padding: 0;
+  border: 0;
+  background: none;
   color: inherit;
+  font: inherit;
   font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .rec-done {
   display: flex;
@@ -385,3 +391,8 @@ span.rec-tag { cursor: default; }
   .recs-layout { grid-template-columns: 1fr; }
   .recs-side { position: static; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: start; }
 }
+
+/* A pick: the video's own title, then the student's line in quotes, then who recommended it. */
+.rec-title { margin: 0; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rec-channel { margin: -4px 0 0; }
+.rec-quote { margin: 0; padding-left: 12px; border-left: 3px solid var(--md-sys-color-primary); font-style: italic; overflow-wrap: anywhere; }
