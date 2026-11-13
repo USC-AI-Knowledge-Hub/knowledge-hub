@@ -139,7 +139,7 @@ describe("board schema", () => {
   });
 
   it("takes a video pick as the page sends it, and counts its votes", async () => {
-    const body = encodeRec({ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", why: "Skip to 4:10.", tags: ["rag"] });
+    const body = encodeRec({ headline: "The clearest RAG explainer", videoId: "b1j0Hf1GqZE", title: "RAG explained", why: "Skip to 4:10.", tags: ["rag"] });
     const id = await post({ board: REC_BOARD, topic: "agents", body });
     for (const v of ["a", "b"]) await db.query("select board_react($1,$2,$3)", [id, v.repeat(24), VOTE]);
     const list = (await rows()).map((r) => ({

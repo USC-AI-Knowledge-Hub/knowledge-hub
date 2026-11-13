@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { categoryFor, decodeRec, encodeRec, leaders, parseTags, popularTags, rankRecs, recProblem, recsFrom, searchRecs, thumbUrl, youtubeId, type Rec } from "../recs";
+import { categoryFor, decodeRec, encodeRec, fetchTitle, leaders, parseTags, popularTags, rankRecs, recProblem, recsFrom, searchRecs, thumbUrl, youtubeId, type Rec } from "../recs";
 import type { Post } from "../store";
 
 const ID = "dQw4w9WgXcQ";
@@ -31,37 +31,32 @@ describe("youtubeId", () => {
 });
 
 describe("encode and decode", () => {
-  it("round-trips a pick, with and without a note", () => {
-    const r = {
-      headline: "The clearest intro to transformers",
-      videoId: ID,
-      why: "Watch the first 10 minutes.\nThen the demo.",
-      tags: ["transformers", "beginner"],
-    };
+  it("round-trips a pick with its title and tags", () => {
+    const r = { headline: "The clearest intro to transformers", videoId: ID, title: "Transformers, explained", why: "", tags: ["transformers", "beginner"] };
     expect(decodeRec(encodeRec(r))).toEqual(r);
-    expect(decodeRec(encodeRec({ ...r, why: "  " }))).toEqual({
-      ...r,
-      why: "",
-    });
-    expect(encodeRec({ ...r, why: "" })).toBe(`The clearest intro to transformers\nhttps://www.youtube.com/watch?v=${ID}\ntags: transformers, beginner`);
-    expect(encodeRec({ ...r, why: "", tags: [] })).toBe(`The clearest intro to transformers\nhttps://www.youtube.com/watch?v=${ID}`);
+    expect(encodeRec(r)).toBe(`The clearest intro to transformers\nhttps://www.youtube.com/watch?v=${ID}\ntitle: Transformers, explained\ntags: transformers, beginner`);
+    expect(encodeRec({ ...r, title: "", tags: [] })).toBe(`The clearest intro to transformers\nhttps://www.youtube.com/watch?v=${ID}`);
   });
 
-  it("reads older picks without a tags line, and a note that starts like one", () => {
-    expect(decodeRec(`Old pick\nhttps://youtu.be/${ID}\n\nA note`)).toEqual({ headline: "Old pick", videoId: ID, why: "A note", tags: [] });
-    expect(decodeRec(encodeRec({ headline: "H", videoId: ID, why: "tags: not really", tags: [] }))?.why).toBe("tags: not really");
+  it("reads older picks: no title or tags lines, a note, either order", () => {
+    expect(decodeRec(`Old pick\nhttps://youtu.be/${ID}\n\nA note`)).toEqual({ headline: "Old pick", videoId: ID, title: "", why: "A note", tags: [] });
+    expect(decodeRec(`H\nhttps://youtu.be/${ID}\ntags: a, b\ntitle: T`)).toMatchObject({ title: "T", tags: ["a", "b"] });
+    expect(decodeRec(encodeRec({ headline: "H", videoId: ID, title: "", why: "tags: not really", tags: [] }))?.why).toBe("tags: not really");
   });
 
-  it("keeps the headline on one line", () => {
-    expect(decodeRec(encodeRec({ headline: "Two\nlines", videoId: ID, why: "", tags: [] }))?.headline).toBe("Two lines");
+  it("keeps the headline and title on one line, and links out of the title", () => {
+    const r = decodeRec(encodeRec({ headline: "Two\nlines", videoId: ID, title: "A\ntitle https://spam.example here", why: "", tags: [] }));
+    expect(r?.headline).toBe("Two lines");
+    expect(r?.title).toBe("A title here");
   });
 
   it("ignores bodies that aren't picks and trims long ones", () => {
     expect(decodeRec("just a comment")).toBeNull();
     expect(decodeRec(`Headline\nhttps://example.com/x`)).toBeNull();
     expect(decodeRec(`\nhttps://youtu.be/${ID}`)).toBeNull();
-    const long = decodeRec(`${"h".repeat(200)}\nhttps://youtu.be/${ID}\n\n${"w".repeat(900)}`);
+    const long = decodeRec(`${"h".repeat(200)}\nhttps://youtu.be/${ID}\ntitle: ${"t".repeat(300)}\n\n${"w".repeat(900)}`);
     expect(long?.headline).toHaveLength(90);
+    expect(long?.title).toHaveLength(150);
     expect(long?.why).toHaveLength(400);
   });
 
@@ -70,21 +65,38 @@ describe("encode and decode", () => {
   });
 });
 
+describe("fetchTitle", () => {
+  const reply = (status: number, body: unknown) => (async () => new Response(JSON.stringify(body), { status })) as typeof fetch;
+  it("reads YouTube's title, cleaned", async () => {
+    let asked = "";
+    const f = (async (url: string) => {
+      asked = url;
+      return new Response(JSON.stringify({ title: "  RAG\nexplained  " }));
+    }) as unknown as typeof fetch;
+    expect(await fetchTitle(ID, f)).toBe("RAG explained");
+    expect(asked).toBe(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(`https://www.youtube.com/watch?v=${ID}`)}`);
+  });
+  it("gives up quietly", async () => {
+    expect(await fetchTitle(ID, reply(404, {}))).toBe("");
+    expect(await fetchTitle(ID, reply(200, { title: 42 }))).toBe("");
+    expect(await fetchTitle(ID, (async () => Promise.reject(new Error("offline"))) as typeof fetch)).toBe("");
+  });
+});
+
 describe("recProblem", () => {
-  const ok = ["Ana", `https://youtu.be/${ID}`, "Best 5-minute RAG explainer", "", "agents"] as const;
+  const ok = ["Ana", `https://youtu.be/${ID}`, "Best 5-minute RAG explainer", "RAG explained", "agents"] as const;
   it("accepts a good pick", () => expect(recProblem(...ok)).toBe(""));
   it("says what's missing or wrong", () => {
-    expect(recProblem("", ok[1], ok[2], "", "agents")).toMatch(/name/);
-    expect(recProblem("www.spam.com", ok[1], ok[2], "", "agents")).toMatch(/links/);
-    expect(recProblem(ok[0], "", ok[2], "", "agents")).toMatch(/YouTube link/);
-    expect(recProblem(ok[0], "https://vimeo.com/1", ok[2], "", "agents")).toMatch(/isn't a YouTube/);
-    expect(recProblem(ok[0], ok[1], "  ", "", "agents")).toMatch(/headline/);
-    expect(recProblem(ok[0], ok[1], "x".repeat(91), "", "agents")).toMatch(/1 over/);
-    expect(recProblem(ok[0], ok[1], "see https://x.com", "", "agents")).toMatch(/video box/);
-    expect(recProblem(ok[0], ok[1], ok[2], "w".repeat(401), "agents")).toMatch(/note/);
-    expect(recProblem(ok[0], ok[1], ok[2], "more at www.x.com", "agents")).toMatch(/Leave links/);
-    expect(recProblem(ok[0], ok[1], ok[2], "", "")).toMatch(/category/);
-    expect(recProblem(ok[0], ok[1], ok[2], "", "made-up")).toMatch(/category/);
+    expect(recProblem("", ok[1], ok[2], ok[3], "agents")).toMatch(/name/);
+    expect(recProblem("www.spam.com", ok[1], ok[2], ok[3], "agents")).toMatch(/links/);
+    expect(recProblem(ok[0], "", ok[2], ok[3], "agents")).toMatch(/YouTube link/);
+    expect(recProblem(ok[0], "https://vimeo.com/1", ok[2], ok[3], "agents")).toMatch(/isn't a YouTube/);
+    expect(recProblem(ok[0], ok[1], ok[2], "  ", "agents")).toMatch(/title/);
+    expect(recProblem(ok[0], ok[1], "  ", ok[3], "agents")).toMatch(/one line/);
+    expect(recProblem(ok[0], ok[1], "x".repeat(91), ok[3], "agents")).toMatch(/1 over/);
+    expect(recProblem(ok[0], ok[1], "see https://x.com", ok[3], "agents")).toMatch(/video box/);
+    expect(recProblem(ok[0], ok[1], ok[2], ok[3], "")).toMatch(/category/);
+    expect(recProblem(ok[0], ok[1], ok[2], ok[3], "made-up")).toMatch(/category/);
   });
 });
 
@@ -94,7 +106,7 @@ const post = (over: Partial<Post>): Post => ({
   topic: "agents",
   parentId: null,
   name: "Ana",
-  body: encodeRec({ headline: "Good one", videoId: ID, why: "", tags: [] }),
+  body: encodeRec({ headline: "Good one", videoId: ID, title: "", why: "", tags: [] }),
   createdAt: "2026-11-01T00:00:00Z",
   editedAt: null,
   deleted: false,
@@ -127,6 +139,7 @@ const rec = (id: string, votes: number, createdAt: string, name = "Ana"): Rec =>
   videoId: ID,
   why: "",
   category: "other",
+  title: "",
   tags: [],
   editedAt: null,
 });

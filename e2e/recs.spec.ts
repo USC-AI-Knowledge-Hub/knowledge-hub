@@ -27,6 +27,8 @@ async function seed(page: Page, rows: unknown[]) {
       body: '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="3"/>',
     }),
   );
+  // YouTube's title lookup, for videos outside the Hub's library.
+  await page.route(/youtube\.com\/oembed/, (r) => r.fulfill({ contentType: "application/json", body: JSON.stringify({ title: "A video from YouTube" }) }));
   await page.addInitScript((r) => {
     if (!sessionStorage.getItem("seeded")) {
       localStorage.setItem("kh-board-local", JSON.stringify(r));
@@ -44,8 +46,8 @@ test.describe("video picks", () => {
     ]);
     await page.goto("/team/test");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Video picks");
-    const headlines = page.locator(".rec-card h3");
-    await expect(headlines).toHaveText(["The best one", "Second best", "Newest, no votes"]);
+    const headlines = page.locator(".rec-card:not(.is-preview) .rec-quote");
+    await expect(headlines).toHaveText(["“The best one”", "“Second best”", "“Newest, no votes”"]);
     await expect(page.locator("#rec-b .rec-rank")).toHaveText("#1");
     await expect(page.locator("#rec-b img")).toHaveAttribute("src", "https://i.ytimg.com/vi/ajfQWhGQGLE/hqdefault.jpg");
     await expect(page.locator("#rec-b .rec-watch")).toHaveAttribute("href", "https://www.youtube.com/watch?v=ajfQWhGQGLE");
@@ -60,21 +62,21 @@ test.describe("video picks", () => {
     await expect(page.locator("#rec-a").getByRole("button", { name: /Vote for this pick, 2 votes/ })).toHaveAttribute("aria-pressed", "false");
 
     await page.getByRole("radio", { name: "Newest" }).click();
-    await expect(headlines.first()).toHaveText("Newest, no votes");
+    await expect(headlines.first()).toHaveText("“Newest, no votes”");
     await page.getByRole("radio", { name: "This week" }).click();
-    await expect(headlines).toHaveText(["Second best", "Newest, no votes"]);
+    await expect(headlines).toHaveText(["“Second best”", "“Newest, no votes”"]);
     await page.getByRole("radio", { name: "Top" }).click();
 
     // Categories, tags and search narrow the list together.
     await page.getByRole("group", { name: "Filter by category" }).getByRole("button", { name: /Agents and automation/ }).click();
-    await expect(headlines).toHaveText(["The best one"]);
+    await expect(headlines).toHaveText(["“The best one”"]);
     await page.getByRole("group", { name: "Filter by category" }).getByRole("button", { name: /^All/ }).click();
     await page.locator("#rec-a").getByRole("button", { name: "Show picks tagged beginner" }).click();
-    await expect(headlines).toHaveText(["The best one", "Second best"]);
+    await expect(headlines).toHaveText(["“The best one”", "“Second best”"]);
     await expect(page.getByRole("heading", { name: "Popular tags" })).toBeVisible();
     await page.getByRole("button", { name: "Remove tag filter beginner" }).click();
     await page.getByLabel("Search picks").fill("jordan 4:10");
-    await expect(headlines).toHaveText(["The best one"]);
+    await expect(headlines).toHaveText(["“The best one”"]);
     await page.getByLabel("Search picks").fill("nothing like this");
     await expect(page.getByText("No picks match")).toBeVisible();
     await page.getByRole("button", { name: "Clear filters" }).click();
@@ -96,8 +98,8 @@ test.describe("video picks", () => {
     await page.getByLabel("YouTube link").fill("https://vimeo.com/1");
     await expect(page.getByText("doesn't look like a YouTube video link")).toBeVisible();
     await page.getByLabel("YouTube link").fill(`https://youtu.be/${ID}?si=share`);
-    await page.getByLabel("Your headline").fill("The clearest RAG explainer");
-    await page.getByLabel("Why watch it?").fill("Short, with a good diagram.");
+    await expect(page.getByLabel("Video title")).toHaveValue("A video from YouTube");
+    await page.getByLabel("Your recommendation, in one line").fill("The clearest RAG explainer");
     await page.getByLabel("Your name").fill("Ana");
     await page.getByRole("button", { name: "Post my pick" }).click();
     await expect(page.getByRole("alert")).toContainText("Pick a category");
@@ -106,11 +108,14 @@ test.describe("video picks", () => {
     await expect(page.locator(".rec-preview")).toContainText("#vector-db");
     await expect(page.locator(".rec-preview img")).toHaveAttribute("src", `https://i.ytimg.com/vi/${ID}/hqdefault.jpg`);
     await expect(page.locator(".rec-preview")).toContainText("The clearest RAG explainer");
-    await expect(page.locator(".rec-preview")).toContainText("by Ana");
+    await expect(page.locator(".rec-preview")).toContainText("Recommended by Ana");
+    await expect(page.locator(".rec-preview .rec-title")).toHaveText("A video from YouTube");
     await page.getByRole("button", { name: "Post my pick" }).click();
 
     const card = page.locator(".rec-card:not(.is-preview)").first();
-    await expect(card.locator("h3")).toHaveText("The clearest RAG explainer");
+    await expect(card.locator("h3")).toHaveText("A video from YouTube");
+    await expect(card.locator(".rec-quote")).toHaveText("“The clearest RAG explainer”");
+    await expect(card).toContainText("Recommended by");
     await expect(card).toContainText("Ana");
     await expect(card).toContainText("You");
     await expect(card.getByRole("button", { name: /Vote for this pick/ })).toHaveCount(0);
@@ -122,17 +127,17 @@ test.describe("video picks", () => {
     await page.getByRole("button", { name: "Recommend a video" }).click();
     await page.getByLabel("YouTube link").fill(`https://www.youtube.com/watch?v=${ID}`);
     await expect(page.getByText("Already recommended by Ana")).toBeVisible();
-    await page.getByLabel("Your headline").fill("Again");
+    await page.getByLabel("Your recommendation, in one line").fill("Again");
     await page.getByRole("button", { name: "Post my pick" }).click();
     await expect(page.getByRole("alert")).toContainText("Vote for their pick instead");
     await page.getByRole("button", { name: "Vote for it instead" }).click();
     await expect(page.getByRole("button", { name: "Recommend a video" })).toBeVisible();
 
     await card.getByRole("button", { name: "Edit" }).click();
-    await card.getByLabel("Headline").fill("The clearest RAG explainer, edited");
+    await card.getByLabel("Your recommendation").fill("The clearest RAG explainer, edited");
     await card.getByLabel("Tags").fill("rag, beginner");
     await card.getByRole("button", { name: "Save" }).click();
-    await expect(card.locator("h3")).toHaveText("The clearest RAG explainer, edited");
+    await expect(card.locator(".rec-quote")).toHaveText("“The clearest RAG explainer, edited”");
     await expect(card).toContainText("edited");
     await expect(card.getByRole("button", { name: "Show picks tagged beginner" })).toBeVisible();
 
@@ -148,7 +153,24 @@ test.describe("video picks", () => {
     await page.getByRole("list", { name: "Library matches" }).getByRole("button").first().click();
     await expect(page.locator(".rec-hint")).toContainText("In the Hub's library");
     await expect(page.getByRole("combobox", { name: "Category" })).not.toHaveValue("");
+    await expect(page.getByLabel("Video title")).toHaveValue("What is RAG vs Agentic RAG? AI Explained for Beginners");
     await expect(page.getByText("Suggested:")).toBeVisible();
+  });
+
+  test("asks for the title when YouTube can't be reached", async ({ page }) => {
+    await seed(page, []);
+    await page.route(/youtube\.com\/oembed/, (r) => r.abort());
+    await page.goto("/team/test");
+    await page.getByLabel("YouTube link").fill(`https://youtu.be/${ID}`);
+    await expect(page.getByText("We couldn't look the title up")).toBeVisible();
+    await page.getByLabel("Your recommendation, in one line").fill("Worth it");
+    await page.getByRole("combobox", { name: "Category" }).selectOption("basics");
+    await page.getByLabel("Your name").fill("Ana");
+    await page.getByRole("button", { name: "Post my pick" }).click();
+    await expect(page.getByRole("alert")).toContainText("video's title");
+    await page.getByLabel("Video title").fill("My typed title");
+    await page.getByRole("button", { name: "Post my pick" }).click();
+    await expect(page.locator(".rec-card:not(.is-preview) h3")).toHaveText("My typed title");
   });
 
   test("skips posts that aren't picks, and fits a phone", async ({ page }) => {
@@ -160,7 +182,9 @@ test.describe("video picks", () => {
     await page.setViewportSize({ width: 360, height: 800 });
     await page.goto("/team/test");
     // An older pick from before categories still shows, under Other.
-    await expect(page.locator(".rec-card h3")).toHaveText(["Real one"]);
+    // It has no stored title and isn't a library video, so it gets a plain one.
+    await expect(page.locator(".rec-card .rec-quote")).toHaveText(["“Real one”"]);
+    await expect(page.locator(".rec-card h3")).toHaveText(["A YouTube video"]);
     await expect(page.locator(".rec-card")).toContainText("Other");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow).toBeLessThanOrEqual(0);
