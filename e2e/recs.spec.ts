@@ -146,14 +146,19 @@ test.describe("video picks", () => {
     await expect(page.getByText("No picks yet")).toBeVisible();
   });
 
-  test("fills in the category and suggests tags for a video from the Hub's library", async ({ page }) => {
+  test("fills in the category and suggests tags for a video from the Hub's library", async ({ page, request }) => {
+    // Use whatever the library holds today: the daily run adds and retires videos.
+    const { videos } = (await (await request.get("/data/videos.json")).json()) as { videos: { title: string; topics: string[] }[] };
+    const known = ["genai-basics", "chat-basics", "llms", "prompting", "writing", "research", "coding", "data", "agents", "automation", "rag", "multimodal", "presenting"];
+    const video = videos.find((v) => v.topics.some((t) => known.includes(t)));
+    test.skip(!video, "The library has no video with a known topic today.");
     await seed(page, []);
     await page.goto("/team/test");
-    await page.getByLabel("Or find it in the Hub's library").fill("RAG vs Agentic");
+    await page.getByLabel("Or find it in the Hub's library").fill(video!.title);
     await page.getByRole("list", { name: "Library matches" }).getByRole("button").first().click();
     await expect(page.locator(".rec-hint")).toContainText("In the Hub's library");
     await expect(page.getByRole("combobox", { name: "Category" })).not.toHaveValue("");
-    await expect(page.getByLabel("Video title")).toHaveValue("What is RAG vs Agentic RAG? AI Explained for Beginners");
+    await expect(page.getByLabel("Video title")).toHaveValue(video!.title);
     await expect(page.getByText("Suggested:")).toBeVisible();
   });
 
