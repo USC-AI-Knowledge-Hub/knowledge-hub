@@ -1,5 +1,5 @@
 import type { TrendKind } from "../../src/data/types";
-import { SETTINGS } from "./config";
+import { CONTENT_SINCE, SETTINGS, TALK_SETTINGS } from "./config";
 
 export interface Candidate {
   id: string;
@@ -16,7 +16,22 @@ export interface Candidate {
   /** Known to be a YouTube Short (RSS links them under /shorts/). */
   short?: boolean;
   trusted?: boolean;
+  /** Comment sentiment, -1 to 1, once the run has read the comments (sentiment.ts). */
+  sentiment?: number;
+  /** How many comments the sentiment is based on. */
+  comments?: number;
 }
+
+/** Published before the Hub's cutoff (CONTENT_SINCE). */
+export const tooOld = (publishedAt: string) => publishedAt.slice(0, 10) < CONTENT_SINCE;
+
+/** Few likes for the views, once there are enough views to tell. Hidden like counts pass. */
+export const fewLikes = (c: Pick<Candidate, "views" | "likes">) =>
+  c.likes !== undefined && c.views >= SETTINGS.likeRatioFromViews && c.likes / c.views < SETTINGS.minLikeRatio;
+
+/** Viewers' comments lean negative, on enough comments to tell. */
+export const badComments = (c: Pick<Candidate, "sentiment" | "comments">) =>
+  c.sentiment !== undefined && (c.comments ?? 0) >= SETTINGS.minComments && c.sentiment < SETTINGS.minSentiment;
 
 const HYPE = [
   /\b(insane|shocking|crazy|unbelievable|mind[- ]?blowing|game[- ]?changer|destroys?|killed|is dead|rip)\b/i,
@@ -95,6 +110,9 @@ export function rejectReason(c: Candidate, now: Date, { evergreen = false }: { e
   if (nonLatinRatio(c.title) > 0.3) return "not English";
   if (hypeLevel(c.title) >= 2) return "clickbait";
   if (ENTERTAINMENT.test(c.title)) return "entertainment";
+  if (tooOld(c.publishedAt)) return "before 2026";
+  if (fewLikes(c)) return "few likes";
+  if (badComments(c)) return "negative comments";
   // Evergreen: a tutorial for a tool the library barely covers may be older and less viewed.
   if (ageDays(c.publishedAt, now) > (evergreen ? SETTINGS.evergreenMaxAgeDays : SETTINGS.maxAgeDays)) return "too old";
   if (!c.trusted && c.views > 0) {
@@ -116,8 +134,30 @@ export function qualityScore(c: Candidate, now: Date): number {
   const fresh = Math.exp(-age / 30);
   const trust = c.trusted ? 1 : 0;
   const edu = EDUCATIONAL.test(c.title) ? 1 : 0;
+  // What viewers say in the comments: up to 0.1 either way, nothing when unread.
+  const mood = (c.comments ?? 0) >= SETTINGS.minComments ? (c.sentiment ?? 0) : 0;
   const s =
-    0.25 * reach + 0.2 * momentum + 0.15 * approval + 0.15 * fresh + 0.12 * trust + 0.13 * edu -
+    0.25 * reach + 0.2 * momentum + 0.15 * approval + 0.15 * fresh + 0.12 * trust + 0.13 * edu + 0.1 * mood -
     0.15 * hypeLevel(c.title);
   return Math.round(Math.max(0, Math.min(1, s)) * 100);
+}
+
+/**
+ * Why a video from a talk or podcast channel isn't kept as a talk, or null if it is: it must be from since the
+ * cutoff, long enough to be a talk rather than a clip, about AI, and well received (views, likes, comments).
+ */
+export function talkRejectReason(c: Candidate, now: Date): string | null {
+  if (c.live) return "live or upcoming";
+  if (c.short || /#shorts?\b/i.test(c.title)) return "short";
+  if (tooOld(c.publishedAt)) return "before 2026";
+  if (c.duration && c.duration < TALK_SETTINGS.minDuration) return "clip, not a talk";
+  if (c.duration > TALK_SETTINGS.maxDuration) return "too long";
+  if (c.language && !c.language.toLowerCase().startsWith("en")) return "not English";
+  if (hypeLevel(c.title) >= 2 || ENTERTAINMENT.test(c.title)) return "clickbait";
+  if (!mentionsAI(c.title) && !mentionsAI(c.description.slice(0, 400))) return "not about AI";
+  const min = ageDays(c.publishedAt, now) < 7 ? TALK_SETTINGS.minViewsFresh : TALK_SETTINGS.minViews;
+  if (c.views < min) return "too few views";
+  if (fewLikes(c)) return "few likes";
+  if (badComments(c)) return "negative comments";
+  return null;
 }

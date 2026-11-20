@@ -143,6 +143,8 @@ export interface CourseCheck {
   lessons?: number;
   seconds?: number;
   cover?: string;
+  /** Publish date (YYYY-MM-DD) of a single video, from the API check. */
+  published?: string;
   problem?: string;
 }
 
@@ -237,6 +239,10 @@ export interface Video {
   firstSeen: string;
   /** Picked up by the evergreen search for a tool the library barely covered, so it may be older. */
   evergreen?: boolean;
+  /** How viewers' top comments lean, -1 to 1 (scripts/pipeline/sentiment.ts). Absent when not read. */
+  sentiment?: number;
+  /** How many comments the sentiment is based on. */
+  comments?: number;
 }
 
 /** What kind of trend video it is. Shown as a label; trends have no difficulty. */
@@ -266,8 +272,27 @@ export interface VideoFeed {
   runDate: string | null;
   mode: "api" | "rss" | "none";
   classifier: "claude" | "heuristic";
-  stats: { candidates: number; kept: number; added: number; trends?: number };
+  stats: { candidates: number; kept: number; added: number; trends?: number; talks?: number };
   videos: Video[];
   /** AI news, launches, research and talks. Absent in feeds written before trends existed. */
   trends?: Trend[];
+  /** Talks and podcasts the daily run found on TALK_CHANNELS. Absent in feeds written before it did. */
+  talks?: AutoTalk[];
+}
+
+/** A talk or podcast episode picked automatically by the daily run (not an editor's pick). */
+export interface AutoTalk {
+  id: string;
+  title: string;
+  channel: string;
+  channelId: string;
+  publishedAt: string;
+  duration: number;
+  views: number;
+  likes?: number;
+  kind: TalkKind;
+  score: number;
+  sentiment?: number;
+  comments?: number;
+  firstSeen: string;
 }

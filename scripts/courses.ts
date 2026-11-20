@@ -72,7 +72,7 @@ async function viaOembed(t: Target): Promise<CourseCheck> {
 
 interface VideoItem {
   id: string;
-  snippet: { title: string; channelTitle: string };
+  snippet: { title: string; channelTitle: string; publishedAt?: string };
   contentDetails: { duration: string };
   status: { embeddable?: boolean; privacyStatus?: string };
 }
@@ -134,6 +134,7 @@ function videoCheck(t: Target, v: VideoItem | undefined): CourseCheck {
     lessons: 1,
     seconds: parseIsoDuration(v.contentDetails.duration),
     cover: v.id,
+    published: v.snippet.publishedAt?.slice(0, 10),
     problem,
   };
 }

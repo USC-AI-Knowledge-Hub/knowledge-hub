@@ -292,7 +292,7 @@ describe("evergreen search for barely covered tools", () => {
 
   it("still has limits on the evergreen path", () => {
     expect(rejectReason({ ...tutorial, views: 120 }, now, { evergreen: true })).toBe("too few views");
-    expect(rejectReason({ ...tutorial, publishedAt: "2023-01-01T00:00:00Z" }, now, { evergreen: true })).toBe("too old");
+    expect(rejectReason({ ...tutorial, publishedAt: "2023-01-01T00:00:00Z" }, now, { evergreen: true })).toBe("before 2026");
   });
 
   it("keeps the evergreen mark when a known video comes back", () => {
