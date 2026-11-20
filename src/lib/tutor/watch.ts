@@ -3,6 +3,7 @@
  * talks for the lessons the answer drew on, most relevant lesson first.
  */
 import { coursePlayable } from "../../components/CourseCard";
+import { recentEnough } from "../../data/since";
 import type { Playable } from "../../components/Player";
 import { talkPlayable, TALK_LABEL } from "../../components/TalkCard";
 import { coursesFor } from "../../data/courses";
@@ -81,7 +82,7 @@ function watchLessons(modules: string[], status: CourseStatus | null, limit: num
       .map((c) => live(c, status))
       .filter((c) => c.available)
       .sort((a, b) => a.hours - b.hours);
-    const picks = m.curated.filter((c) => status?.curated[c.id]?.ok ?? true);
+    const picks = m.curated.filter((c) => (status?.curated[c.id]?.ok ?? true) && recentEnough(status?.curated[c.id]?.published));
     const talks = talksFor(id)
       .map((t) => liveTalk(t, status))
       .filter((t) => t.available);

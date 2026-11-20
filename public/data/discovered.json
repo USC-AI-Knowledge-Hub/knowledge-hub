@@ -351,35 +351,6 @@
       ]
     },
     {
-      "id": "playground",
-      "name": "Playground",
-      "maker": "Google",
-      "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
-      "monogram": "Pl",
-      "bestFor": "Playground is a new experimental gaming platform that lets you create, play, and share custom games.",
-      "tasks": [],
-      "queries": [
-        "Playground AI tutorial"
-      ],
-      "match": [
-        "\\bPlayground\\b"
-      ],
-      "exclude": [],
-      "kind": "tool",
-      "urlKind": "announcement",
-      "origin": "feed",
-      "firstSeen": "2026-10-07",
-      "lastSeen": "2026-11-20",
-      "evidence": [
-        {
-          "source": "Google AI blog",
-          "title": "Introducing Playground: Create and play custom games",
-          "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
-          "date": "2026-10-07"
-        }
-      ]
-    },
-    {
       "id": "autodesk-ai",
       "name": "Autodesk AI",
       "maker": "Autodesk",
@@ -1144,41 +1115,6 @@
           "source": "Google DeepMind blog",
           "title": "Introducing AlphaProof Code: a breakthrough in verifying complex software at depth",
           "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
-          "date": "2026-11-10"
-        }
-      ]
-    },
-    {
-      "id": "businesses",
-      "name": "Businesses",
-      "maker": "OpenAI",
-      "url": "https://openai.com/index/introducing-businesses-chatgpt",
-      "monogram": "Bu",
-      "bestFor": "Manage your business information, get insights about how your business shows up, and turn interest into action in ChatGPT.",
-      "tasks": [],
-      "queries": [
-        "Businesses AI tutorial"
-      ],
-      "match": [
-        "\\bBusinesses\\b"
-      ],
-      "exclude": [],
-      "kind": "tool",
-      "urlKind": "announcement",
-      "origin": "feed",
-      "firstSeen": "2026-11-10",
-      "lastSeen": "2026-11-20",
-      "evidence": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Businesses in ChatGPT",
-          "url": "https://www.producthunt.com/products/openai",
-          "date": "2026-11-13"
-        },
-        {
-          "source": "OpenAI news",
-          "title": "Introducing Businesses in ChatGPT",
-          "url": "https://openai.com/index/introducing-businesses-chatgpt",
           "date": "2026-11-10"
         }
       ]

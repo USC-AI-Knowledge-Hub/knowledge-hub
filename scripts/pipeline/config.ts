@@ -1,3 +1,7 @@
+import { CONTENT_SINCE } from "../../src/data/since";
+
+export { CONTENT_SINCE };
+
 /**
  * Pipeline settings. Tools, their search queries and match patterns live in
  * src/data/tools.ts; learning topics live in src/data/topics.ts.
@@ -57,14 +61,28 @@ export const SETTINGS = {
   searchWindowDays: 30,
   /** Anything older is dropped, including old uploads that show up in channel feeds. */
   maxAgeDays: 60,
+  /**
+   * Fewest likes per view for a video to stay in (0.004 = 4 likes per 1,000 views, about the bottom 8% of the
+   * library). Applied once a video has enough views for the ratio to mean something. Hidden like counts pass.
+   */
+  minLikeRatio: 0.004,
+  likeRatioFromViews: 2000,
+  /**
+   * Comment sentiment (sentiment.ts): read this many top comments of each new video (1 quota unit each) and drop
+   * videos whose comments lean negative. Videos with fewer comments than `minComments` are judged on views and likes.
+   */
+  commentsPerVideo: 20,
+  maxCommentChecks: 200,
+  minComments: 5,
+  minSentiment: -0.15,
   /** Results requested per search query (max 50). Each search costs 100 quota units. */
   resultsPerQuery: 15,
   /**
-   * Most searches per run. 90 searches is 9,000 of the default 10,000 daily
-   * units, leaving room for videos.list and the course check. With more
+   * Most searches per run. 82 searches is 8,200 of the default 10,000 daily
+   * units, leaving room for the talk searches, videos.list, comments and the course check. With more
    * queries than this, the pipeline rotates through them day by day.
    */
-  maxSearches: 90,
+  maxSearches: 82,
   /**
    * Of those, at most this many go to tools found by daily discovery (one query each), so a burst of new
    * tools can't crowd out the reviewed catalog. They rotate like the rest when there are more.
@@ -99,4 +117,40 @@ export const SETTINGS = {
   evergreenWindowDays: 365,
   evergreenMaxAgeDays: 730,
   evergreenMinViews: 300,
+};
+
+/**
+ * Where talks and podcasts come from (the Talks and podcasts tab). The daily run reads each channel's feed for
+ * free, and in API mode also searches `talkSearchesPerDay` of them (rotating, 100 units each) for AI episodes
+ * published since CONTENT_SINCE. Only long videos about AI with strong views, likes and comments are kept, and
+ * the page labels them as picked automatically. Handles are resolved at run time and cached in channels.lock.json.
+ */
+export const TALK_CHANNELS: { handle: string; kind: "talk" | "podcast" | "keynote" | "debate" }[] = [
+  { handle: "TED", kind: "talk" },
+  { handle: "TEDx", kind: "talk" },
+  { handle: "lexfridman", kind: "podcast" },
+  { handle: "DwarkeshPatel", kind: "podcast" },
+  { handle: "NoPriorsPodcast", kind: "podcast" },
+  { handle: "LatentSpacePod", kind: "podcast" },
+  { handle: "CognitiveRevolutionPodcast", kind: "podcast" },
+  { handle: "hardfork", kind: "podcast" },
+  { handle: "a16z", kind: "podcast" },
+  { handle: "ycombinator", kind: "talk" },
+  { handle: "stanfordonline", kind: "talk" },
+  { handle: "aiDotEngineer", kind: "keynote" },
+];
+
+export const TALK_SETTINGS = {
+  /** Channel searches per day (API mode), rotating through TALK_CHANNELS. */
+  talkSearchesPerDay: 6,
+  resultsPerSearch: 10,
+  /** Talks shorter than this are clips, not talks. */
+  minDuration: 8 * 60,
+  maxDuration: 5 * 60 * 60,
+  /** Views needed, unless the episode is under a week old. */
+  minViews: 5000,
+  minViewsFresh: 500,
+  /** Most talks kept, and most from one channel, so one prolific podcast can't fill the tab. */
+  cap: 60,
+  perChannel: 8,
 };

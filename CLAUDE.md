@@ -49,6 +49,14 @@ A daily GitHub Action refreshes the YouTube video library.
 - Video picks (`/team/test`, `src/pages/TeamTest.tsx`, `src/lib/board/recs.ts`): students recommend a YouTube video with a one-line
   headline and their name, and vote (👍, one per browser) on each other's picks. Picks are posts on the board database
   (board `video-recs`, topic `hub` or `found`), so they need no extra tables; the picture is the video's own thumbnail.
+- Watch (`/watch`, `src/pages/Watch.tsx`): the library as a map of tasks (`src/components/TaskExplorer.tsx`, `src/lib/watchMap.ts`).
+  Each video is filed under one task (its first tool's category root, else its topic, else "AI basics"); picking or searching a
+  task zooms in to its tools. Phones get tiles instead of the map. `e2e/watch.spec.ts` covers it.
+- Content date floor: `src/data/since.ts` (`CONTENT_SINCE`, 2026-01-01). The pipeline drops anything older, and editor-picked
+  lesson videos, talks and courses published before it are hidden (a course counts by its newest lesson, recorded by
+  the daily course check).
+- Talks tab: editors' picks in `src/data/talks.ts`, plus talks and podcasts the daily run finds on `TALK_CHANNELS`
+  (`scripts/pipeline/config.ts`), saved as `talks` in `videos.json` and labelled "Picked automatically".
 - `scripts/pipeline/`: the daily video pipeline.
 - `scripts/discovery/`: the daily tool discovery run (`npm run discover`). It writes `public/data/discovered.json`
   and `taxonomy.json`; `src/data/catalog.ts` and `src/lib/catalogStore.ts` combine them with `tools.ts` for the site

@@ -81,7 +81,8 @@ describe("answer quality", () => {
   });
 
   it("suggests a mix of videos for the lessons an answer used", () => {
-    const list = watchFor(["llms", "what-is-genai"], null);
+    // Lessons no longer carry pre-2026 editors' picks, so the mix comes from courses and talks.
+    const list = watchFor(["llms", "agents"], null);
     expect(list.length).toBeGreaterThanOrEqual(4);
     expect(new Set(list.map((v) => v.kind)).size).toBeGreaterThanOrEqual(2);
     expect(new Set(list.map((v) => v.key)).size).toBe(list.length);

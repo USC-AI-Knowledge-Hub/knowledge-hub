@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { recentEnough } from "../data/since";
 import type { Course, CourseStatus, Talk } from "../data/types";
 
 let cached: Promise<CourseStatus | null> | null = null;
@@ -26,7 +27,7 @@ export function useCourseStatus(): CourseStatus | null {
 }
 
 export interface LiveCourse extends Course {
-  /** False when the last check found the course gone; hide it. */
+  /** False when the last check found the course gone, or its newest lesson is from before 2026; hide it. */
   available: boolean;
 }
 
@@ -37,7 +38,7 @@ export function live(c: Course, status: CourseStatus | null): LiveCourse {
   const counts = check?.ok && !c.rolling;
   return {
     ...c,
-    available: check?.ok ?? true,
+    available: (check?.ok ?? true) && recentEnough(check?.published),
     lessons: counts && check.lessons ? check.lessons : c.lessons,
     hours: counts && check.seconds ? Math.round(check.seconds / 360) / 10 : c.hours,
     cover: c.cover ?? (check?.ok ? check.cover : undefined) ?? c.video,
@@ -54,7 +55,7 @@ export function liveTalk(t: Talk, status: CourseStatus | null): LiveTalk {
   const check = status?.talks?.[t.id];
   return {
     ...t,
-    available: check?.ok ?? true,
+    available: (check?.ok ?? true) && recentEnough(check?.published),
     minutes: check?.ok && check.seconds ? Math.max(1, Math.round(check.seconds / 60)) : t.minutes,
   };
 }

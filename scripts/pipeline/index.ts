@@ -17,18 +17,19 @@
  */
 import { appendFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { modules } from "../../src/data/learn";
-import type { Trend, Video, VideoFeed } from "../../src/data/types";
+import type { AutoTalk, TalkKind, Trend, Video, VideoFeed } from "../../src/data/types";
 import { classifyWithClaude, type ClaudeLabel } from "./classify-claude";
 import { loadPipelineTools } from "./catalog";
 import { sparseTools } from "./coverage";
-import { SETTINGS, TOPIC_QUERIES, TREND_QUERIES, TRUSTED_CHANNELS } from "./config";
+import { CONTENT_SINCE, SETTINGS, TALK_CHANNELS, TALK_SETTINGS, TOPIC_QUERIES, TREND_QUERIES, TRUSTED_CHANNELS } from "./config";
 import { guessDifficulty } from "./difficulty";
-import { mergeFeed, mergeTrends } from "./merge";
-import { ageDays, looksEducational, mentionsAI, qualityScore, rejectReason, trendKind, type Candidate } from "./quality";
+import { mergeFeed, mergeTalks, mergeTrends } from "./merge";
+import { ageDays, badComments, looksEducational, mentionsAI, qualityScore, rejectReason, talkRejectReason, tooOld, trendKind, type Candidate } from "./quality";
+import { scoreComments } from "./sentiment";
 import { fetchChannelFeed, resolveHandle } from "./rss";
 import { todaysQueries } from "./rotation";
 import { tagTools, tagTopics, useTools } from "./tagging";
-import { existingIds, searchVideoIds, videoDetails } from "./youtube-api";
+import { existingIds, searchVideoIds, topComments, videoDetails } from "./youtube-api";
 
 const FEED_PATH = process.env.PIPELINE_OUT ?? new URL("../../public/data/videos.json", import.meta.url);
 const LOCK_PATH = new URL("./channels.lock.json", import.meta.url);
@@ -54,7 +55,7 @@ function loadFeed(): VideoFeed {
 async function trustedChannelIds(): Promise<Map<string, string>> {
   const lock: Record<string, string> = existsSync(LOCK_PATH) ? JSON.parse(readFileSync(LOCK_PATH, "utf8")) : {};
   let changed = false;
-  for (const { handle } of TRUSTED_CHANNELS) {
+  for (const { handle } of [...TRUSTED_CHANNELS, ...TALK_CHANNELS]) {
     if (lock[handle] || fixture) continue;
     try {
       const id = await resolveHandle(handle);
@@ -89,7 +90,9 @@ async function collect(trusted: Set<string>, sparse: Set<string>, catalog: Retur
 
   if (!ytKey) return { candidates: rssCandidates, sourcesOk };
 
-  const daysAgo = (n: number) => new Date(now.getTime() - n * 86_400_000);
+  // Never search before the Hub's cutoff, however long the window.
+  const since = new Date(`${CONTENT_SINCE}T00:00:00Z`);
+  const daysAgo = (n: number) => new Date(Math.max(now.getTime() - n * 86_400_000, since.getTime()));
   const ids = new Set(rssCandidates.map((c) => c.id));
   const evergreenQueries = new Set(catalog.all.filter((t) => sparse.has(t.id)).flatMap((t) => t.queries));
   if (evergreenQueries.size) log(`Evergreen search for ${[...sparse].join(", ")}.`);
@@ -124,12 +127,113 @@ async function collect(trusted: Set<string>, sparse: Set<string>, catalog: Retur
   }
 }
 
+/** Reads up to `limit` new candidates' top comments and records how they lean (1 quota unit each). */
+async function readComments(list: Candidate[], limit: number): Promise<number> {
+  if (!ytKey || fixture) return 0;
+  let read = 0;
+  for (const c of list) {
+    if (read >= limit) break;
+    if (c.comments !== undefined) continue;
+    try {
+      const s = scoreComments(await topComments(c.id, ytKey, SETTINGS.commentsPerVideo));
+      c.sentiment = s.score;
+      c.comments = s.n;
+      read++;
+    } catch (e) {
+      errors.push(`Reading comments: ${(e as Error).message}`);
+      break;
+    }
+  }
+  return read;
+}
+
+/**
+ * Talks and podcasts from TALK_CHANNELS: their feeds (free), plus a few channel searches a day in API mode,
+ * then details and comments, kept only when long, about AI, recent and well received.
+ */
+async function collectTalks(channels: Map<string, string>, knownTalks: Map<string, AutoTalk>): Promise<{ talks: AutoTalk[]; rejected: Record<string, number> }> {
+  const rejected: Record<string, number> = {};
+  if (fixture) return { talks: [], rejected };
+  const kindOf = new Map<string, TalkKind>();
+  const ids: string[] = [];
+  for (const { handle, kind } of TALK_CHANNELS) {
+    const id = channels.get(handle);
+    if (id) {
+      kindOf.set(id, kind);
+      ids.push(id);
+    }
+  }
+  const found = new Map<string, Candidate>();
+  for (const channelId of ids) {
+    try {
+      for (const c of await fetchChannelFeed(channelId)) found.set(c.id, { ...c, channelId });
+    } catch (e) {
+      errors.push(`Talk feed ${channelId}: ${(e as Error).message}`);
+    }
+  }
+  let candidates = [...found.values()];
+  if (ytKey) {
+    const searchIds = new Set<string>(found.keys());
+    for (const channelId of todaysQueries(ids, now, TALK_SETTINGS.talkSearchesPerDay)) {
+      try {
+        for (const id of await searchVideoIds("AI", new Date(`${CONTENT_SINCE}T00:00:00Z`), TALK_SETTINGS.resultsPerSearch, ytKey, channelId)) searchIds.add(id);
+      } catch (e) {
+        const message = (e as Error).message;
+        errors.push(`Talk search: ${message}`);
+        if (/quota ?exceeded/i.test(message)) break;
+      }
+    }
+    // Known talks too, so their views and likes stay current.
+    for (const id of knownTalks.keys()) searchIds.add(id);
+    try {
+      candidates = await videoDetails([...searchIds], ytKey, new Set());
+    } catch (e) {
+      errors.push(`Talk details: ${(e as Error).message}`);
+    }
+  }
+  const talks: AutoTalk[] = [];
+  const reject = (why: string) => (rejected[why] = (rejected[why] ?? 0) + 1);
+  // Read comments only for talks that pass everything else, so quota goes where it decides something.
+  const passing = candidates.filter((c) => kindOf.has(c.channelId) || knownTalks.has(c.id)).filter((c) => {
+    const known = knownTalks.get(c.id);
+    if (known?.comments !== undefined) Object.assign(c, { sentiment: known.sentiment, comments: known.comments });
+    const why = talkRejectReason(c, now);
+    if (why) reject(why);
+    return !why;
+  });
+  await readComments(passing, SETTINGS.maxCommentChecks);
+  for (const c of passing) {
+    if (badComments(c)) {
+      reject("negative comments");
+      continue;
+    }
+    const kind = kindOf.get(c.channelId) ?? knownTalks.get(c.id)?.kind ?? "talk";
+    talks.push({
+      id: c.id,
+      title: c.title,
+      channel: c.channel,
+      channelId: c.channelId,
+      publishedAt: c.publishedAt,
+      duration: c.duration,
+      views: c.views,
+      likes: c.likes,
+      kind,
+      score: qualityScore(c, now),
+      sentiment: c.sentiment,
+      comments: c.comments,
+      firstSeen: knownTalks.get(c.id)?.firstSeen ?? runDate,
+    });
+  }
+  return { talks, rejected };
+}
+
 async function main() {
   const feed = loadFeed();
   const known = new Map(feed.videos.map((v) => [v.id, v]));
   const knownTrends = new Map((feed.trends ?? []).map((t) => [t.id, t]));
   const channels = await trustedChannelIds();
-  const trusted = new Set(channels.values());
+  // Talk channels share the lock file but aren't lesson sources.
+  const trusted = new Set(TRUSTED_CHANNELS.map((c) => channels.get(c.handle)).filter((id): id is string => Boolean(id)));
   const catalog = loadPipelineTools();
   useTools(catalog.all);
   if (catalog.discovered.length) log(`${catalog.discovered.length} discovered tools are tagged and searched alongside the reviewed ones.`);
@@ -198,6 +302,19 @@ async function main() {
     passing.push({ ...c, heuristicTools, topics, evergreen });
   }
 
+  // 1b. What viewers say: carry known sentiment over, read comments for new videos, drop the badly received.
+  for (const c of passing) {
+    const prev = known.get(c.id);
+    if (prev?.comments !== undefined) Object.assign(c, { sentiment: prev.sentiment, comments: prev.comments });
+  }
+  const commentsRead = await readComments(passing, SETTINGS.maxCommentChecks);
+  for (let i = passing.length - 1; i >= 0; i--) {
+    if (badComments(passing[i])) {
+      reject("negative comments");
+      passing.splice(i, 1);
+    }
+  }
+
   // 2. Label new videos with Claude when available.
   const labels = new Map<string, ClaudeLabel>();
   const fresh = passing.filter((c) => known.get(c.id)?.difficultySource !== "claude");
@@ -241,6 +358,7 @@ async function main() {
       summary: label?.summary,
       score: qualityScore(c, now),
       firstSeen: known.get(c.id)?.firstSeen ?? runDate,
+      ...(c.comments !== undefined ? { sentiment: c.sentiment, comments: c.comments } : {}),
       ...(c.evergreen || known.get(c.id)?.evergreen ? { evergreen: true } : {}),
     });
   }
@@ -255,7 +373,7 @@ async function main() {
         .filter((v) => live.has(v.id))
         .map((v) => {
           const r = live.get(v.id)!;
-          return { ...v, views: r.views, likes: r.likes, duration: r.duration || v.duration, score: qualityScore(r, now) };
+          return { ...v, views: r.views, likes: r.likes, duration: r.duration || v.duration, score: qualityScore({ ...r, sentiment: v.sentiment, comments: v.comments }, now) };
         });
     } catch (e) {
       errors.push(`Refreshing stats: ${(e as Error).message}`);
@@ -284,6 +402,10 @@ async function main() {
     (t) => !rejectReason({ ...t, description: "", trusted: true }, now) && (!looksEducational(t.title) || trendKind(t.title) === "news"),
   );
   const trends = mergeTrends(existingTrends, trendCandidates, runDate);
+  const knownTalks = new Map((feed.talks ?? []).filter((t) => !tooOld(t.publishedAt)).map((t) => [t.id, t]));
+  const { talks: talkCandidates, rejected: talkRejected } = await collectTalks(channels, knownTalks);
+  // A talk that didn't come back today (feed rotated, search skipped) stays as it was.
+  const talks = mergeTalks([...knownTalks.values()], talkCandidates);
   const added = videos.filter((v) => v.firstSeen === runDate && !known.has(v.id)).length;
 
   const next: VideoFeed = {
@@ -291,9 +413,10 @@ async function main() {
     runDate,
     mode: fixture ? feed.mode : ytKey ? "api" : "rss",
     classifier: labels.size ? "claude" : "heuristic",
-    stats: { candidates: seen.size, kept: videos.length, added, trends: trends.length },
+    stats: { candidates: seen.size, kept: videos.length, added, trends: trends.length, talks: talks.length },
     videos,
     trends,
+    talks,
   };
 
   // 5. Curated videos: warn if any have disappeared (API mode only).
@@ -314,6 +437,7 @@ async function main() {
     `Candidates: ${seen.size} · Passed filters: ${passing.length} · New today: **${added}** · Retired by current rules: ${retired} · In feed: ${videos.length} · Trends: ${trends.length} (${trendCandidates.length} today)`,
     "",
     "Rejected: " + (Object.entries(rejected).map(([k, n]) => `${k} ${n}`).join(", ") || "none"),
+    `Comments read: ${commentsRead} · Talks and podcasts: ${talks.length} (${talkCandidates.length} passed today; rejected: ${Object.entries(talkRejected).map(([k, n]) => `${k} ${n}`).join(", ") || "none"})`,
     ...(warnings.length ? ["", "### Curated", ...warnings.map((w) => `- ${w}`)] : []),
     ...(errors.length ? ["", "### Errors", ...errors.map((e) => `- ${e}`)] : []),
   ].join("\n");

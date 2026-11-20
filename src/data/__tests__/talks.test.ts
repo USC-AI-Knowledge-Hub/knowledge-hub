@@ -4,6 +4,7 @@ import { courses } from "../courses";
 import { modules } from "../learn";
 import { TALK_KINDS, talks, talksFor } from "../talks";
 import type { CourseStatus } from "../types";
+import { CONTENT_SINCE } from "../since";
 
 const moduleIds = new Set(modules.map((m) => m.id));
 
@@ -40,10 +41,9 @@ describe("talks catalog", () => {
     }
   });
 
-  it("covers every kind and stays a curated size", () => {
-    expect(talks.length).toBeGreaterThanOrEqual(25);
+  it("holds only talks from since the Hub's cutoff, and stays a curated size", () => {
+    for (const t of talks) expect(String(t.year) >= CONTENT_SINCE.slice(0, 4), t.id).toBe(true);
     expect(talks.length).toBeLessThanOrEqual(40);
-    for (const k of TALK_KINDS) expect(talks.some((t) => t.kind === k), k).toBe(true);
   });
 
   it("doesn't repeat a course or an editors' pick", () => {
@@ -52,7 +52,7 @@ describe("talks catalog", () => {
   });
 
   it("finds talks for a module", () => {
-    expect(talksFor("ethics-integrity").length).toBeGreaterThan(0);
+    expect(talksFor("agents").length).toBeGreaterThan(0);
     expect(talksFor("no-such-module")).toEqual([]);
   });
 });

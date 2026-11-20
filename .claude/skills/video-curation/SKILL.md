@@ -17,7 +17,9 @@ description: How the daily YouTube pipeline finds, filters, labels and ranks vid
    non-English, clickbait, entertainment (`ENTERTAINMENT`). News, launches,
    research and talks (`trendKind`) go to the separate `trends` feed (`mergeTrends`:
    14-day intake, 21-day retention, 4 per channel, 48 total), never the lessons;
-   older than 60 days, too few views (trusted channels are exempt). Without
+   older than 60 days or published before `CONTENT_SINCE` (`src/data/since.ts`), too few views (trusted channels are
+   exempt), too few likes for the views (`minLikeRatio`), or mostly negative comments (`sentiment.ts` word-list scoring of
+   the top 20 comments, read for at most `maxCommentChecks` new videos a day, 1 unit each). Without
    Claude, the title must also read as a lesson (`looksEducational`), because
    official channels post far more announcements than tutorials.
 3. **Tag** (`tagging.ts`): tools by `tool.match`/`tool.exclude` regexes (title
@@ -66,6 +68,14 @@ search.list is 100 units; the default daily quota is 10,000. Today:
 videos.list and about 100 for the course check (`npm run courses`).
 `SETTINGS.maxSearches` (90) caps searches per run; above it, `rotation.ts`
 cycles through the queries day by day. Give a new tool one query, not three.
+The talks search (`TALK_SETTINGS.talkSearchesPerDay`, 6 searches on `TALK_CHANNELS`) and up to 200 comment reads come out of
+the same budget, which is why `maxSearches` is 82.
+
+## Talks and podcasts
+
+`collectTalks` reads the RSS feeds of `TALK_CHANNELS` and searches a few of them each day, then keeps long, English, on-topic
+videos from 2026 with enough views, likes and positive comments (`quality.ts#talkRejectReason`). `merge.ts#mergeTalks`
+keeps the best 60, at most 8 per channel. Handles resolve at run time; one that doesn't resolve is logged and skipped.
 
 ## Common changes
 

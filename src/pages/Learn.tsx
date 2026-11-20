@@ -3,7 +3,7 @@ import { CourseCard } from "../components/CourseCard";
 import { Icon } from "../components/Icon";
 import { Level } from "../components/Level";
 import { WavyProgress } from "../components/WavyProgress";
-import { courseById, courses } from "../data/courses";
+import { courses } from "../data/courses";
 import { moduleById, modules, paths } from "../data/learn";
 import { DIFFICULTIES, DIFFICULTY_LABEL, type Difficulty, type Module } from "../data/types";
 import { live, useCourseStatus } from "../lib/courses";
@@ -30,12 +30,11 @@ function ModuleTile({ m, done }: { m: Module; done: boolean }) {
 }
 
 /** One strong starting course per level, then one per kind of source. */
-const FEATURED = ["anthropic-ai-fluency", "karpathy-deep-dive", "3b1b-neural-networks", "cs50-ai"];
 
 export function Learn() {
   const { isDone, done } = useProgress();
   const status = useCourseStatus();
-  const featured = FEATURED.map((id) => live(courseById.get(id)!, status)).filter((c) => c.available);
+  const featured = courses.map((c) => live(c, status)).filter((c) => c.available).slice(0, 4);
   const [params, setParams] = useSearchParams();
   const level = params.get("level") as Difficulty | null;
   const show = (track: Module["track"]) => modules.filter((m) => m.track === track && (!level || m.difficulty === level));
@@ -97,6 +96,7 @@ export function Learn() {
         </div>
       </section>
 
+      {featured.length > 0 && (
       <section className="section" aria-labelledby="fc-h">
         <div className="section-head">
           <div>
@@ -104,11 +104,11 @@ export function Learn() {
               Full courses
             </h2>
             <p className="body-m muted">
-              Complete playlists from Harvard, MIT, Stanford, Berkeley and the companies behind the tools. Free, and checked daily.
+              Complete playlists from universities and the companies behind the tools, with lessons from 2026. Free, and checked daily.
             </p>
           </div>
           <Link to="/learn/courses" className="btn tonal state">
-            All {courses.length} courses
+            All courses
           </Link>
         </div>
         <div className="grid cols-videos">
@@ -117,6 +117,7 @@ export function Learn() {
           ))}
         </div>
       </section>
+      )}
 
       <section className="section" aria-labelledby="lib-h">
         <div className="section-head">
