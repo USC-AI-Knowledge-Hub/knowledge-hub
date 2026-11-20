@@ -143,7 +143,7 @@ export interface CourseCheck {
   lessons?: number;
   seconds?: number;
   cover?: string;
-  /** Publish date (YYYY-MM-DD) of a single video, from the API check. */
+  /** Publish date (YYYY-MM-DD) of a single video, or of a playlist's newest video, from the API check. */
   published?: string;
   problem?: string;
 }

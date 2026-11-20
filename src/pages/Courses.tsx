@@ -13,7 +13,7 @@ import { live, useCourseStatus } from "../lib/courses";
 type LevelFilter = "all" | Difficulty;
 const SOURCES: CourseSource[] = ["university", "maker", "educator"];
 const SOURCE_BLURB: Record<CourseSource, string> = {
-  university: "Recorded lectures from Harvard, MIT, Stanford and Berkeley. The deepest material here.",
+  university: "Recorded university lectures. The deepest material here.",
   maker: "Courses from the companies behind the tools. Practical, and current.",
   educator: "Teachers with a track record of explaining this well.",
 };

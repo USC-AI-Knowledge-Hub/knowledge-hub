@@ -53,7 +53,8 @@ A daily GitHub Action refreshes the YouTube video library.
   Each video is filed under one task (its first tool's category root, else its topic, else "AI basics"); picking or searching a
   task zooms in to its tools. Phones get tiles instead of the map. `e2e/watch.spec.ts` covers it.
 - Content date floor: `src/data/since.ts` (`CONTENT_SINCE`, 2026-01-01). The pipeline drops anything older, and editor-picked
-  lesson videos and talks published before it are hidden.
+  lesson videos, talks and courses published before it are hidden (a course counts by its newest lesson, recorded by
+  the daily course check).
 - Talks tab: editors' picks in `src/data/talks.ts`, plus talks and podcasts the daily run finds on `TALK_CHANNELS`
   (`scripts/pipeline/config.ts`), saved as `talks` in `videos.json` and labelled "Picked automatically".
 - `scripts/pipeline/`: the daily video pipeline.
