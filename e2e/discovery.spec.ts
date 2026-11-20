@@ -41,7 +41,8 @@ test("an unknown tool is still a not-found page", async ({ page }) => {
 
 test("the tutor suggests library videos for a question the lessons don't cover", async ({ page }) => {
   const feed = JSON.parse(readFileSync("public/data/videos.json", "utf8"));
-  const clip = { ...feed.videos[0], id: "higg0000001", title: "Higgsfield AI tutorial: cinematic camera moves for AI video", channel: "Example Channel", tools: ["higgsfield"], topics: [], difficulty: "beginner", duration: 540 };
+  const clip = { ...feed.videos[0], id: "higg0000001", title: "Higgsfield AI tutorial: how to generate videos with cinematic camera moves", channel: "Example Channel", tools: ["higgsfield"], topics: [], difficulty: "beginner", duration: 540, score: 99 };
+  // The real library has Higgsfield videos too; this one matches every word asked and ranks first, so the test doesn't depend on the day's library.
   await page.route("**/data/videos.json", (r) => r.fulfill({ json: { ...feed, videos: [clip, ...feed.videos] } }));
   await page.addInitScript(() => {
     if (sessionStorage.getItem("kh-e2e-init")) return;
