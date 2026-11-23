@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router";
+import { recentEnough } from "../data/since";
 import { CourseCard } from "../components/CourseCard";
 import { Icon } from "../components/Icon";
 import { Level } from "../components/Level";
@@ -30,7 +31,8 @@ export function ModulePage() {
     .map((c) => live(c, status))
     .filter((c) => c.available)
     .sort((a, b) => Math.abs(rank[a.difficulty] - rank[m.difficulty]) - Math.abs(rank[b.difficulty] - rank[m.difficulty]) || a.hours - b.hours);
-  const curated = m.curated.filter((c) => status?.curated[c.id]?.ok ?? true);
+  // Editors' picks from before the Hub's cutoff stay hidden, going by the daily check's publish date.
+  const curated = m.curated.filter((c) => (status?.curated[c.id]?.ok ?? true) && recentEnough(status?.curated[c.id]?.published));
 
   // Talks listing this lesson first are the closest fit; at most three, so lessons stay the focus.
   const moduleTalks = talksFor(m.id)

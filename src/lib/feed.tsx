@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import type { Trend, Video, VideoFeed } from "../data/types";
+import type { AutoTalk, Trend, Video, VideoFeed } from "../data/types";
 
 interface FeedState {
   feed: VideoFeed | null;
@@ -8,9 +8,11 @@ interface FeedState {
   today: Video[];
   /** News, launches, research and talks, newest first. */
   trends: Trend[];
+  /** Talks and podcasts the daily run picked, newest first. */
+  talks: AutoTalk[];
 }
 
-const FeedContext = createContext<FeedState>({ feed: null, error: null, today: [], trends: [] });
+const FeedContext = createContext<FeedState>({ feed: null, error: null, today: [], trends: [], talks: [] });
 
 export function FeedProvider({ children }: { children: ReactNode }) {
   const [feed, setFeed] = useState<VideoFeed | null>(null);
@@ -30,7 +32,7 @@ export function FeedProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<FeedState>(() => {
     const today = feed?.runDate ? feed.videos.filter((v) => v.firstSeen === feed.runDate) : [];
-    return { feed, error, today: [...today].sort((a, b) => b.score - a.score), trends: feed?.trends ?? [] };
+    return { feed, error, today: [...today].sort((a, b) => b.score - a.score), trends: feed?.trends ?? [], talks: feed?.talks ?? [] };
   }, [feed, error]);
 
   return <FeedContext.Provider value={value}>{children}</FeedContext.Provider>;

@@ -37,12 +37,7 @@ export const modules: Module[] = [
     },
     tools: ["chatgpt", "claude", "gemini"],
     topic: "genai-basics",
-    curated: [
-      { id: "aircAruvnKk", title: "But what is a neural network?", channel: "3Blue1Brown", minutes: 18 },
-      { id: "LPZh9BOjkQs", title: "Large Language Models explained briefly", channel: "3Blue1Brown", minutes: 8 },
-      { id: "G2fqAlgmoPo", title: "Introduction to Generative AI", channel: "Google Cloud Tech", minutes: 22 },
-      { id: "zjkBMFhNj_g", title: "[1hr Talk] Intro to Large Language Models", channel: "Andrej Karpathy", minutes: 60 },
-    ],
+    curated: [],
   },
   {
     id: "llms",
@@ -69,10 +64,7 @@ export const modules: Module[] = [
     },
     tools: ["chatgpt", "claude"],
     topic: "llms",
-    curated: [
-      { id: "wjZofJX0v4M", title: "Transformers, the tech behind LLMs", channel: "3Blue1Brown", minutes: 27 },
-      { id: "eMlx5fFNoYc", title: "Attention in transformers, step-by-step", channel: "3Blue1Brown", minutes: 26 },
-    ],
+    curated: [],
   },
   {
     id: "reasoning-models",
@@ -261,9 +253,7 @@ export const modules: Module[] = [
     },
     tools: ["chatgpt", "claude", "gemini"],
     topic: "prompting",
-    curated: [
-      { id: "ysPbXH0LpIE", title: "Prompting 101", channel: "Anthropic", minutes: 24 },
-    ],
+    curated: [],
   },
   {
     id: "research-verification",
@@ -367,9 +357,7 @@ export const modules: Module[] = [
     },
     tools: ["github-copilot", "cursor", "claude-code", "replit"],
     topic: "coding",
-    curated: [
-      { id: "kCc8FmEb1nY", title: "Let's build GPT: from scratch, in code, spelled out.", channel: "Andrej Karpathy", minutes: 116 },
-    ],
+    curated: [],
   },
   {
     id: "presentations",

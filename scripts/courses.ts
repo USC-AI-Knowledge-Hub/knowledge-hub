@@ -16,6 +16,7 @@ import { courses } from "../src/data/courses";
 import { modules } from "../src/data/learn";
 import { talks } from "../src/data/talks";
 import type { CourseCheck, CourseStatus } from "../src/data/types";
+import { CONTENT_SINCE, recentEnough } from "../src/data/since";
 import { parseIsoDuration } from "./pipeline/duration";
 
 const OUT = process.env.COURSES_OUT ?? new URL("../public/data/courses.json", import.meta.url);
@@ -72,7 +73,7 @@ async function viaOembed(t: Target): Promise<CourseCheck> {
 
 interface VideoItem {
   id: string;
-  snippet: { title: string; channelTitle: string };
+  snippet: { title: string; channelTitle: string; publishedAt?: string };
   contentDetails: { duration: string };
   status: { embeddable?: boolean; privacyStatus?: string };
 }
@@ -119,6 +120,8 @@ async function playlistViaApi(t: Target): Promise<CourseCheck> {
     lessons: playable.length,
     seconds: playable.reduce((s, v) => s + parseIsoDuration(v.contentDetails.duration), 0),
     cover: playable[0]?.id,
+    // The newest lesson's date: a course still adding lessons this year counts as current.
+    published: playable.map((v) => v.snippet.publishedAt?.slice(0, 10) ?? "").sort().at(-1) || undefined,
     problem,
   };
 }
@@ -134,6 +137,7 @@ function videoCheck(t: Target, v: VideoItem | undefined): CourseCheck {
     lessons: 1,
     seconds: parseIsoDuration(v.contentDetails.duration),
     cover: v.id,
+    published: v.snippet.publishedAt?.slice(0, 10),
     problem,
   };
 }
@@ -185,14 +189,15 @@ async function run() {
   const failures: string[] = [];
   const line = (label: string, c: CourseCheck) => {
     const size = c.lessons ? `${c.lessons} lessons, ${Math.round((c.seconds ?? 0) / 360) / 10} h` : "";
-    rows.push(`| ${c.ok ? "✅" : "❌"} | ${label} | ${c.channel ?? ""} | ${size} | ${c.problem ?? ""} |`);
+    const old = c.ok && !recentEnough(c.published) ? `before ${CONTENT_SINCE.slice(0, 4)}, hidden on the site` : "";
+    rows.push(`| ${c.ok ? (old ? "🕰️" : "✅") : "❌"} | ${label} | ${c.channel ?? ""} | ${size} | ${c.published ?? ""} | ${c.problem ?? old} |`);
     if (!c.ok) failures.push(`${label}: ${c.problem}`);
   };
   for (const c of courses) line(c.title, status.courses[c.id]);
   for (const m of modules) for (const v of m.curated) line(`${v.title} (pick in ${m.id})`, status.curated[v.id]);
   for (const t of talks) line(`${t.title} (${t.kind})`, talkStatus[t.id]);
   for (const id of coverProblems) {
-    rows.push(`| ❌ | cover ${id} | | | cover video not found |`);
+    rows.push(`| ❌ | cover ${id} | | | | cover video not found |`);
     failures.push(`cover ${id}: not found`);
   }
 
@@ -201,8 +206,8 @@ async function run() {
     "",
     `${Object.keys(status.courses).length} courses, ${curatedTargets.size} editors' picks and ${talkTargets.size} talks checked, ${failures.length} problem${failures.length === 1 ? "" : "s"}.`,
     "",
-    "| | Title | Channel | Size | Problem |",
-    "|---|---|---|---|---|",
+    "| | Title | Channel | Size | Newest | Problem |",
+    "|---|---|---|---|---|---|",
     ...rows,
   ].join("\n");
   console.log(summary);

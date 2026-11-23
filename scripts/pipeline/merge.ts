@@ -1,5 +1,6 @@
-import type { Trend, Video } from "../../src/data/types";
-import { SETTINGS } from "./config";
+import type { AutoTalk, Trend, Video } from "../../src/data/types";
+import { SETTINGS, TALK_SETTINGS } from "./config";
+import { tooOld } from "./quality";
 
 const daysBetween = (a: string, b: string) => (Date.parse(b) - Date.parse(a)) / 86_400_000;
 
@@ -27,6 +28,8 @@ export function mergeFeed(existing: Video[], incoming: Video[], runDate: string)
       duration: v.duration || prev.duration,
       score: v.score,
       evergreen: v.evergreen || prev.evergreen || undefined,
+      sentiment: v.sentiment ?? prev.sentiment,
+      comments: v.comments ?? prev.comments,
       ...(keepLabels
         ? {}
         : { difficulty: v.difficulty, difficultySource: v.difficultySource, tools: v.tools, topics: v.topics, summary: v.summary ?? prev.summary }),
@@ -72,6 +75,29 @@ export function mergeTrends(existing: Trend[], incoming: Trend[], runDate: strin
     perChannel.set(t.channelId, n + 1);
     kept.push(t);
     if (kept.length >= SETTINGS.trendCap) break;
+  }
+  return kept.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+}
+
+/**
+ * Talks and podcasts: keep what's known (with fresh stats), drop anything from before the cutoff, then keep the
+ * best-scored up to the cap, at most `perChannel` from one channel. Unlike trends they don't expire after weeks:
+ * a good 2026 talk stays until CONTENT_SINCE moves past it or better ones push it out. Newest first.
+ */
+export function mergeTalks(existing: AutoTalk[], incoming: AutoTalk[]): AutoTalk[] {
+  const byId = new Map(existing.map((t) => [t.id, t]));
+  for (const t of incoming) {
+    const prev = byId.get(t.id);
+    byId.set(t.id, prev ? { ...prev, ...t, firstSeen: prev.firstSeen } : t);
+  }
+  const perChannel = new Map<string, number>();
+  const kept: AutoTalk[] = [];
+  for (const t of [...byId.values()].filter((t) => !tooOld(t.publishedAt)).sort((a, b) => b.score - a.score)) {
+    const n = perChannel.get(t.channelId) ?? 0;
+    if (n >= TALK_SETTINGS.perChannel) continue;
+    perChannel.set(t.channelId, n + 1);
+    kept.push(t);
+    if (kept.length >= TALK_SETTINGS.cap) break;
   }
   return kept.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }

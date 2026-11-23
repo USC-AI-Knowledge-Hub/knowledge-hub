@@ -20,7 +20,7 @@ interface SearchResponse {
 }
 
 /** search.list costs 100 quota units per call. The default daily quota is 10,000. */
-export async function searchVideoIds(query: string, publishedAfter: Date, max: number, key: string): Promise<string[]> {
+export async function searchVideoIds(query: string, publishedAfter: Date, max: number, key: string, channelId?: string): Promise<string[]> {
   const data = await get<SearchResponse>(
     "search",
     {
@@ -34,6 +34,7 @@ export async function searchVideoIds(query: string, publishedAfter: Date, max: n
       safeSearch: "strict",
       videoEmbeddable: "true",
       videoDuration: "any",
+      ...(channelId ? { channelId } : {}),
     },
     key,
   );
@@ -94,4 +95,26 @@ export async function videoDetails(ids: string[], key: string, trustedIds: Set<s
 export async function existingIds(ids: string[], key: string): Promise<Set<string>> {
   const found = await videoDetails(ids, key, new Set());
   return new Set(found.map((v) => v.id));
+}
+
+interface CommentThreadsResponse {
+  items: { snippet: { topLevelComment: { snippet: { textOriginal?: string; textDisplay?: string } } } }[];
+}
+
+/**
+ * A video's most relevant top-level comments, as plain text (1 quota unit). Comments turned off, or any
+ * other refusal, gives an empty list: the video is then judged on views and likes alone.
+ */
+export async function topComments(videoId: string, key: string, max = 20): Promise<string[]> {
+  try {
+    const data = await get<CommentThreadsResponse>(
+      "commentThreads",
+      { part: "snippet", videoId, order: "relevance", maxResults: String(max), textFormat: "plainText" },
+      key,
+    );
+    return data.items.map((i) => { const s = i.snippet.topLevelComment.snippet; return s.textOriginal ?? s.textDisplay ?? ""; });
+  } catch (e) {
+    if (/quota ?exceeded/i.test((e as Error).message)) throw e;
+    return [];
+  }
 }
