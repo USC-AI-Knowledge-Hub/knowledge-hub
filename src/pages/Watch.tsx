@@ -202,8 +202,10 @@ function Lessons() {
   const fromSearch = !params.has("task") && !params.has("tool");
   const toolParam = params.get("tool") ?? (fromSearch ? match.tool : null);
   const tool = toolParam && map.toolTask.has(toolParam) ? toolParam : null;
-  // An old link with only ?tool= still lands in the right task.
+  // The map zooms to the chosen task; a tool on its own (a search or an old link) zooms to its main task.
   const task = params.get("task") ?? (tool ? map.toolTask.get(tool) ?? null : fromSearch ? match.task : null);
+  // The list: a tool picked inside a task shows its videos there; a tool on its own shows all of them.
+  const listTask = params.get("task") ?? (tool ? null : task);
 
   const update = (changes: Record<string, string | null>) => {
     const next = new URLSearchParams(params);
@@ -221,7 +223,7 @@ function Lessons() {
     if (draft === q) return;
     const t = setTimeout(() => {
       const found = findOnMap(draft, map, catalog);
-      update({ q: draft.trim() || null, ...(found.task ? { task: found.task, tool: found.tool } : {}) });
+      update({ q: draft.trim() || null, ...(found.tool ? { task: null, tool: found.tool } : found.task ? { task: found.task, tool: null } : {}) });
     }, 300);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -231,18 +233,23 @@ function Lessons() {
   const textFilter = q.trim() && !match.task ? q.trim().toLowerCase() : "";
   const list = useMemo(() => {
     const words = textFilter.split(/\s+/).filter(Boolean);
-    const inScope = videosIn(all, map, task, tool).filter(
+    const inScope = videosIn(all, map, listTask, tool).filter(
       (v) =>
         (level === "all" || v.difficulty === level) &&
         (!onlyNew || v.firstSeen === feed?.runDate) &&
         words.every((w) => `${v.title} ${v.channel} ${v.summary ?? ""}`.toLowerCase().includes(w)),
     );
     return sort === "top" ? [...inScope].sort((a, b) => b.score - a.score) : [...inScope].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-  }, [all, map, task, tool, level, onlyNew, textFilter, sort, feed?.runDate]);
+  }, [all, map, listTask, tool, level, onlyNew, textFilter, sort, feed?.runDate]);
 
   const taskInfo = task ? map.tasks.find((t) => t.id === task) : undefined;
   const toolInfo = tool ? catalog.toolById.get(tool) : undefined;
-  const heading = toolInfo?.name ?? taskInfo?.label ?? (textFilter ? `Videos matching “${q.trim()}”` : "All videos");
+  const listTaskInfo = listTask ? map.tasks.find((t) => t.id === listTask) : undefined;
+  const heading = toolInfo
+    ? listTaskInfo
+      ? `${toolInfo.name} in ${listTaskInfo.label}`
+      : toolInfo.name
+    : taskInfo?.label ?? (textFilter ? `Videos matching “${q.trim()}”` : "All videos");
 
   return (
     <>
@@ -270,7 +277,7 @@ function Lessons() {
       {q.trim() && (
         <p className="body-s muted watch-search-note" role="status">
           {match.tool
-            ? `Zoomed to ${catalog.toolById.get(match.tool)?.name} in ${map.tasks.find((t) => t.id === match.task)?.label}.`
+            ? `Showing every ${catalog.toolById.get(match.tool)?.name} video. The map is zoomed to ${map.tasks.find((t) => t.id === match.task)?.label}, where most of them are.`
             : match.task
               ? `Zoomed to ${map.tasks.find((t) => t.id === match.task)?.label}.`
               : `No tool or task by that name, so the videos below are the ones that mention it.`}
@@ -284,7 +291,7 @@ function Lessons() {
           task={task}
           tool={tool}
           onTask={(id) => update({ task: id, tool: null, ...(!id && match.task ? { q: null } : {}) })}
-          onTool={(id) => update({ tool: id, task: id ? map.toolTask.get(id) ?? task : task })}
+          onTool={(id) => update({ tool: id, task })}
         />
       )}
 
@@ -304,6 +311,11 @@ function Lessons() {
             <p className="body-m">
               <strong>{toolInfo.name}</strong>: {toolInfo.bestFor}
             </p>
+            {listTask && (
+              <button type="button" className="btn text sm state" onClick={() => update({ task: null })}>
+                All {toolInfo.name} videos
+              </button>
+            )}
             <Link to={`/tools/${toolInfo.id}`} className="btn text sm state">
               Tool guide
             </Link>

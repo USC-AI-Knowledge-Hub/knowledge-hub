@@ -50,8 +50,9 @@ A daily GitHub Action refreshes the YouTube video library.
   headline and their name, and vote (👍, one per browser) on each other's picks. Picks are posts on the board database
   (board `video-recs`, topic `hub` or `found`), so they need no extra tables; the picture is the video's own thumbnail.
 - Watch (`/watch`, `src/pages/Watch.tsx`): the library as a map of tasks (`src/components/TaskExplorer.tsx`, `src/lib/watchMap.ts`).
-  Each video is filed under one task (its first tool's category root, else its topic, else "AI basics"); picking or searching a
-  task zooms in to its tools. Phones get tiles instead of the map. `e2e/watch.spec.ts` covers it.
+  Each video is filed under one task by what its title says it does ("make AI videos with ChatGPT" is Create video), else
+  by a specialist tool's task, else (no tool) its topic, else "General AI" (general assistants with no task in the title).
+  A tool gets a bubble in every task it has videos in; picking or searching a task zooms in to its tools. Phones get tiles instead of the map. `e2e/watch.spec.ts` covers it.
 - Content date floor: `src/data/since.ts` (`CONTENT_SINCE`, 2026-01-01). The pipeline drops anything older, and editor-picked
   lesson videos, talks and courses published before it are hidden (a course counts by its newest lesson, recorded by
   the daily course check).

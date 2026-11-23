@@ -315,6 +315,7 @@
 
 .context-note {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   margin: 8px 0 24px;
@@ -322,7 +323,7 @@
   border-radius: var(--md-shape-lg);
   background: var(--md-sys-color-surface-container);
 }
-.context-note p { flex: 1; }
+.context-note p { flex: 1 1 240px; }
 
 .video-group { margin-top: 32px; }
 .group-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
