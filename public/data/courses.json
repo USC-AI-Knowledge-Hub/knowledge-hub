@@ -1,46 +1,15 @@
 {
- "generatedAt": "2026-11-22T15:16:13.289Z",
+ "generatedAt": "2026-11-23T19:14:41.498Z",
  "via": "api",
  "courses": {
-  "cs50-ai": {
-   "ok": true,
-   "title": "CS50's Introduction to Artificial Intelligence with Python 2020",
-   "channel": "CS50",
-   "lessons": 7,
-   "seconds": 38731,
-   "cover": "gR8QvFmNuLE"
-  },
   "mit-6s191": {
    "ok": true,
    "title": "MIT 6.S191: Introduction to Deep Learning",
    "channel": "Alexander Amini",
    "lessons": 90,
    "seconds": 263934,
-   "cover": "II4giR4vOOo"
-  },
-  "stanford-cs224n": {
-   "ok": true,
-   "title": "Stanford CS224N Natural Language Processing with Deep Learning I Spring 2024 I Professor Christopher Manning",
-   "channel": "Stanford Online",
-   "lessons": 23,
-   "seconds": 99159,
-   "cover": "DzpHeXVSC5I"
-  },
-  "stanford-cs336": {
-   "ok": true,
-   "title": "Stanford CS336 Language Modeling from Scratch I 2025",
-   "channel": "Stanford Online",
-   "lessons": 17,
-   "seconds": 80345,
-   "cover": "SQ3fZ1sAqXI"
-  },
-  "stanford-cs231n": {
-   "ok": true,
-   "title": "Stanford CS231N Deep Learning for Computer Vision I 2025",
-   "channel": "Stanford Online",
-   "lessons": 18,
-   "seconds": 76388,
-   "cover": "2fq9wYslV0A"
+   "cover": "II4giR4vOOo",
+   "published": "2026-05-25"
   },
   "stanford-cs25": {
    "ok": true,
@@ -48,23 +17,8 @@
    "channel": "Stanford Online",
    "lessons": 50,
    "seconds": 200239,
-   "cover": "P127jhj-8-Y"
-  },
-  "berkeley-llm-agents": {
-   "ok": true,
-   "title": "LLM Agents MOOC Fall 2024",
-   "channel": "Berkeley RDI",
-   "lessons": 12,
-   "seconds": 47051,
-   "cover": "QAgR4uQ15rc"
-  },
-  "berkeley-advanced-agents": {
-   "ok": true,
-   "title": "Advanced LLM Agents MOOC Spring 2025",
-   "channel": "Berkeley RDI",
-   "lessons": 12,
-   "seconds": 58907,
-   "cover": "ti6yPE2VPZc"
+   "cover": "P127jhj-8-Y",
+   "published": "2026-06-04"
   },
   "anthropic-ai-fluency": {
    "ok": true,
@@ -72,39 +26,8 @@
    "channel": "Anthropic",
    "lessons": 12,
    "seconds": 4265,
-   "cover": "-UN9sNqQ0t4"
-  },
-  "ms-genai-beginners": {
-   "ok": true,
-   "title": "Generative AI for Beginners",
-   "channel": "Microsoft Developer",
-   "lessons": 19,
-   "seconds": 31411,
-   "cover": "lFXQkBvEe0o"
-  },
-  "ms-agents-beginners": {
-   "ok": true,
-   "title": "AI Agents for Beginners",
-   "channel": "Microsoft Developer",
-   "lessons": 15,
-   "seconds": 11477,
-   "cover": "OhI005_aJkA"
-  },
-  "github-copilot-beginners": {
-   "ok": true,
-   "title": "GitHub Copilot for Beginners",
-   "channel": "GitHub",
-   "lessons": 8,
-   "seconds": 6050,
-   "cover": "n0NlxUyA7FI"
-  },
-  "langchain-rag": {
-   "ok": true,
-   "title": "RAG From Scratch",
-   "channel": "LangChain",
-   "lessons": 14,
-   "seconds": 5188,
-   "cover": "wd7TZ4w1mSw"
+   "cover": "-UN9sNqQ0t4",
+   "published": "2025-06-12"
   },
   "n8n-beginner": {
    "ok": true,
@@ -112,7 +35,8 @@
    "channel": "n8n",
    "lessons": 9,
    "seconds": 7808,
-   "cover": "4BVTkqbn_tY"
+   "cover": "4BVTkqbn_tY",
+   "published": "2024-06-19"
   },
   "gemini-education": {
    "ok": true,
@@ -120,419 +44,20 @@
    "channel": "Google for Education",
    "lessons": 4,
    "seconds": 521,
-   "cover": "uq8FdkApuLk"
-  },
-  "3b1b-neural-networks": {
-   "ok": true,
-   "title": "Neural networks",
-   "channel": "3Blue1Brown",
-   "lessons": 10,
-   "seconds": 13054,
-   "cover": "aircAruvnKk"
-  },
-  "karpathy-deep-dive": {
-   "ok": true,
-   "title": "Deep Dive into LLMs like ChatGPT",
-   "channel": "Andrej Karpathy",
-   "lessons": 1,
-   "seconds": 12684,
-   "cover": "7xTGNNLPyMI"
-  },
-  "karpathy-how-i-use": {
-   "ok": true,
-   "title": "How I use LLMs",
-   "channel": "Andrej Karpathy",
-   "lessons": 1,
-   "seconds": 7872,
-   "cover": "EWvNQjAaOHw"
-  },
-  "karpathy-zero-to-hero": {
-   "ok": true,
-   "title": "Neural Networks: Zero to Hero",
-   "channel": "Andrej Karpathy",
-   "lessons": 10,
-   "seconds": 69662,
-   "cover": "VMj-3S1tku0"
-  },
-  "fastai-practical-dl": {
-   "ok": true,
-   "title": "Practical Deep Learning for Coders",
-   "channel": "Jeremy Howard",
-   "lessons": 8,
-   "seconds": 45242,
-   "cover": "8SF_h3xF3cE"
-  },
-  "crashcourse-ai": {
-   "ok": true,
-   "title": "Artificial Intelligence",
-   "channel": "CrashCourse",
-   "lessons": 21,
-   "seconds": 15457,
-   "cover": "GvYYFloV0aA"
-  },
-  "crashcourse-navigating": {
-   "ok": true,
-   "title": "Navigating Digital Information",
-   "channel": "CrashCourse",
-   "lessons": 11,
-   "seconds": 8695,
-   "cover": "L4aNmdL3Hr0"
-  },
-  "fcc-prompt-engineering": {
-   "ok": true,
-   "title": "Prompt Engineering Tutorial – Master ChatGPT and LLM Responses",
-   "channel": "freeCodeCamp.org",
-   "lessons": 1,
-   "seconds": 2496,
-   "cover": "_ZvnD73m40o"
+   "cover": "uq8FdkApuLk",
+   "published": "2024-05-16"
   }
  },
- "curated": {
-  "aircAruvnKk": {
-   "ok": true,
-   "title": "But what is a neural network? | Deep learning chapter 1",
-   "channel": "3Blue1Brown",
-   "lessons": 1,
-   "seconds": 1120,
-   "cover": "aircAruvnKk"
-  },
-  "LPZh9BOjkQs": {
-   "ok": true,
-   "title": "Large Language Models explained briefly",
-   "channel": "3Blue1Brown",
-   "lessons": 1,
-   "seconds": 478,
-   "cover": "LPZh9BOjkQs"
-  },
-  "G2fqAlgmoPo": {
-   "ok": true,
-   "title": "Introduction to Generative AI",
-   "channel": "Google Cloud Tech",
-   "lessons": 1,
-   "seconds": 1328,
-   "cover": "G2fqAlgmoPo"
-  },
-  "zjkBMFhNj_g": {
-   "ok": true,
-   "title": "[1hr Talk] Intro to Large Language Models",
-   "channel": "Andrej Karpathy",
-   "lessons": 1,
-   "seconds": 3588,
-   "cover": "zjkBMFhNj_g"
-  },
-  "wjZofJX0v4M": {
-   "ok": true,
-   "title": "Transformers, the tech behind LLMs | Deep Learning Chapter 5",
-   "channel": "3Blue1Brown",
-   "lessons": 1,
-   "seconds": 1634,
-   "cover": "wjZofJX0v4M"
-  },
-  "eMlx5fFNoYc": {
-   "ok": true,
-   "title": "Attention in transformers, step-by-step | Deep Learning Chapter 6",
-   "channel": "3Blue1Brown",
-   "lessons": 1,
-   "seconds": 1570,
-   "cover": "eMlx5fFNoYc"
-  },
-  "ysPbXH0LpIE": {
-   "ok": true,
-   "title": "Prompting 101 | Code w/ Claude",
-   "channel": "Anthropic",
-   "lessons": 1,
-   "seconds": 1493,
-   "cover": "ysPbXH0LpIE"
-  },
-  "kCc8FmEb1nY": {
-   "ok": true,
-   "title": "Let's build GPT: from scratch, in code, spelled out.",
-   "channel": "Andrej Karpathy",
-   "lessons": 1,
-   "seconds": 6980,
-   "cover": "kCc8FmEb1nY"
-  }
- },
+ "curated": {},
  "talks": {
-  "choi-smart-and-stupid": {
-   "ok": true,
-   "title": "Why AI Is Incredibly Smart and Shockingly Stupid | Yejin Choi | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 963,
-   "cover": "SvBR0OGT5VI"
-  },
-  "li-spatial-intelligence": {
-   "ok": true,
-   "title": "With Spatial Intelligence, AI Will Understand the Real World | Fei-Fei Li | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 912,
-   "cover": "y8NtMZ7VGmU"
-  },
-  "li-teaching-computers-pictures": {
-   "ok": true,
-   "title": "How we teach computers to understand pictures | Fei Fei Li",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 1083,
-   "cover": "40riCqvRoMs"
-  },
-  "khan-ai-education": {
-   "ok": true,
-   "title": "How AI Could Save (Not Destroy) Education | Sal Khan | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 937,
-   "cover": "hJP5GqnTrNo"
-  },
-  "suleyman-what-is-ai": {
-   "ok": true,
-   "title": "What Is an AI Anyway? | Mustafa Suleyman | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 1322,
-   "cover": "KKNCiRWd_j0"
-  },
-  "sutskever-journey-agi": {
-   "ok": true,
-   "title": "The Exciting, Perilous Journey Toward AGI | Ilya Sutskever | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 745,
-   "cover": "SEkGLj0bwAU"
-  },
-  "buolamwini-bias": {
-   "ok": true,
-   "title": "How I'm fighting bias in algorithms | Joy Buolamwini",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 525,
-   "cover": "UG_X_7g63rY"
-  },
-  "marcus-runaway-ai": {
-   "ok": true,
-   "title": "The Urgent Risks of Runaway AI — and What to Do about Them | Gary Marcus | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 843,
-   "cover": "JL5OFXeXenA"
-  },
-  "luccioni-dangerous": {
-   "ok": true,
-   "title": "AI Is Dangerous, but Not for the Reasons You Think | Sasha Luccioni | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 619,
-   "cover": "eXdVDhOGqoE"
-  },
-  "russell-safer-ai": {
-   "ok": true,
-   "title": "3 principles for creating safer AI | Stuart Russell",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 1056,
-   "cover": "EBK-a94IFHY"
-  },
-  "toner-govern-ai": {
-   "ok": true,
-   "title": "How to Govern AI — Even If It’s Hard to Predict | Helen Toner | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 677,
-   "cover": "LUn8IjZKBPg"
-  },
-  "bengio-catastrophic-risks": {
-   "ok": true,
-   "title": "The Catastrophic Risks of AI — and a Safer Path | Yoshua Bengio | TED",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 893,
-   "cover": "qe9QSCF-d88"
-  },
-  "altman-ted-2025": {
-   "ok": true,
-   "title": "OpenAI’s Sam Altman Talks ChatGPT, AI Agents and Superintelligence — Live at TED2025",
-   "channel": "TED",
-   "lessons": 1,
-   "seconds": 2850,
-   "cover": "5MWT_doo68k"
-  },
-  "bengio-marcus-debate": {
-   "ok": true,
-   "title": "AI DEBATE : Yoshua Bengio | Gary Marcus",
-   "channel": "Montreal.AI",
-   "lessons": 1,
-   "seconds": 7345,
-   "cover": "EeqwFjqFvJA"
-  },
-  "karpathy-software-changing": {
-   "ok": true,
-   "title": "Andrej Karpathy: Software Is Changing (Again)",
-   "channel": "Y Combinator",
-   "lessons": 1,
-   "seconds": 2372,
-   "cover": "LCEmiRjPEtQ"
-  },
-  "karpathy-state-of-gpt": {
-   "ok": true,
-   "title": "State of GPT | BRK216HFS",
-   "channel": "Microsoft Developer",
-   "lessons": 1,
-   "seconds": 2560,
-   "cover": "bZQun8Y4L2A"
-  },
-  "hinton-romanes": {
-   "ok": true,
-   "title": "Prof. Geoffrey Hinton - \"Will digital intelligence replace biological intelligence?\" Romanes Lecture",
-   "channel": "University of Oxford",
-   "lessons": 1,
-   "seconds": 2214,
-   "cover": "N1TEjTeQeg0"
-  },
-  "hassabis-nobel-lecture": {
-   "ok": true,
-   "title": "Nobel Prize lecture: Demis Hassabis, Nobel Prize in Chemistry 2024",
-   "channel": "Nobel Prize",
-   "lessons": 1,
-   "seconds": 1742,
-   "cover": "YtPaZsasmNA"
-  },
-  "ng-opportunities-2023": {
-   "ok": true,
-   "title": "Andrew Ng: Opportunities in AI - 2023",
-   "channel": "Stanford Online",
-   "lessons": 1,
-   "seconds": 2215,
-   "cover": "5p248yoa3oE"
-  },
-  "ng-agentic-workflows": {
-   "ok": true,
-   "title": "What's next for AI agentic workflows ft. Andrew Ng of AI Fund",
-   "channel": "Sequoia Capital",
-   "lessons": 1,
-   "seconds": 820,
-   "cover": "sal78ACtGTc"
-  },
-  "zhang-effective-agents": {
-   "ok": true,
-   "title": "How We Build Effective Agents: Barry Zhang, Anthropic",
-   "channel": "AI Engineer",
-   "lessons": 1,
-   "seconds": 909,
-   "cover": "D7_ipDqhtwk"
-  },
-  "mollick-classroom": {
-   "ok": true,
-   "title": "Co-Intelligence: AI in the Classroom with Ethan Mollick | ASU+GSV 2024",
-   "channel": "Global Silicon Valley",
-   "lessons": 1,
-   "seconds": 1488,
-   "cover": "8FnOkxj0ZuA"
-  },
-  "narayanan-snake-oil": {
-   "ok": true,
-   "title": "AI Snake Oil: What Artificial Intelligence Can Do, What It Can’t, and How to Tell the Difference",
-   "channel": "MIT Stone Center on Inequality & Shaping Work",
-   "lessons": 1,
-   "seconds": 3409,
-   "cover": "C3TqcUEFR58"
-  },
-  "mitchell-future-of-ai": {
-   "ok": true,
-   "title": "The Future of Artificial Intelligence",
-   "channel": "Santa Fe Institute",
-   "lessons": 1,
-   "seconds": 5269,
-   "cover": "GwHDAfAAKd4"
-  },
-  "openai-devday-2025": {
-   "ok": true,
-   "title": "OpenAI DevDay 2025: Opening Keynote with Sam Altman",
-   "channel": "OpenAI",
-   "lessons": 1,
-   "seconds": 3159,
-   "cover": "hS1YqcewH0c"
-  },
-  "google-io-2025": {
-   "ok": true,
-   "title": "Google I/O '25 Keynote",
-   "channel": "Google",
-   "lessons": 1,
-   "seconds": 6917,
-   "cover": "o8NiE3XMPrM"
-  },
   "code-with-claude-2026": {
    "ok": true,
    "title": "Code with Claude 2026: Opening Keynote",
    "channel": "Claude",
    "lessons": 1,
    "seconds": 2850,
-   "cover": "GMIWm5y90xA"
-  },
-  "anthropic-interpretability": {
-   "ok": true,
-   "title": "Interpretability: Understanding how AI models think",
-   "channel": "Anthropic",
-   "lessons": 1,
-   "seconds": 3543,
-   "cover": "fGKNUvivvnc"
-  },
-  "lex-amodei": {
-   "ok": true,
-   "title": "Dario Amodei: Anthropic CEO on Claude, AGI & the Future of AI & Humanity | Lex Fridman Podcast #452",
-   "channel": "Lex Fridman",
-   "lessons": 1,
-   "seconds": 18901,
-   "cover": "ugvHCXCOmm4"
-  },
-  "lex-hassabis": {
-   "ok": true,
-   "title": "Demis Hassabis: Future of AI, Simulating Reality, Physics and Video Games | Lex Fridman Podcast #475",
-   "channel": "Lex Fridman",
-   "lessons": 1,
-   "seconds": 8895,
-   "cover": "-HzgcbRXUK8"
-  },
-  "lex-lecun": {
-   "ok": true,
-   "title": "Yann Lecun: Meta AI, Open Source, Limits of LLMs, AGI & the Future of AI | Lex Fridman Podcast #416",
-   "channel": "Lex Fridman",
-   "lessons": 1,
-   "seconds": 10037,
-   "cover": "5t1vTLU7s40"
-  },
-  "lex-karpathy": {
-   "ok": true,
-   "title": "Andrej Karpathy: Tesla AI, Self-Driving, Optimus, Aliens, and AGI | Lex Fridman Podcast #333",
-   "channel": "Lex Fridman",
-   "lessons": 1,
-   "seconds": 12528,
-   "cover": "cdiD-9MMpb0"
-  },
-  "dwarkesh-karpathy": {
-   "ok": true,
-   "title": "Andrej Karpathy — “We’re summoning ghosts, not building animals”",
-   "channel": "Dwarkesh Patel",
-   "lessons": 1,
-   "seconds": 8768,
-   "cover": "lXUZvyajciY"
-  },
-  "dwarkesh-sutskever": {
-   "ok": true,
-   "title": "Ilya Sutskever – We're moving from the age of scaling to the age of research",
-   "channel": "Dwarkesh Patel",
-   "lessons": 1,
-   "seconds": 5764,
-   "cover": "aR20FWCCjAs"
-  },
-  "dwarkesh-sutton": {
-   "ok": true,
-   "title": "Richard Sutton – Father of RL thinks LLMs are a dead end",
-   "channel": "Dwarkesh Patel",
-   "lessons": 1,
-   "seconds": 4029,
-   "cover": "21EYKqUsPfg"
+   "cover": "GMIWm5y90xA",
+   "published": "2026-05-06"
   }
  }
 }
