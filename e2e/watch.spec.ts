@@ -22,13 +22,18 @@ test.describe("watch explorer", () => {
       await expect(map.getByRole("button", { name: /^All videos/ })).toBeVisible();
     });
 
-    test("picking a tool shows its videos and its guide", async ({ page }) => {
+    test("picking a tool shows its videos in that task, then all of them, and its guide", async ({ page }) => {
       await page.goto("/watch?task=video");
       const map = page.getByRole("group", { name: "Video library map" });
       await map.locator(".tx-tool", { hasText: "Kling" }).click();
       await expect(page).toHaveURL(/tool=kling/);
-      await expect(page.getByRole("heading", { level: 2, name: /^Kling/ })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 2, name: /^Kling in Create video/ })).toBeVisible();
       await expect(page.getByRole("link", { name: "Tool guide" })).toHaveAttribute("href", /\/tools\/kling$/);
+      await page.getByRole("button", { name: "All Kling videos" }).click();
+      await expect(page).not.toHaveURL(/task=/);
+      await expect(page.getByRole("heading", { level: 2, name: /^Kling \d/ })).toBeVisible();
+      await page.goto("/watch?task=video&tool=kling");
+      await expect(page.getByRole("heading", { level: 2, name: /^Kling in Create video/ })).toBeVisible();
       await page.keyboard.press("Escape");
       await expect(page).not.toHaveURL(/tool=/);
       await expect(page).toHaveURL(/task=video/);
@@ -39,7 +44,7 @@ test.describe("watch explorer", () => {
       const search = page.getByLabel("Search videos by tool, task or keyword");
       await search.fill("n8n");
       await expect(page).toHaveURL(/tool=n8n/);
-      await expect(page.getByRole("status")).toContainText("Zoomed to n8n");
+      await expect(page.getByRole("status")).toContainText("Showing every n8n video");
       await search.fill("make slides");
       await expect(page).toHaveURL(/task=present/);
       await expect(page.getByRole("status")).toContainText("Zoomed to Make a presentation");
