@@ -138,6 +138,11 @@ h1, h2, h3, h4, p { margin: 0; }
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   user-select: none;
   flex: none;
+  /* Icons are font ligatures: until the font loads (or if it's blocked) they'd render as words like
+     "arrow_back". A 1em box keeps that from ever pushing text or the layout around. */
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
 }
 .icon.filled { font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24; }
 
@@ -497,6 +502,50 @@ a.card, button.card { cursor: pointer; border: 0; text-align: left; font: inheri
 .grid { display: grid; gap: 16px; }
 .grid.cols-auto { grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
 .grid.cols-videos { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 28px 20px; }
+
+/* Tabs for the pages inside a section (src/data/sections.ts), at the top of each of them. */
+.section-tabs { margin: 8px 0 0; border-bottom: 1px solid var(--md-sys-color-outline-variant); }
+.section-tabs ul {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.section-tabs ul::-webkit-scrollbar { display: none; }
+.section-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: var(--md-shape-md) var(--md-shape-md) 0 0;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 15px;
+  font-weight: 560;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.section-tab:hover { color: var(--md-sys-color-on-surface); }
+.section-tab[aria-current="page"] { color: var(--md-sys-color-primary); font-weight: 650; }
+.section-tab[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--md-sys-color-primary);
+}
+.section-tab:focus-visible { outline: 3px solid var(--md-sys-color-tertiary-fixed-dim); outline-offset: -3px; }
+@media (max-width: 599px) {
+  .section-tabs { margin-inline: calc(var(--kh-gutter) * -1); padding-inline: calc(var(--kh-gutter) - 8px); }
+  .section-tab { padding: 0 12px; font-size: 14px; }
+}
 
 .page-head { padding-top: 24px; }
 .page-head h1 { margin-top: 8px; }

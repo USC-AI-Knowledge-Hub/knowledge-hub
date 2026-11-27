@@ -6,9 +6,10 @@
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useCatalog } from "../lib/catalogStore";
-import { CENTER, MIN_ON_MAP, WORLD, taskPositions, toolPositions, type MapTask, type VideoMap } from "../lib/watchMap";
+import { CENTER, MIN_ON_MAP, WORLD, taskColor, taskPositions, toolPositions, type MapTask, type VideoMap } from "../lib/watchMap";
 import { Icon } from "./Icon";
 import { ToolMark } from "./ToolMark";
+import "../styles/map.css";
 import "../styles/explorer.css";
 
 const videos = (n: number) => `${n} ${n === 1 ? "video" : "videos"}`;
@@ -84,7 +85,7 @@ export function TaskExplorer({
   return (
     <div className="tx">
       {/* Wide screens: the map. */}
-      <div className="tx-graph" ref={viewport} style={{ height: height || undefined }} role="group" aria-label="Video library map">
+      <div className={`tx-graph${focused ? ` ${taskColor(focused.id)}` : ""}`} ref={viewport} style={{ height: height || undefined }} role="group" aria-label="Video library map">
         <div className="tx-world" style={camera}>
           <svg className="tx-lines" width={WORLD.w} height={WORLD.h} aria-hidden="true" overflow="visible">
             {!focused &&
@@ -113,21 +114,23 @@ export function TaskExplorer({
               <button
                 key={t.id}
                 type="button"
-                className={`tx-task state${focused?.id === t.id ? " is-focus" : ""}${dim ? " is-dim" : ""}`}
+                className={`tx-task ${taskColor(t.id)}${focused?.id === t.id ? " is-focus" : ""}${dim ? " is-dim" : ""}`}
                 style={{ left: p.x, top: p.y }}
                 aria-pressed={task === t.id}
                 tabIndex={dim ? -1 : 0}
                 aria-hidden={dim || undefined}
                 onClick={() => pick(t)}
               >
-                <Icon name={t.icon} size={26} />
-                <span className="tx-task-label title-s">{t.label}</span>
+                <span className="tx-task-pill">
+                  <Icon name={t.icon} size={20} />
+                  <span className="tx-task-label">{t.label}</span>
+                </span>
                 <span className="tx-task-count label-m">{videos(t.count)}</span>
                 {!focused && (
                   <span className="tx-task-marks" aria-hidden="true">
                     {t.tools.slice(0, 3).map((x) => {
                       const tm = toolById.get(x.id);
-                      return tm ? <ToolMark key={x.id} tool={tm} size={16} /> : null;
+                      return tm ? <ToolMark key={x.id} tool={tm} size={32} /> : null;
                     })}
                   </span>
                 )}
@@ -141,14 +144,15 @@ export function TaskExplorer({
               <button
                 key={t.id}
                 type="button"
-                className="tx-tool state"
+                className={`tx-tool ${taskColor(focused!.id)}`}
                 style={{ left: toolAt[i].x, top: toolAt[i].y, animationDelay: `${i * 30}ms` }}
                 aria-pressed={tool === t.id}
                 onClick={() => onTool(tool === t.id ? null : t.id)}
               >
-                {tm && <ToolMark tool={tm} size={32} />}
-                <span className="tx-tool-name label-l">{t.name}</span>
-                <span className="label-m muted">{t.count}</span>
+                {tm && <ToolMark tool={tm} size={48} />}
+                <span className="tx-tool-name">
+                  {t.name} <span className="tx-tool-count">{t.count}</span>
+                </span>
               </button>
             );
           })}
@@ -169,7 +173,7 @@ export function TaskExplorer({
           <ul className="chip-row" aria-label="Smaller topics">
             {minor.map((t) => (
               <li key={t.id}>
-                <button type="button" className="chip state" aria-pressed={task === t.id} onClick={() => onTask(task === t.id ? null : t.id)}>
+                <button type="button" className={`chip state tx-chip ${taskColor(t.id)}`} aria-pressed={task === t.id} onClick={() => onTask(task === t.id ? null : t.id)}>
                   <Icon name={t.icon} size={18} />
                   {t.label}
                   <span className="chip-count">{t.count}</span>
@@ -186,7 +190,7 @@ export function TaskExplorer({
           <ul className="tx-tile-grid" aria-label="Tasks">
             {map.tasks.map((t) => (
               <li key={t.id}>
-                <button type="button" className="tx-tile state" aria-pressed={false} onClick={() => onTask(t.id)}>
+                <button type="button" className={`tx-tile state ${taskColor(t.id)}`} aria-pressed={false} onClick={() => onTask(t.id)}>
                   <Icon name={t.icon} size={24} />
                   <span className="title-s">{t.label}</span>
                   <span className="label-m muted">{videos(t.count)}</span>
@@ -200,7 +204,7 @@ export function TaskExplorer({
               <Icon name="arrow_back" size={18} />
               All tasks
             </button>
-            <p className="title-m tx-tile-title">
+            <p className={`title-m tx-tile-title ${taskColor(found.id)}`}>
               <Icon name={found.icon} size={22} /> {found.label}
             </p>
           </div>

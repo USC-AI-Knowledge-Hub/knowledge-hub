@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { Icon } from "../components/Icon";
 import { Level } from "../components/Level";
 import { DIFFICULTIES, DIFFICULTY_BLURB } from "../data/types";
@@ -33,10 +32,6 @@ export function About() {
   return (
     <>
       <header className="page-head">
-        <Link to="/watch" className="crumb">
-          <Icon name="arrow_back" />
-          Watch
-        </Link>
         <h1 className="display-s">How the video library works</h1>
         <p className="body-l muted measure">
           The library is rebuilt automatically every day. Here's exactly what happens, so you can judge how much to trust it.

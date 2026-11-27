@@ -11,6 +11,7 @@ import { longDate, minutesLabel } from "../lib/format";
 import { useProgress } from "../lib/progress";
 import { SHAPES } from "../lib/shapes";
 import { WavyProgress } from "../components/WavyProgress";
+import { taskColor } from "../lib/watchMap";
 
 const PATH_SHAPES = [SHAPES.cookie9, SHAPES.clover4, SHAPES.sunny, SHAPES.cookie6];
 
@@ -25,7 +26,7 @@ export function Home() {
   const { feed, today, trends } = useFeed();
   const { isDone } = useProgress();
   const videos = feed?.videos ?? [];
-  const picks = (today.length ? today : [...videos].sort((a, b) => b.score - a.score)).slice(0, 6);
+  const picks = (today.length ? today : [...videos].sort((a, b) => b.score - a.score)).slice(0, 3);
   const catalog = useCatalog();
 
   return (
@@ -112,6 +113,26 @@ export function Home() {
         </div>
       </section>
 
+      <section className="section" aria-labelledby="task-h">
+        <div className="section-head">
+          <div>
+            <h2 id="task-h" className="headline-m">
+              What are you trying to do?
+            </h2>
+            <p className="body-m muted">Start from the job, and we'll show you the tools that fit it.</p>
+          </div>
+        </div>
+        <div className="tasks">
+          {catalog.roots.map((c) => (
+            <Link key={c.id} to={`/tools?view=list&task=${c.id}`} className={`task state ${taskColor(c.id)}`}>
+              <Icon name={c.icon} size={28} />
+              <span className="title-s">{c.label}</span>
+              <span className="body-s muted">{catalog.toolsIn(c.id).length} tools</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="section" aria-labelledby="help-h">
         <div className="section-head">
           <div>
@@ -187,32 +208,12 @@ export function Home() {
             </div>
           </div>
           <div className="grid cols-videos">
-            {trends.slice(0, 4).map((t) => (
+            {trends.slice(0, 3).map((t) => (
               <TrendCard key={t.id} trend={t} />
             ))}
           </div>
         </section>
       )}
-
-      <section className="section" aria-labelledby="task-h">
-        <div className="section-head">
-          <div>
-            <h2 id="task-h" className="headline-m">
-              What are you trying to do?
-            </h2>
-            <p className="body-m muted">Start from the job, and we'll show you the tools that fit it.</p>
-          </div>
-        </div>
-        <div className="tasks">
-          {catalog.roots.map((c) => (
-            <Link key={c.id} to={`/tools?view=list&task=${c.id}`} className="task state">
-              <Icon name={c.icon} size={28} />
-              <span className="title-s">{c.label}</span>
-              <span className="body-s muted">{catalog.toolsIn(c.id).length} tools</span>
-            </Link>
-          ))}
-        </div>
-      </section>
 
       <section className="section" aria-labelledby="faq-h">
         <div className="section-head">

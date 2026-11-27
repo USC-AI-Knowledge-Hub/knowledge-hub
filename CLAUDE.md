@@ -22,6 +22,8 @@ A daily GitHub Action refreshes the YouTube video library.
   `talks.ts` (talks, debates, keynotes and podcasts), `guided/` (guided lessons and course paths),
   `topics.ts`, `types.ts`.
 - `src/pages/`, `src/components/`, `src/lib/`: the app.
+- `src/data/sections.ts`: the site's structure. The rail, the tabs at the top of a section's pages and the footer are
+  built from it. A new page goes in a section (`sections.test.ts` fails if a page belongs to none).
 - `src/styles/`: `tokens.css` (generated), `base.css` (system and components), `pages.css`.
 - `src/lib/seo.ts`: every page's title, description, canonical address, text and structured data,
   built from the data files. `npm run build` ends with `scripts/prerender.ts`, which writes a real
@@ -46,7 +48,7 @@ A daily GitHub Action refreshes the YouTube video library.
   (`npm run firebase-rules`; a test fails if it's stale). `npm run test:firebase` runs `firebase/__tests__/` against Google's emulators
   (needs Java), also in CI. The older Supabase store (`supabase/`, `BOARD_URL`) is used only when Firebase isn't set; with neither,
   the board keeps posts on the visitor's device.
-- Video picks (`/team/test`, `src/pages/TeamTest.tsx`, `src/lib/board/recs.ts`): students recommend a YouTube video with a one-line
+- Video picks (`/team/picks`, `src/pages/TeamTest.tsx`, `src/lib/board/recs.ts`): students recommend a YouTube video with a one-line
   headline and their name, and vote (👍, one per browser) on each other's picks. Picks are posts on the board database
   (board `video-recs`, topic `hub` or `found`), so they need no extra tables; the picture is the video's own thumbnail.
 - Watch (`/watch`, `src/pages/Watch.tsx`): the library as a map of tasks (`src/components/TaskExplorer.tsx`, `src/lib/watchMap.ts`).

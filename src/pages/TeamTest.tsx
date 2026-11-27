@@ -527,7 +527,7 @@ function RecCard({
   );
 }
 
-/** Video picks: students recommend a video in one line and vote on each other's picks. Being tried at /team/test. */
+/** Video picks: students recommend a video in one line and vote on each other's picks. At /team/picks (it was tried at /team/test, which now redirects). */
 export function TeamTest() {
   const store = useMemo(() => makeStore(DATABASE), []);
   const me = useMemo(() => identity(), []);

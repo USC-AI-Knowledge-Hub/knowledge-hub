@@ -20,18 +20,19 @@
 }
 
 .footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 16px 48px;
+  display: grid;
+  grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
+  gap: 24px 48px;
   max-width: calc(var(--kh-max) + var(--kh-gutter) * 2);
   margin: 0 auto;
   padding: 32px var(--kh-gutter) 48px;
   border-top: 1px solid var(--md-sys-color-outline-variant);
 }
-.footer-groups { display: grid; gap: 8px; justify-items: end; }
-@media (max-width: 839px) { .footer-groups { justify-items: start; } }
-.footer-links { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; }
+@media (max-width: 839px) { .footer { grid-template-columns: minmax(0, 1fr); } }
+/* The footer is the whole site map: one column per section. */
+.footer-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; }
+.footer-links { display: grid; gap: 8px; align-content: start; }
+.footer-links .label-l { margin: 0 0 2px; color: var(--md-sys-color-on-surface); }
 .footer-links a { color: var(--md-sys-color-on-surface-variant); }
 @media (max-width: 839px) {
   .footer { padding-bottom: 112px; }
@@ -218,6 +219,9 @@
 }
 .task:hover { border-radius: var(--md-shape-xl); }
 .task .icon { color: var(--md-sys-color-primary-container); margin-bottom: 12px; }
+/* Same category colors as the Tools and Watch maps (map.css). */
+.task[class*="cat-"] { background: color-mix(in srgb, var(--cat-c) 55%, var(--md-sys-color-surface-container-low)); }
+.task[class*="cat-"] .icon { color: var(--cat); }
 
 /* ── Video card ────────────────────────────────────────────────────────── */
 
@@ -362,6 +366,8 @@
 
 .tool-head { display: grid; gap: 16px; }
 .tool-hero { display: flex; align-items: center; gap: 20px; margin-top: 8px; }
+.tool-hero > * { min-width: 0; }
+.tool-hero h1 { overflow-wrap: anywhere; }
 .tool-bestfor { font-weight: 480; }
 .usc-note {
   display: flex;

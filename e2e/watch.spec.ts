@@ -28,6 +28,9 @@ test.describe("watch explorer", () => {
       await map.locator(".tx-tool", { hasText: "Kling" }).click();
       await expect(page).toHaveURL(/tool=kling/);
       await expect(page.getByRole("heading", { level: 2, name: /^Kling in Create video/ })).toBeVisible();
+      // The page scrolls down to the tool's videos.
+      await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(300);
+      await expect(page.getByRole("heading", { level: 2, name: /^Kling in Create video/ })).toBeInViewport();
       await expect(page.getByRole("link", { name: "Tool guide" })).toHaveAttribute("href", /\/tools\/kling$/);
       await page.getByRole("button", { name: "All Kling videos" }).click();
       await expect(page).not.toHaveURL(/task=/);

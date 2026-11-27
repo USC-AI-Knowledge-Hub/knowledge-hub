@@ -1,19 +1,11 @@
-import { useEffect, useState, type FormEvent } from "react";
-import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
+import { SECTIONS, hrefOf, sectionOf, tabsFor } from "../data/sections";
 import { useSeo } from "../lib/useSeo";
 import { useThemeMode } from "../lib/theme";
 import { Icon } from "./Icon";
 import { PlayerProvider } from "./Player";
 import { Tutor } from "./tutor/Tutor";
-
-const NAV = [
-  { to: "/", label: "Home", icon: "home", end: true },
-  { to: "/learn", label: "Learn", icon: "school" },
-  { to: "/tools", label: "Tools", icon: "handyman" },
-  { to: "/watch", label: "Watch", icon: "smart_display" },
-  { to: "/team", label: "AI Team", icon: "forum" },
-  { to: "/green", label: "Green AI", icon: "eco" },
-];
 
 function Brand({ size = 40 }: { size?: number }) {
   return (
@@ -27,18 +19,48 @@ function Brand({ size = 40 }: { size?: number }) {
   );
 }
 
+/** The main sections. A section stays lit on all its pages: "Where to start" lights Learn, "Use AI offline" Green AI. */
 function NavItems() {
+  const { pathname } = useLocation();
+  const here = sectionOf(pathname);
   return (
     <>
-      {NAV.map((n) => (
-        <NavLink key={n.to} to={n.to} end={n.end} className="nav-item">
+      {SECTIONS.map((n) => (
+        <Link key={n.to} to={n.to} className="nav-item" aria-current={here === n ? "page" : undefined}>
           <span className="pill">
             <Icon name={n.icon} />
           </span>
           {n.label}
-        </NavLink>
+        </Link>
       ))}
     </>
+  );
+}
+
+/** Tabs for the pages inside the current section, on each of those pages. */
+function SectionNav() {
+  const { pathname, search } = useLocation();
+  const tabs = tabsFor(pathname, search);
+  const list = useRef<HTMLUListElement>(null);
+  // On a phone the row scrolls sideways: bring the current tab into view.
+  useEffect(() => {
+    const ul = list.current;
+    const on = ul?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (ul && on) ul.scrollLeft = on.offsetLeft - (ul.clientWidth - on.offsetWidth) / 2;
+  }, [pathname, search]);
+  if (!tabs) return null;
+  return (
+    <nav className="section-tabs" aria-label={`${tabs.section.label} pages`}>
+      <ul ref={list}>
+        {tabs.section.pages.map((pg) => (
+          <li key={hrefOf(pg)}>
+            <Link to={hrefOf(pg)} className="section-tab state" aria-current={pg === tabs.current ? "page" : undefined}>
+              {pg.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 
@@ -106,6 +128,7 @@ export function Layout() {
       </header>
 
       <main id="main" className="main">
+        <SectionNav />
         <Outlet />
       </main>
 
@@ -115,16 +138,18 @@ export function Layout() {
           <p className="body-s muted">Learn AI. Use AI. Understand what's next. Built and reviewed by USC AI Knowledge Hub Fellows.</p>
         </div>
         <div className="footer-groups">
-          <nav className="footer-links body-s" aria-label="Practical help">
-            <Link to="/start">Where to start</Link>
-            <Link to="/prompts">Prompts that work</Link>
-            <Link to="/ai-use">Using AI in coursework</Link>
-            <Link to="/tools/compare">Compare tools</Link>
-            <Link to="/new">What's new</Link>
-          </nav>
-          <nav className="footer-links body-s" aria-label="About the site">
-            <Link to="/offline">Use offline</Link>
-            <Link to="/about">How the video library works</Link>
+          {SECTIONS.filter((sec) => sec.pages.length).map((sec) => (
+            <nav key={sec.to} className="footer-links body-s" aria-label={sec.label}>
+              <p className="label-l">{sec.label}</p>
+              {sec.pages.map((pg) => (
+                <Link key={hrefOf(pg)} to={hrefOf(pg)}>
+                  {pg.label}
+                </Link>
+              ))}
+            </nav>
+          ))}
+          <nav className="footer-links body-s" aria-label="More">
+            <p className="label-l">More</p>
             <a href="/feed.xml">RSS feed</a>
             <a href="https://sites.usc.edu/ai-knowledge-hub/" target="_blank" rel="noreferrer">
               Main Hub site

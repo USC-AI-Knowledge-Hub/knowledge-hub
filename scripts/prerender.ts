@@ -37,6 +37,14 @@ try {
     count += 1;
   }
 
+  // Moved addresses: the app shell, whose router sends the visitor on to the new address.
+  const { MOVED } = (await vite.ssrLoadModule("/src/data/sections.ts")) as typeof import("../src/data/sections");
+  const moved = template.replace("</head>", '  <meta name="robots" content="noindex" />\n  </head>');
+  for (const from of Object.keys(MOVED)) {
+    mkdirSync(join(dist, from), { recursive: true });
+    writeFileSync(join(dist, from, "index.html"), moved);
+  }
+
   // A generic page for the offline service worker to show for any address it hasn't saved.
   // Unlike the real pages it isn't meant to be found, so it is kept out of search results.
   writeFileSync(join(dist, "shell.html"), template.replace("</head>", '  <meta name="robots" content="noindex" />\n  </head>'));

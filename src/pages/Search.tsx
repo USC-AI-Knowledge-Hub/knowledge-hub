@@ -48,6 +48,7 @@ export function Search() {
   return (
     <>
       <header className="page-head">
+        <h1 className="display-s">Search</h1>
         <form
           role="search"
           className="search big-search"
