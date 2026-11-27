@@ -244,7 +244,7 @@ function MapView({
           onCluster={(id) => setParam("cluster", cluster === id ? null : id)}
         />
 
-        <aside className="map-panel" aria-label="Matches and legend">
+        <section className="map-panel" aria-label="Matches and legend">
           <div aria-live="polite" className="map-panel-results">
             {q.trim() ? (
               hits.length ? (
@@ -298,7 +298,7 @@ function MapView({
             )}
           </div>
           <Legend />
-        </aside>
+        </section>
       </div>
     </section>
   );

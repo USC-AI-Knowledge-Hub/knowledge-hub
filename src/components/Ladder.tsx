@@ -40,18 +40,20 @@ export function Ladder({ videos, runDate, rows = 7 }: { videos: Video[]; runDate
       </div>
       {ranked.map((t) => (
         <div key={t.id} className="ladder-row" role="row">
-          <Link role="rowheader" to={`/tools/${t.id}`} className="ladder-tool">
-            <ToolMark tool={t} size={30} />
-            <span className="title-s">{t.name}</span>
-          </Link>
+          {/* Table roles go on wrappers: a link can't be a cell. The wrappers don't affect the grid. */}
+          <span role="rowheader" className="ladder-slot">
+            <Link to={`/tools/${t.id}`} className="ladder-tool">
+              <ToolMark tool={t} size={30} />
+              <span className="title-s">{t.name}</span>
+            </Link>
+          </span>
           {DIFFICULTIES.map((d) => {
             const c = counts.get(`${t.id}:${d}`);
             const n = c?.total ?? 0;
             const strength = n ? 18 + Math.round((n / max) * 82) : 0;
             return (
+              <span key={d} role="cell" className="ladder-slot">
               <Link
-                key={d}
-                role="cell"
                 to={`/watch?tool=${t.id}&level=${d}`}
                 className={`ladder-cell ${d} ${n ? "" : "zero"}`}
                 style={{ "--s": `${strength}%`, "--i": i++ } as React.CSSProperties}
@@ -60,6 +62,7 @@ export function Ladder({ videos, runDate, rows = 7 }: { videos: Video[]; runDate
                 <span className="ladder-n">{n}</span>
                 {c?.fresh ? <span className="ladder-dot" aria-hidden="true" /> : null}
               </Link>
+              </span>
             );
           })}
         </div>

@@ -44,6 +44,8 @@ test.describe("watch explorer", () => {
 
     test("searching a tool or a task zooms the map there", async ({ page }) => {
       await page.goto("/watch");
+      // Pages load on demand: wait for the library before typing, as a visitor would.
+      await expect(page.getByRole("group", { name: "Video library map" }).getByRole("button", { name: /^All videos/ })).toBeVisible();
       const search = page.getByLabel("Search videos by tool, task or keyword");
       await search.fill("n8n");
       await expect(page).toHaveURL(/tool=n8n/);

@@ -77,6 +77,7 @@
 /* ── Ladder ────────────────────────────────────────────────────────────── */
 
 .ladder { display: grid; gap: 4px; }
+.ladder-slot { display: contents; }
 .ladder-row {
   display: grid;
   grid-template-columns: minmax(136px, 1.5fr) repeat(3, minmax(0, 1fr));
@@ -395,7 +396,7 @@
   background: var(--md-sys-color-surface-container-low);
 }
 .level-col-head { display: flex; align-items: center; gap: 8px; padding: 0 6px; }
-.level-col-head .label-m { margin-left: auto; opacity: 0.7; }
+.level-col-head .label-m { margin-left: auto; color: var(--md-sys-color-on-surface-variant); }
 .level-col.beginner .level-col-head { color: var(--kh-beginner); }
 .level-col.intermediate .level-col-head { color: var(--kh-intermediate); }
 .level-col.advanced .level-col-head { color: var(--kh-advanced); }
@@ -792,3 +793,8 @@
 .help-card { display: grid; gap: 8px; align-content: start; padding: 20px; text-decoration: none; color: inherit; }
 .help-card h3 { margin: 0; }
 .help-card p { margin: 0; }
+
+/* Used on more than one page (tool pages and Compare; the home page and What's new), so they live here, not in a page's own file. */
+.tool-compare { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 8px; }
+.tool-compare .chip-row { margin: 0; padding: 0; list-style: none; }
+.section-links { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }

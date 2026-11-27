@@ -124,6 +124,15 @@
   background: color-mix(in srgb, var(--kh-green-container) calc(100% - var(--i) * 22%), var(--md-sys-color-tertiary-container));
   color: var(--md-sys-color-on-surface);
 }
+/* In dark mode the gold end is too bright for light text: deepen it so every step keeps 4.5:1 contrast. */
+:root[data-theme="dark"] .heavier li {
+  background: color-mix(in srgb, var(--kh-green-container) calc(100% - var(--i) * 22%), color-mix(in srgb, var(--md-sys-color-tertiary-container) 55%, #000));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .heavier li {
+    background: color-mix(in srgb, var(--kh-green-container) calc(100% - var(--i) * 22%), color-mix(in srgb, var(--md-sys-color-tertiary-container) 55%, #000));
+  }
+}
 .heavier-scale { display: flex; justify-content: space-between; }
 
 .fp-perspective {

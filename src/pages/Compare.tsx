@@ -90,7 +90,7 @@ export function Compare() {
             </section>
           )}
           <div className="cmp-grid" style={{ ["--cols" as string]: cols }}>
-            <div className="cmp-head" role="row">
+            <div className="cmp-head">
               {chosen.map((t) => (
                 <Link key={t.id} to={`/tools/${t.id}`} className="cmp-tool card outlined state">
                   <ToolMark tool={t} size={48} />
