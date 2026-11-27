@@ -6,7 +6,8 @@ test.describe("where to start", () => {
     await page.getByRole("link", { name: "Find your level", exact: true }).click();
     await expect(page).toHaveURL(/\/start$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Where to start with AI");
-    await expect(page.getByRole("link", { name: "Where to start" })).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "Learn pages" }).getByRole("link", { name: "Where to start" })).toHaveAttribute("aria-current", "page");
+    await expect(page.getByRole("contentinfo").getByRole("link", { name: "Where to start" })).toBeVisible();
   });
 
   test("places a visitor in a bucket, remembers it, and tracks courses", async ({ page }) => {

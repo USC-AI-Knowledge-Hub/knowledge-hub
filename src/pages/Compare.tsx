@@ -1,5 +1,4 @@
 import { Link, useNavigate, useParams, useSearchParams } from "react-router";
-import { Icon } from "../components/Icon";
 import { Level } from "../components/Level";
 import { ToolMark } from "../components/ToolMark";
 import { COST_LABEL } from "../components/ToolProfile";
@@ -50,10 +49,6 @@ export function Compare() {
   return (
     <>
       <header className="page-head">
-        <Link to="/tools" className="crumb">
-          <Icon name="arrow_back" />
-          All tools
-        </Link>
         <h1 className="display-s">{chosen.length >= 2 ? `${chosen.map((t) => t.name).join(" vs ")}` : "Compare AI tools"}</h1>
         <p className="body-l muted measure">
           Side by side, from our reviews. Pick up to three tools. Each review shows when it was last checked, and tools we haven't reviewed aren't listed here.

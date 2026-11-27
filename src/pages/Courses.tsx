@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { Link, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
 import { Bars } from "../components/Level";
 import { CourseCard, coursePlayable } from "../components/CourseCard";
 import { usePlayer } from "../components/Player";
@@ -54,10 +54,6 @@ export function Courses() {
   return (
     <>
       <header className="page-head">
-        <Link to="/learn" className="crumb">
-          <Icon name="arrow_back" />
-          Learn
-        </Link>
         <h1 className="display-s">Full courses</h1>
         <p className="body-l muted measure">
           {all.length} complete courses, about {totalHours} hours in all, free on YouTube. Each lesson in Learn points to the ones that go

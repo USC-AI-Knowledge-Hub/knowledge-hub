@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
-import { Link } from "react-router";
 import { Icon } from "../components/Icon";
 import { Markdown } from "../components/tutor/Markdown";
 import { WavyProgress } from "../components/WavyProgress";
@@ -360,10 +359,6 @@ export function Assistant() {
   return (
     <>
       <header className="page-head">
-        <Link to="/offline" className="crumb">
-          <Icon name="arrow_back" />
-          Offline mode
-        </Link>
         <h1 className="display-s">Offline assistant</h1>
         <p className="body-l muted measure">
           A general-purpose AI assistant that runs on your own device. After a one-time download it works with no internet, and what you type never leaves your

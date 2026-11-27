@@ -22,6 +22,8 @@ A daily GitHub Action refreshes the YouTube video library.
   `talks.ts` (talks, debates, keynotes and podcasts), `guided/` (guided lessons and course paths),
   `topics.ts`, `types.ts`.
 - `src/pages/`, `src/components/`, `src/lib/`: the app.
+- `src/data/sections.ts`: the site's structure. The rail, the tabs at the top of a section's pages and the footer are
+  built from it. A new page goes in a section (`sections.test.ts` fails if a page belongs to none).
 - `src/styles/`: `tokens.css` (generated), `base.css` (system and components), `pages.css`.
 - `src/lib/seo.ts`: every page's title, description, canonical address, text and structured data,
   built from the data files. `npm run build` ends with `scripts/prerender.ts`, which writes a real

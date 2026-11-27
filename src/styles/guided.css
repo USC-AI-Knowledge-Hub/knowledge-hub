@@ -2,7 +2,7 @@
 
 /* ── Course page ──────────────────────────────────────────────────────── */
 
-.course-cta { margin-top: 20px; }
+.btn.course-cta { margin-top: 20px; max-width: 100%; height: auto; min-height: var(--h, 48px); padding-block: 10px; white-space: normal; text-align: left; }
 .course-outcomes { max-width: 820px; margin-top: 32px; padding: 24px 28px; }
 .course-outcomes .ideas { margin-top: 12px; }
 .course-unit { margin-top: 48px; }
