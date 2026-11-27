@@ -7,7 +7,7 @@ const categories = [
   cat("video", "Create video", undefined, ["video generation", "video"], ["videos"]),
   cat("video-edit", "Edit video", "video", ["video editing"]),
   cat("present", "Make a presentation", undefined, ["slides", "slide deck", "presentation"]),
-  cat("automate", "Automate a workflow", undefined, ["workflow", "agents"]),
+  cat("automate", "Automate a workflow", undefined, ["workflow", "agents", "ai agent"]),
   cat("research", "Research", undefined, ["citations", "literature review"]),
   cat("write", "Write", undefined, ["essay", "write"]),
 ];
@@ -56,6 +56,30 @@ describe("watch map", () => {
     expect(videoTask(videos[6], catalog)).toBe(BASICS.id);
     // A general assistant with a title that names no task is general, whatever its topic tags say.
     expect(videoTask(videos[8], catalog)).toBe(BASICS.id);
+  });
+
+  it("isn't fooled by filler words, tool names or one stray word", () => {
+    const more = {
+      ...catalog,
+      categories: [...categories, cat("code", "Code", undefined, ["coding", "code"]), cat("audio", "Voice & audio", undefined, ["text to speech"])],
+      toolById: new Map([
+        ...tools.map((t) => [t.id, t] as const),
+        ["claude-code", { id: "claude-code", name: "Claude Code", tasks: ["code", "automate"] }],
+        ["udio", { id: "udio", name: "Udio", tasks: ["audio"] }],
+      ]),
+    } as unknown as Parameters<typeof buildVideoMap>[1];
+    (more as { roots: unknown[] }).roots = (more as { categories: { parent?: string }[] }).categories.filter((c) => !c.parent);
+    (more as { categoryById: Map<string, unknown> }).categoryById = new Map((more as { categories: { id: string }[] }).categories.map((c) => [c.id, c]));
+    // "Full workflow" is filler, so the specialist tool decides.
+    expect(videoTask(v("w1", ["kling"], [], "Kling tutorial: full workflow"), more)).toBe("video");
+    // "Every feature in one video" isn't about making video.
+    expect(videoTask(v("w2", ["chatgpt"], [], "ChatGPT: every feature in one video"), more)).toBe(BASICS.id);
+    // "No coding" isn't coding, and a tool's name isn't a task word.
+    expect(videoTask(v("w3", ["claude-code"], [], "Build your first AI agent in Claude Code (no coding)"), more)).toBe("automate");
+    // One stray word doesn't outvote a specialist that can't do that task.
+    expect(videoTask(v("w4", ["udio"], [], "Udio tutorial: custom music for videos"), more)).toBe("audio");
+    // Title words the categories don't list still count.
+    expect(videoTask(v("w5", ["chatgpt"], [], "Make a movie with ChatGPT"), more)).toBe("video");
   });
 
   it("reads an unfiled tool's task from its description", () => {

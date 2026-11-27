@@ -53,8 +53,28 @@ const TOPIC_TASK: Record<string, string> = {
  * changer", "machine learning"), so titles don't count them as naming a task.
  */
 const TITLE_NOISE = new Set(
-  ["app", "api", "ide", "developer", "program", "script", "learn", "learning", "understand", "explain", "reading", "notes", "class", "students", "game", "youtube", "write", "draft", "art", "agents", "sources", "data", "architecture", "rendering", "guide"].map(stem),
+  ["app", "api", "ide", "developer", "program", "script", "learn", "learning", "understand", "explain", "reading", "notes", "class", "students", "game", "youtube", "write", "draft", "art", "agents", "sources", "data", "architecture", "rendering", "guide", "workflow", "workflows"].map(stem),
 );
+
+/** Ways titles say "this video" that don't mean the video teaches video-making ("every feature in one video"). */
+const SELF_REFERENCE = /\b(in |watch )?(this|one|the|a|single|full) videos?\b/gi;
+
+/** Words titles use for a task that a tool description wouldn't, so the categories don't list them. */
+const TITLE_WORDS: Record<string, string[]> = {
+  video: ["movie", "filmmaking", "short film", "animated", "cartoon", "shorts", "documentary", "commercial", "music video"],
+  audio: ["music", "song", "voiceover", "voice clone", "sound effects"],
+  code: ["website", "websites", "web app", "build an app", "build apps", "typescript", "deploy"],
+  analyze: ["dashboard", "dashboards", "excel"],
+  design3d: ["roblox", "make a game", "game ready", "3d printing", "3d print"],
+  present: ["powerpoint", "slides"],
+};
+
+/** A phrase so common in titles now that it only counts as one word. */
+const WEAK_PHRASES = new Set(["ai agent"].map((k) => norm(k)));
+/** Single words that name a task outright, so they count like a phrase. */
+const STRONG_WORDS = new Set(["automation", "automate", "3d", "presentation", "slides", "transcribe"].map(stem));
+/** "No coding" says how, not what: it shouldn't count as coding. */
+const NO_CODE = /\b(no|without|zero)[\s\u2010-\u2015-]*(cod(e|ing)|programming)( required| needed)?\b/gi;
 
 export interface MapTool {
   id: string;
@@ -106,43 +126,62 @@ function describedAs(text: string, catalog: Pick<Catalog, "categories">): string
 /** The tool's main task. */
 export const toolRoot = (toolId: string, catalog: CatalogLike): string | undefined => toolRoots(toolId, catalog)[0];
 
-/** The tasks a title names, strongest first: "Make AI videos with ChatGPT + CapCut" names Create video. */
-export function titleTasks(title: string, catalog: Pick<Catalog, "categories" | "categoryById">): string[] {
-  const ix = indexText(title);
+/**
+ * The tasks a title names, strongest first, with how strongly: a phrase ("text to speech") counts 2, a word 1.
+ * "Make AI videos with ChatGPT + CapCut" names Create video.
+ */
+export function titleScores(
+  title: string,
+  catalog: Pick<Catalog, "categories" | "categoryById">,
+  toolNames: string[] = [],
+): { id: string; score: number }[] {
+  // A tool's own name says nothing about the task: "Claude Code" and "GitHub Copilot" aren't about code by name.
+  let text = title.replace(SELF_REFERENCE, " ").replace(NO_CODE, " ");
+  for (const name of toolNames) text = text.replace(new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi"), " ");
+  const ix = indexText(text);
   const score = new Map<string, number>();
-  for (const c of catalog.categories) {
-    for (const kw of new Set([...c.keywords, ...(c.cues ?? [])])) {
-      const words = norm(kw).split(" ").filter(Boolean);
-      if (!words.length || (words.length === 1 && TITLE_NOISE.has(stem(words[0])))) continue;
-      if (!hasKeyword(ix, kw)) continue;
-      const root = rootOf(c.id, catalog);
-      score.set(root, Math.max(score.get(root) ?? 0, words.length > 1 ? 2 : 1));
-    }
+  const seen = new Map<string, [string, number]>();
+  const terms: [string, string][] = [
+    ...catalog.categories.flatMap((c) => [...new Set([...c.keywords, ...(c.cues ?? [])])].map((kw): [string, string] => [rootOf(c.id, catalog), kw])),
+    ...Object.entries(TITLE_WORDS).flatMap(([root, kws]) => kws.map((kw): [string, string] => [root, kw])),
+  ];
+  for (const [root, kw] of terms) {
+    const words = norm(kw).split(" ").filter(Boolean);
+    if (!words.length || (words.length === 1 && TITLE_NOISE.has(stem(words[0])))) continue;
+    if (!hasKeyword(ix, kw)) continue;
+    const weight = (words.length > 1 && !WEAK_PHRASES.has(norm(kw))) || (words.length === 1 && STRONG_WORDS.has(stem(words[0]))) ? 2 : 1;
+    seen.set(`${root} ${stem(norm(kw))}`, [root, weight]);
   }
-  return [...score.entries()].sort((a, b) => b[1] - a[1]).map(([id]) => id);
+  // Evidence adds up across different words ("presentation maker ... slides"), each word once.
+  for (const [root, weight] of seen.values()) score.set(root, (score.get(root) ?? 0) + weight);
+  return [...score.entries()].sort((a, b) => b[1] - a[1]).map(([id, n]) => ({ id, score: n }));
 }
+
+export const titleTasks = (title: string, catalog: Pick<Catalog, "categories" | "categoryById">) => titleScores(title, catalog).map((t) => t.id);
 
 /** A tool filed under more broad tasks than this is a general assistant (ChatGPT, Claude, Gemini): naming it says no task. */
 const SPECIALIST_MAX = 3;
 
 /**
  * One task for a video, from what it shows how to do:
- * 1. the task its title names (a tie goes to a task one of its tools does);
+ * 1. the task its title names (a tie goes to a task one of its tools does). One stray word doesn't outvote a
+ *    specialist tool, though: "Udio: custom music for videos" stays with Udio's audio, since Udio makes no video;
  * 2. else the main task of a specialist tool in it (a Gamma tutorial is about slides);
  * 3. else, for a video that names no tool, its lesson topic's task;
  * 4. else General AI: "Get ChatGPT Plus for free" or "Claude for beginners" teach no one task.
  */
 export function videoTask(v: Pick<Video, "title" | "tools" | "topics">, catalog: CatalogLike): string {
   const known = v.tools.filter((t) => catalog.toolById.has(t));
-  const fromTitle = titleTasks(v.title ?? "", catalog);
+  const specialist = known.map((t) => toolRoots(t, catalog)).find((roots) => roots.length && roots.length <= SPECIALIST_MAX);
+  const fromTitle = titleScores(v.title ?? "", catalog, known.map((t) => catalog.toolById.get(t)!.name));
   if (fromTitle.length) {
+    const best = fromTitle[0].score;
+    const top = fromTitle.filter((t) => t.score === best).map((t) => t.id);
+    if (best <= 1 && specialist && !top.some((id) => specialist.includes(id))) return specialist[0];
     const toolTasks = new Set(known.flatMap((t) => toolRoots(t, catalog)));
-    return fromTitle.find((id) => toolTasks.has(id)) ?? fromTitle[0];
+    return top.find((id) => toolTasks.has(id)) ?? top[0];
   }
-  for (const t of known) {
-    const roots = toolRoots(t, catalog);
-    if (roots.length && roots.length <= SPECIALIST_MAX) return roots[0];
-  }
+  if (specialist) return specialist[0];
   if (!known.length) for (const t of v.topics) if (TOPIC_TASK[t]) return TOPIC_TASK[t];
   return BASICS.id;
 }
