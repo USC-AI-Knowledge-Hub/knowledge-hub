@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-23",
+  "updatedAt": "2026-11-27",
   "sources": [
     {
       "id": "hf-blog",
       "url": "https://huggingface.co/blog/feed.xml",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
-      "items": 30
+      "items": 32
     },
     {
       "id": "openai",
       "url": "https://openai.com/news/rss.xml",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 40
     },
@@ -21,7 +21,7 @@
       "id": "google-ai",
       "url": "https://blog.google/technology/ai/rss/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 16
     },
@@ -29,7 +29,7 @@
       "id": "deepmind",
       "url": "https://deepmind.google/blog/rss.xml",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 14
     },
@@ -37,7 +37,7 @@
       "id": "microsoft-ai",
       "url": "https://news.microsoft.com/source/topics/ai/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 1
     },
@@ -45,7 +45,7 @@
       "id": "nvidia",
       "url": "https://blogs.nvidia.com/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 18
     },
@@ -53,7 +53,7 @@
       "id": "techcrunch-ai",
       "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 20
     },
@@ -61,7 +61,7 @@
       "id": "verge-ai",
       "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 10
     },
@@ -78,7 +78,7 @@
       "id": "simonw",
       "url": "https://simonwillison.net/atom/everything/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 30
     },
@@ -86,7 +86,7 @@
       "id": "one-useful-thing",
       "url": "https://www.oneusefulthing.org/feed",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 1
     },
@@ -94,7 +94,7 @@
       "id": "marktechpost",
       "url": "https://www.marktechpost.com/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 10
     },
@@ -102,15 +102,15 @@
       "id": "github-ai",
       "url": "https://github.blog/ai-and-ml/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
-      "items": 2
+      "items": 3
     },
     {
       "id": "aws-ml",
       "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 20
     },
@@ -118,7 +118,7 @@
       "id": "apple-ml",
       "url": "https://machinelearning.apple.com/rss.xml",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 10
     },
@@ -126,7 +126,7 @@
       "id": "google-research",
       "url": "https://research.google/blog/rss/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 9
     },
@@ -134,7 +134,7 @@
       "id": "microsoft-research",
       "url": "https://www.microsoft.com/en-us/research/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 8
     },
@@ -142,7 +142,7 @@
       "id": "nvidia-dev",
       "url": "https://developer.nvidia.com/blog/feed",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 40
     },
@@ -150,15 +150,15 @@
       "id": "cloudflare-ai",
       "url": "https://blog.cloudflare.com/tag/ai/rss/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
-      "items": 4
+      "items": 5
     },
     {
       "id": "elevenlabs",
       "url": "https://elevenlabs.io/blog/rss.xml",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 40
     },
@@ -166,7 +166,7 @@
       "id": "the-decoder",
       "url": "https://the-decoder.com/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 10
     },
@@ -174,7 +174,7 @@
       "id": "ars-ai",
       "url": "https://arstechnica.com/ai/feed/",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 20
     },
@@ -182,7 +182,7 @@
       "id": "wired-ai",
       "url": "https://www.wired.com/feed/tag/ai/latest/rss",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 10
     },
@@ -190,7 +190,7 @@
       "id": "mit-tr-ai",
       "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 10
     },
@@ -198,7 +198,7 @@
       "id": "zdnet-ai",
       "url": "https://www.zdnet.com/topic/artificial-intelligence/rss.xml",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 25
     },
@@ -206,7 +206,7 @@
       "id": "latent-space",
       "url": "https://www.latent.space/feed",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 20
     },
@@ -214,15 +214,15 @@
       "id": "interconnects",
       "url": "https://www.interconnects.ai/feed",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
-      "items": 5
+      "items": 4
     },
     {
       "id": "bens-bites",
       "url": "https://www.bensbites.com/feed",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 8
     },
@@ -230,7 +230,7 @@
       "id": "producthunt-ai",
       "url": "https://www.producthunt.com/feed?category=artificial-intelligence",
       "ok": true,
-      "lastOk": "2026-11-23",
+      "lastOk": "2026-11-27",
       "failures": 0,
       "items": 40
     },
@@ -239,7 +239,7 @@
       "url": "https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week",
       "ok": false,
       "lastOk": "2026-11-17",
-      "failures": 6,
+      "failures": 7,
       "items": 0,
       "error": "HTTP 429"
     },
@@ -247,10 +247,10 @@
       "id": "hn-show",
       "url": "https://hnrss.org/show?q=AI&points=60",
       "ok": false,
-      "lastOk": "2026-11-22",
+      "lastOk": "2026-11-26",
       "failures": 1,
       "items": 0,
-      "error": "The operation was aborted due to timeout"
+      "error": "HTTP 502"
     }
   ],
   "tools": [
@@ -275,7 +275,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-09-29",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": [
         {
           "source": "OpenAI news",
@@ -397,7 +397,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -421,7 +421,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -443,7 +443,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -467,7 +467,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -491,7 +491,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": [
         {
           "source": "Product Hunt: AI",
@@ -522,7 +522,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -546,7 +546,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -568,7 +568,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": [],
       "siteFailures": 1
     },
@@ -594,7 +594,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -618,7 +618,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -643,7 +643,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": [],
       "siteFailures": 1
     },
@@ -669,7 +669,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -693,7 +693,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": [],
       "siteFailures": 1
     },
@@ -719,7 +719,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -743,7 +743,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -768,7 +768,7 @@
       "urlKind": "site",
       "origin": "editor",
       "firstSeen": "2026-10-12",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": []
     },
     {
@@ -932,7 +932,7 @@
       "urlKind": "announcement",
       "origin": "feed",
       "firstSeen": "2026-10-23",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": [
         {
           "source": "Google AI blog",
@@ -1181,7 +1181,7 @@
       "urlKind": "site",
       "origin": "feed",
       "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-23",
+      "lastSeen": "2026-11-27",
       "evidence": [
         {
           "source": "Product Hunt: AI",
@@ -1473,46 +1473,6 @@
       ]
     },
     {
-      "key": "ernie",
-      "name": "ERNIE",
-      "kind": "model",
-      "firstSeen": "2026-11-05",
-      "lastSeen": "2026-11-05",
-      "mentions": [
-        {
-          "source": "MarkTechPost",
-          "title": "Baidu Releases ERNIE 5.5 Flash Base: A 280B MoE Base Model With 14B Active Parameters",
-          "url": "https://www.marktechpost.com/2026/11/05/baidu-ernie-5-5-flash-base-280b-moe/",
-          "date": "2026-11-05",
-          "sourceId": "marktechpost",
-          "tier": "press"
-        },
-        {
-          "source": "The Decoder",
-          "title": "Baidu releases ERNIE 5.5 Flash Base with 280 billion parameters as an open-source foundation model",
-          "url": "https://the-decoder.com/baidu-releases-ernie-5-5-flash-base-with-280-billion-parameters-as-an-open-source-foundation-model/",
-          "date": "2026-11-05",
-          "sourceId": "the-decoder",
-          "tier": "press"
-        }
-      ],
-      "summary": "Baidu has released ERNIE 5.5 Flash Base, a 280B sparse MoE base model with 14B active parameters, trained on 33.5T tokens and published before any mid- or post-training. The post Baidu Releases ERNIE 5.5 Flash Base: A 280B MoE Base Model With 14B Active Parameters appeared first on MarkTechPost .",
-      "links": [
-        "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base",
-        "https://x.com/Baidu_Inc/status/2118265920665587935",
-        "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base#model-overview",
-        "https://arxiv.org/abs/2610.17959",
-        "https://arxiv.org/abs/2610.40577",
-        "https://arxiv.org/abs/2610.24766",
-        "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
-        "https://huggingface.co/tencent/Hy3-preview-Base",
-        "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Base",
-        "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base#evaluation",
-        "https://huggingface.co/baidu/ERNIE-5.5-Flash-Base-BF16",
-        "https://github.com/baidu/vLLM-ERNIE"
-      ]
-    },
-    {
       "key": "genie",
       "name": "Genie",
       "kind": "tool",
@@ -1643,43 +1603,235 @@
       ]
     },
     {
-      "key": "nemotron 3 5 transcribe",
-      "name": "Nemotron 3.5 Transcribe",
-      "kind": "model",
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-11-05",
+      "key": "dfly",
+      "name": "DFly",
+      "kind": "tool",
+      "firstSeen": "2026-11-27",
+      "lastSeen": "2026-11-27",
       "mentions": [
         {
           "source": "MarkTechPost",
-          "title": "NVIDIA Releases Nemotron 3.5 Transcribe: An Open 30B MoE Model for 40-Language Transcription with ~4B Active Parameters",
-          "url": "https://www.marktechpost.com/2026/10/28/nvidia-nemotron-3-5-transcribe-open-speech-llm/",
-          "date": "2026-10-29",
+          "title": "Tencent Open-Sources DFly2: Speculative Decoding That Reuses the Target’s Sparse KV Cache",
+          "url": "https://www.marktechpost.com/2026/11/26/tencent-dfly2-speculative-decoding-sparse-models/",
+          "date": "2026-11-27",
           "sourceId": "marktechpost",
           "tier": "press"
-        },
-        {
-          "source": "Product Hunt: AI",
-          "title": "Nemotron 3.5 Transcribe",
-          "url": "https://www.producthunt.com/products/nvidia",
-          "date": "2026-11-05",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
         }
       ],
-      "summary": "NVIDIA released Nemotron 3.5 Transcribe, an open-weights speech LLM with 4.3B active parameters. It transcribes 40 languages, adds speaker labels and word timestamps, and posts a 4.71% mean WER on the English Open ASR Leaderboard.",
+      "summary": "Tencent open-sourced DFly2, a speculative decoding drafter for sparse-attention LLMs. Each draft layer reuses the target's KV cache and top-k indexer picks, adding no draft KV memory and lifting 64K serving throughput by up to 81%.",
       "links": [
-        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
-        "https://research.nvidia.com/labs/nemotron/NVIDIA-Nemotron-3.5-Transcribe/",
-        "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3.5-Transcribe-Technical-Report.pdf",
-        "https://huggingface.co/nvidia/Nemotron-3-Diarization",
-        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
-        "https://huggingface.co/Qwen/Qwen3-ASR-1.7B",
-        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-FP8",
-        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-NVFP4",
-        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-GGUF",
-        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-DFlash2",
-        "https://openmdw.ai/license/1-1/",
-        "https://github.com/NVIDIA-NeMo/Speech"
+        "https://x.com/TencentAI_News/status/2125968859450802415",
+        "https://huggingface.co/tencent/Hy4-flash",
+        "https://recipes.vllm.ai/tencent/Hy4-flash",
+        "https://arxiv.org/abs/2611.34776",
+        "https://github.com/Tencent/AngelSpec",
+        "https://arxiv.org/abs/2607.05147",
+        "https://arxiv.org/abs/2602.06036",
+        "https://www.deeplearning.ai/the-batch/deepseeks-dspark-gains-velocity",
+        "https://chromewebstore.google.com/detail/gpu-leaderboard-deploy-it/ilgeefmmchkiepflddidhalcdihimfbh",
+        "https://x.com/intent/follow?screen_name=marktechpost",
+        "https://www.reddit.com/r/machinelearningnews/",
+        "https://www.marktechpost.com/2026/11/08/google-elephant-goldfish-model-plugin-spec-review-coding-agents/#aids-signup"
+      ]
+    },
+    {
+      "key": "namazu",
+      "name": "Namazu",
+      "kind": "model",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Sakana AI Releases Namazu Small, a 30B Model Built on Nemotron 3 Nano",
+          "url": "https://www.marktechpost.com/2026/11/26/sakana-ai-namazu-small-30b-nemotron-3-nano/",
+          "date": "2026-11-26",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Sakana AI released Sakana Namazu Small, a 30B-A3B reasoning model built on NVIDIA Nemotron 3 Nano. It averages 60.1 across 25 benchmarks, ahead of the 120B Nemotron 3 Super at 56.2. The post Sakana AI Releases Namazu Small, a 30B Model Built on Nemotron 3 Nano appeared first on MarkTechPost .",
+      "links": [
+        "https://sakana.ai/namazu-small/",
+        "https://sakana.ai/namazu",
+        "https://huggingface.co/blog/nvidia/nemotron-3-nano-efficient-open-intelligent-models",
+        "https://developer.nvidia.com/blog/?p=110507",
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+        "https://arxiv.org/abs/2504.12516",
+        "https://arxiv.org/abs/2509.07968",
+        "https://arxiv.org/abs/2512.20848",
+        "https://chromewebstore.google.com/detail/gpu-leaderboard-deploy-it/ilgeefmmchkiepflddidhalcdihimfbh",
+        "https://x.com/intent/follow?screen_name=marktechpost",
+        "https://www.reddit.com/r/machinelearningnews/",
+        "https://www.marktechpost.com/2026/11/08/google-elephant-goldfish-model-plugin-spec-review-coding-agents/#aids-signup"
+      ]
+    },
+    {
+      "key": "sakana ai",
+      "name": "Sakana AI",
+      "kind": "model",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "Sakana AI Releases Namazu Small, a 30B Model Built on Nemotron 3 Nano",
+          "url": "https://www.marktechpost.com/2026/11/26/sakana-ai-namazu-small-30b-nemotron-3-nano/",
+          "date": "2026-11-26",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Sakana AI released Sakana Namazu Small, a 30B-A3B reasoning model built on NVIDIA Nemotron 3 Nano. It averages 60.1 across 25 benchmarks, ahead of the 120B Nemotron 3 Super at 56.2. The post Sakana AI Releases Namazu Small, a 30B Model Built on Nemotron 3 Nano appeared first on MarkTechPost .",
+      "links": [
+        "https://sakana.ai/namazu-small/",
+        "https://sakana.ai/namazu",
+        "https://huggingface.co/blog/nvidia/nemotron-3-nano-efficient-open-intelligent-models",
+        "https://developer.nvidia.com/blog/?p=110507",
+        "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+        "https://arxiv.org/abs/2504.12516",
+        "https://arxiv.org/abs/2509.07968",
+        "https://arxiv.org/abs/2512.20848",
+        "https://chromewebstore.google.com/detail/gpu-leaderboard-deploy-it/ilgeefmmchkiepflddidhalcdihimfbh",
+        "https://x.com/intent/follow?screen_name=marktechpost",
+        "https://www.reddit.com/r/machinelearningnews/",
+        "https://www.marktechpost.com/2026/11/08/google-elephant-goldfish-model-plugin-spec-review-coding-agents/#aids-signup"
+      ]
+    },
+    {
+      "key": "laminar",
+      "name": "Laminar",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "ByteDance Researchers Open-Sources Laminar, an Async Reinforcement Learning RL Post-Training Framework",
+          "url": "https://www.marktechpost.com/2026/11/24/bytedance-seed-laminar-async-rl-post-training-framework/",
+          "date": "2026-11-25",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "Laminar is an open-source asynchronous RL post-training framework from HKU and ByteDance Seed researchers. It decouples rollout, training and weight sync, and lifted Qwen3-Coder-30B-A3B to 52.2% on SWE-bench Verified.",
+      "links": [
+        "https://arxiv.org/abs/2510.12633",
+        "https://github.com/verl-project/laminar",
+        "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct",
+        "https://verl-project.github.io/posts/2026-11-20-laminar/",
+        "https://github.com/verl-project/verl",
+        "https://github.com/verl-project/uni-agent",
+        "https://arxiv.org/html/2510.12633v1",
+        "https://github.com/inclusionAI/AReaL",
+        "https://github.com/THUDM/slime",
+        "https://doi.org/10.1145/3767295.3803580",
+        "https://chromewebstore.google.com/detail/gpu-leaderboard-deploy-it/ilgeefmmchkiepflddidhalcdihimfbh",
+        "https://x.com/intent/follow?screen_name=marktechpost"
+      ]
+    },
+    {
+      "key": "amazon bedrock trusted access",
+      "name": "Amazon Bedrock Trusted Access",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "AWS machine learning blog",
+          "title": "Introducing the Amazon Bedrock Trusted Access API with Anthropic’s Enterprise Frontier Safeguards and Enterprise Data Controls",
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-the-amazon-bedrock-trusted-access-api-with-anthropics-enterprise-frontier-safeguards-and-enterprise-data-controls/",
+          "date": "2026-11-24",
+          "sourceId": "aws-ml",
+          "tier": "press"
+        }
+      ],
+      "summary": "Amazon Bedrock now offers a trusted access program API: one place to discover, request, and enroll in model provider programs.",
+      "links": [
+        "https://aws.amazon.com/bedrock/",
+        "https://support.claude.com/en/articles/14604842-cyber-verification-program",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/trusted-access-programs.html",
+        "https://aws.amazon.com/kms/",
+        "https://aws.amazon.com/s3/",
+        "https://d2908q01vomqb2.cloudfront.net/f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59/2026/11/23/ML-22385-1.png",
+        "https://aws.amazon.com/cloudtrail/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/anthropic-efs-enterprise-data-controls.html",
+        "https://claude.com/resources/articles/zero-data-retention-with-enterprise-frontier-safeguards",
+        "https://trust.anthropic.com/resources?s=a7lwkeieqk3ggz29k954j&name=enterprise-frontier-safeguards:-technical-overview"
+      ]
+    },
+    {
+      "key": "maple",
+      "name": "Maple",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "TechCrunch AI",
+          "title": "Maple raises $5.3M to build AI products that protect your data, even from itself",
+          "url": "https://techcrunch.com/2026/11/24/maple-raises-5-3m-to-build-ai-products-that-protect-your-data-even-from-itself/",
+          "date": "2026-11-24",
+          "sourceId": "techcrunch-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "The startup's encrypted AI architecture is designed to prevent even the company itself from accessing users' private data.",
+      "links": []
+    },
+    {
+      "key": "shirudo",
+      "name": "Shirudo",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "MarkTechPost",
+          "title": "OpenAI and Cisco Releases Shirudo: An Open-Source Linux Runtime Allowing Agents to Defend Systems Without Downtime",
+          "url": "https://www.marktechpost.com/2026/11/24/openai-cisco-shirudo-ebpf-linux-runtime/",
+          "date": "2026-11-24",
+          "sourceId": "marktechpost",
+          "tier": "press"
+        }
+      ],
+      "summary": "OpenAI and Cisco released Shirudo, a pre-release, BSD-licensed eBPF runtime for Linux. AI agents write signed \"shields\" that block exploit paths on running systems while teams test and roll out real patches.",
+      "links": [
+        "https://openai.com/index/introducing-shirudo/",
+        "https://isovalent.com/blog/post/cisco-openai-shirudo/",
+        "https://github.com/shirudo-dev/shirudo",
+        "https://docs.shirudo.dev/start/quickstart.html",
+        "https://docs.shirudo.dev/index.html",
+        "https://lpc.events/event/20/contributions/2437/",
+        "https://docs.shirudo.dev/operate/plan/system-requirements.html",
+        "https://calif.io/java4shell",
+        "https://docs.shirudo.dev/upatches/write/java-agents.html",
+        "https://docs.shirudo.dev/internals/kernel-patches.html",
+        "https://labs.isovalent.com/#/lab/shirudo-getting-started",
+        "https://github.com/cilium/tetragon"
+      ]
+    },
+    {
+      "key": "tidal",
+      "name": "Tidal",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Ars Technica AI",
+          "title": "Tidal announces ban on AI-generated music; 27 million tracks will be deleted",
+          "url": "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/",
+          "date": "2026-11-24",
+          "sourceId": "ars-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "AI songs account for 6.3 percent of Tidal's catalog, but it's about to be zero.",
+      "links": [
+        "https://x.com/TIDAL/status/2125233598714487170",
+        "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/",
+        "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/#comments"
       ]
     },
     {
@@ -1777,6 +1929,25 @@
         "https://x.com/intent/follow?screen_name=marktechpost",
         "https://www.reddit.com/r/machinelearningnews/"
       ]
+    },
+    {
+      "key": "supertake",
+      "name": "Supertake",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "TechCrunch AI",
+          "title": "Supertake raises $20M to let AI agents turn your market predictions into stock portfolios",
+          "url": "https://techcrunch.com/2026/11/23/supertake-raises-20m-to-let-ai-agents-turn-your-market-predictions-into-stock-portfolios/",
+          "date": "2026-11-23",
+          "sourceId": "techcrunch-ai",
+          "tier": "press"
+        }
+      ],
+      "summary": "Think you know where the market is headed? A startup called Supertake lets you put money behind your ideas without having to pick the stocks yourself.",
+      "links": []
     },
     {
       "key": "z ai",
@@ -3638,594 +3809,1192 @@
       ]
     },
     {
-      "key": "agile deliberation framework",
-      "name": "Agile Deliberation Framework",
+      "key": "depost ai",
+      "name": "Depost AI",
       "kind": "tool",
-      "firstSeen": "2026-11-05",
-      "lastSeen": "2026-11-05",
+      "firstSeen": "2026-11-27",
+      "lastSeen": "2026-11-27",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "Google AI Research Releases Agile Deliberation Framework for Gray-Area Image Classifiers",
-          "url": "https://www.marktechpost.com/2026/11/04/google-agile-deliberation-subjective-image-classifiers/",
-          "date": "2026-11-05",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Depost AI",
+          "url": "https://www.producthunt.com/products/depost-ai",
+          "date": "2026-11-27",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Google Research released Agile Deliberation, a human-in-the-loop framework that helps users define subjective visual concepts through borderline images. In 18 live sessions, it lifted Gemini-based classifier F1 by 10.5 points over zero-shot.",
+      "summary": "The LinkedIn AI agent that learns what works for your brand",
       "links": [
-        "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/",
-        "https://openaccess.thecvf.com/content/CVPR2026/papers/Wang_Agile_Deliberation_Concept_Deliberation_for_Subjective_Visual_Classification_CVPR_2026_paper.pdf",
-        "https://arxiv.org/abs/2403.02626",
-        "https://arxiv.org/abs/2302.12948",
-        "https://github.com/google-research/google-research/tree/master/agile_deliberation",
-        "https://github.com/google-research/google-research/blob/master/agile_deliberation/Demo.ipynb",
-        "https://arxiv.org/abs/2512.10821",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews",
-        "https://promotions.marktechpost.com/"
+        "https://www.producthunt.com/products/depost-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1332760?app_id=339"
       ]
     },
     {
-      "key": "gpt image flare",
-      "name": "GPT-Image Flare",
+      "key": "woomool",
+      "name": "Woomool",
       "kind": "tool",
-      "firstSeen": "2026-11-05",
-      "lastSeen": "2026-11-05",
+      "firstSeen": "2026-11-27",
+      "lastSeen": "2026-11-27",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "OpenAI Launches GPT-Image-2.6 Flare and Sunburst: Adds GIFs, SVG Export and 6-Second API Generation",
-          "url": "https://www.marktechpost.com/2026/11/04/openai-gpt-image-2-6-flare-sunburst/",
-          "date": "2026-11-05",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Woomool",
+          "url": "https://www.producthunt.com/products/woomool",
+          "date": "2026-11-27",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "OpenAI released Images 2.6 and the GPT-Image-2.6 Flare and Sunburst API models. Flare generates images in as little as 6 seconds, and both add GIF output, SVG export, markup edits and a complexity parameter.",
+      "summary": "AI Canvas where thinking becomes tangible",
       "links": [
-        "https://openai.com/index/introducing-images-2-6/",
-        "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
-        "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
-        "https://developers.openai.com/api/docs/guides/image-generation#gpt-image-26",
-        "https://openai.com/index/introducing-chatgpt-images-2-5/",
-        "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
-        "https://docs.bfl.ml/release-notes",
-        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
-        "https://ai.google.dev/gemini-api/docs/pricing",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}"
+        "https://www.producthunt.com/products/woomool?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1332846?app_id=339"
       ]
     },
     {
-      "key": "together ai",
-      "name": "Together AI",
+      "key": "contral",
+      "name": "Contral",
       "kind": "tool",
-      "firstSeen": "2026-11-05",
-      "lastSeen": "2026-11-05",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "Together AI Releases Together Compiler: Agents Make Inference Up to 2.6x Faster",
-          "url": "https://www.marktechpost.com/2026/11/05/together-ai-together-compiler-continual-compilation-ai-inference/",
-          "date": "2026-11-05",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Contral",
+          "url": "https://www.producthunt.com/products/contral",
+          "date": "2026-11-26",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Together AI released Together Compiler, an agent-driven loop that keeps re-optimizing the inference forward pass as traffic shifts. It beat the best InferenceX configurations by up to 2.6x TPS in under 24 hours per model.",
+      "summary": "The AI coding agent that checks its work and teaches you",
       "links": [
-        "https://www.together.ai/blog/together-compiler-continual-compilation-for-ai-inference",
-        "https://inferencex.semianalysis.com/inference",
-        "https://github.com/HazyResearch/Megakernels",
-        "https://github.com/mirage-project/mirage",
-        "https://www.together.ai/blog/polymorphic-inference",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews",
-        "https://promotions.marktechpost.com/",
-        "https://www.marktechpost.com/2026/11/05/together-ai-together-compiler-continual-compilation-ai-inference/",
-        "https://www.marktechpost.com/"
+        "https://www.producthunt.com/products/contral?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331740?app_id=339"
       ]
     },
     {
-      "key": "together compiler",
-      "name": "Together Compiler",
+      "key": "form action store",
+      "name": "Form Action Store",
       "kind": "tool",
-      "firstSeen": "2026-11-05",
-      "lastSeen": "2026-11-05",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "Together AI Releases Together Compiler: Agents Make Inference Up to 2.6x Faster",
-          "url": "https://www.marktechpost.com/2026/11/05/together-ai-together-compiler-continual-compilation-ai-inference/",
-          "date": "2026-11-05",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Form Action Store",
+          "url": "https://www.producthunt.com/products/form-action-store",
+          "date": "2026-11-26",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Together AI released Together Compiler, an agent-driven loop that keeps re-optimizing the inference forward pass as traffic shifts. It beat the best InferenceX configurations by up to 2.6x TPS in under 24 hours per model.",
+      "summary": "Discover, create and grow with powerful digital tools.",
       "links": [
-        "https://www.together.ai/blog/together-compiler-continual-compilation-for-ai-inference",
-        "https://inferencex.semianalysis.com/inference",
-        "https://github.com/HazyResearch/Megakernels",
-        "https://github.com/mirage-project/mirage",
-        "https://www.together.ai/blog/polymorphic-inference",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews",
-        "https://promotions.marktechpost.com/",
-        "https://www.marktechpost.com/2026/11/05/together-ai-together-compiler-continual-compilation-ai-inference/",
-        "https://www.marktechpost.com/"
+        "https://www.producthunt.com/products/form-action-store?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1332478?app_id=339"
       ]
     },
     {
-      "key": "ricursive ai",
-      "name": "Ricursive AI",
-      "kind": "model",
-      "firstSeen": "2026-11-04",
-      "lastSeen": "2026-11-04",
-      "mentions": [
-        {
-          "source": "MarkTechPost",
-          "title": "Ricursive AI Releases Ripple-65B Preview: A 65B Dense Open-Weight Model Scoring 80.5 on Terminal-Bench 2.1",
-          "url": "https://www.marktechpost.com/2026/11/04/ricursive-ripple-65b-preview-open-weight-model/",
-          "date": "2026-11-04",
-          "sourceId": "marktechpost",
-          "tier": "press"
-        }
-      ],
-      "summary": "Ricursive Intelligence released Ripple-65B Preview, a 65B dense open-weight LLM under Apache 2.0. It scores 80.5 on Terminal-Bench 2.1, ahead of US open models up to 15x its size.",
-      "links": [
-        "https://www.ricursive.com/ripple",
-        "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
-        "https://huggingface.co/ricursiveAI/Ripple-65B-Preview-NVFP4",
-        "https://huggingface.co/ricursiveAI/Ripple-65B-Base-Preview",
-        "https://arxiv.org/abs/2505.06708",
-        "https://arxiv.org/abs/2501.18795",
-        "https://arxiv.org/pdf/2410.17897",
-        "https://openai.com/index/introducing-gpt-oss/",
-        "https://arxiv.org/pdf/2412.04403",
-        "https://openreview.net/forum?id=xsonlP8DRV",
-        "https://arxiv.org/abs/2609.20807",
-        "https://microsoft.ai/pdf/mai-thinking-1.pdf"
-      ]
-    },
-    {
-      "key": "ripple",
-      "name": "Ripple",
-      "kind": "model",
-      "firstSeen": "2026-11-04",
-      "lastSeen": "2026-11-04",
-      "mentions": [
-        {
-          "source": "MarkTechPost",
-          "title": "Ricursive AI Releases Ripple-65B Preview: A 65B Dense Open-Weight Model Scoring 80.5 on Terminal-Bench 2.1",
-          "url": "https://www.marktechpost.com/2026/11/04/ricursive-ripple-65b-preview-open-weight-model/",
-          "date": "2026-11-04",
-          "sourceId": "marktechpost",
-          "tier": "press"
-        }
-      ],
-      "summary": "Ricursive Intelligence released Ripple-65B Preview, a 65B dense open-weight LLM under Apache 2.0. It scores 80.5 on Terminal-Bench 2.1, ahead of US open models up to 15x its size.",
-      "links": [
-        "https://www.ricursive.com/ripple",
-        "https://huggingface.co/ricursiveAI/Ripple-65B-Preview",
-        "https://huggingface.co/ricursiveAI/Ripple-65B-Preview-NVFP4",
-        "https://huggingface.co/ricursiveAI/Ripple-65B-Base-Preview",
-        "https://arxiv.org/abs/2505.06708",
-        "https://arxiv.org/abs/2501.18795",
-        "https://arxiv.org/pdf/2410.17897",
-        "https://openai.com/index/introducing-gpt-oss/",
-        "https://arxiv.org/pdf/2412.04403",
-        "https://openreview.net/forum?id=xsonlP8DRV",
-        "https://arxiv.org/abs/2609.20807",
-        "https://microsoft.ai/pdf/mai-thinking-1.pdf"
-      ]
-    },
-    {
-      "key": "twil",
-      "name": "TwIL",
-      "kind": "model",
-      "firstSeen": "2026-11-04",
-      "lastSeen": "2026-11-04",
-      "mentions": [
-        {
-          "source": "MarkTechPost",
-          "title": "webAI Releases TwIL-8B, an 8.8B Reasoning Model Scoring 98.2 on MATH-500",
-          "url": "https://www.marktechpost.com/2026/11/04/webai-twil-8b-reasoning-model/",
-          "date": "2026-11-04",
-          "sourceId": "marktechpost",
-          "tier": "press"
-        }
-      ],
-      "summary": "webAI released TwIL-8B, an 8.8B reasoning model post-trained from IBM Granite 4.2 8B. It posts 98.2 on MATH-500 and 81.6 on LiveCodeBench, but trails similar-size models on knowledge benchmarks.",
-      "links": [
-        "https://huggingface.co/webAI-Official/TwIL-8B",
-        "https://huggingface.co/ibm-granite/granite-4.2-8b",
-        "https://x.com/thewebAI/status/2118054125737070659",
-        "https://huggingface.co/webAI-Official/TwIL-8B#model-details",
-        "https://www.webai.com/blog/webai-releases-twil-lm-a-family-of-formal-logic-models-that-outreason-a-120b-model-and-run-on-an-iphone",
-        "https://huggingface.co/webAI-Official/TwIL-8B#how-it-was-built",
-        "https://www.sota2.com/research/sota/math-on-math-500-score",
-        "https://huggingface.co/RedHatAI/gemma-4-31B-it-FP8-dynamic",
-        "https://matharena.ai/models/qwen_qwen3_5_9b",
-        "https://ai.google.dev/gemma/docs/core/model_card_4",
-        "https://huggingface.co/Qwen/Qwen3.5-9B",
-        "https://huggingface.co/webAI-Official/TwIL-8B#gguf--llamacpp"
-      ]
-    },
-    {
-      "key": "flashprove",
-      "name": "FlashProve",
+      "key": "onset",
+      "name": "Onset",
       "kind": "tool",
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "Anthropic Releases FlashProve: Cryptographic Proofs That a Reply Came From Committed Weights",
-          "url": "https://www.marktechpost.com/2026/11/03/anthropic-flashprove-provable-inference-zksnark/",
-          "date": "2026-11-03",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Onset",
+          "url": "https://www.producthunt.com/products/onset",
+          "date": "2026-11-26",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Anthropic released FlashProve, an Apache 2.0 zkSNARK prototype that proves a reply came from a committed model without revealing weights. It proves Llama 4 Maverick at 110 tokens/second on 1 H100, with 19 MB proofs.",
+      "summary": "AI reviews, titles and thumbnails for YouTube creators",
       "links": [
-        "https://github.com/anthropics/FlashProve",
-        "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
-        "https://www.anthropic.com/research/provable-inference",
-        "https://github.com/anthropics/FlashProve/blob/main/guide/performance.md",
-        "https://attestable.com/blog/proving-llms-scale",
-        "https://github.com/JamesPetrie/VerInf",
-        "https://eprint.iacr.org/2026/1112",
-        "https://arxiv.org/abs/2404.16109",
-        "https://lagrange.dev/deepprove",
-        "https://www.anthropic.com/document/flashprove-technical-report",
-        "https://github.com/anthropics/FlashProve/blob/main/paper/paper.pdf",
-        "https://x.com/intent/follow?screen_name=marktechpost"
+        "https://www.producthunt.com/products/onset?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1332445?app_id=339"
       ]
     },
     {
-      "key": "india based inference",
-      "name": "India-based inference",
+      "key": "pax",
+      "name": "Pax",
       "kind": "tool",
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
       "mentions": [
         {
-          "source": "AWS machine learning blog",
-          "title": "Introducing India-based inference for Kimi K3 on Amazon Bedrock",
-          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-india-based-inference-for-kimi-k3-on-amazon-bedrock/",
-          "date": "2026-11-03",
-          "sourceId": "aws-ml",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Pax by Pydantic",
+          "url": "https://www.producthunt.com/products/pydantic",
+          "date": "2026-11-26",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Amazon Bedrock now offers in-country inference in India for Kimi K3, keeping processing within the Mumbai and Hyderabad Regions. This post explains the global and geographic cross-Region inference options and shares example code for reading and understanding Indic-language documents with Kimi K3.",
+      "summary": "A coding agent where even coding is a plugin",
       "links": [
-        "https://aws.amazon.com/bedrock/",
-        "https://www.ultrahuman.com/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-moonshot-ai-kimi-k3.html",
-        "https://github.com/aws-samples/sample-moonshotai-on-aws/tree/main/Kimi-on-Amazon-Bedrock/Use-Cases/Indic-Document-OCR",
-        "https://aws.amazon.com/resources/create-account/",
-        "https://www.python.org/downloads/",
-        "https://github.com/aws-samples/sample-moonshotai-on-aws/blob/main/pyproject.toml",
-        "https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html",
-        "https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-prereq.html"
+        "https://www.producthunt.com/products/pydantic?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331434?app_id=339"
       ]
     },
     {
-      "key": "letter company",
-      "name": "Letter Company",
+      "key": "periscope",
+      "name": "Periscope",
       "kind": "tool",
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "The Letter Company Releases Letterpress-1: A Coding Agent Built for Growth Engineering",
-          "url": "https://www.marktechpost.com/2026/11/02/letter-letterpress-1-growth-engineering-coding-agent/",
-          "date": "2026-11-03",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Periscope",
+          "url": "https://www.producthunt.com/products/periscope-4",
+          "date": "2026-11-26",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Letter has released the beta of Letterpress-1, a coding agent, harness and IDE for growth engineering. It reads a git-based site and its market, then opens pull requests for SEO, GEO and conversion work.",
+      "summary": "Turn any work into an API",
       "links": [
-        "https://letter.dev/",
-        "https://x.com/mathewpregasen/status/2117300715739857151",
-        "https://letter.dev/showcase",
-        "https://letter.dev/agents.md",
-        "https://learn.chatgpt.com/docs/pricing",
-        "https://claude.com/pricing",
-        "https://cursor.com/pricing",
-        "https://letter.dev/pricing",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews"
+        "https://www.producthunt.com/products/periscope-4?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331479?app_id=339"
       ]
     },
     {
-      "key": "letterpress",
-      "name": "Letterpress",
+      "key": "ploid",
+      "name": "Ploid",
       "kind": "tool",
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "The Letter Company Releases Letterpress-1: A Coding Agent Built for Growth Engineering",
-          "url": "https://www.marktechpost.com/2026/11/02/letter-letterpress-1-growth-engineering-coding-agent/",
-          "date": "2026-11-03",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Ploid",
+          "url": "https://www.producthunt.com/products/ploid",
+          "date": "2026-11-26",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Letter has released the beta of Letterpress-1, a coding agent, harness and IDE for growth engineering. It reads a git-based site and its market, then opens pull requests for SEO, GEO and conversion work.",
+      "summary": "People search for AI agents, across 2B+ profiles",
       "links": [
-        "https://letter.dev/",
-        "https://x.com/mathewpregasen/status/2117300715739857151",
-        "https://letter.dev/showcase",
-        "https://letter.dev/agents.md",
-        "https://learn.chatgpt.com/docs/pricing",
-        "https://claude.com/pricing",
-        "https://cursor.com/pricing",
-        "https://letter.dev/pricing",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews"
+        "https://www.producthunt.com/products/ploid?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1332536?app_id=339"
       ]
     },
     {
-      "key": "pando",
-      "name": "Pando",
+      "key": "superframes",
+      "name": "Superframes",
       "kind": "tool",
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03",
+      "firstSeen": "2026-11-26",
+      "lastSeen": "2026-11-26",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "OpenAI Introduces Pando: A Git Backend That Cuts Median Push Latency ~80%",
-          "url": "https://www.marktechpost.com/2026/11/02/openai-pando-git-backend-monorepo/",
-          "date": "2026-11-03",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Superframes",
+          "url": "https://www.producthunt.com/products/superframes-ai-video-editor",
+          "date": "2026-11-26",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "OpenAI built Pando, a Git-compatible backend for its monorepo. It handles branches independently, reuses stored packfiles across fetches, cut median push latency by nearly 80%, and now delivers nearly a petabyte of Git data per day.",
+      "summary": "Brief an AI Director to edit the whole video",
       "links": [
-        "https://openai.com/index/scaling-git-at-openai/",
-        "https://git-scm.com/docs/packfile-uri",
-        "https://github.blog/engineering/infrastructure/stretching-spokes/",
-        "https://www.anthropic.com/research/redesigning-source-control",
-        "https://github.blog/engineering/architecture-optimization/building-git-infrastructure-for-agent-scale-development/",
-        "https://github.com/openai/git",
-        "https://oai-git.openai.chatgpt.site/",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews",
-        "https://promotions.marktechpost.com/"
+        "https://www.producthunt.com/products/superframes-ai-video-editor?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331478?app_id=339"
       ]
     },
     {
-      "key": "zyphra ai",
-      "name": "Zyphra AI",
+      "key": "antipode",
+      "name": "Antipode",
       "kind": "tool",
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "Zyphra AI Introduces Zyphra Hierarchical Attention (ZHA): A Path to True Subquadratic Attention",
-          "url": "https://www.marktechpost.com/2026/11/02/zyphra-hierarchical-attention-zha-sparse-attention/",
-          "date": "2026-11-03",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Antipode",
+          "url": "https://www.producthunt.com/products/antipode",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Zyphra Hierarchical Attention (ZHA) is a tree-indexed sparse attention method that retrofits frozen LLMs with 4B tokens of distillation, matching dense attention on reasoning and 256K retrieval benchmarks.",
+      "summary": "Share your unused Claude Code limits without breaking ToS",
       "links": [
-        "https://zyphra.com/our-work/zyphra-hierarchical-attention",
-        "https://arxiv.org/abs/2610.42112",
-        "https://huggingface.co/docs/transformers/model_doc/deepseek_v32",
-        "https://arxiv.org/abs/2606.13392",
-        "https://arxiv.org/abs/2502.11089",
-        "https://huggingface.co/deepseek-ai/DeepSeek-V3.2",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews",
-        "https://promotions.marktechpost.com/",
-        "https://www.marktechpost.com/2026/11/02/zyphra-hierarchical-attention-zha-sparse-attention/"
+        "https://www.producthunt.com/products/antipode?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330885?app_id=339"
       ]
     },
     {
-      "key": "zyphra hierarchical attention",
-      "name": "Zyphra Hierarchical Attention",
+      "key": "clary",
+      "name": "Clary",
       "kind": "tool",
-      "firstSeen": "2026-11-03",
-      "lastSeen": "2026-11-03",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "Zyphra AI Introduces Zyphra Hierarchical Attention (ZHA): A Path to True Subquadratic Attention",
-          "url": "https://www.marktechpost.com/2026/11/02/zyphra-hierarchical-attention-zha-sparse-attention/",
-          "date": "2026-11-03",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Clary",
+          "url": "https://www.producthunt.com/products/clary-2",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "Zyphra Hierarchical Attention (ZHA) is a tree-indexed sparse attention method that retrofits frozen LLMs with 4B tokens of distillation, matching dense attention on reasoning and 256K retrieval benchmarks.",
+      "summary": "iOS notifications in sender's own voice from WhatsApp & more",
       "links": [
-        "https://zyphra.com/our-work/zyphra-hierarchical-attention",
-        "https://arxiv.org/abs/2610.42112",
-        "https://huggingface.co/docs/transformers/model_doc/deepseek_v32",
-        "https://arxiv.org/abs/2606.13392",
-        "https://arxiv.org/abs/2502.11089",
-        "https://huggingface.co/deepseek-ai/DeepSeek-V3.2",
-        "https://x.com/intent/follow?screen_name=marktechpost",
-        "https://www.reddit.com/r/machinelearningnews/",
-        "https://magic.beehiiv.com/v1/f5e63dd4-5653-4f09-83e2-321a8b1ba526?email={{email}}",
-        "https://t.me/machinelearningresearchnews",
-        "https://promotions.marktechpost.com/",
-        "https://www.marktechpost.com/2026/11/02/zyphra-hierarchical-attention-zha-sparse-attention/"
+        "https://www.producthunt.com/products/clary-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329841?app_id=339"
       ]
     },
     {
-      "key": "auto ontology",
-      "name": "Auto Ontology",
+      "key": "deskfleet",
+      "name": "DeskFleet",
       "kind": "tool",
-      "firstSeen": "2026-11-02",
-      "lastSeen": "2026-11-02",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
       "mentions": [
         {
-          "source": "MarkTechPost",
-          "title": "NVIDIA Releases Auto Ontology: An Open Semantic Layer That Grounds AI Agent SQL",
-          "url": "https://www.marktechpost.com/2026/11/01/nvidia-auto-ontology-open-source-semantic-layer-ai-agents/",
-          "date": "2026-11-02",
-          "sourceId": "marktechpost",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "DeskFleet",
+          "url": "https://www.producthunt.com/products/deskfleet",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "NVIDIA released Auto Ontology, an Apache 2.0 library that generates a semantic layer from enterprise metadata. It grounds agent SQL in certified definitions and serves context through MCP, CLI and API.",
+      "summary": "Run coding agents together across your team’s machines",
       "links": [
-        "https://github.com/NVIDIA/auto-ontology",
-        "https://github.com/NVIDIA/auto-ontology/blob/main/LICENSE",
-        "https://developer.nvidia.com/topic/ai/agent-knowledge-foundation",
-        "https://github.com/NVIDIA/auto-ontology/blob/main/docs/mcp.md",
-        "https://github.com/NVIDIA/auto-ontology-eval",
-        "https://github.com/NVIDIA/auto-ontology-eval/blob/main/datasets/bird/README.md",
-        "https://github.com/Canner/WrenAI",
-        "https://github.com/cube-js/cube",
-        "https://github.com/dbt-labs/metricflow",
-        "https://github.com/NVIDIA/auto-ontology/blob/main/DEPLOYMENT.md",
-        "https://catalog.ngc.nvidia.com/orgs/nvidia/-/containers/auto-ontology/-",
-        "https://build.nvidia.com/"
+        "https://www.producthunt.com/products/deskfleet?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330907?app_id=339"
       ]
     },
     {
-      "key": "deep principle",
-      "name": "Deep Principle",
-      "kind": "model",
-      "firstSeen": "2026-11-02",
-      "lastSeen": "2026-11-02",
-      "mentions": [
-        {
-          "source": "MarkTechPost",
-          "title": "Deep Principle Releases Hydrogen-1.0: A 753B Open-Weight Model for Scientific Discovery",
-          "url": "https://www.marktechpost.com/2026/11/02/deep-principle-hydrogen-1-0-open-weight-scientific-model/",
-          "date": "2026-11-02",
-          "sourceId": "marktechpost",
-          "tier": "press"
-        }
-      ],
-      "summary": "Deep Principle has released Hydrogen-1.0, an open-weight scientific model for chemistry, materials science and life sciences. It is built by post-training Z.ai’s GLM-5.3 on domain data, laboratory records and agent discovery trajectories.",
-      "links": [
-        "https://blog.deepprinciple.com/introducing-hydrogen-1.0/",
-        "https://huggingface.co/zai-org/GLM-5.3",
-        "https://huggingface.co/deep-principle/Hydrogen-1.0",
-        "https://mira.deepprinciple.com/",
-        "https://www.modelscope.cn/models/deep-principle/Hydrogen-1.0",
-        "https://huggingface.co/deep-principle/Hydrogen-1.0-NVFP4",
-        "https://huggingface.co/deep-principle/Hydrogen-1.0-MXFP4",
-        "https://www.kimi.com/en/blog/kimi-k3",
-        "https://llm-stats.com/blog/research/gpt-6-astra-launch",
-        "https://www.lmstudio.ai/models/glm-5.3",
-        "https://docs.z.ai/guides/overview/pricing",
-        "https://developers.openai.com/api/docs/pricing"
-      ]
-    },
-    {
-      "key": "hydrogen",
-      "name": "Hydrogen",
-      "kind": "model",
-      "firstSeen": "2026-11-02",
-      "lastSeen": "2026-11-02",
-      "mentions": [
-        {
-          "source": "MarkTechPost",
-          "title": "Deep Principle Releases Hydrogen-1.0: A 753B Open-Weight Model for Scientific Discovery",
-          "url": "https://www.marktechpost.com/2026/11/02/deep-principle-hydrogen-1-0-open-weight-scientific-model/",
-          "date": "2026-11-02",
-          "sourceId": "marktechpost",
-          "tier": "press"
-        }
-      ],
-      "summary": "Deep Principle has released Hydrogen-1.0, an open-weight scientific model for chemistry, materials science and life sciences. It is built by post-training Z.ai’s GLM-5.3 on domain data, laboratory records and agent discovery trajectories.",
-      "links": [
-        "https://blog.deepprinciple.com/introducing-hydrogen-1.0/",
-        "https://huggingface.co/zai-org/GLM-5.3",
-        "https://huggingface.co/deep-principle/Hydrogen-1.0",
-        "https://mira.deepprinciple.com/",
-        "https://www.modelscope.cn/models/deep-principle/Hydrogen-1.0",
-        "https://huggingface.co/deep-principle/Hydrogen-1.0-NVFP4",
-        "https://huggingface.co/deep-principle/Hydrogen-1.0-MXFP4",
-        "https://www.kimi.com/en/blog/kimi-k3",
-        "https://llm-stats.com/blog/research/gpt-6-astra-launch",
-        "https://www.lmstudio.ai/models/glm-5.3",
-        "https://docs.z.ai/guides/overview/pricing",
-        "https://developers.openai.com/api/docs/pricing"
-      ]
-    },
-    {
-      "key": "sfx",
-      "name": "SFX",
+      "key": "doodle",
+      "name": "Doodle",
       "kind": "tool",
-      "firstSeen": "2026-10-29",
-      "lastSeen": "2026-11-02",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
       "mentions": [
         {
-          "source": "ElevenLabs blog",
-          "title": "Introducing SFX v3 in ElevenCreative and ElevenAPI",
-          "url": "https://elevenlabs.io/blog/sound-effects-v3",
-          "date": "2026-10-29",
-          "sourceId": "elevenlabs",
-          "tier": "press"
-        },
-        {
-          "source": "ElevenLabs blog",
-          "title": "Introducing SFX v3 for developers",
-          "url": "https://elevenlabs.io/blog/sfx-v3-for-developers",
-          "date": "2026-11-02",
-          "sourceId": "elevenlabs",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Doodle",
+          "url": "https://www.producthunt.com/products/doodle-5",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "SFX v3 is here: more reliable multi-sound prompts, more convincing music and vocals, and cleaner audio. Now in ElevenCreative and ElevenAPI.",
-      "links": []
+      "summary": "The stick figure on your taskbar that answers questions",
+      "links": [
+        "https://www.producthunt.com/products/doodle-5?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331268?app_id=339"
+      ]
     },
     {
-      "key": "trajectory",
-      "name": "Trajectory",
-      "kind": "model",
-      "firstSeen": "2026-11-02",
-      "lastSeen": "2026-11-02",
+      "key": "flurra",
+      "name": "Flurra",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
       "mentions": [
         {
-          "source": "TechCrunch AI",
-          "title": "Trajectory raises $45M to make AI model training accessible to nontechnical experts",
-          "url": "https://techcrunch.com/2026/11/02/trajectory-raises-45m-to-make-ai-model-training-accessible-to-nontechnical-experts/",
-          "date": "2026-11-02",
-          "sourceId": "techcrunch-ai",
-          "tier": "press"
+          "source": "Product Hunt: AI",
+          "title": "Flurra",
+          "url": "https://www.producthunt.com/products/flurra",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
         }
       ],
-      "summary": "The one-year-old startup is now valued at $300 million.",
-      "links": []
+      "summary": "Ask Claude or ChatGPT to edit your videos",
+      "links": [
+        "https://www.producthunt.com/products/flurra?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330867?app_id=339"
+      ]
+    },
+    {
+      "key": "ground",
+      "name": "Ground",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Ground",
+          "url": "https://www.producthunt.com/products/ground-2",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Generate high quality synthetic data for testing or training",
+      "links": [
+        "https://www.producthunt.com/products/ground-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331053?app_id=339"
+      ]
+    },
+    {
+      "key": "hiring right now",
+      "name": "Hiring Right Now",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Hiring Right Now",
+          "url": "https://www.producthunt.com/products/hiring-right-now",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Which startups would hire you?",
+      "links": [
+        "https://www.producthunt.com/products/hiring-right-now?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329956?app_id=339"
+      ]
+    },
+    {
+      "key": "kagi mail",
+      "name": "Kagi Mail",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Kagi Mail",
+          "url": "https://www.producthunt.com/products/kagi",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Private email that puts people who need you first",
+      "links": [
+        "https://www.producthunt.com/products/kagi?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330192?app_id=339"
+      ]
+    },
+    {
+      "key": "magi",
+      "name": "MAGI",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "MAGI-2",
+          "url": "https://www.producthunt.com/products/magi-1",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Sand AI's 480B model for cinematic video generation",
+      "links": [
+        "https://www.producthunt.com/products/magi-1?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330047?app_id=339"
+      ]
+    },
+    {
+      "key": "meetfolks",
+      "name": "MeetFolks",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "MeetFolks",
+          "url": "https://www.producthunt.com/products/meetfolks",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI Notetaker for In-Person Meetings",
+      "links": [
+        "https://www.producthunt.com/products/meetfolks?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331149?app_id=339"
+      ]
+    },
+    {
+      "key": "mime",
+      "name": "Mime",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Mime",
+          "url": "https://www.producthunt.com/products/mime",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Silent dictation: mouth the words and it types them",
+      "links": [
+        "https://www.producthunt.com/products/mime?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330187?app_id=339"
+      ]
+    },
+    {
+      "key": "monton",
+      "name": "Monton",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Monton",
+          "url": "https://www.producthunt.com/products/monton",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI agents that do your agency's busywork",
+      "links": [
+        "https://www.producthunt.com/products/monton?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330643?app_id=339"
+      ]
+    },
+    {
+      "key": "musicproductionai",
+      "name": "MusicProductionAI",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "MusicProductionAI",
+          "url": "https://www.producthunt.com/products/musicproductionai",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Make music from a prompt or a hum, right in your browser",
+      "links": [
+        "https://www.producthunt.com/products/musicproductionai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330273?app_id=339"
+      ]
+    },
+    {
+      "key": "nexus",
+      "name": "NEXUS",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "NEXUS",
+          "url": "https://www.producthunt.com/products/nexus-42",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Map codebase locally and AI changes only what you approved",
+      "links": [
+        "https://www.producthunt.com/products/nexus-42?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330566?app_id=339"
+      ]
+    },
+    {
+      "key": "omi x",
+      "name": "Omi X",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Omi X 2.0",
+          "url": "https://www.producthunt.com/products/omi-x",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Omi can build anything. Your $1B idea, live in production",
+      "links": [
+        "https://www.producthunt.com/products/omi-x?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329892?app_id=339"
+      ]
+    },
+    {
+      "key": "openchat",
+      "name": "OpenChat",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "OpenChat",
+          "url": "https://www.producthunt.com/products/openchat-5",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Open-source live chat in your own Cloudflare account",
+      "links": [
+        "https://www.producthunt.com/products/openchat-5?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330938?app_id=339"
+      ]
+    },
+    {
+      "key": "openeight",
+      "name": "OpenEight",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "OpenEight",
+          "url": "https://www.producthunt.com/products/openeight",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "The deterministic control layer for AI agents",
+      "links": [
+        "https://www.producthunt.com/products/openeight?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330145?app_id=339"
+      ]
+    },
+    {
+      "key": "ottante",
+      "name": "Ottante",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Ottante",
+          "url": "https://www.producthunt.com/products/ottante",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Checks the work your AI agents did, right on your Mac",
+      "links": [
+        "https://www.producthunt.com/products/ottante?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330765?app_id=339"
+      ]
+    },
+    {
+      "key": "peerband",
+      "name": "PeerBand",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "PeerBand",
+          "url": "https://www.producthunt.com/products/peerband",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Reach every coding agent you run, from anywhere",
+      "links": [
+        "https://www.producthunt.com/products/peerband?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329861?app_id=339"
+      ]
+    },
+    {
+      "key": "remora",
+      "name": "Remora",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Remora",
+          "url": "https://www.producthunt.com/products/remora-6",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "The long-term memory layer for AI agents",
+      "links": [
+        "https://www.producthunt.com/products/remora-6?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330977?app_id=339"
+      ]
+    },
+    {
+      "key": "spark ai",
+      "name": "Spark AI",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Spark AI",
+          "url": "https://www.producthunt.com/products/spark-ai-7",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI-native permitting & diligence services for data centers",
+      "links": [
+        "https://www.producthunt.com/products/spark-ai-7?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330200?app_id=339"
+      ]
+    },
+    {
+      "key": "statefold",
+      "name": "Statefold",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Statefold",
+          "url": "https://www.producthunt.com/products/statefold-2",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Coding agents that keep working while you're away",
+      "links": [
+        "https://www.producthunt.com/products/statefold-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329880?app_id=339"
+      ]
+    },
+    {
+      "key": "upsolve harness",
+      "name": "Upsolve Harness",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Upsolve Harness 2.0",
+          "url": "https://www.producthunt.com/products/upsolve-ai",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "A data agent that's 2x faster and learns every user",
+      "links": [
+        "https://www.producthunt.com/products/upsolve-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331174?app_id=339"
+      ]
+    },
+    {
+      "key": "whipdesk",
+      "name": "WhipDesk",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "WhipDesk",
+          "url": "https://www.producthunt.com/products/whipdesk",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Control AI coding agents from your phone",
+      "links": [
+        "https://www.producthunt.com/products/whipdesk?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1331155?app_id=339"
+      ]
+    },
+    {
+      "key": "wizstar r",
+      "name": "Wizstar R",
+      "kind": "tool",
+      "firstSeen": "2026-11-25",
+      "lastSeen": "2026-11-25",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Wizstar R1",
+          "url": "https://www.producthunt.com/products/wizstar",
+          "date": "2026-11-25",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Seedance 2.0-level product videos at a lower cost",
+      "links": [
+        "https://www.producthunt.com/products/wizstar?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1330231?app_id=339"
+      ]
+    },
+    {
+      "key": "agenda hero magic labs",
+      "name": "Agenda Hero Magic Labs",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Agenda Hero Magic Labs",
+          "url": "https://www.producthunt.com/products/agenda-hero-magic",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Any schedule. Any layout. Any style.",
+      "links": [
+        "https://www.producthunt.com/products/agenda-hero-magic?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1328677?app_id=339"
+      ]
+    },
+    {
+      "key": "bifura",
+      "name": "Bifura",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Bifura",
+          "url": "https://www.producthunt.com/products/bifura",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "See your website the way AI agents do",
+      "links": [
+        "https://www.producthunt.com/products/bifura?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329325?app_id=339"
+      ]
+    },
+    {
+      "key": "falcon",
+      "name": "Falcon",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Falcon by Vybe",
+          "url": "https://www.producthunt.com/products/vybe-4",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Falcon analyzes your competitors for free, then gets to work",
+      "links": [
+        "https://www.producthunt.com/products/vybe-4?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329814?app_id=339"
+      ]
+    },
+    {
+      "key": "hai",
+      "name": "Hai",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Hai",
+          "url": "https://www.producthunt.com/products/hai-4",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Your AI assistant that actually makes the phone call",
+      "links": [
+        "https://www.producthunt.com/products/hai-4?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329023?app_id=339"
+      ]
+    },
+    {
+      "key": "hold em",
+      "name": "Hold'em",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Hold'em",
+          "url": "https://www.producthunt.com/products/hold-em",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Swipe real Black Friday cart deals across Shopify",
+      "links": [
+        "https://www.producthunt.com/products/hold-em?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329778?app_id=339"
+      ]
+    },
+    {
+      "key": "hub",
+      "name": "Hub",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Hub",
+          "url": "https://www.producthunt.com/products/hub-20",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Run 100 Claude Code or Codex sessions like 5",
+      "links": [
+        "https://www.producthunt.com/products/hub-20?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329592?app_id=339"
+      ]
+    },
+    {
+      "key": "koed",
+      "name": "Koed",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Koed",
+          "url": "https://www.producthunt.com/products/koed",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Supercharged Agents!",
+      "links": [
+        "https://www.producthunt.com/products/koed?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1328887?app_id=339"
+      ]
+    },
+    {
+      "key": "memoryworks",
+      "name": "MemoryWorks",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "MemoryWorks",
+          "url": "https://www.producthunt.com/products/memoryworks",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Company memory for people and AI agents",
+      "links": [
+        "https://www.producthunt.com/products/memoryworks?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329703?app_id=339"
+      ]
+    },
+    {
+      "key": "myclaw",
+      "name": "MyClaw",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "MyClaw 3.0",
+          "url": "https://www.producthunt.com/products/myclaw-3-0",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Build an always-on AI team with shared memory",
+      "links": [
+        "https://www.producthunt.com/products/myclaw-3-0?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329374?app_id=339"
+      ]
+    },
+    {
+      "key": "pinned",
+      "name": "Pinned",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Pinned",
+          "url": "https://www.producthunt.com/products/pinned",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Ask the city where to go tonight with your friends",
+      "links": [
+        "https://www.producthunt.com/products/pinned?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1328434?app_id=339"
+      ]
+    },
+    {
+      "key": "qa tech mcp",
+      "name": "QA.tech MCP",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "QA.tech MCP",
+          "url": "https://www.producthunt.com/products/qa-tech",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Verify every change from your IDE with QA agents",
+      "links": [
+        "https://www.producthunt.com/products/qa-tech?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329270?app_id=339"
+      ]
+    },
+    {
+      "key": "qube",
+      "name": "Qube",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Qube",
+          "url": "https://www.producthunt.com/products/qube-6",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "An AI agent for anyone with the model of your choice",
+      "links": [
+        "https://www.producthunt.com/products/qube-6?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1329544?app_id=339"
+      ]
+    },
+    {
+      "key": "snag",
+      "name": "Snag",
+      "kind": "tool",
+      "firstSeen": "2026-11-24",
+      "lastSeen": "2026-11-24",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Snag by Parallel",
+          "url": "https://www.producthunt.com/products/snag",
+          "date": "2026-11-24",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Find the best deals on products from your agents",
+      "links": [
+        "https://www.producthunt.com/products/snag?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1328447?app_id=339"
+      ]
+    },
+    {
+      "key": "3way social mcp",
+      "name": "3way.Social MCP",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "3way.Social MCP",
+          "url": "https://www.producthunt.com/products/3way-social",
+          "date": "2026-11-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Ask your AI to find link partners. You approve the deals.",
+      "links": [
+        "https://www.producthunt.com/products/3way-social?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1328124?app_id=339"
+      ]
+    },
+    {
+      "key": "astrolabio",
+      "name": "Astrolabio",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Astrolabio",
+          "url": "https://www.producthunt.com/products/astrolabio",
+          "date": "2026-11-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Your AIs pick up right where you left off, on your Mac",
+      "links": [
+        "https://www.producthunt.com/products/astrolabio?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1327754?app_id=339"
+      ]
+    },
+    {
+      "key": "clam ai",
+      "name": "Clam AI",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Clam AI",
+          "url": "https://www.producthunt.com/products/clam-ai",
+          "date": "2026-11-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Your inbox, safely shared with AI agents",
+      "links": [
+        "https://www.producthunt.com/products/clam-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1327369?app_id=339"
+      ]
+    },
+    {
+      "key": "finseo",
+      "name": "Finseo",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Finseo",
+          "url": "https://www.producthunt.com/products/finseo-ai",
+          "date": "2026-11-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Company brain + outreach to get your brand mentioned by AI",
+      "links": [
+        "https://www.producthunt.com/products/finseo-ai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1327983?app_id=339"
+      ]
+    },
+    {
+      "key": "fleetify",
+      "name": "Fleetify",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Fleetify",
+          "url": "https://www.producthunt.com/products/fleetify",
+          "date": "2026-11-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Open-source command center for your AI coding agents",
+      "links": [
+        "https://www.producthunt.com/products/fleetify?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1327943?app_id=339"
+      ]
+    },
+    {
+      "key": "valley",
+      "name": "Valley",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Valley",
+          "url": "https://www.producthunt.com/products/valley-3",
+          "date": "2026-11-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Outbound system to find people most likely to buy from you",
+      "links": [
+        "https://www.producthunt.com/products/valley-3?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1327551?app_id=339"
+      ]
+    },
+    {
+      "key": "viktor code",
+      "name": "Viktor Code",
+      "kind": "tool",
+      "firstSeen": "2026-11-23",
+      "lastSeen": "2026-11-23",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Viktor Code",
+          "url": "https://www.producthunt.com/products/viktor",
+          "date": "2026-11-23",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Coding agents know your repo. Viktor knows your company.",
+      "links": [
+        "https://www.producthunt.com/products/viktor?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1327970?app_id=339"
+      ]
     },
     {
       "key": "ashwa",
@@ -4294,6 +5063,28 @@
       ]
     },
     {
+      "key": "pushary calls",
+      "name": "Pushary Calls",
+      "kind": "tool",
+      "firstSeen": "2026-11-22",
+      "lastSeen": "2026-11-22",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Pushary Calls",
+          "url": "https://www.producthunt.com/products/pushary",
+          "date": "2026-11-22",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Miss your AI agent’s ping? Pushary calls you.",
+      "links": [
+        "https://www.producthunt.com/products/pushary?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1326480?app_id=339"
+      ]
+    },
+    {
       "key": "tesla self driving",
       "name": "Tesla Self-Driving",
       "kind": "tool",
@@ -4338,6 +5129,28 @@
       ]
     },
     {
+      "key": "prates",
+      "name": "Prates",
+      "kind": "tool",
+      "firstSeen": "2026-11-21",
+      "lastSeen": "2026-11-21",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Prates",
+          "url": "https://www.producthunt.com/products/prates",
+          "date": "2026-11-21",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Learns how you write, then writes exactly as you would",
+      "links": [
+        "https://www.producthunt.com/products/prates?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1325372?app_id=339"
+      ]
+    },
+    {
       "key": "resurf",
       "name": "Resurf",
       "kind": "tool",
@@ -4357,6 +5170,50 @@
       "links": [
         "https://www.producthunt.com/products/resurf-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1325452?app_id=339"
+      ]
+    },
+    {
+      "key": "vibecode surf",
+      "name": "VibeCode.surf",
+      "kind": "tool",
+      "firstSeen": "2026-11-21",
+      "lastSeen": "2026-11-21",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "VibeCode.surf",
+          "url": "https://www.producthunt.com/products/vibecode-surf",
+          "date": "2026-11-21",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI code editor where agents build, run and test your app",
+      "links": [
+        "https://www.producthunt.com/products/vibecode-surf?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1325269?app_id=339"
+      ]
+    },
+    {
+      "key": "deskmagic",
+      "name": "DeskMagic",
+      "kind": "tool",
+      "firstSeen": "2026-11-20",
+      "lastSeen": "2026-11-20",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "DeskMagic",
+          "url": "https://www.producthunt.com/products/deskmagic",
+          "date": "2026-11-20",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Shake your cursor, ask AI about anything on screen",
+      "links": [
+        "https://www.producthunt.com/products/deskmagic?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1323870?app_id=339"
       ]
     },
     {
@@ -4401,6 +5258,28 @@
       "links": [
         "https://www.producthunt.com/products/gauth-ai-course?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1324531?app_id=339"
+      ]
+    },
+    {
+      "key": "k stra",
+      "name": "K-Stra",
+      "kind": "tool",
+      "firstSeen": "2026-11-20",
+      "lastSeen": "2026-11-20",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "K-Stra",
+          "url": "https://www.producthunt.com/products/k-stra",
+          "date": "2026-11-20",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Geomarketing for Australia, with an AI that does the maths",
+      "links": [
+        "https://www.producthunt.com/products/k-stra?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1324358?app_id=339"
       ]
     },
     {
@@ -4470,6 +5349,28 @@
       ]
     },
     {
+      "key": "tendor",
+      "name": "Tendor",
+      "kind": "tool",
+      "firstSeen": "2026-11-20",
+      "lastSeen": "2026-11-20",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Tendor",
+          "url": "https://www.producthunt.com/products/tendor",
+          "date": "2026-11-20",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Write it or ask it, from anywhere on Windows",
+      "links": [
+        "https://www.producthunt.com/products/tendor?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1323873?app_id=339"
+      ]
+    },
+    {
       "key": "threadlore",
       "name": "ThreadLore",
       "kind": "tool",
@@ -4514,6 +5415,50 @@
       ]
     },
     {
+      "key": "airbot",
+      "name": "Airbot",
+      "kind": "tool",
+      "firstSeen": "2026-11-19",
+      "lastSeen": "2026-11-19",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Airbot",
+          "url": "https://www.producthunt.com/products/airbots",
+          "date": "2026-11-19",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "The AI chief of staff that texts you first",
+      "links": [
+        "https://www.producthunt.com/products/airbots?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1323240?app_id=339"
+      ]
+    },
+    {
+      "key": "astor",
+      "name": "Astor",
+      "kind": "tool",
+      "firstSeen": "2026-11-19",
+      "lastSeen": "2026-11-19",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Astor",
+          "url": "https://www.producthunt.com/products/astor",
+          "date": "2026-11-19",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI Thesis Investing",
+      "links": [
+        "https://www.producthunt.com/products/astor?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1322364?app_id=339"
+      ]
+    },
+    {
       "key": "conversaflex",
       "name": "Conversaflex",
       "kind": "tool",
@@ -4533,6 +5478,28 @@
       "links": [
         "https://www.producthunt.com/products/conversaflex?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1323362?app_id=339"
+      ]
+    },
+    {
+      "key": "cullman",
+      "name": "Cullman",
+      "kind": "tool",
+      "firstSeen": "2026-11-19",
+      "lastSeen": "2026-11-19",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Cullman",
+          "url": "https://www.producthunt.com/products/cullman",
+          "date": "2026-11-19",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Faster voice agent evals, from simulation to production",
+      "links": [
+        "https://www.producthunt.com/products/cullman?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1322500?app_id=339"
       ]
     },
     {
@@ -4844,6 +5811,28 @@
       ]
     },
     {
+      "key": "coderabbit verify",
+      "name": "CodeRabbit Verify",
+      "kind": "tool",
+      "firstSeen": "2026-11-18",
+      "lastSeen": "2026-11-18",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "CodeRabbit Verify",
+          "url": "https://www.producthunt.com/products/coderabbit",
+          "date": "2026-11-18",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "AI agent that tests your running app on every pull request",
+      "links": [
+        "https://www.producthunt.com/products/coderabbit?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1321904?app_id=339"
+      ]
+    },
+    {
       "key": "croon",
       "name": "CROON",
       "kind": "tool",
@@ -4954,6 +5943,28 @@
       ]
     },
     {
+      "key": "granular build",
+      "name": "Granular.Build",
+      "kind": "tool",
+      "firstSeen": "2026-11-18",
+      "lastSeen": "2026-11-18",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Granular.Build",
+          "url": "https://www.producthunt.com/products/granular-build",
+          "date": "2026-11-18",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Put your AI agents to work in a visual workspace",
+      "links": [
+        "https://www.producthunt.com/products/granular-build?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1322050?app_id=339"
+      ]
+    },
+    {
       "key": "groundwork",
       "name": "Groundwork",
       "kind": "tool",
@@ -5017,6 +6028,28 @@
       "links": [
         "https://www.producthunt.com/products/noteshell?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1321837?app_id=339"
+      ]
+    },
+    {
+      "key": "ohhai",
+      "name": "Ohhai",
+      "kind": "tool",
+      "firstSeen": "2026-11-18",
+      "lastSeen": "2026-11-18",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Ohhai",
+          "url": "https://www.producthunt.com/products/ohhai",
+          "date": "2026-11-18",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "Type messy, send clean: an AI keyboard for iPhone",
+      "links": [
+        "https://www.producthunt.com/products/ohhai?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1322011?app_id=339"
       ]
     },
     {
@@ -5157,6 +6190,28 @@
       ]
     },
     {
+      "key": "adanotch",
+      "name": "Adanotch",
+      "kind": "tool",
+      "firstSeen": "2026-11-17",
+      "lastSeen": "2026-11-17",
+      "mentions": [
+        {
+          "source": "Product Hunt: AI",
+          "title": "Adanotch",
+          "url": "https://www.producthunt.com/products/adanotch",
+          "date": "2026-11-17",
+          "sourceId": "producthunt-ai",
+          "tier": "community"
+        }
+      ],
+      "summary": "A live Dynamic Island for your MacBook notch",
+      "links": [
+        "https://www.producthunt.com/products/adanotch?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
+        "https://www.producthunt.com/r/p/1320807?app_id=339"
+      ]
+    },
+    {
       "key": "altercontacts",
       "name": "AlterContacts",
       "kind": "tool",
@@ -5286,1216 +6341,6 @@
       "links": [
         "https://www.producthunt.com/products/linkbit?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
         "https://www.producthunt.com/r/p/1319947?app_id=339"
-      ]
-    },
-    {
-      "key": "mai image",
-      "name": "MAI Image",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "MAI Image 2.7",
-          "url": "https://www.producthunt.com/products/mai-image-2-3",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Microsoft's image model with precise edits and Canvas",
-      "links": [
-        "https://www.producthunt.com/products/mai-image-2-3?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1320690?app_id=339"
-      ]
-    },
-    {
-      "key": "microsoft iq",
-      "name": "Microsoft IQ",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Microsoft IQ",
-          "url": "https://www.producthunt.com/products/microsoft-365",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Give AI agents a shared understanding of your business",
-      "links": [
-        "https://www.producthunt.com/products/microsoft-365?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1320750?app_id=339"
-      ]
-    },
-    {
-      "key": "prompt puncher",
-      "name": "Prompt Puncher",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Prompt Puncher",
-          "url": "https://www.producthunt.com/products/prompt-puncher",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "The AI CEO Fighting Game",
-      "links": [
-        "https://www.producthunt.com/products/prompt-puncher?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1320677?app_id=339"
-      ]
-    },
-    {
-      "key": "storiara",
-      "name": "Storiara",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Storiara",
-          "url": "https://www.producthunt.com/products/storiara",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "AI producers that find real savings in your film budget",
-      "links": [
-        "https://www.producthunt.com/products/storiara?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1320776?app_id=339"
-      ]
-    },
-    {
-      "key": "ui verify",
-      "name": "UI Verify",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "UI Verify",
-          "url": "https://www.producthunt.com/products/ui-verify",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Visual testing for coding agents",
-      "links": [
-        "https://www.producthunt.com/products/ui-verify?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1320860?app_id=339"
-      ]
-    },
-    {
-      "key": "ulika",
-      "name": "Ulika",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Ulika",
-          "url": "https://www.producthunt.com/products/ulika",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Visual editor for sites built with Claude, Cursor, or Codex",
-      "links": [
-        "https://www.producthunt.com/products/ulika?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1320738?app_id=339"
-      ]
-    },
-    {
-      "key": "vanira",
-      "name": "Vanira",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Vanira",
-          "url": "https://www.producthunt.com/products/vanira",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Voice, video & multimodal AI agent infrastructure",
-      "links": [
-        "https://www.producthunt.com/products/vanira?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319962?app_id=339"
-      ]
-    },
-    {
-      "key": "zapyso",
-      "name": "Zapyso",
-      "kind": "tool",
-      "firstSeen": "2026-11-17",
-      "lastSeen": "2026-11-17",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Zapyso",
-          "url": "https://www.producthunt.com/products/zapyso",
-          "date": "2026-11-17",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Free meeting notes and dictation that stay on your Mac",
-      "links": [
-        "https://www.producthunt.com/products/zapyso?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1320097?app_id=339"
-      ]
-    },
-    {
-      "key": "ballet",
-      "name": "Ballet",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Ballet",
-          "url": "https://www.producthunt.com/products/ballet",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Deterministic AI workflow automation for Ops teams",
-      "links": [
-        "https://www.producthunt.com/products/ballet?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319369?app_id=339"
-      ]
-    },
-    {
-      "key": "base",
-      "name": "BASE",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "BASE Studio",
-          "url": "https://www.producthunt.com/products/base-studio",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Turn product photos into 3D and AR, automatically",
-      "links": [
-        "https://www.producthunt.com/products/base-studio?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318923?app_id=339"
-      ]
-    },
-    {
-      "key": "bytevoice",
-      "name": "ByteVoice",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "ByteVoice",
-          "url": "https://www.producthunt.com/products/bytevoice",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Talk to your coding agents and hear them back",
-      "links": [
-        "https://www.producthunt.com/products/bytevoice?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318221?app_id=339"
-      ]
-    },
-    {
-      "key": "liquid d",
-      "name": "Liquid d",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Liquid d1.2",
-          "url": "https://www.producthunt.com/products/lfm2",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Decision models that return calibrated probabilities",
-      "links": [
-        "https://www.producthunt.com/products/lfm2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319139?app_id=339"
-      ]
-    },
-    {
-      "key": "openvorld",
-      "name": "OpenVorld",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "OpenVorld",
-          "url": "https://www.producthunt.com/products/openvorld",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Give your AI agents a home you can see",
-      "links": [
-        "https://www.producthunt.com/products/openvorld?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319324?app_id=339"
-      ]
-    },
-    {
-      "key": "pinecall",
-      "name": "Pinecall",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Pinecall",
-          "url": "https://www.producthunt.com/products/pinecall",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "The open-source platform for voice AI agents",
-      "links": [
-        "https://www.producthunt.com/products/pinecall?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318689?app_id=339"
-      ]
-    },
-    {
-      "key": "shipyard",
-      "name": "Shipyard",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Shipyard",
-          "url": "https://www.producthunt.com/products/shipyard",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "MCP for Claude, Cursor and Codex to Automate Integrations",
-      "links": [
-        "https://www.producthunt.com/products/shipyard?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319260?app_id=339"
-      ]
-    },
-    {
-      "key": "source",
-      "name": "Source",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Source",
-          "url": "https://www.producthunt.com/products/source-public-beta",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "The attribution data layer for your agents to drive pipeline",
-      "links": [
-        "https://www.producthunt.com/products/source-public-beta?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319192?app_id=339"
-      ]
-    },
-    {
-      "key": "superhands",
-      "name": "Superhands",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Superhands",
-          "url": "https://www.producthunt.com/products/stencil-by-superhands",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Design the system, not every output.",
-      "links": [
-        "https://www.producthunt.com/products/stencil-by-superhands?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318477?app_id=339"
-      ]
-    },
-    {
-      "key": "tabstack",
-      "name": "Tabstack",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Tabstack by Mozilla",
-          "url": "https://www.producthunt.com/products/tabstack",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Give your model the web without giving up your privacy",
-      "links": [
-        "https://www.producthunt.com/products/tabstack?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319464?app_id=339"
-      ]
-    },
-    {
-      "key": "tencent hy",
-      "name": "Tencent Hy",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Tencent Hy4 flash",
-          "url": "https://www.producthunt.com/products/hunyuan-a13b",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Fast, low-cost model from $0.07/M input",
-      "links": [
-        "https://www.producthunt.com/products/hunyuan-a13b?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318419?app_id=339"
-      ]
-    },
-    {
-      "key": "tripmojo",
-      "name": "Tripmojo",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Tripmojo",
-          "url": "https://www.producthunt.com/products/tripmojo",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Agentic travel app that helps plan, book and run your trip",
-      "links": [
-        "https://www.producthunt.com/products/tripmojo?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318366?app_id=339"
-      ]
-    },
-    {
-      "key": "vinc",
-      "name": "VINC",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "VINC",
-          "url": "https://www.producthunt.com/products/vinc",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Bring your filmmaking vision to life.",
-      "links": [
-        "https://www.producthunt.com/products/vinc?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318920?app_id=339"
-      ]
-    },
-    {
-      "key": "wispos",
-      "name": "WispOS",
-      "kind": "tool",
-      "firstSeen": "2026-11-16",
-      "lastSeen": "2026-11-16",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "WispOS",
-          "url": "https://www.producthunt.com/products/wispos",
-          "date": "2026-11-16",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Free AI game maker with an app store that wants your games",
-      "links": [
-        "https://www.producthunt.com/products/wispos?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1319132?app_id=339"
-      ]
-    },
-    {
-      "key": "agentic canvas",
-      "name": "Agentic Canvas",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Agentic Canvas",
-          "url": "https://www.producthunt.com/products/agentgrid-io",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Free Agentic Design Canvas - A visual way to work with AI",
-      "links": [
-        "https://www.producthunt.com/products/agentgrid-io?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317198?app_id=339"
-      ]
-    },
-    {
-      "key": "cal com",
-      "name": "Cal.com",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Cal.com v7",
-          "url": "https://www.producthunt.com/products/cal",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Cal.com now has events, discover, an assistant + more",
-      "links": [
-        "https://www.producthunt.com/products/cal?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317659?app_id=339"
-      ]
-    },
-    {
-      "key": "canvas",
-      "name": "Canvas",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Canvas by AgentGrid.io",
-          "url": "https://www.producthunt.com/products/agentgrid-io",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Agentic Design Canvas - A visual way to collaborate with AI",
-      "links": [
-        "https://www.producthunt.com/products/agentgrid-io?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317198?app_id=339"
-      ]
-    },
-    {
-      "key": "cup of sugar",
-      "name": "Cup of Sugar",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Cup of Sugar",
-          "url": "https://www.producthunt.com/products/cup-of-sugar-2",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Share a dream, let Cubby break it into small steps.",
-      "links": [
-        "https://www.producthunt.com/products/cup-of-sugar-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317347?app_id=339"
-      ]
-    },
-    {
-      "key": "dippr",
-      "name": "Dippr",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Dippr",
-          "url": "https://www.producthunt.com/products/dippr",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "A data platform served to your agents, with one prompt",
-      "links": [
-        "https://www.producthunt.com/products/dippr?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317264?app_id=339"
-      ]
-    },
-    {
-      "key": "glifa",
-      "name": "Glifa",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Glifa",
-          "url": "https://www.producthunt.com/products/glifa",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "The Markdown editor for Mac you can ask for anything",
-      "links": [
-        "https://www.producthunt.com/products/glifa?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317504?app_id=339"
-      ]
-    },
-    {
-      "key": "lexicad",
-      "name": "LexiCAD",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "LexiCAD",
-          "url": "https://www.producthunt.com/products/lexicad",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Describe a part in plain language to get a CAD design",
-      "links": [
-        "https://www.producthunt.com/products/lexicad?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1318136?app_id=339"
-      ]
-    },
-    {
-      "key": "papyras",
-      "name": "Papyras",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Papyras",
-          "url": "https://www.producthunt.com/products/papyras",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "For people who still read the last page",
-      "links": [
-        "https://www.producthunt.com/products/papyras?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317299?app_id=339"
-      ]
-    },
-    {
-      "key": "perit marketplace",
-      "name": "Perit Marketplace",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Perit Marketplace",
-          "url": "https://www.producthunt.com/products/perit-marketplace",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Sell your data and RL tasks to frontier AI labs",
-      "links": [
-        "https://www.producthunt.com/products/perit-marketplace?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317137?app_id=339"
-      ]
-    },
-    {
-      "key": "punchcutter",
-      "name": "Punchcutter",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Punchcutter",
-          "url": "https://www.producthunt.com/products/punchcutter",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Turn a sentence or your handwriting into a real font family",
-      "links": [
-        "https://www.producthunt.com/products/punchcutter?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317334?app_id=339"
-      ]
-    },
-    {
-      "key": "s space",
-      "name": "S.Space",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "S.Space",
-          "url": "https://www.producthunt.com/products/s-space",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Your team and everyone's AI agents, in one workspace",
-      "links": [
-        "https://www.producthunt.com/products/s-space?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317562?app_id=339"
-      ]
-    },
-    {
-      "key": "stateweave",
-      "name": "StateWeave",
-      "kind": "tool",
-      "firstSeen": "2026-11-15",
-      "lastSeen": "2026-11-15",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "StateWeave",
-          "url": "https://www.producthunt.com/products/stateweave",
-          "date": "2026-11-15",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Test your AI agent on working clones of the apps it uses",
-      "links": [
-        "https://www.producthunt.com/products/stateweave?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1317996?app_id=339"
-      ]
-    },
-    {
-      "key": "byteask cloud",
-      "name": "ByteAsk Cloud",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "ByteAsk Cloud Agents",
-          "url": "https://www.producthunt.com/products/byteask-cloud-agents",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Find the fix in big codebases. Ship it from Slack.",
-      "links": [
-        "https://www.producthunt.com/products/byteask-cloud-agents?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316064?app_id=339"
-      ]
-    },
-    {
-      "key": "glassmail",
-      "name": "Glassmail",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Glassmail",
-          "url": "https://www.producthunt.com/products/glassmail",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "A fast Mac email app with AI that never leaves your Mac",
-      "links": [
-        "https://www.producthunt.com/products/glassmail?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316562?app_id=339"
-      ]
-    },
-    {
-      "key": "icons",
-      "name": "ICONS",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "ICONS",
-          "url": "https://www.producthunt.com/products/icons-2",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Where brands book creators, or license their AI likeness",
-      "links": [
-        "https://www.producthunt.com/products/icons-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316666?app_id=339"
-      ]
-    },
-    {
-      "key": "inbox hero",
-      "name": "Inbox Hero",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Inbox Hero",
-          "url": "https://www.producthunt.com/products/inbox-hero-2",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Your replies drafted in your voice, scams quarantined",
-      "links": [
-        "https://www.producthunt.com/products/inbox-hero-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316663?app_id=339"
-      ]
-    },
-    {
-      "key": "motionflare",
-      "name": "Motionflare",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Motionflare",
-          "url": "https://www.producthunt.com/products/motionflare",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Turn your website into a stunning launch video in minutes",
-      "links": [
-        "https://www.producthunt.com/products/motionflare?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316202?app_id=339"
-      ]
-    },
-    {
-      "key": "orpheus",
-      "name": "Orpheus",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Orpheus",
-          "url": "https://www.producthunt.com/products/orpheus-2",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Run all your Claude subscriptions from one place",
-      "links": [
-        "https://www.producthunt.com/products/orpheus-2?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316662?app_id=339"
-      ]
-    },
-    {
-      "key": "ridian",
-      "name": "Ridian",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Ridian",
-          "url": "https://www.producthunt.com/products/ridian",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "The AI-first scheduling suite for everything around meetings",
-      "links": [
-        "https://www.producthunt.com/products/ridian?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316705?app_id=339"
-      ]
-    },
-    {
-      "key": "supermailbox",
-      "name": "SuperMailbox",
-      "kind": "tool",
-      "firstSeen": "2026-11-14",
-      "lastSeen": "2026-11-14",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "SuperMailbox",
-          "url": "https://www.producthunt.com/products/supermailbox",
-          "date": "2026-11-14",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Your email in one inbox, ready for AI",
-      "links": [
-        "https://www.producthunt.com/products/supermailbox?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1316336?app_id=339"
-      ]
-    },
-    {
-      "key": "blomma",
-      "name": "Blomma",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Blomma for Organizations",
-          "url": "https://www.producthunt.com/products/blomma",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Scale your people at the speed of your business",
-      "links": [
-        "https://www.producthunt.com/products/blomma?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315749?app_id=339"
-      ]
-    },
-    {
-      "key": "dialect",
-      "name": "Dialect",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Dialect",
-          "url": "https://www.producthunt.com/products/dialect",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Give the physical world an API",
-      "links": [
-        "https://www.producthunt.com/products/dialect?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315446?app_id=339"
-      ]
-    },
-    {
-      "key": "dream",
-      "name": "Dream",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Dream by Smart Jelly",
-          "url": "https://www.producthunt.com/products/smart-jelly",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "An AI agent that works through your tasks overnight",
-      "links": [
-        "https://www.producthunt.com/products/smart-jelly?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315282?app_id=339"
-      ]
-    },
-    {
-      "key": "fluid",
-      "name": "Fluid",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Fluid",
-          "url": "https://www.producthunt.com/products/kugelaudio",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "speech-to-speech built to solve problems",
-      "links": [
-        "https://www.producthunt.com/products/kugelaudio?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315063?app_id=339"
-      ]
-    },
-    {
-      "key": "intelligent eyewear",
-      "name": "Intelligent Eyewear",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Intelligent Eyewear",
-          "url": "https://www.producthunt.com/products/sumsung",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Samsung and Google bring Gemini AI to smart eyewear",
-      "links": [
-        "https://www.producthunt.com/products/sumsung?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1314780?app_id=339"
-      ]
-    },
-    {
-      "key": "kafkador",
-      "name": "Kafkador",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Kafkador",
-          "url": "https://www.producthunt.com/products/kafkador",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "A console for to manage, observe & play Apache Kafka",
-      "links": [
-        "https://www.producthunt.com/products/kafkador?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315778?app_id=339"
-      ]
-    },
-    {
-      "key": "kuc kuc",
-      "name": "Kuc-kuc",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Kuc-kuc",
-          "url": "https://www.producthunt.com/products/kuc-kuc",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "A knock on the door when dangerous weather comes",
-      "links": [
-        "https://www.producthunt.com/products/kuc-kuc?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315726?app_id=339"
-      ]
-    },
-    {
-      "key": "rakazo",
-      "name": "Rakazo",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Rakazo",
-          "url": "https://www.producthunt.com/products/rakazo",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "The open source Grok Bot alternative you actually own",
-      "links": [
-        "https://www.producthunt.com/products/rakazo?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315641?app_id=339"
-      ]
-    },
-    {
-      "key": "saas toolkit mcp",
-      "name": "SaaS Toolkit MCP",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "SaaS Toolkit MCP",
-          "url": "https://www.producthunt.com/products/saas-toolkit-mcp",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "An SDR and CMO on your site 24/7, for one JavaScript snippet",
-      "links": [
-        "https://www.producthunt.com/products/saas-toolkit-mcp?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315797?app_id=339"
-      ]
-    },
-    {
-      "key": "tabletop",
-      "name": "Tabletop",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Tabletop by Google Labs",
-          "url": "https://www.producthunt.com/products/google-labs",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Build interactive group experiences with AI.",
-      "links": [
-        "https://www.producthunt.com/products/google-labs?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315230?app_id=339"
-      ]
-    },
-    {
-      "key": "thunder",
-      "name": "Thunder",
-      "kind": "tool",
-      "firstSeen": "2026-11-13",
-      "lastSeen": "2026-11-13",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Thunder",
-          "url": "https://www.producthunt.com/products/thunder-3",
-          "date": "2026-11-13",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "A blazing-fast, persistent, key-value AI workload database",
-      "links": [
-        "https://www.producthunt.com/products/thunder-3?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1315758?app_id=339"
-      ]
-    },
-    {
-      "key": "agentwatch",
-      "name": "AgentWatch",
-      "kind": "tool",
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-12",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "AgentWatch",
-          "url": "https://www.producthunt.com/products/agentwatch-ai-traffic-tracker",
-          "date": "2026-11-12",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Monitor AI shopping agent sales and visibility on Shopify",
-      "links": [
-        "https://www.producthunt.com/products/agentwatch-ai-traffic-tracker?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1313617?app_id=339"
-      ]
-    },
-    {
-      "key": "badya",
-      "name": "Badya",
-      "kind": "tool",
-      "firstSeen": "2026-11-12",
-      "lastSeen": "2026-11-12",
-      "mentions": [
-        {
-          "source": "Product Hunt: AI",
-          "title": "Badya",
-          "url": "https://www.producthunt.com/products/badya-ai-language-immersion",
-          "date": "2026-11-12",
-          "sourceId": "producthunt-ai",
-          "tier": "community"
-        }
-      ],
-      "summary": "Learn languages from real content with an agentic AI tutor",
-      "links": [
-        "https://www.producthunt.com/products/badya-ai-language-immersion?utm_campaign=producthunt-atom-posts-feed&utm_medium=rss-feed&utm_source=producthunt-atom-posts-feed",
-        "https://www.producthunt.com/r/p/1313803?app_id=339"
       ]
     }
   ],
