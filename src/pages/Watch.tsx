@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { Icon } from "../components/Icon";
 import { Bars } from "../components/Level";
@@ -194,6 +194,9 @@ function Lessons() {
   const q = params.get("q") ?? "";
   const [draft, setDraft] = useState(q);
   const [shown, setShown] = useState(PAGE);
+  // Picking a tool on the map scrolls down to its videos, once they've rendered.
+  const results = useRef<HTMLElement>(null);
+  const scrollToVideos = useRef(false);
 
   const all = useMemo(() => feed?.videos ?? [], [feed]);
   const map = useMemo(() => buildVideoMap(all, catalog), [all, catalog]);
@@ -206,6 +209,13 @@ function Lessons() {
   const task = params.get("task") ?? (tool ? map.toolTask.get(tool) ?? null : fromSearch ? match.task : null);
   // The list: a tool picked inside a task shows its videos there; a tool on its own shows all of them.
   const listTask = params.get("task") ?? (tool ? null : task);
+
+  useEffect(() => {
+    if (!tool || !scrollToVideos.current) return;
+    scrollToVideos.current = false;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    results.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }, [tool]);
 
   const update = (changes: Record<string, string | null>) => {
     const next = new URLSearchParams(params);
@@ -291,11 +301,14 @@ function Lessons() {
           task={task}
           tool={tool}
           onTask={(id) => update({ task: id, tool: null, ...(!id && match.task ? { q: null } : {}) })}
-          onTool={(id) => update({ tool: id, task })}
+          onTool={(id) => {
+            scrollToVideos.current = !!id;
+            update({ tool: id, task });
+          }}
         />
       )}
 
-      <section className="video-group watch-results" aria-labelledby="watch-results-h">
+      <section ref={results} className="video-group watch-results" aria-labelledby="watch-results-h">
         <div className="watch-results-head">
           <h2 id="watch-results-h" className="headline-s">
             {heading} <span className="label-l muted">{list.length}</span>

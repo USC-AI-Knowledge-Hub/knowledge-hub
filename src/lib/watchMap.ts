@@ -10,6 +10,27 @@ import { classify, hasKeyword, indexText, norm, stem } from "./taxonomy";
 /** Videos whose title names no task and whose tools do many things land here, as do topic-only explainers. */
 export const BASICS = { id: "basics", label: "General AI", icon: "lightbulb" } as const;
 
+/**
+ * Each task wears the Tools map's color for the same kind of job (--kh-cat-* in tokens.css), so a task looks
+ * the same on both pages. Categories the discovery run adds later use the general color.
+ */
+const TASK_COLOR: Record<string, string> = {
+  basics: "assistants",
+  research: "research",
+  write: "study",
+  study: "study",
+  teach: "study",
+  code: "code",
+  analyze: "code",
+  present: "create",
+  image: "create",
+  design3d: "create",
+  video: "media",
+  audio: "media",
+  automate: "automate",
+};
+export const taskColor = (id: string) => `cat-${TASK_COLOR[id] ?? "assistants"}`;
+
 /** Tasks with fewer videos than this sit under the map as chips instead of on it, so the ring stays readable. */
 export const MIN_ON_MAP = 5;
 
