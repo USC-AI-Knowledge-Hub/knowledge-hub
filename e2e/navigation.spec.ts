@@ -23,7 +23,10 @@ test.describe("navigation", () => {
   test("pages that were hard to find are one tap from their section", async ({ page }) => {
     await page.goto("/team");
     await page.getByRole("navigation", { name: "AI Team pages" }).getByRole("link", { name: "Video picks" }).click();
-    await expect(page).toHaveURL(/\/team\/test$/);
+    await expect(page).toHaveURL(/\/team\/picks$/);
+    // The old address still works.
+    await page.goto("/team/test");
+    await expect(page).toHaveURL(/\/team\/picks$/);
     await page.goto("/green");
     await page.getByRole("navigation", { name: "Green AI pages" }).getByRole("link", { name: "Use AI offline" }).click();
     await expect(page).toHaveURL(/\/offline$/);

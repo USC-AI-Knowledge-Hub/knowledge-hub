@@ -48,7 +48,7 @@ A daily GitHub Action refreshes the YouTube video library.
   (`npm run firebase-rules`; a test fails if it's stale). `npm run test:firebase` runs `firebase/__tests__/` against Google's emulators
   (needs Java), also in CI. The older Supabase store (`supabase/`, `BOARD_URL`) is used only when Firebase isn't set; with neither,
   the board keeps posts on the visitor's device.
-- Video picks (`/team/test`, `src/pages/TeamTest.tsx`, `src/lib/board/recs.ts`): students recommend a YouTube video with a one-line
+- Video picks (`/team/picks`, `src/pages/TeamTest.tsx`, `src/lib/board/recs.ts`): students recommend a YouTube video with a one-line
   headline and their name, and vote (👍, one per browser) on each other's picks. Picks are posts on the board database
   (board `video-recs`, topic `hub` or `found`), so they need no extra tables; the picture is the video's own thumbnail.
 - Watch (`/watch`, `src/pages/Watch.tsx`): the library as a map of tasks (`src/components/TaskExplorer.tsx`, `src/lib/watchMap.ts`).

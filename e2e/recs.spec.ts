@@ -44,7 +44,7 @@ test.describe("video picks", () => {
       row("b", "Jordan", "agents", enc("The best one", "ajfQWhGQGLE", "Watch from 4:10.", ["agents", "beginner"]), 5, 200),
       row("c", "Priya", "work", enc("Newest, no votes", "9Hwanevuhd8"), 0, 1),
     ]);
-    await page.goto("/team/test");
+    await page.goto("/team/picks");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Video picks");
     const headlines = page.locator(".rec-card:not(.is-preview) .rec-quote");
     await expect(headlines).toHaveText(["“The best one”", "“Second best”", "“Newest, no votes”"]);
@@ -89,7 +89,7 @@ test.describe("video picks", () => {
 
   test("posts a pick with a preview, then edits and deletes it; your own pick can't be voted for", async ({ page }) => {
     await seed(page, []);
-    await page.goto("/team/test");
+    await page.goto("/team/picks");
     await expect(page.getByText("No picks yet")).toBeVisible();
     // With no picks yet, the form starts open.
     await page.getByRole("button", { name: "Post my pick" }).click();
@@ -153,7 +153,7 @@ test.describe("video picks", () => {
     const video = videos.find((v) => v.topics.some((t) => known.includes(t)));
     test.skip(!video, "The library has no video with a known topic today.");
     await seed(page, []);
-    await page.goto("/team/test");
+    await page.goto("/team/picks");
     await page.getByLabel("Or find it in the Hub's library").fill(video!.title);
     await page.getByRole("list", { name: "Library matches" }).getByRole("button").first().click();
     await expect(page.locator(".rec-hint")).toContainText("In the Hub's library");
@@ -165,7 +165,7 @@ test.describe("video picks", () => {
   test("asks for the title when YouTube can't be reached", async ({ page }) => {
     await seed(page, []);
     await page.route(/youtube\.com\/oembed/, (r) => r.abort());
-    await page.goto("/team/test");
+    await page.goto("/team/picks");
     await page.getByLabel("YouTube link").fill(`https://youtu.be/${ID}`);
     await expect(page.getByText("We couldn't look the title up")).toBeVisible();
     await page.getByLabel("Your recommendation, in one line").fill("Worth it");
@@ -185,7 +185,7 @@ test.describe("video picks", () => {
       row("z", "Ok", "hub", enc("Real one", ID), 0, 2),
     ]);
     await page.setViewportSize({ width: 360, height: 800 });
-    await page.goto("/team/test");
+    await page.goto("/team/picks");
     // An older pick from before categories still shows, under Other.
     // It has no stored title and isn't a library video, so it gets a plain one.
     await expect(page.locator(".rec-card .rec-quote")).toHaveText(["“Real one”"]);

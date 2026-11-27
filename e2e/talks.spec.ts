@@ -24,7 +24,7 @@ test.describe("talks and podcasts", () => {
 
   test("the tab shows editors' picks, then talks found automatically", async ({ page }) => {
     await page.goto("/watch");
-    await page.getByRole("radio", { name: "Talks and podcasts" }).click();
+    await page.getByRole("navigation", { name: "Watch pages" }).getByRole("link", { name: "Talks and podcasts" }).click();
     await expect(page).toHaveURL(/tab=talks/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Talks and podcasts");
     await expect(page.locator(".talk-card")).toHaveCount(total);

@@ -27,6 +27,7 @@ import { Search } from "./pages/Search";
 import { ToolPage } from "./pages/ToolPage";
 import { Tools } from "./pages/Tools";
 import { Watch } from "./pages/Watch";
+import { MOVED } from "./data/sections";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/pages.css";
@@ -50,16 +51,16 @@ const router = createBrowserRouter(
         { path: "watch", element: <Watch /> },
         { path: "green", element: <Green /> },
         { path: "team", element: <Team /> },
-        { path: "team/test", element: <TeamTest /> },
+        { path: "team/picks", element: <TeamTest /> },
         { path: "start", element: <Start /> },
         { path: "ai-use", element: <AiUse /> },
         { path: "prompts", element: <Prompts /> },
         { path: "new", element: <WhatsNew /> },
-        { path: "green/team", element: <Navigate to="/team" replace /> },
         { path: "offline", element: <Offline /> },
         { path: "offline/assistant", element: <Assistant /> },
         { path: "search", element: <Search /> },
         { path: "about", element: <About /> },
+        ...Object.entries(MOVED).map(([from, to]) => ({ path: from.slice(1), element: <Navigate to={to} replace /> })),
         { path: "*", element: <NotFound /> },
       ],
     },

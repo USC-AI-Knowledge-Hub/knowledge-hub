@@ -9,6 +9,8 @@ export interface SectionPage {
   label: string;
   /** Deeper addresses that count as this page ("/tools/compare/chatgpt-vs-claude"). */
   prefix?: boolean;
+  /** A view of the page picked by `?tab=` (the Watch page's trends and talks). */
+  tab?: string;
 }
 
 export interface Section {
@@ -53,7 +55,9 @@ export const SECTIONS: Section[] = [
     label: "Watch",
     icon: "smart_display",
     pages: [
-      { to: "/watch", label: "Video library" },
+      { to: "/watch", label: "Lessons" },
+      { to: "/watch", tab: "trends", label: "AI trends" },
+      { to: "/watch", tab: "talks", label: "Talks and podcasts" },
       { to: "/about", label: "How videos are chosen" },
     ],
   },
@@ -63,7 +67,7 @@ export const SECTIONS: Section[] = [
     icon: "forum",
     pages: [
       { to: "/team", label: "Discussion boards" },
-      { to: "/team/test", label: "Video picks" },
+      { to: "/team/picks", label: "Video picks" },
     ],
   },
   {
@@ -78,7 +82,19 @@ export const SECTIONS: Section[] = [
   },
 ];
 
+/**
+ * Addresses that moved. The app redirects them, and the build writes a page at each old address so a
+ * saved link still opens on GitHub Pages, which has no fallback for unknown addresses.
+ */
+export const MOVED: Record<string, string> = {
+  "/team/test": "/team/picks",
+  "/green/team": "/team",
+};
+
 const clean = (path: string) => (path.length > 1 ? path.replace(/\/+$/, "") : path);
+
+/** Where a section page lives, with its `?tab=` if it has one. */
+export const hrefOf = (page: SectionPage) => (page.tab ? `${page.to}?tab=${page.tab}` : page.to);
 
 /** Whether an address is a section page (exactly, or under it for `prefix` pages). */
 export const isPage = (page: SectionPage, path: string) => {
@@ -97,10 +113,12 @@ export function sectionOf(path: string): Section | undefined {
 }
 
 /** The section and tab to show at the top of a page: only on the section's own pages, not on a lesson or a tool. */
-export function tabsFor(path: string): { section: Section; current: SectionPage } | undefined {
+export function tabsFor(path: string, search = ""): { section: Section; current: SectionPage } | undefined {
   const section = sectionOf(path);
   if (!section || section.pages.length < 2) return undefined;
-  // The most specific page wins ("/offline/assistant" over "/offline").
-  const current = [...section.pages].sort((a, b) => b.to.length - a.to.length).find((pg) => isPage(pg, path));
+  const tab = new URLSearchParams(search).get("tab") ?? undefined;
+  // The most specific page wins ("/offline/assistant" over "/offline"), then the view its ?tab= names.
+  const here = [...section.pages].sort((a, b) => b.to.length - a.to.length).filter((pg) => isPage(pg, path));
+  const current = here.find((pg) => pg.tab === tab) ?? here.find((pg) => !pg.tab);
   return current ? { section, current } : undefined;
 }

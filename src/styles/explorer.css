@@ -184,3 +184,4 @@
 .watch-results-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
 .watch-results-head h2 { margin: 0; }
 .watch-more { justify-self: center; }
+.video-group > .watch-more { display: flex; width: fit-content; margin: 24px auto 0; }

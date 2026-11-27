@@ -571,8 +571,8 @@ const STATIC: Record<string, () => PageMeta> = {
     links: [{ to: "/learn", label: "Learn" }],
     jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "AI Team", path: "/team" }])],
   }),
-  "/team/test": () => ({
-    path: "/team/test",
+  "/team/picks": () => ({
+    path: "/team/picks",
     title: `Video picks: videos students recommend${suffix}`,
     description: "Students recommend AI videos in one line, with the video's picture and their name, and vote for the picks that helped them most.",
     heading: "Video picks",
@@ -580,7 +580,7 @@ const STATIC: Record<string, () => PageMeta> = {
     noindex: true,
     content: [{ kind: "p", text: "Recommend a video you watched in one line, and vote for other students' picks. The most helpful rise to the top." }],
     links: [{ to: "/team", label: "AI Team discussion boards" }],
-    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "AI Team", path: "/team" }, { name: "Video picks", path: "/team/test" }])],
+    jsonLd: [breadcrumbs([{ name: "Home", path: "/" }, { name: "AI Team", path: "/team" }, { name: "Video picks", path: "/team/picks" }])],
   }),
   "/offline": () => ({
     path: "/offline",

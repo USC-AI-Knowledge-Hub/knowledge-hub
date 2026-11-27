@@ -1,6 +1,6 @@
 # AI Team board on Google Firebase
 
-The AI Team boards (`/team`) and video picks (`/team/test`) keep their posts in Cloud Firestore, Google's
+The AI Team boards (`/team`) and video picks (`/team/picks`) keep their posts in Cloud Firestore, Google's
 database. Each visitor's browser signs in anonymously, so nobody makes an account. There's no server:
 `firestore.rules` checks every write. The free Spark plan needs no card and doesn't pause when the site is quiet.
 

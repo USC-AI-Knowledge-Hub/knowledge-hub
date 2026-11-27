@@ -1,16 +1,23 @@
 import { describe, expect, it } from "vitest";
 import { allPaths } from "../../lib/seo";
-import { SECTIONS, sectionOf, tabsFor } from "../sections";
+import { MOVED, SECTIONS, sectionOf, tabsFor } from "../sections";
 
 describe("site sections", () => {
   it("files every page under a section, so the rail can show where you are", () => {
-    const lost = [...allPaths(), "/search", "/team/test", "/offline/assistant"].filter((p) => p !== "/search" && !sectionOf(p));
+    const lost = [...allPaths(), "/search", "/offline/assistant"].filter((p) => p !== "/search" && !sectionOf(p));
     expect(lost).toEqual([]);
   });
 
   it("links every section page to a real page", () => {
-    const known = new Set([...allPaths(), "/team/test"]);
+    const known = new Set(allPaths());
     for (const s of SECTIONS) for (const pg of s.pages) expect(known.has(pg.to), pg.to).toBe(true);
+  });
+
+  it("sends moved addresses to pages that exist", () => {
+    for (const [from, to] of Object.entries(MOVED)) {
+      expect(allPaths(), from).not.toContain(from);
+      expect(allPaths(), to).toContain(to);
+    }
   });
 
   it("lights the section a secondary page belongs to", () => {
@@ -30,5 +37,8 @@ describe("site sections", () => {
     expect(tabsFor("/tools/chatgpt")).toBeUndefined(); // a tool's page has its own way back
     expect(tabsFor("/learn/llms")).toBeUndefined();
     expect(tabsFor("/")).toBeUndefined();
+    expect(tabsFor("/watch")?.current.label).toBe("Lessons");
+    expect(tabsFor("/watch", "?tab=talks")?.current.label).toBe("Talks and podcasts");
+    expect(tabsFor("/watch", "?tab=nonsense")?.current.label).toBe("Lessons");
   });
 });

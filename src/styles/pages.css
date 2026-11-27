@@ -219,6 +219,9 @@
 }
 .task:hover { border-radius: var(--md-shape-xl); }
 .task .icon { color: var(--md-sys-color-primary-container); margin-bottom: 12px; }
+/* Same category colors as the Tools and Watch maps (map.css). */
+.task[class*="cat-"] { background: color-mix(in srgb, var(--cat-c) 55%, var(--md-sys-color-surface-container-low)); }
+.task[class*="cat-"] .icon { color: var(--cat); }
 
 /* ── Video card ────────────────────────────────────────────────────────── */
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
-import { SECTIONS, sectionOf, tabsFor } from "../data/sections";
+import { SECTIONS, hrefOf, sectionOf, tabsFor } from "../data/sections";
 import { useSeo } from "../lib/useSeo";
 import { useThemeMode } from "../lib/theme";
 import { Icon } from "./Icon";
@@ -39,22 +39,22 @@ function NavItems() {
 
 /** Tabs for the pages inside the current section, on each of those pages. */
 function SectionNav() {
-  const { pathname } = useLocation();
-  const tabs = tabsFor(pathname);
+  const { pathname, search } = useLocation();
+  const tabs = tabsFor(pathname, search);
   const list = useRef<HTMLUListElement>(null);
   // On a phone the row scrolls sideways: bring the current tab into view.
   useEffect(() => {
     const ul = list.current;
     const on = ul?.querySelector<HTMLElement>('[aria-current="page"]');
     if (ul && on) ul.scrollLeft = on.offsetLeft - (ul.clientWidth - on.offsetWidth) / 2;
-  }, [pathname]);
+  }, [pathname, search]);
   if (!tabs) return null;
   return (
     <nav className="section-tabs" aria-label={`${tabs.section.label} pages`}>
       <ul ref={list}>
         {tabs.section.pages.map((pg) => (
-          <li key={pg.to}>
-            <Link to={pg.to} className="section-tab state" aria-current={pg === tabs.current ? "page" : undefined}>
+          <li key={hrefOf(pg)}>
+            <Link to={hrefOf(pg)} className="section-tab state" aria-current={pg === tabs.current ? "page" : undefined}>
               {pg.label}
             </Link>
           </li>
@@ -142,7 +142,7 @@ export function Layout() {
             <nav key={sec.to} className="footer-links body-s" aria-label={sec.label}>
               <p className="label-l">{sec.label}</p>
               {sec.pages.map((pg) => (
-                <Link key={pg.to} to={pg.to}>
+                <Link key={hrefOf(pg)} to={hrefOf(pg)}>
                   {pg.label}
                 </Link>
               ))}

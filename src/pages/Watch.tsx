@@ -101,6 +101,8 @@ const TAB_TITLE: Record<Tab, string> = { lessons: "Watch and learn", trends: "Wh
  * Talks, debates, keynotes and podcasts from 2026: editors' picks first, then the episodes the daily run found on
  * trusted talk and podcast channels (labelled as picked automatically), best received first.
  */
+const TALKS_PAGE = 12;
+
 function Talks() {
   const status = useCourseStatus();
   const { talks: auto } = useFeed();
@@ -119,6 +121,9 @@ function Talks() {
   const count = (k: TalkKind) => picks.filter((t) => t.kind === k).length + found.filter((t) => t.kind === k).length;
   const shownPicks = picks.filter((t) => !kind || t.kind === kind);
   const shownFound = found.filter((t) => !kind || t.kind === kind);
+  // The automatic picks run to dozens, so they come a page at a time.
+  const [limit, setLimit] = useState(TALKS_PAGE);
+  useEffect(() => setLimit(TALKS_PAGE), [kind]);
   return (
     <>
       <div className="chip-row talk-filters" aria-label="Kind of talk">
@@ -168,10 +173,15 @@ function Talks() {
             Picked automatically<span className="label-m muted">{shownFound.length}</span>
           </h2>
           <div className="grid cols-videos">
-            {shownFound.map((t) => (
+            {shownFound.slice(0, limit).map((t) => (
               <AutoTalkCard key={t.id} talk={t} />
             ))}
           </div>
+          {shownFound.length > limit && (
+            <button type="button" className="btn outlined state watch-more" onClick={() => setLimit(limit + TALKS_PAGE)}>
+              Show more ({shownFound.length - limit} left)
+            </button>
+          )}
         </section>
       )}
     </>
@@ -405,7 +415,7 @@ function Lessons() {
 
 export function Watch() {
   const { feed, today } = useFeed();
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const tabParam = params.get("tab");
   const tab: Tab = tabParam === "trends" || tabParam === "talks" ? tabParam : "lessons";
 
@@ -413,18 +423,6 @@ export function Watch() {
     <>
       <header className="page-head">
         <h1 className="display-s">{TAB_TITLE[tab]}</h1>
-        <div className="watch-tabs">
-          <Segmented<Tab>
-            label="Library"
-            value={tab}
-            onChange={(v) => setParams(v === "lessons" ? {} : { tab: v }, { replace: true, preventScrollReset: true })}
-            options={[
-              { value: "lessons", label: "Lessons" },
-              { value: "trends", label: "AI trends" },
-              { value: "talks", label: "Talks and podcasts" },
-            ]}
-          />
-        </div>
         {tab === "lessons" && (
           <p className="body-l muted measure">
             {feed?.runDate
