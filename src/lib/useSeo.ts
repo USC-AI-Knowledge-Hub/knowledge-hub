@@ -1,10 +1,14 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
 import { useCatalog } from "./catalogStore";
-import { SITE_NAME, canonicalUrl, headTags, pageMeta } from "./seo";
+// The page details read every lesson file, so they load in the background rather than with the app: the
+// prerendered HTML already has the right tags for the first page.
+const seoModule = () => import("./seo");
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
-  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  let el = document.head.querySelector<HTMLMetaElement>(
+    `meta[${attr}="${key}"]`,
+  );
   if (!el) {
     el = document.createElement("meta");
     el.setAttribute(attr, key);
@@ -22,42 +26,62 @@ export function useSeo() {
   const { pathname } = useLocation();
   const { toolById } = useCatalog();
   useEffect(() => {
-    const meta = pageMeta(pathname);
-    // A tool the daily run found has a page but isn't part of the site's reviewed content: it gets a title
-    // and stays out of search results.
-    const found = /^\/tools\/([^/]+)\/?$/.exec(pathname);
-    const listed = !meta && found ? toolById.get(found[1]) : undefined;
-    if (listed && !listed.reviewed) {
-      document.title = `${listed.name} (not reviewed yet) | ${SITE_NAME}`;
-      setMeta("name", "robots", "noindex, follow");
-      document.head.querySelector('link[rel="canonical"]')?.remove();
-      document.head.querySelectorAll('script[type="application/ld+json"]').forEach((s) => s.remove());
-      return;
-    }
-    if (!meta) {
-      document.title = `Page not found | ${SITE_NAME}`;
-      setMeta("name", "robots", "noindex, follow");
-      document.head.querySelector('link[rel="canonical"]')?.remove();
-      document.head.querySelector("#seo-jsonld")?.remove();
-      return;
-    }
-    document.title = meta.title;
-    for (const t of headTags(meta)) setMeta(t.name ? "name" : "property", (t.name ?? t.property)!, t.content);
-    let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "canonical";
-      document.head.appendChild(link);
-    }
-    link.href = canonicalUrl(meta.path);
-    // Replace the page's structured data with this page's. Earlier pages' data would be wrong here.
-    document.head.querySelectorAll('script[type="application/ld+json"]').forEach((s) => s.remove());
-    if (meta.jsonLd.length) {
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.id = "seo-jsonld";
-      script.textContent = JSON.stringify(meta.jsonLd.length === 1 ? meta.jsonLd[0] : meta.jsonLd);
-      document.head.appendChild(script);
-    }
+    let stale = false;
+    void seoModule().then(({ SITE_NAME, canonicalUrl, headTags, pageMeta }) => {
+      if (stale) return;
+      const meta = pageMeta(pathname);
+      // A tool the daily run found has a page but isn't part of the site's reviewed content: it gets a title
+      // and stays out of search results.
+      const found = /^\/tools\/([^/]+)\/?$/.exec(pathname);
+      const listed = !meta && found ? toolById.get(found[1]) : undefined;
+      if (listed && !listed.reviewed) {
+        document.title = `${listed.name} (not reviewed yet) | ${SITE_NAME}`;
+        setMeta("name", "robots", "noindex, follow");
+        document.head.querySelector('link[rel="canonical"]')?.remove();
+        document.head
+          .querySelectorAll('script[type="application/ld+json"]')
+          .forEach((s) => s.remove());
+        return;
+      }
+      if (!meta) {
+        document.title = `Page not found | ${SITE_NAME}`;
+        setMeta("name", "robots", "noindex, follow");
+        document.head.querySelector('link[rel="canonical"]')?.remove();
+        document.head.querySelector("#seo-jsonld")?.remove();
+        return;
+      }
+      document.title = meta.title;
+      for (const t of headTags(meta))
+        setMeta(
+          t.name ? "name" : "property",
+          (t.name ?? t.property)!,
+          t.content,
+        );
+      let link = document.head.querySelector<HTMLLinkElement>(
+        'link[rel="canonical"]',
+      );
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "canonical";
+        document.head.appendChild(link);
+      }
+      link.href = canonicalUrl(meta.path);
+      // Replace the page's structured data with this page's. Earlier pages' data would be wrong here.
+      document.head
+        .querySelectorAll('script[type="application/ld+json"]')
+        .forEach((s) => s.remove());
+      if (meta.jsonLd.length) {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.id = "seo-jsonld";
+        script.textContent = JSON.stringify(
+          meta.jsonLd.length === 1 ? meta.jsonLd[0] : meta.jsonLd,
+        );
+        document.head.appendChild(script);
+      }
+    });
+    return () => {
+      stale = true;
+    };
   }, [pathname, toolById]);
 }

@@ -21,8 +21,11 @@ test.describe("tool map", () => {
   test("intent search highlights matches and lists why", async ({ page }) => {
     await page.goto("/tools");
     await expect(page.locator(".map-node")).toHaveCount(30);
-    await page.keyboard.press("/");
-    await expect(page.locator("#map-q")).toBeFocused();
+    // The page's keyboard shortcut attaches just after its first paint, so keep pressing until it's there.
+    await expect(async () => {
+      await page.keyboard.press("/");
+      await expect(page.locator("#map-q")).toBeFocused({ timeout: 500 });
+    }).toPass();
     await page.locator("#map-q").fill("make slides from my notes");
     await expect(page.locator('[data-tool="gamma"]')).toHaveAttribute("data-match", "");
     await expect(page.locator('[data-tool="zapier"]')).toHaveAttribute("data-dim", "");

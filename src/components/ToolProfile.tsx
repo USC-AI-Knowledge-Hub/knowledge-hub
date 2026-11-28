@@ -198,9 +198,9 @@ export function ToolReview({ tool, variant }: { tool: Tool; variant: Variant }) 
         {different}
         {strengths}
       </div>
-      <aside className="profile-side">
+      <div className="profile-side">
         <ToolFacts tool={tool} variant={variant} />
-      </aside>
+      </div>
     </section>
   );
 }

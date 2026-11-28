@@ -602,3 +602,34 @@ dialog.sheet::backdrop { background: rgb(0 0 0 / 0.55); }
   border-radius: var(--md-shape-xl);
   background: var(--md-sys-color-surface-container);
 }
+
+/* ── Category color hooks (shared by the Tools map, the Watch map and the home page) ──────────────────────────────────────────────── */
+
+.cat-assistants { --cat: var(--kh-cat-assistants); --cat-c: var(--kh-cat-assistants-container); --on-cat-c: var(--kh-on-cat-assistants-container); }
+.cat-research { --cat: var(--kh-cat-research); --cat-c: var(--kh-cat-research-container); --on-cat-c: var(--kh-on-cat-research-container); }
+.cat-study { --cat: var(--kh-cat-study); --cat-c: var(--kh-cat-study-container); --on-cat-c: var(--kh-on-cat-study-container); }
+.cat-code { --cat: var(--kh-cat-code); --cat-c: var(--kh-cat-code-container); --on-cat-c: var(--kh-on-cat-code-container); }
+.cat-create { --cat: var(--kh-cat-create); --cat-c: var(--kh-cat-create-container); --on-cat-c: var(--kh-on-cat-create-container); }
+.cat-media { --cat: var(--kh-cat-media); --cat-c: var(--kh-cat-media-container); --on-cat-c: var(--kh-on-cat-media-container); }
+.cat-automate { --cat: var(--kh-cat-automate); --cat-c: var(--kh-cat-automate-container); --on-cat-c: var(--kh-on-cat-automate-container); }
+
+:root {
+  --halo-a: 0.34;
+  --map-bg: var(--md-sys-color-surface-container-lowest);
+  --spec: rgb(255 255 255 / 0.85);
+  --glass-scrim: rgb(20 8 8 / 0.3);
+}
+:root[data-theme="dark"] {
+  --halo-a: 0.26;
+  --map-bg: var(--md-sys-color-surface-container-lowest);
+  --spec: rgb(255 255 255 / 0.4);
+  --glass-scrim: rgb(0 0 0 / 0.5);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --halo-a: 0.26;
+    --spec: rgb(255 255 255 / 0.4);
+    --glass-scrim: rgb(0 0 0 / 0.5);
+  }
+}
+
